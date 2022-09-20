@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Hoofdstuk 8 Niet-parametrische statistiek | Cursus Inleiding tot de Biostatistiek 2022-2023</title>
+  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Hoofdstuk 8 Niet-parametrische statistiek | Cursus Inleiding tot de Biostatistiek 2022-2023" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="github-repo" content="statOmics/statistiek2deBach" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hoofdstuk 8 Niet-parametrische statistiek | Cursus Inleiding tot de Biostatistiek 2022-2023" />
+  
+  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  
+
+<meta name="author" content="Lieven Clement" />
+
+
+<meta name="date" content="2022-09-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chap-anova.html"/>
+<link rel="next" href="chap-categorisch.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Cursus Inleiding tot Biostatistiek 2022-2023</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Woord vooraf</a></li>
+<li class="chapter" data-level="" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i>Links</a></li>
+<li class="chapter" data-level="1" data-path="inleiding.html"><a href="inleiding.html"><i class="fa fa-check"></i><b>1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="inleiding.html"><a href="inleiding.html#sec:wetMeth"><i class="fa fa-check"></i><b>1.1</b> De Wetenschappelijke Methode</a></li>
+<li class="chapter" data-level="1.2" data-path="inleiding.html"><a href="inleiding.html#opzet-van-de-cursus"><i class="fa fa-check"></i><b>1.2</b> Opzet van de cursus</a></li>
+<li class="chapter" data-level="1.3" data-path="inleiding.html"><a href="inleiding.html#case-study-oksel-microbiome"><i class="fa fa-check"></i><b>1.3</b> Case study: oksel microbiome</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="inleiding.html"><a href="inleiding.html#experimenteel-design-proefopzet"><i class="fa fa-check"></i><b>1.3.1</b> Experimenteel design (proefopzet)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="inleiding.html"><a href="inleiding.html#data-exploratie-en-beschrijvende-statistiek"><i class="fa fa-check"></i><b>1.3.2</b> Data exploratie en beschrijvende statistiek</a></li>
+<li class="chapter" data-level="1.3.3" data-path="inleiding.html"><a href="inleiding.html#statistische-besluitvorming"><i class="fa fa-check"></i><b>1.3.3</b> Statistische Besluitvorming</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="inleiding.html"><a href="inleiding.html#case-study-ii-verschil-in-lengte-tussen-vrouwen-en-mannen"><i class="fa fa-check"></i><b>1.4</b> Case Study II: Verschil in lengte tussen vrouwen en mannen</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="inleiding.html"><a href="inleiding.html#experiment"><i class="fa fa-check"></i><b>1.4.1</b> Experiment</a></li>
+<li class="chapter" data-level="1.4.2" data-path="inleiding.html"><a href="inleiding.html#herhaal-het-experiment"><i class="fa fa-check"></i><b>1.4.2</b> Herhaal het experiment</a></li>
+<li class="chapter" data-level="1.4.3" data-path="inleiding.html"><a href="inleiding.html#herhaal-het-experiment-opnieuw"><i class="fa fa-check"></i><b>1.4.3</b> Herhaal het experiment opnieuw</a></li>
+<li class="chapter" data-level="1.4.4" data-path="inleiding.html"><a href="inleiding.html#samenvatting"><i class="fa fa-check"></i><b>1.4.4</b> Samenvatting</a></li>
+<li class="chapter" data-level="1.4.5" data-path="inleiding.html"><a href="inleiding.html#controle-van-beslissingsfouten"><i class="fa fa-check"></i><b>1.4.5</b> Controle van beslissingsfouten</a></li>
+<li class="chapter" data-level="1.4.6" data-path="inleiding.html"><a href="inleiding.html#conclusies"><i class="fa fa-check"></i><b>1.4.6</b> Conclusies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="inleiding.html"><a href="inleiding.html#case-study-salk-vaccin"><i class="fa fa-check"></i><b>1.5</b> Case study: Salk vaccin</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="inleiding.html"><a href="inleiding.html#nfip-study"><i class="fa fa-check"></i><b>1.5.1</b> NFIP Study</a></li>
+<li class="chapter" data-level="1.5.2" data-path="inleiding.html"><a href="inleiding.html#confounding"><i class="fa fa-check"></i><b>1.5.2</b> Confounding</a></li>
+<li class="chapter" data-level="1.5.3" data-path="inleiding.html"><a href="inleiding.html#salk-study"><i class="fa fa-check"></i><b>1.5.3</b> Salk Study</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="inleiding.html"><a href="inleiding.html#rol-van-statistiek"><i class="fa fa-check"></i><b>1.6</b> Rol van Statistiek</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html"><i class="fa fa-check"></i><b>2</b> Belangrijke concepten &amp; conventies</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#inleiding-1"><i class="fa fa-check"></i><b>2.1</b> Inleiding</a></li>
+<li class="chapter" data-level="2.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#variabelen"><i class="fa fa-check"></i><b>2.2</b> Variabelen</a></li>
+<li class="chapter" data-level="2.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#subsec:pop"><i class="fa fa-check"></i><b>2.3</b> Populatie</a></li>
+<li class="chapter" data-level="2.4" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#toevalsveranderlijken-of-toevallige-veranderlijken"><i class="fa fa-check"></i><b>2.4</b> Toevalsveranderlijken (of toevallige veranderlijken)</a></li>
+<li class="chapter" data-level="2.5" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#beschrijven-van-de-populatie"><i class="fa fa-check"></i><b>2.5</b> Beschrijven van de populatie</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#intermezzo-probabiliteitstheorie"><i class="fa fa-check"></i><b>2.5.1</b> Intermezzo probabiliteitstheorie</a></li>
+<li class="chapter" data-level="2.5.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#standardisatie"><i class="fa fa-check"></i><b>2.5.2</b> Standardisatie</a></li>
+<li class="chapter" data-level="2.5.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#subsec:normalcalc"><i class="fa fa-check"></i><b>2.5.3</b> Achtergrond Normale verdeling</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#steekproef"><i class="fa fa-check"></i><b>2.6</b> Steekproef</a></li>
+<li class="chapter" data-level="2.7" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#nhanes-gender"><i class="fa fa-check"></i><b>2.7</b> NHANES: Gender</a></li>
+<li class="chapter" data-level="2.8" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#nhanes-lengte"><i class="fa fa-check"></i><b>2.8</b> NHANES: Lengte</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#empirische-distributie"><i class="fa fa-check"></i><b>2.8.1</b> Empirische distributie</a></li>
+<li class="chapter" data-level="2.8.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#normale-benadering"><i class="fa fa-check"></i><b>2.8.2</b> Normale benadering</a></li>
+<li class="chapter" data-level="2.8.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#referentie-intervallen"><i class="fa fa-check"></i><b>2.8.3</b> Referentie intervallen</a></li>
+<li class="chapter" data-level="2.8.4" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#conclusions"><i class="fa fa-check"></i><b>2.8.4</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#statistieken"><i class="fa fa-check"></i><b>2.9</b> Statistieken</a></li>
+<li class="chapter" data-level="2.10" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#conventie"><i class="fa fa-check"></i><b>2.10</b> Conventie</a></li>
+<li class="chapter" data-level="2.11" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#code-voor-dit-hoofdstuk"><i class="fa fa-check"></i><b>2.11</b> Code voor dit hoofdstuk</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-design.html"><a href="chap-design.html"><i class="fa fa-check"></i><b>3</b> Studiedesign</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chap-design.html"><a href="chap-design.html#inleiding-2"><i class="fa fa-check"></i><b>3.1</b> Inleiding</a></li>
+<li class="chapter" data-level="3.2" data-path="chap-design.html"><a href="chap-design.html#sec:steekproefdesigns"><i class="fa fa-check"></i><b>3.2</b> Steekproefdesigns</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="chap-design.html"><a href="chap-design.html#replicatie"><i class="fa fa-check"></i><b>3.2.1</b> Replicatie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chap-design.html"><a href="chap-design.html#experimentele-studies"><i class="fa fa-check"></i><b>3.3</b> Experimentele studies</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="chap-design.html"><a href="chap-design.html#de-salk-vaccin-veldstudie"><i class="fa fa-check"></i><b>3.3.1</b> De Salk Vaccin Veldstudie</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chap-design.html"><a href="chap-design.html#gerandomiseerde-gecontroleerde-studies"><i class="fa fa-check"></i><b>3.3.2</b> Gerandomiseerde gecontroleerde studies</a></li>
+<li class="chapter" data-level="3.3.3" data-path="chap-design.html"><a href="chap-design.html#parallelle-designs"><i class="fa fa-check"></i><b>3.3.3</b> Parallelle designs</a></li>
+<li class="chapter" data-level="3.3.4" data-path="chap-design.html"><a href="chap-design.html#cross-over-designs"><i class="fa fa-check"></i><b>3.3.4</b> Cross-over designs</a></li>
+<li class="chapter" data-level="3.3.5" data-path="chap-design.html"><a href="chap-design.html#factoriële-designs"><i class="fa fa-check"></i><b>3.3.5</b> Factoriële designs</a></li>
+<li class="chapter" data-level="3.3.6" data-path="chap-design.html"><a href="chap-design.html#quasi-experimentele-designs"><i class="fa fa-check"></i><b>3.3.6</b> Quasi-experimentele designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chap-design.html"><a href="chap-design.html#sec:observational"><i class="fa fa-check"></i><b>3.4</b> Observationele studies</a></li>
+<li class="chapter" data-level="3.5" data-path="chap-design.html"><a href="chap-design.html#subsec:design:prosp"><i class="fa fa-check"></i><b>3.5</b> Prospectieve studies</a></li>
+<li class="chapter" data-level="3.6" data-path="chap-design.html"><a href="chap-design.html#subsec:design:retro"><i class="fa fa-check"></i><b>3.6</b> Retrospectieve studies</a></li>
+<li class="chapter" data-level="3.7" data-path="chap-design.html"><a href="chap-design.html#niet-gecontroleerde-studies"><i class="fa fa-check"></i><b>3.7</b> Niet-gecontroleerde studies</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="chap-design.html"><a href="chap-design.html#subsec:prepost"><i class="fa fa-check"></i><b>3.7.1</b> Pre-test/Post-test studies</a></li>
+<li class="chapter" data-level="3.7.2" data-path="chap-design.html"><a href="chap-design.html#cross-sectionele-surveys"><i class="fa fa-check"></i><b>3.7.2</b> Cross-sectionele surveys</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chap-describe.html"><a href="chap-describe.html"><i class="fa fa-check"></i><b>4</b> Data exploratie en beschrijvende statistiek</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chap-describe.html"><a href="chap-describe.html#inleiding-3"><i class="fa fa-check"></i><b>4.1</b> Inleiding</a></li>
+<li class="chapter" data-level="4.2" data-path="chap-describe.html"><a href="chap-describe.html#sec:univar"><i class="fa fa-check"></i><b>4.2</b> Univariate beschrijving van de variabelen</a></li>
+<li class="chapter" data-level="4.3" data-path="chap-describe.html"><a href="chap-describe.html#sec:summarize"><i class="fa fa-check"></i><b>4.3</b> Samenvattingsmaten voor continue variabelen</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="chap-describe.html"><a href="chap-describe.html#maten-voor-de-centrale-ligging"><i class="fa fa-check"></i><b>4.3.1</b> Maten voor de centrale ligging</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:spreiding"><i class="fa fa-check"></i><b>4.3.2</b> Spreidingsmaten</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chap-describe.html"><a href="chap-describe.html#sec:normal"><i class="fa fa-check"></i><b>4.4</b> De Normale benadering van gegevens</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="chap-describe.html"><a href="chap-describe.html#sec:qq"><i class="fa fa-check"></i><b>4.4.1</b> QQ-plots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="chap-describe.html"><a href="chap-describe.html#sec:explCatVar"><i class="fa fa-check"></i><b>4.5</b> Samenvattingsmaten voor categorische variabelen</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="chap-describe.html"><a href="chap-describe.html#prospectieve-studies-en-lukrake-steekproeven"><i class="fa fa-check"></i><b>4.5.1</b> Prospectieve studies en lukrake steekproeven</a></li>
+<li class="chapter" data-level="4.5.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:retrospect"><i class="fa fa-check"></i><b>4.5.2</b> Retrospectieve studies</a></li>
+<li class="chapter" data-level="4.5.3" data-path="chap-describe.html"><a href="chap-describe.html#rates-versus-risicos"><i class="fa fa-check"></i><b>4.5.3</b> Rates versus risico’s</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="chap-describe.html"><a href="chap-describe.html#associaties-tussen-twee-variabelen"><i class="fa fa-check"></i><b>4.6</b> Associaties tussen twee variabelen</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="chap-describe.html"><a href="chap-describe.html#subsec:kruistabel"><i class="fa fa-check"></i><b>4.6.1</b> Associatie tussen twee kwalitatieve variabelen</a></li>
+<li class="chapter" data-level="4.6.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:asskwalcont"><i class="fa fa-check"></i><b>4.6.2</b> Associatie tussen één kwalitatieve en één continue variabele</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="chap-describe.html"><a href="chap-describe.html#sec:correlatie"><i class="fa fa-check"></i><b>4.7</b> Associatie tussen twee continue variabelen</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="chap-describe.html"><a href="chap-describe.html#covariantie-en-correlatie"><i class="fa fa-check"></i><b>4.7.1</b> Covariantie en Correlatie</a></li>
+<li class="chapter" data-level="4.7.2" data-path="chap-describe.html"><a href="chap-describe.html#pearson-correlatie"><i class="fa fa-check"></i><b>4.7.2</b> Pearson Correlatie</a></li>
+<li class="chapter" data-level="4.7.3" data-path="chap-describe.html"><a href="chap-describe.html#verschillende-groottes-van-correlatie"><i class="fa fa-check"></i><b>4.7.3</b> Verschillende groottes van correlatie</a></li>
+<li class="chapter" data-level="4.7.4" data-path="chap-describe.html"><a href="chap-describe.html#spearman-correlatie"><i class="fa fa-check"></i><b>4.7.4</b> Spearman correlatie</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="chap-describe.html"><a href="chap-describe.html#sec:missing"><i class="fa fa-check"></i><b>4.8</b> Onvolledige gegevens</a></li>
+<li class="chapter" data-level="4.9" data-path="chap-describe.html"><a href="chap-describe.html#clips-over-de-code-in-dit-hoofdstuk"><i class="fa fa-check"></i><b>4.9</b> Clips over de code in dit hoofdstuk</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap-besluit.html"><a href="chap-besluit.html"><i class="fa fa-check"></i><b>5</b> Statistische besluitvorming</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chap-besluit.html"><a href="chap-besluit.html#inleiding-4"><i class="fa fa-check"></i><b>5.1</b> Inleiding</a></li>
+<li class="chapter" data-level="5.2" data-path="chap-besluit.html"><a href="chap-besluit.html#captopril-voorbeeld"><i class="fa fa-check"></i><b>5.2</b> Captopril voorbeeld</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="chap-besluit.html"><a href="chap-besluit.html#proefopzet"><i class="fa fa-check"></i><b>5.2.1</b> Proefopzet</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chap-besluit.html"><a href="chap-besluit.html#data-exploratie-beschrijvende-statistiek"><i class="fa fa-check"></i><b>5.2.2</b> Data Exploratie &amp; Beschrijvende Statistiek</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chap-besluit.html"><a href="chap-besluit.html#schatten"><i class="fa fa-check"></i><b>5.2.3</b> Schatten</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chap-besluit.html"><a href="chap-besluit.html#puntschatters-het-steekproefgemiddelde"><i class="fa fa-check"></i><b>5.3</b> Puntschatters: het steekproefgemiddelde</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="chap-besluit.html"><a href="chap-besluit.html#overzicht"><i class="fa fa-check"></i><b>5.3.1</b> Overzicht</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chap-besluit.html"><a href="chap-besluit.html#het-steekproefgemiddelde-is-onvertekend"><i class="fa fa-check"></i><b>5.3.2</b> Het steekproefgemiddelde is onvertekend</a></li>
+<li class="chapter" data-level="5.3.3" data-path="chap-besluit.html"><a href="chap-besluit.html#imprecisiestandard-error"><i class="fa fa-check"></i><b>5.3.3</b> Imprecisie/standard error</a></li>
+<li class="chapter" data-level="5.3.4" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:verdelingXbar"><i class="fa fa-check"></i><b>5.3.4</b> Verdeling van het steekproefgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chap-besluit.html"><a href="chap-besluit.html#intervalschatters"><i class="fa fa-check"></i><b>5.4</b> Intervalschatters</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:bigek"><i class="fa fa-check"></i><b>5.4.1</b> Gekende variantie op de metingen</a></li>
+<li class="chapter" data-level="5.4.2" data-path="chap-besluit.html"><a href="chap-besluit.html#sec:tBI"><i class="fa fa-check"></i><b>5.4.2</b> Ongekende variantie op de metingen</a></li>
+<li class="chapter" data-level="5.4.3" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:interpretBI"><i class="fa fa-check"></i><b>5.4.3</b> Interpretatie van betrouwbaarheidsintervallen</a></li>
+<li class="chapter" data-level="5.4.4" data-path="chap-besluit.html"><a href="chap-besluit.html#wat-rapporteren"><i class="fa fa-check"></i><b>5.4.4</b> Wat rapporteren?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="chap-besluit.html"><a href="chap-besluit.html#principe-van-hypothesetoetsen-via-one-sample-t-test"><i class="fa fa-check"></i><b>5.5</b> Principe van Hypothesetoetsen (via one sample t-test)</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="chap-besluit.html"><a href="chap-besluit.html#introductie-d.m.v.-captopril-voorbeeld"><i class="fa fa-check"></i><b>5.5.1</b> Introductie d.m.v. captopril voorbeeld</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chap-besluit.html"><a href="chap-besluit.html#hypotheses"><i class="fa fa-check"></i><b>5.5.2</b> Hypotheses</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chap-besluit.html"><a href="chap-besluit.html#test-statistiek"><i class="fa fa-check"></i><b>5.5.3</b> Test-statistiek</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chap-besluit.html"><a href="chap-besluit.html#de-p-waarde"><i class="fa fa-check"></i><b>5.5.4</b> De p-waarde</a></li>
+<li class="chapter" data-level="5.5.5" data-path="chap-besluit.html"><a href="chap-besluit.html#kritieke-waarde"><i class="fa fa-check"></i><b>5.5.5</b> Kritieke waarde</a></li>
+<li class="chapter" data-level="5.5.6" data-path="chap-besluit.html"><a href="chap-besluit.html#beslissingsfouten"><i class="fa fa-check"></i><b>5.5.6</b> Beslissingsfouten</a></li>
+<li class="chapter" data-level="5.5.7" data-path="chap-besluit.html"><a href="chap-besluit.html#conclusies-captopril-voorbeeld."><i class="fa fa-check"></i><b>5.5.7</b> Conclusies Captopril voorbeeld.</a></li>
+<li class="chapter" data-level="5.5.8" data-path="chap-besluit.html"><a href="chap-besluit.html#eenzijdig-of-tweezijdig-toetsen"><i class="fa fa-check"></i><b>5.5.8</b> Eenzijdig of tweezijdig toetsen?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chap-besluit.html"><a href="chap-besluit.html#geclusterde-metingen"><i class="fa fa-check"></i><b>5.6</b> Geclusterde metingen</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="chap-besluit.html"><a href="chap-besluit.html#captopril"><i class="fa fa-check"></i><b>5.6.1</b> Captopril</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="chap-besluit.html"><a href="chap-besluit.html#two-sample-t-test"><i class="fa fa-check"></i><b>5.7</b> Two-sample t-test</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="chap-besluit.html"><a href="chap-besluit.html#notatie"><i class="fa fa-check"></i><b>5.7.1</b> Notatie</a></li>
+<li class="chapter" data-level="5.7.2" data-path="chap-besluit.html"><a href="chap-besluit.html#oksel-voorbeeld"><i class="fa fa-check"></i><b>5.7.2</b> Oksel-voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="chap-besluit.html"><a href="chap-besluit.html#aannames"><i class="fa fa-check"></i><b>5.8</b> Aannames</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="chap-besluit.html"><a href="chap-besluit.html#nagaan-van-de-veronderstelling-van-normaliteit"><i class="fa fa-check"></i><b>5.8.1</b> Nagaan van de veronderstelling van Normaliteit</a></li>
+<li class="chapter" data-level="5.8.2" data-path="chap-besluit.html"><a href="chap-besluit.html#nagaan-van-homoscedasticiteit"><i class="fa fa-check"></i><b>5.8.2</b> Nagaan van homoscedasticiteit</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="chap-besluit.html"><a href="chap-besluit.html#wat-rapporteren-1"><i class="fa fa-check"></i><b>5.9</b> Wat rapporteren?</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="chap-besluit.html"><a href="chap-besluit.html#reden-1-relatie-toetsen-en-betrouwbaarheidsintervallen"><i class="fa fa-check"></i><b>5.9.1</b> Reden 1: Relatie toetsen en betrouwbaarheidsintervallen</a></li>
+<li class="chapter" data-level="5.9.2" data-path="chap-besluit.html"><a href="chap-besluit.html#reden-2-statistische-significantie-versus-wetenschappelijke-relevantie"><i class="fa fa-check"></i><b>5.9.2</b> Reden 2: Statistische significantie versus wetenschappelijke relevantie</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="chap-besluit.html"><a href="chap-besluit.html#equivalentie-intervallen"><i class="fa fa-check"></i><b>5.10</b> Equivalentie-intervallen</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap-linReg.html"><a href="chap-linReg.html"><i class="fa fa-check"></i><b>6</b> Enkelvoudige lineaire regressie</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chap-linReg.html"><a href="chap-linReg.html#inleiding-5"><i class="fa fa-check"></i><b>6.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="chap-linReg.html"><a href="chap-linReg.html#borstkanker-dataset"><i class="fa fa-check"></i><b>6.1.1</b> Borstkanker dataset</a></li>
+<li class="chapter" data-level="6.1.2" data-path="chap-linReg.html"><a href="chap-linReg.html#data-exploratie"><i class="fa fa-check"></i><b>6.1.2</b> Data exploratie</a></li>
+<li class="chapter" data-level="6.1.3" data-path="chap-linReg.html"><a href="chap-linReg.html#model"><i class="fa fa-check"></i><b>6.1.3</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="chap-linReg.html"><a href="chap-linReg.html#lineaire-regressie"><i class="fa fa-check"></i><b>6.2</b> Lineaire regressie</a></li>
+<li class="chapter" data-level="6.3" data-path="chap-linReg.html"><a href="chap-linReg.html#parameterschatting"><i class="fa fa-check"></i><b>6.3</b> Parameterschatting</a></li>
+<li class="chapter" data-level="6.4" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linBesluit"><i class="fa fa-check"></i><b>6.4</b> Statistische besluitvorming</a></li>
+<li class="chapter" data-level="6.5" data-path="chap-linReg.html"><a href="chap-linReg.html#nagaan-van-modelveronderstellingen"><i class="fa fa-check"></i><b>6.5</b> Nagaan van modelveronderstellingen</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="chap-linReg.html"><a href="chap-linReg.html#lineariteit"><i class="fa fa-check"></i><b>6.5.1</b> Lineariteit</a></li>
+<li class="chapter" data-level="6.5.2" data-path="chap-linReg.html"><a href="chap-linReg.html#veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie"><i class="fa fa-check"></i><b>6.5.2</b> Veronderstelling van homoscedasticiteit (gelijkheid van variantie)</a></li>
+<li class="chapter" data-level="6.5.3" data-path="chap-linReg.html"><a href="chap-linReg.html#veronderstelling-van-normaliteit"><i class="fa fa-check"></i><b>6.5.3</b> Veronderstelling van normaliteit</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="chap-linReg.html"><a href="chap-linReg.html#afwijkingen-van-modelveronderstellingen"><i class="fa fa-check"></i><b>6.6</b> Afwijkingen van Modelveronderstellingen</a></li>
+<li class="chapter" data-level="6.7" data-path="chap-linReg.html"><a href="chap-linReg.html#besluitvorming-over-gemiddelde-uitkomst"><i class="fa fa-check"></i><b>6.7</b> Besluitvorming over gemiddelde uitkomst</a></li>
+<li class="chapter" data-level="6.8" data-path="chap-linReg.html"><a href="chap-linReg.html#predictie-intervallen"><i class="fa fa-check"></i><b>6.8</b> Predictie-intervallen</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="chap-linReg.html"><a href="chap-linReg.html#nhanes-voorbeeld"><i class="fa fa-check"></i><b>6.8.1</b> NHANES voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linAnova"><i class="fa fa-check"></i><b>6.9</b> Kwadratensommen en Anova-tabel</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="chap-linReg.html"><a href="chap-linReg.html#determinatie-coëfficiënt"><i class="fa fa-check"></i><b>6.9.1</b> Determinatie-coëfficiënt</a></li>
+<li class="chapter" data-level="6.9.2" data-path="chap-linReg.html"><a href="chap-linReg.html#f-testen-in-het-enkelvoudig-lineair-regressiemodel"><i class="fa fa-check"></i><b>6.9.2</b> F-Testen in het enkelvoudig lineair regressiemodel</a></li>
+<li class="chapter" data-level="6.9.3" data-path="chap-linReg.html"><a href="chap-linReg.html#anova-tabel"><i class="fa fa-check"></i><b>6.9.3</b> Anova Tabel</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linDummy"><i class="fa fa-check"></i><b>6.10</b> Dummy variabelen</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chap-anova.html"><a href="chap-anova.html"><i class="fa fa-check"></i><b>7</b> Variantie analyse</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chap-anova.html"><a href="chap-anova.html#inleiding-6"><i class="fa fa-check"></i><b>7.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="chap-anova.html"><a href="chap-anova.html#prostacycline-voorbeeld"><i class="fa fa-check"></i><b>7.1.1</b> Prostacycline voorbeeld</a></li>
+<li class="chapter" data-level="7.1.2" data-path="chap-anova.html"><a href="chap-anova.html#model-1"><i class="fa fa-check"></i><b>7.1.2</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="chap-anova.html"><a href="chap-anova.html#variantie-analyse"><i class="fa fa-check"></i><b>7.2</b> Variantie-analyse</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="chap-anova.html"><a href="chap-anova.html#model-2"><i class="fa fa-check"></i><b>7.2.1</b> Model</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chap-anova.html"><a href="chap-anova.html#kwadratensommen-en-anova"><i class="fa fa-check"></i><b>7.2.2</b> Kwadratensommen en Anova</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chap-anova.html"><a href="chap-anova.html#anova-test"><i class="fa fa-check"></i><b>7.2.3</b> Anova-test</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chap-anova.html"><a href="chap-anova.html#anova-tabel-1"><i class="fa fa-check"></i><b>7.2.4</b> Anova Tabel</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chap-anova.html"><a href="chap-anova.html#post-hoc-analyse-meervoudig-vergelijken-van-gemiddelden"><i class="fa fa-check"></i><b>7.3</b> Post hoc analyse: Meervoudig Vergelijken van Gemiddelden</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="chap-anova.html"><a href="chap-anova.html#naïeve-methode"><i class="fa fa-check"></i><b>7.3.1</b> Naïeve methode</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chap-anova.html"><a href="chap-anova.html#family-wise-error-rate"><i class="fa fa-check"></i><b>7.3.2</b> Family-wise error rate</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chap-anova.html"><a href="chap-anova.html#conclusies-prostacycline-voorbeeld"><i class="fa fa-check"></i><b>7.4</b> Conclusies: Prostacycline Voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html"><i class="fa fa-check"></i><b>8</b> Niet-parametrische statistiek</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#inleiding-7"><i class="fa fa-check"></i><b>8.1</b> Inleiding</a></li>
+<li class="chapter" data-level="8.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#vergelijken-van-twee-groepen"><i class="fa fa-check"></i><b>8.2</b> Vergelijken van twee groepen</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#cholestorol-voorbeeld"><i class="fa fa-check"></i><b>8.2.1</b> Cholestorol voorbeeld</a></li>
+<li class="chapter" data-level="8.2.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#permutatietesten"><i class="fa fa-check"></i><b>8.2.2</b> Permutatietesten</a></li>
+<li class="chapter" data-level="8.2.3" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#rank-testen"><i class="fa fa-check"></i><b>8.2.3</b> Rank Testen</a></li>
+<li class="chapter" data-level="8.2.4" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#wilcoxon-mann-whitney-test"><i class="fa fa-check"></i><b>8.2.4</b> Wilcoxon-Mann-Whitney Test</a></li>
+<li class="chapter" data-level="8.2.5" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#conclusie-cholestorol-voorbeeld"><i class="fa fa-check"></i><b>8.2.5</b> Conclusie Cholestorol Voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#vergelijken-van-g-behandelingen"><i class="fa fa-check"></i><b>8.3</b> Vergelijken van <span class="math inline">\(g\)</span> Behandelingen</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#dmh-voorbeeld"><i class="fa fa-check"></i><b>8.3.1</b> DMH Voorbeeld</a></li>
+<li class="chapter" data-level="8.3.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#kruskal-wallis-rank-test"><i class="fa fa-check"></i><b>8.3.2</b> Kruskal-Wallis Rank Test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap-categorisch.html"><a href="chap-categorisch.html"><i class="fa fa-check"></i><b>9</b> Categorische data analyse</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#inleiding-8"><i class="fa fa-check"></i><b>9.1</b> Inleiding</a></li>
+<li class="chapter" data-level="9.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#toetsen-voor-een-proportie"><i class="fa fa-check"></i><b>9.2</b> Toetsen voor een proportie</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#asymptotisch-betrouwbaarheidsinterval"><i class="fa fa-check"></i><b>9.2.1</b> Asymptotisch Betrouwbaarheidsinterval</a></li>
+<li class="chapter" data-level="9.2.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#asymptotische-test"><i class="fa fa-check"></i><b>9.2.2</b> Asymptotische Test</a></li>
+<li class="chapter" data-level="9.2.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#subsec:binom"><i class="fa fa-check"></i><b>9.2.3</b> Binomiale test</a></li>
+<li class="chapter" data-level="9.2.4" data-path="chap-categorisch.html"><a href="chap-categorisch.html#conclusie"><i class="fa fa-check"></i><b>9.2.4</b> Conclusie</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#toets-voor-associatie-tussen-2-kwalitatieve-variabelen"><i class="fa fa-check"></i><b>9.3</b> Toets voor associatie tussen 2 kwalitatieve variabelen</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#gepaarde-gegevens"><i class="fa fa-check"></i><b>9.3.1</b> Gepaarde gegevens</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#subsec:catOnPaired"><i class="fa fa-check"></i><b>9.3.2</b> Ongepaarde gegevens</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#de-pearson-chi-kwadraat-test-voor-ongepaarde-gegevens"><i class="fa fa-check"></i><b>9.3.3</b> De Pearson Chi-kwadraat test voor ongepaarde gegevens</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chap-categorisch.html"><a href="chap-categorisch.html#logistische-regressie"><i class="fa fa-check"></i><b>9.4</b> Logistische regressie</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#categorische-predictor"><i class="fa fa-check"></i><b>9.4.1</b> Categorische predictor</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#continue-predictor"><i class="fa fa-check"></i><b>9.4.2</b> Continue predictor</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap-glm.html"><a href="chap-glm.html"><i class="fa fa-check"></i><b>10</b> Algemeen lineair model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chap-glm.html"><a href="chap-glm.html#inleiding-9"><i class="fa fa-check"></i><b>10.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="chap-glm.html"><a href="chap-glm.html#sec:prostate"><i class="fa fa-check"></i><b>10.1.1</b> Prostaatkanker dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="chap-glm.html"><a href="chap-glm.html#het-additieve-meervoudig-lineaire-regressie-model"><i class="fa fa-check"></i><b>10.2</b> Het additieve meervoudig lineaire regressie model</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="chap-glm.html"><a href="chap-glm.html#statistisch-model"><i class="fa fa-check"></i><b>10.2.1</b> Statistisch model</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chap-glm.html"><a href="chap-glm.html#besluitvorming-in-regressiemodellen"><i class="fa fa-check"></i><b>10.3</b> Besluitvorming in regressiemodellen</a></li>
+<li class="chapter" data-level="10.4" data-path="chap-glm.html"><a href="chap-glm.html#nagaan-van-modelveronderstellingen-1"><i class="fa fa-check"></i><b>10.4</b> Nagaan van modelveronderstellingen</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="chap-glm.html"><a href="chap-glm.html#lineariteit-1"><i class="fa fa-check"></i><b>10.4.1</b> Lineariteit</a></li>
+<li class="chapter" data-level="10.4.2" data-path="chap-glm.html"><a href="chap-glm.html#homoscedasticiteit"><i class="fa fa-check"></i><b>10.4.2</b> Homoscedasticiteit</a></li>
+<li class="chapter" data-level="10.4.3" data-path="chap-glm.html"><a href="chap-glm.html#normaliteit"><i class="fa fa-check"></i><b>10.4.3</b> Normaliteit</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="chap-glm.html"><a href="chap-glm.html#het-niet-additieve-meervoudig-lineair-regressiemodel"><i class="fa fa-check"></i><b>10.5</b> Het niet-additieve meervoudig lineair regressiemodel</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="chap-glm.html"><a href="chap-glm.html#interactie-tussen-continue-variabele-en-factor-variabele"><i class="fa fa-check"></i><b>10.5.1</b> Interactie tussen continue variabele en factor variabele</a></li>
+<li class="chapter" data-level="10.5.2" data-path="chap-glm.html"><a href="chap-glm.html#sec:intCont"><i class="fa fa-check"></i><b>10.5.2</b> Interactie tussen twee continue variabelen</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="chap-glm.html"><a href="chap-glm.html#anova-tabel-2"><i class="fa fa-check"></i><b>10.6</b> ANOVA Tabel</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="chap-glm.html"><a href="chap-glm.html#sstot-ssr-en-sse"><i class="fa fa-check"></i><b>10.6.1</b> SSTot, SSR en SSE</a></li>
+<li class="chapter" data-level="10.6.2" data-path="chap-glm.html"><a href="chap-glm.html#extra-kwadratensommen"><i class="fa fa-check"></i><b>10.6.2</b> Extra Kwadratensommen</a></li>
+<li class="chapter" data-level="10.6.3" data-path="chap-glm.html"><a href="chap-glm.html#type-i-kwadratensommen"><i class="fa fa-check"></i><b>10.6.3</b> Type I Kwadratensommen</a></li>
+<li class="chapter" data-level="10.6.4" data-path="chap-glm.html"><a href="chap-glm.html#type-iii-kwadratensommen"><i class="fa fa-check"></i><b>10.6.4</b> Type III Kwadratensommen</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="chap-glm.html"><a href="chap-glm.html#regressiediagnostieken"><i class="fa fa-check"></i><b>10.7</b> Regressiediagnostieken</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="chap-glm.html"><a href="chap-glm.html#multicollineariteit"><i class="fa fa-check"></i><b>10.7.1</b> Multicollineariteit</a></li>
+<li class="chapter" data-level="10.7.2" data-path="chap-glm.html"><a href="chap-glm.html#invloedrijke-observaties"><i class="fa fa-check"></i><b>10.7.2</b> Invloedrijke observaties</a></li>
+<li class="chapter" data-level="10.7.3" data-path="chap-glm.html"><a href="chap-glm.html#cooks-distance"><i class="fa fa-check"></i><b>10.7.3</b> Cook’s distance</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="chap-glm.html"><a href="chap-glm.html#constrasten"><i class="fa fa-check"></i><b>10.8</b> Constrasten</a>
+<ul>
+<li class="chapter" data-level="10.8.1" data-path="chap-glm.html"><a href="chap-glm.html#nhanes-voorbeeld-1"><i class="fa fa-check"></i><b>10.8.1</b> NHANES voorbeeld</a></li>
+<li class="chapter" data-level="10.8.2" data-path="chap-glm.html"><a href="chap-glm.html#model-3"><i class="fa fa-check"></i><b>10.8.2</b> Model</a></li>
+<li class="chapter" data-level="10.8.3" data-path="chap-glm.html"><a href="chap-glm.html#besluitvorming"><i class="fa fa-check"></i><b>10.8.3</b> Besluitvorming</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="chap-glm.html"><a href="chap-glm.html#factoriële-proeven"><i class="fa fa-check"></i><b>10.9</b> Factoriële proeven</a>
+<ul>
+<li class="chapter" data-level="10.9.1" data-path="chap-glm.html"><a href="chap-glm.html#introductie"><i class="fa fa-check"></i><b>10.9.1</b> Introductie</a></li>
+<li class="chapter" data-level="10.9.2" data-path="chap-glm.html"><a href="chap-glm.html#data-2"><i class="fa fa-check"></i><b>10.9.2</b> Data</a></li>
+<li class="chapter" data-level="10.9.3" data-path="chap-glm.html"><a href="chap-glm.html#model-4"><i class="fa fa-check"></i><b>10.9.3</b> Model</a></li>
+<li class="chapter" data-level="10.9.4" data-path="chap-glm.html"><a href="chap-glm.html#inferentie"><i class="fa fa-check"></i><b>10.9.4</b> Inferentie</a></li>
+<li class="chapter" data-level="10.9.5" data-path="chap-glm.html"><a href="chap-glm.html#conclusie-3"><i class="fa fa-check"></i><b>10.9.5</b> Conclusie</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cursus Inleiding tot de Biostatistiek 2022-2023</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="niet-parametrische-statistiek" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Hoofdstuk 8</span> Niet-parametrische statistiek<a href="niet-parametrische-statistiek.html#niet-parametrische-statistiek" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Alle kennisclips die in dit hoofdstuk zijn verwerkt kan je in deze youtube playlist vinden:</p>
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PLZH1hP8_LbJJyR4mqLOxDwwOzysbhaFm1">Kennisclips Hoofdstuk 8 Niet-parametrische Statistiek</a></li>
+</ul>
+<p>Link naar webpage/script die wordt gebruik in de kennisclips:</p>
+<ul>
+<li><a href="https://statomics.github.io/sbc21/rmd/08-NonparametericStatistics.html">script Hoofdstuk 8</a></li>
+</ul>
+<div id="inleiding-7" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Inleiding<a href="niet-parametrische-statistiek.html#inleiding-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x0qBWoUpT00" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Alle methoden die in de vorige hoofdstukken behandeld werden, zijn zogenaamde parametrische methoden. Deze term duidt erop dat de geldigheid van de inferentie enkel correct is als er voldaan is aan parametrische veronderstellingen.
+Dit zijn voornamelijk de distributionele veronderstellingen, zoals dat de observaties normaal verdeeld zijn. Andere
+voorbeelden van een parametrische veronderstelling zijn de gelijkheid van varianties bij de two-sample <span class="math inline">\(t\)</span>-test en ANOVA en de lineariteit van een regressiemodel.</p>
+<p>Wanneer we over statistische besluitvorming spreken, is bijvoorbeeld de <span class="math inline">\(p\)</span>-waarde van een statistische test, of de probabilistische interpretatie van een betrouwbaarheidsinterval enkel correct interpreteerbaar onder bepaalde veronderstellingen:</p>
+<ul>
+<li><p>De <span class="math inline">\(p\)</span>-waarde is de kans dat de teststatistiek <span class="math inline">\(T\)</span> onder de nulhypothese meer extreem is dan de waargenomen waarde <span class="math inline">\(t\)</span> (gegeven dat <span class="math inline">\(H_0\)</span> waar is). Die kans wordt berekend op basis van de nuldistributie van <span class="math inline">\(T\)</span>. Deze distributie wordt bij parametrische testen afgeleid door te steunen op veronderstellingen over de verdeling van de observaties. Indien er niet voldaan is aan deze veronderstellingen, is de berekende <span class="math inline">\(p\)</span>-waarde fout. Dit betekent dat de conclusies die op <span class="math inline">\(p\)</span> gebaseerd worden, eveneens mogelijks fout kunnen zijn.</p></li>
+<li><p>De berekening van bv. een <span class="math inline">\(95\%\)</span> betrouwbaarheidsinterval steunt eveneens op distributionele veronderstellingen. Als er niet voldaan is aan de veronderstellingen, is er geen garantie meer dat de berekende intervallen de (correcte) interpretatie hebben dat dergelijke intervallen de juiste parameterwaarde omvatten met <span class="math inline">\(95\%\)</span> kans.</p></li>
+</ul>
+<p>Asymptotische theorie is misschien moeilijker te plaatsen onder parametrisch of niet-parametrisch. Je zou kunnen stellen dat bv. een <span class="math inline">\(t\)</span>-test asymptotisch niet-parametrisch is, omdat bij erg grote steekproefgroottes de distributionele veronderstelling van normaliteit niet meer belangrijk is.</p>
+<p>De reden waarom we in deze cursus een focus hebben op parametrische methoden is omdat ze efficiënter en meer flexibel zijn wanneer er aan de voorwaarden voldaan is. Efficiëntie betekent dat bij een constante steekproefgrootte de testen een grotere power hebben en dat de betrouwbaarheidsintervallen smaller zijn. Met meer flexibel bedoelen we dat het eenvoudiger is om de methoden in te zetten voor experimenten met meer complexe designs.
+Als er niet voldaan is aan de veronderstellingen van de parameterische methoden kunnen we voor bepaalde designs overschakelen naar niet-parametrische methoden die in deze situatie nog steeds formeel geldig zijn.</p>
+</div>
+<div id="vergelijken-van-twee-groepen" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Vergelijken van twee groepen<a href="niet-parametrische-statistiek.html#vergelijken-van-twee-groepen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2gkuOjD_Trc" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<div id="cholestorol-voorbeeld" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Cholestorol voorbeeld<a href="niet-parametrische-statistiek.html#cholestorol-voorbeeld" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In een studie werd de cholestorolconcentratie in het bloed gemeten bij 5 patiënten (groep=1) die twee dagen geleden een hartaanval hadden en bij 5 gezonde personen (groep=2).
+De onderzoekers wensen na te gaan of de cholestorolconcentratie verschillend is bij hartpatiënten en gezonde personen.
+Boxplots en qqplots van de data worden weergegeven in Figuur <a href="niet-parametrische-statistiek.html#fig:cholBox">8.1</a> en <a href="niet-parametrische-statistiek.html#fig:cholQQ">8.2</a>.</p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="niet-parametrische-statistiek.html#cb390-1" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc21/master/data/chol.txt&quot;</span>)</span>
+<span id="cb390-2"><a href="niet-parametrische-statistiek.html#cb390-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb390-3"><a href="niet-parametrische-statistiek.html#cb390-3" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb390-4"><a href="niet-parametrische-statistiek.html#cb390-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">as.factor</span>(group))</span>
+<span id="cb390-5"><a href="niet-parametrische-statistiek.html#cb390-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb390-6"><a href="niet-parametrische-statistiek.html#cb390-6" aria-hidden="true" tabindex="-1"></a>nGroups <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb390-7"><a href="niet-parametrische-statistiek.html#cb390-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb390-8"><a href="niet-parametrische-statistiek.html#cb390-8" aria-hidden="true" tabindex="-1"></a>  table</span>
+<span id="cb390-9"><a href="niet-parametrische-statistiek.html#cb390-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb390-10"><a href="niet-parametrische-statistiek.html#cb390-10" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> nGroups <span class="sc">%&gt;%</span></span>
+<span id="cb390-11"><a href="niet-parametrische-statistiek.html#cb390-11" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb390-12"><a href="niet-parametrische-statistiek.html#cb390-12" aria-hidden="true" tabindex="-1"></a>chol</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 2
+##    group cholest
+##    &lt;fct&gt;   &lt;dbl&gt;
+##  1 1         244
+##  2 1         206
+##  3 1         242
+##  4 1         278
+##  5 1         236
+##  6 2         188
+##  7 2         212
+##  8 2         186
+##  9 2         198
+## 10 2         160</code></pre>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="niet-parametrische-statistiek.html#cb392-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span>  </span>
+<span id="cb392-2"><a href="niet-parametrische-statistiek.html#cb392-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>group,<span class="at">y=</span>cholest)) <span class="sc">+</span></span>
+<span id="cb392-3"><a href="niet-parametrische-statistiek.html#cb392-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb392-4"><a href="niet-parametrische-statistiek.html#cb392-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cholBox"></span>
+<img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/cholBox-1.png" alt="Boxplot van de cholesterol concentratie in het bloed bij hartpatiënten (groep 1) en gezonde individuen (groep 2)." width="100%" />
+<p class="caption">
+Figuur 8.1: Boxplot van de cholesterol concentratie in het bloed bij hartpatiënten (groep 1) en gezonde individuen (groep 2).
+</p>
+</div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="niet-parametrische-statistiek.html#cb393-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>cholest)) <span class="sc">+</span></span>
+<span id="cb393-2"><a href="niet-parametrische-statistiek.html#cb393-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb393-3"><a href="niet-parametrische-statistiek.html#cb393-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb393-4"><a href="niet-parametrische-statistiek.html#cb393-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cholQQ"></span>
+<img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/cholQQ-1.png" alt="Qqplot van de cholesterol concentratie in het bloed bij hartpatiënten (groep 1) en gezonde individuen (groep 2)." width="100%" />
+<p class="caption">
+Figuur 8.2: Qqplot van de cholesterol concentratie in het bloed bij hartpatiënten (groep 1) en gezonde individuen (groep 2).
+</p>
+</div>
+<p>De boxplots en qqplots geven aan dat er mogelijks outliers in de data voorkomen.
+Het is moeilijk om inzicht te krijgen in de verdeling van de data gezien we maar 5 observaties hebben per groep.</p>
+</div>
+<div id="permutatietesten" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Permutatietesten<a href="niet-parametrische-statistiek.html#permutatietesten" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>De vraagstelling van het cholestorol voorbeeld is geformuleerd in erg ruime bewoordingen en dit laat vrijheid in de vertaling ervan naar een nulhypothese.</p>
+<p>Laten we starten met een nulhypothese in termen van gemiddelden. Stel dat <span class="math inline">\(\mu_1\)</span> en <span class="math inline">\(\mu_2\)</span> de gemiddelde uitkomsten in behandelingsgroep 1 (hartpatiënten) en 2 (gezonde personen) voorstellen, dan zouden de hypotheses kunnen zijn:</p>
+<p><span class="math display">\[H_0: \mu_1=\mu_2 \text{ versus } H_1: \mu_1\neq \mu_2.\]</span></p>
+<p>Voor het testen van deze hypotheses kunnen we bijvoorbeeld gebruik maken van de two-sample <span class="math inline">\(t\)</span>-test.</p>
+<p>We gaan de voorwaarden na:</p>
+<ul>
+<li>Normaliteit van de uitkomsten in de twee behandelingsgroepen. Met slechts 5 observaties in iedere groep, kan de veronderstelling niet nagegaan worden.</li>
+<li>Gelijkheid van varianties. Met slechts 5 observaties in iedere groep, kan de veronderstelling niet nagegaan worden.</li>
+</ul>
+<p>We kunnen dus de veronderstellingen van de two-sample <span class="math inline">\(t\)</span>-test niet nagaan.
+We kunnen ook geen beroep doen op de asymptotische benadering omdat 5 observaties per groep te weinig is.</p>
+<p>Samengevat: de veronderstellingen van de <span class="math inline">\(t\)</span>-test kunnen niet worden nagegaan en er zijn te weinig observaties om gebruik te kunnen maken van de asymptotische benadering. Aangezien het erg gevaarlijk is een statistische methode te gebruiken waarvan de voorwaarden niet nagegaan kunnen worden, is de klassieke <span class="math inline">\(t\)</span>-test niet de geschikte methode. De oplossing die in dit hoofdstuk besproken wordt, zijn permutatietesten.
+Om deze te kunnen beschrijven, zullen we eerst de nulhypothese anders formuleren.</p>
+<div id="hypothesen" class="section level4 hasAnchor" number="8.2.2.1">
+<h4><span class="header-section-number">8.2.2.1</span> Hypothesen<a href="niet-parametrische-statistiek.html#hypothesen" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>De oplossing die in deze sectie besproken wordt, zijn de permutatietesten.
+Om deze te kunnen beschrijven, zullen we eerst de nulhypothese anders formuleren.</p>
+<p>De veronderstelling voor de two-sample <span class="math inline">\(t\)</span>-test kunnen we als volgt schrijven, met <span class="math inline">\(Y_{1j}\)</span> en <span class="math inline">\(Y_{2j}\)</span> de notatie voor de uitkomsten uit respectievelijk groep 1 en 2:</p>
+<p><span class="math display">\[Y_{1j} \text{ iid } N(\mu_1,\sigma^2) \;\;\;\text{ en }\;\;\; Y_{2j} \text{ iid } N(\mu_2,\sigma^2).\]</span></p>
+<p>Onder <span class="math inline">\(H_0:\mu_1=\mu_2\)</span>, wordt dit (stel <span class="math inline">\(\mu=\mu_1=\mu_2\)</span> onder <span class="math inline">\(H_0\)</span>)</p>
+<p><span class="math display">\[ Y_{ij} \text{ iid } N(\mu,\sigma^2),\]</span></p>
+<p>wat uitdrukt dat alle <span class="math inline">\(n=n_1+n_2\)</span> uitkomsten uit dezelfde normale distributie komen en onafhankelijk verdeeld zijn. Dit laat ons dus toe om de oorspronkelijke nulhypothese van de two-sample <span class="math inline">\(t\)</span>-test anders te schrijven:</p>
+<p><span class="math display" id="eq:H0F1F2">\[\begin{equation}
+H_0: F_1(y) = F_2(y) \text{ voor alle } y \;\;\;\text{ of }\;\;\; H_0: f_1(y) = f_2(y) \text{ voor alle } y \tag{8.1}
+\end{equation}\]</span></p>
+<p>met <span class="math inline">\(F_1\)</span> en <span class="math inline">\(F_2\)</span> de distributiefuncties en <span class="math inline">\(f_1\)</span> en <span class="math inline">\(f_2\)</span> de densiteitfuncties van de verdeling van de uitkomsten in respectievelijk behandelingsgroep 1 en 2, en met de bijkomende veronderstelling dat <span class="math inline">\(f_1\)</span> en <span class="math inline">\(f_2\)</span> de distributiefuncties van Normale verdelingen zijn.</p>
+<p>Onder de alternatieve hypothese wordt een locatie-shift verondersteld:</p>
+<p><span class="math display">\[H_1: f_1(y)=f_2(y-\Delta) \;\;\;\text{ voor alle } y\]</span></p>
+<p>met <span class="math inline">\(\Delta=\mu_1-\mu_2\)</span>, verder hebben de Normale verdelingen dezelfde variantie.</p>
+<p>We illustreren dit in R voor <span class="math inline">\(f_1\sim N(0,1)\)</span> en <span class="math inline">\(f_2\sim N(1,1)\)</span> en <span class="math inline">\(\Delta=-1\)</span>.</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="niet-parametrische-statistiek.html#cb394-1" aria-hidden="true" tabindex="-1"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb394-2"><a href="niet-parametrische-statistiek.html#cb394-2" aria-hidden="true" tabindex="-1"></a>sigma1 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb394-3"><a href="niet-parametrische-statistiek.html#cb394-3" aria-hidden="true" tabindex="-1"></a>mu2 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb394-4"><a href="niet-parametrische-statistiek.html#cb394-4" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb394-5"><a href="niet-parametrische-statistiek.html#cb394-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
+<span id="cb394-6"><a href="niet-parametrische-statistiek.html#cb394-6" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> mu1 <span class="sc">-</span> mu2</span>
+<span id="cb394-7"><a href="niet-parametrische-statistiek.html#cb394-7" aria-hidden="true" tabindex="-1"></a>delta</span></code></pre></div>
+<pre><code>## [1] -1</code></pre>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="niet-parametrische-statistiek.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(y, mu1, sigma1)</span></code></pre></div>
+<pre><code>## [1] 0.05399097 0.24197072 0.39894228 0.24197072
+## [5] 0.05399097</code></pre>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="niet-parametrische-statistiek.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(y <span class="sc">-</span> delta, mu2, sigma2)</span></code></pre></div>
+<pre><code>## [1] 0.05399097 0.24197072 0.39894228 0.24197072
+## [5] 0.05399097</code></pre>
+<p>De permutatietesten die in de volgende sectie ontwikkeld worden, kunnen gebruikt worden voor het testen van de hypothese <a href="niet-parametrische-statistiek.html#eq:H0F1F2">(8.1)</a>, maar dan zonder de Normaliteitsveronderstelling.</p>
+<p>We schrijven hypothese <a href="niet-parametrische-statistiek.html#eq:H0F1F2">(8.1)</a> verkort als</p>
+<p><span class="math display">\[
+  H_0: F_1=F_2 \;\;\;\text{ of }\;\;\; H_0:f_1=f_2.
+\]</span></p>
+<p>Als de nulhypothese waar is, met name dat de verdelingen van de cholestorolconcentraties gelijk zijn voor hartpatiënten en gezonde personen, dan zijn de groep-labels van de 10 personen niet informatief.
+Gezien er geen verschil is in de verdeling tussen beide groepen is elke groepering immers irrelevant.
+We kunnen bijgevolg de verdeling van de test-statistiek onder de nulhypothese bekomen door de groepslabels <span class="math inline">\(G\)</span> te permuteren.</p>
+<p>####Verdeling van de statistiek onder <span class="math inline">\(H_0\)</span></p>
+<p>In praktijk zijn er <span class="math inline">\(m=\binom{n_1+n_2}{n_1}=\binom{n}{n_1}=\binom{n}{n_2}\)</span> mogelijke unieke permutaties <span class="math inline">\(\cal{G}\)</span> van de groepslabels.
+Voor ons voorbeeld zijn dat er <span class="math inline">\(m=\)</span> 252.
+Als <span class="math inline">\(m\)</span> niet te groot is dan kunnen alle unieke permutaties van de groepslabels berekend worden.
+Voor iedere unique permutatie <span class="math inline">\(g \in \cal{G}\)</span> wordt de teststatistiek <span class="math inline">\(t^*_g\)</span> berekend<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a>.</p>
+<p>We kunnen alle m=252 permutaties in R genereren a.d.h.v. de functie <code>combn(n,n_1)</code>.
+Dit wordt geïllustreerd in de onderstaande R code:</p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="niet-parametrische-statistiek.html#cb400-1" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">combn</span>(n,nGroups[<span class="dv">1</span>])</span>
+<span id="cb400-2"><a href="niet-parametrische-statistiek.html#cb400-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(G)</span></code></pre></div>
+<pre><code>## [1]   5 252</code></pre>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="niet-parametrische-statistiek.html#cb402-1" aria-hidden="true" tabindex="-1"></a>G[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+## [1,]    1    1    1    1    1    1    1    1    1
+## [2,]    2    2    2    2    2    2    2    2    2
+## [3,]    3    3    3    3    3    3    3    3    3
+## [4,]    4    4    4    4    4    4    5    5    5
+## [5,]    5    6    7    8    9   10    6    7    8
+##      [,10]
+## [1,]     1
+## [2,]     2
+## [3,]     3
+## [4,]     5
+## [5,]     9</code></pre>
+<p>De matrix G bevat voor elke permutatie de volgnummers van de observaties die tot de eerste groep zullen behoren.
+We tonen enkel de eerste 10 permutaties.
+We kunnen nu de teststatistiek berekenen voor de originele steekproef en voor elke permutatie</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="niet-parametrische-statistiek.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Originele test statistiek</span></span>
+<span id="cb404-2"><a href="niet-parametrische-statistiek.html#cb404-2" aria-hidden="true" tabindex="-1"></a>tOrig<span class="ot">=</span><span class="fu">t.test</span>(cholest<span class="sc">~</span>group,chol)<span class="sc">$</span>statistic</span>
+<span id="cb404-3"><a href="niet-parametrische-statistiek.html#cb404-3" aria-hidden="true" tabindex="-1"></a><span class="co">#bereken alle permutatiecombinaties en voer voor</span></span>
+<span id="cb404-4"><a href="niet-parametrische-statistiek.html#cb404-4" aria-hidden="true" tabindex="-1"></a><span class="co">#elke combinantie een functie uit die de t-test statistiek</span></span>
+<span id="cb404-5"><a href="niet-parametrische-statistiek.html#cb404-5" aria-hidden="true" tabindex="-1"></a><span class="co">#berekent voor de gepermuteerde groepslabels</span></span>
+<span id="cb404-6"><a href="niet-parametrische-statistiek.html#cb404-6" aria-hidden="true" tabindex="-1"></a>tOrig <span class="ot">&lt;-</span> <span class="fu">t.test</span>(cholest <span class="sc">~</span> group, chol)<span class="sc">$</span>statistic</span>
+<span id="cb404-7"><a href="niet-parametrische-statistiek.html#cb404-7" aria-hidden="true" tabindex="-1"></a>tOrig</span></code></pre></div>
+<pre><code>##        t 
+## 3.664425</code></pre>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="niet-parametrische-statistiek.html#cb406-1" aria-hidden="true" tabindex="-1"></a>tStar <span class="ot">&lt;-</span> <span class="fu">combn</span>(</span>
+<span id="cb406-2"><a href="niet-parametrische-statistiek.html#cb406-2" aria-hidden="true" tabindex="-1"></a>  n,</span>
+<span id="cb406-3"><a href="niet-parametrische-statistiek.html#cb406-3" aria-hidden="true" tabindex="-1"></a>  nGroups[<span class="dv">1</span>],</span>
+<span id="cb406-4"><a href="niet-parametrische-statistiek.html#cb406-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(g,y) {</span>
+<span id="cb406-5"><a href="niet-parametrische-statistiek.html#cb406-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t.test</span>(y[g],y[<span class="sc">-</span>g])<span class="sc">$</span>statistic</span>
+<span id="cb406-6"><a href="niet-parametrische-statistiek.html#cb406-6" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb406-7"><a href="niet-parametrische-statistiek.html#cb406-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> chol <span class="sc">%&gt;%</span> <span class="fu">pull</span>(cholest)</span>
+<span id="cb406-8"><a href="niet-parametrische-statistiek.html#cb406-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb406-9"><a href="niet-parametrische-statistiek.html#cb406-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tStar)</span></code></pre></div>
+<pre><code>## [1] 3.6644253 1.6397911 2.3973923 1.5876250 1.9217173
+## [6] 0.9967105</code></pre>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="niet-parametrische-statistiek.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(tStar)</span></code></pre></div>
+<pre><code>## [1] 252</code></pre>
+<p>Merk op dat <code>y[g]</code> de data selecteert met volgnummers g uit de vector y en <code>y[-g]</code> de data waarvoor de volgnummers niet tot g behoren.
+De vector <code>tStar</code> bevat de waarden van de teststatistiek <span class="math inline">\(t^*_g\)</span> voor alle <span class="math inline">\(g \in {\cal{G}}\)</span>.</p>
+<p>We kunnen nu de verdeling van de teststatistiek onder <span class="math inline">\(H_0\)</span> bestuderen.</p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="niet-parametrische-statistiek.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(tStar,<span class="at">bins=</span><span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb410-2"><a href="niet-parametrische-statistiek.html#cb410-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="st">&quot;permutatiestatistiek t&quot;</span><span class="sc">^</span><span class="st">&quot;*&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb410-3"><a href="niet-parametrische-statistiek.html#cb410-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span>tOrig,<span class="at">col=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:tPermDist"></span>
+<img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/tPermDist-1.png" alt="Exacte permutatie nuldistributie van de Welch t-test voor het cholestorol voorbeeld. Bovenaan histogram van elke mogelijke waarde voor de test-statistiek. Onderaan een gewoon histogram met balkbreedtes gelijk aan 1. De geobserveerde waarde voor de test-statistiek is aangeduid met een rode verticale lijn." width="100%" />
+<p class="caption">
+Figuur 8.3: Exacte permutatie nuldistributie van de Welch t-test voor het cholestorol voorbeeld. Bovenaan histogram van elke mogelijke waarde voor de test-statistiek. Onderaan een gewoon histogram met balkbreedtes gelijk aan 1. De geobserveerde waarde voor de test-statistiek is aangeduid met een rode verticale lijn.
+</p>
+</div>
+<p>Het histogram (Figuur <a href="niet-parametrische-statistiek.html#fig:tPermDist">8.3</a>) bevat alle informatie voor de permutatienuldistributie van de two-sample <span class="math inline">\(t\)</span>-teststatistiek voor de geobserveerde uitkomsten; merk op dat er 252 unieke waarden van de teststatistiek berekend zijn.<br />
+Het histogram in Figuur <a href="niet-parametrische-statistiek.html#fig:tPermDist">8.3</a> is de verdeling van de teststatistiek onder de nulhypothese.
+We zien eveneens dat de geobserveerde teststatistiek vrij extreem is.</p>
+</div>
+<div id="p-waarde" class="section level4 hasAnchor" number="8.2.2.2">
+<h4><span class="header-section-number">8.2.2.2</span> p-waarde<a href="niet-parametrische-statistiek.html#p-waarde" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Nu we in staat zijn de permutatienuldistributie te berekenen, kunnen we hypothesetesten uitvoeren net als in de parametrische statistiek.
+Voor een permutatietest is de <span class="math inline">\(p\)</span>-waarde voor de tweezijdige test (immers <span class="math inline">\(H_1: \mu_1 \neq \mu_2\)</span>)</p>
+<p><span class="math display">\[p=\text{P}_0\left[\vert T\vert \geq \vert t\vert \mid \mathbf{y}\right].\]</span></p>
+<p>Merk op dat deze p-waarde geconditioneerd is op de geobserveerde cholestorolwaarden die weergegeven worden in de vector <span class="math inline">\(\mathbf{y}=(y_{11},\ldots,y_{51},y_{12},\ldots,y_{52})^T\)</span>.</p>
+<p>Aangezien de permutatienuldistrubutie van <span class="math inline">\(T\)</span> bepaald wordt door <span class="math inline">\(t^*_g\)</span>, <span class="math inline">\(g \in{\cal{G}}\)</span>, berekenen we</p>
+<p><span class="math display">\[p  = \text{P}_0\left[\left\vert T\right\vert \geq \left\vert t\right\vert \mid \mathbf{y}\right] = \frac{\#\{g\in {\cal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m},\]</span></p>
+<p>m.a.w. als de ratio van het aantal permutaties waarvoor de statistiek minstens even extreem is als de geobserveerde statistiek op het totaal aantal permutaties. In R kunnen we dit als volgt berekenen.</p>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="niet-parametrische-statistiek.html#cb411-1" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(tStar)<span class="sc">&gt;=</span><span class="fu">abs</span>(tOrig))</span>
+<span id="cb411-2"><a href="niet-parametrische-statistiek.html#cb411-2" aria-hidden="true" tabindex="-1"></a>pval</span></code></pre></div>
+<pre><code>## [1] 0.01587302</code></pre>
+<p>We vinden dus een <span class="math inline">\(p\)</span>-waarde van 0.0159. Aangezien <span class="math inline">\(p&lt;5\%\)</span>, besluiten we op het <span class="math inline">\(5\%\)</span> significantieniveau dat de distributies van de cholestorol concentraties niet gelijk zijn bij hartpatiënten en bij gezonde personen.
+De <span class="math inline">\(p\)</span>-waarde die gevonden wordt via de permutatienuldistributie op basis van alle permutaties wordt een <strong>exacte</strong> <span class="math inline">\(p\)</span>-waarde genoemd. De permutatienuldistributie wordt een <strong>exacte</strong> nuldistributie genoemd. De term <strong>exact</strong> betekent dat de resultaten correct zijn voor iedere steekproefgrootte <span class="math inline">\(n\)</span>.</p>
+<p>De kans op een type I fout wordt dus gecontroleerd door een permutatietest, maar wel conditioneel op de geobserveerde uitkomsten data <span class="math inline">\(\mathbf{y}\)</span>.</p>
+<p>We hebben steeds geconditioneerd op de observaties van de steekproef. <strong>We kunnen ons nu afvragen of we de conclusies kunnen veralgemenen naar de populatie toe? Het antwoord is ja, als de subjecten at random getrokken zijn uit de populatie.</strong> Het bewijs hiervan valt buiten het bestek van de cursus.</p>
+<p>Soms treedt er een praktisch probleem op omdat het aantal permutaties <span class="math inline">\(m=\#{\cal{G}}\)</span> erg groot is. Enkele voorbeelden:
+<span class="math inline">\(\binom{20}{10}=\)</span> 184756, <span class="math inline">\(\binom{30}{15}=\)</span> 1.55e+08 en <span class="math inline">\(\binom{40}{20}=\)</span> 1.38e+11.</p>
+<p>Dus zelfs met slechts 40 observaties en een gebalanceerde proefopzet is het quasi onmogelijk om alle permutaties één voor één door te rekenen.
+De oplossing bestaat erin om niet alle <span class="math inline">\(g \in {\cal{G}}\)</span> te beschouwen, maar slechts een beperkt aantal (bv. 10000 of 100000).
+We kunnen m.a.w. de nuldistributie benaderen door een groot aantal random permutaties uit te voeren.</p>
+</div>
+<div id="hoe-kunnen-we-conclusie-interpreteren" class="section level4 hasAnchor" number="8.2.2.3">
+<h4><span class="header-section-number">8.2.2.3</span> Hoe kunnen we conclusie interpreteren<a href="niet-parametrische-statistiek.html#hoe-kunnen-we-conclusie-interpreteren" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We permuteren immers t statistiek. De effectgrootte in de t-test is de locatie-shift.</p>
+<p>Als locatie-shift model niet opgaat is een significant resultaat moeilijk te interpreteren. Het is dan immers niet duidelijk tegenover welk alternatief we dan testen.</p>
+<p>Locatie-shift kan niet worden nagegaan in kleine steekproeven…</p>
+<!---break-->
+</div>
+</div>
+<div id="rank-testen" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Rank Testen<a href="niet-parametrische-statistiek.html#rank-testen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6l3-IEfNSN8" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>De ontwikkeling van rank testen startte in de eerste helft van de twintigste eeuw, maar ze vormen vandaag nog steeds de belangrijkste groep van niet-parametrische testen. Aanvankelijk hadden ze hun populariteit te danken aan het feit dat ze niet-parametrisch zijn en dat ze exacte <span class="math inline">\(p\)</span>-waarden geven op basis van de permutatienuldistributie. In tegenstelling tot de test besproken in de vorige sectie, hebben rank testen geen nood aan het numeriek opstellen van de permutatienuldistributie voor iedere nieuwe dataset. De permutatienuldistributie van rank testen hangt alleen af van de steekproefgroottes. Bovendien zal blijken dat de testen erg robust zijn tegen uitschieters (Engels: <em>outliers</em>) en dat ze nuttig zijn als het locatie-shift model niet opgaat.</p>
+<p>Rank testen starten vanuit rank-getransformeerde uitkomsten.</p>
+<p><code>{.definition, name="Rank"}</code>
+Beschouw <span class="math inline">\(Y_1, \ldots, Y_n\)</span>. We veronderstellen voorlopig dat
+er geen twee gelijke observaties voorkomen (i.e. geen <em>ties</em>).
+De rank van observatie <span class="math inline">\(Y_i\)</span> wordt dan
+gedefinieerd als</p>
+<p><span class="math display">\[\begin{equation*}
+  R_i=R(Y_i) = \#\{Y_j: Y_j\leq Y_i; j=1,\ldots, n\}.
+\end{equation*}\]</span></p>
+<p>De kleinste observatie krijgt dus rank 1, de tweede kleinste rank 2, enzovoort, en de grootste observatie,
+tenslotte, krijgt rank <span class="math inline">\(n\)</span>.</p>
+<p><strong>Einde Definitie</strong></p>
+<p>De rank transformatie wordt geïllustreerd op basis van het cholestorol voorbeeld.</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="niet-parametrische-statistiek.html#cb413-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
+<span id="cb413-2"><a href="niet-parametrische-statistiek.html#cb413-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest)</span></code></pre></div>
+<pre><code>##  [1] 244 206 242 278 236 188 212 186 198 160</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="niet-parametrische-statistiek.html#cb415-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
+<span id="cb415-2"><a href="niet-parametrische-statistiek.html#cb415-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest) <span class="sc">%&gt;%</span></span>
+<span id="cb415-3"><a href="niet-parametrische-statistiek.html#cb415-3" aria-hidden="true" tabindex="-1"></a>  rank</span></code></pre></div>
+<pre><code>##  [1]  9  5  8 10  7  3  6  2  4  1</code></pre>
+<p>Soms komen <em>ties</em> voor in de data, i.e. minstens twee observaties hebben dezelfde numerieke waarde. Een klein voorbeeld:</p>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="niet-parametrische-statistiek.html#cb417-1" aria-hidden="true" tabindex="-1"></a>metTies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">403</span>, <span class="dv">507</span>, <span class="dv">507</span>, <span class="dv">610</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">830</span>, <span class="dv">900</span>)</span>
+<span id="cb417-2"><a href="niet-parametrische-statistiek.html#cb417-2" aria-hidden="true" tabindex="-1"></a>metTies <span class="sc">%&gt;%</span> rank</span></code></pre></div>
+<pre><code>## [1] 1.0 2.5 2.5 4.0 6.0 6.0 6.0 8.0 9.0</code></pre>
+<p>De numerieke waarde 507 komt tweemaal voor en de numerieke waarde 651 komt driemaal voor. Dit zijn voorbeelden van <em>ties</em>.
+Wanneer <em>ties</em> voorkomen, wordt dikwijls de definitie van <em>midranks</em> toegepast voor de rank-transformatie.</p>
+<p><code>{.definition, name="Midrank"}</code>
+Beschouw <span class="math inline">\(Y_1, \ldots, Y_n\)</span>.
+De <strong>midrank</strong> van observatie <span class="math inline">\(Y_i\)</span> wordt dan
+gedefinieerd als</p>
+<p><span class="math display">\[\begin{eqnarray*}
+  R_i &amp;=&amp; \frac{ \#\{Y_j: Y_j\leq Y_i\} + ( \#\{Y_j: Y_j &lt; Y_i\} +1)}{2}.
+\end{eqnarray*}\]</span></p>
+<p><strong>Einde Definitie</strong></p>
+<p>In wat volgt hebben we dikwijls de ranks van de uitkomsten nodig in de gepoolde steekproef. Bijvoorbeeld: beschouw de uitkomsten <span class="math inline">\(Y_{ij}\)</span>, <span class="math inline">\(i=1,\ldots, n_j\)</span> en <span class="math inline">\(j=1,2\)</span>.
+Deze uitkomsten kunnen ook gerepresenteerd worden door <span class="math inline">\(Z_1,\ldots, Z_n\)</span> (<span class="math inline">\(n=n_1+n_2\)</span>), de uitkomsten uit de gepoolde steekproef.</p>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="niet-parametrische-statistiek.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(chol)</span></code></pre></div>
+<pre><code>##         [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7] 
+## group   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;2&quot;   &quot;2&quot;  
+## cholest &quot;244&quot; &quot;206&quot; &quot;242&quot; &quot;278&quot; &quot;236&quot; &quot;188&quot; &quot;212&quot;
+##         [,8]  [,9]  [,10]
+## group   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;  
+## cholest &quot;186&quot; &quot;198&quot; &quot;160&quot;</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="niet-parametrische-statistiek.html#cb421-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb421-2"><a href="niet-parametrische-statistiek.html#cb421-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest)</span>
+<span id="cb421-3"><a href="niet-parametrische-statistiek.html#cb421-3" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+<pre><code>##  [1] 244 206 242 278 236 188 212 186 198 160</code></pre>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="niet-parametrische-statistiek.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rank</span>(z)</span></code></pre></div>
+<pre><code>##  [1]  9  5  8 10  7  3  6  2  4  1</code></pre>
+<!---break-->
+</div>
+<div id="wilcoxon-mann-whitney-test" class="section level3 hasAnchor" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Wilcoxon-Mann-Whitney Test<a href="niet-parametrische-statistiek.html#wilcoxon-mann-whitney-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qInfzU97YLI" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>De test werd gelijktijdig ontwikkeld door Wilcoxon en door Mann en Whitney. Om deze reden wordt de test dikwijls de <strong>Wilcoxon-Mann-Whitney</strong> (WMW) test genoemd. Soms wordt de test ook de <strong>Wilcoxon rank sum test</strong> of de <strong>Mann-Whitney U test</strong> genoemd.</p>
+<p>De test werd ontwikkeld voor het testen van de nulhypothese <a href="niet-parametrische-statistiek.html#eq:H0F1F2">(8.1)</a> tegenover het alternatief <span class="math inline">\(H_1: \mu_1\neq \mu_2\)</span> (of de eenzijdige versies). Eerst wordt er een distributionele veronderstelling gemaakt: het <strong>locatie-shift</strong> model, later relaxeren we deze aanname.</p>
+<p>Stel dat <span class="math inline">\(Y_1\)</span> en <span class="math inline">\(Y_2\)</span> uitkomsten zijn uit respectievelijk de eerste en tweede behandelingsgroep, met respectievelijke verdelingen <span class="math inline">\(f_1\)</span> en <span class="math inline">\(f_2\)</span>. Het locatie-shift model geldt als er een <span class="math inline">\(\Delta\)</span> bestaat waarvoor geldt</p>
+<p><span class="math display">\[
+   f_1(y)=f_2(y-\Delta) \;\;\;\text{ voor alle } y.
+\]</span></p>
+<p>Locatie-shift betekent dat <span class="math inline">\(f_1\)</span> en <span class="math inline">\(f_2\)</span> dezelfde vorm hebben, maar ze mogen over <span class="math inline">\(\Delta\)</span> verschoven zijn.
+De <span class="math inline">\(\Delta\)</span> uit de definitie heeft als interpretatie: <span class="math inline">\(\Delta = \mu_1-\mu_2\)</span>.
+Door locatie-shift aan te nemen, zal het verwerpen van <span class="math inline">\(H_0: f_1=f_2\)</span> de conclusie <span class="math inline">\(\mu_1\neq \mu_2\)</span> impliceren.</p>
+<p>De klassieke two-sample <span class="math inline">\(t\)</span>-teststatistiek is gebouwd rond het verschil in steekproefgemiddelden <span class="math inline">\(\bar{Y}_1-\bar{Y}_2\)</span>. We beschouwen nu ook het verschil in steekproefgemiddelden, maar niet op basis van de oorspronkelijke uitkomsten, maar op basis van de rank-getransformeerde uitkomsten. De ranks zijn toegekend op basis van de gepoolde observaties (i.e. na samenvoegen van de uitkomsten uit groep 1 en groep 2); dus <span class="math inline">\(R_{ij}=R(Y_{ij})\)</span> is de rank van uitkomst <span class="math inline">\(Y_{ij}\)</span> in de gepoolde steekproef.
+Beschouw de teststatistiek</p>
+<p><span class="math display">\[
+  T = \frac{1}{n_1}\sum_{i=1}^{n_1} R(Y_{i1}) - \frac{1}{n_2}\sum_{i=1}^{n_2} R(Y_{i2}) .
+\]</span></p>
+<p>De statistiek vergelijkt dus de gemiddelde rank in groep 1 met de gemiddelde rank in groep 2.</p>
+<p>Dit is een zinvolle teststatistiek, want</p>
+<ul>
+<li><p>als <span class="math inline">\(H_0\)</span> waar is, dan verwachten we dat de gemiddelde rank in de eerste groep ongeveer gelijk is aan de gemiddelde rank in de tweede groep en dus verwachten we dat <span class="math inline">\(T\)</span> dicht bij nul ligt.</p></li>
+<li><p>als <span class="math inline">\(H_1\)</span> waar is dan verwachten we dat de gemiddelde ranks zullen verschillen en dus dat <span class="math inline">\(T\)</span> niet dicht bij nul zal liggen.</p></li>
+</ul>
+<p>Er kan echter worden aangetoond dat het volstaat het om</p>
+<p><span class="math display">\[S_1=\sum_{i=1}^{n_1} R(Y_{i1})\]</span></p>
+<p>als teststatistiek te beschouwen. <span class="math inline">\(S_1\)</span> is de som van de ranks van de observaties uit de eerste behandelingsgroep; dit verklaart de naam <em>rank sum test</em>.</p>
+<p><span class="math inline">\(S_1\)</span> en <span class="math inline">\(S_2\)</span> bevatten immers dezelfde informatie en zijn gerelateerd via</p>
+<p><span class="math display">\[
+  S_1+S_2 = \text{som van alle ranks} = 1+2+\cdots + n=\frac{1}{2}n(n+1).
+\]</span></p>
+<p>Nu we weten dat <span class="math inline">\(S_1\)</span> (en <span class="math inline">\(S_2\)</span>) een goede teststatistiek is, kan de permutatietestmethode toegepast worden om de exacte permutatienuldistributie op te stellen en de test uit te voeren.
+Voor een gegeven steekproefgrootte <span class="math inline">\(n\)</span>, en veronderstellend dat er geen <em>ties</em> zijn, nemen de rank-getransformeerde uitkomsten altijd de waarden <span class="math inline">\(1, 2, \ldots, n\)</span> aan. Voor gegeven groepsgroottes <span class="math inline">\(n_1\)</span> en <span class="math inline">\(n_2\)</span>, zal de permutatienuldistributie dan ook steeds dezelfde zijn! In de vorige eeuw (tot ongeveer de jaren 1980) werd dit als een groot voordeel beschouwd omdat de nuldistributies voor gegeven <span class="math inline">\(n_1\)</span> en <span class="math inline">\(n_2\)</span> getabuleerd konden worden (belangrijke kwantielen werden als tabellen in boeken gepubliceerd zodat ze konden gebruikt worden voor het bepalen van kritische waarden en <span class="math inline">\(p\)</span>-waarden), waardoor de gebruiker geen nood had aan zware rekencapaciteit. Vandaag de dag speelt dit argument niet meer mee, maar toch blijven de rank testen erg populair, maar dan wel om andere, heel belangrijke redenen.</p>
+<p>Niettegenstaande <span class="math inline">\(S_1\)</span> en <span class="math inline">\(S_2\)</span> perfect als teststatistieken gebruikt kunnen worden, wordt dikwijls gewerkt met de gestandaardiseerde teststatistiek</p>
+<p><span class="math display">\[
+  T = \frac{S_1-\text{E}_{0}\left[S_1\right]}{\sqrt{\text{Var}_{0}\left[S_1\right]}},
+\]</span></p>
+<p>met <span class="math inline">\(\text{E}_{0}\left[S_1\right]\)</span> en <span class="math inline">\(\text{Var}_{0}\left[S_1\right]\)</span> de verwachtingswaarde en variantie van <span class="math inline">\(S_1\)</span> onder <span class="math inline">\(H_0\)</span>. Dit zijn dus het gemiddelde en variantie van de permutatienuldistributie van <span class="math inline">\(S_1\)</span>.</p>
+<p>Onder <span class="math inline">\(H_0\)</span> geldt</p>
+<p><span class="math display">\[
+   \text{E}_{0}\left[S_1\right]= \frac{1}{2}n_1(n+1) \;\;\;\;\text{ en }\;\;\;\; \text{Var}_{0}\left[S_1\right]=\frac{1}{12}n_1n_2(n+1).
+\]</span></p>
+<p>Verder kan men onder <span class="math inline">\(H_0\)</span> en als <span class="math inline">\(\min(n_1,n_2)\rightarrow \infty\)</span> opgaat aantonen dat,</p>
+<p><span class="math display">\[
+    T = \frac{S_1-\text{E}_{0}\left[S_1\right]}{\sqrt{\text{Var}_{0}\left[S_1\right]}} \rightarrow N(0,1).  
+\]</span></p>
+<p>Asymptotisch volgt de gestandaardiseerde teststatistiek dus een standaardnormaal verdeling.</p>
+<p>We illustreren de WMW test aan de hand van de R functie <code>wilcox.test</code>.</p>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="niet-parametrische-statistiek.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(cholest <span class="sc">~</span> group, <span class="at">data =</span> chol)</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum exact test
+## 
+## data:  cholest by group
+## W = 24, p-value = 0.01587
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>We zien dat we op basis van de test de nulhypothese kunnen verwerpen op het 5% significantie-niveau.</p>
+<p>De output geeft de teststatistiek <span class="math inline">\(W=\)</span> 24.
+In volgende lijnen berekenen we <span class="math inline">\(S_1\)</span> en <span class="math inline">\(S_2\)</span> manueel voor de dataset.</p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="niet-parametrische-statistiek.html#cb427-1" aria-hidden="true" tabindex="-1"></a>S1 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb427-2"><a href="niet-parametrische-statistiek.html#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank=</span><span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
+<span id="cb427-3"><a href="niet-parametrische-statistiek.html#cb427-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb427-4"><a href="niet-parametrische-statistiek.html#cb427-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
+<span id="cb427-5"><a href="niet-parametrische-statistiek.html#cb427-5" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb427-6"><a href="niet-parametrische-statistiek.html#cb427-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-7"><a href="niet-parametrische-statistiek.html#cb427-7" aria-hidden="true" tabindex="-1"></a>S2 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb427-8"><a href="niet-parametrische-statistiek.html#cb427-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank =</span> <span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
+<span id="cb427-9"><a href="niet-parametrische-statistiek.html#cb427-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb427-10"><a href="niet-parametrische-statistiek.html#cb427-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
+<span id="cb427-11"><a href="niet-parametrische-statistiek.html#cb427-11" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb427-12"><a href="niet-parametrische-statistiek.html#cb427-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-13"><a href="niet-parametrische-statistiek.html#cb427-13" aria-hidden="true" tabindex="-1"></a>S1</span></code></pre></div>
+<pre><code>## [1] 39</code></pre>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="niet-parametrische-statistiek.html#cb429-1" aria-hidden="true" tabindex="-1"></a>S2</span></code></pre></div>
+<pre><code>## [1] 16</code></pre>
+<p>Waar komt <span class="math inline">\(W=\)</span> 24 vandaan? Dit wordt zodadelijk toegelicht.</p>
+<p>De teststatistieken <span class="math inline">\(S_1\)</span> en <span class="math inline">\(S_2\)</span> werden voorgesteld door Wilcoxon, maar tezelfdertijd werd een equivalente test voorgesteld door Mann en Whitney. Hun teststatistiek wordt gegeven door<a href="#fn51" class="footnote-ref" id="fnref51"><sup>51</sup></a></p>
+<p><span class="math display">\[
+U_1 = \sum_{i=1}^{n_1}\sum_{k=1}^{n_2} \text{I}\left\{Y_{i1}\geq Y_{k2}\right\}.
+\]</span></p>
+<p>waarbij <span class="math inline">\(\text{I}\left\{.\right\}\)</span> een indicator is die 1 is als de uitdrukking waar is en 0 als dit niet het geval is.
+Er wordt voor elke observatie uit de eerste groep geteld hoeveel keer zij groter of gelijk is aan een observatie uit de tweede groep.
+We berekenen de Mann-Whitney statistiek nu manueel in R.</p>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="niet-parametrische-statistiek.html#cb431-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb431-2"><a href="niet-parametrische-statistiek.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb431-3"><a href="niet-parametrische-statistiek.html#cb431-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
+<span id="cb431-4"><a href="niet-parametrische-statistiek.html#cb431-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-5"><a href="niet-parametrische-statistiek.html#cb431-5" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb431-6"><a href="niet-parametrische-statistiek.html#cb431-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb431-7"><a href="niet-parametrische-statistiek.html#cb431-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
+<span id="cb431-8"><a href="niet-parametrische-statistiek.html#cb431-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-9"><a href="niet-parametrische-statistiek.html#cb431-9" aria-hidden="true" tabindex="-1"></a>u1Hlp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
+<span id="cb431-10"><a href="niet-parametrische-statistiek.html#cb431-10" aria-hidden="true" tabindex="-1"></a>  y1,</span>
+<span id="cb431-11"><a href="niet-parametrische-statistiek.html#cb431-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(y1i,y2) {y1i<span class="sc">&gt;=</span>y2},</span>
+<span id="cb431-12"><a href="niet-parametrische-statistiek.html#cb431-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">y2=</span>y2)</span>
+<span id="cb431-13"><a href="niet-parametrische-statistiek.html#cb431-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-14"><a href="niet-parametrische-statistiek.html#cb431-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(u1Hlp) <span class="ot">&lt;-</span> y1</span>
+<span id="cb431-15"><a href="niet-parametrische-statistiek.html#cb431-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(u1Hlp) <span class="ot">&lt;-</span> y2</span>
+<span id="cb431-16"><a href="niet-parametrische-statistiek.html#cb431-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-17"><a href="niet-parametrische-statistiek.html#cb431-17" aria-hidden="true" tabindex="-1"></a>u1Hlp</span></code></pre></div>
+<pre><code>##      244   206  242  278  236
+## 188 TRUE  TRUE TRUE TRUE TRUE
+## 212 TRUE FALSE TRUE TRUE TRUE
+## 186 TRUE  TRUE TRUE TRUE TRUE
+## 198 TRUE  TRUE TRUE TRUE TRUE
+## 160 TRUE  TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="niet-parametrische-statistiek.html#cb433-1" aria-hidden="true" tabindex="-1"></a>U1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(u1Hlp)</span>
+<span id="cb433-2"><a href="niet-parametrische-statistiek.html#cb433-2" aria-hidden="true" tabindex="-1"></a>U1</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<p>Er kan worden aangetoond dat</p>
+<p><span class="math display">\[U_1 = S_1 - \frac{1}{2}n_1(n_1+1).\]</span></p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="niet-parametrische-statistiek.html#cb435-1" aria-hidden="true" tabindex="-1"></a>S1<span class="sc">-</span>nGroups[<span class="dv">1</span>]<span class="sc">*</span>(nGroups[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>##  1 
+## 24</code></pre>
+<p>Hieruit concluderen we (1) dat <span class="math inline">\(U_1\)</span> en <span class="math inline">\(S_1\)</span> dezelfde informatie bevatten, (2) dat <span class="math inline">\(U_1\)</span> ook een rankstatistiek is en dat exacte testen gebaseerd op <span class="math inline">\(U_1\)</span> en <span class="math inline">\(S_1\)</span> equivalent zijn.</p>
+<p>De statistiek <span class="math inline">\(U_1\)</span> heeft als voordeel dat het een informatieve interpretatie heeft.
+Stel <span class="math inline">\(Y_j\)</span> een willekeurige uitkomst uit behandelingsgroep <span class="math inline">\(j\)</span> (<span class="math inline">\(j=1,2\)</span>). Dan geldt</p>
+<p><span class="math display">\[\begin{eqnarray*}
+  \frac{1}{n_1n_2}\text{E}\left[U_1\right]
+     &amp;=&amp; \text{P}\left[Y_1 \geq Y_2\right].
+\end{eqnarray*}\]</span></p>
+<p>Intuïtief voelen we dit aan: Op basis van de steekproef kunnen we die kans schatten door het gemiddelde te berekenen van alle indicator waarden <span class="math inline">\(\text{I}\left\{Y_{i1}\geq Y_{k2}\right\}\)</span>.
+We voerden inderdaad <span class="math inline">\(n_1 \times n_2\)</span> vergelijkingen uit.</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="niet-parametrische-statistiek.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(u1Hlp)</span></code></pre></div>
+<pre><code>## [1] 0.96</code></pre>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="niet-parametrische-statistiek.html#cb439-1" aria-hidden="true" tabindex="-1"></a>U1<span class="sc">/</span>(nGroups[<span class="dv">1</span>]<span class="sc">*</span>nGroups[<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>##    1 
+## 0.96</code></pre>
+<p>De kans <span class="math inline">\(\text{P}\left[Y_1 \geq Y_2\right]\)</span> wordt een <strong>probabilistische index</strong> (Engels: <em>probabilistic index</em>) genoemd.
+Het is de kans dat een uitkomst uit de eerste groep groter of gelijk is dan een uitkomst uit de tweede groep.
+Als <span class="math inline">\(H_0\)</span> waar is, dan is <span class="math inline">\(\text{P}\left[Y_1 \geq Y_2\right]=\frac{1}{2}\)</span>.</p>
+<p>De gestandaardiseerde Mann-Whitney statistiek is</p>
+<p><span class="math display">\[
+  T = \frac{U_1 - \frac{n_1n_2}{2}}{\sqrt{\frac{1}{12}n_1n_2(n+1)}}.
+\]</span></p>
+<p>De R functie <code>wilcox.test</code> geeft niet de Wilcoxon rank sum statistiek, maar wel de Mann-Whitney statistiek <span class="math inline">\(U_1\)</span>.
+We weten echter dat exacte permutatietesten gebaseerd op <span class="math inline">\(U_1\)</span>, <span class="math inline">\(U_2\)</span>, <span class="math inline">\(S_1\)</span> of <span class="math inline">\(S_2\)</span> dezelfde resultaten geven.
+We bekijken nogmaals de output</p>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="niet-parametrische-statistiek.html#cb441-1" aria-hidden="true" tabindex="-1"></a>wTest <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(cholest<span class="sc">~</span>group, <span class="at">data =</span> chol)</span>
+<span id="cb441-2"><a href="niet-parametrische-statistiek.html#cb441-2" aria-hidden="true" tabindex="-1"></a>wTest</span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum exact test
+## 
+## data:  cholest by group
+## W = 24, p-value = 0.01587
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="niet-parametrische-statistiek.html#cb443-1" aria-hidden="true" tabindex="-1"></a>U1</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="niet-parametrische-statistiek.html#cb445-1" aria-hidden="true" tabindex="-1"></a>probInd <span class="ot">&lt;-</span> wTest<span class="sc">$</span>statistic<span class="sc">/</span><span class="fu">prod</span>(nGroups)</span>
+<span id="cb445-2"><a href="niet-parametrische-statistiek.html#cb445-2" aria-hidden="true" tabindex="-1"></a>probInd</span></code></pre></div>
+<pre><code>##    W 
+## 0.96</code></pre>
+<p>Aangezien <span class="math inline">\(p=\)</span> 0.0159 <span class="math inline">\(&lt;0.05\)</span> besluiten we op het <span class="math inline">\(5\%\)</span> significantieniveau dat de gemiddelde cholestorolconcentratie groter is bij hartpatiënten kort na een hartaanval dan bij gezonde personen. We nemen aan dat locatie-shift opgaat.</p>
+<p>Nu we weten hoe <span class="math inline">\(U_1\)</span> berekend wordt, weten we ook meteen dat een cholestorolwaarde van hartpatiënten met een kans van
+<span class="math inline">\(U1/(n_1\times n_2)=\)</span> 96%
+groter is die van gezonde personen. Aangezien we het locatie-shift model veronderstellen, besluiten we ook dat de gemiddelde uitkomst uit de behandelingsgroep groter is dan de gemiddelde uitkomst uit de placebogroep.</p>
+<p>We zouden de veronderstelling van de locatie-shift moeten nagaan, maar met slechts 5 observaties in elke behandelingsgroep is dit zinloos. Zonder verder theorie hierover te geven, geven we nog mee dat zonder de locatie-shift veronderstelling de conclusie in termen van de probabilistische index correct blijft en de conclusie ook zo zou moeten worden geformuleerd.</p>
+<p>Dus wanneer we geen locatie-shift veronderstellen en een tweezijdige test uitvoeren testen we eigenlijk</p>
+<p><span class="math display">\[H_0: F_1=F_2 \text{ vs P}(Y_1 \geq Y_2) \neq 0.5.\]</span></p>
+</div>
+<div id="conclusie-cholestorol-voorbeeld" class="section level3 hasAnchor" number="8.2.5">
+<h3><span class="header-section-number">8.2.5</span> Conclusie Cholestorol Voorbeeld<a href="niet-parametrische-statistiek.html#conclusie-cholestorol-voorbeeld" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Er is een significant verschil in de distributie van de cholestorolconcentraties bij hartpatiënten 2 dagen na hun hartaanval en gezonde individuen (<span class="math inline">\(p=\)</span> 0.0159). Het is meer waarschijnlijk om hogere cholestorolconcentraties te observeren bij hartpatiënten dan bij gezonde individuen. De puntschatting voor deze kans bedraagt 96%.</p>
+</div>
+</div>
+<div id="vergelijken-van-g-behandelingen" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Vergelijken van <span class="math inline">\(g\)</span> Behandelingen<a href="niet-parametrische-statistiek.html#vergelijken-van-g-behandelingen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tio4b5GUTIk" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>In deze sectie veralgemenen we de methoden uit de vorige sectie.
+De methoden kunnen ook gezien worden
+als niet-parametrische tegenhangers van de <span class="math inline">\(F\)</span>-test uit een one-way ANOVA.</p>
+<div id="dmh-voorbeeld" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> DMH Voorbeeld<a href="niet-parametrische-statistiek.html#dmh-voorbeeld" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nieuwe (en bestaande) chemische substaties moeten getest worden op genotoxiciteit. De resultaten van genotoxiciteitstesten vormen de basis voor risic0-analyses en de classificatie en labeling van chemische substanties in de EU (<em>Dangerous Substances Directive 67/548/EEC and Regulation (EC) No. 1272/2008</em>). In dat kader werd een studie met 24 ratten opgezet voor het testen van de genotoxiciteit van 1,2-dimethylhydrazine dihydrochloride (DMH).
+De ratten werden at random verdeeld over vier groepen die een verschillende dagelijkse DMH dosis kregen toegediend (controle, laag, medium, hoog).
+Na drie weken werden de dieren afgemaakt en werd genotoxiciteit van DMH in de lever bepaald a.d.h.v. een comet assay waarbij DNA strengbreuken worden gevisualiseerd via gel electroforese.
+De lengte van de comet staart is een proxy voor het aantal strengbreuken.
+De onderzoekers wensen na te gaan of er verschillen zijn in de DNA schade tengevolge van de DMH dosis.
+Boxplots van de data worden weergegeven in Figuur <a href="niet-parametrische-statistiek.html#fig:dnaBox">8.4</a>.</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="niet-parametrische-statistiek.html#cb447-1" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc21/master/data/dna.txt&quot;</span>,<span class="at">delim=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb447-2"><a href="niet-parametrische-statistiek.html#cb447-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb447-3"><a href="niet-parametrische-statistiek.html#cb447-3" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> dna <span class="sc">%&gt;%</span></span>
+<span id="cb447-4"><a href="niet-parametrische-statistiek.html#cb447-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dose =</span> <span class="fu">as.factor</span>(dna<span class="sc">$</span>dose))</span>
+<span id="cb447-5"><a href="niet-parametrische-statistiek.html#cb447-5" aria-hidden="true" tabindex="-1"></a>dna</span></code></pre></div>
+<pre><code>## # A tibble: 24 × 3
+##    id    length dose 
+##    &lt;chr&gt;  &lt;dbl&gt; &lt;fct&gt;
+##  1 Rat1    19.3 0    
+##  2 Rat2    18.9 0    
+##  3 Rat3    18.6 0    
+##  4 Rat4    19.0 0    
+##  5 Rat5    17.1 0    
+##  6 Rat6    18.8 0    
+##  7 Rat7    55.4 1.25 
+##  8 Rat8    59.2 1.25 
+##  9 Rat9    59.1 1.25 
+## 10 Rat10   52.1 1.25 
+## # … with 14 more rows</code></pre>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="niet-parametrische-statistiek.html#cb449-1" aria-hidden="true" tabindex="-1"></a>dna <span class="sc">%&gt;%</span></span>
+<span id="cb449-2"><a href="niet-parametrische-statistiek.html#cb449-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose,<span class="at">y=</span>length,<span class="at">fill=</span>dose))<span class="sc">+</span></span>
+<span id="cb449-3"><a href="niet-parametrische-statistiek.html#cb449-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb449-4"><a href="niet-parametrische-statistiek.html#cb449-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dnaBox"></span>
+<img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/dnaBox-1.png" alt="Boxplot van de comet staart lengte in functie van de DMH dosis." width="100%" />
+<p class="caption">
+Figuur 8.4: Boxplot van de comet staart lengte in functie van de DMH dosis.
+</p>
+</div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="niet-parametrische-statistiek.html#cb450-1" aria-hidden="true" tabindex="-1"></a>dna <span class="sc">%&gt;%</span></span>
+<span id="cb450-2"><a href="niet-parametrische-statistiek.html#cb450-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>length)) <span class="sc">+</span></span>
+<span id="cb450-3"><a href="niet-parametrische-statistiek.html#cb450-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb450-4"><a href="niet-parametrische-statistiek.html#cb450-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb450-5"><a href="niet-parametrische-statistiek.html#cb450-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>dose)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dnaQQ"></span>
+<img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/dnaQQ-1.png" alt="QQ-plots van de comet staart lengte per DMH dosis." width="100%" />
+<p class="caption">
+Figuur 8.5: QQ-plots van de comet staart lengte per DMH dosis.
+</p>
+</div>
+<p>De boxplots lijken een indicatie te geven dat de controle groep een andere variabiliteit heeft.
+Merk wel op dat er slechts 6 observaties zijn per groep wat eigenlijk te weinig is om de aannames na te gaan.</p>
+<!---break-->
+</div>
+<div id="kruskal-wallis-rank-test" class="section level3 hasAnchor" number="8.3.2">
+<h3><span class="header-section-number">8.3.2</span> Kruskal-Wallis Rank Test<a href="niet-parametrische-statistiek.html#kruskal-wallis-rank-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9tZfMB37KFQ" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>De Kruskal-Wallis Rank Test (KW-test) is een niet-parameterisch alternatief voor de ANOVA F-test.</p>
+<p>De klassieke <span class="math inline">\(F\)</span>-teststatistiek kan geschreven worden als</p>
+<p><span class="math display">\[
+    F = \frac{\text{SST}/(g-1)}{\text{SSE}/(n-g)} = \frac{\text{SST}/(g-1)}{(\text{SSTot}-\text{SST})/(n-g)} ,
+  \]</span></p>
+<p>met <span class="math inline">\(g\)</span> het aantal groepen.</p>
+<p>Merk op dat SSTot enkel afhangt van de uitkomsten <span class="math inline">\(\mathbf{y}\)</span> en niet zal variëren bij permutaties. Het is dus eigenlijk voldoende om SST als teststatistiek te gebruiken. Ter herinnering: <span class="math inline">\(\text{SST}=\sum_{j=1}^t n_j(\bar{Y}_j-\bar{Y})^2\)</span>.</p>
+<p>De KW teststatistiek maakt gebruik van SST maar dan gebaseerd op de rank-getransformeerde uitkomsten<a href="#fn52" class="footnote-ref" id="fnref52"><sup>52</sup></a>,</p>
+<p><span class="math display">\[
+     \text{SST} = \sum_{j=1}^g n_j \left(\bar{R}_j - \bar{R}\right)^2 = \sum_{j=1}^g n_j \left(\bar{R}_j - \frac{n+1}{2}\right)^2 ,
+  \]</span></p>
+<p>met <span class="math inline">\(\bar{R}_j\)</span> het gemiddelde van de ranks in behandelingsgroep <span class="math inline">\(j\)</span>, en <span class="math inline">\(\bar{R}\)</span> het gemiddelde van alle ranks,</p>
+<p><span class="math display">\[
+    \bar{R} = \frac{1}{n}(1+2+\cdots + n) = \frac{1}{n}\frac{1}{2}n(n+1) = \frac{n+1}{2}.
+  \]</span></p>
+<p>De KW teststatistiek wordt gegeven door</p>
+<p><span class="math display">\[
+    KW = \frac{12}{n(n+1)}  \sum_{j=1}^g n_j \left(\bar{R}_j - \frac{n+1}{2}\right)^2.
+  \]</span></p>
+<p>De factor <span class="math inline">\(\frac{12}{n(n+1)}\)</span> zorgt ervoor dat <span class="math inline">\(KW\)</span> een eenvoudige asymptotische nuldistributie heeft. In het bijzonder, onder <span class="math inline">\(H_0\)</span>, als <span class="math inline">\(\min(n_1,\ldots, n_g)\rightarrow \infty\)</span>,</p>
+<p><span class="math display">\[
+    KW  \rightarrow \chi^2_{t-1}.
+  \]</span></p>
+<p>De exacte KW-test kan uitgevoerd worden via de berekening van de permutatienuldistributie (die enkel afhangt van <span class="math inline">\(n_1, \ldots, n_g\)</span>) voor het testen van</p>
+<p><span class="math display">\[H_0: f_1=\ldots=f_g \text{ vs } H_1: \text{ minstens twee gemiddelden verschillend}.\]</span></p>
+<p>Om toe te laten dat <span class="math inline">\(H_1\)</span> geformuleerd is in termen van gemiddelden, moet locatie-shift verondersteld worden. Indien locatie-shift niet opgaat, zou <span class="math inline">\(H_1\)</span> eigenlijk geformuleerd moeten worden in termen van probabilistische indexen:</p>
+<p><span class="math display">\[H_0: f_1=\ldots=f_g \text{ vs } H_1: \exists\ j,k \in \{1,\ldots,g\} : \text{P}\left[Y_j\geq Y_k\right]\neq 0.5\]</span></p>
+<div id="dna-schade-voorbeeld" class="section level4 hasAnchor" number="8.3.2.1">
+<h4><span class="header-section-number">8.3.2.1</span> DNA Schade Voorbeeld<a href="niet-parametrische-statistiek.html#dna-schade-voorbeeld" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Eerst analyseren we de data met de R functie <code>kruskal.test</code></p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="niet-parametrische-statistiek.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(length <span class="sc">~</span> dose, <span class="at">data =</span> dna)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  length by dose
+## Kruskal-Wallis chi-squared = 14, df = 3,
+## p-value = 0.002905</code></pre>
+<p>De waarde van de KW teststatistiek is 14, met een <span class="math inline">\(p\)</span>-waarde van 0.00291. Dus op het <span class="math inline">\(5\%\)</span> significantieniveau kan de nulhypothese worden verworpen.</p>
+<p>Het is belangrijk om op te merken dat de R-functie <code>kruskal.test</code> steeds de asymptotische benadering gebruikt voor de berekening van de <span class="math inline">\(p\)</span>-waarden. Met slechts 6 observaties per groep, is dit geen optimale benadering van de exacte <span class="math inline">\(p\)</span>-waarde!
+Met de <code>coin</code> R package kunnen we de exacte <span class="math inline">\(p\)</span>-waarde wel berekenen via het argument <code>distribution='exact'</code>of benaderen a.d.h.v. simulaties <code>distribution=approximate(B=100000)</code>, waarbij B het aantal permutaties is.</p>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="niet-parametrische-statistiek.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coin)</span>
+<span id="cb453-2"><a href="niet-parametrische-statistiek.html#cb453-2" aria-hidden="true" tabindex="-1"></a>kwPerm <span class="ot">&lt;-</span> <span class="fu">kruskal_test</span>(length <span class="sc">~</span> dose, <span class="at">data =</span> dna,</span>
+<span id="cb453-3"><a href="niet-parametrische-statistiek.html#cb453-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">distribution =</span> <span class="fu">approximate</span>(<span class="at">nresample =</span> <span class="dv">100000</span>))</span>
+<span id="cb453-4"><a href="niet-parametrische-statistiek.html#cb453-4" aria-hidden="true" tabindex="-1"></a>kwPerm</span></code></pre></div>
+<pre><code>## 
+##  Approximative Kruskal-Wallis Test
+## 
+## data:  length by dose (0, 1.25, 2.5, 5)
+## chi-squared = 14, p-value = 0.00036</code></pre>
+<p>We kunnen besluiten dat er een extreem significant verschil is in distributie van de DNA schade ten gevolge van de dosis.</p>
+<!---break-->
+</div>
+<div id="posthoc-analyse" class="section level4 hasAnchor" number="8.3.2.2">
+<h4><span class="header-section-number">8.3.2.2</span> Posthoc Analyse<a href="niet-parametrische-statistiek.html#posthoc-analyse" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9kcSwfVo82s" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>We vragen ons nu uiteraard af welke groepen verschillend zijn. Hiervoor dienen we een posthoc analyse uit te voeren met paarsgewijze niet-parameterische testen.</p>
+<p>We kunnen dit bijvoorbeeld doen a.d.h.v Wilcoxon-Mann-Withney testen.</p>
+<ul>
+<li>Dat is eigenlijk suboptimaal na KW-test want de data worden opnieuw gerangschikt!</li>
+<li>KW gebaseerd over ranks bepaalde over alle groepen</li>
+<li>WMW gebaseerd op ranks van twee groepen in vergelijking</li>
+</ul>
+<p>Betere alternatieven bestaan maar vallen buiten bestek van de cursus.</p>
+<p>We voeren nu verdere posthoc testen uit voor alle paarsgewijse verschillen a.d.h.v WMW testen.</p>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="niet-parametrische-statistiek.html#cb455-1" aria-hidden="true" tabindex="-1"></a>pairWilcox <span class="ot">&lt;-</span> <span class="fu">pairwise.wilcox.test</span>(dna<span class="sc">$</span>length, dna<span class="sc">$</span>dose)</span>
+<span id="cb455-2"><a href="niet-parametrische-statistiek.html#cb455-2" aria-hidden="true" tabindex="-1"></a>pairWilcox</span></code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using Wilcoxon rank sum exact test 
+## 
+## data:  dna$length and dna$dose 
+## 
+##      0     1.25  2.5  
+## 1.25 0.013 -     -    
+## 2.5  0.013 0.818 -    
+## 5    0.013 0.721 0.788
+## 
+## P value adjustment method: holm</code></pre>
+<p>De output geeft pairsgewijze p-waarden weer voor elke vergelijking. De output wordt in een matrix geordend.
+De p-waarde voor elk element van de matrix behoort tot de paarsgewijze vergelijking van de groep in de kolom en de groep in de rij.
+Standaard wordt de Holm multiple testing methode gebruikt. Dat is een variant van Bonferroni die minder conservatief is.</p>
+<p>We zien dat alle DMH behandelingen significant verschillen van de controle.
+Maar er is geen significant verschil in de distributie van de DNA schade tussen de verschillende dosisgroepen waarbij DMH werd toegediend.
+Om een puntschatter op de kans op hogere DNA-schade te berekenen voor de vergelijkingen tussen de behandelingen met DMH en de controle zouden we ook de statistieken U1 nodig hebben.
+Dit kunnen we niet bekomen uit de <code>pairwise.wilcox.test</code> output.
+Hiervoor zullen we de individuele wilcoxon testen aan moeten roepen.</p>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="niet-parametrische-statistiek.html#cb457-1" aria-hidden="true" tabindex="-1"></a>nGroep <span class="ot">&lt;-</span> <span class="fu">table</span>(dna<span class="sc">$</span>dose)</span>
+<span id="cb457-2"><a href="niet-parametrische-statistiek.html#cb457-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-3"><a href="niet-parametrische-statistiek.html#cb457-3" aria-hidden="true" tabindex="-1"></a>probInd <span class="ot">&lt;-</span> <span class="fu">combn</span>(</span>
+<span id="cb457-4"><a href="niet-parametrische-statistiek.html#cb457-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">levels</span>(dna<span class="sc">$</span>dose),</span>
+<span id="cb457-5"><a href="niet-parametrische-statistiek.html#cb457-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>,</span>
+<span id="cb457-6"><a href="niet-parametrische-statistiek.html#cb457-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) {</span>
+<span id="cb457-7"><a href="niet-parametrische-statistiek.html#cb457-7" aria-hidden="true" tabindex="-1"></a>         test <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(</span>
+<span id="cb457-8"><a href="niet-parametrische-statistiek.html#cb457-8" aria-hidden="true" tabindex="-1"></a>       length<span class="sc">~</span>dose,</span>
+<span id="cb457-9"><a href="niet-parametrische-statistiek.html#cb457-9" aria-hidden="true" tabindex="-1"></a>       dna <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dose<span class="sc">%in%</span>x)</span>
+<span id="cb457-10"><a href="niet-parametrische-statistiek.html#cb457-10" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb457-11"><a href="niet-parametrische-statistiek.html#cb457-11" aria-hidden="true" tabindex="-1"></a>         <span class="fu">return</span>(test<span class="sc">$</span>statistic<span class="sc">/</span><span class="fu">prod</span>(nGroep[x]))</span>
+<span id="cb457-12"><a href="niet-parametrische-statistiek.html#cb457-12" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb457-13"><a href="niet-parametrische-statistiek.html#cb457-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-14"><a href="niet-parametrische-statistiek.html#cb457-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(probInd) <span class="ot">&lt;-</span> <span class="fu">combn</span>(</span>
+<span id="cb457-15"><a href="niet-parametrische-statistiek.html#cb457-15" aria-hidden="true" tabindex="-1"></a>  dna <span class="sc">%&gt;%</span> <span class="fu">pull</span>(dose) <span class="sc">%&gt;%</span> levels,</span>
+<span id="cb457-16"><a href="niet-parametrische-statistiek.html#cb457-16" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>,</span>
+<span id="cb457-17"><a href="niet-parametrische-statistiek.html#cb457-17" aria-hidden="true" tabindex="-1"></a>  paste,</span>
+<span id="cb457-18"><a href="niet-parametrische-statistiek.html#cb457-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse=</span><span class="st">&quot;vs&quot;</span>)</span>
+<span id="cb457-19"><a href="niet-parametrische-statistiek.html#cb457-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-20"><a href="niet-parametrische-statistiek.html#cb457-20" aria-hidden="true" tabindex="-1"></a>probInd</span></code></pre></div>
+<pre><code>##   0vs1.25    0vs2.5      0vs5 1.25vs2.5   1.25vs5 
+## 0.0000000 0.0000000 0.0000000 0.4444444 0.2777778 
+##    2.5vs5 
+## 0.3333333</code></pre>
+<p>Omdat er twijfels zijn of het locatie-shift model geldig is, doen we enkel uitspraken in termen van de probabilistische index.</p>
+<p>We besluiten dat er extreem significant verschil is in de distributie van de DNA-schade metingen tengevolge van de DMH behandeling (<span class="math inline">\(p&lt;0.001\)</span> KW-test).
+DNA-schade is meer waarschijnlijk na behandeling met DMH dan in de controle behandeling (alle p=0.013, WMW-testen).
+De kansen op hogere DNA-schade na blootstelling aan DMH bedraagt 100%<a href="#fn53" class="footnote-ref" id="fnref53"><sup>53</sup></a>.
+Er zijn geen significante verschillen in de distributies van de comit-lengtes tussen de DMH behandelingen onderling (<span class="math inline">\(p=\)</span> 0.72-0.82). DMH vertoont dus al bij de lage dosis genotoxische effecten. (Alle paarsgewijze testen werden gecorrigeerd voor multiple testing d.m.v. Holm’s methode).</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="50">
+<li id="fn50"><p>in ons geval de t-test statistiek door de originele reponses te gebruiken die nu gekoppeld worden aan de gepermuteerde groepslabels <span class="math inline">\(G_g^*\)</span><a href="niet-parametrische-statistiek.html#fnref50" class="footnote-back">↩︎</a></p></li>
+<li id="fn51"><p>in de afwezigheid van <em>ties</em><a href="niet-parametrische-statistiek.html#fnref51" class="footnote-back">↩︎</a></p></li>
+<li id="fn52"><p>we veronderstellen afwezigheid van <em>ties</em><a href="niet-parametrische-statistiek.html#fnref52" class="footnote-back">↩︎</a></p></li>
+<li id="fn53"><p>Het berekenen van een BI op deze kansen valt buiten het bestek van de cursus<a href="niet-parametrische-statistiek.html#fnref53" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chap-anova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap-categorisch.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/08-NietParametrischeStatistiek.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["InleidingTotBiostatistiek_2022_2023.pdf", "InleidingTotBiostatistiek_2022_2023.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

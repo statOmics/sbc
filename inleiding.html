@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Hoofdstuk 1 Inleiding | Cursus Inleiding tot de Biostatistiek 2022-2023</title>
+  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Hoofdstuk 1 Inleiding | Cursus Inleiding tot de Biostatistiek 2022-2023" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="github-repo" content="statOmics/statistiek2deBach" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hoofdstuk 1 Inleiding | Cursus Inleiding tot de Biostatistiek 2022-2023" />
+  
+  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  
+
+<meta name="author" content="Lieven Clement" />
+
+
+<meta name="date" content="2022-09-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="links.html"/>
+<link rel="next" href="belangrijke-concepten-conventies.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Cursus Inleiding tot Biostatistiek 2022-2023</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Woord vooraf</a></li>
+<li class="chapter" data-level="" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i>Links</a></li>
+<li class="chapter" data-level="1" data-path="inleiding.html"><a href="inleiding.html"><i class="fa fa-check"></i><b>1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="inleiding.html"><a href="inleiding.html#sec:wetMeth"><i class="fa fa-check"></i><b>1.1</b> De Wetenschappelijke Methode</a></li>
+<li class="chapter" data-level="1.2" data-path="inleiding.html"><a href="inleiding.html#opzet-van-de-cursus"><i class="fa fa-check"></i><b>1.2</b> Opzet van de cursus</a></li>
+<li class="chapter" data-level="1.3" data-path="inleiding.html"><a href="inleiding.html#case-study-oksel-microbiome"><i class="fa fa-check"></i><b>1.3</b> Case study: oksel microbiome</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="inleiding.html"><a href="inleiding.html#experimenteel-design-proefopzet"><i class="fa fa-check"></i><b>1.3.1</b> Experimenteel design (proefopzet)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="inleiding.html"><a href="inleiding.html#data-exploratie-en-beschrijvende-statistiek"><i class="fa fa-check"></i><b>1.3.2</b> Data exploratie en beschrijvende statistiek</a></li>
+<li class="chapter" data-level="1.3.3" data-path="inleiding.html"><a href="inleiding.html#statistische-besluitvorming"><i class="fa fa-check"></i><b>1.3.3</b> Statistische Besluitvorming</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="inleiding.html"><a href="inleiding.html#case-study-ii-verschil-in-lengte-tussen-vrouwen-en-mannen"><i class="fa fa-check"></i><b>1.4</b> Case Study II: Verschil in lengte tussen vrouwen en mannen</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="inleiding.html"><a href="inleiding.html#experiment"><i class="fa fa-check"></i><b>1.4.1</b> Experiment</a></li>
+<li class="chapter" data-level="1.4.2" data-path="inleiding.html"><a href="inleiding.html#herhaal-het-experiment"><i class="fa fa-check"></i><b>1.4.2</b> Herhaal het experiment</a></li>
+<li class="chapter" data-level="1.4.3" data-path="inleiding.html"><a href="inleiding.html#herhaal-het-experiment-opnieuw"><i class="fa fa-check"></i><b>1.4.3</b> Herhaal het experiment opnieuw</a></li>
+<li class="chapter" data-level="1.4.4" data-path="inleiding.html"><a href="inleiding.html#samenvatting"><i class="fa fa-check"></i><b>1.4.4</b> Samenvatting</a></li>
+<li class="chapter" data-level="1.4.5" data-path="inleiding.html"><a href="inleiding.html#controle-van-beslissingsfouten"><i class="fa fa-check"></i><b>1.4.5</b> Controle van beslissingsfouten</a></li>
+<li class="chapter" data-level="1.4.6" data-path="inleiding.html"><a href="inleiding.html#conclusies"><i class="fa fa-check"></i><b>1.4.6</b> Conclusies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="inleiding.html"><a href="inleiding.html#case-study-salk-vaccin"><i class="fa fa-check"></i><b>1.5</b> Case study: Salk vaccin</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="inleiding.html"><a href="inleiding.html#nfip-study"><i class="fa fa-check"></i><b>1.5.1</b> NFIP Study</a></li>
+<li class="chapter" data-level="1.5.2" data-path="inleiding.html"><a href="inleiding.html#confounding"><i class="fa fa-check"></i><b>1.5.2</b> Confounding</a></li>
+<li class="chapter" data-level="1.5.3" data-path="inleiding.html"><a href="inleiding.html#salk-study"><i class="fa fa-check"></i><b>1.5.3</b> Salk Study</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="inleiding.html"><a href="inleiding.html#rol-van-statistiek"><i class="fa fa-check"></i><b>1.6</b> Rol van Statistiek</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html"><i class="fa fa-check"></i><b>2</b> Belangrijke concepten &amp; conventies</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#inleiding-1"><i class="fa fa-check"></i><b>2.1</b> Inleiding</a></li>
+<li class="chapter" data-level="2.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#variabelen"><i class="fa fa-check"></i><b>2.2</b> Variabelen</a></li>
+<li class="chapter" data-level="2.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#subsec:pop"><i class="fa fa-check"></i><b>2.3</b> Populatie</a></li>
+<li class="chapter" data-level="2.4" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#toevalsveranderlijken-of-toevallige-veranderlijken"><i class="fa fa-check"></i><b>2.4</b> Toevalsveranderlijken (of toevallige veranderlijken)</a></li>
+<li class="chapter" data-level="2.5" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#beschrijven-van-de-populatie"><i class="fa fa-check"></i><b>2.5</b> Beschrijven van de populatie</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#intermezzo-probabiliteitstheorie"><i class="fa fa-check"></i><b>2.5.1</b> Intermezzo probabiliteitstheorie</a></li>
+<li class="chapter" data-level="2.5.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#standardisatie"><i class="fa fa-check"></i><b>2.5.2</b> Standardisatie</a></li>
+<li class="chapter" data-level="2.5.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#subsec:normalcalc"><i class="fa fa-check"></i><b>2.5.3</b> Achtergrond Normale verdeling</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#steekproef"><i class="fa fa-check"></i><b>2.6</b> Steekproef</a></li>
+<li class="chapter" data-level="2.7" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#nhanes-gender"><i class="fa fa-check"></i><b>2.7</b> NHANES: Gender</a></li>
+<li class="chapter" data-level="2.8" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#nhanes-lengte"><i class="fa fa-check"></i><b>2.8</b> NHANES: Lengte</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#empirische-distributie"><i class="fa fa-check"></i><b>2.8.1</b> Empirische distributie</a></li>
+<li class="chapter" data-level="2.8.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#normale-benadering"><i class="fa fa-check"></i><b>2.8.2</b> Normale benadering</a></li>
+<li class="chapter" data-level="2.8.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#referentie-intervallen"><i class="fa fa-check"></i><b>2.8.3</b> Referentie intervallen</a></li>
+<li class="chapter" data-level="2.8.4" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#conclusions"><i class="fa fa-check"></i><b>2.8.4</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#statistieken"><i class="fa fa-check"></i><b>2.9</b> Statistieken</a></li>
+<li class="chapter" data-level="2.10" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#conventie"><i class="fa fa-check"></i><b>2.10</b> Conventie</a></li>
+<li class="chapter" data-level="2.11" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#code-voor-dit-hoofdstuk"><i class="fa fa-check"></i><b>2.11</b> Code voor dit hoofdstuk</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-design.html"><a href="chap-design.html"><i class="fa fa-check"></i><b>3</b> Studiedesign</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chap-design.html"><a href="chap-design.html#inleiding-2"><i class="fa fa-check"></i><b>3.1</b> Inleiding</a></li>
+<li class="chapter" data-level="3.2" data-path="chap-design.html"><a href="chap-design.html#sec:steekproefdesigns"><i class="fa fa-check"></i><b>3.2</b> Steekproefdesigns</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="chap-design.html"><a href="chap-design.html#replicatie"><i class="fa fa-check"></i><b>3.2.1</b> Replicatie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chap-design.html"><a href="chap-design.html#experimentele-studies"><i class="fa fa-check"></i><b>3.3</b> Experimentele studies</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="chap-design.html"><a href="chap-design.html#de-salk-vaccin-veldstudie"><i class="fa fa-check"></i><b>3.3.1</b> De Salk Vaccin Veldstudie</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chap-design.html"><a href="chap-design.html#gerandomiseerde-gecontroleerde-studies"><i class="fa fa-check"></i><b>3.3.2</b> Gerandomiseerde gecontroleerde studies</a></li>
+<li class="chapter" data-level="3.3.3" data-path="chap-design.html"><a href="chap-design.html#parallelle-designs"><i class="fa fa-check"></i><b>3.3.3</b> Parallelle designs</a></li>
+<li class="chapter" data-level="3.3.4" data-path="chap-design.html"><a href="chap-design.html#cross-over-designs"><i class="fa fa-check"></i><b>3.3.4</b> Cross-over designs</a></li>
+<li class="chapter" data-level="3.3.5" data-path="chap-design.html"><a href="chap-design.html#factoriële-designs"><i class="fa fa-check"></i><b>3.3.5</b> Factoriële designs</a></li>
+<li class="chapter" data-level="3.3.6" data-path="chap-design.html"><a href="chap-design.html#quasi-experimentele-designs"><i class="fa fa-check"></i><b>3.3.6</b> Quasi-experimentele designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chap-design.html"><a href="chap-design.html#sec:observational"><i class="fa fa-check"></i><b>3.4</b> Observationele studies</a></li>
+<li class="chapter" data-level="3.5" data-path="chap-design.html"><a href="chap-design.html#subsec:design:prosp"><i class="fa fa-check"></i><b>3.5</b> Prospectieve studies</a></li>
+<li class="chapter" data-level="3.6" data-path="chap-design.html"><a href="chap-design.html#subsec:design:retro"><i class="fa fa-check"></i><b>3.6</b> Retrospectieve studies</a></li>
+<li class="chapter" data-level="3.7" data-path="chap-design.html"><a href="chap-design.html#niet-gecontroleerde-studies"><i class="fa fa-check"></i><b>3.7</b> Niet-gecontroleerde studies</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="chap-design.html"><a href="chap-design.html#subsec:prepost"><i class="fa fa-check"></i><b>3.7.1</b> Pre-test/Post-test studies</a></li>
+<li class="chapter" data-level="3.7.2" data-path="chap-design.html"><a href="chap-design.html#cross-sectionele-surveys"><i class="fa fa-check"></i><b>3.7.2</b> Cross-sectionele surveys</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chap-describe.html"><a href="chap-describe.html"><i class="fa fa-check"></i><b>4</b> Data exploratie en beschrijvende statistiek</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chap-describe.html"><a href="chap-describe.html#inleiding-3"><i class="fa fa-check"></i><b>4.1</b> Inleiding</a></li>
+<li class="chapter" data-level="4.2" data-path="chap-describe.html"><a href="chap-describe.html#sec:univar"><i class="fa fa-check"></i><b>4.2</b> Univariate beschrijving van de variabelen</a></li>
+<li class="chapter" data-level="4.3" data-path="chap-describe.html"><a href="chap-describe.html#sec:summarize"><i class="fa fa-check"></i><b>4.3</b> Samenvattingsmaten voor continue variabelen</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="chap-describe.html"><a href="chap-describe.html#maten-voor-de-centrale-ligging"><i class="fa fa-check"></i><b>4.3.1</b> Maten voor de centrale ligging</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:spreiding"><i class="fa fa-check"></i><b>4.3.2</b> Spreidingsmaten</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chap-describe.html"><a href="chap-describe.html#sec:normal"><i class="fa fa-check"></i><b>4.4</b> De Normale benadering van gegevens</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="chap-describe.html"><a href="chap-describe.html#sec:qq"><i class="fa fa-check"></i><b>4.4.1</b> QQ-plots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="chap-describe.html"><a href="chap-describe.html#sec:explCatVar"><i class="fa fa-check"></i><b>4.5</b> Samenvattingsmaten voor categorische variabelen</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="chap-describe.html"><a href="chap-describe.html#prospectieve-studies-en-lukrake-steekproeven"><i class="fa fa-check"></i><b>4.5.1</b> Prospectieve studies en lukrake steekproeven</a></li>
+<li class="chapter" data-level="4.5.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:retrospect"><i class="fa fa-check"></i><b>4.5.2</b> Retrospectieve studies</a></li>
+<li class="chapter" data-level="4.5.3" data-path="chap-describe.html"><a href="chap-describe.html#rates-versus-risicos"><i class="fa fa-check"></i><b>4.5.3</b> Rates versus risico’s</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="chap-describe.html"><a href="chap-describe.html#associaties-tussen-twee-variabelen"><i class="fa fa-check"></i><b>4.6</b> Associaties tussen twee variabelen</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="chap-describe.html"><a href="chap-describe.html#subsec:kruistabel"><i class="fa fa-check"></i><b>4.6.1</b> Associatie tussen twee kwalitatieve variabelen</a></li>
+<li class="chapter" data-level="4.6.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:asskwalcont"><i class="fa fa-check"></i><b>4.6.2</b> Associatie tussen één kwalitatieve en één continue variabele</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="chap-describe.html"><a href="chap-describe.html#sec:correlatie"><i class="fa fa-check"></i><b>4.7</b> Associatie tussen twee continue variabelen</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="chap-describe.html"><a href="chap-describe.html#covariantie-en-correlatie"><i class="fa fa-check"></i><b>4.7.1</b> Covariantie en Correlatie</a></li>
+<li class="chapter" data-level="4.7.2" data-path="chap-describe.html"><a href="chap-describe.html#pearson-correlatie"><i class="fa fa-check"></i><b>4.7.2</b> Pearson Correlatie</a></li>
+<li class="chapter" data-level="4.7.3" data-path="chap-describe.html"><a href="chap-describe.html#verschillende-groottes-van-correlatie"><i class="fa fa-check"></i><b>4.7.3</b> Verschillende groottes van correlatie</a></li>
+<li class="chapter" data-level="4.7.4" data-path="chap-describe.html"><a href="chap-describe.html#spearman-correlatie"><i class="fa fa-check"></i><b>4.7.4</b> Spearman correlatie</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="chap-describe.html"><a href="chap-describe.html#sec:missing"><i class="fa fa-check"></i><b>4.8</b> Onvolledige gegevens</a></li>
+<li class="chapter" data-level="4.9" data-path="chap-describe.html"><a href="chap-describe.html#clips-over-de-code-in-dit-hoofdstuk"><i class="fa fa-check"></i><b>4.9</b> Clips over de code in dit hoofdstuk</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap-besluit.html"><a href="chap-besluit.html"><i class="fa fa-check"></i><b>5</b> Statistische besluitvorming</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chap-besluit.html"><a href="chap-besluit.html#inleiding-4"><i class="fa fa-check"></i><b>5.1</b> Inleiding</a></li>
+<li class="chapter" data-level="5.2" data-path="chap-besluit.html"><a href="chap-besluit.html#captopril-voorbeeld"><i class="fa fa-check"></i><b>5.2</b> Captopril voorbeeld</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="chap-besluit.html"><a href="chap-besluit.html#proefopzet"><i class="fa fa-check"></i><b>5.2.1</b> Proefopzet</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chap-besluit.html"><a href="chap-besluit.html#data-exploratie-beschrijvende-statistiek"><i class="fa fa-check"></i><b>5.2.2</b> Data Exploratie &amp; Beschrijvende Statistiek</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chap-besluit.html"><a href="chap-besluit.html#schatten"><i class="fa fa-check"></i><b>5.2.3</b> Schatten</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chap-besluit.html"><a href="chap-besluit.html#puntschatters-het-steekproefgemiddelde"><i class="fa fa-check"></i><b>5.3</b> Puntschatters: het steekproefgemiddelde</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="chap-besluit.html"><a href="chap-besluit.html#overzicht"><i class="fa fa-check"></i><b>5.3.1</b> Overzicht</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chap-besluit.html"><a href="chap-besluit.html#het-steekproefgemiddelde-is-onvertekend"><i class="fa fa-check"></i><b>5.3.2</b> Het steekproefgemiddelde is onvertekend</a></li>
+<li class="chapter" data-level="5.3.3" data-path="chap-besluit.html"><a href="chap-besluit.html#imprecisiestandard-error"><i class="fa fa-check"></i><b>5.3.3</b> Imprecisie/standard error</a></li>
+<li class="chapter" data-level="5.3.4" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:verdelingXbar"><i class="fa fa-check"></i><b>5.3.4</b> Verdeling van het steekproefgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chap-besluit.html"><a href="chap-besluit.html#intervalschatters"><i class="fa fa-check"></i><b>5.4</b> Intervalschatters</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:bigek"><i class="fa fa-check"></i><b>5.4.1</b> Gekende variantie op de metingen</a></li>
+<li class="chapter" data-level="5.4.2" data-path="chap-besluit.html"><a href="chap-besluit.html#sec:tBI"><i class="fa fa-check"></i><b>5.4.2</b> Ongekende variantie op de metingen</a></li>
+<li class="chapter" data-level="5.4.3" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:interpretBI"><i class="fa fa-check"></i><b>5.4.3</b> Interpretatie van betrouwbaarheidsintervallen</a></li>
+<li class="chapter" data-level="5.4.4" data-path="chap-besluit.html"><a href="chap-besluit.html#wat-rapporteren"><i class="fa fa-check"></i><b>5.4.4</b> Wat rapporteren?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="chap-besluit.html"><a href="chap-besluit.html#principe-van-hypothesetoetsen-via-one-sample-t-test"><i class="fa fa-check"></i><b>5.5</b> Principe van Hypothesetoetsen (via one sample t-test)</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="chap-besluit.html"><a href="chap-besluit.html#introductie-d.m.v.-captopril-voorbeeld"><i class="fa fa-check"></i><b>5.5.1</b> Introductie d.m.v. captopril voorbeeld</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chap-besluit.html"><a href="chap-besluit.html#hypotheses"><i class="fa fa-check"></i><b>5.5.2</b> Hypotheses</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chap-besluit.html"><a href="chap-besluit.html#test-statistiek"><i class="fa fa-check"></i><b>5.5.3</b> Test-statistiek</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chap-besluit.html"><a href="chap-besluit.html#de-p-waarde"><i class="fa fa-check"></i><b>5.5.4</b> De p-waarde</a></li>
+<li class="chapter" data-level="5.5.5" data-path="chap-besluit.html"><a href="chap-besluit.html#kritieke-waarde"><i class="fa fa-check"></i><b>5.5.5</b> Kritieke waarde</a></li>
+<li class="chapter" data-level="5.5.6" data-path="chap-besluit.html"><a href="chap-besluit.html#beslissingsfouten"><i class="fa fa-check"></i><b>5.5.6</b> Beslissingsfouten</a></li>
+<li class="chapter" data-level="5.5.7" data-path="chap-besluit.html"><a href="chap-besluit.html#conclusies-captopril-voorbeeld."><i class="fa fa-check"></i><b>5.5.7</b> Conclusies Captopril voorbeeld.</a></li>
+<li class="chapter" data-level="5.5.8" data-path="chap-besluit.html"><a href="chap-besluit.html#eenzijdig-of-tweezijdig-toetsen"><i class="fa fa-check"></i><b>5.5.8</b> Eenzijdig of tweezijdig toetsen?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chap-besluit.html"><a href="chap-besluit.html#geclusterde-metingen"><i class="fa fa-check"></i><b>5.6</b> Geclusterde metingen</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="chap-besluit.html"><a href="chap-besluit.html#captopril"><i class="fa fa-check"></i><b>5.6.1</b> Captopril</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="chap-besluit.html"><a href="chap-besluit.html#two-sample-t-test"><i class="fa fa-check"></i><b>5.7</b> Two-sample t-test</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="chap-besluit.html"><a href="chap-besluit.html#notatie"><i class="fa fa-check"></i><b>5.7.1</b> Notatie</a></li>
+<li class="chapter" data-level="5.7.2" data-path="chap-besluit.html"><a href="chap-besluit.html#oksel-voorbeeld"><i class="fa fa-check"></i><b>5.7.2</b> Oksel-voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="chap-besluit.html"><a href="chap-besluit.html#aannames"><i class="fa fa-check"></i><b>5.8</b> Aannames</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="chap-besluit.html"><a href="chap-besluit.html#nagaan-van-de-veronderstelling-van-normaliteit"><i class="fa fa-check"></i><b>5.8.1</b> Nagaan van de veronderstelling van Normaliteit</a></li>
+<li class="chapter" data-level="5.8.2" data-path="chap-besluit.html"><a href="chap-besluit.html#nagaan-van-homoscedasticiteit"><i class="fa fa-check"></i><b>5.8.2</b> Nagaan van homoscedasticiteit</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="chap-besluit.html"><a href="chap-besluit.html#wat-rapporteren-1"><i class="fa fa-check"></i><b>5.9</b> Wat rapporteren?</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="chap-besluit.html"><a href="chap-besluit.html#reden-1-relatie-toetsen-en-betrouwbaarheidsintervallen"><i class="fa fa-check"></i><b>5.9.1</b> Reden 1: Relatie toetsen en betrouwbaarheidsintervallen</a></li>
+<li class="chapter" data-level="5.9.2" data-path="chap-besluit.html"><a href="chap-besluit.html#reden-2-statistische-significantie-versus-wetenschappelijke-relevantie"><i class="fa fa-check"></i><b>5.9.2</b> Reden 2: Statistische significantie versus wetenschappelijke relevantie</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="chap-besluit.html"><a href="chap-besluit.html#equivalentie-intervallen"><i class="fa fa-check"></i><b>5.10</b> Equivalentie-intervallen</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap-linReg.html"><a href="chap-linReg.html"><i class="fa fa-check"></i><b>6</b> Enkelvoudige lineaire regressie</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chap-linReg.html"><a href="chap-linReg.html#inleiding-5"><i class="fa fa-check"></i><b>6.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="chap-linReg.html"><a href="chap-linReg.html#borstkanker-dataset"><i class="fa fa-check"></i><b>6.1.1</b> Borstkanker dataset</a></li>
+<li class="chapter" data-level="6.1.2" data-path="chap-linReg.html"><a href="chap-linReg.html#data-exploratie"><i class="fa fa-check"></i><b>6.1.2</b> Data exploratie</a></li>
+<li class="chapter" data-level="6.1.3" data-path="chap-linReg.html"><a href="chap-linReg.html#model"><i class="fa fa-check"></i><b>6.1.3</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="chap-linReg.html"><a href="chap-linReg.html#lineaire-regressie"><i class="fa fa-check"></i><b>6.2</b> Lineaire regressie</a></li>
+<li class="chapter" data-level="6.3" data-path="chap-linReg.html"><a href="chap-linReg.html#parameterschatting"><i class="fa fa-check"></i><b>6.3</b> Parameterschatting</a></li>
+<li class="chapter" data-level="6.4" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linBesluit"><i class="fa fa-check"></i><b>6.4</b> Statistische besluitvorming</a></li>
+<li class="chapter" data-level="6.5" data-path="chap-linReg.html"><a href="chap-linReg.html#nagaan-van-modelveronderstellingen"><i class="fa fa-check"></i><b>6.5</b> Nagaan van modelveronderstellingen</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="chap-linReg.html"><a href="chap-linReg.html#lineariteit"><i class="fa fa-check"></i><b>6.5.1</b> Lineariteit</a></li>
+<li class="chapter" data-level="6.5.2" data-path="chap-linReg.html"><a href="chap-linReg.html#veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie"><i class="fa fa-check"></i><b>6.5.2</b> Veronderstelling van homoscedasticiteit (gelijkheid van variantie)</a></li>
+<li class="chapter" data-level="6.5.3" data-path="chap-linReg.html"><a href="chap-linReg.html#veronderstelling-van-normaliteit"><i class="fa fa-check"></i><b>6.5.3</b> Veronderstelling van normaliteit</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="chap-linReg.html"><a href="chap-linReg.html#afwijkingen-van-modelveronderstellingen"><i class="fa fa-check"></i><b>6.6</b> Afwijkingen van Modelveronderstellingen</a></li>
+<li class="chapter" data-level="6.7" data-path="chap-linReg.html"><a href="chap-linReg.html#besluitvorming-over-gemiddelde-uitkomst"><i class="fa fa-check"></i><b>6.7</b> Besluitvorming over gemiddelde uitkomst</a></li>
+<li class="chapter" data-level="6.8" data-path="chap-linReg.html"><a href="chap-linReg.html#predictie-intervallen"><i class="fa fa-check"></i><b>6.8</b> Predictie-intervallen</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="chap-linReg.html"><a href="chap-linReg.html#nhanes-voorbeeld"><i class="fa fa-check"></i><b>6.8.1</b> NHANES voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linAnova"><i class="fa fa-check"></i><b>6.9</b> Kwadratensommen en Anova-tabel</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="chap-linReg.html"><a href="chap-linReg.html#determinatie-coëfficiënt"><i class="fa fa-check"></i><b>6.9.1</b> Determinatie-coëfficiënt</a></li>
+<li class="chapter" data-level="6.9.2" data-path="chap-linReg.html"><a href="chap-linReg.html#f-testen-in-het-enkelvoudig-lineair-regressiemodel"><i class="fa fa-check"></i><b>6.9.2</b> F-Testen in het enkelvoudig lineair regressiemodel</a></li>
+<li class="chapter" data-level="6.9.3" data-path="chap-linReg.html"><a href="chap-linReg.html#anova-tabel"><i class="fa fa-check"></i><b>6.9.3</b> Anova Tabel</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linDummy"><i class="fa fa-check"></i><b>6.10</b> Dummy variabelen</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chap-anova.html"><a href="chap-anova.html"><i class="fa fa-check"></i><b>7</b> Variantie analyse</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chap-anova.html"><a href="chap-anova.html#inleiding-6"><i class="fa fa-check"></i><b>7.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="chap-anova.html"><a href="chap-anova.html#prostacycline-voorbeeld"><i class="fa fa-check"></i><b>7.1.1</b> Prostacycline voorbeeld</a></li>
+<li class="chapter" data-level="7.1.2" data-path="chap-anova.html"><a href="chap-anova.html#model-1"><i class="fa fa-check"></i><b>7.1.2</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="chap-anova.html"><a href="chap-anova.html#variantie-analyse"><i class="fa fa-check"></i><b>7.2</b> Variantie-analyse</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="chap-anova.html"><a href="chap-anova.html#model-2"><i class="fa fa-check"></i><b>7.2.1</b> Model</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chap-anova.html"><a href="chap-anova.html#kwadratensommen-en-anova"><i class="fa fa-check"></i><b>7.2.2</b> Kwadratensommen en Anova</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chap-anova.html"><a href="chap-anova.html#anova-test"><i class="fa fa-check"></i><b>7.2.3</b> Anova-test</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chap-anova.html"><a href="chap-anova.html#anova-tabel-1"><i class="fa fa-check"></i><b>7.2.4</b> Anova Tabel</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chap-anova.html"><a href="chap-anova.html#post-hoc-analyse-meervoudig-vergelijken-van-gemiddelden"><i class="fa fa-check"></i><b>7.3</b> Post hoc analyse: Meervoudig Vergelijken van Gemiddelden</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="chap-anova.html"><a href="chap-anova.html#naïeve-methode"><i class="fa fa-check"></i><b>7.3.1</b> Naïeve methode</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chap-anova.html"><a href="chap-anova.html#family-wise-error-rate"><i class="fa fa-check"></i><b>7.3.2</b> Family-wise error rate</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chap-anova.html"><a href="chap-anova.html#conclusies-prostacycline-voorbeeld"><i class="fa fa-check"></i><b>7.4</b> Conclusies: Prostacycline Voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html"><i class="fa fa-check"></i><b>8</b> Niet-parametrische statistiek</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#inleiding-7"><i class="fa fa-check"></i><b>8.1</b> Inleiding</a></li>
+<li class="chapter" data-level="8.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#vergelijken-van-twee-groepen"><i class="fa fa-check"></i><b>8.2</b> Vergelijken van twee groepen</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#cholestorol-voorbeeld"><i class="fa fa-check"></i><b>8.2.1</b> Cholestorol voorbeeld</a></li>
+<li class="chapter" data-level="8.2.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#permutatietesten"><i class="fa fa-check"></i><b>8.2.2</b> Permutatietesten</a></li>
+<li class="chapter" data-level="8.2.3" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#rank-testen"><i class="fa fa-check"></i><b>8.2.3</b> Rank Testen</a></li>
+<li class="chapter" data-level="8.2.4" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#wilcoxon-mann-whitney-test"><i class="fa fa-check"></i><b>8.2.4</b> Wilcoxon-Mann-Whitney Test</a></li>
+<li class="chapter" data-level="8.2.5" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#conclusie-cholestorol-voorbeeld"><i class="fa fa-check"></i><b>8.2.5</b> Conclusie Cholestorol Voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#vergelijken-van-g-behandelingen"><i class="fa fa-check"></i><b>8.3</b> Vergelijken van <span class="math inline">\(g\)</span> Behandelingen</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#dmh-voorbeeld"><i class="fa fa-check"></i><b>8.3.1</b> DMH Voorbeeld</a></li>
+<li class="chapter" data-level="8.3.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#kruskal-wallis-rank-test"><i class="fa fa-check"></i><b>8.3.2</b> Kruskal-Wallis Rank Test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap-categorisch.html"><a href="chap-categorisch.html"><i class="fa fa-check"></i><b>9</b> Categorische data analyse</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#inleiding-8"><i class="fa fa-check"></i><b>9.1</b> Inleiding</a></li>
+<li class="chapter" data-level="9.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#toetsen-voor-een-proportie"><i class="fa fa-check"></i><b>9.2</b> Toetsen voor een proportie</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#asymptotisch-betrouwbaarheidsinterval"><i class="fa fa-check"></i><b>9.2.1</b> Asymptotisch Betrouwbaarheidsinterval</a></li>
+<li class="chapter" data-level="9.2.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#asymptotische-test"><i class="fa fa-check"></i><b>9.2.2</b> Asymptotische Test</a></li>
+<li class="chapter" data-level="9.2.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#subsec:binom"><i class="fa fa-check"></i><b>9.2.3</b> Binomiale test</a></li>
+<li class="chapter" data-level="9.2.4" data-path="chap-categorisch.html"><a href="chap-categorisch.html#conclusie"><i class="fa fa-check"></i><b>9.2.4</b> Conclusie</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#toets-voor-associatie-tussen-2-kwalitatieve-variabelen"><i class="fa fa-check"></i><b>9.3</b> Toets voor associatie tussen 2 kwalitatieve variabelen</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#gepaarde-gegevens"><i class="fa fa-check"></i><b>9.3.1</b> Gepaarde gegevens</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#subsec:catOnPaired"><i class="fa fa-check"></i><b>9.3.2</b> Ongepaarde gegevens</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#de-pearson-chi-kwadraat-test-voor-ongepaarde-gegevens"><i class="fa fa-check"></i><b>9.3.3</b> De Pearson Chi-kwadraat test voor ongepaarde gegevens</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chap-categorisch.html"><a href="chap-categorisch.html#logistische-regressie"><i class="fa fa-check"></i><b>9.4</b> Logistische regressie</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#categorische-predictor"><i class="fa fa-check"></i><b>9.4.1</b> Categorische predictor</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#continue-predictor"><i class="fa fa-check"></i><b>9.4.2</b> Continue predictor</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap-glm.html"><a href="chap-glm.html"><i class="fa fa-check"></i><b>10</b> Algemeen lineair model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chap-glm.html"><a href="chap-glm.html#inleiding-9"><i class="fa fa-check"></i><b>10.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="chap-glm.html"><a href="chap-glm.html#sec:prostate"><i class="fa fa-check"></i><b>10.1.1</b> Prostaatkanker dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="chap-glm.html"><a href="chap-glm.html#het-additieve-meervoudig-lineaire-regressie-model"><i class="fa fa-check"></i><b>10.2</b> Het additieve meervoudig lineaire regressie model</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="chap-glm.html"><a href="chap-glm.html#statistisch-model"><i class="fa fa-check"></i><b>10.2.1</b> Statistisch model</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chap-glm.html"><a href="chap-glm.html#besluitvorming-in-regressiemodellen"><i class="fa fa-check"></i><b>10.3</b> Besluitvorming in regressiemodellen</a></li>
+<li class="chapter" data-level="10.4" data-path="chap-glm.html"><a href="chap-glm.html#nagaan-van-modelveronderstellingen-1"><i class="fa fa-check"></i><b>10.4</b> Nagaan van modelveronderstellingen</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="chap-glm.html"><a href="chap-glm.html#lineariteit-1"><i class="fa fa-check"></i><b>10.4.1</b> Lineariteit</a></li>
+<li class="chapter" data-level="10.4.2" data-path="chap-glm.html"><a href="chap-glm.html#homoscedasticiteit"><i class="fa fa-check"></i><b>10.4.2</b> Homoscedasticiteit</a></li>
+<li class="chapter" data-level="10.4.3" data-path="chap-glm.html"><a href="chap-glm.html#normaliteit"><i class="fa fa-check"></i><b>10.4.3</b> Normaliteit</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="chap-glm.html"><a href="chap-glm.html#het-niet-additieve-meervoudig-lineair-regressiemodel"><i class="fa fa-check"></i><b>10.5</b> Het niet-additieve meervoudig lineair regressiemodel</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="chap-glm.html"><a href="chap-glm.html#interactie-tussen-continue-variabele-en-factor-variabele"><i class="fa fa-check"></i><b>10.5.1</b> Interactie tussen continue variabele en factor variabele</a></li>
+<li class="chapter" data-level="10.5.2" data-path="chap-glm.html"><a href="chap-glm.html#sec:intCont"><i class="fa fa-check"></i><b>10.5.2</b> Interactie tussen twee continue variabelen</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="chap-glm.html"><a href="chap-glm.html#anova-tabel-2"><i class="fa fa-check"></i><b>10.6</b> ANOVA Tabel</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="chap-glm.html"><a href="chap-glm.html#sstot-ssr-en-sse"><i class="fa fa-check"></i><b>10.6.1</b> SSTot, SSR en SSE</a></li>
+<li class="chapter" data-level="10.6.2" data-path="chap-glm.html"><a href="chap-glm.html#extra-kwadratensommen"><i class="fa fa-check"></i><b>10.6.2</b> Extra Kwadratensommen</a></li>
+<li class="chapter" data-level="10.6.3" data-path="chap-glm.html"><a href="chap-glm.html#type-i-kwadratensommen"><i class="fa fa-check"></i><b>10.6.3</b> Type I Kwadratensommen</a></li>
+<li class="chapter" data-level="10.6.4" data-path="chap-glm.html"><a href="chap-glm.html#type-iii-kwadratensommen"><i class="fa fa-check"></i><b>10.6.4</b> Type III Kwadratensommen</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="chap-glm.html"><a href="chap-glm.html#regressiediagnostieken"><i class="fa fa-check"></i><b>10.7</b> Regressiediagnostieken</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="chap-glm.html"><a href="chap-glm.html#multicollineariteit"><i class="fa fa-check"></i><b>10.7.1</b> Multicollineariteit</a></li>
+<li class="chapter" data-level="10.7.2" data-path="chap-glm.html"><a href="chap-glm.html#invloedrijke-observaties"><i class="fa fa-check"></i><b>10.7.2</b> Invloedrijke observaties</a></li>
+<li class="chapter" data-level="10.7.3" data-path="chap-glm.html"><a href="chap-glm.html#cooks-distance"><i class="fa fa-check"></i><b>10.7.3</b> Cook’s distance</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="chap-glm.html"><a href="chap-glm.html#constrasten"><i class="fa fa-check"></i><b>10.8</b> Constrasten</a>
+<ul>
+<li class="chapter" data-level="10.8.1" data-path="chap-glm.html"><a href="chap-glm.html#nhanes-voorbeeld-1"><i class="fa fa-check"></i><b>10.8.1</b> NHANES voorbeeld</a></li>
+<li class="chapter" data-level="10.8.2" data-path="chap-glm.html"><a href="chap-glm.html#model-3"><i class="fa fa-check"></i><b>10.8.2</b> Model</a></li>
+<li class="chapter" data-level="10.8.3" data-path="chap-glm.html"><a href="chap-glm.html#besluitvorming"><i class="fa fa-check"></i><b>10.8.3</b> Besluitvorming</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="chap-glm.html"><a href="chap-glm.html#factoriële-proeven"><i class="fa fa-check"></i><b>10.9</b> Factoriële proeven</a>
+<ul>
+<li class="chapter" data-level="10.9.1" data-path="chap-glm.html"><a href="chap-glm.html#introductie"><i class="fa fa-check"></i><b>10.9.1</b> Introductie</a></li>
+<li class="chapter" data-level="10.9.2" data-path="chap-glm.html"><a href="chap-glm.html#data-2"><i class="fa fa-check"></i><b>10.9.2</b> Data</a></li>
+<li class="chapter" data-level="10.9.3" data-path="chap-glm.html"><a href="chap-glm.html#model-4"><i class="fa fa-check"></i><b>10.9.3</b> Model</a></li>
+<li class="chapter" data-level="10.9.4" data-path="chap-glm.html"><a href="chap-glm.html#inferentie"><i class="fa fa-check"></i><b>10.9.4</b> Inferentie</a></li>
+<li class="chapter" data-level="10.9.5" data-path="chap-glm.html"><a href="chap-glm.html#conclusie-3"><i class="fa fa-check"></i><b>10.9.5</b> Conclusie</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cursus Inleiding tot de Biostatistiek 2022-2023</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="inleiding" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Hoofdstuk 1</span> Inleiding<a href="inleiding.html#inleiding" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>link naar playlist met kennisclips:
+<a href="https://www.youtube.com/playlist?list=PLZH1hP8_LbJIk4G2AZYYKvgZLjRR-1-Iw">Kennisclips Hoofdstuk1</a></p>
+<p>link naar webpage/script die wordt gebruik in de kennisclips: <a href="https://statomics.github.io/sbc21/rmd/01-intro.html">script Hoofdstuk1</a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nm_yvgAXvyA" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>De meeste vragen in de levenswetenschappen kunnen slechts beantwoord worden door gegevens te verzamelen en te analyseren, bijvoorbeeld:</p>
+<ul>
+<li>Voor welke genen verschilt het expressieniveau in kanker en normaal weefsel?</li>
+<li>Kwaliteitscontrole: wijkt de concentratie van een chemisch product af van wat er op het label wordt vermeld?<br />
+</li>
+<li>Wat is de invloed van regelmatig joggen op bloeddruk?</li>
+<li>Is er een relatie tussen zweetgeur en de samenstelling van de microbiële gemeenschap onder de oksel?</li>
+</ul>
+<p>Bij onderzoek naar biologische processen moet men zich realiseren dat uitkomsten aan variatie onderhevig zijn. Aspirine is bijvoorbeeld niet bij iedereen even effectief om hoofdpijn te verzachten zodat de uitkomst voor een persoon met en zonder inname van aspirine meestal niet exact te voorspellen valt. Dit wordt mede veroorzaakt door het feit dat mensen verschillen in gewicht, ziektegraad, gevoeligheid voor een stof, … Bovendien reageert een persoon vaak anders op een stof naargelang hij moe of uitgerust is, het middel ’s morgens of ’s avonds inneemt, voor of na het eten, op geregelde tijdstippen of met onregelmatige intervallen, … En zelfs al mocht een bepaalde stof voor iedereen even effectief zijn, dan nog is het zo dat verschillende metingen voor een zelfde persoon zelden gelijk.
+De aanwezigheid van die biologische variabiliteit is bijzonder opvallend in de context van roken: de schadelijke gevolgen van roken op longkanker en hartaandoeningen zijn intussen goed gekend, maar nagenoeg iedereen kent wel iemand die gans zijn leven gerookt heeft en desondanks meer dan 80 jaar oud geworden is.</p>
+<p>Precies omwille van die biologische variabiliteit is het moeilijk om wetenschappelijke vragen goed te beantwoorden en zal men zelden onmiddellijk het antwoord zien na het bekijken van ruwe gegevens. Onderzoekers in de fysiologie, bijvoorbeeld, gaan vaak na wat het effect is van een bepaalde substantie (bijvoorbeeld, een geneesmiddel, hormoon of toxine) op experimentele dieren (bijvoorbeeld, ratten of ook in vitro weefselpreparaten). Dit effect wordt bestudeerd door verschillen in respons te meten tussen dieren geïnjecteerd met de substantie en controledieren die werden geïnjecteerd met een inactieve zoutoplossing. Omwille van biologische variatie zullen een aantal dieren die geïnjecteerd werden met lage dosissen van de toxische stof, het er vaak beter van af brengen dan sommige controledieren. Hierdoor kunnen geobserveerde effecten zowel toevallig zijn als wijzen op een systematisch effect. Bovendien moeten we ons afvragen of de controlegroep en de met substantie-geïnjecteerde groep een vergelijkbare gezondheid hebben. Zo niet, dan zou een mogelijk verschil in respons ook mede hierdoor verklaard kunnen worden.</p>
+<p>Het doel van statistiek is precies om orde te scheppen in de chaos door duidelijk te maken hoeveel variatie op de gegevens toe te schrijven valt aan systematische verschillen (bijvoorbeeld, door het al dan niet inspuiten van een bepaalde substantie) en hoeveel aan toeval of biologische variatie.</p>
+<p>Statistiek is immers de wetenschap rond verzamelen, exploreren en analyseren van data. Ze laat toe</p>
+<ul>
+<li>om tot een goede proefopzet te komen,</li>
+<li>om te leren uit data en</li>
+<li>om hierbij variabiliteit en onzekerheid te
+<ul>
+<li>kwantificeren</li>
+<li>controleren</li>
+<li>rapporteren</li>
+</ul></li>
+<li>d.m.v. statistische besluitvorming modellen op een formele wijze te toetsen aan de data.</li>
+</ul>
+<p>Ze vervult daarom een belangrijke rol in zowat alle wetenschappen. Zie ondermeer de populaire column ‘’points of significance’’ in Nature Methods. (<a href="http://blogs.nature.com/methagora/2013/08/giving_statistics_the_attention_it_deserves.html" class="uri">http://blogs.nature.com/methagora/2013/08/giving_statistics_the_attention_it_deserves.html</a>)</p>
+<p>In deze inleiding situeren we Statistiek in de Wetenschappelijke Methode.</p>
+<div id="sec:wetMeth" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> De Wetenschappelijke Methode<a href="inleiding.html#sec:wetMeth" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Het doel van wetenschap is het begrijpen van de natuur (van het allerkleinste tot het allergrootste, van vroeger en nu tot in de toekomst). De <em>Wetenschappelijke Methode</em> is de methodiek die vandaag de dag algemeen aanvaard wordt om onze wetenschappelijke kennis van de natuur op te bouwen. Twee belangrijke pijlers van de Wetenschappelijke Methode zijn theorie en observatie. Een wetenschappelijke theorie voorspelt hoe een natuurlijk proces zich gedraagt. Observaties kunnen gebruikt worden om deze theorie te bevestigen of te ontkrachten. Een wetenschappelijke theorie kan dus nooit bewezen worden door observatie, maar kan wel ontkracht worden door observatie. Dit is het <em>falcificatieprincipe</em> van de wetenschapsfilosoof Karl Popper (1902-1994).</p>
+<p>De levenswetenschappen berusten op empirisch onderzoek omdat observaties nodig zijn om de kennis uit te breiden. Theorieën kunnen gepostuleerd worden zonder observatie (hoewel dit zelden gebeurt), maar de wetenschapsgemeenschap neemt ze typisch maar voor waar aan nadat de nieuwe theorieën aan observatie getoetst worden.</p>
+<p>Figuur <a href="inleiding.html#fig:wetMet">1.1</a> is een schematische weergave van de Wetenschappelijke Methode.</p>
+<ul>
+<li><p>De <em>natuur</em> staat bovenaan de driehoek. Dit stelt het universum, de wereld, de werkelijkheid of de <em>waarheid</em> voor, waarover de mens kennis wil verzamelen.</p></li>
+<li><p>Een <em>model</em> (of een <em>theorie</em>) stelt een denkbeeld van een aspect van de natuur voor. Een model laat toe om voorspellingen, verder <em>predicties</em> genoemd te maken over het gedrag van een aspect van de natuur. Hierbij wordt niet noodzakelijk een mathematisch model bedoeld, maar kan het ook een kwalitatieve beschrijving zijn van een aspect van de natuur (bv. insecticide behandeling van planten leidt tot een vermindering van het aantal schadelijke insecten op de planten en tot een verhoogde opbrengst van de oogst).</p></li>
+<li><p>Via een <em>wetenschappelijk experiment</em> worden <em>data</em> uit de <em>natuur</em> gehaald. Data vormen een manifestatie van het werkelijke gedrag van de natuur. Het experiment moet <em>representatief</em> en <em>reproduceerbaar</em> zijn</p></li>
+<li><p><em>Statistische Besluitvorming</em> (Engels: <em>statistical inference</em>) vormt de brug tussen het model van de natuur en de data uit de natuur. <em>Statistische Besluitvorming</em> laat toe op een formele wijze het model te toetsen aan de data en te besluiten in welke mate de wetenschappelijke gemeenschap de theorie en het model voor waar mag aannemen.</p></li>
+<li><p>Statistiek wordt ingeroepen omdat de <em>Wetenschappelijke Methode</em> niet zonder doel gebruikt wordt. Wetenschappers hebben gedeeltelijke kennis van de natuur via een aantal modellen/theorieën, maar deze kennis doet nieuwe vragen ontstaan. Dit leidt tot een nieuwe <em>onderzoeksvraag</em> (bijvoorbeeld: zorgt het gebruik van insecticiden voor minder schade van insecten aan de plant?), welke vervolgens verfijnd wordt in een nauwkeurig geformuleerde <em>hypothese</em> (bijvoorbeeld: Het aantal aangetaste bladeren is gelijk voor onbehandelde en pesticide-behandelde planten). Een hypothese is zodanig geformuleerd dat ze door data kan verworpen worden indien de hypothese niet waar zou zijn. De formulering van de hypothese bepaalt mede hoe het <em>experiment</em> moet opgezet worden om de meest informatieve data (evidentie) te kunnen bekomen om vervolgens via de <em>statistische besluitvoering</em> tot een <em>conclusie</em> (i.e. antwoord op de onderzoeksvraag) te komen. Statistiek als wetenschapdiscipline treedt dus op in drie domeinen:</p>
+<ol style="list-style-type: decimal">
+<li><em>Proefopzet (“Experimental Design”):</em> het ontwerpen van het exeriment,</li>
+<li><em>Data-exploratie en beschrijvende statistiek (“Data-exploration and Descriptive Statistics”):</em> het exploreren, samenvatten en visualiseren van de data en</li>
+<li><em>Statistische besluitvorming (“Statistical Inference”):</em> het veralgemenen van de resultaten in de steekproef naar de populatie toe.</li>
+</ol></li>
+</ul>
+<p>We komen nog even terug of het falcificatieprincipe. Doorheen deze cursus zal het duidelijk worden dat statistiek methoden aanlevert die toelaten om na te gaan in welke mate data consistent zijn met een vooropgestelde model. Indien de data consistent zijn met het model zullen we niet noodzakelijk onmiddellijk besluiten dat de theorie en het model correct zijn. De wijze waarop de data tot stand gekomen zijn via de opzet van experiment speelt hierbij ook een belangrijke rol. Het experiment moet eigenlijk zo opgezet worden dat het model uitgedaagd wordt. Pas als alle moeite gedaan is om te pogen data te bekomen die inconsistent zijn met het model, kunnen de theorie en het model als waar beschouwd worden met een grote waarschijnlijkheid. Wanneer de data inconsistent zijn met het gepostuleerde model, dan kan direct besloten worden dat het model niet juist is.</p>
+<p>De <em>Wetenschappelijke Methode</em> heeft een cyclisch karakter: bij het vaststellen van een foutief model zal de wetenschapper het model aanpassen en doorloopt hij opnieuw alle stappen van de <em>Wetenschappelijke Methode</em>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:wetMet"></span>
+<img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/wetMet-1.png" alt="De Wetenschappelijke Methode en de rol van Statistiek." width="100%" />
+<p class="caption">
+Figuur 1.1: De Wetenschappelijke Methode en de rol van Statistiek.
+</p>
+</div>
+<p>Een andere belangrijke rol van de Statistiek die verder in deze cursus wordt behandeld, is om de <em>reproduceerbaarheid</em> van wetenschappelijk onderzoek te waarborgen, binnen zelf gekozen probabiliteitsgrenzen (onzekerheid / zekerheid).</p>
+</div>
+<div id="opzet-van-de-cursus" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Opzet van de cursus<a href="inleiding.html#opzet-van-de-cursus" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We leven in een tijd van big data en het is cruciaal om informatie uit cijfers te kunnen extraheren. Statistiek is nu net de wetenschap om te leren uit empirische gegevens.</p>
+<p>Statistische geletterdheid is dus een noodzaak om de resultaten uit deze analyses in wetenschappelijke tijdschriften of in de media kritisch te kunnen interpreteren.</p>
+<p>Hierbij is het belangrijk om inzicht te verwerven in statistische data analyse enerzijds en om anderzijds deze analyse te interpreteren. We moeten de analyse m.a.w. kunnen koppelen aan de context van het onderzoek: de onderzoeksvraag, de proefopzet en de eigenschappen van de data.
+Daarom gaan we alle statistische methodes in de cursus aanbrengen aan de hand van case studies.
+We gaan hierbij steeds stilstaan bij</p>
+<ol style="list-style-type: decimal">
+<li><p>de proefopzet en context van de studie (experimenteel ontwerp),</p></li>
+<li><p>eigenschappen van de ruwe data (data exploratie), en</p></li>
+<li><p>hoe we de resultaten uit de steekproef kunnen veralgemenen naar de populatie toe (statistische besluitvorming).</p></li>
+<li><p>Om statistische geletterdheid te verwerven is het ook cruciaal om zelf eenvoudige statistische analyses uit te kunnen voeren zodat je data leert analyseren en te interpreteren. We zullen dus ook in elke case study stilstaan bij hoe we de data analyse uit moeten voeren in statistische software.</p></li>
+</ol>
+<p>In de cursus maken we hiervoor gebruik van
+het statistische software pakket R. De cursus en de case studies werden volledig in rmarkdown aangemaakt, dit zijn geavanceerde scripts die toelaten om</p>
+<ul>
+<li>tekst</li>
+<li>formules</li>
+<li>code en</li>
+<li>R output en plots</li>
+</ul>
+<p>op een efficiënte manier te combineren. Het rmarkdown script kan dan worden gecompileerd naar een webpagina of een pdf document. Op deze manier kan je een data analyse op een volledig reproduceerbare manier documenteren. De scripts van de cursus vormen een goede inspiratiebron om zelf met rmarkdown aan de slag te gaan.</p>
+<p>De cursus wordt volledig in online leerpaden verzorgt op het platform Dodona.
+Daarbij gaan we hand-on leren statistische programmeren in 2 modules:</p>
+<ol style="list-style-type: decimal">
+<li><p>Module: Introduction to R, waarbij jullie interactief kennis maken met het statistische software pakket en programmeer taal R. Week 1 - Week 3.</p></li>
+<li><p>Module: Data exploration and visualisation waarbij jullie de basis principes zullen leren van het maken van goede grafieken die je inzicht zullen geven in de data die wordt gegenereerd in het experiment. Week 4 - 5.</p></li>
+<li><p>Module: Statistiek, het hart van deze cursus, waarin jullie inzicht zullen verwerven in de drie belangrijke takken van de statistiek. Week 1-12.</p>
+<ul>
+<li>proefopzet ook wel experimental design genoemd,</li>
+<li>data exploratie</li>
+<li>statistische besluitvorming ook wel inferentie genoemd.</li>
+</ul></li>
+</ol>
+<p>Hierbij staat steeds een echte dataset centraal zodat jullie de vertaalslag leren maken van de onderzoeksvraag naar statistisch modellen toe om dan na de data analyse de resultaten opnieuw te interpreteren in termen van de onderzoeksvraag.</p>
+<p>We zullen ook telkens alle code delen die nodig is om alle data analyses en visualisaties uit te voeren die worden weergegeven in deze cursus.</p>
+<p>In deze inleiding introduceren we drie case studies die het belang van statistiek illustreren.</p>
+<ol style="list-style-type: decimal">
+<li><p>Case study I: Het oksel microbiome. In deze case study doorlopen we alle belangrijke stappen van een experimentele study.</p></li>
+<li><p>Case study II: Verschil in lichaamslengte tussen vrouwen en mannen. In deze studie zal je inzicht verwerven in hoe observaties, resultaten en conclusies van een studie onderhevig zijn aan variabiliteit.</p></li>
+<li><p>Case study III: Salk vaccin studie voor polio. Deze studie illustreert het belang van een goede controle en introduceert het concept van confounding.</p></li>
+</ol>
+<p>Tijdens de eerste lezing van dit hoofdstuk is het nog niet belangrijk om te focussen op de code. Probeer vooral inzicht te verwerven in het theoretisch raamwerk dat wordt geïntroduceerd. Na week 4 kan het nuttig zijn om de case studies nog eens door te nemen met het oog op hoe je de analyses concreet uit kan voeren.</p>
+</div>
+<div id="case-study-oksel-microbiome" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Case study: oksel microbiome<a href="inleiding.html#case-study-oksel-microbiome" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HkMCq3IBvRI" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p><a href="https://www.vrt.be/vrtnws/nl/2018/10/22/gezocht-mensen-met-penetrante-lijfgeur-om-probiotische-deodor/" class="uri">https://www.vrt.be/vrtnws/nl/2018/10/22/gezocht-mensen-met-penetrante-lijfgeur-om-probiotische-deodor/</a></p>
+<iframe width="560" height="315" src="https://youtube.com/embed/9RIFyqLXdVw" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Zweten en vooral een zweetgeur is vervelend.
+Het zweten op zich is niet de oorzaak van de geur.
+Het zijn de microorganismen onder de oksel die het zweet metaboliseren die de geur veroorzaken.
+De samenstelling van de gemeenschap van microorganismen onder de oksel is dus bepalend voor het hebben van een zweetgeur.
+Deze gemeenschap wordt ook het oksel microbiome genoemd.</p>
+<p>Corynebacterium is een bacterië die zweet metaboliseert en hierbij verzadigde vetzuren aanmaakt met een penetrante geur.
+Gelukkig zijn er Staphylococcus bacteriën die het zweet ook metaboliseren maar die hierbij geen hinderlijke verzadigde vetzuren produceren.</p>
+<p>Het CMet Lab aan de Universiteit Gent doet onderzoek naar microbiële gemeenschappen en stelde een therapie voor om mensen van dit probleem af te helpen.
+Die bestaat uit een antibiotica behandeling van de oksel om microbiome af te doden,
+gevolgd door een transplantatie van het microbiome van een persoon zonder zweetgeur.</p>
+<p>Alvorens dat de therapie breed kan worden ingezet, dient eerst te worden aangetoond in een experiment dat ze werkt.</p>
+<!---break-->
+<div id="experimenteel-design-proefopzet" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Experimenteel design (proefopzet)<a href="inleiding.html#experimenteel-design-proefopzet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0CUL9DaY-bw" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Een eerste tak van de statistiek focust op experimenteel design.
+Idealiter zouden we de therapie evalueren door het uit te testen op de volledige populatie van personen met een zweetgeur.
+Dat is echter niet haalbaar omdat het</p>
+<ol style="list-style-type: decimal">
+<li>ethisch niet verantwoord is: we weten niet of therapie werkt</li>
+<li>financieel en logistiek onmogelijk is om iedereen te bemonsteren, en omdat</li>
+<li>de populatie waarover we uitspraken wensen te doen bestaat nog niet volledig: ze omvat ook toekomstige personen met een zweetgeur.</li>
+</ol>
+<p>Daarom zullen we een steekproef nemen.
+Hierbij zullen we een aantal personen uit de populatie selecteren waarop we het experiment uit zullen voeren.</p>
+<p>Cruciaal is hierbij dat de steekproef representatief is voor de populatie zodat we de resultaten van het experiment zullen kunnen veralgemenen naar de populatie. We zullen de mensen daarom volledig at random trekken uit de populatie zodat elk subject een zelfde kans heeft om in het experiment te worden opgenomen: randomisatie.
+Merk ook op dat het daarom heel belangrijk om de populatie goed te omschrijven voor de start van het experiment: scope van de studie.</p>
+<p>In deze studie worden twintig personen met een zweetgeur volledig at random geselecteerd uit de populatie.
+We zouden nu elk subject kunnen behandelen.
+Maar, dan zijn we niet zeker dat een verschil in het microbiome te wijten is aan de behandeling.</p>
+<p>We hebben dus een goeie controle nodig.
+We zouden de controle personen niet kunnen behandelen, maar dan kan een verschil in microbiome mogelijks ook te wijten zijn aan de antibiotica behandeling i.p.v. aan de transplantatie.
+De onderzoekers opteerden daarom 10 personen een placebo behandeling geven, enkel antibiotica behandeling en 10 personen te behandelen met antibiotica en de transplantatie.</p>
+<p>De proefpersonen worden volledig at random toegewezen aan de behandelingsgroep zodat beide groepen vergelijkbaar zijn.</p>
+<p>Vervolgens moet er stil worden gestaan bij hoe het microbiome zal worden gemeten?</p>
+<p>In de studie maakte men gebruik van een DGGE meting.
+Microorganismen hebben een heel variabel stukje ribosomaal RNA, het 16s ribosomaal RNA dat uniek is voor de soort.
+Het 16S rRNA van de verschillende microorganismen in het staal wordt dan geamplificeerd en gescheiden op een DGGE gel.
+Waarbij een bandenpatroon ontstaat volgens de lengte van het 16s rRNA.</p>
+<p><img src="figures/dgge.png" style="width:70.0%" />
+Foto van een DGGE gel van het oksel microbiome (bron: <a href="https://doi.org/10.1371/journal.pone.0070538" class="uri">https://doi.org/10.1371/journal.pone.0070538</a>)</p>
+<p>Elke band in de DGGE correspondeert met een bacterie.
+Hoe helderder de band hoe meer van de bacterie in het microbiome voorkomt.
+Band A staat voor Staphylococcus.
+De ratio van de intensiteit van de band en de totale intensiteit in het bandenpatroon kan worden gebruik als een proxy voor de relatieve abundantie.</p>
+<p><em>Essentiële stap: Vertaal onderzoeksvraag nu naar iets wat we kunnen quantificeren!</em></p>
+<p>We kunnen dit doen door middel van het gemiddeld verschil in relatieve abundantie in Staphylococcus tussen de transplantatie en placebo groep.</p>
+<p>Het experiment kan nu worden uitgevoerd.</p>
+<!---break-->
+</div>
+<div id="data-exploratie-en-beschrijvende-statistiek" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Data exploratie en beschrijvende statistiek<a href="inleiding.html#data-exploratie-en-beschrijvende-statistiek" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nN25owSaS2A" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Data exploratie is heel belangrijk om inzicht te krijgen in de data en is een essentiële eerste stap om te leren uit data.
+Het wordt vaak ondergewaardeerd of over het hoofd gezien.</p>
+<p>Data in deze cursus wordt verwerkt via het statistisch software pakket R.
+Vooraleer we met de data exploratie van start kunnen gaan moeten we de data eerst importeren in R.</p>
+<p>We geven duidelijk aan welke delen van de tekst over het Code gaan en welke over de interpretatie. Probeer initiëel te focussen op de interpretatie. Het Code zal je immers gedurende de eerste weken oppikken. Daarom hebben we ook gekozen om aparte clips te maken m.b.t interpretatie en Code. Zodat de manier hoe je de data analyse dient uit te voeren het begrip initiëel niet in de weg staan.</p>
+<div id="importeer-de-data" class="section level4 hasAnchor" number="1.3.2.1">
+<h4><span class="header-section-number">1.3.2.1</span> Importeer de data<a href="inleiding.html#importeer-de-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><em>Code</em> Tijdens de data exploratie gaan we voor de data manipulaties veelal gebruik maken van functies uit het <code>tidyverse</code> package.
+Dat kan worden geladen door het commando
+<code>library(tidyverse)</code>.</p>
+<p>Via het commando <code>read_lines</code> kunnen we enkele regels van een data bestand inlezen om de structuur van het data bestand te weten te komen.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="inleiding.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="inleiding.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read_lines</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc21/master/data/armpit.csv&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;trt,rel&quot;                      
+##  [2] &quot;placebo,54.99207606973059&quot;    
+##  [3] &quot;placebo,31.84466019417476&quot;    
+##  [4] &quot;placebo,41.09947643979057&quot;    
+##  [5] &quot;placebo,59.52063914780293&quot;    
+##  [6] &quot;placebo,63.573407202216075&quot;   
+##  [7] &quot;placebo,41.48648648648649&quot;    
+##  [8] &quot;placebo,30.44041450777202&quot;    
+##  [9] &quot;placebo,42.95676429567643&quot;    
+## [10] &quot;placebo,41.7391304347826&quot;     
+## [11] &quot;placebo,33.896515311510036&quot;   
+## [12] &quot;transplant,57.218124341412015&quot;
+## [13] &quot;transplant,72.50900360144058&quot; 
+## [14] &quot;transplant,61.89258312020461&quot; 
+## [15] &quot;transplant,56.690140845070424&quot;
+## [16] &quot;transplant,76&quot;                
+## [17] &quot;transplant,71.7357910906298&quot;  
+## [18] &quot;transplant,57.757296466973884&quot;
+## [19] &quot;transplant,65.1219512195122&quot;  
+## [20] &quot;transplant,67.53424657534246&quot; 
+## [21] &quot;transplant,77.55359394703657&quot;</code></pre>
+<p>We observeren de volgende structuur:</p>
+<ul>
+<li>Gegevens in het bestand zijn door comma’s gescheiden.</li>
+<li>Elke rij bevat de gegevens voor 1 proefpersoon</li>
+<li>Verschillende variabelen worden gemeten per persoon en zijn van elkaar gescheiden door een comma. Het bestand is in csv formaat: “comma separated values”.</li>
+<li>We kunnen bestanden met dit formaat inlezen R via het commando <code>read_csv</code>.</li>
+<li>We slaan de data op in R in het object met naam ap. Hiervoor gebruiken we de <code>&lt;-</code> operator.</li>
+<li>We geven de data tabel terug door het object aan te roepen door zijn naam te typen.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="inleiding.html#cb3-1" aria-hidden="true" tabindex="-1"></a>ap <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc21/master/data/armpit.csv&quot;</span>)</span>
+<span id="cb3-2"><a href="inleiding.html#cb3-2" aria-hidden="true" tabindex="-1"></a>ap</span></code></pre></div>
+<pre><code>## # A tibble: 20 × 2
+##    trt          rel
+##    &lt;chr&gt;      &lt;dbl&gt;
+##  1 placebo     55.0
+##  2 placebo     31.8
+##  3 placebo     41.1
+##  4 placebo     59.5
+##  5 placebo     63.6
+##  6 placebo     41.5
+##  7 placebo     30.4
+##  8 placebo     43.0
+##  9 placebo     41.7
+## 10 placebo     33.9
+## 11 transplant  57.2
+## 12 transplant  72.5
+## 13 transplant  61.9
+## 14 transplant  56.7
+## 15 transplant  76  
+## 16 transplant  71.7
+## 17 transplant  57.8
+## 18 transplant  65.1
+## 19 transplant  67.5
+## 20 transplant  77.6</code></pre>
+<p>Als we data matrix observeren zien we de volgende structuur:
+proefpersonen in de rijen waarvoor we twee karateristieken (variabelen) hebben bijgehouden per subject:
+behandeling (trt) en relatieve abundantie (rel).
+Deze data structuur wordt <code>tidy data</code> genoemd.</p>
+<p>Weinig mensen kunnen a.d.h.v. het bekijken van de data matrix structuur of patronen zien in de data. Daarom zullen we de data moeten verwerken en visualiseren.</p>
+</div>
+<div id="beschrijvende-statistiek" class="section level4 hasAnchor" number="1.3.2.2">
+<h4><span class="header-section-number">1.3.2.2</span> Beschrijvende statistiek<a href="inleiding.html#beschrijvende-statistiek" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In artikels en de media worden resultaten uit een steekproef vaak gerapporteerd a.d.h.v. gemiddelde en de standaardafwijking.</p>
+<p><em>Code</em></p>
+<ul>
+<li>We vatten de data eerst samen. We berekenen het gemiddelde en de standaard deviatie (een maat voor de spreiding, zie volgende hoofdstukken).
+We slaan het resultaat hiervan op in het object apRelSum via <code>apRelSum &lt;-</code>.</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><p>We pipen (via <code>%&gt;%</code>) het <code>ap</code> dataframe naar de <code>group_by</code> functie om de data te groeperen per treatment trt: <code>group_by(trt)</code>.</p></li>
+<li><p>We pipen het resultaat naar de <code>summarize_at</code> function om de “rel” variable samen te vatten en berekenen hierbij het gemiddelde en standaardafwijking. Omdat we de data eerst hebben gegroepeerd zullen we het gemiddelde en de standaard deviatie berekenen per groep.</p></li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="inleiding.html#cb5-1" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="ot">&lt;-</span> ap <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="inleiding.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trt) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="inleiding.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;rel&quot;</span>,</span>
+<span id="cb5-4"><a href="inleiding.html#cb5-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
+<span id="cb5-5"><a href="inleiding.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd</span>
+<span id="cb5-6"><a href="inleiding.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb5-7"><a href="inleiding.html#cb5-7" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
+<p>We tonen vervolgens het resultaat door het object apRelSum aan te roepen</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="inleiding.html#cb6-1" aria-hidden="true" tabindex="-1"></a>apRelSum</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   trt         mean    sd
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
+## 1 placebo     44.2 11.5 
+## 2 transplant  66.4  7.88</code></pre>
+<p>We kunnen ook een tabel in de webpagina of het pdf bestand integreren via het commando kable van het knitr pakket:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="inleiding.html#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(apRelSum, <span class="st">&#39;html&#39;</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+trt
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+placebo
+</td>
+<td style="text-align:right;">
+44.15496
+</td>
+<td style="text-align:right;">
+11.543251
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+transplant
+</td>
+<td style="text-align:right;">
+66.40127
+</td>
+<td style="text-align:right;">
+7.880175
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Interpretatie</em></p>
+<p>Het effect van de behandeling in de steekproef kan worden gekwantificeerd door de gemiddelde relatieve abundantie te vergelijken in elke steekproef. We observeren dat de gemiddelde relatieve abundantie in de steekproef gemiddeld 22.2% hoger is in de transplantatie dan in de placebo groep.</p>
+<p>We quantificeren ook de variabiliteit of de spreiding van de gegevens rond het gemiddelde aan de hand van de standaardafwijking.</p>
+<p>Het gemiddelde en de standaardafwijking wordt ook vaak grafisch weergegeven in een barplot.</p>
+<p><em>Code</em>
+We maken in deze cursus gebruik van het pakket <code>ggplot2</code> om grafieken te maken.<br />
+Met de ggplot2 bibliotheek kunnen we gemakkelijk grafieken opbouwen in lagen (layers).
+Hierdoor leest de code veel makkelijker.
+In uitgebreide introductie tot ggplot vinden je in de Dodona module <a href="https://dodona.ugent.be/nl/courses/345/">R data exploration and visualisation</a>.</p>
+<p>Bar plots worden heel veel gebruikt in artikels om resultaten weer te geven.</p>
+<ol style="list-style-type: decimal">
+<li><p>We pipen de samengevatte data naar de functie <code>ggplot</code>. Dat is de basis van elke ggplot. We selecteren de variabele met de behandeling trt als x variabele en de variabele met naam mean als y-variabele voor de plot.
+We doen dit steeds via de aestetics <code>aes</code> functie. <code>aes(x=trt,y=mean)</code></p></li>
+<li><p>We maken een barplot door een laag toe te voegen via de <code>geom_bar</code> function. De statistiek is <code>stat="identity"</code> omdat de hoogte van de bar gelijk is aan de waarde voor y (hier het gemiddelde voor de relatieve abundantie).</p></li>
+<li><p>We voegen foutenvlaggen toe om de onzekerheid op het gemiddelde weer te geven. We doen dit via de <code>geom_errorbar</code> functie en specifiëren het minimum en maximum van de error bar. Het <code>width</code> argument wordt gebruikt om de breedte van de error bar smaller te maken dat deze van de bar.</p></li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="inleiding.html#cb9-1" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="inleiding.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>mean)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="inleiding.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="inleiding.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd,<span class="at">ymax=</span>mean<span class="sc">+</span>sd),<span class="at">width=</span>.<span class="dv">2</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><em>Interpretatie</em></p>
+<p>Is deze plot informatief? Nee!</p>
+<p>We zien enkel een “two-number summary”: het gemiddelde en de standaarddeviatie. We weten niet of deze wel een goeie samenvattende maat zijn voor de data. Bovendien wordt heel wat ruimte in de plot benut die niet informatief is: er zijn bijvoorbeeld geen observaties met relatieve abundanties van 0%.</p>
+<p>Om de data van verschillende groepen makkelijk te kunnen vergelijken in een grafiek die meer informatief is dan de bar plot ontwikkelde Tukey de boxplot. Dit is een “five-number summary” het bereik van de data (minimum en maximum) samen met het 25, 50 (mediaan), and 75 percentiel. Deze percentielen zijn de waarden waarvoor respectievelijk 25%, 50% en 75% van de data in de steekproef kleiner zijn. Tukey raadde aan om het bereik van de data te berekenen zonder rekening te houden met outliers (extreme observaties). De outliers worden afzonderlijk als data punten toegevoegd aan de plot. In het hoofdstuk 4: Data Exploratie leggen we uit wat outliers precies zijn.</p>
+<p><em>Code</em>
+We maken nu een boxplot voor de ap data</p>
+<ol style="list-style-type: decimal">
+<li>We pipen het <code>ap</code> data object naar <code>ggplot</code></li>
+<li>We selecteren de data voor de plot via <code>ggplot(aes(x=trt,y=rel))</code></li>
+<li>We voegen een laag toe voor de boxplot dmv de functie <code>geom_boxplot()</code></li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="inleiding.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<span id="cb10-2"><a href="inleiding.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="inleiding.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><em>Interpretatie</em>: De boxplot geeft ons al veel meer informatie dan de barplot. Het bereik van de data wordt weergegeven door de wiskers (eindpunten van de verticale lijnen in het midden van de boxplot). De box in de boxplot geeft het 25%, 50% en 75% percentiel weer. (Merk op dat er geen outliers zijn. Er worden geen individuele punten weergegeven in de plot)</p>
+<p>We observeren dat boxplot voor de transplantie groep hoger ligt dan voor de placebo groep. Wat aangeeft dat de relatieve abundanties van Staphylococcus vaak hoger liggen voor personen in de steekproef die zijn toegewezen aan de transplantatie groep dan voor personen die zijn toegewezen aan placebo groep. Dit is een indicatie dat de behandeling werkt.</p>
+<p>Verder weten we dat er maar 10 observaties zijn in elke groep. Dat laat toe om de ruwe gegevens aan de plot toe te voegen zonder dat de plot te druk wordt.</p>
+<p><em>Code</em></p>
+<ul>
+<li>Merk op dat we het argument <code>outlier.shape</code> op NA (not available) zetten <code>outlier.shape=NA</code> in the <code>geom_boxplot</code> functie. Dat doen we standaard als we de ruwe data toevoegen aan de boxplots: anders zullen outliers immers twee keer worden weergegeven (eerst via de boxplot laag en daarna door de laag met alle ruwe data toevoegen aan de plot).</li>
+<li>We geven de ruwe data weer via de <code>geom_point(position="jitter")</code> functie. We gebruiken hierbij het argument position=‘jitter’ zodat we wat random ruis toevoegen aan de x-cordinaat zodat de gegevens elkaar niet overlappen.</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="inleiding.html#cb11-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<span id="cb11-2"><a href="inleiding.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="inleiding.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="inleiding.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Dit is een informatieve plot!
+Het toont de data zo ruw mogelijk weer. De plot is toch nog goed leesbaar en toont duidelijk aan dat de relatieve abundanties bij bijna alle proefpersonen in de transplantatie groep hoger is dan deze voor de placebo groep.</p>
+<!---break-->
+</div>
+</div>
+<div id="statistische-besluitvorming" class="section level3 hasAnchor" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Statistische Besluitvorming<a href="inleiding.html#statistische-besluitvorming" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cIGBfK7UrQw" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>We zagen duidelijk een effect van de transplantatie op de relatieve abundantie van Staphylococcus.
+We vragen ons nu af of het effect groot genoeg om te kunnen concluderen dat de behandeling werkt?</p>
+<p>Hoe kunnen we met andere woorden de conclusies uit de steekproef veralgemenen naar de populatie toe? <em>inductie</em>.
+Op basis van de steekproef kunnen we het effect, gemiddeld verschil in relatieve abundantie tussen beide behandelingsgroepen, schatten in de populatie.
+De prijs die we hiervoor betalen is onzekerheid!
+Omdat we niet alle personen in de populatie hebben kunnen testen zullen we echter nooit absoluut zeker kunnen zijn over onze conclusies.</p>
+<p>Om de conclusies uit de steekproef te veralgemenen naar de populatie maken we gebruik van een derde tak van de statistiek:
+Statistische besluitvorming.</p>
+<ul>
+<li><p>Met data kunnen we niet bewijzen dat een behandeling werkt.</p></li>
+<li><p>Falsificatie principe van Popper: Data kunnen enkel een hypothese of een theorie ontkrachten.</p></li>
+<li><p>Met statistiek kunnen we dus niet aantonen dat de behandeling werkt.</p></li>
+<li><p>Statistiek zal ons wel toelaten om het omgekeerde te falsifiëren: als we veronderstellen dat er geen effect van de behandeling, spreekt de data in de steekproef dit tegen?</p></li>
+</ul>
+<p>Met statistiek kunnen we berekenen hoe waarschijnlijk het is om in een random steekproef (nieuw experiment) een verschil in gemiddelde relatieve abundantie te zien tussen transplantatie (<span class="math inline">\(\bar X_\text{transplant}\)</span>) en placebo groep (<span class="math inline">\(\bar X_\text{placebo}\)</span>) dat minstens 22.2% bedraagt als de behandeling geen effect zou hebben.</p>
+<p><span class="math display">\[p=P( \vert \bar X_\text{transplant}-\bar X_\text{placebo}\vert \vert \geq 22.2\% \vert \text{geen effect van de behandeling})\]</span></p>
+<ul>
+<li><p>Die kans wordt een p-waarde genoemd.</p></li>
+<li><p>Als p heel klein is, dan is het heel onwaarschijnlijk om een dergelijk effect door toeval te observeren in een steekproef als er in werkelijkheid geen effect is van de behandeling.</p></li>
+</ul>
+<p>Om de kans p te berekenen is het nodig om de data te modelleren met een statistisch model. Hiervoor zullen we bepaalde aannames moeten doen. In hoofdstuk 5 zien we dat we dit kunnen doen d.m.v. de <code>t.test</code> functie.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="inleiding.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(rel<span class="sc">~</span>trt,<span class="at">data=</span>ap)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  rel by trt
+## t = -5.0334, df = 15.892, p-value = 0.0001249
+## alternative hypothesis: true difference in means between group placebo and group transplant is not equal to 0
+## 95 percent confidence interval:
+##  -31.62100 -12.87163
+## sample estimates:
+##    mean in group placebo mean in group transplant 
+##                 44.15496                 66.40127</code></pre>
+<p>Als er in werkelijkheid geen effect is van de behandeling en als de model aannames correct zijn dan verwachten we in minder dan 2 op 10000 random steekproeven een verschil van minstens 22.2% in de relatieve abundantie tussen beide behandelingsgroepen.
+Deze kans is heel klein. Het is dus heel onwaarschijnlijk om dergelijk verschil in relatieve abundantie te observeren in een random steekproef als er geen effect van de behandeling zou zijn.</p>
+<p>We kunnen daarom de hypothese dat er geen effect is van de behandeling verwerpen en concluderen:</p>
+<p>Er is een statistisch significant verschil in gemiddelde relatieve abundantie van Staphylococcus in het okselmicrobiome van personen met een zweetgeur die worden behandeld met de transplantie en personen die behandeld worden met de placebo behandeling.
+Gemiddeld is de relatieve abundantie van Staphylococcus in het microbiome van personen met een zweetgeur is 22.2% hoger na microbiome transplantie dan na de placebo behandeling.</p>
+<div id="mogelijke-fouten" class="section level4 hasAnchor" number="1.3.3.1">
+<h4><span class="header-section-number">1.3.3.1</span> Mogelijke fouten<a href="inleiding.html#mogelijke-fouten" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Merk op dat een experiment onderhevig is aan random variabiliteit. Als we het experiment opnieuw uit zouden voeren zullen we andere proefpersonen in de steekproef opnemen. Bijgevolg zullen we ook andere relatieve abundanties meten.</p>
+<ul>
+<li><p>Daardoor zijn ook onze conclusies onderhevig aan random variabiliteit.</p></li>
+<li><p>Zelfs al zou er in werkelijkheid geen effect zijn van de behandeling dan kunnen we in een random steekproef met 10 mensen in de placebo en 10 mensen in de behandelingsgroep toch ook een verschil in relatieve abundantie observeren die minsten 22.2% is. Dat kunnen we in 1 op de 10000 experimenten verwachten.</p></li>
+</ul>
+<p>In dergelijke steekproef zal men ten onrechte besluiten dat er bewijs is dat de transplantie behandeling werkt.</p>
+<ul>
+<li><p>Intuïtief voelen we aan dat we dus niet met absolute zekerheid uitspraken kunnen doen over populatiekarakteristieken op basis van een eindige steekproef.</p></li>
+<li><p>Typisch zullen we de p-waarde vergelijken met 5% vooraleer we beslissen dat een behandeling werkt. We zullen de kans op het maken van foute conclusies dus controleren op 5%.</p></li>
+</ul>
+<p>In de volgende case studie zullen we bestuderen hoe de metingen, de resultaten en de conclusies kunnen variëren van steekproef tot steekproef.</p>
+</div>
+</div>
+</div>
+<div id="case-study-ii-verschil-in-lengte-tussen-vrouwen-en-mannen" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Case Study II: Verschil in lengte tussen vrouwen en mannen<a href="inleiding.html#case-study-ii-verschil-in-lengte-tussen-vrouwen-en-mannen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9TuGsPqlWRM" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Om resultaten van een steekproef te kunnen veralgemenen naar de populatie toe trekken we subjecten at random uit de populatie.</p>
+<p>Randomisatie is sterk gerelateerd met het concept van de populatie en scope van de studie.
+De scope van de studie moet goed worden omschreven voor de start van het experiment. Het is immers de populatie naar waar we de resultaten uit de steekproef kunnen veralgemenen.</p>
+<p>We nemen daarom een random steekproef uit de populatie:</p>
+<ul>
+<li><p>alle subjecten van de populatie hebben dus evenveel kans om in de steekproef te worden opgenomen.</p></li>
+<li><p>de selectie van een subject is onafhankelijk van andere subjecten in de steekproef.</p></li>
+</ul>
+<p>De steekproef is dan representatief voor de populatie, maar is nog steeds random.</p>
+<p>Om te begrijpen dat een steekproef random is zouden we hetzelfde experiment veel keer moeten kunnen herhalen (<code>repeated sampling</code>). Dan zouden we inzicht kunnen krijgen hoe de gegevens veranderen van steekproef tot steekproef.</p>
+<p>Om dit te illustreren zullen we gebruik maken van de National Health And Nutrition Examination Study (NHANES) studie. Uit die studie kunnen we herhaaldelijk kleine steekproeven trekken om te begrijpen hoe de gegevens en statistieken veranderen van steekproef tot steekproef. Of om met andere woorden na te gaan wat de variabiliteit is tussen steekproeven.</p>
+<p>De National Health And Nutrition Examination Study (NHANES) studie:</p>
+<ul>
+<li><p>Sinds 1960 worden elk jaar mensen van alle leeftijden geïnterviewd bij hen thuis.</p></li>
+<li><p>Er maakt ook een gezondheidsonderzoek deel uit van de study die in een mobiel onderzoekscentrum wordt afgenomen.</p></li>
+<li><p>We zullen deze grote studie gebruiken om at random personen te selecteren van de Amerikaanse populatie.</p></li>
+<li><p>Dat zal inzicht geven in hoe de gegevens en resultaten van een analyse zullen variëren van steekproef tot steekproef.</p></li>
+</ul>
+<p>De data van deze studie is terug te vinden in het R pakket <code>NHANES</code>. Met de functie <code>head</code> kunnen we de eerste 6 rijen van de dataset bekijken.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="inleiding.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
+<span id="cb14-2"><a href="inleiding.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(NHANES)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 76
+##      ID SurveyYr Gender   Age AgeDecade AgeMonths
+##   &lt;int&gt; &lt;fct&gt;    &lt;fct&gt;  &lt;int&gt; &lt;fct&gt;         &lt;int&gt;
+## 1 51624 2009_10  male      34 &quot; 30-39&quot;        409
+## 2 51624 2009_10  male      34 &quot; 30-39&quot;        409
+## 3 51624 2009_10  male      34 &quot; 30-39&quot;        409
+## 4 51625 2009_10  male       4 &quot; 0-9&quot;           49
+## 5 51630 2009_10  female    49 &quot; 40-49&quot;        596
+## 6 51638 2009_10  male       9 &quot; 0-9&quot;          115
+## # … with 70 more variables: Race1 &lt;fct&gt;, Race3 &lt;fct&gt;,
+## #   Education &lt;fct&gt;, MaritalStatus &lt;fct&gt;,
+## #   HHIncome &lt;fct&gt;, HHIncomeMid &lt;int&gt;, Poverty &lt;dbl&gt;,
+## #   HomeRooms &lt;int&gt;, HomeOwn &lt;fct&gt;, Work &lt;fct&gt;,
+## #   Weight &lt;dbl&gt;, Length &lt;dbl&gt;, HeadCirc &lt;dbl&gt;,
+## #   Height &lt;dbl&gt;, BMI &lt;dbl&gt;, BMICatUnder20yrs &lt;fct&gt;,
+## #   BMI_WHO &lt;fct&gt;, Pulse &lt;int&gt;, BPSysAve &lt;int&gt;, …</code></pre>
+<p>We focussen in dit voorbeeld op het verschil in lengte tussen volwassen vrouwen en mannen in de Amerikaanse populatie.</p>
+<p>Onderzoeksvraag: hoe verschilt de lengte van volwassen mannen en vrouwen.</p>
+<p>We exploreren hiervoor eerst de lengte data in de NHANES studie. Omdat we heel veel gegevens hebben, maken we gebruik van histogrammen om inzicht te krijgen in de verdeling van de data.</p>
+<p><em>Code</em>
+1. We pipen de dataset naar de function <code>filter</code> om de data te filteren volgens leeftijd. We verwijderen eveneens gegevens waarvoor de lengte metingen ontbreken. Voor deze gevens werd de data ingegeven met de code NA (Not Available)
+2. We plotten de lengte metingen.
+- We selecteren de data met het commando <code>ggplot(aes(x=lengte))</code>
+- We voegen een histogram toe met het commando <code>geom_histogram()</code>
+- We maken twee vertikale panels met het commando <code>facet_grid(Gender~.)</code>. Een panel per geslacht.
+- We veranderen het label van de x-as met de <code>xlab</code> functie.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="inleiding.html#cb16-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">%&gt;%</span>  </span>
+<span id="cb16-2"><a href="inleiding.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="inleiding.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height))<span class="sc">+</span></span>
+<span id="cb16-4"><a href="inleiding.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="inleiding.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Gender <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="inleiding.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><em>Interpretatie</em></p>
+<ul>
+<li>Zoals we verwachten ligt de verdeling van de lengte van mannen hoger dan deze van vrouwen.</li>
+<li>We zien dat de data min of meer symmetrisch verdeeld zijn in elke groep en een klokvorm hebben.</li>
+<li>We zullen later zien dat de lengte data approximatief normaal verdeeld zijn.</li>
+<li>Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken van twee statistieken: het gemiddelde en de standaard deviatie wat een maat is voor de spreiding van de gegevens rond het gemiddelde.</li>
+</ul>
+<p>We maken nu een subset van de data die we zullen gebruiken om aan te tonen hoe de variabiliteit in kleine steekproeven kan variëren van steekproef tot steekproef.</p>
+<p><em>Code</em></p>
+<ol style="list-style-type: decimal">
+<li>We filteren op leeftijd en verwijderen ontbrekenden gegevens (NA, Not Available).</li>
+<li>We selecteren enkel het geslacht en Lengte zodat de dataset geen onnodige variabelen bevat.</li>
+</ol>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="inleiding.html#cb17-1" aria-hidden="true" tabindex="-1"></a>nhanesSub <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="inleiding.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="inleiding.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Height&quot;</span>))</span></code></pre></div>
+<p>We berekenen het gemiddelde en de standaard deviatie voor de lengte voor mannen en vrouwen in de grote dataset.
+We groeperen de data hiervoor op basis van het geslacht (variable Gender).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="inleiding.html#cb18-1" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="inleiding.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="inleiding.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
+<span id="cb18-4"><a href="inleiding.html#cb18-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean =</span> mean,</span>
+<span id="cb18-5"><a href="inleiding.html#cb18-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">sd =</span> sd)</span>
+<span id="cb18-6"><a href="inleiding.html#cb18-6" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb18-7"><a href="inleiding.html#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="inleiding.html#cb18-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb18-9"><a href="inleiding.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  HeightSum <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="inleiding.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="at">digits=</span><span class="dv">1</span>),</span>
+<span id="cb18-11"><a href="inleiding.html#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;html&quot;</span></span>
+<span id="cb18-12"><a href="inleiding.html#cb18-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+sd
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+162.1
+</td>
+<td style="text-align:right;">
+7.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+175.9
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>Interpretatie</em></p>
+<p>Vrouwen zijn gemiddeld 162.1 cm HeightSum en mannen 175.9 cm.
+Wat onze intuïtie bevestigt dat mannen gemiddeld groter zijn dan vrouwen.</p>
+<!---break-->
+<div id="experiment" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Experiment<a href="inleiding.html#experiment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0tVTFDqT0jo" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<ul>
+<li><p>Stel dat we geen toegang hebben tot de metingen van de NHANES studie.</p></li>
+<li><p>We zouden dan een experiment op moeten zetten om metingen bij mannen en vrouwen te doen.</p></li>
+<li><p>Veronderstel dat we budget hebben om metingen bij 5 mannen en 5 vrouwen te doen.</p></li>
+<li><p>We zouden dan 5 mannen en 5 vrouwen boven de 25 jaar at random selecteren uit de Amerikaanse populatie.</p></li>
+<li><p>We kunnen dit experiment simuleren door 5 vrouwen en 5 mannen at random te selecteren uit de NHANES studie.</p></li>
+</ul>
+<p><em>Code</em></p>
+<pre><code>1. het `set.seed` commando wordt gebruikt omdat we dezelfde steekproef zou trekken als we de code opnieuw laten lopen. Dit is louter om de cursus consistent te houden als we de nota&#39;s opnieuw maken.
+2. het nSamp object bevat de steekproefgrootte per groep
+3. we trekken 5 vrouwelijke subjecten uit de nhanesSub dataset
+4. vervolgens trekken we 5 mannen uit de nhanesSub dataset
+5. we voegen de data van mannen en vrouwen samen in 1 dataset. Het `rbind` commando zal de data van de rijen onder elkaar zetten.
+6. We tonen de dataset</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="inleiding.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1023</span>)</span>
+<span id="cb20-2"><a href="inleiding.html#cb20-2" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb20-3"><a href="inleiding.html#cb20-3" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="inleiding.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="inleiding.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
+<span id="cb20-6"><a href="inleiding.html#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="inleiding.html#cb20-7" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a href="inleiding.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-9"><a href="inleiding.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
+<span id="cb20-10"><a href="inleiding.html#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="inleiding.html#cb20-11" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
+<span id="cb20-12"><a href="inleiding.html#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="inleiding.html#cb20-13" aria-hidden="true" tabindex="-1"></a>samp1</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 2
+##    Gender Height
+##    &lt;fct&gt;   &lt;dbl&gt;
+##  1 female   164 
+##  2 female   160.
+##  3 female   159 
+##  4 female   154.
+##  5 female   156.
+##  6 male     170.
+##  7 male     183.
+##  8 male     183.
+##  9 male     185.
+## 10 male     170.</code></pre>
+<p>We hebben met de code dus een steekproef getrokken van 5 vrouwen en 5 mannen.
+We exploreren vervolgens de data in de steekproef.</p>
+<p><em>Code</em></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="inleiding.html#cb22-1" aria-hidden="true" tabindex="-1"></a>samp1 <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="inleiding.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="inleiding.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb22-4"><a href="inleiding.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Gender<span class="sc">~</span>.) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="inleiding.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="inleiding.html#cb23-1" aria-hidden="true" tabindex="-1"></a>HeightSumExp1 <span class="ot">&lt;-</span> samp1 <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="inleiding.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="inleiding.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
+<span id="cb23-4"><a href="inleiding.html#cb23-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean =</span> mean,</span>
+<span id="cb23-5"><a href="inleiding.html#cb23-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sd =</span> sd)</span>
+<span id="cb23-6"><a href="inleiding.html#cb23-6" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb23-7"><a href="inleiding.html#cb23-7" aria-hidden="true" tabindex="-1"></a>HeightSumExp1</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   Gender  mean    sd
+##   &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 female  159.  3.76
+## 2 male    178.  7.55</code></pre>
+<p>Histogram is niet zinvol als we maar zo weinig datapunten hebben. Een boxplot is meer geschikt om distributies te vergelijken als er weinig data zijn:</p>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><em>Einde Code</em></p>
+<p>Om na te gaan of het verschil in de steekproef groot genoeg is om de bevindingen van de steekproef te kunnen veralgemenen naar de populatie toe voeren we opnieuw een t-test uit.</p>
+<p>Met de p-waarde wordt de kans berekend om in een nieuwe random steekproef door toeval een effect te vinden dat in absolute waarde minstens evengroot is als in onze geobserveerde steekproef onder de aanname dat er in werkelijkheid geen verschil zou zijn in gemiddelde lengte tussen vrouwen en mannen.</p>
+<p>Als die kans heel klein is is het weinig waarschijnlijk om onze steekproef te observeren onder de hypothese dat de lengtes gemiddeld niet verschillen tussen vrouwen en mannen en kunnen we deze hypothese verwerpen.</p>
+<p>Typisch wordt de kans op een valse positieve conclusie gecontroleerd op 5%.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="inleiding.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height<span class="sc">~</span>Gender,<span class="at">data=</span>samp1)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Height by Gender
+## t = -5.0783, df = 5.8695, p-value = 0.00242
+## alternative hypothesis: true difference in means between group female and group male is not equal to 0
+## 95 percent confidence interval:
+##  -28.441927  -9.878073
+## sample estimates:
+## mean in group female   mean in group male 
+##               158.72               177.88</code></pre>
+<p>In het experiment zijn vrouwen gemiddeld 19.16 cm kleiner dan mannen. En als we een statistische test uitvoeren (zie hoofdstuk 5: Statistische besluitvorming) kunnen we besluiten dat dit verschil statistisch significant is.</p>
+</div>
+<div id="herhaal-het-experiment" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Herhaal het experiment<a href="inleiding.html#herhaal-het-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Als we het experiment herhalen selecteren we andere mensen en verkrijgen we andere resultaten.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="inleiding.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1024</span>)</span>
+<span id="cb27-2"><a href="inleiding.html#cb27-2" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="inleiding.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="inleiding.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
+<span id="cb27-5"><a href="inleiding.html#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="inleiding.html#cb27-6" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="inleiding.html#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="inleiding.html#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
+<span id="cb27-9"><a href="inleiding.html#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="inleiding.html#cb27-10" aria-hidden="true" tabindex="-1"></a>samp2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
+<span id="cb27-11"><a href="inleiding.html#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="inleiding.html#cb27-12" aria-hidden="true" tabindex="-1"></a>HeightSumExp2 <span class="ot">&lt;-</span> samp2 <span class="sc">%&gt;%</span></span>
+<span id="cb27-13"><a href="inleiding.html#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb27-14"><a href="inleiding.html#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
+<span id="cb27-15"><a href="inleiding.html#cb27-15" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
+<span id="cb27-16"><a href="inleiding.html#cb27-16" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd)</span>
+<span id="cb27-17"><a href="inleiding.html#cb27-17" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb27-18"><a href="inleiding.html#cb27-18" aria-hidden="true" tabindex="-1"></a>HeightSumExp2</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   Gender  mean    sd
+##   &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 female  166.  9.89
+## 2 male    170.  8.24</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="inleiding.html#cb29-1" aria-hidden="true" tabindex="-1"></a>samp2 <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="inleiding.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="inleiding.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="inleiding.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="inleiding.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb29-6"><a href="inleiding.html#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> HeightSumExp2<span class="sc">$</span>mean[<span class="dv">1</span>]),</span>
+<span id="cb29-7"><a href="inleiding.html#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb29-8"><a href="inleiding.html#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb29-9"><a href="inleiding.html#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="inleiding.html#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb29-11"><a href="inleiding.html#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> HeightSumExp2<span class="sc">$</span>mean[<span class="dv">2</span>]),</span>
+<span id="cb29-12"><a href="inleiding.html#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb29-13"><a href="inleiding.html#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb29-14"><a href="inleiding.html#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-15"><a href="inleiding.html#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Height (cm)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="inleiding.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height <span class="sc">~</span> Gender, <span class="at">data=</span>samp2)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Height by Gender
+## t = -0.7295, df = 7.747, p-value = 0.4872
+## alternative hypothesis: true difference in means between group female and group male is not equal to 0
+## 95 percent confidence interval:
+##  -17.552343   9.152343
+## sample estimates:
+## mean in group female   mean in group male 
+##               166.26               170.46</code></pre>
+<p>Vijf andere mannen en vrouwen worden getrokken uit de populatie. Hierdoor verschillen de lengte metingen van de vorige steekproef alsook de berekende gemiddeldes en de p-waarde van de statistische toets.</p>
+<p>In de nieuwe steekproef zijn vrouwen gemiddeld 4.2 cm kleiner dan mannen. En dit verschil is statistisch niet significant</p>
+</div>
+<div id="herhaal-het-experiment-opnieuw" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Herhaal het experiment opnieuw<a href="inleiding.html#herhaal-het-experiment-opnieuw" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="inleiding.html#cb32-1" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">88605</span></span>
+<span id="cb32-2"><a href="inleiding.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
+<span id="cb32-3"><a href="inleiding.html#cb32-3" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="inleiding.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a href="inleiding.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
+<span id="cb32-6"><a href="inleiding.html#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="inleiding.html#cb32-7" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a href="inleiding.html#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-9"><a href="inleiding.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
+<span id="cb32-10"><a href="inleiding.html#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="inleiding.html#cb32-11" aria-hidden="true" tabindex="-1"></a>samp3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
+<span id="cb32-12"><a href="inleiding.html#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="inleiding.html#cb32-13" aria-hidden="true" tabindex="-1"></a>HeightSumExp3 <span class="ot">&lt;-</span> samp3 <span class="sc">%&gt;%</span></span>
+<span id="cb32-14"><a href="inleiding.html#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb32-15"><a href="inleiding.html#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
+<span id="cb32-16"><a href="inleiding.html#cb32-16" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
+<span id="cb32-17"><a href="inleiding.html#cb32-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd)</span>
+<span id="cb32-18"><a href="inleiding.html#cb32-18" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb32-19"><a href="inleiding.html#cb32-19" aria-hidden="true" tabindex="-1"></a>HeightSumExp3</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   Gender  mean    sd
+##   &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 female  173.  1.97
+## 2 male    168.  2.84</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="inleiding.html#cb34-1" aria-hidden="true" tabindex="-1"></a>samp3 <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="inleiding.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="inleiding.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="inleiding.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="inleiding.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb34-6"><a href="inleiding.html#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> HeightSumExp3<span class="sc">$</span>mean[<span class="dv">1</span>]),</span>
+<span id="cb34-7"><a href="inleiding.html#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb34-8"><a href="inleiding.html#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb34-9"><a href="inleiding.html#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-10"><a href="inleiding.html#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb34-11"><a href="inleiding.html#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> HeightSumExp3<span class="sc">$</span>mean[<span class="dv">2</span>]),</span>
+<span id="cb34-12"><a href="inleiding.html#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb34-13"><a href="inleiding.html#cb34-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb34-14"><a href="inleiding.html#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-15"><a href="inleiding.html#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Height (cm)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="inleiding.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height <span class="sc">~</span> Gender, <span class="at">data=</span>samp3)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Height by Gender
+## t = 3.1182, df = 7.136, p-value = 0.01648
+## alternative hypothesis: true difference in means between group female and group male is not equal to 0
+## 95 percent confidence interval:
+##  1.178916 8.461084
+## sample estimates:
+## mean in group female   mean in group male 
+##               172.60               167.78</code></pre>
+<p>In de nieuwe steekproef zijn vrouwen gemiddeld 4.82 cm groter dan mannen. En dit verschil is statistisch significant</p>
+<p>Merk op dat we in deze extreme steekproef door toeval vrij grote vrouwen en eerder kleine mannen hebben getrokken uit de populatie. Een dergelijke steekproef zal eerder zeldzaam zijn maar kan door toeval voorkomen.</p>
+<p>In de onderstaande paragraaf leggen we uit hoe we deze extreme steekproef hebben bekomen:</p>
+<p>Een seed wordt in de cursus gebruikt om ervoor te zorgen dat we telkens dezelfde resultaten bekomen als we de random generator opnieuw laten lopen in R (zie het set.seed commando). Dat doen we puur om de resultaten in de cursus gelijk te kunnen houden als we aanpassingen hebben doorgevoerd aan de tekst en de code dus opnieuw moeten laten lopen om de cursus te compileren. In vrijwel alle code is de seed gewoon random gekozen.</p>
+<p>Om de extreme steekproef weer te geven, hebben we deze keer echter geen random seed gebruikt. Daarvoor hebben we alle seeds overlopen van 1 tot 100000. We hebben dus 8.8605^{4} steekproeven moeten trekken alvorens we een dergelijke extreme steekproef uit de populatie hadden getrokken waaruit we ten onrechte zouden concluderen dat vrouwen gemiddeld significant groter zijn dan mannen.</p>
+</div>
+<div id="samenvatting" class="section level3 hasAnchor" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> Samenvatting<a href="inleiding.html#samenvatting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We trokken at random andere proefpersonen in elke steekproef. Hierdoor</p>
+<ul>
+<li><p>verschillen de lengtemetingen van steekproef tot steekproef.</p></li>
+<li><p>Dus ook de geschatte gemiddeldes en standaard deviaties.</p></li>
+<li><p>Bijgevolg zijn onze conclusies ook onzeker en kunnen deze wijzigen van steekproef tot steekproef.</p></li>
+<li><p>Ook steekproeven waarbij het effect tegengesteld is aan dat in de populatie en waarbij we besluiten dat het verschil significant is kunnen voorkomen.</p></li>
+<li><p>We kunnen aantonen dat dergelijke steekproeven voor experimenten waarbij we de lengte tussen mannen en vrouwen vergelijken eerder zeldzaam zijn.</p></li>
+</ul>
+<p><span class="math inline">\(\rightarrow\)</span> Met statistiek gaan we de kans op het trekken foute conclusies controleren.</p>
+<!---break-->
+</div>
+<div id="controle-van-beslissingsfouten" class="section level3 hasAnchor" number="1.4.5">
+<h3><span class="header-section-number">1.4.5</span> Controle van beslissingsfouten<a href="inleiding.html#controle-van-beslissingsfouten" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fdQ-EOX0Jc8" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Hoe controleert statistiek de kans op het trekken van foute conclusies?</p>
+<ul>
+<li>In onderstaande code trekken we 10000 herhaalde steekproeven van 5 vrouwen en 5 mannen uit de NHANES studie.</li>
+</ul>
+<p><em>Code</em></p>
+<p>Deze code is vrij complex. Het kan nuttig zijn om deze pas na de twee modules Introductie tot R, en, data visualisatie opnieuw te bekijken.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="inleiding.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15152</span>)</span>
+<span id="cb37-2"><a href="inleiding.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per groep</span></span>
+<span id="cb37-3"><a href="inleiding.html#cb37-3" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb37-4"><a href="inleiding.html#cb37-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb37-5"><a href="inleiding.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="inleiding.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
+<span id="cb37-7"><a href="inleiding.html#cb37-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb37-8"><a href="inleiding.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb37-9"><a href="inleiding.html#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="inleiding.html#cb37-10" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb37-11"><a href="inleiding.html#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
+<span id="cb37-12"><a href="inleiding.html#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="inleiding.html#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
+<span id="cb37-14"><a href="inleiding.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.</span></span>
+<span id="cb37-15"><a href="inleiding.html#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="inleiding.html#cb37-16" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> malSamps <span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>nSamp, <span class="at">ncol=</span>nSim)</span>
+<span id="cb37-17"><a href="inleiding.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim)</span>
+<span id="cb37-18"><a href="inleiding.html#cb37-18" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb37-19"><a href="inleiding.html#cb37-19" aria-hidden="true" tabindex="-1"></a>  femSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb37-20"><a href="inleiding.html#cb37-20" aria-hidden="true" tabindex="-1"></a>  malSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(mal<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb37-21"><a href="inleiding.html#cb37-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-22"><a href="inleiding.html#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="inleiding.html#cb37-23" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb37-24"><a href="inleiding.html#cb37-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil=</span><span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(malSamps),</span>
+<span id="cb37-25"><a href="inleiding.html#cb37-25" aria-hidden="true" tabindex="-1"></a>  Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, malSamps)</span>
+<span id="cb37-26"><a href="inleiding.html#cb37-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb37-27"><a href="inleiding.html#cb37-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-28"><a href="inleiding.html#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 7234</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="inleiding.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&gt;=</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 2766</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="inleiding.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil<span class="sc">&gt;</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="inleiding.html#cb43-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="inleiding.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>verschil,<span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue),<span class="at">color=</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="inleiding.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb43-4"><a href="inleiding.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-5"><a href="inleiding.html#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="inleiding.html#cb44-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="inleiding.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="inleiding.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb44-4"><a href="inleiding.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="inleiding.html#cb45-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## $x
+## [1] &quot;&quot;
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;labels&quot;</code></pre>
+<p>Op basis van 10000 steekproeven van 5 mannen en 5 vrouwen zagen we dat in 7234 steekproeven vrouwen gemiddeld significant kleiner zijn dan mannen. In 2766 steekproeven besluiten we dat vrouwen en mannen gemiddeld niet significant verschillen in lengte. En in 0 besluiten we dat vrouwen gemiddeld significant groter zijn dan mannen.</p>
+<ul>
+<li><p>De steekproef die we toonden waaruit we zouden besluiten dat vrouwen significant groter zijn dan mannen is heel onwaarschijnlijk. Er moesten 88605 steekproeven worden getrokken om deze extreme steekproef te vinden.</p></li>
+<li><p>Het feit dat we in veel steekproeven resultaten vinden die statistisch niet significant zijn komt omdat de statistische toets een te lage kracht heeft om het verschil te detecteren wanneer er maar 5 observaties zijn per groep.</p></li>
+</ul>
+<hr />
+<div id="grotere-steekproef" class="section level4 hasAnchor" number="1.4.5.1">
+<h4><span class="header-section-number">1.4.5.1</span> Grotere steekproef?<a href="inleiding.html#grotere-steekproef" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Wat gebeurt er als we de steekproef verhogen naar 50 observaties per groep?</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="inleiding.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11145</span>)</span>
+<span id="cb47-2"><a href="inleiding.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per groep</span></span>
+<span id="cb47-3"><a href="inleiding.html#cb47-3" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb47-4"><a href="inleiding.html#cb47-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb47-5"><a href="inleiding.html#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="inleiding.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
+<span id="cb47-7"><a href="inleiding.html#cb47-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb47-8"><a href="inleiding.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb47-9"><a href="inleiding.html#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="inleiding.html#cb47-10" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb47-11"><a href="inleiding.html#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
+<span id="cb47-12"><a href="inleiding.html#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="inleiding.html#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
+<span id="cb47-14"><a href="inleiding.html#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.</span></span>
+<span id="cb47-15"><a href="inleiding.html#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="inleiding.html#cb47-16" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> malSamps <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nSamp, <span class="at">ncol =</span> nSim)</span>
+<span id="cb47-17"><a href="inleiding.html#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim)</span>
+<span id="cb47-18"><a href="inleiding.html#cb47-18" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb47-19"><a href="inleiding.html#cb47-19" aria-hidden="true" tabindex="-1"></a>  femSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb47-20"><a href="inleiding.html#cb47-20" aria-hidden="true" tabindex="-1"></a>  malSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(mal<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb47-21"><a href="inleiding.html#cb47-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-22"><a href="inleiding.html#cb47-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-23"><a href="inleiding.html#cb47-23" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb47-24"><a href="inleiding.html#cb47-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil =</span> <span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(malSamps),</span>
+<span id="cb47-25"><a href="inleiding.html#cb47-25" aria-hidden="true" tabindex="-1"></a>  Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, malSamps)</span>
+<span id="cb47-26"><a href="inleiding.html#cb47-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-27"><a href="inleiding.html#cb47-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-28"><a href="inleiding.html#cb47-28" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 10000</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="inleiding.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&gt;=</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="inleiding.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="inleiding.html#cb53-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="inleiding.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>verschil,<span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue),<span class="at">color=</span>pvalue<span class="sc">&lt;</span><span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="inleiding.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb53-4"><a href="inleiding.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="inleiding.html#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="inleiding.html#cb54-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="inleiding.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>verschil)) <span class="sc">+</span></span>
+<span id="cb54-3"><a href="inleiding.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb54-4"><a href="inleiding.html#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="inleiding.html#cb55-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## $x
+## [1] &quot;&quot;
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;labels&quot;</code></pre>
+<ul>
+<li><p>We zien dus dat we de kans om een verschil te vinden als er in werkelijkheid een verschil is in de populatie kunnen beïnvloeden in de design fase: aan de hand van de steekproefgrootte.</p></li>
+<li><p>Hoe meer gegevens hoe makkelijker we het werkelijk verschil oppikken in de steekproef.</p></li>
+<li><p>Dat wordt ook geïllustreerd in het gemiddelde verschil in lengte tussen mannen en vrouwen: daar zit in de grote studie veel minder variabiliteit op van steekproef tot steekproef omdat ze veel nauwkeuriger kunnen worden geschat omdat er meer gegevens zijn in de steekproef.</p></li>
+</ul>
+</div>
+<div id="controle-van-vals-positieven" class="section level4 hasAnchor" number="1.4.5.2">
+<h4><span class="header-section-number">1.4.5.2</span> Controle van vals positieven<a href="inleiding.html#controle-van-vals-positieven" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Wat gebeurt er als er geen verschil is tussen beide groepen?</p>
+<ul>
+<li><p>We moeten hiervoor experimenten simuleren waarbij de groepen gelijk zijn.</p></li>
+<li><p>Hiervoor zullen we twee groepen vergelijken waarvoor de lengte gemiddeld niet verschillend is.</p></li>
+<li><p>Dat kunnen we doen door een steekproef te trekken waarbij we voor beide groepen at random subjecten trekken uit de subset van vrouwen in de NHANES studie. Dan weten we dat er on de populatie geen verschil is in lengte tussen beide groepen die we zullen vergelijken.</p></li>
+<li><p>Als we toch een verschil vinden in een steekproef dan weten we dat dit een vals positief resultaat is!</p></li>
+<li><p>We doen de simulatiestudie opnieuw voor steekproeven met 5 subjecten per groep</p></li>
+</ul>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="inleiding.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">13245</span>)</span>
+<span id="cb57-2"><a href="inleiding.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per groep</span></span>
+<span id="cb57-3"><a href="inleiding.html#cb57-3" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb57-4"><a href="inleiding.html#cb57-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb57-5"><a href="inleiding.html#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="inleiding.html#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
+<span id="cb57-7"><a href="inleiding.html#cb57-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb57-8"><a href="inleiding.html#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb57-9"><a href="inleiding.html#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-10"><a href="inleiding.html#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
+<span id="cb57-11"><a href="inleiding.html#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.</span></span>
+<span id="cb57-12"><a href="inleiding.html#cb57-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-13"><a href="inleiding.html#cb57-13" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> femSamps2 <span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>nSamp, <span class="at">ncol=</span>nSim)</span>
+<span id="cb57-14"><a href="inleiding.html#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim)</span>
+<span id="cb57-15"><a href="inleiding.html#cb57-15" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb57-16"><a href="inleiding.html#cb57-16" aria-hidden="true" tabindex="-1"></a>  femSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb57-17"><a href="inleiding.html#cb57-17" aria-hidden="true" tabindex="-1"></a>  femSamps2[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb57-18"><a href="inleiding.html#cb57-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb57-19"><a href="inleiding.html#cb57-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-20"><a href="inleiding.html#cb57-20" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb57-21"><a href="inleiding.html#cb57-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil=</span><span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(femSamps2),</span>
+<span id="cb57-22"><a href="inleiding.html#cb57-22" aria-hidden="true" tabindex="-1"></a>  Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, femSamps2)</span>
+<span id="cb57-23"><a href="inleiding.html#cb57-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb57-24"><a href="inleiding.html#cb57-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-25"><a href="inleiding.html#cb57-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 213</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="inleiding.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&gt;=</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 9558</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="inleiding.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil<span class="sc">&gt;</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 229</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="inleiding.html#cb63-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="inleiding.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>verschil,<span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue),<span class="at">color=</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb63-3"><a href="inleiding.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb63-4"><a href="inleiding.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb63-5"><a href="inleiding.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="inleiding.html#cb64-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb64-2"><a href="inleiding.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span></span>
+<span id="cb64-3"><a href="inleiding.html#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb64-4"><a href="inleiding.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="inleiding.html#cb65-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## $x
+## [1] &quot;&quot;
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;labels&quot;</code></pre>
+<p>Op basis van 10000 steekproeven zien we dat we in 442 steekproeven ten onrechte besluiten dat er een verschil is in gemiddelde lengte tussen twee groepen vrouwen.</p>
+<p>Met de statistische analyse controleren we dus het aantal vals positieve resultaten correct op 5%.</p>
+<p><em>Wat gebeurt er als we het aantal observaties verhogen?</em></p>
+<p>We simuleren opnieuw experimenten met 50 subjecten per groep maar we trekken de subjecten opnieuw telkens uit de populatie van vrouwen.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="inleiding.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1345</span>)</span>
+<span id="cb67-2"><a href="inleiding.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per groep</span></span>
+<span id="cb67-3"><a href="inleiding.html#cb67-3" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb67-4"><a href="inleiding.html#cb67-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb67-5"><a href="inleiding.html#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-6"><a href="inleiding.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
+<span id="cb67-7"><a href="inleiding.html#cb67-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb67-8"><a href="inleiding.html#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb67-9"><a href="inleiding.html#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-10"><a href="inleiding.html#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
+<span id="cb67-11"><a href="inleiding.html#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.</span></span>
+<span id="cb67-12"><a href="inleiding.html#cb67-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-13"><a href="inleiding.html#cb67-13" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> femSamps2 <span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>nSamp, <span class="at">ncol=</span>nSim)</span>
+<span id="cb67-14"><a href="inleiding.html#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim)</span>
+<span id="cb67-15"><a href="inleiding.html#cb67-15" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb67-16"><a href="inleiding.html#cb67-16" aria-hidden="true" tabindex="-1"></a>  femSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb67-17"><a href="inleiding.html#cb67-17" aria-hidden="true" tabindex="-1"></a>  femSamps2[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb67-18"><a href="inleiding.html#cb67-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb67-19"><a href="inleiding.html#cb67-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-20"><a href="inleiding.html#cb67-20" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb67-21"><a href="inleiding.html#cb67-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil=</span><span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(femSamps2),</span>
+<span id="cb67-22"><a href="inleiding.html#cb67-22" aria-hidden="true" tabindex="-1"></a>  Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, femSamps2)</span>
+<span id="cb67-23"><a href="inleiding.html#cb67-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb67-24"><a href="inleiding.html#cb67-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-25"><a href="inleiding.html#cb67-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 271</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="inleiding.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&gt;=</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## [1] 9501</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="inleiding.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil<span class="sc">&gt;</span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## [1] 228</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="inleiding.html#cb73-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb73-2"><a href="inleiding.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>verschil,<span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue),<span class="at">color=</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb73-3"><a href="inleiding.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb73-4"><a href="inleiding.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-5"><a href="inleiding.html#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="inleiding.html#cb74-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb74-2"><a href="inleiding.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span></span>
+<span id="cb74-3"><a href="inleiding.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb74-4"><a href="inleiding.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="inleiding.html#cb75-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## $x
+## [1] &quot;&quot;
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;labels&quot;</code></pre>
+<p>Op basis van 10000 steekproeven zien we dat we in 499 steekproeven ten onrechte besluiten dat er een verschil is in gemiddelde lengte tussen twee groepen vrouwen.</p>
+<p>Met de statistische analyse controleren we dus ook bij het nemen van een grote steekproef het aantal vals positieve resultaten correct op 5%. (Vals positief: Op basis van de steekproef besluiten dat er gemiddeld een verschil is in lengte tussen beide groepen terwijl er in werkelijkheid geen verschil is in de populatie.)</p>
+<!---break-->
+</div>
+</div>
+<div id="conclusies" class="section level3 hasAnchor" number="1.4.6">
+<h3><span class="header-section-number">1.4.6</span> Conclusies<a href="inleiding.html#conclusies" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7aJPMQglE8A" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<ol style="list-style-type: decimal">
+<li><p>In elke steekproef worden at random andere proefpersonen uit de populatie getrokken.</p></li>
+<li><p>Hierdoor verschillen lengte metingen van steekproef tot steekproef.</p></li>
+<li><p>Dus ook het geschatte gemiddeldes en standaard deviaties.</p></li>
+<li><p>Ook onze conclusies zijn onzeker en kunnen wijzigen van steekproef tot steekproef.</p></li>
+<li><p>Met statistiek controleren we de kans op het trekken foute conclusies.</p></li>
+</ol>
+</div>
+</div>
+<div id="case-study-salk-vaccin" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Case study: Salk vaccin<a href="inleiding.html#case-study-salk-vaccin" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1F8qCfQVW7U" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>In 1916, brak de eerste grote polio epidemie uit in de USA.
+Begin de jaren 50 ontwikkelde John Salk een vaccin met belovende resultaten in het lab.
+In 1954, heeft de National Foundation for Infantile Paralysis (NFIP) een grote studie opgezet om de effectiviteit van het Salk vaccin na te gaan.</p>
+<ul>
+<li>Veronderstel dat de NFIP in 1954 een groot aantal kinderen zou hebben gevaccineerd, wat zouden ze dan kunnen besluiten als de polio incidentie in 1954 lager was dan in 1953?</li>
+</ul>
+<p>Neen, het zou gekund hebben dat het verschil in polio incidentie veroorzaakt werd door het feit dat de infectie minder hevig was in 1954.
+We hebben dus een controle nodig!</p>
+<div id="nfip-study" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> NFIP Study<a href="inleiding.html#nfip-study" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="design" class="section level4 hasAnchor" number="1.5.1.1">
+<h4><span class="header-section-number">1.5.1.1</span> Design<a href="inleiding.html#design" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Grote simultane studie met gevaccineerde kinderen (cases) en ongevaccineerde kinderen (controles).</li>
+<li>In scholen van districten met hoge polio incidentie.</li>
+<li>Cases: kinderen van de tweede graad van het lager onderwijs waarvan de ouders toestemden met vaccinatie.</li>
+<li>Controles: kinderen van de eerste en derde graad.</li>
+</ul>
+</div>
+<div id="data" class="section level4 hasAnchor" number="1.5.1.2">
+<h4><span class="header-section-number">1.5.1.2</span> Data<a href="inleiding.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="inleiding.html#cb77-1" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb77-2"><a href="inleiding.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">group=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>,<span class="st">&quot;controls&quot;</span>,<span class="st">&quot;noConcent&quot;</span>),</span>
+<span id="cb77-3"><a href="inleiding.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">grade=</span><span class="fu">c</span>(<span class="st">&quot;g2&quot;</span>,<span class="st">&quot;g1g3&quot;</span>,<span class="st">&quot;g2&quot;</span>),</span>
+<span id="cb77-4"><a href="inleiding.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vaccin=</span><span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;no&quot;</span>),</span>
+<span id="cb77-5"><a href="inleiding.html#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">total=</span><span class="fu">c</span>(<span class="dv">221998</span>,<span class="dv">725173</span>,<span class="dv">123605</span>),</span>
+<span id="cb77-6"><a href="inleiding.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">polio=</span><span class="fu">c</span>(<span class="dv">54</span>,<span class="dv">391</span>,<span class="dv">56</span>)</span>
+<span id="cb77-7"><a href="inleiding.html#cb77-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb77-8"><a href="inleiding.html#cb77-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">noPolio =</span> total <span class="sc">-</span> polio)</span>
+<span id="cb77-9"><a href="inleiding.html#cb77-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+group
+</th>
+<th style="text-align:left;">
+grade
+</th>
+<th style="text-align:left;">
+vaccin
+</th>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+polio
+</th>
+<th style="text-align:right;">
+noPolio
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+cases
+</td>
+<td style="text-align:left;">
+g2
+</td>
+<td style="text-align:left;">
+yes
+</td>
+<td style="text-align:right;">
+221998
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+221944
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+controls
+</td>
+<td style="text-align:left;">
+g1g3
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:right;">
+725173
+</td>
+<td style="text-align:right;">
+391
+</td>
+<td style="text-align:right;">
+724782
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+noConcent
+</td>
+<td style="text-align:left;">
+g2
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:right;">
+123605
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+123549
+</td>
+</tr>
+</tbody>
+</table>
+<p>We zien 54 polio besmettingen bij de gevaccineerde kinderen
+en 391 bij de controle groep.</p>
+<ul>
+<li>Kunnen we daaruit besluiten trekken?</li>
+</ul>
+<p>De twee groepen verschillen echter ook in grootte!</p>
+<p>We zullen daarom kijken naar polio incidentie per miljoen kinderen.</p>
+<ol style="list-style-type: decimal">
+<li>We voegen een extra column toe aan het nfip data object d.m.v. de mutate functie. We berekenen de incidentie per miljoen kinderen (incidencePM) en slaan de gewijzigde dataset op onder dezelfde naam.</li>
+<li>we maken de tabel opnieuw</li>
+</ol>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="inleiding.html#cb78-1" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> nfip <span class="sc">%&gt;%</span></span>
+<span id="cb78-2"><a href="inleiding.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incidencePM =</span> <span class="fu">round</span>(nfip<span class="sc">$</span>polio<span class="sc">/</span>nfip<span class="sc">$</span>total<span class="sc">*</span><span class="fl">1e6</span>,<span class="dv">0</span>))</span>
+<span id="cb78-3"><a href="inleiding.html#cb78-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+group
+</th>
+<th style="text-align:left;">
+grade
+</th>
+<th style="text-align:left;">
+vaccin
+</th>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+polio
+</th>
+<th style="text-align:right;">
+noPolio
+</th>
+<th style="text-align:right;">
+incidencePM
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+cases
+</td>
+<td style="text-align:left;">
+g2
+</td>
+<td style="text-align:left;">
+yes
+</td>
+<td style="text-align:right;">
+221998
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+221944
+</td>
+<td style="text-align:right;">
+243
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+controls
+</td>
+<td style="text-align:left;">
+g1g3
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:right;">
+725173
+</td>
+<td style="text-align:right;">
+391
+</td>
+<td style="text-align:right;">
+724782
+</td>
+<td style="text-align:right;">
+539
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+noConcent
+</td>
+<td style="text-align:left;">
+g2
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:right;">
+123605
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+123549
+</td>
+<td style="text-align:right;">
+453
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>We observeren nu dat de incidentie meer dan dubbel zo hoog is in de controle groep als in de vaccinatie groep.</p></li>
+<li><p>We observeren echter ook dat de incidentie lager is in de groep van kinderen uit de tweede graad waarvan de ouders geen toestemming gaven voor inenting!?</p></li>
+<li><p>Wat betekent dit?</p></li>
+</ul>
+</div>
+</div>
+<div id="confounding" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Confounding<a href="inleiding.html#confounding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>We observeren een lagere polio (P) incidentie voor kinderen bij wie de ouders geen toestemming gaven dan in de controle groep.
+Toestemming voor vaccinatie (V) is geassocieerd met de socio-economische status (S).
+Kinderen van lagere socio-economische status zijn meer resistent tegen de ziekte.</p>
+<p>Er is dus sprake van confounding: de socio-economische status is geassocieerd met zowel de polio incidentie als met de toestemming op vaccinatie.</p>
+<p>Controle groep en gevaccineerde groep zijn dus niet vergelijkbaar:
+Ze verschillen in socio economische status en bovendien ook in leeftijd!
+We kunnen aan de hand van het experiment het effect van de vaccinatie niet correct inschatten.</p>
+</div>
+<div id="salk-study" class="section level3 hasAnchor" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> Salk Study<a href="inleiding.html#salk-study" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="design-1" class="section level4 hasAnchor" number="1.5.3.1">
+<h4><span class="header-section-number">1.5.3.1</span> Design<a href="inleiding.html#design-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Een nieuwe studie werd uitgevoerd: dubbel blinde gerandomiseerde studie.</p>
+<ul>
+<li>Kinderen worden at random toegewezen aan controle of case arm van het experiment nadat de ouders toestemden met vaccinatie.</li>
+<li>Controle: vaccinatie met placebo</li>
+<li>Treatment: vaccinatie met vaccin</li>
+<li>Double blinding:
+<ul>
+<li>ouders en kinderen weten niet of ze werden gevaccineerd of niet</li>
+<li>medische staf en onderzoekers weten niet of het kind het vaccin of de placebo kreeg</li>
+</ul></li>
+</ul>
+</div>
+<div id="data-1" class="section level4 hasAnchor" number="1.5.3.2">
+<h4><span class="header-section-number">1.5.3.2</span> Data<a href="inleiding.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="inleiding.html#cb79-1" aria-hidden="true" tabindex="-1"></a>salk <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb79-2"><a href="inleiding.html#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">group=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>,<span class="st">&quot;control&quot;</span>,<span class="st">&quot;noConcent&quot;</span>),</span>
+<span id="cb79-3"><a href="inleiding.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment=</span><span class="fu">c</span>(<span class="st">&quot;vaccine&quot;</span>,<span class="st">&quot;placebo&quot;</span>,<span class="st">&quot;none&quot;</span>),</span>
+<span id="cb79-4"><a href="inleiding.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">total=</span><span class="fu">c</span>(<span class="dv">200745</span>,<span class="dv">201229</span>, <span class="dv">338778</span>),<span class="at">polio=</span><span class="fu">c</span>(<span class="dv">57</span>,<span class="dv">142</span>,<span class="dv">157</span>)</span>
+<span id="cb79-5"><a href="inleiding.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb79-6"><a href="inleiding.html#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb79-7"><a href="inleiding.html#cb79-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">noPolio =</span> total<span class="sc">-</span>polio,</span>
+<span id="cb79-8"><a href="inleiding.html#cb79-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidencePM =</span> <span class="fu">round</span>(polio<span class="sc">/</span>total<span class="sc">*</span><span class="fl">1e6</span>,<span class="dv">0</span>)</span>
+<span id="cb79-9"><a href="inleiding.html#cb79-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb79-10"><a href="inleiding.html#cb79-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(salk, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+group
+</th>
+<th style="text-align:left;">
+treatment
+</th>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+polio
+</th>
+<th style="text-align:right;">
+noPolio
+</th>
+<th style="text-align:right;">
+incidencePM
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+cases
+</td>
+<td style="text-align:left;">
+vaccine
+</td>
+<td style="text-align:right;">
+200745
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+200688
+</td>
+<td style="text-align:right;">
+284
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+control
+</td>
+<td style="text-align:left;">
+placebo
+</td>
+<td style="text-align:right;">
+201229
+</td>
+<td style="text-align:right;">
+142
+</td>
+<td style="text-align:right;">
+201087
+</td>
+<td style="text-align:right;">
+706
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+noConcent
+</td>
+<td style="text-align:left;">
+none
+</td>
+<td style="text-align:right;">
+338778
+</td>
+<td style="text-align:right;">
+157
+</td>
+<td style="text-align:right;">
+338621
+</td>
+<td style="text-align:right;">
+463
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>We observeren een veel groter effect nu dat cases en controles vergelijkbaar zijn, incidentie van respectievelijk 284 and 706 per miljoen.</p></li>
+<li><p>De polio incidentie voor kinderen die geen toestemming geven blijft vergelijkbaar 453 and 463 per miljoen respectievelijk in the NFIP and Salk study.</p></li>
+</ul>
+<p>We zullen later in de cursus tonen dat het effect van het vaccin statistisch significant is.</p>
+</div>
+</div>
+</div>
+<div id="rol-van-statistiek" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Rol van Statistiek<a href="inleiding.html#rol-van-statistiek" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In deze introductie hebben we gezien dat statistiek een belangrijke rol speelt in empirisch onderzoek. We toonden aan dat</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Proefopzet</em> is essentieel</p>
+<ul>
+<li><p>het belangrijk is om de scope van de studie goed te specifiëren voor de start van het experiment</p></li>
+<li><p>randomisatie nodig is om een representatieve steekproef te nemen</p></li>
+<li><p>steekproef grootte is heel belangrijk</p></li>
+<li><p>we moeten ons bewust zijn van Confounding</p></li>
+<li><p>een goede controle is belangrijk</p></li>
+</ul></li>
+<li><p><em>Data exploratie en beschrijvende statistiek</em>:</p>
+<ul>
+<li>exploreren</li>
+<li>visualiseren</li>
+<li>samenvatten en beschrijven van geobserveerde data zodat relevante aspecten naar voor komen.</li>
+</ul></li>
+<li><p><em>Statistische besluitvorming</em>: aan de hand van statistische modellen bestuderen in hoeverre geobserveerde trends/effecten die geobserveerd worden in een steekproef veralgemeend kunnen worden naar de algemene populatie.</p></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="links.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="belangrijke-concepten-conventies.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-Inleiding.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["InleidingTotBiostatistiek_2022_2023.pdf", "InleidingTotBiostatistiek_2022_2023.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

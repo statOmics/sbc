@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Hoofdstuk 2 Belangrijke concepten &amp; conventies | Cursus Inleiding tot de Biostatistiek 2022-2023</title>
+  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Hoofdstuk 2 Belangrijke concepten &amp; conventies | Cursus Inleiding tot de Biostatistiek 2022-2023" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="github-repo" content="statOmics/statistiek2deBach" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Hoofdstuk 2 Belangrijke concepten &amp; conventies | Cursus Inleiding tot de Biostatistiek 2022-2023" />
+  
+  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  
+
+<meta name="author" content="Lieven Clement" />
+
+
+<meta name="date" content="2022-09-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="inleiding.html"/>
+<link rel="next" href="chap-design.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Cursus Inleiding tot Biostatistiek 2022-2023</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Woord vooraf</a></li>
+<li class="chapter" data-level="" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i>Links</a></li>
+<li class="chapter" data-level="1" data-path="inleiding.html"><a href="inleiding.html"><i class="fa fa-check"></i><b>1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="inleiding.html"><a href="inleiding.html#sec:wetMeth"><i class="fa fa-check"></i><b>1.1</b> De Wetenschappelijke Methode</a></li>
+<li class="chapter" data-level="1.2" data-path="inleiding.html"><a href="inleiding.html#opzet-van-de-cursus"><i class="fa fa-check"></i><b>1.2</b> Opzet van de cursus</a></li>
+<li class="chapter" data-level="1.3" data-path="inleiding.html"><a href="inleiding.html#case-study-oksel-microbiome"><i class="fa fa-check"></i><b>1.3</b> Case study: oksel microbiome</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="inleiding.html"><a href="inleiding.html#experimenteel-design-proefopzet"><i class="fa fa-check"></i><b>1.3.1</b> Experimenteel design (proefopzet)</a></li>
+<li class="chapter" data-level="1.3.2" data-path="inleiding.html"><a href="inleiding.html#data-exploratie-en-beschrijvende-statistiek"><i class="fa fa-check"></i><b>1.3.2</b> Data exploratie en beschrijvende statistiek</a></li>
+<li class="chapter" data-level="1.3.3" data-path="inleiding.html"><a href="inleiding.html#statistische-besluitvorming"><i class="fa fa-check"></i><b>1.3.3</b> Statistische Besluitvorming</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="inleiding.html"><a href="inleiding.html#case-study-ii-verschil-in-lengte-tussen-vrouwen-en-mannen"><i class="fa fa-check"></i><b>1.4</b> Case Study II: Verschil in lengte tussen vrouwen en mannen</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="inleiding.html"><a href="inleiding.html#experiment"><i class="fa fa-check"></i><b>1.4.1</b> Experiment</a></li>
+<li class="chapter" data-level="1.4.2" data-path="inleiding.html"><a href="inleiding.html#herhaal-het-experiment"><i class="fa fa-check"></i><b>1.4.2</b> Herhaal het experiment</a></li>
+<li class="chapter" data-level="1.4.3" data-path="inleiding.html"><a href="inleiding.html#herhaal-het-experiment-opnieuw"><i class="fa fa-check"></i><b>1.4.3</b> Herhaal het experiment opnieuw</a></li>
+<li class="chapter" data-level="1.4.4" data-path="inleiding.html"><a href="inleiding.html#samenvatting"><i class="fa fa-check"></i><b>1.4.4</b> Samenvatting</a></li>
+<li class="chapter" data-level="1.4.5" data-path="inleiding.html"><a href="inleiding.html#controle-van-beslissingsfouten"><i class="fa fa-check"></i><b>1.4.5</b> Controle van beslissingsfouten</a></li>
+<li class="chapter" data-level="1.4.6" data-path="inleiding.html"><a href="inleiding.html#conclusies"><i class="fa fa-check"></i><b>1.4.6</b> Conclusies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="inleiding.html"><a href="inleiding.html#case-study-salk-vaccin"><i class="fa fa-check"></i><b>1.5</b> Case study: Salk vaccin</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="inleiding.html"><a href="inleiding.html#nfip-study"><i class="fa fa-check"></i><b>1.5.1</b> NFIP Study</a></li>
+<li class="chapter" data-level="1.5.2" data-path="inleiding.html"><a href="inleiding.html#confounding"><i class="fa fa-check"></i><b>1.5.2</b> Confounding</a></li>
+<li class="chapter" data-level="1.5.3" data-path="inleiding.html"><a href="inleiding.html#salk-study"><i class="fa fa-check"></i><b>1.5.3</b> Salk Study</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="inleiding.html"><a href="inleiding.html#rol-van-statistiek"><i class="fa fa-check"></i><b>1.6</b> Rol van Statistiek</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html"><i class="fa fa-check"></i><b>2</b> Belangrijke concepten &amp; conventies</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#inleiding-1"><i class="fa fa-check"></i><b>2.1</b> Inleiding</a></li>
+<li class="chapter" data-level="2.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#variabelen"><i class="fa fa-check"></i><b>2.2</b> Variabelen</a></li>
+<li class="chapter" data-level="2.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#subsec:pop"><i class="fa fa-check"></i><b>2.3</b> Populatie</a></li>
+<li class="chapter" data-level="2.4" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#toevalsveranderlijken-of-toevallige-veranderlijken"><i class="fa fa-check"></i><b>2.4</b> Toevalsveranderlijken (of toevallige veranderlijken)</a></li>
+<li class="chapter" data-level="2.5" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#beschrijven-van-de-populatie"><i class="fa fa-check"></i><b>2.5</b> Beschrijven van de populatie</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#intermezzo-probabiliteitstheorie"><i class="fa fa-check"></i><b>2.5.1</b> Intermezzo probabiliteitstheorie</a></li>
+<li class="chapter" data-level="2.5.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#standardisatie"><i class="fa fa-check"></i><b>2.5.2</b> Standardisatie</a></li>
+<li class="chapter" data-level="2.5.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#subsec:normalcalc"><i class="fa fa-check"></i><b>2.5.3</b> Achtergrond Normale verdeling</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#steekproef"><i class="fa fa-check"></i><b>2.6</b> Steekproef</a></li>
+<li class="chapter" data-level="2.7" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#nhanes-gender"><i class="fa fa-check"></i><b>2.7</b> NHANES: Gender</a></li>
+<li class="chapter" data-level="2.8" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#nhanes-lengte"><i class="fa fa-check"></i><b>2.8</b> NHANES: Lengte</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#empirische-distributie"><i class="fa fa-check"></i><b>2.8.1</b> Empirische distributie</a></li>
+<li class="chapter" data-level="2.8.2" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#normale-benadering"><i class="fa fa-check"></i><b>2.8.2</b> Normale benadering</a></li>
+<li class="chapter" data-level="2.8.3" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#referentie-intervallen"><i class="fa fa-check"></i><b>2.8.3</b> Referentie intervallen</a></li>
+<li class="chapter" data-level="2.8.4" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#conclusions"><i class="fa fa-check"></i><b>2.8.4</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#statistieken"><i class="fa fa-check"></i><b>2.9</b> Statistieken</a></li>
+<li class="chapter" data-level="2.10" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#conventie"><i class="fa fa-check"></i><b>2.10</b> Conventie</a></li>
+<li class="chapter" data-level="2.11" data-path="belangrijke-concepten-conventies.html"><a href="belangrijke-concepten-conventies.html#code-voor-dit-hoofdstuk"><i class="fa fa-check"></i><b>2.11</b> Code voor dit hoofdstuk</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-design.html"><a href="chap-design.html"><i class="fa fa-check"></i><b>3</b> Studiedesign</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chap-design.html"><a href="chap-design.html#inleiding-2"><i class="fa fa-check"></i><b>3.1</b> Inleiding</a></li>
+<li class="chapter" data-level="3.2" data-path="chap-design.html"><a href="chap-design.html#sec:steekproefdesigns"><i class="fa fa-check"></i><b>3.2</b> Steekproefdesigns</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="chap-design.html"><a href="chap-design.html#replicatie"><i class="fa fa-check"></i><b>3.2.1</b> Replicatie</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chap-design.html"><a href="chap-design.html#experimentele-studies"><i class="fa fa-check"></i><b>3.3</b> Experimentele studies</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="chap-design.html"><a href="chap-design.html#de-salk-vaccin-veldstudie"><i class="fa fa-check"></i><b>3.3.1</b> De Salk Vaccin Veldstudie</a></li>
+<li class="chapter" data-level="3.3.2" data-path="chap-design.html"><a href="chap-design.html#gerandomiseerde-gecontroleerde-studies"><i class="fa fa-check"></i><b>3.3.2</b> Gerandomiseerde gecontroleerde studies</a></li>
+<li class="chapter" data-level="3.3.3" data-path="chap-design.html"><a href="chap-design.html#parallelle-designs"><i class="fa fa-check"></i><b>3.3.3</b> Parallelle designs</a></li>
+<li class="chapter" data-level="3.3.4" data-path="chap-design.html"><a href="chap-design.html#cross-over-designs"><i class="fa fa-check"></i><b>3.3.4</b> Cross-over designs</a></li>
+<li class="chapter" data-level="3.3.5" data-path="chap-design.html"><a href="chap-design.html#factoriële-designs"><i class="fa fa-check"></i><b>3.3.5</b> Factoriële designs</a></li>
+<li class="chapter" data-level="3.3.6" data-path="chap-design.html"><a href="chap-design.html#quasi-experimentele-designs"><i class="fa fa-check"></i><b>3.3.6</b> Quasi-experimentele designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="chap-design.html"><a href="chap-design.html#sec:observational"><i class="fa fa-check"></i><b>3.4</b> Observationele studies</a></li>
+<li class="chapter" data-level="3.5" data-path="chap-design.html"><a href="chap-design.html#subsec:design:prosp"><i class="fa fa-check"></i><b>3.5</b> Prospectieve studies</a></li>
+<li class="chapter" data-level="3.6" data-path="chap-design.html"><a href="chap-design.html#subsec:design:retro"><i class="fa fa-check"></i><b>3.6</b> Retrospectieve studies</a></li>
+<li class="chapter" data-level="3.7" data-path="chap-design.html"><a href="chap-design.html#niet-gecontroleerde-studies"><i class="fa fa-check"></i><b>3.7</b> Niet-gecontroleerde studies</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="chap-design.html"><a href="chap-design.html#subsec:prepost"><i class="fa fa-check"></i><b>3.7.1</b> Pre-test/Post-test studies</a></li>
+<li class="chapter" data-level="3.7.2" data-path="chap-design.html"><a href="chap-design.html#cross-sectionele-surveys"><i class="fa fa-check"></i><b>3.7.2</b> Cross-sectionele surveys</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chap-describe.html"><a href="chap-describe.html"><i class="fa fa-check"></i><b>4</b> Data exploratie en beschrijvende statistiek</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chap-describe.html"><a href="chap-describe.html#inleiding-3"><i class="fa fa-check"></i><b>4.1</b> Inleiding</a></li>
+<li class="chapter" data-level="4.2" data-path="chap-describe.html"><a href="chap-describe.html#sec:univar"><i class="fa fa-check"></i><b>4.2</b> Univariate beschrijving van de variabelen</a></li>
+<li class="chapter" data-level="4.3" data-path="chap-describe.html"><a href="chap-describe.html#sec:summarize"><i class="fa fa-check"></i><b>4.3</b> Samenvattingsmaten voor continue variabelen</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="chap-describe.html"><a href="chap-describe.html#maten-voor-de-centrale-ligging"><i class="fa fa-check"></i><b>4.3.1</b> Maten voor de centrale ligging</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:spreiding"><i class="fa fa-check"></i><b>4.3.2</b> Spreidingsmaten</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chap-describe.html"><a href="chap-describe.html#sec:normal"><i class="fa fa-check"></i><b>4.4</b> De Normale benadering van gegevens</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="chap-describe.html"><a href="chap-describe.html#sec:qq"><i class="fa fa-check"></i><b>4.4.1</b> QQ-plots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="chap-describe.html"><a href="chap-describe.html#sec:explCatVar"><i class="fa fa-check"></i><b>4.5</b> Samenvattingsmaten voor categorische variabelen</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="chap-describe.html"><a href="chap-describe.html#prospectieve-studies-en-lukrake-steekproeven"><i class="fa fa-check"></i><b>4.5.1</b> Prospectieve studies en lukrake steekproeven</a></li>
+<li class="chapter" data-level="4.5.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:retrospect"><i class="fa fa-check"></i><b>4.5.2</b> Retrospectieve studies</a></li>
+<li class="chapter" data-level="4.5.3" data-path="chap-describe.html"><a href="chap-describe.html#rates-versus-risicos"><i class="fa fa-check"></i><b>4.5.3</b> Rates versus risico’s</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="chap-describe.html"><a href="chap-describe.html#associaties-tussen-twee-variabelen"><i class="fa fa-check"></i><b>4.6</b> Associaties tussen twee variabelen</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="chap-describe.html"><a href="chap-describe.html#subsec:kruistabel"><i class="fa fa-check"></i><b>4.6.1</b> Associatie tussen twee kwalitatieve variabelen</a></li>
+<li class="chapter" data-level="4.6.2" data-path="chap-describe.html"><a href="chap-describe.html#subsec:asskwalcont"><i class="fa fa-check"></i><b>4.6.2</b> Associatie tussen één kwalitatieve en één continue variabele</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="chap-describe.html"><a href="chap-describe.html#sec:correlatie"><i class="fa fa-check"></i><b>4.7</b> Associatie tussen twee continue variabelen</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="chap-describe.html"><a href="chap-describe.html#covariantie-en-correlatie"><i class="fa fa-check"></i><b>4.7.1</b> Covariantie en Correlatie</a></li>
+<li class="chapter" data-level="4.7.2" data-path="chap-describe.html"><a href="chap-describe.html#pearson-correlatie"><i class="fa fa-check"></i><b>4.7.2</b> Pearson Correlatie</a></li>
+<li class="chapter" data-level="4.7.3" data-path="chap-describe.html"><a href="chap-describe.html#verschillende-groottes-van-correlatie"><i class="fa fa-check"></i><b>4.7.3</b> Verschillende groottes van correlatie</a></li>
+<li class="chapter" data-level="4.7.4" data-path="chap-describe.html"><a href="chap-describe.html#spearman-correlatie"><i class="fa fa-check"></i><b>4.7.4</b> Spearman correlatie</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="chap-describe.html"><a href="chap-describe.html#sec:missing"><i class="fa fa-check"></i><b>4.8</b> Onvolledige gegevens</a></li>
+<li class="chapter" data-level="4.9" data-path="chap-describe.html"><a href="chap-describe.html#clips-over-de-code-in-dit-hoofdstuk"><i class="fa fa-check"></i><b>4.9</b> Clips over de code in dit hoofdstuk</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chap-besluit.html"><a href="chap-besluit.html"><i class="fa fa-check"></i><b>5</b> Statistische besluitvorming</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chap-besluit.html"><a href="chap-besluit.html#inleiding-4"><i class="fa fa-check"></i><b>5.1</b> Inleiding</a></li>
+<li class="chapter" data-level="5.2" data-path="chap-besluit.html"><a href="chap-besluit.html#captopril-voorbeeld"><i class="fa fa-check"></i><b>5.2</b> Captopril voorbeeld</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="chap-besluit.html"><a href="chap-besluit.html#proefopzet"><i class="fa fa-check"></i><b>5.2.1</b> Proefopzet</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chap-besluit.html"><a href="chap-besluit.html#data-exploratie-beschrijvende-statistiek"><i class="fa fa-check"></i><b>5.2.2</b> Data Exploratie &amp; Beschrijvende Statistiek</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chap-besluit.html"><a href="chap-besluit.html#schatten"><i class="fa fa-check"></i><b>5.2.3</b> Schatten</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chap-besluit.html"><a href="chap-besluit.html#puntschatters-het-steekproefgemiddelde"><i class="fa fa-check"></i><b>5.3</b> Puntschatters: het steekproefgemiddelde</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="chap-besluit.html"><a href="chap-besluit.html#overzicht"><i class="fa fa-check"></i><b>5.3.1</b> Overzicht</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chap-besluit.html"><a href="chap-besluit.html#het-steekproefgemiddelde-is-onvertekend"><i class="fa fa-check"></i><b>5.3.2</b> Het steekproefgemiddelde is onvertekend</a></li>
+<li class="chapter" data-level="5.3.3" data-path="chap-besluit.html"><a href="chap-besluit.html#imprecisiestandard-error"><i class="fa fa-check"></i><b>5.3.3</b> Imprecisie/standard error</a></li>
+<li class="chapter" data-level="5.3.4" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:verdelingXbar"><i class="fa fa-check"></i><b>5.3.4</b> Verdeling van het steekproefgemiddelde</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chap-besluit.html"><a href="chap-besluit.html#intervalschatters"><i class="fa fa-check"></i><b>5.4</b> Intervalschatters</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:bigek"><i class="fa fa-check"></i><b>5.4.1</b> Gekende variantie op de metingen</a></li>
+<li class="chapter" data-level="5.4.2" data-path="chap-besluit.html"><a href="chap-besluit.html#sec:tBI"><i class="fa fa-check"></i><b>5.4.2</b> Ongekende variantie op de metingen</a></li>
+<li class="chapter" data-level="5.4.3" data-path="chap-besluit.html"><a href="chap-besluit.html#subsec:interpretBI"><i class="fa fa-check"></i><b>5.4.3</b> Interpretatie van betrouwbaarheidsintervallen</a></li>
+<li class="chapter" data-level="5.4.4" data-path="chap-besluit.html"><a href="chap-besluit.html#wat-rapporteren"><i class="fa fa-check"></i><b>5.4.4</b> Wat rapporteren?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="chap-besluit.html"><a href="chap-besluit.html#principe-van-hypothesetoetsen-via-one-sample-t-test"><i class="fa fa-check"></i><b>5.5</b> Principe van Hypothesetoetsen (via one sample t-test)</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="chap-besluit.html"><a href="chap-besluit.html#introductie-d.m.v.-captopril-voorbeeld"><i class="fa fa-check"></i><b>5.5.1</b> Introductie d.m.v. captopril voorbeeld</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chap-besluit.html"><a href="chap-besluit.html#hypotheses"><i class="fa fa-check"></i><b>5.5.2</b> Hypotheses</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chap-besluit.html"><a href="chap-besluit.html#test-statistiek"><i class="fa fa-check"></i><b>5.5.3</b> Test-statistiek</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chap-besluit.html"><a href="chap-besluit.html#de-p-waarde"><i class="fa fa-check"></i><b>5.5.4</b> De p-waarde</a></li>
+<li class="chapter" data-level="5.5.5" data-path="chap-besluit.html"><a href="chap-besluit.html#kritieke-waarde"><i class="fa fa-check"></i><b>5.5.5</b> Kritieke waarde</a></li>
+<li class="chapter" data-level="5.5.6" data-path="chap-besluit.html"><a href="chap-besluit.html#beslissingsfouten"><i class="fa fa-check"></i><b>5.5.6</b> Beslissingsfouten</a></li>
+<li class="chapter" data-level="5.5.7" data-path="chap-besluit.html"><a href="chap-besluit.html#conclusies-captopril-voorbeeld."><i class="fa fa-check"></i><b>5.5.7</b> Conclusies Captopril voorbeeld.</a></li>
+<li class="chapter" data-level="5.5.8" data-path="chap-besluit.html"><a href="chap-besluit.html#eenzijdig-of-tweezijdig-toetsen"><i class="fa fa-check"></i><b>5.5.8</b> Eenzijdig of tweezijdig toetsen?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chap-besluit.html"><a href="chap-besluit.html#geclusterde-metingen"><i class="fa fa-check"></i><b>5.6</b> Geclusterde metingen</a>
+<ul>
+<li class="chapter" data-level="5.6.1" data-path="chap-besluit.html"><a href="chap-besluit.html#captopril"><i class="fa fa-check"></i><b>5.6.1</b> Captopril</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="chap-besluit.html"><a href="chap-besluit.html#two-sample-t-test"><i class="fa fa-check"></i><b>5.7</b> Two-sample t-test</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="chap-besluit.html"><a href="chap-besluit.html#notatie"><i class="fa fa-check"></i><b>5.7.1</b> Notatie</a></li>
+<li class="chapter" data-level="5.7.2" data-path="chap-besluit.html"><a href="chap-besluit.html#oksel-voorbeeld"><i class="fa fa-check"></i><b>5.7.2</b> Oksel-voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="chap-besluit.html"><a href="chap-besluit.html#aannames"><i class="fa fa-check"></i><b>5.8</b> Aannames</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="chap-besluit.html"><a href="chap-besluit.html#nagaan-van-de-veronderstelling-van-normaliteit"><i class="fa fa-check"></i><b>5.8.1</b> Nagaan van de veronderstelling van Normaliteit</a></li>
+<li class="chapter" data-level="5.8.2" data-path="chap-besluit.html"><a href="chap-besluit.html#nagaan-van-homoscedasticiteit"><i class="fa fa-check"></i><b>5.8.2</b> Nagaan van homoscedasticiteit</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="chap-besluit.html"><a href="chap-besluit.html#wat-rapporteren-1"><i class="fa fa-check"></i><b>5.9</b> Wat rapporteren?</a>
+<ul>
+<li class="chapter" data-level="5.9.1" data-path="chap-besluit.html"><a href="chap-besluit.html#reden-1-relatie-toetsen-en-betrouwbaarheidsintervallen"><i class="fa fa-check"></i><b>5.9.1</b> Reden 1: Relatie toetsen en betrouwbaarheidsintervallen</a></li>
+<li class="chapter" data-level="5.9.2" data-path="chap-besluit.html"><a href="chap-besluit.html#reden-2-statistische-significantie-versus-wetenschappelijke-relevantie"><i class="fa fa-check"></i><b>5.9.2</b> Reden 2: Statistische significantie versus wetenschappelijke relevantie</a></li>
+</ul></li>
+<li class="chapter" data-level="5.10" data-path="chap-besluit.html"><a href="chap-besluit.html#equivalentie-intervallen"><i class="fa fa-check"></i><b>5.10</b> Equivalentie-intervallen</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chap-linReg.html"><a href="chap-linReg.html"><i class="fa fa-check"></i><b>6</b> Enkelvoudige lineaire regressie</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chap-linReg.html"><a href="chap-linReg.html#inleiding-5"><i class="fa fa-check"></i><b>6.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="chap-linReg.html"><a href="chap-linReg.html#borstkanker-dataset"><i class="fa fa-check"></i><b>6.1.1</b> Borstkanker dataset</a></li>
+<li class="chapter" data-level="6.1.2" data-path="chap-linReg.html"><a href="chap-linReg.html#data-exploratie"><i class="fa fa-check"></i><b>6.1.2</b> Data exploratie</a></li>
+<li class="chapter" data-level="6.1.3" data-path="chap-linReg.html"><a href="chap-linReg.html#model"><i class="fa fa-check"></i><b>6.1.3</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="chap-linReg.html"><a href="chap-linReg.html#lineaire-regressie"><i class="fa fa-check"></i><b>6.2</b> Lineaire regressie</a></li>
+<li class="chapter" data-level="6.3" data-path="chap-linReg.html"><a href="chap-linReg.html#parameterschatting"><i class="fa fa-check"></i><b>6.3</b> Parameterschatting</a></li>
+<li class="chapter" data-level="6.4" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linBesluit"><i class="fa fa-check"></i><b>6.4</b> Statistische besluitvorming</a></li>
+<li class="chapter" data-level="6.5" data-path="chap-linReg.html"><a href="chap-linReg.html#nagaan-van-modelveronderstellingen"><i class="fa fa-check"></i><b>6.5</b> Nagaan van modelveronderstellingen</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="chap-linReg.html"><a href="chap-linReg.html#lineariteit"><i class="fa fa-check"></i><b>6.5.1</b> Lineariteit</a></li>
+<li class="chapter" data-level="6.5.2" data-path="chap-linReg.html"><a href="chap-linReg.html#veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie"><i class="fa fa-check"></i><b>6.5.2</b> Veronderstelling van homoscedasticiteit (gelijkheid van variantie)</a></li>
+<li class="chapter" data-level="6.5.3" data-path="chap-linReg.html"><a href="chap-linReg.html#veronderstelling-van-normaliteit"><i class="fa fa-check"></i><b>6.5.3</b> Veronderstelling van normaliteit</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="chap-linReg.html"><a href="chap-linReg.html#afwijkingen-van-modelveronderstellingen"><i class="fa fa-check"></i><b>6.6</b> Afwijkingen van Modelveronderstellingen</a></li>
+<li class="chapter" data-level="6.7" data-path="chap-linReg.html"><a href="chap-linReg.html#besluitvorming-over-gemiddelde-uitkomst"><i class="fa fa-check"></i><b>6.7</b> Besluitvorming over gemiddelde uitkomst</a></li>
+<li class="chapter" data-level="6.8" data-path="chap-linReg.html"><a href="chap-linReg.html#predictie-intervallen"><i class="fa fa-check"></i><b>6.8</b> Predictie-intervallen</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="chap-linReg.html"><a href="chap-linReg.html#nhanes-voorbeeld"><i class="fa fa-check"></i><b>6.8.1</b> NHANES voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linAnova"><i class="fa fa-check"></i><b>6.9</b> Kwadratensommen en Anova-tabel</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="chap-linReg.html"><a href="chap-linReg.html#determinatie-coëfficiënt"><i class="fa fa-check"></i><b>6.9.1</b> Determinatie-coëfficiënt</a></li>
+<li class="chapter" data-level="6.9.2" data-path="chap-linReg.html"><a href="chap-linReg.html#f-testen-in-het-enkelvoudig-lineair-regressiemodel"><i class="fa fa-check"></i><b>6.9.2</b> F-Testen in het enkelvoudig lineair regressiemodel</a></li>
+<li class="chapter" data-level="6.9.3" data-path="chap-linReg.html"><a href="chap-linReg.html#anova-tabel"><i class="fa fa-check"></i><b>6.9.3</b> Anova Tabel</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="chap-linReg.html"><a href="chap-linReg.html#sec:linDummy"><i class="fa fa-check"></i><b>6.10</b> Dummy variabelen</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chap-anova.html"><a href="chap-anova.html"><i class="fa fa-check"></i><b>7</b> Variantie analyse</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chap-anova.html"><a href="chap-anova.html#inleiding-6"><i class="fa fa-check"></i><b>7.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="chap-anova.html"><a href="chap-anova.html#prostacycline-voorbeeld"><i class="fa fa-check"></i><b>7.1.1</b> Prostacycline voorbeeld</a></li>
+<li class="chapter" data-level="7.1.2" data-path="chap-anova.html"><a href="chap-anova.html#model-1"><i class="fa fa-check"></i><b>7.1.2</b> Model</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="chap-anova.html"><a href="chap-anova.html#variantie-analyse"><i class="fa fa-check"></i><b>7.2</b> Variantie-analyse</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="chap-anova.html"><a href="chap-anova.html#model-2"><i class="fa fa-check"></i><b>7.2.1</b> Model</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chap-anova.html"><a href="chap-anova.html#kwadratensommen-en-anova"><i class="fa fa-check"></i><b>7.2.2</b> Kwadratensommen en Anova</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chap-anova.html"><a href="chap-anova.html#anova-test"><i class="fa fa-check"></i><b>7.2.3</b> Anova-test</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chap-anova.html"><a href="chap-anova.html#anova-tabel-1"><i class="fa fa-check"></i><b>7.2.4</b> Anova Tabel</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chap-anova.html"><a href="chap-anova.html#post-hoc-analyse-meervoudig-vergelijken-van-gemiddelden"><i class="fa fa-check"></i><b>7.3</b> Post hoc analyse: Meervoudig Vergelijken van Gemiddelden</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="chap-anova.html"><a href="chap-anova.html#naïeve-methode"><i class="fa fa-check"></i><b>7.3.1</b> Naïeve methode</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chap-anova.html"><a href="chap-anova.html#family-wise-error-rate"><i class="fa fa-check"></i><b>7.3.2</b> Family-wise error rate</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chap-anova.html"><a href="chap-anova.html#conclusies-prostacycline-voorbeeld"><i class="fa fa-check"></i><b>7.4</b> Conclusies: Prostacycline Voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html"><i class="fa fa-check"></i><b>8</b> Niet-parametrische statistiek</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#inleiding-7"><i class="fa fa-check"></i><b>8.1</b> Inleiding</a></li>
+<li class="chapter" data-level="8.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#vergelijken-van-twee-groepen"><i class="fa fa-check"></i><b>8.2</b> Vergelijken van twee groepen</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#cholestorol-voorbeeld"><i class="fa fa-check"></i><b>8.2.1</b> Cholestorol voorbeeld</a></li>
+<li class="chapter" data-level="8.2.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#permutatietesten"><i class="fa fa-check"></i><b>8.2.2</b> Permutatietesten</a></li>
+<li class="chapter" data-level="8.2.3" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#rank-testen"><i class="fa fa-check"></i><b>8.2.3</b> Rank Testen</a></li>
+<li class="chapter" data-level="8.2.4" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#wilcoxon-mann-whitney-test"><i class="fa fa-check"></i><b>8.2.4</b> Wilcoxon-Mann-Whitney Test</a></li>
+<li class="chapter" data-level="8.2.5" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#conclusie-cholestorol-voorbeeld"><i class="fa fa-check"></i><b>8.2.5</b> Conclusie Cholestorol Voorbeeld</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#vergelijken-van-g-behandelingen"><i class="fa fa-check"></i><b>8.3</b> Vergelijken van <span class="math inline">\(g\)</span> Behandelingen</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#dmh-voorbeeld"><i class="fa fa-check"></i><b>8.3.1</b> DMH Voorbeeld</a></li>
+<li class="chapter" data-level="8.3.2" data-path="niet-parametrische-statistiek.html"><a href="niet-parametrische-statistiek.html#kruskal-wallis-rank-test"><i class="fa fa-check"></i><b>8.3.2</b> Kruskal-Wallis Rank Test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chap-categorisch.html"><a href="chap-categorisch.html"><i class="fa fa-check"></i><b>9</b> Categorische data analyse</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#inleiding-8"><i class="fa fa-check"></i><b>9.1</b> Inleiding</a></li>
+<li class="chapter" data-level="9.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#toetsen-voor-een-proportie"><i class="fa fa-check"></i><b>9.2</b> Toetsen voor een proportie</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#asymptotisch-betrouwbaarheidsinterval"><i class="fa fa-check"></i><b>9.2.1</b> Asymptotisch Betrouwbaarheidsinterval</a></li>
+<li class="chapter" data-level="9.2.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#asymptotische-test"><i class="fa fa-check"></i><b>9.2.2</b> Asymptotische Test</a></li>
+<li class="chapter" data-level="9.2.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#subsec:binom"><i class="fa fa-check"></i><b>9.2.3</b> Binomiale test</a></li>
+<li class="chapter" data-level="9.2.4" data-path="chap-categorisch.html"><a href="chap-categorisch.html#conclusie"><i class="fa fa-check"></i><b>9.2.4</b> Conclusie</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#toets-voor-associatie-tussen-2-kwalitatieve-variabelen"><i class="fa fa-check"></i><b>9.3</b> Toets voor associatie tussen 2 kwalitatieve variabelen</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#gepaarde-gegevens"><i class="fa fa-check"></i><b>9.3.1</b> Gepaarde gegevens</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#subsec:catOnPaired"><i class="fa fa-check"></i><b>9.3.2</b> Ongepaarde gegevens</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chap-categorisch.html"><a href="chap-categorisch.html#de-pearson-chi-kwadraat-test-voor-ongepaarde-gegevens"><i class="fa fa-check"></i><b>9.3.3</b> De Pearson Chi-kwadraat test voor ongepaarde gegevens</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chap-categorisch.html"><a href="chap-categorisch.html#logistische-regressie"><i class="fa fa-check"></i><b>9.4</b> Logistische regressie</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="chap-categorisch.html"><a href="chap-categorisch.html#categorische-predictor"><i class="fa fa-check"></i><b>9.4.1</b> Categorische predictor</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chap-categorisch.html"><a href="chap-categorisch.html#continue-predictor"><i class="fa fa-check"></i><b>9.4.2</b> Continue predictor</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chap-glm.html"><a href="chap-glm.html"><i class="fa fa-check"></i><b>10</b> Algemeen lineair model</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chap-glm.html"><a href="chap-glm.html#inleiding-9"><i class="fa fa-check"></i><b>10.1</b> Inleiding</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="chap-glm.html"><a href="chap-glm.html#sec:prostate"><i class="fa fa-check"></i><b>10.1.1</b> Prostaatkanker dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="chap-glm.html"><a href="chap-glm.html#het-additieve-meervoudig-lineaire-regressie-model"><i class="fa fa-check"></i><b>10.2</b> Het additieve meervoudig lineaire regressie model</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="chap-glm.html"><a href="chap-glm.html#statistisch-model"><i class="fa fa-check"></i><b>10.2.1</b> Statistisch model</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chap-glm.html"><a href="chap-glm.html#besluitvorming-in-regressiemodellen"><i class="fa fa-check"></i><b>10.3</b> Besluitvorming in regressiemodellen</a></li>
+<li class="chapter" data-level="10.4" data-path="chap-glm.html"><a href="chap-glm.html#nagaan-van-modelveronderstellingen-1"><i class="fa fa-check"></i><b>10.4</b> Nagaan van modelveronderstellingen</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="chap-glm.html"><a href="chap-glm.html#lineariteit-1"><i class="fa fa-check"></i><b>10.4.1</b> Lineariteit</a></li>
+<li class="chapter" data-level="10.4.2" data-path="chap-glm.html"><a href="chap-glm.html#homoscedasticiteit"><i class="fa fa-check"></i><b>10.4.2</b> Homoscedasticiteit</a></li>
+<li class="chapter" data-level="10.4.3" data-path="chap-glm.html"><a href="chap-glm.html#normaliteit"><i class="fa fa-check"></i><b>10.4.3</b> Normaliteit</a></li>
+</ul></li>
+<li class="chapter" data-level="10.5" data-path="chap-glm.html"><a href="chap-glm.html#het-niet-additieve-meervoudig-lineair-regressiemodel"><i class="fa fa-check"></i><b>10.5</b> Het niet-additieve meervoudig lineair regressiemodel</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="chap-glm.html"><a href="chap-glm.html#interactie-tussen-continue-variabele-en-factor-variabele"><i class="fa fa-check"></i><b>10.5.1</b> Interactie tussen continue variabele en factor variabele</a></li>
+<li class="chapter" data-level="10.5.2" data-path="chap-glm.html"><a href="chap-glm.html#sec:intCont"><i class="fa fa-check"></i><b>10.5.2</b> Interactie tussen twee continue variabelen</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="chap-glm.html"><a href="chap-glm.html#anova-tabel-2"><i class="fa fa-check"></i><b>10.6</b> ANOVA Tabel</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="chap-glm.html"><a href="chap-glm.html#sstot-ssr-en-sse"><i class="fa fa-check"></i><b>10.6.1</b> SSTot, SSR en SSE</a></li>
+<li class="chapter" data-level="10.6.2" data-path="chap-glm.html"><a href="chap-glm.html#extra-kwadratensommen"><i class="fa fa-check"></i><b>10.6.2</b> Extra Kwadratensommen</a></li>
+<li class="chapter" data-level="10.6.3" data-path="chap-glm.html"><a href="chap-glm.html#type-i-kwadratensommen"><i class="fa fa-check"></i><b>10.6.3</b> Type I Kwadratensommen</a></li>
+<li class="chapter" data-level="10.6.4" data-path="chap-glm.html"><a href="chap-glm.html#type-iii-kwadratensommen"><i class="fa fa-check"></i><b>10.6.4</b> Type III Kwadratensommen</a></li>
+</ul></li>
+<li class="chapter" data-level="10.7" data-path="chap-glm.html"><a href="chap-glm.html#regressiediagnostieken"><i class="fa fa-check"></i><b>10.7</b> Regressiediagnostieken</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="chap-glm.html"><a href="chap-glm.html#multicollineariteit"><i class="fa fa-check"></i><b>10.7.1</b> Multicollineariteit</a></li>
+<li class="chapter" data-level="10.7.2" data-path="chap-glm.html"><a href="chap-glm.html#invloedrijke-observaties"><i class="fa fa-check"></i><b>10.7.2</b> Invloedrijke observaties</a></li>
+<li class="chapter" data-level="10.7.3" data-path="chap-glm.html"><a href="chap-glm.html#cooks-distance"><i class="fa fa-check"></i><b>10.7.3</b> Cook’s distance</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="chap-glm.html"><a href="chap-glm.html#constrasten"><i class="fa fa-check"></i><b>10.8</b> Constrasten</a>
+<ul>
+<li class="chapter" data-level="10.8.1" data-path="chap-glm.html"><a href="chap-glm.html#nhanes-voorbeeld-1"><i class="fa fa-check"></i><b>10.8.1</b> NHANES voorbeeld</a></li>
+<li class="chapter" data-level="10.8.2" data-path="chap-glm.html"><a href="chap-glm.html#model-3"><i class="fa fa-check"></i><b>10.8.2</b> Model</a></li>
+<li class="chapter" data-level="10.8.3" data-path="chap-glm.html"><a href="chap-glm.html#besluitvorming"><i class="fa fa-check"></i><b>10.8.3</b> Besluitvorming</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="chap-glm.html"><a href="chap-glm.html#factoriële-proeven"><i class="fa fa-check"></i><b>10.9</b> Factoriële proeven</a>
+<ul>
+<li class="chapter" data-level="10.9.1" data-path="chap-glm.html"><a href="chap-glm.html#introductie"><i class="fa fa-check"></i><b>10.9.1</b> Introductie</a></li>
+<li class="chapter" data-level="10.9.2" data-path="chap-glm.html"><a href="chap-glm.html#data-2"><i class="fa fa-check"></i><b>10.9.2</b> Data</a></li>
+<li class="chapter" data-level="10.9.3" data-path="chap-glm.html"><a href="chap-glm.html#model-4"><i class="fa fa-check"></i><b>10.9.3</b> Model</a></li>
+<li class="chapter" data-level="10.9.4" data-path="chap-glm.html"><a href="chap-glm.html#inferentie"><i class="fa fa-check"></i><b>10.9.4</b> Inferentie</a></li>
+<li class="chapter" data-level="10.9.5" data-path="chap-glm.html"><a href="chap-glm.html#conclusie-3"><i class="fa fa-check"></i><b>10.9.5</b> Conclusie</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cursus Inleiding tot de Biostatistiek 2022-2023</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="belangrijke-concepten-conventies" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Hoofdstuk 2</span> Belangrijke concepten &amp; conventies<a href="belangrijke-concepten-conventies.html#belangrijke-concepten-conventies" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Alle kennisclips die in dit hoofdstuk zijn verwerkt kan je in deze youtube playlist vinden: <a href="https://www.youtube.com/playlist?list=PLZH1hP8_LbJJ7apU5sAbRlUsve2nWz5ev">Kennisclips Hoofdstuk2</a></p>
+<p>Link naar webpage/script die wordt gebruik in de kennisclips: <a href="https://statomics.github.io/sbc21/rmd/02-concepts.html">script Hoofdstuk2</a></p>
+<div id="inleiding-1" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Inleiding<a href="belangrijke-concepten-conventies.html#inleiding-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eaecWUy8lCY" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>De verschillende stappen in een studie worden geïllustreerd in
+Figuur <a href="belangrijke-concepten-conventies.html#fig:pop2Samp2Pop">2.1</a>.
+Eerst bepaalt de onderzoeker de <em>populatie</em> van interesse.
+Gezien het om financiële en logistieke beperkingen vrijwel nooit mogelijk is om de volledige populatie te onderzoeken zal men vervolgens een steekproef nemen uit de populatie.
+De manier waarop een steekproef zal worden genomen wordt vastgelegd in het <em>design van de studie</em>.
+<em>Proefopzet</em> of <em>studie design</em> is een aparte tak van de statisitiek en is een cruciaal onderdeel van een studie.
+Het studie design moet immers garanderen dat de gegevens en resultaten van de steekproef representatief zijn voor de populatie zodat de resultaten van de studie veralgemeneend kunnen worden naar de populatie toe.
+Vervolgens wordt de studie uitgevoerd, worden de gegevens verzameld en kan de eigenlijke data-analyse van start gaan.
+In een eerste fase is het belangrijk om de gegevens grondig te exploreren.
+<em>Data-exploratie en beschrijvende statistiek</em> is een tweede tak van de statistiek die toelaat om gegevens van de steekproef te visualiseren, samen te vatten en om inzicht in de data te verwerven.
+Dat is belangrijk om de data correct te kunnen modelleren en om aannames na te kunnen gaan die nodig zijn voor de verdere data analyse. Vervolgens zullen we hetgeen we observeren in de steekproef trachten te veralgemenen naar de algemene populatie toe, zodat we algemene conclusies kunnen trekken op populatie-niveau op basis van de steekproef van de studie. Hiervoor zijn methodes nodig van de <em>statistische besluitvorming</em>, ook wel <em>statistische inferentie</em> genoemd, een derde belangrijke tak van de statistiek.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pop2Samp2Pop"></span>
+<img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/pop2Samp2Pop-1.png" alt="Verschillende stappen in een studie. (1) In de design fase/ proefopzet definieert de onderzoeker de populatie, bepaalt hij/zij op welke manier een steekproef zal worden genomen uit de populatie en hoe het experiment zal worden uitgevoerd. Ook het volledige data analyse plan moet in deze fase zijn vastgelegd. Vervolgens wordt het experiment uitgevoerd en worden de gegevens verzameld. (2) De gegevens worden vervolgens verkend en samengevat. Hierbij verwerft men inzicht in de gegevens en kunnen aannames worden nagegaan die noodzakelijk zijn voor de verdere data analyse stappen. (3) Tenslotte zal men hetgeen men observeert in de steekproef trachten te veralgemenen naar de populatie toe a.d.h.v. statistische inferentie." width="100%" />
+<p class="caption">
+Figuur 2.1: Verschillende stappen in een studie. (1) In de design fase/ proefopzet definieert de onderzoeker de populatie, bepaalt hij/zij op welke manier een steekproef zal worden genomen uit de populatie en hoe het experiment zal worden uitgevoerd. Ook het volledige data analyse plan moet in deze fase zijn vastgelegd. Vervolgens wordt het experiment uitgevoerd en worden de gegevens verzameld. (2) De gegevens worden vervolgens verkend en samengevat. Hierbij verwerft men inzicht in de gegevens en kunnen aannames worden nagegaan die noodzakelijk zijn voor de verdere data analyse stappen. (3) Tenslotte zal men hetgeen men observeert in de steekproef trachten te veralgemenen naar de populatie toe a.d.h.v. statistische inferentie.
+</p>
+</div>
+<p>Vooraleer we dieper ingaan op studie-design, data-exploratie en statistische besluitvorming zullen we eerst enkele concepten introduceren.
+We doen dat in dit hoofdstuk aan de hand van de de NHANES studie.</p>
+<p><code>{.example, name="NHANES studie",label="nhanesExConcepten"}</code></p>
+<p>De National Health and Nutrition Examination Survey
+(NHANES) wordt sinds 1960 op regelmatige basis afgenomen. In dit voorbeeld maken we gebruik van de gegevens die werden verzameld tussen 2009-2012 bij 10000 Amerikanen en die werden opgenomen in het R-pakket NHANES. Er werd een groot aantal fysieke, demografische, nutritionele, levelsstijl en gezondheidskarakteristieken gecollecteerd in deze studie (zie Tabel <a href="belangrijke-concepten-conventies.html#tab:nhanesConcepten">2.1</a>).</p>
+<p><strong>Einde voorbeeld</strong></p>
+<table>
+<caption>
+<span id="tab:nhanesConcepten">Tabel 2.1: </span>Overzicht van een aantal variabelen uit de NHANES studie.
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+ID
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:right;">
+Height
+</th>
+<th style="text-align:left;">
+BMI_WHO
+</th>
+<th style="text-align:right;">
+DirectChol
+</th>
+<th style="text-align:right;">
+SexNumPartnLife
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+51624
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+164.7
+</td>
+<td style="text-align:left;">
+30.0_plus
+</td>
+<td style="text-align:right;">
+1.29
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51625
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+105.4
+</td>
+<td style="text-align:left;">
+12.0_18.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51630
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+168.4
+</td>
+<td style="text-align:left;">
+30.0_plus
+</td>
+<td style="text-align:right;">
+1.16
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51638
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+133.1
+</td>
+<td style="text-align:left;">
+12.0_18.5
+</td>
+<td style="text-align:right;">
+1.34
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51646
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+130.6
+</td>
+<td style="text-align:left;">
+18.5_to_24.9
+</td>
+<td style="text-align:right;">
+1.55
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51647
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+166.7
+</td>
+<td style="text-align:left;">
+25.0_to_29.9
+</td>
+<td style="text-align:right;">
+2.12
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="variabelen" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Variabelen<a href="belangrijke-concepten-conventies.html#variabelen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ez9Xm5EqSx8" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<table>
+<caption>
+<span id="tab:nhanesConcepten2">Tabel 2.2: </span>Overzicht van een aantal variabelen uit de NHANES studie.
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+ID
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:right;">
+Height
+</th>
+<th style="text-align:left;">
+BMI_WHO
+</th>
+<th style="text-align:right;">
+DirectChol
+</th>
+<th style="text-align:right;">
+SexNumPartnLife
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+51624
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+164.7
+</td>
+<td style="text-align:left;">
+30.0_plus
+</td>
+<td style="text-align:right;">
+1.29
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51625
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+105.4
+</td>
+<td style="text-align:left;">
+12.0_18.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51630
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+168.4
+</td>
+<td style="text-align:left;">
+30.0_plus
+</td>
+<td style="text-align:right;">
+1.16
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51638
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+133.1
+</td>
+<td style="text-align:left;">
+12.0_18.5
+</td>
+<td style="text-align:right;">
+1.34
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51646
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+130.6
+</td>
+<td style="text-align:left;">
+18.5_to_24.9
+</td>
+<td style="text-align:right;">
+1.55
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51647
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+166.7
+</td>
+<td style="text-align:left;">
+25.0_to_29.9
+</td>
+<td style="text-align:right;">
+2.12
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+</tbody>
+</table>
+<p>Een <em>variabele</em> is een karakteristiek (bvb. Systolische bloeddruk, leeftijd, geslacht, …)
+die varieert van subject tot subject (bvb. van persoon tot persoon, van dier tot dier, …) in de studie.
+Er zijn verschillende <em>types</em> variabelen.</p>
+<p><em>Kwalitatieve variabelen</em> hebben (meestal) beperkt aantal
+uitkomstcategorieën die niet numeriek van aard zijn. Deze worden
+onderverdeeld in <em>nominale variabelen</em> en <em>ordinale variabelen</em>
+. Nominale gegevens zijn er die men kan benoemen. Ze worden niet gemeten en kennen geen natuurlijke ordening; bijvoorbeeld geslacht, ras,
+bloedgroep, kleur van ogen, …
+Ordinale variabelen kennen wel een ordening; bijvoorbeeld de BMI klasse volgens het WHO, de rokersstatus (nooit gerookt, ooit gerookt maar
+gestopt, actueel roker), …</p>
+<p>Een ander type van variabelen zijn <em>numerieke variabelen</em>. Hierbij maakt men het onderscheid tussen <em>numerieke discrete variabelen</em> en <em>numerieke continue variabelen</em>.
+Numerieke discrete variabelen bestaan uit tellingen, b.v. het aantal partners die men had gedurende het leven (geregistreerd in de NHANES studie), het aantal salamanders van de species <strong>P. jordani</strong> in een bepaald gebied, het aantal reads dat mapt op een bepaald gen in een genexpressiestudie waarbij men gebruik maakt van next-generation sequencing technologie , …</p>
+<p>Numerieke continue variabelen kunnen (tenminste in theorie) tussen bepaalde grenzen elke mogelijke waarde aannemen. Bijvoorbeeld, leeftijd is continu want het verschil in leeftijd tussen 2 personen kan in principe willekeurig klein zijn (1 uur, 1 minuut, …). Analoog zijn het gewicht, BMI, fluorescentie-metingen in een ELISA experiment, … continue metingen.</p>
+<p>In de wetenschappen gaat men vaak continue
+gegevens dichotomiseren om ze nominaal te maken. Bijvoorbeeld, systolische
+bloeddruk wordt omgezet in hypertensie (<span class="math inline">\(&gt;140\)</span> mmHg) en normotensie (<span class="math inline">\(\leq 140\)</span>
+mmHg). Dit vereenvoudigt de beschrijving van gegevens. Helaas is dit een
+slechte praktijk omdat het meestal leidt tot een aanzienlijk verlies aan informatie en
+omdat de aldus bekomen resultaten sterk afhankelijk kunnen zijn van de
+gekozen drempelwaarde. In de praktijk worden de uitkomsten van continue
+variabelen ook vaak afgerond zodat de vermelde waarden in feite discreet
+zijn. Om analoge redenen is het vaak wenselijk om ze als continue variabelen
+te blijven beschouwen.</p>
+<p>In de praktijk wil men vaak numerieke rangen toekennen aan de verschillende
+waarden die ordinale variabelen aannemen. Bijvoorbeeld kan men ervoor kiezen
+de codes 1, 2 en 3 toe te kennen aan de meetwaarden <em>nooit gerookt</em>, <em>ooit gerookt maar gestopt</em> en <em>actueel roker</em>.
+Het is belangrijk om te beseffen dat de keuze van die numerieke waarden vaak geen betekenis heeft.
+Het verschil tussen de toegekende codes (3-2=1, 2-1=1, 3-2=1) is niet bruikbaar gezien men bijvoorbeeld niet onderstellen dat de wijziging in rokerstatus identiek is van <em>nooit gerookt</em> naar <em>ooit gerookt maar gestopt</em> (2-1=1) en van <em>ooit gerookt maar gestopt</em> naar <em>actueel roker</em> (3-2=1).</p>
+<p><code>{.example, name="oefening"}</code>
+Geef het type aan van de variabelen in Tabel <a href="belangrijke-concepten-conventies.html#tab:nhanesConcepten">2.1</a></p>
+</div>
+<div id="subsec:pop" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Populatie<a href="belangrijke-concepten-conventies.html#subsec:pop" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bVKa1o5IrTg" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Het doel van een wetenschappelijke studie is nagenoeg altijd om uitspraken te doen over de algemene populatie.
+Stel bijvoorbeeld dat men een grenswaarde wil afleiden om patiënten met hypertensie op te sporen.
+Hiervoor zal men eerst de systolische bloeddruk moeten bestuderen bij een populatie van gezonde personen.
+Een populatie is meestal continu in verandering.
+Bovendien is men meestal niet alleen geïnteresseerd in effecten bij huidige subjecten, maar ook in het effect bij toekomstige subjecten.
+De populatie kan dus als oneindig groot worden beschouwd en is op een bepaald ogenblik zelfs niet volledig observeerbaar<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.
+De populatie kan binnen de statistiek dus worden opgevat als een theoretisch concept die alle huidige en toekomstige subjecten omvat waarover men uitspraken wenst te doen.
+In de praktijk zal men dus nooit de volledige populatie kunnen bemonsteren en dient men een steekproef te nemen van de populatie.
+Om een representatieve groep subjecten te waarborgen, vertrekt een goede onderzoeksopzet vanuit een belangrijke, precies geformuleerde vraagstelling
+omtrent een duidelijk omschreven populatie.
+Vaak worden hierbij inclusie- en exclusiecriteria geformuleerd.</p>
+<p><em>Inclusiecriteria</em> zijn karakteristieken die een subject/experimentele eenheid moet hebben om tot de populatie te behoren, b.v.</p>
+<ul>
+<li>specifieke ziekte: hypertensie</li>
+<li>leeftijdscategorie</li>
+<li>geslacht</li>
+<li>…</li>
+</ul>
+<p><em>Exclusiecriteria</em> zijn karakteristieken die een subject/experimentele eenheid niet mag hebben om tot de populatie te behoren, b.v.</p>
+<ul>
+<li>geneesmiddelen gebruik</li>
+<li>andere ziekten</li>
+<li>zwangerschap</li>
+<li>…</li>
+</ul>
+<p>Op de subjecten zal men meestal een aantal karakteristieken meten, ook wel <em>variabelen</em> genoemd (bvb. Systolische bloeddruk, leeftijd, geslacht, …). Typisch zullen deze variabelen variëren van subject tot subject (bvb. van persoon tot persoon, van dier tot dier, …) in de populatie.</p>
+</div>
+<div id="toevalsveranderlijken-of-toevallige-veranderlijken" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Toevalsveranderlijken (of toevallige veranderlijken)<a href="belangrijke-concepten-conventies.html#toevalsveranderlijken-of-toevallige-veranderlijken" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>De belangrijke vraag, waar we in in de verdere hoofdstukken dieper op in
+zullen gaan, is hoe nauwkeurig we uitspraken kunnen doen over de populatie o.b.v. een groep gemeten subjecten in een steekproef.
+De spreiding op de gegevens zal daar een cruciale rol in spelen.
+Als de gegevens niet variëren tussen subjecten, dan zullen alle steekproeven uit de populatie hetzelfde resultaat opleveren en zullen de bekomen schattingen niet afwijken van de gezochte populatieparameters.
+Als daarentegen de gegevens zeer chaotisch zijn, dan zullen verschillende steekproeven mogelijks zeer verschillende resultaten opleveren, die bijgevolg ver kunnen afwijken van de gezochte populatieparameters.</p>
+<p>Om het denkwerk te vergemakkelijken, zullen we hoofdletters gebruiken om aan te geven dat
+de bestudeerde karakteristiek (vb. een meetresultaat zoals systolische bloeddruk) variabel is in de populatie,
+zonder daarbij concreet over de gerealiseerde waarde
+voor een bepaald subject na te denken.
+Dergelijke meting of variabele <span class="math inline">\(X\)</span> wordt
+algemeen een <em>toevalsveranderlijke</em> of <em>toevallige veranderlijke</em> genoemd, (a) omdat ze formeel het
+resultaat aanduidt van een <em>toevallige trekking</em> van een bepaalde
+karakteristiek uit de studiepopulatie en (b) omdat ze bovendien <em>veranderlijk</em> is,
+niet alle subjecten in de steekproef bezitten immers dezelfde waarde
+voor die karakteristiek.</p>
+<p>Het makkelijkst om over een toevalsveranderlijke <span class="math inline">\(X\)</span> na te denken is alsof <span class="math inline">\(X\)</span> het label voorstelt van
+een bepaalde populatiekarakteristiek voor een lukraak individu uit de
+bestudeerde populatie, vooraleer haar concrete waarde gemeten werd.
+Met andere woorden, een toevalsveranderlijke <span class="math inline">\(X\)</span> kan men opvatten als onbekende veranderlijke die een meting voorstelt die we plannen te verzamelen, maar nog niet hebben verzameld.
+Net zoals observaties kunnen we toevallig veranderlijken klasseren als kwalitatief, kwantitatief, discreet, continu, ….</p>
+</div>
+<div id="beschrijven-van-de-populatie" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Beschrijven van de populatie<a href="belangrijke-concepten-conventies.html#beschrijven-van-de-populatie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yy1hZ3sqIs4" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Voor we een random variabele meten, kunnen we onmogelijk zeggen hoe hoog de meting precies zal zijn.
+De gerealiseerde waarde van <span class="math inline">\(X\)</span> is dus onderhevig aan random variabiliteit.
+De geobserveerde steekproef in de NHANES studie <span class="math inline">\(x_1, x_2, . . . , x_{10000}\)</span> kan dus als n = 10000 realisaties worden beschouwd van dezelfde random variable X, voor subject <span class="math inline">\(i\)</span>, met <span class="math inline">\(i = 1,2,...,10000\)</span>.
+Een random veranderlijke, een karakteristiek van de populatie, wordt beschreven door gebruik te maken van een <em>verdeling</em>.</p>
+<p>De verdeling beschrijft de waarschijnlijkheid om een bepaalde waarde te observeren voor de toevallig veranderlijke wanneer men volledige lukraak een proefpersoon kiest uit de populatie.</p>
+<p>Als we weten hoe de variabele verdeeld is dan kunnen we probabiliteitstheorie gebruiken om de kans te berekenen dat een bepaald voorval (event) zich voordoet: vb wat is de kans dat het IQ van een random subject uit de populatie kleiner of gelijk is aan 80.</p>
+<ul>
+<li><p>Notatie:</p>
+<ul>
+<li>Event: <span class="math inline">\(X \leq 80\)</span></li>
+<li>Probabiliteit op event: <span class="math inline">\(Pr(X \leq 80)\)</span></li>
+</ul></li>
+</ul>
+<!---break-->
+<div id="intermezzo-probabiliteitstheorie" class="section level3 hasAnchor" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Intermezzo probabiliteitstheorie<a href="belangrijke-concepten-conventies.html#intermezzo-probabiliteitstheorie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCWPnIeupG4" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<div id="discrete-toevallig-veranderlijken" class="section level4 hasAnchor" number="2.5.1.1">
+<h4><span class="header-section-number">2.5.1.1</span> Discrete toevallig veranderlijken<a href="belangrijke-concepten-conventies.html#discrete-toevallig-veranderlijken" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Stel dat we een discrete random variabele meten <span class="math inline">\(X\)</span>. Alle mogelijke waarden voor <span class="math inline">\(X\)</span> worden de steekproefruimte <span class="math inline">\(\Omega\)</span> genoemd.</p>
+<ul>
+<li><p>Voor Gender is de steekproefruimte <span class="math inline">\(\Omega=(0,1)\)</span> met 0 (vrouw) or 1 (man).</p></li>
+<li><p>Voor het werpen van een dobbelsteen is de steekproefruimte <span class="math inline">\(\Omega=(1,2,3,4,5,6)\)</span>.</p></li>
+</ul>
+<p>Een event <span class="math inline">\(A\)</span> is een subset van de steekproefruimte</p>
+<ul>
+<li>Een even getal werpen met een dobbelsteen: <span class="math inline">\(A=(2,4,6)\)</span>.</li>
+<li>Kan ook een specifieke waarde zijn <span class="math inline">\(A=(1)\)</span>.</li>
+</ul>
+<p>Event ruimte <span class="math inline">\(\mathcal{A}\)</span> is de klasse van alle mogelijke events die kunnen optreden bij een bepaald experiment.</p>
+<p>Twee events (<span class="math inline">\(A_1\)</span> en <span class="math inline">\(A_2\)</span>) zijn multueel exclusief als ze niet samen op kunnen treden.</p>
+<ul>
+<li>v.b. event van de oneven getallen <span class="math inline">\(A_1=(1,3,5)\)</span> en het event om <span class="math inline">\(A_2=(6)\)</span> te gooien.</li>
+<li>Dus <span class="math inline">\(A_1 \bigcap A_2=\emptyset\)</span>.</li>
+</ul>
+<p>Probabiliteit <span class="math inline">\(Pr(A)\)</span> is een function <span class="math inline">\(Pr: A \rightarrow [0,1]\)</span> die voldoet aan</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(Pr(A) \geq 0\)</span> en <span class="math inline">\(Pr(A) \leq 1\)</span> voor elke <span class="math inline">\(A \in \mathcal{A}\)</span>.</li>
+<li><span class="math inline">\(Pr(\Omega)=1\)</span>.</li>
+<li>Voor multueel exclusieve events <span class="math inline">\(A_1, A_2, \ldots A_k\)</span> geldt dat <span class="math inline">\(Pr(A_1 \cup A_2 \ldots \cup A_k)= Pr(A_1) + \ldots + Pr(A_k)\)</span>.</li>
+</ol>
+<p>Dobbelsteen voorbeeld</p>
+<ul>
+<li>oneven number <span class="math inline">\(A=(1,3,5)\)</span>: is de unie van 3 multueel exclusieve events <span class="math inline">\(A_1=1\)</span>, <span class="math inline">\(A_2=3\)</span> en <span class="math inline">\(A_3=5\)</span> zodat
+<span class="math inline">\(Pr(A)=Pr(1)+Pr(3)+Pr(5)=1/6+1/6+1/6=0.5\)</span></li>
+<li><span class="math inline">\(\Omega=(1,2,3,4,5,6)\)</span>: <span class="math inline">\(Pr(\Omega)=1\)</span></li>
+</ul>
+<p>Als we twee subjecten (j en k) onafhankelijk trekken van de populatie dan is de gezamelijke probabiliteit
+<span class="math inline">\(P(X_j,X_k)= P(X_j)P(X_j)\)</span></p>
+<div id="distributie-of-verdeling" class="section level5 hasAnchor" number="2.5.1.1.1">
+<h5><span class="header-section-number">2.5.1.1.1</span> Distributie of verdeling<a href="belangrijke-concepten-conventies.html#distributie-of-verdeling" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>De distributie of de verdeling van een discrete toevallig veranderlijke <span class="math inline">\(X\)</span> beschrijft de kans op elke mogelijke waarde van de steekproefruimte.</p>
+<p>Voorbeeld: Gender is een binaire variabele (0: vrouw, 1: man) en binaire variabelen volgen een Bernoulli verdeling. 50.8% van de subjecten in de Amerikaanse populatie zijn vrouw en 49.2% is man.</p>
+<p>Laat <span class="math inline">\(\pi\)</span> de probabiliteit zijn op een man <span class="math inline">\(\pi=0.492\)</span>.
+<span class="math display">\[ X\sim \left \{
+    \begin{array}{lcl}
+    P(X=0) &amp;=&amp; 1-\pi\\
+    P(X=1) &amp;=&amp; \pi
+    \end{array} \right . \]</span></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="belangrijke-concepten-conventies.html#cb80-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="fl">0.492</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="belangrijke-concepten-conventies.html#cb80-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="dv">0</span>,<span class="at">yend=</span>prob)) <span class="sc">+</span></span>
+<span id="cb80-3"><a href="belangrijke-concepten-conventies.html#cb80-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
+<span id="cb80-4"><a href="belangrijke-concepten-conventies.html#cb80-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylab</span>(<span class="st">&quot;Probability&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Toevallig veranderlijke <span class="math inline">\(X\)</span> volgt een Bernoulli verdeling <span class="math inline">\(B(\pi)\)</span> met parameter <span class="math inline">\(\pi=0.492\)</span>,
+<span class="math display">\[B(\pi)= \pi^x(1-\pi)^{(1-x)}\]</span></p>
+</div>
+<div id="cumulative-distributie-functie" class="section level5 hasAnchor" number="2.5.1.1.2">
+<h5><span class="header-section-number">2.5.1.1.2</span> Cumulative distributie functie<a href="belangrijke-concepten-conventies.html#cumulative-distributie-functie" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>De cumulative distributie functie F(x) geeft de probabiliteit weer om een random variable X te observeren waarvoor geldt dat <span class="math inline">\(X\leq x\)</span>:
+<span class="math display">\[ F(x) = \sum\limits_{\forall X\leq x} P(x)\]</span></p>
+<p>Gender voorbeeld <span class="math inline">\(F(0)=1-\pi\)</span> and <span class="math inline">\(F(1)= P(X=0) + P(X=1)=1\)</span></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="belangrijke-concepten-conventies.html#cb81-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">cumprob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb81-2"><a href="belangrijke-concepten-conventies.html#cb81-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="dv">0</span>,<span class="at">yend=</span>cumprob)) <span class="sc">+</span></span>
+<span id="cb81-3"><a href="belangrijke-concepten-conventies.html#cb81-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
+<span id="cb81-4"><a href="belangrijke-concepten-conventies.html#cb81-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylab</span>(<span class="st">&quot;F(x)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>Dobbelsteen voorbeeld:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="belangrijke-concepten-conventies.html#cb82-1" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(<span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">cumprob=</span><span class="fu">cumsum</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,<span class="dv">6</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="belangrijke-concepten-conventies.html#cb82-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">6</span>),<span class="at">yend=</span>cumprob)) <span class="sc">+</span></span>
+<span id="cb82-3"><a href="belangrijke-concepten-conventies.html#cb82-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
+<span id="cb82-4"><a href="belangrijke-concepten-conventies.html#cb82-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ylab</span>(<span class="st">&quot;F(x)&quot;</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<!---break-->
+</div>
+<div id="gemiddelde" class="section level5 hasAnchor" number="2.5.1.1.3">
+<h5><span class="header-section-number">2.5.1.1.3</span> Gemiddelde<a href="belangrijke-concepten-conventies.html#gemiddelde" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wBDYiJZqE6g" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Het gemiddelde of de verwachte waarde <span class="math inline">\(E[X]\)</span> van een discrete toevallig veranderlijke <span class="math inline">\(X\)</span> is gegeven door:</p>
+<p><span class="math display">\[E[X]=\sum\limits_{x\in\Omega} x P(X=x)\]</span></p>
+<p>Merk op dat de operator <span class="math display">\[E[.]\]</span> staat voor de verwachte waarde van een toevallige veranderlijke of een functie van toevallig veranderlijken.</p>
+<p>Gender voorbeeld</p>
+<p><span class="math display">\[E[X]= 0 \times (1-\pi) + 1 \times (\pi) = \pi\]</span></p>
+<p>Het gemiddelde is <span class="math inline">\(E[X]=0.492\)</span>.</p>
+<p>Dobbelsteen voorbeeld</p>
+<p><span class="math display">\[E[X]= 1 \times \frac{1}{6} + 2 \times \frac{1}{6} + \ldots + 6 \times \frac{1}{6} = 3.5\]</span></p>
+</div>
+<div id="variantie" class="section level5 hasAnchor" number="2.5.1.1.4">
+<h5><span class="header-section-number">2.5.1.1.4</span> Variantie<a href="belangrijke-concepten-conventies.html#variantie" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>De variantie is een maat voor de variabiliteit van een toevallig veranderlijke en wordt gegeven door:</p>
+<p><span class="math display">\[E[(X-E[X])^2]=\sum\limits_{x\in\Omega} (x-E[X])^2 P(X=x)\]</span></p>
+<p>Het is dus de verwachte waarde van de kwadratische afwijkingen van een toevallig veranderlijke rond zijn gemiddelde en is dus een maat voor de variabiliteit of spreiding van de toevallige veranderlijke.</p>
+<p>Gender voorbeeld
+<span class="math display">\[\begin{eqnarray}
+    E[(X-E[X])^2]&amp;=&amp;(0-\pi)^2\times (1-\pi)+(1-\pi)^2 \times \pi\\
+    &amp;=&amp; \pi^2 (1-\pi) + (1-\pi)^2 \pi\\
+    &amp;=&amp;\pi (1-\pi)(\pi+1-\pi)\\
+    &amp;=&amp;\pi(1-\pi)
+    \end{eqnarray}\]</span></p>
+<!---break-->
+</div>
+</div>
+<div id="continue-toevallig-veranderlijke" class="section level4 hasAnchor" number="2.5.1.2">
+<h4><span class="header-section-number">2.5.1.2</span> Continue toevallig veranderlijke<a href="belangrijke-concepten-conventies.html#continue-toevallig-veranderlijke" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xNUWvBEkIyQ" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Een continue toevallig veranderlijke kan binnen bepaalde grenzen alle mogelijke waarden aannemen. De kans dat een continue toevallige veranderlijke exact één bepaalde waarde aan te nemen is daarom gelijk aan 0.</p>
+<p>De distributie (verdeling) wordt daarom weergegeven a.d.h.v. de densiteitsfunctie of de dichtheidsfunctie <span class="math inline">\(f(x)\)</span></p>
+<p>Veel biologische karakteristieken zijn approximatief normaal verdeeld (lengte, bloeddruk, IQ, concentratie metingen na logaritmische transformatie)</p>
+<p><span class="math display">\[f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</span></p>
+<p>Dat wordt kort genoteerd als</p>
+<p><span class="math display">\[f(x) = N(\mu,\sigma^2)\]</span></p>
+<p>Van het IQ is geweten dat het normale verdeling volgt met gemiddelde <span class="math inline">\(\mu=100\)</span> en standaardafwijking <span class="math inline">\(\sigma=15\)</span>.</p>
+<p><span class="math display">\[IQ \sim N(100,15^2)\]</span></p>
+<p>In R kunnen we de dnorm functie gebruiken om de densiteit te berekenen voor een bepaalde waarde X=x.</p>
+<ul>
+<li>De argumenten van <code>dnorm</code> zijn <code>mean</code> (<span class="math inline">\(\mu\)</span>) en <code>sd</code> (standaardafwijking <span class="math inline">\(\sigma\)</span>).</li>
+</ul>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="belangrijke-concepten-conventies.html#cb83-1" aria-hidden="true" tabindex="-1"></a>iq <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb83-2"><a href="belangrijke-concepten-conventies.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">IQ =</span> <span class="fu">seq</span>(<span class="dv">40</span>,<span class="dv">150</span>,.<span class="dv">1</span>),</span>
+<span id="cb83-3"><a href="belangrijke-concepten-conventies.html#cb83-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Densiteit =</span> <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="dv">40</span>,<span class="dv">150</span>,.<span class="dv">1</span>),<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)</span>
+<span id="cb83-4"><a href="belangrijke-concepten-conventies.html#cb83-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb83-5"><a href="belangrijke-concepten-conventies.html#cb83-5" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">%&gt;%</span></span>
+<span id="cb83-6"><a href="belangrijke-concepten-conventies.html#cb83-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>IQ,<span class="at">y=</span>Densiteit)) <span class="sc">+</span></span>
+<span id="cb83-7"><a href="belangrijke-concepten-conventies.html#cb83-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/IQ-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Binnen bepaalde grenzen kunnen continue toevallig veranderlijken alle mogelijke waarden aannemen dus is <span class="math inline">\(\Omega\)</span> oneindig groot.</p>
+<div id="cumulatieve-distributie" class="section level5 hasAnchor" number="2.5.1.2.1">
+<h5><span class="header-section-number">2.5.1.2.1</span> Cumulatieve distributie<a href="belangrijke-concepten-conventies.html#cumulatieve-distributie" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Opnieuw is de cumulatieve distributie</p>
+<p><span class="math display">\[F(X)=Pr(X\leq x).\]</span></p>
+<p>Omdat X continu is berekenen we deze probabiliteit a.d.h.v. een integraal</p>
+<p><span class="math display">\[F(x)=\int \limits_{-\infty}^x f(x) dx\]</span></p>
+<p>Merk op dat <span class="math inline">\(f(x)=0\)</span> als x niet tot de steekproefruimte behoord.</p>
+<p>We kunnen <span class="math inline">\(F(x)\)</span> berekenen voor een normaal verdeelde toevallig veranderlijke met de functie <code>pnorm</code> die opnieuw argumenten <code>mean</code> en <code>sd</code> heeft.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="belangrijke-concepten-conventies.html#cb84-1" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="belangrijke-concepten-conventies.html#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Probability=</span><span class="fu">pnorm</span>(IQ,<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb84-3"><a href="belangrijke-concepten-conventies.html#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>IQ,<span class="at">y=</span>Probability)) <span class="sc">+</span></span>
+<span id="cb84-4"><a href="belangrijke-concepten-conventies.html#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>De probabiliteit dat het IQ van een random subject lager is dan 80 wordt in R berekend door</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="belangrijke-concepten-conventies.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">80</span>,<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)</span></code></pre></div>
+<pre><code>## [1] 0.09121122</code></pre>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Voor de grootst mogelijke waarde voor <span class="math inline">\(X\)</span> integreren we over de volledige steekproefruimte <span class="math inline">\(\Omega\)</span> dus</p>
+<p><span class="math display">\[\int \limits_{x \in \Omega} f(x) dx=1.\]</span></p>
+<p>De oppervlakte onder de dichtheidsfunctie is dus steeds 1!</p>
+<!---break-->
+</div>
+<div id="gemiddelde-en-variantie" class="section level5 hasAnchor" number="2.5.1.2.2">
+<h5><span class="header-section-number">2.5.1.2.2</span> Gemiddelde en variantie<a href="belangrijke-concepten-conventies.html#gemiddelde-en-variantie" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jBhSTKC-tYI" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Het gemiddelde of de verwachte waarde is</p>
+<p><span class="math display">\[\int \limits_{x \in \Omega} x f(x) dx.\]</span></p>
+<p>Voor de normale distributie</p>
+<p><span class="math display">\[\int \limits_{-\infty}^{+\infty} x f(x) dx = \mu.\]</span></p>
+<p>De parameter <span class="math inline">\(\mu\)</span> is dus het gemiddelde van een Normaal verdeelde veranderlijke X de populatie.</p>
+<p>De variance <span class="math inline">\(E[(X-E[X])^2]\)</span></p>
+<p><span class="math display">\[\int \limits_{x \in \Omega} (x-E[X])^2 f(x) dx\]</span></p>
+<p>Voor de normale distributie bekomen we</p>
+<p><span class="math display">\[\int \limits_{-\infty}^{+\infty} (x-\mu)^2 f(x) dx = \sigma^2\]</span></p>
+<p>De parameter <span class="math inline">\(\sigma^2\)</span> is dus de variantie van een Normaal verdeelde veranderlijke X in de populatie.</p>
+<p>Het is vaak moeilijk om de variantie te interpreteren gezien ze niet in de zelfde eenheden staat als het gemiddelde. Daarom werken we vaak met de standaardafwijking (SD):</p>
+<p><span class="math display">\[SD=\sqrt{E[(X-E[X])^2]}\]</span></p>
+<p>De standaardafwijking voor de normale distributie, <span class="math inline">\(\sigma\)</span> heeft de interessante interpretatie dat ongeveer 68% van de populatie een waarde heeft voor de karakteristiek X binnen het interval van 1 standaardafwijking(<span class="math inline">\(\sigma\)</span>) rond het gemiddelde:</p>
+<p><span class="math display">\[P(\mu-\sigma &lt; X &lt; \mu + \sigma) \approx 0.68\]</span></p>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Voor Normaal verdeelde toevallig veranderlijken heeft ongeveer 95% van de subjecten in de populatie een waarde die binnen twee standaardafwijkingen (<span class="math inline">\(2 \sigma\)</span>) ligt van het gemiddelde.</p>
+<p><span class="math display">\[P[\mu - 2 \sigma &lt; X &lt; \mu + 2 \sigma]\approx 0.95\]</span>
+<img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Deze intervallen worden ook wel een referentie interval genoemd.</p>
+<!---break-->
+</div>
+</div>
+</div>
+<div id="standardisatie" class="section level3 hasAnchor" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Standardisatie<a href="belangrijke-concepten-conventies.html#standardisatie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Yz9n3dihOKc" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Normale data worden vaak gestandardiseerd.</p>
+<p><span class="math display">\[z=\frac{x-\mu}{\sigma}\]</span></p>
+<p>Na standardisatie volgen de data een standaard Normaal verdeling met gemiddelde <span class="math inline">\(\mu=0\)</span> en variantie <span class="math inline">\(\sigma^2=1\)</span>:
+<span class="math display">\[z \sim N(0,1)\]</span></p>
+<p>We kunnen de <code>qnorm</code> functie gebruiken om kwantielen <span class="math inline">\(z_{2.5\%}\)</span> en <span class="math inline">\(z_{97.5\%}\)</span> die respectievelijk corresponderen met <span class="math inline">\(F(z_{2.5\%})=0.025\)</span> en <span class="math inline">\(F(z_{97.5\%})=0.975\)</span>.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="belangrijke-concepten-conventies.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>)</span></code></pre></div>
+<pre><code>## [1] -1.959964</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="belangrijke-concepten-conventies.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span></code></pre></div>
+<pre><code>## [1] 1.959964</code></pre>
+<p>Voor een standaard Normaal verdeelde toevallig veranderlijke valt inderdaad ongeveer <span class="math inline">\(0.975 - 0.025=0.95\)</span> van de waarden binnen het interval [-2,2], of binnen 2 standaardafwijkingen (<span class="math inline">\(\sigma=1\)</span>) van het gemiddelde (<span class="math inline">\(\mu=0\)</span>).</p>
+<!---break-->
+</div>
+<div id="subsec:normalcalc" class="section level3 hasAnchor" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> Achtergrond Normale verdeling<a href="belangrijke-concepten-conventies.html#subsec:normalcalc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>De <em>Normale curve</em> of <em>Normale dichtheidsfunctie</em> wordt gegeven door:</p>
+<p><span class="math display">\[\begin{equation*}
+f(x) = \frac{1}{\sigma \sqrt{2 \pi} } \exp \left ( - \frac{ (x - \mu)^2 }{ 2
+\sigma^2} \right ).
+\end{equation*}\]</span></p>
+<p>Ze wordt beschreven door 2 onbekende parameters <span class="math inline">\(\mu\)</span> en <span class="math inline">\(\sigma\)</span>, waarbij <span class="math inline">\(\mu\)</span> het gemiddelde van de verdeling van de observaties aangeeft en <span class="math inline">\(\sigma\)</span>
+de standaarddeviatie. Deze curve geeft voor elke waarde <span class="math inline">\(x\)</span> weer hoe
+frequent deze waarde, relatief gezien, voorkomt. De notatie <span class="math inline">\(\pi\)</span> verwijst
+naar het getal <span class="math inline">\(\pi=3.1459...\)</span> Wanneer het gemiddelde 0 is en de variantie
+1, spreekt men van de <em>standaardnormale curve</em> of <em>standaardnormale dichtheidsfunctie</em>.</p>
+<p>Een lukrake observatie uit een reeks gegevens wiens verdeling de Normale
+curve volgt, wordt een <strong>Normaal verdeelde observatie</strong> genoemd.
+Dergelijke observaties komen frequent voor: voor heel wat reeksen gegevens
+die symmetrisch verdeeld zijn, vormt de Normale curve met <span class="math inline">\(\mu\)</span> gelijk aan <span class="math inline">\(\bar x\)</span> en <span class="math inline">\(\sigma\)</span> gelijk aan <span class="math inline">\(s_x\)</span> immers een goede benadering voor het
+histogram.</p>
+<p>Voor Normaal verdeelde gegevens geeft de oppervlakte onder de Normale curve
+tussen 2 willekeurige getallen <span class="math inline">\(a\)</span> en <span class="math inline">\(b\)</span> het percentage van de
+observaties weer dat tussen deze 2 getallen gelegen is. Op die manier laat de
+Normale curve toe om, enkel op basis van kennis van het gemiddelde en de
+standaarddeviatie, na te gaan welk percentage van de gegevens bij benadering
+tussen 2 willekeurige getallen <span class="math inline">\(a\)</span> en <span class="math inline">\(b\)</span> gelegen is.</p>
+<p>Om deze berekening uit te voeren, gaan we als volgt te werk. Zij <span class="math inline">\(X\)</span> een
+lukrake meting uit een reeks Normaal verdeelde gegevens met gemiddelde <span class="math inline">\(\mu\)</span>
+en standaarddeviatie <span class="math inline">\(\sigma\)</span>. Dan noteren we met <span class="math inline">\(P(X\leq b)\)</span> de
+oppervlakte onder de Normale curve die links van <span class="math inline">\(b\)</span> gelegen is, en met <span class="math inline">\(P(a\leq X\leq b)\)</span> de oppervlakte onder de Normale curve tussen <span class="math inline">\(a\)</span> en <span class="math inline">\(b\)</span>.
+Hierbij is<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+<p><span class="math display">\[\begin{equation*}
+P(a\leq X\leq b)=P(X\leq b)-P(X\leq a)
+\end{equation*}\]</span></p>
+<p>Om <span class="math inline">\(P(a\leq X\leq b)\)</span> te berekenen, hebben we dus enkel een strategie nodig
+om voor een willekeurig getal <span class="math inline">\(x\)</span>, het getal <span class="math inline">\(F(x) = P(X \leq x)\)</span> uit te
+rekenen. Dit staat uitgezet in functie van <span class="math inline">\(x\)</span> in Figuur <a href="#fig:continu"><strong>??</strong></a>
+(rechtsboven) voor <span class="math inline">\(\mu=80\)</span> en <span class="math inline">\(\sigma=12\)</span> en wordt een <em>distributiefunctie</em> genoemd.</p>
+<p><code>{.definition, name="distributiefunctie"}</code>
+De functie die voor elk getal <span class="math inline">\(x\)</span> uitdrukt wat de kans is dat een lukrake
+meting <span class="math inline">\(X\)</span> met gekende verdeling (bvb. een Normale verdeling) kleiner of
+gelijk is aan <span class="math inline">\(x\)</span>, wordt de <strong>distributiefunctie</strong> van die verdeling
+genoemd.</p>
+<p><strong>Einde definitie</strong></p>
+<p>Omdat de Normale dichtheidsfunctie zeer complex is, blijkt dat het getal <span class="math inline">\(F(x)\)</span> niet expliciet uit te rekenen is. Om die reden heeft men de getallen <span class="math inline">\(F(x)\)</span>
+voor de standaardnormale verdelingsfunctie getabuleerd. Voor
+deze standaardnormale curve duidt men voor een willekeurige waarde <span class="math inline">\(z\)</span>, het
+getal <span class="math inline">\(F(z)\)</span> met <span class="math inline">\(\Phi(z)\)</span> aan. Omwille van de symmetrie rond 0 van de
+standaardnormale curve kan de waarde van <span class="math inline">\(\Phi(-z)\)</span> dan uit de waarde van <span class="math inline">\(\Phi(z)\)</span> worden afgeleid als</p>
+<p><span class="math display">\[\begin{equation*}
+\Phi(-z)= 1- \Phi(z)
+\end{equation*}\]</span></p>
+<p>Deze uitdrukking geeft aan dat voor een reeks standaardnormaal verdeelde
+metingen, het percentage dat kleiner is dan <span class="math inline">\(-z\)</span> gelijk is aan
+het percentage dat groter is dan <span class="math inline">\(z\)</span>.</p>
+<p>Om nu <span class="math inline">\(P(a\leq X\leq b)\)</span> te berekenen op basis van de tabellen voor de
+standaardnormale verdeling gaan we als volgt te werk. Vooreerst kan men
+aantonen dat het resultaat van een lineaire transformatie <span class="math inline">\(aX+b\)</span> op een
+Normaal verdeelde meting <span class="math inline">\(X\)</span> met gemiddelde <span class="math inline">\(\mu\)</span> en standaarddeviatie <span class="math inline">\(\sigma\)</span> terug een Normaal verdeelde meting toevalsveranderlijke is, maar nu
+met gemiddelde <span class="math inline">\(a\mu+b\)</span> en standaarddeviatie <span class="math inline">\(|a|\sigma\)</span>. Op die manier kan
+men elke Normaal verdeelde meting met gemiddelde <span class="math inline">\(\mu\)</span> en standaarddeviatie <span class="math inline">\(\sigma\)</span> omzetten naar een standaardnormale meting door ze als volgt te
+<em>standaardiseren</em>:</p>
+<p><span class="math display">\[\begin{equation*}
+Z = \frac{X- \mu}{\sigma}
+\end{equation*}\]</span></p>
+<p>Verifieer dat <span class="math inline">\(Z\)</span> inderdaad gemiddelde 0 en standaarddeviatie 1 heeft!</p>
+<p>Aangezien voor een willekeurig getal <span class="math inline">\(x\)</span></p>
+<p><span class="math display">\[\begin{equation*}
+X\leq x \Leftrightarrow \frac{X-\mu}{\sigma} \leq \frac{x-\mu}{\sigma}
+\end{equation*}\]</span></p>
+<p>vinden we nu dat</p>
+<p><span class="math display">\[\begin{eqnarray*}
+P(a \leq X \leq b) &amp; = &amp; P\left(\frac{a-\mu}{\sigma} \leq Z \leq \frac{b-\mu%
+}{\sigma} \right) \\
+&amp; = &amp; \Phi \left (\frac{b-\mu}{\sigma} \right ) - \Phi \left (\frac{a-\mu}{%
+\sigma} \right )
+\end{eqnarray*}\]</span></p>
+<p>De getallen <span class="math inline">\(\Phi \left (\frac{b-\mu}{\sigma} \right )\)</span> en <span class="math inline">\(\Phi \left (\frac{a-\mu}{\sigma} \right )\)</span> kunnen hierbij rechtstreeks uit tabellen of R software worden gehaald. In het vervolg zullen we
+algemeen de notatie <span class="math inline">\(Z\)</span> gebruiken om een standaardnormaal verdeelde meting
+aan te duiden.</p>
+<pre class="exercise"><code></code></pre>
+<p>Een labo bepaalt in een visstaal Hg via een methode op basis van AAS. In
+werkelijkheid bevat het staal (gemiddeld) 1.90 ppm. De meetmethode is echter
+niet perfect, zoals aangegeven door een standaarddeviatie van 0.10 ppm. Wat
+is de kans dat de laborant die het staal onderzoekt, een meetresultaat van
+2.10 ppm of meer vaststelt?</p>
+<p>Om op deze vraag te antwoorden, noteren we met <span class="math inline">\(X\)</span> het meetresultaat van de
+laborant en berekenen we</p>
+<p><span class="math display">\[\begin{eqnarray*}
+P(X\geq 2)&amp;=&amp;P\left(\frac{X-\mu}{\sigma}\geq \frac{2.1-1.9}{0.1}\right) \\
+&amp;=&amp;P(Z\geq 2) = 2.28\%
+\end{eqnarray*}\]</span></p>
+<p>We besluiten dat er 2.28% kans is dat de laborant een meetresultaat van
+minstens 2.10 ppm zal vaststellen. In R kan dit resultaat als volgt bekomen worden:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="belangrijke-concepten-conventies.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fl">2.1</span>, <span class="at">mean =</span> <span class="fl">1.9</span>, <span class="at">sd =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.02275013</code></pre>
+<p>waarbij de functie pnorm de distributiefunctie van de Normale verdeling voorstelt.</p>
+<p><strong>Einde oefening</strong></p>
+<p>Met <span class="math inline">\(z_{\alpha}\)</span> duiden<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> we die waarde aan waar <span class="math inline">\(\alpha100\%\)</span> van de
+oppervlakte onder de standaardnormale curve rechts van zit; m.a.w. waarvoor
+geldt dat <span class="math inline">\(P(Z \geq z_{\alpha}) = \alpha\)</span>. Als <span class="math inline">\(Z\)</span> een standaardnormaal
+verdeelde meting is, dan stelt <span class="math inline">\(z_{\alpha}\)</span> bijgevolg het <span class="math inline">\((1-\alpha)100\%\)</span>
+percentiel van die verdeling voor. Voor <span class="math inline">\(z_{\alpha/2}\)</span> geldt dat <span class="math inline">\(P(-z_{\alpha/2}\leq Z \leq z_{\alpha/2}) = 1-\alpha\)</span>. Bijvoorbeeld, <span class="math inline">\(P( - z_{0.025}\leq Z \leq z_{0.025}) = 95\%\)</span>. Voor een reeks standaardnormaal
+verdeelde metingen bevat het interval <span class="math inline">\([-z_{\alpha/2},z_{\alpha/2}]\)</span> dus <span class="math inline">\((1-\alpha)100\%\)</span> van de observaties.</p>
+<p>Stel dat <span class="math inline">\(X\)</span> een Normaal verdeelde meting is met gemiddelde <span class="math inline">\(\mu\)</span> en
+standaarddeviatie <span class="math inline">\(\sigma\)</span>. Dan geldt dat</p>
+<p><span class="math display">\[\begin{equation*}
+P\left( - z_{\alpha/2}\leq \frac{X - \mu}{\sigma} \leq z_{\alpha/2}\right) =
+1-\alpha .
+\end{equation*}\]</span></p>
+<p>Hieruit volgt dat</p>
+<p><span class="math display">\[\begin{equation*}
+P( \mu - z_{\alpha/2} \sigma \leq X \leq \mu + z_{\alpha/2} \sigma ) =
+1-\alpha .
+\end{equation*}\]</span></p>
+<p>Voor een reeks Normaal verdeelde metingen met gemiddelde <span class="math inline">\(\mu\)</span> en
+standaarddeviatie <span class="math inline">\(\sigma\)</span> bevat het interval <span class="math inline">\([\mu-z_{\alpha/2}\sigma,\mu+z_{\alpha/2}\sigma]\)</span> dus <span class="math inline">\((1-\alpha)100\%\)</span> van de observaties. In de
+praktijk worden de parameters <span class="math inline">\(\mu\)</span> en <span class="math inline">\(\sigma\)</span> hierbij vervangen door <span class="math inline">\(\bar x\)</span> en <span class="math inline">\(s_x\)</span>.</p>
+<p>Het resulterende interval <span class="math inline">\([\bar x-z_{\alpha/2}s_x,\bar x+z_{\alpha/2}s_x]\)</span>
+wordt vaak gebruikt<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>, o.a. in de klinische chemie, om <em>referentie-intervallen</em> te berekenen voor een test ter opsporing van een
+bepaalde pathologie. Eenmaal zo’n referentie-interval, ook wel <em>normaal interval</em> genoemd, werd bepaald, wordt het testresultaat van een
+patiënt met de vermoede pathologie vergeleken met het interval. Een
+resultaat buiten het interval is dan indicatief voor de aanwezigheid van de
+pathologie.</p>
+<p>Bij het bepalen van referentie-intervallen is het noodzakelijk om de methode
+eerst te testen bij mensen zonder de pathologie in kwestie. Voor dit doel
+worden `normale en gezonde vrijwilligers’ aangezocht. Vaak worden hiertoe
+collega’s genomen uit het laboratorium dat de test heeft ontwikkeld, hoewel
+dit allesbehalve ideaal is. Immers, mensen die in een zelfde laboratorium
+werken, zijn blootgesteld aan dezelfde werkomgeving, die op zijn beurt een
+invloed kan hebben op hun bloedsamenstelling. Bijgevolg is de
+bloedsamenstelling van de studiepersonen mogelijks niet representatief voor
+een normale, gezonde populatie, hetgeen kan leiden tot vertekende
+referentie-intervallen. In deze cursus zullen we een referentie-interval
+meer algemeen als volgt definiëren.</p>
+<p><code>{.definition, name="referentie-interval"}</code>
+Een <strong><span class="math inline">\((1-\alpha)100\%\)</span> referentie-interval</strong>
+voor een veranderlijke <span class="math inline">\(X\)</span> (bvb. albumine-concentratie
+in het bloed) in een gegeven studiepopulatie (bvb. volwassen Belgen onder de
+60 jaar) is een interval dat zó gekozen werd dat het met <span class="math inline">\((1-\alpha)100\%\)</span>
+kans de observatie voor een lukraak individu uit die populatie bevat. Voor
+een Normaal verdeelde veranderlijke <span class="math inline">\(X\)</span> met gemiddelde <span class="math inline">\(\mu\)</span> en
+standaarddeviatie <span class="math inline">\(\sigma\)</span> kan dit berekend worden als</p>
+<p><span class="math display">\[\begin{equation*}
+[\mu-z_{\alpha/2}\sigma,\mu+z_{\alpha/2}\sigma]
+\end{equation*}\]</span></p>
+<p>en geschat worden op basis van een lukrake steekproef als</p>
+<p><span class="math display">\[\begin{equation*}
+[\bar x-z_{\alpha/2}s_x,\bar x+z_{\alpha/2}s_x]
+\end{equation*}\]</span></p>
+<p><strong>Einde definitie</strong></p>
+</div>
+</div>
+<div id="steekproef" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Steekproef<a href="belangrijke-concepten-conventies.html#steekproef" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QuVnFbv16Nk" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>In echte studies kennen we de verdeling in de populatie typisch niet!
+In de praktijk is het om financiële en logistieke redenen bijna nooit mogelijk om de
+volledige populatie te bestuderen. Populatieparameters (v.b. gemiddeld IQ, variantie van IQ) kunnen daarom meestal
+niet exact bepaald worden. Enkel een deel van de populatie kan onderzocht
+worden, hetgeen men de <em>steekproef</em> noemt. Volgens een
+gestructureerd design worden daartoe <strong>lukraak subjecten</strong> uit de doelpopulatie
+getrokken en geobserveerd. De onbekende parameters worden vervolgens geschat
+o.b.v. die steekproef en noemt met schattingen. In de praktijk hoopt men uiteraard dat de schattingen die men bekomt op basis van de steekproef vergelijkbaar zijn met de overeenkomstige populatieparameters die men voor de volledige populatie zou bekomen.</p>
+<p>Stel bijvoorbeeld dat we op basis van de NHANES studie de lengte van volgroeide vrouwen en mannen wensen te bestuderen.
+Telkens een lukraak individu getrokken wordt uit de populatie zal men een
+realisatie van de toevalsveranderlijke <span class="math inline">\(X\)</span> kunnen observeren. Die realisatie
+of geobserveerde waarde duiden we aan met een kleine letter <span class="math inline">\(x\)</span>. Deze stelt
+dus een welbepaald getal voor en is niet langer een onbekende veranderlijke
+zoals <span class="math inline">\(X\)</span>. Samengevat zijn de nog onbekende waarden voor de
+bestudeerde populatiekarakteristiek bij subjecten 1 tot <span class="math inline">\(n\)</span> in de
+steekproef, toevalsveranderlijken die we algemeen met <span class="math inline">\(X_1,...,X_n\)</span>
+zullen noteren. Na het trekken van de steekproef, ziet men de gerealiseerde
+uitkomsten <span class="math inline">\(x_1, x_2, \dots, x_n\)</span>, bijvoorbeeld hun gemeten lengte.</p>
+<p>De distributie in de populatie is ongekend en moet worden geschat op basis van de steekproef. Als we aannemen dat de gegevens een bepaalde distributie volgen (b.v. de normale verdeling <span class="math inline">\(N(\mu,\sigma^2)\)</span>) dan moeten we enkel de populatie parameters (<span class="math inline">\(\mu\)</span> en <span class="math inline">\(\sigma^2\)</span>) schatten op basis van de steekproef. We noemen dit schattingen (engels: estimates) en noteren ze als volgt: <span class="math inline">\(\hat \mu\)</span> en <span class="math inline">\(\hat \sigma^2\)</span>.</p>
+<p><em>Samenvatting</em></p>
+<ul>
+<li><p>Voor we het experiment uitvoeren is de populatie karakteristiek voor de proefpersonen <span class="math inline">\(1,\ldots,n\)</span> die we uit de populatie zullen trekken ongekend en zijn dat toevallig veranderlijken: <span class="math inline">\(X_1, \ldots, X_n\)</span></p></li>
+<li><p>Dit is noodzakelijk om te kunnen redeneren over hoe de resultaten van steekproef tot steekproef kunnen wijzigen</p></li>
+<li><p>In een steekproef observeren we gerealiseerde uitkomsten <span class="math inline">\(x_1, x_2, \dots, x_n\)</span>: v.b. gender of lengte van subjecten in de steekproef.</p></li>
+</ul>
+</div>
+<div id="nhanes-gender" class="section level2 hasAnchor" number="2.7">
+<h2><span class="header-section-number">2.7</span> NHANES: Gender<a href="belangrijke-concepten-conventies.html#nhanes-gender" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YFPduTacTXk" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="belangrijke-concepten-conventies.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
+<span id="cb94-2"><a href="belangrijke-concepten-conventies.html#cb94-2" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Gender)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<ul>
+<li>Gender is een binaire variabele.</li>
+<li>Het volgt een Bernoulli distibutie.</li>
+<li>De Bernoulli distributie heeft een parameter: het gemiddelde <span class="math inline">\(\pi\)</span>.</li>
+<li>We kunnen <span class="math inline">\(\pi\)</span> schatten op basis van de steekproef door het steekproefgemiddelde te berekenen <span class="math inline">\(\bar x = \sum\limits_{i=1}^n x_i\)</span></li>
+<li>Merk op dat het steekproefgemiddelde zelf een toevallig veranderlijke is! Het wijzigt ook van steekproef tot steekproef!</li>
+</ul>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="belangrijke-concepten-conventies.html#cb95-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb95-2"><a href="belangrijke-concepten-conventies.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb95-3"><a href="belangrijke-concepten-conventies.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">probability =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   Gender     n probability
+##   &lt;fct&gt;  &lt;int&gt;       &lt;dbl&gt;
+## 1 female  5020       0.502
+## 2 male    4980       0.498</code></pre>
+</div>
+<div id="nhanes-lengte" class="section level2 hasAnchor" number="2.8">
+<h2><span class="header-section-number">2.8</span> NHANES: Lengte<a href="belangrijke-concepten-conventies.html#nhanes-lengte" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/46B4ivzTuHI" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<div id="empirische-distributie" class="section level3 hasAnchor" number="2.8.1">
+<h3><span class="header-section-number">2.8.1</span> Empirische distributie<a href="belangrijke-concepten-conventies.html#empirische-distributie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We kunnen de distributie van de lengte voor volwassen vrouwen schatten aan de hand van het histogram.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="belangrijke-concepten-conventies.html#cb97-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb97-2"><a href="belangrijke-concepten-conventies.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb97-3"><a href="belangrijke-concepten-conventies.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb97-4"><a href="belangrijke-concepten-conventies.html#cb97-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p>We kunnen de cumulative distributie functie schatten door gebruik te maken van de empirische cumulatieve distributie functie.</p>
+<ul>
+<li>Elke observatie werd één keer geobserveerd in het staal.</li>
+<li>Dus empirische cumulatieve distributie functie van het staal is een discrete distributie met probabiliteit 1/n op elke observatie.</li>
+<li>De empirische cumulatieve distributie functie (ECDF) is gegeven door</li>
+</ul>
+<p><span class="math display">\[ECDF(x) = \sum\limits_{x_i \leq x} \frac{1}{n} = \frac{\# (x_i \leq x)}{n}\]</span></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="belangrijke-concepten-conventies.html#cb98-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="belangrijke-concepten-conventies.html#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb98-3"><a href="belangrijke-concepten-conventies.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb98-4"><a href="belangrijke-concepten-conventies.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>()</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p>We kunnen de empische cumulatieve distributie functie gebruiken om kansen te berekenen.
+Wat is de kans dat een vrouw kleiner is dan 150 cm.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="belangrijke-concepten-conventies.html#cb99-1" aria-hidden="true" tabindex="-1"></a>ecdfFem <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb99-2"><a href="belangrijke-concepten-conventies.html#cb99-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb99-3"><a href="belangrijke-concepten-conventies.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb99-4"><a href="belangrijke-concepten-conventies.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  ecdf</span>
+<span id="cb99-5"><a href="belangrijke-concepten-conventies.html#cb99-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem</span>(<span class="dv">150</span>)</span></code></pre></div>
+<pre><code>## [1] 0.05222073</code></pre>
+<p>We illustreren dit ook voor een steekproef van grootte 10</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="belangrijke-concepten-conventies.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">502</span>)</span>
+<span id="cb101-2"><a href="belangrijke-concepten-conventies.html#cb101-2" aria-hidden="true" tabindex="-1"></a>fem10<span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb101-3"><a href="belangrijke-concepten-conventies.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb101-4"><a href="belangrijke-concepten-conventies.html#cb101-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">10</span>)</span>
+<span id="cb101-5"><a href="belangrijke-concepten-conventies.html#cb101-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-6"><a href="belangrijke-concepten-conventies.html#cb101-6" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb101-7"><a href="belangrijke-concepten-conventies.html#cb101-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb101-8"><a href="belangrijke-concepten-conventies.html#cb101-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>()</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="belangrijke-concepten-conventies.html#cb102-1" aria-hidden="true" tabindex="-1"></a>ecdfFem10 <span class="ot">&lt;-</span> fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="belangrijke-concepten-conventies.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
+<span id="cb102-3"><a href="belangrijke-concepten-conventies.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  ecdf</span>
+<span id="cb102-4"><a href="belangrijke-concepten-conventies.html#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem10</span>(<span class="dv">150</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>Merk op dat die kans niet goed wordt geschat o.b.v. de kleine steekproef. Er zijn immers te weinig observaties om de kansen goed te kunnen schatten.</p>
+<p>Merk ook op dat we die kans ook hadden kunnen schatten door te berekenen hoeveel lengtemetingen er lager zijn dan 150.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="belangrijke-concepten-conventies.html#cb104-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="belangrijke-concepten-conventies.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb104-3"><a href="belangrijke-concepten-conventies.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb104-4"><a href="belangrijke-concepten-conventies.html#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob=</span>n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##   `Height &lt;= 150`     n   prob
+##   &lt;lgl&gt;           &lt;int&gt;  &lt;dbl&gt;
+## 1 FALSE            3521 0.948 
+## 2 TRUE              194 0.0522</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="belangrijke-concepten-conventies.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem</span>(<span class="dv">150</span>)</span></code></pre></div>
+<pre><code>## [1] 0.05222073</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="belangrijke-concepten-conventies.html#cb108-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb108-2"><a href="belangrijke-concepten-conventies.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb108-3"><a href="belangrijke-concepten-conventies.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob=</span>n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##   `Height &lt;= 150`     n  prob
+##   &lt;lgl&gt;           &lt;int&gt; &lt;dbl&gt;
+## 1 FALSE              10     1</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="belangrijke-concepten-conventies.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem10</span>(<span class="dv">150</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+</div>
+<div id="normale-benadering" class="section level3 hasAnchor" number="2.8.2">
+<h3><span class="header-section-number">2.8.2</span> Normale benadering<a href="belangrijke-concepten-conventies.html#normale-benadering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In de introductie zagen we dat de lengte metingen een mooie klokvorm hadden. We kunnen dus aannemen dat de metingen approximatief normaal verdeeld zijn. We zullen dat in hoofdstuk 4 Data Exploratie illustreren a.d.h.v. diagnostische plots.</p>
+<ul>
+<li><p>We kunnen de verdeling van de lengte metingen ook benaderen d.m.v. een normale distribution.</p></li>
+<li><p>We moeten hiervoor enkel twee parameters schatten:</p>
+<ul>
+<li>gemiddelde via steekproefgemiddelde (<span class="math inline">\(\hat\mu=\bar x\)</span>)</li>
+<li>variantie via steekproefvariantie (<span class="math inline">\(\hat{\sigma}^2= s^2\)</span>) of de standaardafwijking d.m.v. steekproef standaarddeviatie (<span class="math inline">\(\hat\sigma=s\)</span>).</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="belangrijke-concepten-conventies.html#cb112-1" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb112-2"><a href="belangrijke-concepten-conventies.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb112-3"><a href="belangrijke-concepten-conventies.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(Height),<span class="at">sd=</span><span class="fu">sd</span>(Height))</span>
+<span id="cb112-4"><a href="belangrijke-concepten-conventies.html#cb112-4" aria-hidden="true" tabindex="-1"></a>HeightSum</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  162.  7.27</code></pre>
+<p>We zien dat de benadering goed werkt:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="belangrijke-concepten-conventies.html#cb114-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb114-2"><a href="belangrijke-concepten-conventies.html#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb114-3"><a href="belangrijke-concepten-conventies.html#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb114-4"><a href="belangrijke-concepten-conventies.html#cb114-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb114-5"><a href="belangrijke-concepten-conventies.html#cb114-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb114-6"><a href="belangrijke-concepten-conventies.html#cb114-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb114-7"><a href="belangrijke-concepten-conventies.html#cb114-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun=</span>dnorm,</span>
+<span id="cb114-8"><a href="belangrijke-concepten-conventies.html#cb114-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb114-9"><a href="belangrijke-concepten-conventies.html#cb114-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb114-10"><a href="belangrijke-concepten-conventies.html#cb114-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean=</span>HeightSum<span class="sc">$</span>mean[<span class="dv">1</span>],</span>
+<span id="cb114-11"><a href="belangrijke-concepten-conventies.html#cb114-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd=</span>HeightSum<span class="sc">$</span>sd[<span class="dv">1</span>]</span>
+<span id="cb114-12"><a href="belangrijke-concepten-conventies.html#cb114-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb114-13"><a href="belangrijke-concepten-conventies.html#cb114-13" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>We doen nu hetzelfde op basis van de steekproef met de 10 vrouwen.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="belangrijke-concepten-conventies.html#cb115-1" aria-hidden="true" tabindex="-1"></a>HeightSum10 <span class="ot">&lt;-</span> fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb115-2"><a href="belangrijke-concepten-conventies.html#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(Height),<span class="at">sd=</span><span class="fu">sd</span>(Height))</span>
+<span id="cb115-3"><a href="belangrijke-concepten-conventies.html#cb115-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-4"><a href="belangrijke-concepten-conventies.html#cb115-4" aria-hidden="true" tabindex="-1"></a>HeightSum10</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 2
+##    mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1  163.  8.19</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="belangrijke-concepten-conventies.html#cb117-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb117-2"><a href="belangrijke-concepten-conventies.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb117-3"><a href="belangrijke-concepten-conventies.html#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),<span class="at">bins=</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb117-4"><a href="belangrijke-concepten-conventies.html#cb117-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb117-5"><a href="belangrijke-concepten-conventies.html#cb117-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(</span>
+<span id="cb117-6"><a href="belangrijke-concepten-conventies.html#cb117-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun=</span>dnorm,</span>
+<span id="cb117-7"><a href="belangrijke-concepten-conventies.html#cb117-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb117-8"><a href="belangrijke-concepten-conventies.html#cb117-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb117-9"><a href="belangrijke-concepten-conventies.html#cb117-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean=</span>HeightSum10<span class="sc">$</span>mean[<span class="dv">1</span>],</span>
+<span id="cb117-10"><a href="belangrijke-concepten-conventies.html#cb117-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd=</span>HeightSum10<span class="sc">$</span>sd[<span class="dv">1</span>]</span>
+<span id="cb117-11"><a href="belangrijke-concepten-conventies.html#cb117-11" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb117-12"><a href="belangrijke-concepten-conventies.html#cb117-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb117-13"><a href="belangrijke-concepten-conventies.html#cb117-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">130</span>,<span class="dv">190</span>)</span></code></pre></div>
+<p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>We kunnen de normale benadering nu ook gebruiken om de kans te berekenen dat een vrouw kleiner is dan 150 cm: Pr(X &lt;= 150).</p>
+<p>We doen dit op basis van de volledige steekproef en vergelijken dit uit wat we bekomen met de ECDF.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="belangrijke-concepten-conventies.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">150</span>,HeightSum<span class="sc">$</span>mean[<span class="dv">1</span>],HeightSum<span class="sc">$</span>sd[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] 0.0484516</code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="belangrijke-concepten-conventies.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem</span>(<span class="dv">150</span>)</span></code></pre></div>
+<pre><code>## [1] 0.05222073</code></pre>
+<p>Op basis van de kleine steekproef bekomen we:</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="belangrijke-concepten-conventies.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">150</span>,HeightSum10<span class="sc">$</span>mean[<span class="dv">1</span>],HeightSum10<span class="sc">$</span>sd[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] 0.05346615</code></pre>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="belangrijke-concepten-conventies.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem10</span>(<span class="dv">150</span>)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>Voor kleine steekproef is geschatte kans o.b.v. empirische distributie veel minder nauwkeurig.
+Kwantielen geschat o.b.v. kleine steekproef zijn immers vrij onzeker. Ze gebruiken immers maar een fractie van de data.<br />
+De schatting o.b.v. de normale verdeling laat toe om alle data te gebruiken voor het schatten van de model parameters en is daarom nauwkeuriger. Uiteraard heeft de laatste aanpak de beperking dat de data Normaal verdeeld moeten zijn.</p>
+<!---break-->
+</div>
+<div id="referentie-intervallen" class="section level3 hasAnchor" number="2.8.3">
+<h3><span class="header-section-number">2.8.3</span> Referentie intervallen<a href="belangrijke-concepten-conventies.html#referentie-intervallen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sWmtCWk-W44" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Het bepalen van grenswaarden voor de lengte die vrij veel voorkomen kunnen worden bekomen door gebruik te maken van een referentie interval.</p>
+<p>Typisch wordt een 95% referentie interval gebruikt zodat we voor 95% van de subjecten in de populatie verwachten dat ze een karakteristiek hebben die in het referentie interval ligt.</p>
+<p>We kunnen dat opnieuw op basis van de empirische distributie.</p>
+<ul>
+<li><p>We moeten hiervoor <span class="math inline">\(\hat{F}(x_{2.5\%})=0.025\)</span> en <span class="math inline">\(\hat{F}(x_{97.5\%})=0.975\)</span> berekenen zodat 95% van de observaties in de steekproef vallen in het interval <span class="math inline">\([x_{2.5\%},x_{97.5\%}]\)</span>.</p></li>
+<li><p>Dat kan met de <code>quantile</code> functie.</p></li>
+</ul>
+<p>Grote steekproef</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="belangrijke-concepten-conventies.html#cb126-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb126-2"><a href="belangrijke-concepten-conventies.html#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb126-3"><a href="belangrijke-concepten-conventies.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
+<span id="cb126-4"><a href="belangrijke-concepten-conventies.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code></pre></div>
+<pre><code>##  2.5% 97.5% 
+## 147.6 176.7</code></pre>
+<ul>
+<li>Op basis van de grote steekproef schatten we dat 95% van de vrouwen in de populatie een lengte heeft die ligt in het interval [147.6, 176.7].</li>
+</ul>
+<p>Kleine steekproef</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="belangrijke-concepten-conventies.html#cb128-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb128-2"><a href="belangrijke-concepten-conventies.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
+<span id="cb128-3"><a href="belangrijke-concepten-conventies.html#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code></pre></div>
+<pre><code>##     2.5%    97.5% 
+## 154.7250 178.3275</code></pre>
+<ul>
+<li>Dit interval o.b.v. de kleine steekproef is een ruwe benadering.</li>
+<li>We hebben immers niet voldoende observaties om een goede benadering te hebben voor extreme quantielen.</li>
+</ul>
+<div id="normale-benadering-1" class="section level4 hasAnchor" number="2.8.3.1">
+<h4><span class="header-section-number">2.8.3.1</span> Normale benadering<a href="belangrijke-concepten-conventies.html#normale-benadering-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We kunnen de functie qnorm gebruiken om quantielen te berekenen van de normale distributie. We weten dat een 95% referentie interval ongeveer binnen twee standaard deviaties rond het gemiddelde ligt.</p>
+<p>We doen dit nu voor de
+- Grote steekproef</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="belangrijke-concepten-conventies.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>,<span class="at">mean=</span>HeightSum<span class="sc">$</span>mean,<span class="at">sd=</span>HeightSum<span class="sc">$</span>sd)</span></code></pre></div>
+<pre><code>## [1] 147.8192</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="belangrijke-concepten-conventies.html#cb132-1" aria-hidden="true" tabindex="-1"></a>HeightSum<span class="sc">$</span>mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> HeightSum<span class="sc">$</span>sd</span></code></pre></div>
+<pre><code>## [1] 147.528</code></pre>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="belangrijke-concepten-conventies.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>,<span class="at">mean=</span>HeightSum<span class="sc">$</span>mean,<span class="at">sd=</span>HeightSum<span class="sc">$</span>sd)</span></code></pre></div>
+<pre><code>## [1] 176.3237</code></pre>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="belangrijke-concepten-conventies.html#cb136-1" aria-hidden="true" tabindex="-1"></a>HeightSum<span class="sc">$</span>mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> HeightSum<span class="sc">$</span>sd</span></code></pre></div>
+<pre><code>## [1] 176.6149</code></pre>
+<ul>
+<li>Kleine steekproef</li>
+</ul>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="belangrijke-concepten-conventies.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.025</span>,<span class="at">mean=</span>HeightSum10<span class="sc">$</span>mean,<span class="at">sd=</span>HeightSum10<span class="sc">$</span>sd)</span></code></pre></div>
+<pre><code>## [1] 147.1499</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="belangrijke-concepten-conventies.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>,<span class="at">mean=</span>HeightSum10<span class="sc">$</span>mean,<span class="at">sd=</span>HeightSum10<span class="sc">$</span>sd)</span></code></pre></div>
+<pre><code>## [1] 179.2701</code></pre>
+<p>We zien dat de benadering voor de kleine steekproef op basis van de aanname van Normaliteit opnieuw goed werkt!</p>
+</div>
+</div>
+<div id="conclusions" class="section level3 hasAnchor" number="2.8.4">
+<h3><span class="header-section-number">2.8.4</span> Conclusions<a href="belangrijke-concepten-conventies.html#conclusions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><p>Voor de grote steekproef geven de empirische distributie en de normale benadering vergelijkbare resultaten.</p></li>
+<li><p>Voor de kleine steekproef werkt de normale benadering beter dan de empirische distributie.</p>
+<ul>
+<li>We kijken immers naar extreme quantielen 2.5% en 97.5%.</li>
+<li>Er zijn inderdaad weinig gegevens in de steekproef die toelaten om deze quantielen direct te schatten.</li>
+<li>Met de normale benadering kunnen we alle data gebruiken om het gemiddelde en de standaarddeviatie te schatten.</li>
+<li>Als de aanname van normaliteit geldt dan krijgen we betere schattingen voor deze kwantielen.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="statistieken" class="section level2 hasAnchor" number="2.9">
+<h2><span class="header-section-number">2.9</span> Statistieken<a href="belangrijke-concepten-conventies.html#statistieken" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MZ2tBhjyhDQ" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<p>Formules die gebruikt worden om parameters van de verdeling in de populatie te schatten op basis van de
+steekproef, alsook het numerieke resultaat dat men bekomt door deze formules
+te evalueren, worden <em>statistieken</em> genoemd.
+Bijvoorbeeld het
+rekenkundig gemiddelde van alle systolische bloeddrukwaarden voor de verschillende subjecten
+in de steekproef, is een statistiek. Statistieken zijn dus wat
+de onderzoekers observeren of kunnen berekenen o.b.v. de gegevens in de
+steekproef; parameters zijn wat ze eigenlijk willen weten.
+Omdat statistieken berekend worden op basis van de gegevens uit de steekproef, zullen ze variëren van steekproef tot steekproef.
+We zullen ze daarom noteren met een hoofdletter (bvb. <span class="math inline">\(\bar X\)</span> voor het steekproefgemiddelde), tenzij we verwijzen naar de numerieke waarde die gerealiseerd wordt in een bepaalde steekproef, in welk geval we een kleine letter gebruiken (bvb. <span class="math inline">\(\bar x\)</span> voor het steekproefgemiddelde).</p>
+</div>
+<div id="conventie" class="section level2 hasAnchor" number="2.10">
+<h2><span class="header-section-number">2.10</span> Conventie<a href="belangrijke-concepten-conventies.html#conventie" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Belangrijke Conventie:</strong> In de cursus gebruiken we de conventie om <strong>populatieparameters die een vaste waarden aannemen maar die meestal ongekend zijn</strong> voor te stellen door <strong>Griekse symbolen</strong>. <strong>Statistieken</strong> waarmee we deze ongekende parameters schatten o.b.v. een steekproef zullen we weergeven door <strong>letters</strong>.</p>
+<p>Voor de normaal verdeling hebben we dus:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Populatie</th>
+<th align="center">Steekproef</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\mu\)</span></td>
+<td align="center"><span class="math inline">\(\bar X\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\sigma^2\)</span></td>
+<td align="center"><span class="math inline">\(S^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Om hetgeen we in de steekproef observeren te kunnen veralgemenen naar de populatie, zullen we gebruik moeten maken van methodes uit de statistische besluitvorming wat in latere hoofdstukken aan bod komt.</p>
+<p>De cursus is als volgt georganiseerd:
+In hoofdstuk <a href="chap-design.html#chap-design">3</a> verdiepen we ons in studiedesign. Vervolgens gaan we in op data-exploratie in hoofdstuk <a href="chap-describe.html#chap-describe">4</a>, hierbij zullen we de gegevens in een steekproef grondig exploreren zodoende inzicht te verwerven in de data en hoe we ze statistisch kunnen modelleren.
+In hoofdstuk <a href="chap-besluit.html#chap-besluit">5</a> introduceren we de grondslagen van statistische besluitvorming die het ons mogelijk maakt om effecten die we observeren in de steekproef te kunnen veralgemenen naar de populatie toe.
+In hoofdstukken <a href="chap-linReg.html#chap-linReg">6</a>-<a href="chap-glm.html#chap-glm">10</a> zullen we meer geavanceerde statistische modellen en methoden introduceren om data te modelleren en voor statistische besluitvorming.</p>
+</div>
+<div id="code-voor-dit-hoofdstuk" class="section level2 hasAnchor" number="2.11">
+<h2><span class="header-section-number">2.11</span> Code voor dit hoofdstuk<a href="belangrijke-concepten-conventies.html#code-voor-dit-hoofdstuk" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Continue Toevallige Veranderlijken:</li>
+</ol>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/InoHJxUyF4s" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+<ol start="2" style="list-style-type: decimal">
+<li>Lengte voorbeeld:</li>
+</ol>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yOQdJD-33Fg" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
+</iframe>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="4">
+<li id="fn4"><p>B.v. omdat het ook toekomstige subjecten omvat<a href="belangrijke-concepten-conventies.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Hierbij maken we gebruik van het feit dat voor een Normaal verdeelde observatie <span class="math inline">\(X\)</span>, <span class="math inline">\(P(X=a)=0\)</span> voor elk reëel getal <span class="math inline">\(a\)</span>, zodat <span class="math inline">\(P(X\leq a)=P(X&lt;a)\)</span>.<a href="belangrijke-concepten-conventies.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Let wel op want in verschillende boeken krijgt het symbool <span class="math inline">\(z_{\alpha}\)</span> verschillende definities!<a href="belangrijke-concepten-conventies.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Dit interval bevat niet exact <span class="math inline">\((1-\alpha)100\%\)</span> van de observaties, maar slechts bij benadering, omdat het geen rekening houdt met het feit dat <span class="math inline">\(\bar x\)</span> en <span class="math inline">\(\sigma_x\)</span> impreciese schattingen zijn voor <span class="math inline">\(\mu\)</span> en <span class="math inline">\(\sigma\)</span> op basis van een eindige steekproef. Meer accurate referentie-intervallen die deze imprecisie in rekening brengen, ook predictie-intervallen genoemd<a href="belangrijke-concepten-conventies.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="inleiding.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap-design.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Concepten.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["InleidingTotBiostatistiek_2022_2023.pdf", "InleidingTotBiostatistiek_2022_2023.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

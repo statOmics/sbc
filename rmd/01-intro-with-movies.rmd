@@ -1,0 +1,1210 @@
+---
+title: "1. Inleiding: Waarom Statistiek?"
+author: "Lieven Clement"
+date: "statOmics, Ghent University (https://statomics.github.io)"
+output:
+    html_document:
+      code_download: true    
+      theme: cosmo
+      toc: true
+      toc_float: true
+      highlight: tango
+      number_sections: true
+---
+
+# Introductie
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nm_yvgAXvyA" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+```{r include=FALSE}
+knitr::opts_chunk$set(include = TRUE, comment = NA, echo = TRUE,
+                      message = FALSE, warning = FALSE)
+library(tidyverse)
+```
+
+- We leven in het big data era
+- Gegevens over locatie, surfgedrag, aankoopgedrag, sociale media
+- Wetenschap: expressie meten van duizenden genen, eiwitten,... voor elk subject
+- Chemische proces controle: groot aantal sensoren die continu een proces meten zodat het proces kan worden bijgestuurd
+- Data driven journalism
+- ...
+
+Statistiek is de wetenschap om te leren uit empirische gegevens
+
+Statistische geletterdheid is cruciaal om resultaten en publicaties kritisch te kunnen interpreteren.
+
+---
+
+# Case study: oksel microbiome
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HkMCq3IBvRI" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>s
+
+- https://www.vrt.be/vrtnws/nl/2018/10/22/gezocht-mensen-met-penetrante-lijfgeur-om-probiotische-deodor/
+- https://youtu.be/9RIFyqLXdVw
+
+---
+
+- Okselgeur wordt niet veroorzaakt door het zweet zelf. De geur is afkomstig van specificiek micro-organismen van de groep *Corynebacterium spp.* die het zweet metaboliseren. *Staphylococcus spp.* zijn een andere groep bacteriën die ook abundant zijn in het microbiome van de oksel die zweet metaboliseren naar metabolieten die niet stinken.
+
+- De CMET-groep aan UGENT doet onderzoek naar het transplanteren van de microbiële gemeenschap, het microbiome, om mensen van geurende oksels af te helpen.  
+
+- Voorgestelde therapie
+  	1. Verwijder het oksel microbiome met antibiotica
+    2. Beïnvloed het oksel microbiome door microbiome te transplanteren van een individue die geen geurende oksels heeft (https://youtu.be/9RIFyqLXdVw)
+
+
+---
+
+## Proefopzet (experimental design)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0CUL9DaY-bw" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+```{r out.width='80%',fig.asp=.8, fig.align='center',echo=FALSE}
+if ("pi"%in%ls()) rm("pi")
+kopvoeter<-function(x,y,angle=0,l=.2,cex.dot=.5,pch=19,col="black")
+{
+angle=angle/180*pi
+points(x,y,cex=cex.dot,pch=pch,col=col)
+lines(c(x,x+l*cos(-pi/2+angle)),c(y,y+l*sin(-pi/2+angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(pi+angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(pi+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2+pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2+pi/4+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2-pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2-pi/4+angle)),col=col)
+}
+
+par(mar=c(0,0,0,0),mai=c(0,0,0,0))
+plot(0,0,xlab="",ylab="",xlim=c(0,10),ylim=c(0,10),col=0,xaxt="none",yaxt="none",axes=FALSE)
+rect(0,6,10,10,border="red",lwd=2)
+text(.5,8,"population",srt=90,col="red",cex=2)
+symbols (3, 8, circles=1.5, col="red",add=TRUE,fg="red",inches=FALSE,lwd=2)
+set.seed(330)
+grid=seq(0,1.3,.01)
+
+for (i in 1:50)
+{
+	angle1=runif(n=1,min=0,max=360)
+	angle2=runif(n=1,min=0,max=360)
+	radius=sample(grid,prob=grid^2*pi/sum(grid^2*pi),size=1)
+	kopvoeter(3+radius*cos(angle1/180*pi),8+radius*sin(angle1/180*pi),angle=angle2)
+}
+text(7.5,8,"Microbiome in population",col="red",cex=1.2)
+```
+
+---
+
+
+```{r out.width='80%',fig.asp=.8, fig.align='center',echo=FALSE}
+if ("pi"%in%ls()) rm("pi")
+kopvoeter<-function(x,y,angle=0,l=.2,cex.dot=.5,pch=19,col="black")
+{
+angle=angle/180*pi
+points(x,y,cex=cex.dot,pch=pch,col=col)
+lines(c(x,x+l*cos(-pi/2+angle)),c(y,y+l*sin(-pi/2+angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(pi+angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(pi+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2+pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2+pi/4+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2-pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2-pi/4+angle)),col=col)
+}
+
+par(mar=c(0,0,0,0),mai=c(0,0,0,0))
+plot(0,0,xlab="",ylab="",xlim=c(0,10),ylim=c(0,10),col=0,xaxt="none",yaxt="none",axes=FALSE)
+rect(0,6,10,10,border="red",lwd=2)
+text(.5,8,"population",srt=90,col="red",cex=2)
+symbols (3, 8, circles=1.5, col="red",add=TRUE,fg="red",inches=FALSE,lwd=2)
+set.seed(330)
+grid=seq(0,1.3,.01)
+
+for (i in 1:50)
+{
+	angle1=runif(n=1,min=0,max=360)
+	angle2=runif(n=1,min=0,max=360)
+	radius=sample(grid,prob=grid^2*pi/sum(grid^2*pi),size=1)
+	kopvoeter(3+radius*cos(angle1/180*pi),8+radius*sin(angle1/180*pi),angle=angle2)
+}
+text(7.5,8,"Microbiome in population",col="red",cex=1.2)
+
+rect(0,0,10,4,border="blue",lwd=2)
+text(.5,2,"sample",srt=90,col="blue",cex=2)
+symbols (3, 2, circles=1.5, col="red",add=TRUE,fg="blue",inches=FALSE,lwd=2)
+for (i in 0:1)
+	for (j in 0:4)
+{
+
+	kopvoeter(2.1+j*(3.9-2.1)/4,1.1+i/2,col="black")
+}
+for (i in 2:3)
+	for (j in 0:4)
+{
+
+	kopvoeter(2.1+j*(3.9-2.1)/4,1.6+i/2,col="black")
+}
+text(7.5,2,"Microbiome in sample",col="blue",cex=1.2)
+
+arrows(3,5.9,3,4.1,col="black",lwd=3)
+text(1.5,5,"EXP. DESIGN (1)",col="black",cex=1.2)
+```
+
+---
+
+- Experiment:
+
+    - 20 personen worden at random uit de populatie getrokken van personen met een okselgeur: steekproef representatief voor populatie!
+
+    - de personen worden at random verdeeld over twee behandelingsgroepen:
+
+        - placebo (enkel antibiotica)
+        - transplantie (antibiotica en microbiële transplantatie).
+        - Randomisatie is belangrijk om ervoor te zorgen dat de groepen vergelijkbaar zijn.
+
+    - Het microbiome wordt bemonsterd 6 weken na de behandeling.
+    - The relative abundantie van *Staphylococcus spp.* op *Corynebacterium spp.* + *Staphylococcus spp.* in het microbiome wordt gemeten via DGGE (*Denaturing Gradient Gel Electrophoresis*).
+
+---
+
+DGGE
+
+![](https://journals.plos.org/plosone/article/figure/image?size=large&download=&id=10.1371/journal.pone.0070538.g001){width=70%}
+
+https://doi.org/10.1371/journal.pone.0070538
+
+---
+
+Vertaal onderzoeksvraag naar iets wat we kunnen quantificeren: Is er een verschil in relatieve abundantie van *Staphylococcus spp.* in het microbiome van de placebo groep en de transplantatie
+
+---
+
+```{r out.width='80%',fig.asp=.8, fig.align='center',echo=FALSE}
+if ("pi"%in%ls()) rm("pi")
+kopvoeter<-function(x,y,angle=0,l=.2,cex.dot=.5,pch=19,col="black")
+{
+angle=angle/180*pi
+points(x,y,cex=cex.dot,pch=pch,col=col)
+lines(c(x,x+l*cos(-pi/2+angle)),c(y,y+l*sin(-pi/2+angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(pi+angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(pi+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2+pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2+pi/4+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2-pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2-pi/4+angle)),col=col)
+}
+
+par(mar=c(0,0,0,0),mai=c(0,0,0,0))
+plot(0,0,xlab="",ylab="",xlim=c(0,10),ylim=c(0,10),col=0,xaxt="none",yaxt="none",axes=FALSE)
+rect(0,6,10,10,border="red",lwd=2)
+text(.5,8,"population",srt=90,col="red",cex=2)
+symbols (3, 8, circles=1.5, col="red",add=TRUE,fg="red",inches=FALSE,lwd=2)
+set.seed(330)
+grid=seq(0,1.3,.01)
+
+for (i in 1:50)
+{
+	angle1=runif(n=1,min=0,max=360)
+	angle2=runif(n=1,min=0,max=360)
+	radius=sample(grid,prob=grid^2*pi/sum(grid^2*pi),size=1)
+	kopvoeter(3+radius*cos(angle1/180*pi),8+radius*sin(angle1/180*pi),angle=angle2)
+}
+text(7.5,8,"Microbiome in population",col="red",cex=1.2)
+
+rect(0,0,10,4,border="blue",lwd=2)
+text(.5,2,"sample",srt=90,col="blue",cex=2)
+symbols (3, 2, circles=1.5, col="red",add=TRUE,fg="blue",inches=FALSE,lwd=2)
+for (i in 0:1)
+	for (j in 0:4)
+{
+
+	kopvoeter(2.1+j*(3.9-2.1)/4,1.1+i/2,col="purple")
+}
+for (i in 2:3)
+	for (j in 0:4)
+{
+
+	kopvoeter(2.1+j*(3.9-2.1)/4,1.6+i/2,col="orange")
+}
+text(7.5,2,"Microbiome in sample",col="blue",cex=1.2)
+
+arrows(3,5.9,3,4.1,col="black",lwd=3)
+text(1.5,5,"EXP. DESIGN (1)",col="black",cex=1.2)
+text(7.5,.5,"DATA EXPLORATION &\nDESCRIPTIVE STATISTICS (2)",col="black",cex=1.2)
+```
+
+---
+
+## Data Exploratie en beschrijvende statistiek
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nN25owSaS2A" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+- Data exploratie is heel belangrijk om inzicht te krijgen in de data en is een essentiële eerste stap om te leren uit data.
+- Het wordt vaak ondergewaardeerd of over het hoofd gezien.
+
+---
+
+### Importeer de data
+
+- Data in deze cursus wordt verwerkt via het statistisch software pakket R.
+- Dit pakket laat toe om te leren uit data.
+- In deze cursus gaan we data eerst exploreren om inzicht te verwerven in de gegevens om die vervolgens statistisch te verwerken.
+- Vooraleer we hiermee van start kunnen gaan moeten we de data eerst importeren in R.
+
+- Via het volgende commando kunnen we enkele regels van een data bestand inlezen om de structuur van het data bestand te weten te komen.
+
+```{r}
+read_lines("https://raw.githubusercontent.com/statOmics/sbc20/master/data/armpit.csv")
+```
+
+- Gegevens in het bestand zijn door comma's gescheiden.
+- Elke rij bevat de gegevens voor 1 proefpersoon
+- Verschillende variabelen worden gemeten per persoon en zijn van elkaar gescheiden door een comma. Het bestand is csv formaat: "comma separated values".
+- We kunnen bestanden met dit formaat inlezen R via het commando read_csv.
+- We slaan de data op in R in het object met naam ap. Hiervoor gebruiken we de `<-` operator.
+- We geven de data tabel terug door het object aan te roepen door zijn naam te typen.
+
+```{r}
+ap <- read_csv("https://raw.githubusercontent.com/statOmics/sbc20/master/data/armpit.csv")
+ap
+```
+
+---
+
+### Beschrijvende statistiek
+
+- In artikels en de media worden resultaten uit een steekproef vaak gerapporteerd a.d.h.v. gemiddelde en de standaardafwijking
+
+- We vatten de data eerst samen. We berekenen het gemiddelde en de standaard deviatie (een maat voor de spreiding, zie volgende hoofdstukken).
+We slaan het resultaat hiervan op in het object apRelSum via `apRelSum <-`.
+
+1. We pipen (via `%>%`) het `ap` dataframe naar de `group_by` functie om de data te groeperen per treatment trt: `group_by(trt)`.
+
+2. We pipen het resultaat naar de `summarize_at` function om de "rel" variable samen te vatten en berekenen hierbij het gemiddelde en standaardafwijking. Omdat we de data eerst hebben gegroepeerd zullen we het gemiddelde en de standaard deviatie berekenen per groep.
+
+
+
+```{r}
+apRelSum <- ap %>%
+  group_by(trt) %>%
+  summarize_at("rel",
+               list(mean=mean,
+                    sd=sd
+                    )
+                )
+```
+
+We tonen vervolgens het resultaat door het object apRelSum aan te roepen
+
+```{r}
+apRelSum
+```
+
+We kunnen ook een tabel in de webpagina of het pdf bestand integreren via het commando kable van het knitr pakket:
+
+```{r}
+knitr::kable(apRelSum)
+```
+
+---
+
+### Grafieken
+
+We maken in deze cursus gebruik van het pakket `ggplot2` om grafieken te maken.  
+Met de ggplot2 bibliotheek kunnen we gemakkelijk grafieken opbouwen in lagen (layers).
+Hierdoor leest de code veel makkelijker.
+
+#### barplot
+
+Bar plots worden heel veel gebruikt in artikels om resultaten weer te geven.
+
+1. We pipen de samengevatte data naar de functie `ggplot`. Dat is de basis van elke ggplot.  We selecteren de variabele met de behandeling trt als x variabele en de variabele met naam mean als y-variabele voor de plot.
+We doen dit steeds via de aestetics `aes` functie.   `aes(x=trt,y=mean)`
+
+2. We maken een barplot door een laag toe te voegen via de  `geom_bar` function. De statistiek is `stat="identity"` omdat de hoogte van de bar gelijk is aan de waarde voor y (hier het gemiddelde voor de relatieve abundantie).
+
+3. We voegen foutenvlaggen toe om de onzekerheid op het gemiddelde weer te geven.  We doen dit via de `geom_errorbar` functie en specifiëren het minimum en maximum van de error bar. Het `width` argument wordt gebruikt om de breedte van de error bar smaller te maken dat deze van de bar.
+
+```{r}
+apRelSum %>%
+  ggplot(aes(x=trt,y=mean)) +
+  geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd),width=.2)
+```
+
+- Is deze plot informatief??
+
+---
+
+#### boxplots
+
+Barplots zijn geen goede grafieken:
+
+- Ze zijn niet informatief
+
+- Ze visulariseren een samenvatting van de data door twee punten: `two point summary`: gemiddelde en de standaard deviatie hierop en kunnen beter in een tabel worden opgenomen.
+
+- Ze laten niet toe om anomalieën in de data zoals meetfouten op te sporen.
+
+- Ze verbruiken veel ruimte, b.v. van nul tot de kleinste waarde voor de relatieve abundantie) waar geen data in ligt.
+
+Het is beter om de data zo ruw mogelijk voor te stellen zodat we inzicht krijgen in de verdeling van de gegevens.
+Hiervoor zullen we ondermeer boxplots gebruiken.
+
+---
+
+We maken nu een boxplot voor de ap data
+
+1. We pipen het `ap` dataframe naar `ggplot`
+2. We selecteren de data voor de plot via `ggplot(aes(x=trt,y=rel))`
+3. We voegen laag toe voor de boxplot dmv de functie `geom_boxplot()`
+
+```{r}
+ap %>%  
+  ggplot(aes(x=trt,y=rel)) +
+  geom_boxplot()
+```
+
+---
+
+Merk op dat we de plot ook op kunnen slaan als een object.
+
+```{r}
+apBoxplot <- ap %>%  
+  ggplot(aes(x=trt,y=rel)) +
+  geom_boxplot()
+```
+
+De plot wordt dan niet gemaakt.
+
+Om de plot weer te geven kunnen we het object aanroepen
+
+```{r}
+apBoxplot
+```
+
+---
+
+- Merk op dat we niet zoveel gegevens hebben. Enkel 10 per groep.
+
+- Het is altijd beter om de data zo ruw mogelijk te tonen!
+
+Omdat er niet zoveel gegevens zijn kunnen we de data toevoegen aan de plot zonder dat die te druk wordt.
+
+- Merk op dat we het argument `outlier.shape` op NA (not available) zetten `outlier.shape=NA` in the `geom_boxplot` functie omdat we anders outliers twee keer weer zullen geven. Eerst via de boxplot laag en daarna omdat we een laag met alle ruwe data toevoegen aan de plot.
+- We geven de ruwe data weer via de  `geom_point(position="jitter")` functie. We gebruiken hierbij het argument position='jitter' zodat we wat random ruis toevoegen aan de x-cordinaat zodat de gegevens elkaar niet overlappen.
+
+```{r}
+ap %>%  
+  ggplot(aes(x=trt,y=rel)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(position="jitter")
+```
+
+Dit is een informatieve plot!
+
+---
+
+Aangezien we de plot ook hebben opgeslagen konden we dit ook doen door de plot op te roepen en nog een laag toe te voegen.
+
+```{r}
+apBoxplot +
+  geom_point(position="jitter")
+```
+
+We hadden het resultaat ook opnieuw op kunnen slaan voor later hergebruik.
+
+```{r}
+apBoxplot <- apBoxplot +
+  geom_point(position="jitter")
+```
+
+---
+
+- We zagen duidelijk een effect van de transplantatie op de relatieve abundantie van Staphylococcus.
+
+- Is dat effect nu groot genoeg om te kunnen concluderen dat de behandeling werkt?
+
+---
+
+### Statistische besluitvorming
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uQkQjg3ZWK8" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+```{r out.width='80%',fig.asp=.8, fig.align='center',echo=FALSE}
+if ("pi"%in%ls()) rm("pi")
+kopvoeter<-function(x,y,angle=0,l=.2,cex.dot=.5,pch=19,col="black")
+{
+angle=angle/180*pi
+points(x,y,cex=cex.dot,pch=pch,col=col)
+lines(c(x,x+l*cos(-pi/2+angle)),c(y,y+l*sin(-pi/2+angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(pi+angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(pi+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2+pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2+pi/4+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2-pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2-pi/4+angle)),col=col)
+}
+
+par(mar=c(0,0,0,0),mai=c(0,0,0,0))
+plot(0,0,xlab="",ylab="",xlim=c(0,10),ylim=c(0,10),col=0,xaxt="none",yaxt="none",axes=FALSE)
+rect(0,6,10,10,border="red",lwd=2)
+text(.5,8,"population",srt=90,col="red",cex=2)
+symbols (3, 8, circles=1.5, col="red",add=TRUE,fg="red",inches=FALSE,lwd=2)
+set.seed(330)
+grid=seq(0,1.3,.01)
+
+for (i in 1:50)
+{
+	angle1=runif(n=1,min=0,max=360)
+	angle2=runif(n=1,min=0,max=360)
+	radius=sample(grid,prob=grid^2*pi/sum(grid^2*pi),size=1)
+	kopvoeter(3+radius*cos(angle1/180*pi),8+radius*sin(angle1/180*pi),angle=angle2)
+}
+text(7.5,8,"Microbiome in population",col="red",cex=1.2)
+
+rect(0,0,10,4,border="blue",lwd=2)
+text(.5,2,"sample",srt=90,col="blue",cex=2)
+symbols (3, 2, circles=1.5, col="red",add=TRUE,fg="blue",inches=FALSE,lwd=2)
+for (i in 0:1)
+	for (j in 0:4)
+{
+
+	kopvoeter(2.1+j*(3.9-2.1)/4,1.1+i/2,col="purple")
+}
+for (i in 2:3)
+	for (j in 0:4)
+{
+
+	kopvoeter(2.1+j*(3.9-2.1)/4,1.6+i/2,col="orange")
+}
+text(7.5,2,"Microbiome in sample",col="blue",cex=1.2)
+
+arrows(3,5.9,3,4.1,col="black",lwd=3)
+text(1.5,5,"EXP. DESIGN (1)",col="black",cex=1.2)
+text(7.5,.5,"DATA EXPLORATION &\nDESCRIPTIVE STATISTICS (2)",col="black",cex=1.2)
+arrows(7,4.1,7,5.9,col="black",lwd=3)
+text(8.5,5,"ESTIMATION &\nINFERENCE (3)",col="black",cex=1.2)
+```
+
+---
+
+- Inductie: Door middel van statistische besluitvorming (inference) kunnen we uitspraken doen over de populatie op basis van een steekproef.
+
+- De prijs die we hiervoor betalen is onzekerheid!
+
+- We kunnen op basis van een steekproef nooit absoluut zeker zijn van onze conclusies.
+
+---
+
+- Met data kunnen we niet bewijzen dat een behandeling werkt.
+
+- Falsificatie principe van Popper: Data kunnen enkel een hypothese of een theorie ontkrachten.
+
+- Met statistiek kunnen we dus niet aantonen dat de behandeling werkt.
+
+- Statistiek zal ons wel toelaten om het omgekeerde te falsifiëren: als we veronderstellen dat er geen effect van de behandeling, spreekt de data in de steekproef dit tegen?
+
+- Met statistiek kunnen we berekenen hoe waarschijnlijk het is om in een random steekproef (wanneer we het experiment dus opnieuw uit zouden voeren) een gemiddeld verschil in relatieve abundantie te zien tussen placebo en transplantatiegroep dat minstens zo groot is als in onze steekproef als de behandeling geen effect zou hebben.
+
+- Die kans wordt een p-waarde genoemd.
+
+- Als p heel klein is, dan is het heel onwaarschijnlijk om een dergelijk effect te observeren in een steekproef door toeval.
+
+- p wordt meestal vergeleken met 5%. Als er geen effect is van de behandeling dan tolereren 5% vals positieve conclusies.
+
+- Om de kans p te berekenen is het nodig om de data te modelleren met statistische modellen.
+
+---
+
+In latere hoofdstukken zullen we zien dat we t-test kunnen gebruiken om hetgeen we observeren in de microbiome dataset te veralgemenen naar de populatie.
+
+```{r}
+t.test(rel~trt,data=ap)
+```
+
+Conclusie:
+Gemiddeld is de relatieve abundantie van Staphylococcus in het microbiome van personen met een zweetgeur `r format(apRelSum$mean[2]-apRelSum$mean[1],digits=3)`% hoger na de transplantie dan na de placebo behandeling.
+
+---
+
+## Randomisatie
+
+- Wat wordt zijn de consequenties van het gebruik van een steekproef en van randomisatie?
+
+- Randomisatie is sterk gerelateerd met het concept van de populatie en scope van de studie.  
+
+- De scope van de studie moet goed worden omschreven voor de start van het experiment.
+
+- Omdat de statistische analyse valide zou zijn is het noodzakelijk dat de subjecten volledig random worden getrokken uit de populatie naar waar we onze conclusies wensen te veralgemenen.
+
+- Volledig random trekken van de populatie impliceert dat:
+
+    - alle subjecten van de populatie evenveel kans hebben om in de steekproef te worden opgenomen
+    - de selectie van een subject onafhankelijk is van de andere subjecten in de steekproef.
+
+
+- De steekproef is dan representatief voor de populatie, maar is nog steeds random.
+
+- Wat betekent dit?
+
+---
+
+# Case study: Lengte van mannen en vrouwen \- Variabiliteit van steekproef tot steekproef
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9TuGsPqlWRM" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+- Om te begrijpen dat een steekproef random is zouden we hetzelfde experiment veel keer moeten kunnen herhalen (`repeated sampling`).
+
+- Dan zouden we inzicht kunnen krijgen hoe de gegevens veranderen van steekproef tot steekproef.
+
+- Om dit te illustreren zullen we gebruik maken van een hele grote studie.
+
+- Uit die studie zullen we dan herhaaldelijk kleine steekproeven trekken om te begrijpen hoe de gegevens en statistieken veranderen van steekproef tot steekproef. Of om met andere woorden na te gaan wat de variabiliteit is tussen steekproeven.
+
+---
+
+National Health And Nutrition Examination Study (NHANES)
+
+  - Sinds 1960 worden elk jaar mensen van alle leeftijden geïnterviewd bij hen thuis.
+  - Er maakt ook een gezondheidsonderzoek deel uit van de study die in een mobiel onderzoekscentrum wordt afgenomen.
+  - We zullen deze grote studie gebruiken om at random personen te selecteren van de Amerikaanse populatie.
+  - Dat zal inzicht geven in hoe de gegevens en resultaten van een analyse zullen variëren van steekproef tot steekproef.
+  - De data van deze studie is terug te vinden in het R pakket `NHANES`
+
+---
+
+```{r}
+library(NHANES)
+head(NHANES)
+glimpse(NHANES)
+```
+
+---
+
+## Data exploratie
+
+
+
+Onderzoeksvraag: hoe verschilt de lengte van volwassen mannen en vrouwen.
+
+1. We pipen de dataset naar de function `filter` om de data te filteren volgens leeftijd.  
+2. We plotten de lengte metingen.
+    - We selecteren de data data met het commando `ggplot(aes(x=lengte))`
+    - We voegen een histogram toe met het commando `geom_histogram()`
+    - We maken twee vertikale panels met het commando `facet_grid(Gender~.)`
+    - We veranderen het label van de x-as met de `xlab` functie.
+
+```{r}
+NHANES%>%  
+  filter(Age >= 18 & !is.na(Height)) %>%
+  ggplot(aes(x = Height))+
+  geom_histogram() +
+  facet_grid(Gender ~ .) +
+  xlab("Lengte (cm)")
+```
+
+---
+
+We zien dat de data nu min of meer symmetrisch verdeeld zijn en een klokvorm hebben.  
+Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken van twee statistieken: het gemiddelde en de standaard deviatie wat een maat is voor de spreiding van de gegevens rond het gemiddelde.
+
+---
+
+We maken nu een subset van de data die we zullen gebruiken om aan te tonen hoe de variabiliteit in kleine steekproeven kan variëren van steekproef tot steekproef.
+
+  1. We filteren op leeftijd en verwijderen ontbrekenden gegevens (NA, Not Available).
+  2. We selecteren enkel het geslacht en Lengte zodat de dataset geen onnodige variabelen bevat.
+
+```{r}
+nhanesSub <- NHANES %>%
+  filter(Age >= 18 & !is.na(Height)) %>%
+  select(c("Gender","Height"))
+```
+
+---
+
+We berekenen het gemiddelde en de standaard deviatie voor de lengte voor mannen en vrouwen in de grote dataset.
+We groeperen de data hiervoor op basis van het geslacht (variable Gender).
+
+
+```{r}
+
+HeightSum <- nhanesSub %>%
+  group_by(Gender) %>%
+  summarize_at("Height",
+               list(mean = mean,
+               sd = sd)
+              )
+
+knitr::kable(
+  HeightSum %>%
+  mutate_if(is.numeric, round, digits=1)
+  )
+```
+
+---
+
+## Experiment
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0tVTFDqT0jo" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+- Stel dat we geen toegang hebben tot de metingen van de NHANES studie.
+
+- We zouden dan een experiment op moeten zetten om metingen bij mannen en vrouwen te doen.
+
+- Veronderstel dat we budget hebben om metingen bij 5 mannen en 5 vrouwen te doen.
+
+- We zouden dan 5 mannen en 5 vrouwen boven de 18 jaar at random selecteren uit de Amerikaanse populatie.
+
+- We kunnen dit experiment simuleren door 5 vrouwen en 5 mannen at random te selecteren uit de NHANES studie.
+
+---
+
+```{r}
+set.seed(1023)
+nSamp <- 5
+fem <- nhanesSub %>%
+  filter(Gender=="female") %>%
+  sample_n(size=5)
+
+mal <- nhanesSub %>%
+  filter(Gender=="male") %>%
+  sample_n(size=5)
+
+samp1 <- rbind(fem,mal)
+
+samp1
+```
+
+---
+
+Data Exploratie
+
+```{r}
+samp1 %>%
+  ggplot(aes(x=Height)) +
+  geom_histogram() +
+  facet_grid(Gender~.) +
+  xlab("Lengte (cm)")
+
+HeightSumExp1 <- samp1 %>%
+  group_by(Gender) %>%
+  summarize_at("Height",
+               list(mean = mean,
+                      sd = sd)
+                  )
+HeightSumExp1
+```
+
+Histogram is niet zinvol als we maar zo weinig datapunten hebben.
+
+---
+
+
+Boxplot is beter:
+
+```{r echo=FALSE}
+samp1 %>%
+  ggplot(aes(x = Gender,y = Height)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_point(position = "jitter") +
+  geom_point(
+    aes(x = 1, y = HeightSumExp1$mean[1]),
+    size = 3,
+    pch = 17,
+    color="darkred") +
+  geom_point(
+    aes(x = 2, y = HeightSumExp1$mean[2]),
+    size = 3,
+    pch = 17,
+    color = "darkred") +
+  ylab("Height (cm)")
+```
+
+---
+
+We voeren hier ook een t-test uit.
+
+```{r}
+t.test(Height~Gender,data=samp1)
+```
+
+In het experiment zijn vrouwen gemiddeld `r round(abs(HeightSumExp1$mean[1]-HeightSumExp1$mean[2]),2)` cm `r ifelse(HeightSumExp1$mean[1]>HeightSumExp1$mean[2],"groter","kleiner")` dan mannen. En als we een statistische test uitvoeren (zie hoofdstuk 5: Statistische besluitvorming) kunnen we besluiten dat dit verschil statistisch `r ifelse(t.test(Height~Gender,samp1)$p.value < 0.05,"significant","niet significant")` is.
+
+---
+
+## Herhaal het experiment
+
+Als we het experiment herhalen selecteren we andere mensen en verkrijgen we andere resultaten.
+
+
+```{r}
+set.seed(1024)
+fem <- nhanesSub %>%
+  filter(Gender=="female") %>%
+  sample_n(size=5)
+
+mal <- nhanesSub %>%
+  filter(Gender=="male") %>%
+  sample_n(size=5)
+
+samp2 <- rbind(fem,mal)
+
+HeightSumExp2 <- samp2 %>%
+  group_by(Gender) %>%
+  summarize_at("Height",
+               list(mean=mean,
+                    sd=sd)
+              )
+HeightSumExp2
+
+samp2 %>%
+  ggplot(aes(x = Gender,y = Height)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_point(position = "jitter") +
+  geom_point(
+    aes(x = 1, y = HeightSumExp2$mean[1]),
+    size = 3,
+    pch = 17,
+    color="darkred") +
+  geom_point(
+    aes(x = 2, y = HeightSumExp2$mean[2]),
+    size = 3,
+    pch = 17,
+    color = "darkred") +
+  ylab("Height (cm)")
+
+t.test(Height ~ Gender, data=samp2)
+```
+
+
+In de nieuwe steekproef zijn vrouwen gemiddeld `r round(abs(HeightSumExp2$mean[1]-HeightSumExp2$mean[2]),2)` cm `r ifelse(HeightSumExp2$mean[1]>HeightSumExp2$mean[2],"groter","kleiner")` dan mannen. En dit verschil is statistisch `r ifelse(t.test(Height~Gender,samp2,var.equal=TRUE)$p.value < 0.05,"significant","niet significant")`
+
+
+---
+
+## Herhaal het experiment opnieuw
+
+```{r}
+seed <- 88605
+set.seed(seed)
+fem <- nhanesSub %>%
+  filter(Gender=="female") %>%
+  sample_n(size=5)
+
+mal <- nhanesSub %>%
+  filter(Gender=="male") %>%
+  sample_n(size=5)
+
+samp3 <- rbind(fem,mal)
+
+HeightSumExp3 <- samp3 %>%
+  group_by(Gender) %>%
+  summarize_at("Height",
+               list(mean=mean,
+                    sd=sd)
+              )
+HeightSumExp3
+
+samp3 %>%
+  ggplot(aes(x = Gender,y = Height)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_point(position = "jitter") +
+  geom_point(
+    aes(x = 1, y = HeightSumExp3$mean[1]),
+    size = 3,
+    pch = 17,
+    color="darkred") +
+  geom_point(
+    aes(x = 2, y = HeightSumExp3$mean[2]),
+    size = 3,
+    pch = 17,
+    color = "darkred") +
+  ylab("Height (cm)")
+
+t.test(Height ~ Gender, data=samp3)
+```
+
+In de nieuwe steekproef zijn vrouwen gemiddeld `r round(abs(HeightSumExp3$mean[1]-HeightSumExp3$mean[2]),2)` cm `r ifelse(HeightSumExp3$mean[1]>HeightSumExp3$mean[2],"groter","kleiner")` dan mannen. En dit verschil is statistisch `r ifelse(t.test(Height~Gender,samp3,var.equal=TRUE)$p.value < 0.05,"significant","niet significant")`
+
+---
+
+## Samenvatting
+
+- We trokken at random andere proefpersonen in elke steekproef
+
+- Hierdoor verschillen lengtemetingen van steekproef tot steekproef.
+
+- Dus ook de geschatte gemiddeldes en standaard deviaties.
+
+- Bijgevolg zijn onze conclusies ook onzeker en kunnen deze wijzigen van steekproef tot steekproef.
+
+- Voor het lengte voorbeeld zijn steekproeven waarbij het effect tegengesteld is aan dat in de populatie en waarbij we besluiten dat het verschil significant echter zeldzaam.
+
+$\rightarrow$ Met statistiek controleren we de kans op het trekken foute conclusies.
+
+## Controle van fouten
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J4zyvu2WY00" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+Hoe controleert statistiek de kans op het trekken van foute conclusies?
+
+- In onderstaande code trekken we 10000 herhaalde steekproeven van 5 vrouwen en 5 mannen uit de NHANES studie.
+
+```{r}
+set.seed(15152)
+# Aantal simulaties en steekproefgrootte per groep
+nSim <- 10000
+nSamp <- 5
+
+# We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
+fem <- nhanesSub %>%
+  filter(Gender == "female")
+
+mal <- nhanesSub %>%
+  filter(Gender == "male")
+
+# Simulatie studie
+# Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.
+
+femSamps <- malSamps <-matrix(NA, nrow=nSamp, ncol=nSim)
+for (i in 1:nSim)
+{
+  femSamps[,i] <- sample(fem$Height, nSamp)
+  malSamps[,i] <- sample(mal$Height, nSamp)
+}
+
+res <- data.frame(
+  verschil=colMeans(femSamps) - colMeans(malSamps),
+  Rfast::ttests(femSamps, malSamps)
+  )
+
+sum(res$pvalue < 0.05 & res$verschil < 0)
+sum(res$pvalue >= 0.05)
+sum(res$pvalue < 0.05 & res$verschil>0)
+
+res %>%
+  ggplot(aes(x=verschil,y=-log10(pvalue),color=pvalue < 0.05)) +
+  geom_point() +
+  xlab("Gemiddeld Verschil (cm)") +
+  ylab("Statistische Significantie (-log10 p)")
+
+res %>%
+  ggplot(aes(y = verschil)) +
+  geom_boxplot() +
+  ylab("Gemiddeld Verschil (cm)")
+  xlab("")
+```
+
+Op basis van 10000 steekproeven van 5 mannen en 5 vrouwen zagen we dat in `r sum(res$pvalue<0.05&res$verschil<0)` steekproeven vrouwen gemiddeld significant kleiner zijn dan mannen. In `r sum(res$pvalue>=0.05)` steekproeven besluiten we dat vrouwen en mannen gemiddeld niet significant verschillen in lengte. En in `r sum(res$pvalue<0.05&res$verschil>0)` besluiten we dat vrouwen gemiddeld significant groter zijn dan mannen.
+
+- De steekproef die we toonden waaruit we zouden besluiten dat vrouwen significant groter zijn dan mannen is heel onwaarschijnlijk. Er moesten `r paste(seed)` steekproeven worden getrokken om deze extreme steekproef te vinden.
+
+Het feit dat we in veel steekproeven resultaten vinden die statistisch niet significant zijn komt omdat de statistische toets een te lage kracht heeft om het verschil te detecteren wanneer er maar 5 observaties zijn per groep.
+
+---
+
+### Grotere steekproef?
+
+Wat gebeurt er als we de steekproef verhogen naar 50 observaties per groep?
+
+
+```{r}
+set.seed(11145)
+# Aantal simulaties en steekproefgrootte per groep
+nSim <- 10000
+nSamp <- 50
+
+# We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
+fem <- nhanesSub %>%
+  filter(Gender == "female")
+
+mal <- nhanesSub %>%
+  filter(Gender == "male")
+
+# Simulatie studie
+# Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.
+
+femSamps <- malSamps <- matrix(NA, nrow = nSamp, ncol = nSim)
+for (i in 1:nSim)
+{
+  femSamps[,i] <- sample(fem$Height, nSamp)
+  malSamps[,i] <- sample(mal$Height, nSamp)
+}
+
+res <- data.frame(
+  verschil = colMeans(femSamps) - colMeans(malSamps),
+  Rfast::ttests(femSamps, malSamps)
+  )
+
+sum(res$pvalue < 0.05 & res$verschil < 0)
+sum(res$pvalue >= 0.05)
+sum(res$pvalue < 0.05 & res$verschil > 0)
+
+res %>%
+  ggplot(aes(x=verschil,y=-log10(pvalue),color=pvalue<0.05)) +
+  geom_point() +
+  xlab("Gemiddeld Verschil (cm)") +
+  ylab("Statistische Significantie (-log10 p)")
+
+res %>%
+  ggplot(aes(y=verschil)) +
+  geom_boxplot() +
+  ylab("Gemiddeld Verschil (cm)")
+  xlab("")
+```
+
+- We zien dus dat we de kans om een verschil te vinden als er in werkelijkheid een verschil is in de populatie kunnen beïnvloeden in de design fase: aan de hand van de steekproefgrootte.
+
+- Hoe meer gegevens hoe makkelijker we het werkelijk verschil oppikken in de steekproef.
+
+
+### Controle van vals positieven
+
+Wat gebeurt er als er geen verschil is tussen beide groepen?
+
+- We moeten hiervoor experimenten simuleren waarbij de groepen gelijk zijn.  
+
+- Hiervoor zullen we twee groepen vergelijken waarvoor de lengte gemiddeld niet verschillend is.
+
+- Dat kunnen we doen door een steekproef te trekken waarbij we voor beide groepen at random subjecten trekken uit de subset van vrouwen in de NHANES studie.
+
+- We doen dit opnieuw voor een steekproef met 5 subjecten per groep
+
+
+```{r}
+set.seed(13245)
+# Aantal simulaties en steekproefgrootte per groep
+nSim <- 10000
+nSamp <- 5
+
+# We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
+fem <- nhanesSub %>%
+  filter(Gender == "female")
+
+# Simulatie studie
+# Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.
+
+femSamps <- femSamps2 <-matrix(NA, nrow=nSamp, ncol=nSim)
+for (i in 1:nSim)
+{
+  femSamps[,i] <- sample(fem$Height, nSamp)
+  femSamps2[,i] <- sample(fem$Height, nSamp)
+}
+
+res <- data.frame(
+  verschil=colMeans(femSamps) - colMeans(femSamps2),
+  Rfast::ttests(femSamps, femSamps2)
+  )
+
+sum(res$pvalue < 0.05 & res$verschil < 0)
+sum(res$pvalue >= 0.05)
+sum(res$pvalue < 0.05 & res$verschil>0)
+
+res %>%
+  ggplot(aes(x=verschil,y=-log10(pvalue),color=pvalue < 0.05)) +
+  geom_point() +
+  xlab("Gemiddeld Verschil (cm)") +
+  ylab("Statistische Significantie (-log10 p)")
+
+res %>%
+  ggplot(aes(y = verschil)) +
+  geom_boxplot() +
+  ylab("Gemiddeld Verschil (cm)")
+  xlab("")
+```
+
+Op basis van 10000 steekproeven zien we dat we in `r sum(res$pvalue<0.05)` steekproeven ten onrechte besluiten dat er een verschil is in gemiddelde lengte tussen twee groepen vrouwen.
+
+Met de statistische analyse controleren we dus het aantal vals positieve resultaten correct op 5%.
+
+*Wat gebeurt er als we het aantal observaties verhogen?*
+
+We simuleren opnieuw experimenten met 50 subjecten per groep maar we trekken de subjecten opnieuw telkens uit de populatie van vrouwen.
+
+```{r}
+set.seed(1345)
+# Aantal simulaties en steekproefgrootte per groep
+nSim <- 10000
+nSamp <- 50
+
+# We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
+fem <- nhanesSub %>%
+  filter(Gender == "female")
+
+# Simulatie studie
+# Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.
+
+femSamps <- femSamps2 <-matrix(NA, nrow=nSamp, ncol=nSim)
+for (i in 1:nSim)
+{
+  femSamps[,i] <- sample(fem$Height, nSamp)
+  femSamps2[,i] <- sample(fem$Height, nSamp)
+}
+
+res <- data.frame(
+  verschil=colMeans(femSamps) - colMeans(femSamps2),
+  Rfast::ttests(femSamps, femSamps2)
+  )
+
+sum(res$pvalue < 0.05 & res$verschil < 0)
+sum(res$pvalue >= 0.05)
+sum(res$pvalue < 0.05 & res$verschil>0)
+
+res %>%
+  ggplot(aes(x=verschil,y=-log10(pvalue),color=pvalue < 0.05)) +
+  geom_point() +
+  xlab("Gemiddeld Verschil (cm)") +
+  ylab("Statistische Significantie (-log10 p)")
+
+res %>%
+  ggplot(aes(y = verschil)) +
+  geom_boxplot() +
+  ylab("Gemiddeld Verschil (cm)")
+  xlab("")
+```
+
+
+Op basis van 10000 steekproeven zien we dat we in `r sum(res$pvalue<0.05)` steekproeven ten onrechte besluiten dat er een verschil is in gemiddelde lengte tussen twee groepen vrouwen.
+
+Met de statistische analyse controleren we dus ook bij het nemen van een grote steekproef het aantal vals positieve resultaten correct op 5% (Vals positief: Op basis van de steekproef besluiten dat er gemiddeld een verschil is in lengte tussen beide groepen terwijl er in werkelijkheid geen verschil is in de populatie.)
+
+### Conclusies
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7aJPMQglE8A" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+ - De statistische analyse controleert steeds de kans op het nemen van een vals positieve conclusie.
+
+ - De statistische analysis controleert de kans op het nemen van een vals negatieve conclusies niet, maar in de design fase kunnen we deze kans beïnvloeden ondermeer d.m.v. de steekproefgrootte.
+
+---
+
+#Case study: Salk vaccin
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1F8qCfQVW7U" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+- In 1916, brak de eerste grote polio epidemie uit in de USA.
+- Begin de jaren 50 ontwikkelde John Salk een vaccin met belovende resultaten in het lab.
+- In 1954, heeft de National Foundation
+for Infantile Paralysis (NFIP) een grote studie opgezet om de effectiviteit van het Salk vaccin na te gaan.
+- Veronderstel dat de NFIP in 1954 een groot aantal kinderen zou hebben gevaccineerd, wat zouden ze dan kunnen besluiten als de polio incidentie in 1954 lager was dan in 1953?
+
+---
+
+## NFIP Study
+### Design
+
+- Grote simultane studie met gevaccineerde kinderen (cases) en ongevaccineerde kinderen (controles).
+- In scholen van districten met hoge polio incidentie.
+- Cases: kinderen van de tweede graad van het lager onderwijs waarvan de ouders toestemden met vaccinatie.
+- Controles: kinderen van de eerste en derde graad.
+
+### Data
+```{r}
+nfip <- tibble(
+  group=c("cases","controls","noConcent"),
+  grade=c("g2","g1g3","g2"),
+  vaccin=c("yes","no","no"),
+  total=c(221998,725173,123605),
+  polio=c(54,391,56)
+  ) %>%
+  mutate(noPolio = total - polio)
+knitr::kable(nfip)
+```
+
+Vergelijk de polio incidentie?
+
+---
+
+```{r}
+nfip <- nfip %>%
+  mutate(incidencePM = round(nfip$polio/nfip$total*1e6,0))
+knitr::kable(nfip)
+```
+
+Wat kunnen we concluderen?
+
+---
+
+## Confounding
+
+
+```{r,echo=FALSE, fig.align = "center",out.width = '50%'}
+plot(c(0,0,1),c(-2,2,0),pch=c("S","V","P"),xaxt="none",yaxt="none",axes=FALSE,xlab="",ylab="",cex=4,ylim=c(-2.2,2.2))
+arrows(x0=0.1,x1=.9,y0=1.8,y1=0.1,lwd=4)
+arrows(x0=0.1,x1=.9,y0=-1.8,y1=-0.2,lwd=4)
+arrows(x0=0,x1=0,y0=-1.4,y1=1.4,lwd=4)
+```
+
+
+- We observeren een lagere polio (P) incidentie voor kinderen bij wie de ouders geen toestemming gaven dan in de controle groep.  
+
+- Toestemming voor vaccinatie (V) is geassocieerd met de socio-economische status (S).
+
+- Kinderen van lagere socio-economische status zijn meer resistent tegen de ziekte.
+
+- De groepen van cases en controles zijn niet vergelijkbaar
+    - verschil in leeftijd
+    - verschil in socio-economische status en
+    - verschil in vatbaarheid voor de ziekte.
+
+---
+
+## Salk Study
+
+### Design
+Een nieuwe studie werd uitgevoerd: dubbel blinde gerandomiseerde studie.
+
+  - Kinderen worden at random toegewezen aan controle of case arm van het experiment nadat de ouders toestemden met vaccinatie.
+  - Controle: vaccinatie met placebo
+  - Treatment: vaccinatie met vaccin
+  - Double blinding:
+    - ouders en kinderen weten niet of ze werden gevaccineerd of niet
+    - medische staf en onderzoekers weten niet of het kind het vaccin of de placebo kreeg
+
+---
+
+### Data
+
+```{r}
+salk <- data.frame(
+  group=c("cases","control","noConcent"),
+  treatment=c("vaccine","placebo","none"),
+  total=c(200745,201229, 338778),polio=c(57,142,157)
+  ) %>%
+  mutate(
+    noPolio = total-polio,
+    incidencePM = round(polio/total*1e6,0)
+    )
+knitr::kable(salk)
+```
+
+- We observeren een veel groter effect nu dat cases en controles vergelijkbaar zijn, incidentie van respectievelijk `r salk$incidencePM[1]`  and `r salk$incidencePM[2]` per miljoen.
+
+- De polio incidentie voor kinderen die geen toestemming geven blijft vergelijkbaar  `r nfip$incidencePM[3]` and `r salk$incidencePM[3]` per miljoen respectievelijk in the NFIP and Salk study.
+
+---
+
+# Rol van Statistiek
+
+- We hebben gezien dat
+    - het belangrijk is om de scope van de studie goed te specifiëren voor de start van het experiment
+    - randomisatie nodig is om een representatieve steekproef te nemen
+    - steekproef grootte is heel belangrijk
+    - we moeten ons bewust zijn van Confounding
+    - een goede controle is belangrijk
+
+
+$\rightarrow$ Goede proefopzet is cruciaal!
+
+---
+
+- We hebben ook geobserveerd dat er variabiliteit is in de populatie
+- We kunnen maar een beperkte steekproef nemen uit de populatie
+
+$\rightarrow$ onzekerheid in de resultaten
+$\rightarrow$ onzekerheid in de conclusies
+
+
+---
+
+- Statistiek is de wetenschap voor het
+    1. verzamelen (experimenteel design),
+    2. exploren (data exploration) en
+    3. leren van data zodat we hetgeen we observeren in de steekproef zouden kunnen veralgemenen naar de populatie terwijl we de onzekerheid quantificeren, controleren en rapporteren (statistisch modelleren en statistische besluitvorming).
+
+- Statistiek speelt daarom een heel belangrijke rol in zowat alle wetenschappen
+
+
+# [Home](https://gtpb.github.io/sbc20/) {-}
