@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Hoofdstuk 9 Categorische data analyse | Inleiding tot de Biostatistiek 2022-2023</title>
-  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Hoofdstuk 9 Categorische data analyse | Inleiding tot de Biostatistiek 2022-2023" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta property="og:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="github-repo" content="statOmics/statistiek2deBach" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hoofdstuk 9 Categorische data analyse | Inleiding tot de Biostatistiek 2022-2023" />
   
-  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="twitter:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   
 
 <meta name="author" content="Lieven Clement" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -563,7 +567,7 @@ de data volgen een Bernoulli verdeling, maar gemiddelde o.b.v. onafhankelijke en
 <li><span class="math inline">\(\text{Var}[\bar X] = \frac{\text{Var}[X]}{n} = \frac{\pi(1-\pi)}{n}\)</span>.</li>
 </ul>
 <p>Uit de steekproef weten we verder dat <span class="math inline">\(\bar x\)</span> = 0.516 en kunnen we de standard error schatten:</p>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="chap-categorisch.html#cb462-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((pi <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> pi))<span class="sc">/</span>n)</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="chap-categorisch.html#cb462-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>((pi<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>pi))<span class="sc">/</span>n)</span></code></pre></div>
 <p>De standard error is dus SE = 0.0064</p>
 <p><span class="math display">\[
 \text{SE} = \hat\sigma_{\bar x} = \sqrt{\frac{\bar x(1-\bar x)}{n}} \]</span></p>
@@ -590,11 +594,11 @@ Daarom zullen we de nul hupothese falsifiëren dat <span class="math inline">\(\
 </ul>
 <p>We kunnen eenvoudig een p-waarde bekomen door gebruik te maken van de cumulatieve distributie van een standaard normale verdeling. Merk op dat het een tweezijdige test is!</p>
 <div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="chap-categorisch.html#cb463-1" aria-hidden="true" tabindex="-1"></a>pi0 <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb463-2"><a href="chap-categorisch.html#cb463-2" aria-hidden="true" tabindex="-1"></a>se0 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(pi0 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> pi0)<span class="sc">/</span>n)</span>
-<span id="cb463-3"><a href="chap-categorisch.html#cb463-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (pi <span class="sc">-</span> pi0)<span class="sc">/</span>se0</span>
+<span id="cb463-2"><a href="chap-categorisch.html#cb463-2" aria-hidden="true" tabindex="-1"></a>se0 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(pi0<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>pi0)<span class="sc">/</span>n)</span>
+<span id="cb463-3"><a href="chap-categorisch.html#cb463-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (pi<span class="sc">-</span>pi0)<span class="sc">/</span>se0</span>
 <span id="cb463-4"><a href="chap-categorisch.html#cb463-4" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
 <pre><code>## [1] 2.485539</code></pre>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="chap-categorisch.html#cb465-1" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z), <span class="at">lower =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span></span>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="chap-categorisch.html#cb465-1" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z),<span class="at">lower=</span><span class="cn">FALSE</span>) <span class="sc">*</span><span class="dv">2</span></span>
 <span id="cb465-2"><a href="chap-categorisch.html#cb465-2" aria-hidden="true" tabindex="-1"></a>pval</span></code></pre></div>
 <pre><code>## [1] 0.01293554</code></pre>
 <p>We besluiten dus dat er significant meer kans is dat een ongeboren kind mannelijk dan vrouwelijk is (p=0.013). De kans dat een ongeboren kind mannelijk is bedraagt 0.516 (95% BI [0.503, 0.528]).</p>
@@ -736,25 +740,25 @@ In de onderstelling dat jongens en meisjes even waarschijnlijk zijn (d.i. onder 
 <p>Gezien <span class="math inline">\(\pi=0.5\)</span> zijn deze kansen gelijk omdat de binomiale distributie dan symmetrisch is. Dat is niet langer het geval wanneer <span class="math inline">\(\pi\)</span> afwijkt van 0.5.</p>
 <p>In R kan men de kansen berekenen via de commando’s:</p>
 <div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="chap-categorisch.html#cb467-1" aria-hidden="true" tabindex="-1"></a>pi0 <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb467-2"><a href="chap-categorisch.html#cb467-2" aria-hidden="true" tabindex="-1"></a>s0 <span class="ot">&lt;-</span> pi0 <span class="sc">*</span> n</span>
-<span id="cb467-3"><a href="chap-categorisch.html#cb467-3" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="fu">abs</span>(boys <span class="sc">-</span> s0)</span>
+<span id="cb467-2"><a href="chap-categorisch.html#cb467-2" aria-hidden="true" tabindex="-1"></a>s0 <span class="ot">&lt;-</span> pi0 <span class="sc">*</span>n</span>
+<span id="cb467-3"><a href="chap-categorisch.html#cb467-3" aria-hidden="true" tabindex="-1"></a>delta <span class="ot">&lt;-</span> <span class="fu">abs</span>(boys<span class="sc">-</span> s0)</span>
 <span id="cb467-4"><a href="chap-categorisch.html#cb467-4" aria-hidden="true" tabindex="-1"></a>delta</span></code></pre></div>
 <pre><code>## [1] 97.5</code></pre>
 <div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="chap-categorisch.html#cb469-1" aria-hidden="true" tabindex="-1"></a>sUp <span class="ot">&lt;-</span> s0 <span class="sc">+</span> delta</span>
-<span id="cb469-2"><a href="chap-categorisch.html#cb469-2" aria-hidden="true" tabindex="-1"></a>sDown <span class="ot">&lt;-</span> s0 <span class="sc">-</span> delta</span>
-<span id="cb469-3"><a href="chap-categorisch.html#cb469-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(sDown, sUp)</span></code></pre></div>
+<span id="cb469-2"><a href="chap-categorisch.html#cb469-2" aria-hidden="true" tabindex="-1"></a>sDown <span class="ot">&lt;-</span> s0 <span class="sc">-</span>delta</span>
+<span id="cb469-3"><a href="chap-categorisch.html#cb469-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(sDown,sUp)</span></code></pre></div>
 <pre><code>## [1] 2980 3175</code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="chap-categorisch.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merk op dat we voor de berekening naar rechts</span></span>
-<span id="cb471-2"><a href="chap-categorisch.html#cb471-2" aria-hidden="true" tabindex="-1"></a><span class="co"># pbinom(sUp-1,n,pi) gebruiken omdat we met</span></span>
-<span id="cb471-3"><a href="chap-categorisch.html#cb471-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pbinom de kans berekenen in de linkse staart</span></span>
-<span id="cb471-4"><a href="chap-categorisch.html#cb471-4" aria-hidden="true" tabindex="-1"></a><span class="co"># anders wordt s=3175 er niet bij geteld!</span></span>
-<span id="cb471-5"><a href="chap-categorisch.html#cb471-5" aria-hidden="true" tabindex="-1"></a>pUp <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(sUp <span class="sc">-</span> <span class="dv">1</span>, n, pi0)</span>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="chap-categorisch.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Merk op dat we voor de berekening naar rechts</span></span>
+<span id="cb471-2"><a href="chap-categorisch.html#cb471-2" aria-hidden="true" tabindex="-1"></a><span class="co">#pbinom(sUp-1,n,pi) gebruiken omdat we met</span></span>
+<span id="cb471-3"><a href="chap-categorisch.html#cb471-3" aria-hidden="true" tabindex="-1"></a><span class="co">#pbinom de kans berekenen in de linkse staart</span></span>
+<span id="cb471-4"><a href="chap-categorisch.html#cb471-4" aria-hidden="true" tabindex="-1"></a><span class="co">#anders wordt s=3175 er niet bij geteld!</span></span>
+<span id="cb471-5"><a href="chap-categorisch.html#cb471-5" aria-hidden="true" tabindex="-1"></a>pUp <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(sUp<span class="dv">-1</span>, n, pi0)</span>
 <span id="cb471-6"><a href="chap-categorisch.html#cb471-6" aria-hidden="true" tabindex="-1"></a>pUp</span></code></pre></div>
 <pre><code>## [1] 0.006699883</code></pre>
 <div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="chap-categorisch.html#cb473-1" aria-hidden="true" tabindex="-1"></a>pDown <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(sDown, n, pi0)</span>
 <span id="cb473-2"><a href="chap-categorisch.html#cb473-2" aria-hidden="true" tabindex="-1"></a>pDown</span></code></pre></div>
 <pre><code>## [1] 0.006699883</code></pre>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="chap-categorisch.html#cb475-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> pUp <span class="sc">+</span> pDown</span>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="chap-categorisch.html#cb475-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> pUp<span class="sc">+</span>pDown</span>
 <span id="cb475-2"><a href="chap-categorisch.html#cb475-2" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <pre><code>## [1] 0.01339977</code></pre>
 <p>waarbij <code>pbinom(sUp-1,n,pi0)</code> de kans op een resultaat kleiner of gelijk aan <span class="math inline">\(s_0+\vert \delta\vert -1 =\)</span> 3174 berekent.
@@ -825,10 +829,74 @@ Figuur 9.4: Experimentele opstelling voor het bepalen van de partnerkeuze bij dw
 </div>
 <p>De mannetjes, die overigens broers zijn, hangen vast aan de doos waardoor ze zich slechts over drie vierden van de ruimte van hun compartiment vrij kunnen bewegen. Na alle dieren enkele minuten te laten acclimatiseren worden niet-doorzichtige wanden die de compartimenten scheidden, opgetrokken waardoor het vrouwtje zich via de aangegeven deurtjes naar de mannetjes kan begeven. Aangezien de mannetjes zich niet buiten hun compartiment kunnen begeven, ligt de keuze volledig in de handen van het vrouwtje. Het wordt aangenomen dat het vrouwtje een partnerkeuze maakt indien ze meer dan twee derden van de tijd met één mannetje doorbrengt, relatief ten opzichte van de totale tijd die ze met mannetjes doorbrengt.</p>
 <p>Elk vrouwtje onderging tweemaal de test, waarbij ze telkens kon kiezen tussen één agressief en één niet-agressief mannetje. Om te onderzoeken of de partnerkeuze van het vrouwtje beïnvloed wordt door de omgeving, kwam het vrouwtje in één van de testen uit een vijandige omgeving (hoge populatie, weinig voedsel, veel concurrentie) en in een andere test uit een vriendelijkere omgeving.</p>
-<p>De resultaten van de studie zijn samengevat in de onderstaande kruistabel (Tabel <a href="#tab:catHamster"><strong>??</strong></a>).</p>
-<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="chap-categorisch.html#cb479-1" aria-hidden="true" tabindex="-1"></a>hamster <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">17</span>, <span class="dv">1</span>, <span class="dv">13</span>), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<p>De resultaten van de studie zijn samengevat in de onderstaande kruistabel (Tabel <a href="chap-categorisch.html#tab:catHamster">9.1</a>).</p>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="chap-categorisch.html#cb479-1" aria-hidden="true" tabindex="-1"></a>hamster <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">17</span>,<span class="dv">1</span>,<span class="dv">13</span>),<span class="at">ncol=</span><span class="dv">2</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
 <span id="cb479-2"><a href="chap-categorisch.html#cb479-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(hamster) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;vijandig-agressief&quot;</span>, <span class="st">&quot;vijandig-niet-agressief&quot;</span>)</span>
-<span id="cb479-3"><a href="chap-categorisch.html#cb479-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(hamster) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;vriendelijk-agressief&quot;</span>, <span class="st">&quot;vriendelijk-niet-agressief&quot;</span>)</span></code></pre></div>
+<span id="cb479-3"><a href="chap-categorisch.html#cb479-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(hamster) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;vriendelijk-agressief&quot;</span>,<span class="st">&quot;vriendelijk-niet-agressief&quot;</span>)</span></code></pre></div>
+<table>
+<caption>
+<span id="tab:catHamster">Tabel 9.1: </span>Kruistabel van partnerkeuze bij dwerghamster.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+vriendelijk-agressief
+</th>
+<th style="text-align:left;">
+vriendelijk-niet-agressief
+</th>
+<th style="text-align:left;">
+totaal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+vijandig-agressief
+</td>
+<td style="text-align:left;">
+3 (e)
+</td>
+<td style="text-align:left;">
+17 (f)
+</td>
+<td style="text-align:left;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+vijandig-niet-agressief
+</td>
+<td style="text-align:left;">
+1 (g)
+</td>
+<td style="text-align:left;">
+13 (h)
+</td>
+<td style="text-align:left;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+totaal
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+30
+</td>
+<td style="text-align:left;">
+34
+</td>
+</tr>
+</tbody>
+</table>
 <p>De kans op de keuze voor een agressief mannetje na verblijf in een vijandige omgeving noteren we als <span class="math inline">\(\pi_1\)</span> en kunnen we schatten als <span class="math inline">\((e+f)/n\)</span>, waarbij <span class="math inline">\(n=e+f+g+h\)</span>. De kans op
 de keuze voor een agressief mannetje na een vriendelijke omgeving noteren we met <span class="math inline">\(\pi_0\)</span>
 en kunnen we schatten als <span class="math inline">\((e+g)/n\)</span>. Het verschil tussen beide kansen,
@@ -846,16 +914,16 @@ als</p>
 <p><span class="math display">\[\left[\widehat{\text{ARV}}-z_{\alpha/2}\text{SE}_{\widehat{\text{ARV}}},\widehat{\text{ARV}}+z_{\alpha/2}\text{SE}_{\widehat{\text{ARV}}}\right]\]</span></p>
 <p>of</p>
 <p><span class="math display">\[\left[\frac{f-g}{n}-\frac{z_{\alpha/2}}{n}\sqrt{f+g-\frac{(f-g)^2}{n}},\frac{f-g}{n}+\frac{z_{\alpha/2}}{n}\sqrt{f+g-\frac{(f-g)^2}{n}}\right] \]</span></p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="chap-categorisch.html#cb480-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> hamster[<span class="dv">1</span>, <span class="dv">2</span>]</span>
-<span id="cb480-2"><a href="chap-categorisch.html#cb480-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> hamster[<span class="dv">2</span>, <span class="dv">1</span>]</span>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="chap-categorisch.html#cb480-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> hamster[<span class="dv">1</span>,<span class="dv">2</span>]</span>
+<span id="cb480-2"><a href="chap-categorisch.html#cb480-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> hamster[<span class="dv">2</span>,<span class="dv">1</span>]</span>
 <span id="cb480-3"><a href="chap-categorisch.html#cb480-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">sum</span>(hamster)</span>
-<span id="cb480-4"><a href="chap-categorisch.html#cb480-4" aria-hidden="true" tabindex="-1"></a>riskdiff <span class="ot">&lt;-</span> (f <span class="sc">-</span> g)<span class="sc">/</span>n</span>
+<span id="cb480-4"><a href="chap-categorisch.html#cb480-4" aria-hidden="true" tabindex="-1"></a>riskdiff <span class="ot">&lt;-</span> (f<span class="sc">-</span>g)<span class="sc">/</span>n</span>
 <span id="cb480-5"><a href="chap-categorisch.html#cb480-5" aria-hidden="true" tabindex="-1"></a>riskdiff</span></code></pre></div>
 <pre><code>## [1] 0.4705882</code></pre>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="chap-categorisch.html#cb482-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(f <span class="sc">+</span> g <span class="sc">-</span> (f <span class="sc">-</span> g)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n)<span class="sc">/</span>n</span>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="chap-categorisch.html#cb482-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(f<span class="sc">+</span>g<span class="sc">-</span>(f<span class="sc">-</span>g)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n)<span class="sc">/</span>n</span>
 <span id="cb482-2"><a href="chap-categorisch.html#cb482-2" aria-hidden="true" tabindex="-1"></a>se</span></code></pre></div>
 <pre><code>## [1] 0.09517144</code></pre>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="chap-categorisch.html#cb484-1" aria-hidden="true" tabindex="-1"></a>bi <span class="ot">&lt;-</span> riskdiff <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> se</span>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="chap-categorisch.html#cb484-1" aria-hidden="true" tabindex="-1"></a>bi <span class="ot">&lt;-</span> riskdiff <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>se</span>
 <span id="cb484-2"><a href="chap-categorisch.html#cb484-2" aria-hidden="true" tabindex="-1"></a>bi</span></code></pre></div>
 <pre><code>## [1] 0.2840556 0.6571208</code></pre>
 <p>Het absolute risicoverschil op de keuze van een agressief mannetje tussen een verblijf in een vijandige en vriendelijke omgeving bedraagt</p>
@@ -909,14 +977,14 @@ De Normale benadering is goed als</p>
 \end{equation*}\]</span></p>
 <p>De <strong>Mc Nemar test</strong> wordt gebruikt om te toetsen of er een associatie is tussen 2 kwalitatieve, binaire variabelen, i.h.b. om te toetsen of de kans op succes voor de ene variabele verschilt tussen de 2 strata van de andere kwalitatieve variabele. Ze vereist dat alle metingen voor de ene kwalitatieve variabele (uitkomst) in het ene stratum van de andere kwalitatieve variabele, onafhankelijk zijn, en dat elke meting uit het ene stratum gepaard is met een meting uit het andere stratum in die zin dat ze van verwante subjecten afkomstig zijn. Op die manier vormt ze het analogon van de gepaarde t-test voor binaire, kwalitatieve i.p.v. continue variabelen.</p>
 <p>We voeren nu de analyse uit voor het hamstervoorbeeld in R:</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="chap-categorisch.html#cb486-1" aria-hidden="true" tabindex="-1"></a>correct <span class="ot">&lt;-</span> f <span class="sc">*</span> g<span class="sc">/</span>(f <span class="sc">+</span> g)</span>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="chap-categorisch.html#cb486-1" aria-hidden="true" tabindex="-1"></a>correct <span class="ot">&lt;-</span> f<span class="sc">*</span>g<span class="sc">/</span>(f<span class="sc">+</span>g)</span>
 <span id="cb486-2"><a href="chap-categorisch.html#cb486-2" aria-hidden="true" tabindex="-1"></a>correct</span></code></pre></div>
 <pre><code>## [1] 0.9444444</code></pre>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="chap-categorisch.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="co"># continuiteitscorrectie</span></span>
-<span id="cb488-2"><a href="chap-categorisch.html#cb488-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (<span class="fu">abs</span>(f <span class="sc">-</span> g) <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span><span class="fu">sqrt</span>(f <span class="sc">+</span> g)</span>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="chap-categorisch.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="co">#continuiteitscorrectie</span></span>
+<span id="cb488-2"><a href="chap-categorisch.html#cb488-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (<span class="fu">abs</span>(f<span class="sc">-</span>g)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">/</span><span class="fu">sqrt</span>(f<span class="sc">+</span>g)</span>
 <span id="cb488-3"><a href="chap-categorisch.html#cb488-3" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
 <pre><code>## [1] 3.535534</code></pre>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="chap-categorisch.html#cb490-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(z)) <span class="sc">*</span> <span class="dv">2</span></span>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="chap-categorisch.html#cb490-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">-</span><span class="fu">pnorm</span>(z))<span class="sc">*</span><span class="dv">2</span></span>
 <span id="cb490-2"><a href="chap-categorisch.html#cb490-2" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <pre><code>## [1] 0.000406952</code></pre>
 <p>Voor het dwerghamster voorbeeld observeren we dat
@@ -947,7 +1015,9 @@ Dergelijke toetsen maken
 gebruik van de exacte Binomiale verdeling van de gegevens om te toetsen of
 de kans dat een lukraak discordant paar in de cel rechtsboven van de tabel
 gelegen is, 0.5 bedraagt.</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="chap-categorisch.html#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> f, <span class="at">n =</span> f <span class="sc">+</span> g, <span class="at">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="chap-categorisch.html#cb494-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>(<span class="at">x =</span> f,</span>
+<span id="cb494-2"><a href="chap-categorisch.html#cb494-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> f <span class="sc">+</span> g,</span>
+<span id="cb494-3"><a href="chap-categorisch.html#cb494-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Exact binomial test
 ## 
@@ -999,14 +1069,93 @@ Een R object met de data is opgeslagen in de file <code>brca.rda</code> in de da
 ##  Mode  :character</code></pre>
 <p>De dataset bevat 3 categorische variabelen: de ziekte status (factor cancer: controle vs case), brca variant (variant: wild type Pro/Pro, enkele mutatie Pro/Leu, dubbele mutatie Leu/Leu) en een factor of men de dubbele Leu/Leu mutatie bevat of niet (variant2).</p>
 <p>Een kruistabel kan in R verkregen worden door</p>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="chap-categorisch.html#cb500-1" aria-hidden="true" tabindex="-1"></a>brcaTab <span class="ot">&lt;-</span> <span class="fu">table</span>(brca<span class="sc">$</span>variant, brca<span class="sc">$</span>cancer)</span>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="chap-categorisch.html#cb500-1" aria-hidden="true" tabindex="-1"></a>brcaTab <span class="ot">&lt;-</span> <span class="fu">table</span>(brca<span class="sc">$</span>variant,brca<span class="sc">$</span>cancer)</span>
 <span id="cb500-2"><a href="chap-categorisch.html#cb500-2" aria-hidden="true" tabindex="-1"></a>brcaTab</span></code></pre></div>
 <pre><code>##          
 ##           case control
 ##   leu/leu   89      56
 ##   pro/leu  369     250
 ##   pro/pro  342     266</code></pre>
-<p>Informatie omtrent het BRCA1-polymorfisme werd bekomen via DNA-analyse en staat opnieuw getabuleerd in Tabel <a href="#tab:leu3"><strong>??</strong></a>.</p>
+<p>Informatie omtrent het BRCA1-polymorfisme werd bekomen via DNA-analyse en staat opnieuw getabuleerd in Tabel <a href="chap-categorisch.html#tab:leu3">9.2</a>.</p>
+<table>
+<caption>
+<span id="tab:leu3">Tabel 9.2: </span>Kruistabel van borstkanker-status versus BRCA1-allel.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Genotype
+</th>
+<th style="text-align:left;">
+Controles
+</th>
+<th style="text-align:left;">
+Cases
+</th>
+<th style="text-align:left;">
+Totaal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pro/Pro
+</td>
+<td style="text-align:left;">
+266 (a)
+</td>
+<td style="text-align:left;">
+342 (d)
+</td>
+<td style="text-align:left;">
+608 (a+d)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pro/Leu
+</td>
+<td style="text-align:left;">
+250 (b)
+</td>
+<td style="text-align:left;">
+369 (e)
+</td>
+<td style="text-align:left;">
+619 (b+e)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leu/Leu
+</td>
+<td style="text-align:left;">
+56 (c)
+</td>
+<td style="text-align:left;">
+89 (f)
+</td>
+<td style="text-align:left;">
+145 (c+f)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Totaal
+</td>
+<td style="text-align:left;">
+572 (a+b+c)
+</td>
+<td style="text-align:left;">
+800 (d+e+f)
+</td>
+<td style="text-align:left;">
+1372 (n)
+</td>
+</tr>
+</tbody>
+</table>
 <!---break-->
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HOoX8qET4os" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen>
 </iframe>
@@ -1017,13 +1166,78 @@ In voorbeeld <a href="#exm:brcaLeu"><strong>??</strong></a> konden we daarom de 
 versus vrouwen zonder de dubbele mutatie als <span class="math inline">\(OR=89\times (266+250)/(56\times (342+369))=89\times 512/(56 \times 711)=1.15\)</span>.
 De odds op borstkanker is bijgevolg 15% hoger bij vrouwen met die specifieke allelcombinatie.
 We kunnen ons nu afvragen of dat verschil groot genoeg is zodat we het effect die we in de steekproef zien kunnen veralgemenen naar de populatie toe.</p>
-<p>Hiertoe zullen we de kruistabel eerst herschrijven tot een 2x2 tabel zodat we de vrouwen met een Leu/Leu variant vergelijken met de vrouwen in de studie die niet homozygoot zijn in de mutatie<a href="#fn57" class="footnote-ref" id="fnref57"><sup>57</sup></a> (Tabel <a href="#tab:leu4"><strong>??</strong></a>).</p>
+<p>Hiertoe zullen we de kruistabel eerst herschrijven tot een 2x2 tabel zodat we de vrouwen met een Leu/Leu variant vergelijken met de vrouwen in de studie die niet homozygoot zijn in de mutatie<a href="#fn57" class="footnote-ref" id="fnref57"><sup>57</sup></a> (Tabel <a href="chap-categorisch.html#tab:leu4">9.3</a>).</p>
 <div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="chap-categorisch.html#cb502-1" aria-hidden="true" tabindex="-1"></a>brcaTab2 <span class="ot">&lt;-</span> <span class="fu">table</span>(brca<span class="sc">$</span>variant2, brca<span class="sc">$</span>cancer)</span>
 <span id="cb502-2"><a href="chap-categorisch.html#cb502-2" aria-hidden="true" tabindex="-1"></a>brcaTab2</span></code></pre></div>
 <pre><code>##          
 ##           case control
 ##   leu/leu   89      56
 ##   other    711     516</code></pre>
+<table>
+<caption>
+<span id="tab:leu4">Tabel 9.3: </span>Kruistabel van borstkanker-status versus Leu/Leu-variant.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Genotype
+</th>
+<th style="text-align:left;">
+Controles
+</th>
+<th style="text-align:left;">
+Cases
+</th>
+<th style="text-align:left;">
+Totaal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+andere
+</td>
+<td style="text-align:left;">
+516 (a)
+</td>
+<td style="text-align:left;">
+711 (c)
+</td>
+<td style="text-align:left;">
+1227 (a+c)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leu/Leu
+</td>
+<td style="text-align:left;">
+56 (b)
+</td>
+<td style="text-align:left;">
+89 (d)
+</td>
+<td style="text-align:left;">
+145 (b+d)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Totaal
+</td>
+<td style="text-align:left;">
+572 (a+b)
+</td>
+<td style="text-align:left;">
+800 (c+d)
+</td>
+<td style="text-align:left;">
+1372 (n)
+</td>
+</tr>
+</tbody>
+</table>
 <!---break-->
 </div>
 <div id="de-pearson-chi-kwadraat-test-voor-ongepaarde-gegevens" class="section level3 hasAnchor" number="9.3.3">
@@ -1079,14 +1293,15 @@ geobserveerde waarde <span class="math inline">\(x^2\)</span> als de nulhypothes
 een <span class="math inline">\(\chi^2_1\)</span>-verdeelde toevalsveranderlijke waarden groter dan <span class="math inline">\(x^2\)</span>
 aanneemt.</p>
 <div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="chap-categorisch.html#cb504-1" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb504-2"><a href="chap-categorisch.html#cb504-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) expected[i, j] <span class="ot">&lt;-</span> <span class="fu">sum</span>(brcaTab2[i,</span>
-<span id="cb504-3"><a href="chap-categorisch.html#cb504-3" aria-hidden="true" tabindex="-1"></a>    ]) <span class="sc">*</span> <span class="fu">sum</span>(brcaTab2[, j])<span class="sc">/</span><span class="fu">sum</span>(brcaTab2)</span>
-<span id="cb504-4"><a href="chap-categorisch.html#cb504-4" aria-hidden="true" tabindex="-1"></a>expected</span></code></pre></div>
+<span id="cb504-2"><a href="chap-categorisch.html#cb504-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb504-3"><a href="chap-categorisch.html#cb504-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb504-4"><a href="chap-categorisch.html#cb504-4" aria-hidden="true" tabindex="-1"></a>        expected[i,j] <span class="ot">&lt;-</span> <span class="fu">sum</span>(brcaTab2[i,]) <span class="sc">*</span> <span class="fu">sum</span>(brcaTab2[,j]) <span class="sc">/</span> <span class="fu">sum</span>(brcaTab2)</span>
+<span id="cb504-5"><a href="chap-categorisch.html#cb504-5" aria-hidden="true" tabindex="-1"></a>expected</span></code></pre></div>
 <pre><code>##          [,1]     [,2]
 ## [1,]  84.5481  60.4519
 ## [2,] 715.4519 511.5481</code></pre>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="chap-categorisch.html#cb506-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">abs</span>(brcaTab2 <span class="sc">-</span> expected) <span class="sc">-</span> <span class="fl">0.5</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>expected)</span>
-<span id="cb506-2"><a href="chap-categorisch.html#cb506-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(x2, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="chap-categorisch.html#cb506-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">abs</span>(brcaTab2 <span class="sc">-</span> expected) <span class="sc">-</span> .<span class="dv">5</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> expected)</span>
+<span id="cb506-2"><a href="chap-categorisch.html#cb506-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(x2, <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.481519</code></pre>
 <p>Omdat de observaties <span class="math inline">\(O_{ij}\)</span> in feite discrete getallen zijn, kan de
 toetsingsgrootheid <span class="math inline">\(X^2\)</span> slechts discrete waarden aannemen en kan een
@@ -1167,7 +1382,7 @@ kolommen.</p>
 ## 
 ## data:  brcaTab
 ## X-squared = 2.0551, df = 2, p-value = 0.3579</code></pre>
-<p>Om te onderzoeken of het BRCA1 gen geassocieerd is met borstkanker, berekenen we de Pearson chi-kwadraat toets voor de case-controle studie uit Tabel <a href="#tab:leu3"><strong>??</strong></a>. De toetsingsgrootheid bedraagt nu 2.055 en volgt een Chi-kwadraat verdeling met 2 vrijheidsgraden. De kans dat zo’n <span class="math inline">\(\chi^2\)</span>- verdeelde toevalsveranderlijke extremer is dan 2.055, bedraagt 36%.
+<p>Om te onderzoeken of het BRCA1 gen geassocieerd is met borstkanker, berekenen we de Pearson chi-kwadraat toets voor de case-controle studie uit Tabel <a href="chap-categorisch.html#tab:leu3">9.2</a>. De toetsingsgrootheid bedraagt nu 2.055 en volgt een Chi-kwadraat verdeling met 2 vrijheidsgraden. De kans dat zo’n <span class="math inline">\(\chi^2\)</span>- verdeelde toevalsveranderlijke extremer is dan 2.055, bedraagt 36%.
 Op het 5% significantieniveau kunnen we dus niet besluiten dat het BRCA1 gen geassocieerd is met borstkanker.</p>
 <p>De <strong>Pearson <span class="math inline">\(\chi^2\)</span> test</strong> wordt gebruikt om te toetsen of er een associatie is tussen 2 kwalitatieve (mogelijks niet binaire) variabelen, i.h.b. om te toetsen of de verdeling<a href="#fn58" class="footnote-ref" id="fnref58"><sup>58</sup></a> van de ene kwalitatieve variabele verschilt alnaargelang de waarde van de andere kwalitatieve variabele. Ze vereist dat de 2 metingen voor de 2 kwalitatieve variabelen telkens bekomen werden van onafhankelijke subjecten, en dat minstens 80% van de cellen in de overeenkomstige kruistabel een verwacht aantal observaties van minstens 5 bezitten. Op die manier vormt ze het analogon van de one-way variantie-analyse voor kwalitatieve i.p.v. continue variabelen.</p>
 </div>
@@ -1211,15 +1426,21 @@ We zullen hierbij 1 dummy variable minder nodig hebben dan er groepen zijn.</p>
 <li>en dat we de functie <code>relevel</code> gebruiken om de controles als referentie groep de definiëren: eerste niveau van de factor.</li>
 </ul>
 <div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="chap-categorisch.html#cb516-1" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span></span>
-<span id="cb516-2"><a href="chap-categorisch.html#cb516-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cancer =</span> cancer <span class="sc">%&gt;%</span></span>
-<span id="cb516-3"><a href="chap-categorisch.html#cb516-3" aria-hidden="true" tabindex="-1"></a>        as.factor <span class="sc">%&gt;%</span></span>
-<span id="cb516-4"><a href="chap-categorisch.html#cb516-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">relevel</span>(<span class="st">&quot;control&quot;</span>), <span class="at">variant =</span> variant <span class="sc">%&gt;%</span></span>
-<span id="cb516-5"><a href="chap-categorisch.html#cb516-5" aria-hidden="true" tabindex="-1"></a>        as.factor <span class="sc">%&gt;%</span></span>
-<span id="cb516-6"><a href="chap-categorisch.html#cb516-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">relevel</span>(<span class="st">&quot;pro/pro&quot;</span>))</span>
-<span id="cb516-7"><a href="chap-categorisch.html#cb516-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb516-8"><a href="chap-categorisch.html#cb516-8" aria-hidden="true" tabindex="-1"></a>brcaLogit <span class="ot">&lt;-</span> <span class="fu">glm</span>(cancer <span class="sc">~</span> variant, <span class="at">data =</span> brca, <span class="at">family =</span> binomial)</span>
-<span id="cb516-9"><a href="chap-categorisch.html#cb516-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb516-10"><a href="chap-categorisch.html#cb516-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brcaLogit)</span></code></pre></div>
+<span id="cb516-2"><a href="chap-categorisch.html#cb516-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb516-3"><a href="chap-categorisch.html#cb516-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cancer =</span> cancer <span class="sc">%&gt;%</span></span>
+<span id="cb516-4"><a href="chap-categorisch.html#cb516-4" aria-hidden="true" tabindex="-1"></a>      as.factor <span class="sc">%&gt;%</span></span>
+<span id="cb516-5"><a href="chap-categorisch.html#cb516-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relevel</span>(<span class="st">&quot;control&quot;</span>),</span>
+<span id="cb516-6"><a href="chap-categorisch.html#cb516-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">variant =</span> variant <span class="sc">%&gt;%</span></span>
+<span id="cb516-7"><a href="chap-categorisch.html#cb516-7" aria-hidden="true" tabindex="-1"></a>      as.factor <span class="sc">%&gt;%</span></span>
+<span id="cb516-8"><a href="chap-categorisch.html#cb516-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relevel</span>(<span class="st">&quot;pro/pro&quot;</span>)</span>
+<span id="cb516-9"><a href="chap-categorisch.html#cb516-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb516-10"><a href="chap-categorisch.html#cb516-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb516-11"><a href="chap-categorisch.html#cb516-11" aria-hidden="true" tabindex="-1"></a>brcaLogit <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb516-12"><a href="chap-categorisch.html#cb516-12" aria-hidden="true" tabindex="-1"></a>  cancer <span class="sc">~</span> variant,</span>
+<span id="cb516-13"><a href="chap-categorisch.html#cb516-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> brca,</span>
+<span id="cb516-14"><a href="chap-categorisch.html#cb516-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> binomial)</span>
+<span id="cb516-15"><a href="chap-categorisch.html#cb516-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb516-16"><a href="chap-categorisch.html#cb516-16" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brcaLogit)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = cancer ~ variant, family = binomial, data = brca)
@@ -1274,10 +1495,11 @@ De p-waarde is bijna equivalent aan de p-waarde van de <span class="math inline"
 Voor het BRCA1 voorbeeld zouden we uiteraard geen post-hoc testen uitvoeren omdat de globale <span class="math inline">\(\chi^2\)</span>-test voor het testen van associatie niet significant is.
 We illustreren de post-hoc analyse toch zodat jullie over de code beschikken voor het uitvoeren van de analyses.</p>
 <div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="chap-categorisch.html#cb520-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
-<span id="cb520-2"><a href="chap-categorisch.html#cb520-2" aria-hidden="true" tabindex="-1"></a>posthoc <span class="ot">&lt;-</span> <span class="fu">glht</span>(brcaLogit, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">variant =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
-<span id="cb520-3"><a href="chap-categorisch.html#cb520-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb520-4"><a href="chap-categorisch.html#cb520-4" aria-hidden="true" tabindex="-1"></a>posthocTests <span class="ot">&lt;-</span> <span class="fu">summary</span>(posthoc)</span>
-<span id="cb520-5"><a href="chap-categorisch.html#cb520-5" aria-hidden="true" tabindex="-1"></a>posthocTests</span></code></pre></div>
+<span id="cb520-2"><a href="chap-categorisch.html#cb520-2" aria-hidden="true" tabindex="-1"></a>posthoc <span class="ot">&lt;-</span> <span class="fu">glht</span>(brcaLogit,</span>
+<span id="cb520-3"><a href="chap-categorisch.html#cb520-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">variant =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
+<span id="cb520-4"><a href="chap-categorisch.html#cb520-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-5"><a href="chap-categorisch.html#cb520-5" aria-hidden="true" tabindex="-1"></a>posthocTests <span class="ot">&lt;-</span> <span class="fu">summary</span>(posthoc)</span>
+<span id="cb520-6"><a href="chap-categorisch.html#cb520-6" aria-hidden="true" tabindex="-1"></a>posthocTests</span></code></pre></div>
 <pre><code>## 
 ##   Simultaneous Tests for General Linear Hypotheses
 ## 
@@ -1326,7 +1548,7 @@ We illustreren de post-hoc analyse toch zodat jullie over de code beschikken voo
 ## [1] 0.95
 ## attr(,&quot;calpha&quot;)
 ## [1] 2.326099</code></pre>
-<p>De odds ratios die worden bekomen met het logistisch regressiemodel zijn exact gelijk aan de odds ratios die we zouden bekomen op basis van Tabel <a href="#tab:leu3"><strong>??</strong></a>:
+<p>De odds ratios die worden bekomen met het logistisch regressiemodel zijn exact gelijk aan de odds ratios die we zouden bekomen op basis van Tabel <a href="chap-categorisch.html#tab:leu3">9.2</a>:
 vb. <span class="math inline">\(\text{OR}_\text{Leu/Leu-Pro/Pro}=89\times 266/(56\times 342)=\)</span> 1.236.</p>
 <p>Merk op dat de statistische besluitvorming bij logistische modellen beroep doet op asymptotische theorie. Ze is dus enkel correct voor grote steekproeven.</p>
 <!---break-->
@@ -1363,9 +1585,12 @@ Een R object met de data is opgeslagen in de file <code>kevers.rda</code> in de 
 ##   188.39 0 4</code></pre>
 <p>We bouwen nu een logistisch regressiemodel waarbij we de log odds modelleren in functie van de dosis <span class="math inline">\(x_i\)</span>:</p>
 <p><span class="math display">\[\log \frac{\pi_i}{1-\pi_i}=\beta_0+\beta_1 \times x_i.\]</span></p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="chap-categorisch.html#cb530-1" aria-hidden="true" tabindex="-1"></a>beetleModel <span class="ot">&lt;-</span> <span class="fu">glm</span>(status <span class="sc">~</span> dose, <span class="at">data =</span> beetles, <span class="at">family =</span> binomial)</span>
-<span id="cb530-2"><a href="chap-categorisch.html#cb530-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb530-3"><a href="chap-categorisch.html#cb530-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(beetleModel)</span></code></pre></div>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="chap-categorisch.html#cb530-1" aria-hidden="true" tabindex="-1"></a>beetleModel<span class="ot">&lt;-</span><span class="fu">glm</span>(</span>
+<span id="cb530-2"><a href="chap-categorisch.html#cb530-2" aria-hidden="true" tabindex="-1"></a>  status<span class="sc">~</span>dose,</span>
+<span id="cb530-3"><a href="chap-categorisch.html#cb530-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> beetles,</span>
+<span id="cb530-4"><a href="chap-categorisch.html#cb530-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> binomial)</span>
+<span id="cb530-5"><a href="chap-categorisch.html#cb530-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb530-6"><a href="chap-categorisch.html#cb530-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(beetleModel)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = status ~ dose, family = binomial, data = beetles)
@@ -1398,25 +1623,43 @@ Merk op dat de interpretatie van het intercept echter wel op een heel sterke ext
 We kunnen predicties voor nieuwe dosissen berekenen d.m.v. de <code>predict</code> functie.
 Het argument <code>type="response"</code> geeft aan dat we de predicties op de probabiliteitsschaal wensen.
 Wanneer we dat niet specifiëren genereert het model predictie op de log odds schaal.</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="chap-categorisch.html#cb532-1" aria-hidden="true" tabindex="-1"></a>beetlesTab <span class="ot">&lt;-</span> <span class="fu">table</span>(beetles) <span class="sc">%&gt;%</span></span>
-<span id="cb532-2"><a href="chap-categorisch.html#cb532-2" aria-hidden="true" tabindex="-1"></a>    data.frame</span>
-<span id="cb532-3"><a href="chap-categorisch.html#cb532-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb532-4"><a href="chap-categorisch.html#cb532-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">grid =</span> <span class="fu">seq</span>(<span class="fu">min</span>(beetles<span class="sc">$</span>dose), <span class="fu">max</span>(beetles<span class="sc">$</span>dose),</span>
-<span id="cb532-5"><a href="chap-categorisch.html#cb532-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb532-6"><a href="chap-categorisch.html#cb532-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">piHat =</span> <span class="fu">predict</span>(beetleModel, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose =</span> grid),</span>
-<span id="cb532-7"><a href="chap-categorisch.html#cb532-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb532-8"><a href="chap-categorisch.html#cb532-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(grid, piHat)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;dose&quot;</span>) <span class="sc">+</span></span>
-<span id="cb532-9"><a href="chap-categorisch.html#cb532-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;probability (dead)&quot;</span>) <span class="sc">+</span> <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">%&gt;%</span></span>
-<span id="cb532-10"><a href="chap-categorisch.html#cb532-10" aria-hidden="true" tabindex="-1"></a>    as.character <span class="sc">%&gt;%</span></span>
-<span id="cb532-11"><a href="chap-categorisch.html#cb532-11" aria-hidden="true" tabindex="-1"></a>    as.double, <span class="at">y =</span> status <span class="sc">%&gt;%</span></span>
-<span id="cb532-12"><a href="chap-categorisch.html#cb532-12" aria-hidden="true" tabindex="-1"></a>    as.character <span class="sc">%&gt;%</span></span>
-<span id="cb532-13"><a href="chap-categorisch.html#cb532-13" aria-hidden="true" tabindex="-1"></a>    as.double, <span class="at">label =</span> Freq), beetlesTab <span class="sc">%&gt;%</span></span>
-<span id="cb532-14"><a href="chap-categorisch.html#cb532-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(status <span class="sc">==</span> <span class="dv">0</span>)) <span class="sc">+</span> <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">%&gt;%</span></span>
-<span id="cb532-15"><a href="chap-categorisch.html#cb532-15" aria-hidden="true" tabindex="-1"></a>    as.character <span class="sc">%&gt;%</span></span>
-<span id="cb532-16"><a href="chap-categorisch.html#cb532-16" aria-hidden="true" tabindex="-1"></a>    as.double, <span class="at">y =</span> status <span class="sc">%&gt;%</span></span>
-<span id="cb532-17"><a href="chap-categorisch.html#cb532-17" aria-hidden="true" tabindex="-1"></a>    as.character <span class="sc">%&gt;%</span></span>
-<span id="cb532-18"><a href="chap-categorisch.html#cb532-18" aria-hidden="true" tabindex="-1"></a>    as.double, <span class="at">label =</span> Freq), beetlesTab <span class="sc">%&gt;%</span></span>
-<span id="cb532-19"><a href="chap-categorisch.html#cb532-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(status <span class="sc">==</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="chap-categorisch.html#cb532-1" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">%&gt;%</span> data.frame</span>
+<span id="cb532-2"><a href="chap-categorisch.html#cb532-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb532-3"><a href="chap-categorisch.html#cb532-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb532-4"><a href="chap-categorisch.html#cb532-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="fu">seq</span>(</span>
+<span id="cb532-5"><a href="chap-categorisch.html#cb532-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">min</span>(beetles<span class="sc">$</span>dose),</span>
+<span id="cb532-6"><a href="chap-categorisch.html#cb532-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">max</span>(beetles<span class="sc">$</span>dose),.<span class="dv">1</span>)</span>
+<span id="cb532-7"><a href="chap-categorisch.html#cb532-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb532-8"><a href="chap-categorisch.html#cb532-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">piHat =</span> <span class="fu">predict</span>(beetleModel,</span>
+<span id="cb532-9"><a href="chap-categorisch.html#cb532-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose=</span>grid),</span>
+<span id="cb532-10"><a href="chap-categorisch.html#cb532-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb532-11"><a href="chap-categorisch.html#cb532-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb532-12"><a href="chap-categorisch.html#cb532-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(grid, piHat))<span class="sc">+</span></span>
+<span id="cb532-13"><a href="chap-categorisch.html#cb532-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb532-14"><a href="chap-categorisch.html#cb532-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;dose&quot;</span>) <span class="sc">+</span></span>
+<span id="cb532-15"><a href="chap-categorisch.html#cb532-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;probability (dead)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb532-16"><a href="chap-categorisch.html#cb532-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb532-17"><a href="chap-categorisch.html#cb532-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">%&gt;%</span></span>
+<span id="cb532-18"><a href="chap-categorisch.html#cb532-18" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
+<span id="cb532-19"><a href="chap-categorisch.html#cb532-19" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
+<span id="cb532-20"><a href="chap-categorisch.html#cb532-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">%&gt;%</span></span>
+<span id="cb532-21"><a href="chap-categorisch.html#cb532-21" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
+<span id="cb532-22"><a href="chap-categorisch.html#cb532-22" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
+<span id="cb532-23"><a href="chap-categorisch.html#cb532-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> Freq),</span>
+<span id="cb532-24"><a href="chap-categorisch.html#cb532-24" aria-hidden="true" tabindex="-1"></a>    beetlesTab <span class="sc">%&gt;%</span></span>
+<span id="cb532-25"><a href="chap-categorisch.html#cb532-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">0</span>)</span>
+<span id="cb532-26"><a href="chap-categorisch.html#cb532-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb532-27"><a href="chap-categorisch.html#cb532-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb532-28"><a href="chap-categorisch.html#cb532-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">%&gt;%</span></span>
+<span id="cb532-29"><a href="chap-categorisch.html#cb532-29" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
+<span id="cb532-30"><a href="chap-categorisch.html#cb532-30" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
+<span id="cb532-31"><a href="chap-categorisch.html#cb532-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">%&gt;%</span></span>
+<span id="cb532-32"><a href="chap-categorisch.html#cb532-32" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
+<span id="cb532-33"><a href="chap-categorisch.html#cb532-33" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
+<span id="cb532-34"><a href="chap-categorisch.html#cb532-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">label=</span>Freq),</span>
+<span id="cb532-35"><a href="chap-categorisch.html#cb532-35" aria-hidden="true" tabindex="-1"></a>   beetlesTab <span class="sc">%&gt;%</span></span>
+<span id="cb532-36"><a href="chap-categorisch.html#cb532-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">1</span>)</span>
+<span id="cb532-37"><a href="chap-categorisch.html#cb532-37" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:keversFit"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/keversFit-1.png" alt="Fit van het logistische regressiemodel voor de kevers data. Het aantal kevers die dood/levend was per dosis is weergegeven met een cijfer." width="100%" />
 <p class="caption">

@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Hoofdstuk 7 Variantie analyse | Inleiding tot de Biostatistiek 2022-2023</title>
-  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Hoofdstuk 7 Variantie analyse | Inleiding tot de Biostatistiek 2022-2023" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta property="og:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="github-repo" content="statOmics/statistiek2deBach" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hoofdstuk 7 Variantie analyse | Inleiding tot de Biostatistiek 2022-2023" />
   
-  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="twitter:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   
 
 <meta name="author" content="Lieven Clement" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -518,11 +522,11 @@ De data is opgeslagen in een tekst bestand met naam <code>prostacyclin.txt</code
 Een boxplot en QQ-plots voor de data in elke groep worden weergegeven in Figuur <a href="chap-anova.html#fig:prostBox">7.1</a> en <a href="chap-anova.html#fig:prostBox2">7.2</a> respectievelijk.</p>
 <div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="chap-anova.html#cb351-1" aria-hidden="true" tabindex="-1"></a>prostacyclin <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/prostacyclin.txt&quot;</span>)</span>
 <span id="cb351-2"><a href="chap-anova.html#cb351-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb351-3"><a href="chap-anova.html#cb351-3" aria-hidden="true" tabindex="-1"></a><span class="co"># dosis wordt als continue covariaat ingelezen</span></span>
-<span id="cb351-4"><a href="chap-anova.html#cb351-4" aria-hidden="true" tabindex="-1"></a><span class="co"># zet om naar een factor.</span></span>
+<span id="cb351-3"><a href="chap-anova.html#cb351-3" aria-hidden="true" tabindex="-1"></a><span class="co">#dosis wordt als continue covariaat ingelezen</span></span>
+<span id="cb351-4"><a href="chap-anova.html#cb351-4" aria-hidden="true" tabindex="-1"></a><span class="co">#zet om naar een factor.</span></span>
 <span id="cb351-5"><a href="chap-anova.html#cb351-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb351-6"><a href="chap-anova.html#cb351-6" aria-hidden="true" tabindex="-1"></a>prostacyclin <span class="ot">&lt;-</span> prostacyclin <span class="sc">%&gt;%</span></span>
-<span id="cb351-7"><a href="chap-anova.html#cb351-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">dose =</span> <span class="fu">as.factor</span>(prostacyclin<span class="sc">$</span>dose))</span>
+<span id="cb351-7"><a href="chap-anova.html#cb351-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dose =</span> <span class="fu">as.factor</span>(prostacyclin<span class="sc">$</span>dose))</span>
 <span id="cb351-8"><a href="chap-anova.html#cb351-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prostacyclin)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 2
 ##   prostac dose 
@@ -534,9 +538,10 @@ Een boxplot en QQ-plots voor de data in elke groep worden weergegeven in Figuur 
 ## 5    15.9 10   
 ## 6    33.3 10</code></pre>
 <div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="chap-anova.html#cb353-1" aria-hidden="true" tabindex="-1"></a>prostacyclin <span class="sc">%&gt;%</span></span>
-<span id="cb353-2"><a href="chap-anova.html#cb353-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> prostac, <span class="at">fill =</span> dose)) <span class="sc">+</span></span>
-<span id="cb353-3"><a href="chap-anova.html#cb353-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
-<span id="cb353-4"><a href="chap-anova.html#cb353-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;prostacyclin (ng/ml)&quot;</span>)</span></code></pre></div>
+<span id="cb353-2"><a href="chap-anova.html#cb353-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> prostac, <span class="at">fill =</span> dose)) <span class="sc">+</span></span>
+<span id="cb353-3"><a href="chap-anova.html#cb353-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb353-4"><a href="chap-anova.html#cb353-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
+<span id="cb353-5"><a href="chap-anova.html#cb353-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;prostacyclin (ng/ml)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:prostBox"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/prostBox-1.png" alt="Data-exploratie van het prostacycline niveau bij 36 ratten die behandeld werden met drie verschillende arachidonzuurconcentraties (12 ratten per behandeling). Boxplots van prostacycline niveau in functie van de dosis." width="100%" />
 <p class="caption">
@@ -544,8 +549,10 @@ Figuur 7.1: Data-exploratie van het prostacycline niveau bij 36 ratten die behan
 </p>
 </div>
 <div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="chap-anova.html#cb354-1" aria-hidden="true" tabindex="-1"></a>prostacyclin <span class="sc">%&gt;%</span></span>
-<span id="cb354-2"><a href="chap-anova.html#cb354-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> prostac)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb354-3"><a href="chap-anova.html#cb354-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(<span class="sc">~</span>dose)</span></code></pre></div>
+<span id="cb354-2"><a href="chap-anova.html#cb354-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> prostac)) <span class="sc">+</span></span>
+<span id="cb354-3"><a href="chap-anova.html#cb354-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb354-4"><a href="chap-anova.html#cb354-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb354-5"><a href="chap-anova.html#cb354-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> dose)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:prostBox2"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/prostBox2-1.png" alt="Data-exploratie van het prostacycline niveau bij 36 ratten die behandeld werden met drie verschillende arachidonzuurconcentraties (12 ratten per behandeling). QQ-plot van prostacycline voor lage, matige en hoge dosisgroep." width="100%" />
 <p class="caption">
@@ -856,7 +863,10 @@ Figuur 7.6: Meerdere F-verdelingen met een verschillend aantal vrijheidsgraden i
 <p><span class="math display">\[T_{jk} = \frac{\bar{Y}_j-\bar{Y}_k}{\text{MSE}\sqrt{\frac{1}{n_j}+\frac{1}{n_k}}} \sim t_{n-g}.\]</span></p>
 <p>We zullen hier eerst demonstreren dat het werken met <span class="math inline">\(m\)</span>-testen op het <span class="math inline">\(\alpha\)</span> significantieniveau een foute aanpak is die de kans op een type I fout niet onder controle kan houden. Dit zal aanleiding geven tot een meer algemene definitie van de type I fout.</p>
 <p>Alvorens de denkfout in de naïeve aanpak te demonsteren via simulaties, tonen we hoe de naïeve benadering in zijn werk zou gaan voor het prostacycline voorbeeld.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="chap-anova.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(prostacyclin, <span class="fu">pairwise.t.test</span>(prostac, dose, <span class="st">&quot;none&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="chap-anova.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(</span>
+<span id="cb359-2"><a href="chap-anova.html#cb359-2" aria-hidden="true" tabindex="-1"></a>  prostacyclin,</span>
+<span id="cb359-3"><a href="chap-anova.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise.t.test</span>(prostac, dose, <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb359-4"><a href="chap-anova.html#cb359-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -880,24 +890,22 @@ Verder is het gemiddelde prostacycline niveau niet significant verschillend is t
 3. Voor iedere gesimuleerde dataset zijn er <span class="math inline">\(m=3\)</span> paarsgewijze two-sample <span class="math inline">\(t\)</span>-testen
 4. Zodra minstens één van de <span class="math inline">\(p\)</span>-waarden kleiner is dan het significantieniveau <span class="math inline">\(\alpha=5\%\)</span>, wordt de nulhypothese <span class="math inline">\(H_0: \mu_1=\mu_2=\mu_3\)</span> verworpen omdat er minstens twee gemiddelden verschillend zijn volgens de <span class="math inline">\(t\)</span>-testen.
 5. We rapporteren de relatieve frequentie van het verwerpen van de globale nulhypothese, meer bepaald de kans op een type I fout van de test voor <span class="math inline">\(H_0: \mu_1=\mu_2=\mu_3\)</span>.</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="chap-anova.html#cb361-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># aantal behandelingen (g=3)</span></span>
-<span id="cb361-2"><a href="chap-anova.html#cb361-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># aantal herhalingen in iedere groep</span></span>
-<span id="cb361-3"><a href="chap-anova.html#cb361-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g <span class="sc">*</span> ni  <span class="co"># totaal aantal observaties</span></span>
-<span id="cb361-4"><a href="chap-anova.html#cb361-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span>  <span class="co"># significantieniveau van een individuele test</span></span>
-<span id="cb361-5"><a href="chap-anova.html#cb361-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span>  <span class="co">#aantal simulaties</span></span>
-<span id="cb361-6"><a href="chap-anova.html#cb361-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>)  <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
-<span id="cb361-7"><a href="chap-anova.html#cb361-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni))  <span class="co">#factor</span></span>
-<span id="cb361-8"><a href="chap-anova.html#cb361-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="chap-anova.html#cb361-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># aantal behandelingen (g=3)</span></span>
+<span id="cb361-2"><a href="chap-anova.html#cb361-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># aantal herhalingen in iedere groep</span></span>
+<span id="cb361-3"><a href="chap-anova.html#cb361-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g<span class="sc">*</span>ni <span class="co"># totaal aantal observaties</span></span>
+<span id="cb361-4"><a href="chap-anova.html#cb361-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># significantieniveau van een individuele test</span></span>
+<span id="cb361-5"><a href="chap-anova.html#cb361-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co">#aantal simulaties</span></span>
+<span id="cb361-6"><a href="chap-anova.html#cb361-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>) <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
+<span id="cb361-7"><a href="chap-anova.html#cb361-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni)) <span class="co">#factor</span></span>
+<span id="cb361-8"><a href="chap-anova.html#cb361-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
 <span id="cb361-9"><a href="chap-anova.html#cb361-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb361-10"><a href="chap-anova.html#cb361-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb361-11"><a href="chap-anova.html#cb361-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i<span class="sc">%%</span><span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb361-12"><a href="chap-anova.html#cb361-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(i, <span class="st">&quot;/&quot;</span>, N, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb361-13"><a href="chap-anova.html#cb361-13" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb361-14"><a href="chap-anova.html#cb361-14" aria-hidden="true" tabindex="-1"></a>    tests <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(y, trt, <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb361-15"><a href="chap-anova.html#cb361-15" aria-hidden="true" tabindex="-1"></a>    verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(tests<span class="sc">$</span>p.value, <span class="at">na.rm =</span> T) <span class="sc">&lt;</span> alpha</span>
-<span id="cb361-16"><a href="chap-anova.html#cb361-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (verwerp)</span>
-<span id="cb361-17"><a href="chap-anova.html#cb361-17" aria-hidden="true" tabindex="-1"></a>        cnt <span class="ot">&lt;-</span> cnt <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb361-18"><a href="chap-anova.html#cb361-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb361-10"><a href="chap-anova.html#cb361-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb361-11"><a href="chap-anova.html#cb361-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">cat</span>(i, <span class="st">&quot;/&quot;</span>, N, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb361-12"><a href="chap-anova.html#cb361-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb361-13"><a href="chap-anova.html#cb361-13" aria-hidden="true" tabindex="-1"></a>tests <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(y, trt, <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb361-14"><a href="chap-anova.html#cb361-14" aria-hidden="true" tabindex="-1"></a>verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(tests<span class="sc">$</span>p.value, <span class="at">na.rm =</span> T) <span class="sc">&lt;</span> alpha</span>
+<span id="cb361-15"><a href="chap-anova.html#cb361-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(verwerp) cnt <span class="ot">&lt;-</span> cnt<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb361-16"><a href="chap-anova.html#cb361-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## 1000 / 10000 
 ## 2000 / 10000 
 ## 3000 / 10000 
@@ -946,7 +954,13 @@ Als alternatieve methode kunnen we ook</p>
 <p>Het gebruik van aangepaste p-waarden heeft als voordeel dat de lezer deze zelf kan interpreteren en hij/zij een maat kan geven voor de significantie op het experimentsgewijs significantie niveau.
 Merk op dat we de aangepaste p-waarden begrenzen op <span class="math inline">\(\tilde{p}=1\)</span> omdat p-waarden kansen zijn en steeds tussen 0 en 1 dienen te liggen.</p>
 <p>Onderstaande R code geeft de resultaten (gecorrigeerde <span class="math inline">\(p\)</span>-waarden) na correctie met de methode van Bonferroni.</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="chap-anova.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(prostacyclin, <span class="fu">pairwise.t.test</span>(prostac, dose, <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="chap-anova.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(</span>
+<span id="cb365-2"><a href="chap-anova.html#cb365-2" aria-hidden="true" tabindex="-1"></a>  prostacyclin,</span>
+<span id="cb365-3"><a href="chap-anova.html#cb365-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise.t.test</span>(</span>
+<span id="cb365-4"><a href="chap-anova.html#cb365-4" aria-hidden="true" tabindex="-1"></a>    prostac,</span>
+<span id="cb365-5"><a href="chap-anova.html#cb365-5" aria-hidden="true" tabindex="-1"></a>    dose,</span>
+<span id="cb365-6"><a href="chap-anova.html#cb365-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.adjust.method=</span><span class="st">&quot;bonferroni&quot;</span>)</span>
+<span id="cb365-7"><a href="chap-anova.html#cb365-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -980,10 +994,15 @@ Merk op dat we de aangepaste p-waarden begrenzen op <span class="math inline">\(
 ## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## (Adjusted p values reported -- bonferroni method)</code></pre>
 <p>Om Bonferroni aangepaste betrouwbaarheidsintervallen te verkrijgen moeten we eerst zelf functie definiëren in R om bonferroni kritische waarde te bepalen. We noemen deze functie <code>calpha_bon_t</code>.</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="chap-anova.html#cb369-1" aria-hidden="true" tabindex="-1"></a>calpha_bon_t <span class="ot">&lt;-</span> <span class="cf">function</span>(object, level) {</span>
-<span id="cb369-2"><a href="chap-anova.html#cb369-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(<span class="fu">qt</span>((<span class="dv">1</span> <span class="sc">-</span> level)<span class="sc">/</span><span class="dv">2</span><span class="sc">/</span><span class="fu">nrow</span>(object<span class="sc">$</span>linfct), object<span class="sc">$</span>df))</span>
-<span id="cb369-3"><a href="chap-anova.html#cb369-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb369-4"><a href="chap-anova.html#cb369-4" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model1.mcp, <span class="at">calpha =</span> calpha_bon_t)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="chap-anova.html#cb369-1" aria-hidden="true" tabindex="-1"></a>calpha_bon_t <span class="ot">&lt;-</span> <span class="cf">function</span>(object, level)</span>
+<span id="cb369-2"><a href="chap-anova.html#cb369-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb369-3"><a href="chap-anova.html#cb369-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(</span>
+<span id="cb369-4"><a href="chap-anova.html#cb369-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">qt</span>(</span>
+<span id="cb369-5"><a href="chap-anova.html#cb369-5" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span><span class="sc">-</span>level)<span class="sc">/</span><span class="dv">2</span><span class="sc">/</span><span class="fu">nrow</span>(object<span class="sc">$</span>linfct),</span>
+<span id="cb369-6"><a href="chap-anova.html#cb369-6" aria-hidden="true" tabindex="-1"></a>        object<span class="sc">$</span>df)</span>
+<span id="cb369-7"><a href="chap-anova.html#cb369-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb369-8"><a href="chap-anova.html#cb369-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb369-9"><a href="chap-anova.html#cb369-9" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model1.mcp, <span class="at">calpha =</span> calpha_bon_t)</span></code></pre></div>
 <pre><code>## 
 ##   Simultaneous Confidence Intervals
 ## 
@@ -1002,24 +1021,22 @@ Merk op dat we de aangepaste p-waarden begrenzen op <span class="math inline">\(
 ## 50 - 10 == 0  43.2583  21.3210  65.1957
 ## 50 - 25 == 0  35.0000  13.0626  56.9374</code></pre>
 <p>We zullen nu het effect van de Bonferroni correctie opnieuw nagaan via simulaties.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="chap-anova.html#cb371-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># aantal behandelingen (g=3)</span></span>
-<span id="cb371-2"><a href="chap-anova.html#cb371-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># aantal herhalingen in iedere groep</span></span>
-<span id="cb371-3"><a href="chap-anova.html#cb371-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g <span class="sc">*</span> ni  <span class="co"># totaal aantal observaties</span></span>
-<span id="cb371-4"><a href="chap-anova.html#cb371-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span>  <span class="co"># significantieniveau van een individuele test</span></span>
-<span id="cb371-5"><a href="chap-anova.html#cb371-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span>  <span class="co">#aantal simulaties</span></span>
-<span id="cb371-6"><a href="chap-anova.html#cb371-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>)  <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
-<span id="cb371-7"><a href="chap-anova.html#cb371-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni))  <span class="co">#factor</span></span>
-<span id="cb371-8"><a href="chap-anova.html#cb371-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="chap-anova.html#cb371-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># aantal behandelingen (g=3)</span></span>
+<span id="cb371-2"><a href="chap-anova.html#cb371-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># aantal herhalingen in iedere groep</span></span>
+<span id="cb371-3"><a href="chap-anova.html#cb371-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g<span class="sc">*</span>ni <span class="co"># totaal aantal observaties</span></span>
+<span id="cb371-4"><a href="chap-anova.html#cb371-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># significantieniveau van een individuele test</span></span>
+<span id="cb371-5"><a href="chap-anova.html#cb371-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co">#aantal simulaties</span></span>
+<span id="cb371-6"><a href="chap-anova.html#cb371-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>) <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
+<span id="cb371-7"><a href="chap-anova.html#cb371-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni)) <span class="co">#factor</span></span>
+<span id="cb371-8"><a href="chap-anova.html#cb371-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
 <span id="cb371-9"><a href="chap-anova.html#cb371-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb371-10"><a href="chap-anova.html#cb371-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb371-11"><a href="chap-anova.html#cb371-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i<span class="sc">%%</span><span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb371-12"><a href="chap-anova.html#cb371-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(i, <span class="st">&quot;/&quot;</span>, N, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb371-13"><a href="chap-anova.html#cb371-13" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb371-14"><a href="chap-anova.html#cb371-14" aria-hidden="true" tabindex="-1"></a>    tests <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(y, trt, <span class="st">&quot;bonferroni&quot;</span>)</span>
-<span id="cb371-15"><a href="chap-anova.html#cb371-15" aria-hidden="true" tabindex="-1"></a>    verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(tests<span class="sc">$</span>p.value, <span class="at">na.rm =</span> T) <span class="sc">&lt;</span> alpha</span>
-<span id="cb371-16"><a href="chap-anova.html#cb371-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (verwerp)</span>
-<span id="cb371-17"><a href="chap-anova.html#cb371-17" aria-hidden="true" tabindex="-1"></a>        cnt <span class="ot">&lt;-</span> cnt <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb371-18"><a href="chap-anova.html#cb371-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb371-10"><a href="chap-anova.html#cb371-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb371-11"><a href="chap-anova.html#cb371-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">cat</span>(i, <span class="st">&quot;/&quot;</span>, N, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb371-12"><a href="chap-anova.html#cb371-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb371-13"><a href="chap-anova.html#cb371-13" aria-hidden="true" tabindex="-1"></a>tests <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(y, trt, <span class="st">&quot;bonferroni&quot;</span>)</span>
+<span id="cb371-14"><a href="chap-anova.html#cb371-14" aria-hidden="true" tabindex="-1"></a>verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(tests<span class="sc">$</span>p.value, <span class="at">na.rm =</span> T) <span class="sc">&lt;</span> alpha</span>
+<span id="cb371-15"><a href="chap-anova.html#cb371-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(verwerp) cnt <span class="ot">&lt;-</span> cnt<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb371-16"><a href="chap-anova.html#cb371-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## 1000 / 10000 
 ## 2000 / 10000 
 ## 3000 / 10000 
@@ -1085,8 +1102,8 @@ We hoeven zelf geen functies te definiëren voor het verkrijgen van Tukey gecorr
 <p>Merk op dat de Tukey methode smallere BIs en kleinere aangepaste p-waarden teruggeeft dan Bonferroni en dus minder conservatief is.
 De betrouwbaarheidsintervallen kunnen ook grafisch worden weergegeven wat handig is als er veel vergelijkingen worden uitgevoerd (zie Figuur <a href="chap-anova.html#fig:prostacTukey">7.7</a>).</p>
 <div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="chap-anova.html#cb379-1" aria-hidden="true" tabindex="-1"></a>model1.mcp <span class="sc">%&gt;%</span></span>
-<span id="cb379-2"><a href="chap-anova.html#cb379-2" aria-hidden="true" tabindex="-1"></a>    confint <span class="sc">%&gt;%</span></span>
-<span id="cb379-3"><a href="chap-anova.html#cb379-3" aria-hidden="true" tabindex="-1"></a>    plot</span></code></pre></div>
+<span id="cb379-2"><a href="chap-anova.html#cb379-2" aria-hidden="true" tabindex="-1"></a>  confint <span class="sc">%&gt;%</span></span>
+<span id="cb379-3"><a href="chap-anova.html#cb379-3" aria-hidden="true" tabindex="-1"></a>  plot</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:prostacTukey"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/prostacTukey-1.png" alt="$95\%$ experimentsgewijze betrouwbaarheidsintervallen voor de paarsgewijze verschillen in gemiddeld prostacycline niveau tussen alle arachidonzuur dosisgroepen. De BIs zijn gecorrigeerd voor multipliciteit via de Tukey methode." width="100%" />
 <p class="caption">
@@ -1095,27 +1112,26 @@ Figuur 7.7: <span class="math inline">\(95\%\)</span> experimentsgewijze betrouw
 </div>
 <p>Hierop zien we onmiddellijk dat het effect van de hoogste dosisgroep verschillend is van de laagste en middelste dosisgroep en dat er geen significant verschil is tussen de laagste en de middelste dosisgroep op het 5% experimentsgewijze significantieniveau.</p>
 <p>Tenslotte gaan we ook via simulatie na of de Tukey methode de FWER correct kan controleren.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="chap-anova.html#cb380-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span>  <span class="co"># aantal behandelingen (g=3)</span></span>
-<span id="cb380-2"><a href="chap-anova.html#cb380-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># aantal herhalingen in iedere groep</span></span>
-<span id="cb380-3"><a href="chap-anova.html#cb380-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g <span class="sc">*</span> ni  <span class="co"># totaal aantal observaties</span></span>
-<span id="cb380-4"><a href="chap-anova.html#cb380-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span>  <span class="co"># significantieniveau van een individuele test</span></span>
-<span id="cb380-5"><a href="chap-anova.html#cb380-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span>  <span class="co">#aantal simulaties</span></span>
-<span id="cb380-6"><a href="chap-anova.html#cb380-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>)  <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
-<span id="cb380-7"><a href="chap-anova.html#cb380-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni))  <span class="co">#factor</span></span>
-<span id="cb380-8"><a href="chap-anova.html#cb380-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="chap-anova.html#cb380-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># aantal behandelingen (g=3)</span></span>
+<span id="cb380-2"><a href="chap-anova.html#cb380-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># aantal herhalingen in iedere groep</span></span>
+<span id="cb380-3"><a href="chap-anova.html#cb380-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g<span class="sc">*</span>ni <span class="co"># totaal aantal observaties</span></span>
+<span id="cb380-4"><a href="chap-anova.html#cb380-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># significantieniveau van een individuele test</span></span>
+<span id="cb380-5"><a href="chap-anova.html#cb380-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co">#aantal simulaties</span></span>
+<span id="cb380-6"><a href="chap-anova.html#cb380-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>) <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
+<span id="cb380-7"><a href="chap-anova.html#cb380-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni)) <span class="co">#factor</span></span>
+<span id="cb380-8"><a href="chap-anova.html#cb380-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
 <span id="cb380-9"><a href="chap-anova.html#cb380-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb380-10"><a href="chap-anova.html#cb380-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
-<span id="cb380-11"><a href="chap-anova.html#cb380-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i<span class="sc">%%</span><span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb380-12"><a href="chap-anova.html#cb380-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">cat</span>(i, <span class="st">&quot;/&quot;</span>, N, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb380-13"><a href="chap-anova.html#cb380-13" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb380-14"><a href="chap-anova.html#cb380-14" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> trt)</span>
-<span id="cb380-15"><a href="chap-anova.html#cb380-15" aria-hidden="true" tabindex="-1"></a>    m.mcp <span class="ot">&lt;-</span> <span class="fu">glht</span>(m, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">trt =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
-<span id="cb380-16"><a href="chap-anova.html#cb380-16" aria-hidden="true" tabindex="-1"></a>    tests <span class="ot">&lt;-</span> <span class="fu">summary</span>(m.mcp)<span class="sc">$</span>test</span>
-<span id="cb380-17"><a href="chap-anova.html#cb380-17" aria-hidden="true" tabindex="-1"></a>    verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="fu">as.numeric</span>(tests<span class="sc">$</span>pvalues), <span class="at">na.rm =</span> T) <span class="sc">&lt;</span></span>
-<span id="cb380-18"><a href="chap-anova.html#cb380-18" aria-hidden="true" tabindex="-1"></a>        alpha</span>
-<span id="cb380-19"><a href="chap-anova.html#cb380-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (verwerp)</span>
-<span id="cb380-20"><a href="chap-anova.html#cb380-20" aria-hidden="true" tabindex="-1"></a>        cnt <span class="ot">&lt;-</span> cnt <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb380-21"><a href="chap-anova.html#cb380-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb380-10"><a href="chap-anova.html#cb380-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb380-11"><a href="chap-anova.html#cb380-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">cat</span>(i, <span class="st">&quot;/&quot;</span>, N, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb380-12"><a href="chap-anova.html#cb380-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb380-13"><a href="chap-anova.html#cb380-13" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> trt)</span>
+<span id="cb380-14"><a href="chap-anova.html#cb380-14" aria-hidden="true" tabindex="-1"></a>m.mcp <span class="ot">&lt;-</span> <span class="fu">glht</span>(m, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">trt =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
+<span id="cb380-15"><a href="chap-anova.html#cb380-15" aria-hidden="true" tabindex="-1"></a>tests <span class="ot">&lt;-</span> <span class="fu">summary</span>(m.mcp)<span class="sc">$</span>test</span>
+<span id="cb380-16"><a href="chap-anova.html#cb380-16" aria-hidden="true" tabindex="-1"></a>verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(</span>
+<span id="cb380-17"><a href="chap-anova.html#cb380-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(tests<span class="sc">$</span>pvalues),</span>
+<span id="cb380-18"><a href="chap-anova.html#cb380-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm=</span>T) <span class="sc">&lt;</span> alpha</span>
+<span id="cb380-19"><a href="chap-anova.html#cb380-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(verwerp) cnt <span class="ot">&lt;-</span> cnt<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb380-20"><a href="chap-anova.html#cb380-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## 1000 / 10000 
 ## 2000 / 10000 
 ## 3000 / 10000 

@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Hoofdstuk 1 Inleiding | Inleiding tot de Biostatistiek 2022-2023</title>
-  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Hoofdstuk 1 Inleiding | Inleiding tot de Biostatistiek 2022-2023" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta property="og:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="github-repo" content="statOmics/statistiek2deBach" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hoofdstuk 1 Inleiding | Inleiding tot de Biostatistiek 2022-2023" />
   
-  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="twitter:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   
 
 <meta name="author" content="Lieven Clement" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -740,8 +744,12 @@ We slaan het resultaat hiervan op in het object apRelSum via <code>apRelSum &lt;
 <li><p>We pipen het resultaat naar de <code>summarize_at</code> function om de “rel” variable samen te vatten en berekenen hierbij het gemiddelde en standaardafwijking. Omdat we de data eerst hebben gegroepeerd zullen we het gemiddelde en de standaard deviatie berekenen per groep.</p></li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="inleiding.html#cb5-1" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="ot">&lt;-</span> ap <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="inleiding.html#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(trt) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="inleiding.html#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize_at</span>(<span class="st">&quot;rel&quot;</span>, <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span></code></pre></div>
+<span id="cb5-2"><a href="inleiding.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trt) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="inleiding.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;rel&quot;</span>,</span>
+<span id="cb5-4"><a href="inleiding.html#cb5-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
+<span id="cb5-5"><a href="inleiding.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd</span>
+<span id="cb5-6"><a href="inleiding.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb5-7"><a href="inleiding.html#cb5-7" aria-hidden="true" tabindex="-1"></a>                )</span></code></pre></div>
 <p>We tonen vervolgens het resultaat door het object apRelSum aan te roepen</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="inleiding.html#cb6-1" aria-hidden="true" tabindex="-1"></a>apRelSum</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
@@ -750,7 +758,7 @@ We slaan het resultaat hiervan op in het object apRelSum via <code>apRelSum &lt;
 ## 1 placebo     44.2 11.5 
 ## 2 transplant  66.4  7.88</code></pre>
 <p>We kunnen ook een tabel in de webpagina of het pdf bestand integreren via het commando kable van het knitr pakket:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="inleiding.html#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(apRelSum, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="inleiding.html#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(apRelSum, <span class="st">&#39;html&#39;</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -807,9 +815,9 @@ We doen dit steeds via de aestetics <code>aes</code> functie. <code>aes(x=trt,y=
 <li><p>We voegen foutenvlaggen toe om de onzekerheid op het gemiddelde weer te geven. We doen dit via de <code>geom_errorbar</code> functie en specifiëren het minimum en maximum van de error bar. Het <code>width</code> argument wordt gebruikt om de breedte van de error bar smaller te maken dat deze van de bar.</p></li>
 </ol>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="inleiding.html#cb9-1" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="inleiding.html#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> trt, <span class="at">y =</span> mean)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="inleiding.html#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean <span class="sc">-</span> sd, <span class="at">ymax =</span> mean <span class="sc">+</span></span>
-<span id="cb9-4"><a href="inleiding.html#cb9-4" aria-hidden="true" tabindex="-1"></a>        sd), <span class="at">width =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<span id="cb9-2"><a href="inleiding.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>mean)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="inleiding.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="inleiding.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd,<span class="at">ymax=</span>mean<span class="sc">+</span>sd),<span class="at">width=</span>.<span class="dv">2</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p><em>Interpretatie</em></p>
 <p>Is deze plot informatief? Nee!</p>
@@ -822,8 +830,9 @@ We maken nu een boxplot voor de ap data</p>
 <li>We selecteren de data voor de plot via <code>ggplot(aes(x=trt,y=rel))</code></li>
 <li>We voegen een laag toe voor de boxplot dmv de functie <code>geom_boxplot()</code></li>
 </ol>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="inleiding.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="inleiding.html#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> trt, <span class="at">y =</span> rel)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="inleiding.html#cb10-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<span id="cb10-2"><a href="inleiding.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="inleiding.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p><em>Interpretatie</em>: De boxplot geeft ons al veel meer informatie dan de barplot. Het bereik van de data wordt weergegeven door de wiskers (eindpunten van de verticale lijnen in het midden van de boxplot). De box in de boxplot geeft het 25%, 50% en 75% percentiel weer. (Merk op dat er geen outliers zijn. Er worden geen individuele punten weergegeven in de plot)</p>
 <p>We observeren dat boxplot voor de transplantie groep hoger ligt dan voor de placebo groep. Wat aangeeft dat de relatieve abundanties van Staphylococcus vaak hoger liggen voor personen in de steekproef die zijn toegewezen aan de transplantatie groep dan voor personen die zijn toegewezen aan placebo groep. Dit is een indicatie dat de behandeling werkt.</p>
@@ -833,9 +842,10 @@ We maken nu een boxplot voor de ap data</p>
 <li>Merk op dat we het argument <code>outlier.shape</code> op NA (not available) zetten <code>outlier.shape=NA</code> in the <code>geom_boxplot</code> functie. Dat doen we standaard als we de ruwe data toevoegen aan de boxplots: anders zullen outliers immers twee keer worden weergegeven (eerst via de boxplot laag en daarna door de laag met alle ruwe data toevoegen aan de plot).</li>
 <li>We geven de ruwe data weer via de <code>geom_point(position="jitter")</code> functie. We gebruiken hierbij het argument position=‘jitter’ zodat we wat random ruis toevoegen aan de x-cordinaat zodat de gegevens elkaar niet overlappen.</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="inleiding.html#cb11-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="inleiding.html#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> trt, <span class="at">y =</span> rel)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="inleiding.html#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="inleiding.html#cb11-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<span id="cb11-2"><a href="inleiding.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="inleiding.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="inleiding.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Dit is een informatieve plot!
 Het toont de data zo ruw mogelijk weer. De plot is toch nog goed leesbaar en toont duidelijk aan dat de relatieve abundanties bij bijna alle proefpersonen in de transplantatie groep hoger is dan deze voor de placebo groep.</p>
@@ -867,7 +877,7 @@ Statistische besluitvorming.</p>
 <li><p>Als p heel klein is, dan is het heel onwaarschijnlijk om een dergelijk effect door toeval te observeren in een steekproef als er in werkelijkheid geen effect is van de behandeling.</p></li>
 </ul>
 <p>Om de kans p te berekenen is het nodig om de data te modelleren met een statistisch model. Hiervoor zullen we bepaalde aannames moeten doen. In hoofdstuk 5 zien we dat we dit kunnen doen d.m.v. de <code>t.test</code> functie.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="inleiding.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(rel <span class="sc">~</span> trt, <span class="at">data =</span> ap)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="inleiding.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(rel<span class="sc">~</span>trt,<span class="at">data=</span>ap)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -951,10 +961,12 @@ De scope van de studie moet goed worden omschreven voor de start van het experim
 - We voegen een histogram toe met het commando <code>geom_histogram()</code>
 - We maken twee vertikale panels met het commando <code>facet_grid(Gender~.)</code>. Een panel per geslacht.
 - We veranderen het label van de x-as met de <code>xlab</code> functie.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="inleiding.html#cb16-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="inleiding.html#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
-<span id="cb16-3"><a href="inleiding.html#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(Gender <span class="sc">~</span></span>
-<span id="cb16-4"><a href="inleiding.html#cb16-4" aria-hidden="true" tabindex="-1"></a>    .) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="inleiding.html#cb16-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">%&gt;%</span>  </span>
+<span id="cb16-2"><a href="inleiding.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="inleiding.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height))<span class="sc">+</span></span>
+<span id="cb16-4"><a href="inleiding.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb16-5"><a href="inleiding.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Gender <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="inleiding.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p><em>Interpretatie</em></p>
 <ul>
@@ -970,16 +982,22 @@ De scope van de studie moet goed worden omschreven voor de start van het experim
 <li>We selecteren enkel het geslacht en Lengte zodat de dataset geen onnodige variabelen bevat.</li>
 </ol>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="inleiding.html#cb17-1" aria-hidden="true" tabindex="-1"></a>nhanesSub <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="inleiding.html#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="inleiding.html#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span>, <span class="st">&quot;Height&quot;</span>))</span></code></pre></div>
+<span id="cb17-2"><a href="inleiding.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="inleiding.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Height&quot;</span>))</span></code></pre></div>
 <p>We berekenen het gemiddelde en de standaard deviatie voor de lengte voor mannen en vrouwen in de grote dataset.
 We groeperen de data hiervoor op basis van het geslacht (variable Gender).</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="inleiding.html#cb18-1" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="inleiding.html#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="inleiding.html#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>, <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span>
-<span id="cb18-4"><a href="inleiding.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="inleiding.html#cb18-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(HeightSum <span class="sc">%&gt;%</span></span>
-<span id="cb18-6"><a href="inleiding.html#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_if</span>(is.numeric, round, <span class="at">digits =</span> <span class="dv">1</span>), <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<span id="cb18-2"><a href="inleiding.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="inleiding.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
+<span id="cb18-4"><a href="inleiding.html#cb18-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean =</span> mean,</span>
+<span id="cb18-5"><a href="inleiding.html#cb18-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">sd =</span> sd)</span>
+<span id="cb18-6"><a href="inleiding.html#cb18-6" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb18-7"><a href="inleiding.html#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="inleiding.html#cb18-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb18-9"><a href="inleiding.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  HeightSum <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="inleiding.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="at">digits=</span><span class="dv">1</span>),</span>
+<span id="cb18-11"><a href="inleiding.html#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;html&quot;</span></span>
+<span id="cb18-12"><a href="inleiding.html#cb18-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1044,14 +1062,14 @@ Wat onze intuïtie bevestigt dat mannen gemiddeld groter zijn dan vrouwen.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="inleiding.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1023</span>)</span>
 <span id="cb20-2"><a href="inleiding.html#cb20-2" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb20-3"><a href="inleiding.html#cb20-3" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb20-4"><a href="inleiding.html#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-5"><a href="inleiding.html#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb20-4"><a href="inleiding.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="inleiding.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb20-6"><a href="inleiding.html#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-7"><a href="inleiding.html#cb20-7" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb20-8"><a href="inleiding.html#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-9"><a href="inleiding.html#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb20-8"><a href="inleiding.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-9"><a href="inleiding.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb20-10"><a href="inleiding.html#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="inleiding.html#cb20-11" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem, mal)</span>
+<span id="cb20-11"><a href="inleiding.html#cb20-11" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
 <span id="cb20-12"><a href="inleiding.html#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-13"><a href="inleiding.html#cb20-13" aria-hidden="true" tabindex="-1"></a>samp1</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 2
@@ -1071,13 +1089,18 @@ Wat onze intuïtie bevestigt dat mannen gemiddeld groter zijn dan vrouwen.</p>
 We exploreren vervolgens de data in de steekproef.</p>
 <p><em>Code</em></p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="inleiding.html#cb22-1" aria-hidden="true" tabindex="-1"></a>samp1 <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="inleiding.html#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_grid</span>(Gender <span class="sc">~</span></span>
-<span id="cb22-3"><a href="inleiding.html#cb22-3" aria-hidden="true" tabindex="-1"></a>    .) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>)</span></code></pre></div>
+<span id="cb22-2"><a href="inleiding.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="inleiding.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb22-4"><a href="inleiding.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Gender<span class="sc">~</span>.) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="inleiding.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="inleiding.html#cb23-1" aria-hidden="true" tabindex="-1"></a>HeightSumExp1 <span class="ot">&lt;-</span> samp1 <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="inleiding.html#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="inleiding.html#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>, <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span>
-<span id="cb23-4"><a href="inleiding.html#cb23-4" aria-hidden="true" tabindex="-1"></a>HeightSumExp1</span></code></pre></div>
+<span id="cb23-2"><a href="inleiding.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="inleiding.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
+<span id="cb23-4"><a href="inleiding.html#cb23-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean =</span> mean,</span>
+<span id="cb23-5"><a href="inleiding.html#cb23-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sd =</span> sd)</span>
+<span id="cb23-6"><a href="inleiding.html#cb23-6" aria-hidden="true" tabindex="-1"></a>                  )</span>
+<span id="cb23-7"><a href="inleiding.html#cb23-7" aria-hidden="true" tabindex="-1"></a>HeightSumExp1</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##   Gender  mean    sd
 ##   &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -1090,7 +1113,7 @@ We exploreren vervolgens de data in de steekproef.</p>
 <p>Met de p-waarde wordt de kans berekend om in een nieuwe random steekproef door toeval een effect te vinden dat in absolute waarde minstens evengroot is als in onze geobserveerde steekproef onder de aanname dat er in werkelijkheid geen verschil zou zijn in gemiddelde lengte tussen vrouwen en mannen.</p>
 <p>Als die kans heel klein is is het weinig waarschijnlijk om onze steekproef te observeren onder de hypothese dat de lengtes gemiddeld niet verschillen tussen vrouwen en mannen en kunnen we deze hypothese verwerpen.</p>
 <p>Typisch wordt de kans op een valse positieve conclusie gecontroleerd op 5%.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="inleiding.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height <span class="sc">~</span> Gender, <span class="at">data =</span> samp1)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="inleiding.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height<span class="sc">~</span>Gender,<span class="at">data=</span>samp1)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -1109,32 +1132,44 @@ We exploreren vervolgens de data in de steekproef.</p>
 <p>Als we het experiment herhalen selecteren we andere mensen en verkrijgen we andere resultaten.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="inleiding.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1024</span>)</span>
 <span id="cb27-2"><a href="inleiding.html#cb27-2" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="inleiding.html#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-4"><a href="inleiding.html#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb27-3"><a href="inleiding.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="inleiding.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb27-5"><a href="inleiding.html#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-6"><a href="inleiding.html#cb27-6" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb27-7"><a href="inleiding.html#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-8"><a href="inleiding.html#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb27-7"><a href="inleiding.html#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="inleiding.html#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb27-9"><a href="inleiding.html#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="inleiding.html#cb27-10" aria-hidden="true" tabindex="-1"></a>samp2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem, mal)</span>
+<span id="cb27-10"><a href="inleiding.html#cb27-10" aria-hidden="true" tabindex="-1"></a>samp2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
 <span id="cb27-11"><a href="inleiding.html#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-12"><a href="inleiding.html#cb27-12" aria-hidden="true" tabindex="-1"></a>HeightSumExp2 <span class="ot">&lt;-</span> samp2 <span class="sc">%&gt;%</span></span>
-<span id="cb27-13"><a href="inleiding.html#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb27-14"><a href="inleiding.html#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>, <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span>
-<span id="cb27-15"><a href="inleiding.html#cb27-15" aria-hidden="true" tabindex="-1"></a>HeightSumExp2</span></code></pre></div>
+<span id="cb27-13"><a href="inleiding.html#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb27-14"><a href="inleiding.html#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
+<span id="cb27-15"><a href="inleiding.html#cb27-15" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
+<span id="cb27-16"><a href="inleiding.html#cb27-16" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd)</span>
+<span id="cb27-17"><a href="inleiding.html#cb27-17" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb27-18"><a href="inleiding.html#cb27-18" aria-hidden="true" tabindex="-1"></a>HeightSumExp2</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##   Gender  mean    sd
 ##   &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1 female  166.  9.89
 ## 2 male    170.  8.24</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="inleiding.html#cb29-1" aria-hidden="true" tabindex="-1"></a>samp2 <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="inleiding.html#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">y =</span> Height)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb29-3"><a href="inleiding.html#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>,</span>
-<span id="cb29-4"><a href="inleiding.html#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> HeightSumExp2<span class="sc">$</span>mean[<span class="dv">1</span>]), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">17</span>,</span>
-<span id="cb29-5"><a href="inleiding.html#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> HeightSumExp2<span class="sc">$</span>mean[<span class="dv">2</span>]),</span>
-<span id="cb29-6"><a href="inleiding.html#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">17</span>, <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Height (cm)&quot;</span>)</span></code></pre></div>
+<span id="cb29-2"><a href="inleiding.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="inleiding.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="inleiding.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="inleiding.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb29-6"><a href="inleiding.html#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> HeightSumExp2<span class="sc">$</span>mean[<span class="dv">1</span>]),</span>
+<span id="cb29-7"><a href="inleiding.html#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb29-8"><a href="inleiding.html#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb29-9"><a href="inleiding.html#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="inleiding.html#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb29-11"><a href="inleiding.html#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> HeightSumExp2<span class="sc">$</span>mean[<span class="dv">2</span>]),</span>
+<span id="cb29-12"><a href="inleiding.html#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb29-13"><a href="inleiding.html#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb29-14"><a href="inleiding.html#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-15"><a href="inleiding.html#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Height (cm)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="inleiding.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height <span class="sc">~</span> Gender, <span class="at">data =</span> samp2)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="inleiding.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height <span class="sc">~</span> Gender, <span class="at">data=</span>samp2)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -1154,32 +1189,44 @@ We exploreren vervolgens de data in de steekproef.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="inleiding.html#cb32-1" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">88605</span></span>
 <span id="cb32-2"><a href="inleiding.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
 <span id="cb32-3"><a href="inleiding.html#cb32-3" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb32-4"><a href="inleiding.html#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-5"><a href="inleiding.html#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb32-4"><a href="inleiding.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a href="inleiding.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb32-6"><a href="inleiding.html#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-7"><a href="inleiding.html#cb32-7" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb32-8"><a href="inleiding.html#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-9"><a href="inleiding.html#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">5</span>)</span>
+<span id="cb32-8"><a href="inleiding.html#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-9"><a href="inleiding.html#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb32-10"><a href="inleiding.html#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-11"><a href="inleiding.html#cb32-11" aria-hidden="true" tabindex="-1"></a>samp3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem, mal)</span>
+<span id="cb32-11"><a href="inleiding.html#cb32-11" aria-hidden="true" tabindex="-1"></a>samp3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
 <span id="cb32-12"><a href="inleiding.html#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-13"><a href="inleiding.html#cb32-13" aria-hidden="true" tabindex="-1"></a>HeightSumExp3 <span class="ot">&lt;-</span> samp3 <span class="sc">%&gt;%</span></span>
-<span id="cb32-14"><a href="inleiding.html#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb32-15"><a href="inleiding.html#cb32-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>, <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd))</span>
-<span id="cb32-16"><a href="inleiding.html#cb32-16" aria-hidden="true" tabindex="-1"></a>HeightSumExp3</span></code></pre></div>
+<span id="cb32-14"><a href="inleiding.html#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb32-15"><a href="inleiding.html#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
+<span id="cb32-16"><a href="inleiding.html#cb32-16" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
+<span id="cb32-17"><a href="inleiding.html#cb32-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd)</span>
+<span id="cb32-18"><a href="inleiding.html#cb32-18" aria-hidden="true" tabindex="-1"></a>              )</span>
+<span id="cb32-19"><a href="inleiding.html#cb32-19" aria-hidden="true" tabindex="-1"></a>HeightSumExp3</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##   Gender  mean    sd
 ##   &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1 female  173.  1.97
 ## 2 male    168.  2.84</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="inleiding.html#cb34-1" aria-hidden="true" tabindex="-1"></a>samp3 <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="inleiding.html#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">y =</span> Height)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb34-3"><a href="inleiding.html#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>,</span>
-<span id="cb34-4"><a href="inleiding.html#cb34-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> HeightSumExp3<span class="sc">$</span>mean[<span class="dv">1</span>]), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">17</span>,</span>
-<span id="cb34-5"><a href="inleiding.html#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> HeightSumExp3<span class="sc">$</span>mean[<span class="dv">2</span>]),</span>
-<span id="cb34-6"><a href="inleiding.html#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">17</span>, <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Height (cm)&quot;</span>)</span></code></pre></div>
+<span id="cb34-2"><a href="inleiding.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="inleiding.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="inleiding.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="inleiding.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb34-6"><a href="inleiding.html#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> HeightSumExp3<span class="sc">$</span>mean[<span class="dv">1</span>]),</span>
+<span id="cb34-7"><a href="inleiding.html#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb34-8"><a href="inleiding.html#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb34-9"><a href="inleiding.html#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-10"><a href="inleiding.html#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb34-11"><a href="inleiding.html#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> HeightSumExp3<span class="sc">$</span>mean[<span class="dv">2</span>]),</span>
+<span id="cb34-12"><a href="inleiding.html#cb34-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb34-13"><a href="inleiding.html#cb34-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">pch =</span> <span class="dv">17</span>,</span>
+<span id="cb34-14"><a href="inleiding.html#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-15"><a href="inleiding.html#cb34-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Height (cm)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="inleiding.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height <span class="sc">~</span> Gender, <span class="at">data =</span> samp3)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="inleiding.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(Height <span class="sc">~</span> Gender, <span class="at">data=</span>samp3)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -1221,47 +1268,50 @@ We exploreren vervolgens de data in de steekproef.</p>
 <p><em>Code</em></p>
 <p>Deze code is vrij complex. Het kan nuttig zijn om deze pas na de twee modules Introductie tot R, en, data visualisatie opnieuw te bekijken.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="inleiding.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">15152</span>)</span>
-<span id="cb37-2"><a href="inleiding.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per</span></span>
-<span id="cb37-3"><a href="inleiding.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># groep</span></span>
-<span id="cb37-4"><a href="inleiding.html#cb37-4" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb37-5"><a href="inleiding.html#cb37-5" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb37-6"><a href="inleiding.html#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="inleiding.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet</span></span>
-<span id="cb37-8"><a href="inleiding.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># telkens opnieuw hoeven te doen</span></span>
-<span id="cb37-9"><a href="inleiding.html#cb37-9" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb37-10"><a href="inleiding.html#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
-<span id="cb37-11"><a href="inleiding.html#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-12"><a href="inleiding.html#cb37-12" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb37-13"><a href="inleiding.html#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
-<span id="cb37-14"><a href="inleiding.html#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-15"><a href="inleiding.html#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie Om snelle functies te kunnen</span></span>
-<span id="cb37-16"><a href="inleiding.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># gebruiken nemen we eerst nSim steekproeven en</span></span>
-<span id="cb37-17"><a href="inleiding.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co"># berekenen we daarna alles.</span></span>
-<span id="cb37-18"><a href="inleiding.html#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-19"><a href="inleiding.html#cb37-19" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> malSamps <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nSamp, <span class="at">ncol =</span> nSim)</span>
-<span id="cb37-20"><a href="inleiding.html#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim) {</span>
-<span id="cb37-21"><a href="inleiding.html#cb37-21" aria-hidden="true" tabindex="-1"></a>    femSamps[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
-<span id="cb37-22"><a href="inleiding.html#cb37-22" aria-hidden="true" tabindex="-1"></a>    malSamps[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(mal<span class="sc">$</span>Height, nSamp)</span>
-<span id="cb37-23"><a href="inleiding.html#cb37-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb37-24"><a href="inleiding.html#cb37-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-25"><a href="inleiding.html#cb37-25" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">verschil =</span> <span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(malSamps),</span>
-<span id="cb37-26"><a href="inleiding.html#cb37-26" aria-hidden="true" tabindex="-1"></a>    Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, malSamps))</span>
+<span id="cb37-2"><a href="inleiding.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per groep</span></span>
+<span id="cb37-3"><a href="inleiding.html#cb37-3" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb37-4"><a href="inleiding.html#cb37-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb37-5"><a href="inleiding.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="inleiding.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
+<span id="cb37-7"><a href="inleiding.html#cb37-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb37-8"><a href="inleiding.html#cb37-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb37-9"><a href="inleiding.html#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="inleiding.html#cb37-10" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb37-11"><a href="inleiding.html#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
+<span id="cb37-12"><a href="inleiding.html#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-13"><a href="inleiding.html#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
+<span id="cb37-14"><a href="inleiding.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.</span></span>
+<span id="cb37-15"><a href="inleiding.html#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="inleiding.html#cb37-16" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> malSamps <span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>nSamp, <span class="at">ncol=</span>nSim)</span>
+<span id="cb37-17"><a href="inleiding.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim)</span>
+<span id="cb37-18"><a href="inleiding.html#cb37-18" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb37-19"><a href="inleiding.html#cb37-19" aria-hidden="true" tabindex="-1"></a>  femSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb37-20"><a href="inleiding.html#cb37-20" aria-hidden="true" tabindex="-1"></a>  malSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(mal<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb37-21"><a href="inleiding.html#cb37-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-22"><a href="inleiding.html#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="inleiding.html#cb37-23" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb37-24"><a href="inleiding.html#cb37-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil=</span><span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(malSamps),</span>
+<span id="cb37-25"><a href="inleiding.html#cb37-25" aria-hidden="true" tabindex="-1"></a>  Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, malSamps)</span>
+<span id="cb37-26"><a href="inleiding.html#cb37-26" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb37-27"><a href="inleiding.html#cb37-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-28"><a href="inleiding.html#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 7234</code></pre>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="inleiding.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&gt;=</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 2766</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="inleiding.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="inleiding.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil<span class="sc">&gt;</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="inleiding.html#cb43-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb43-2"><a href="inleiding.html#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> verschil, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(pvalue), <span class="at">color =</span> pvalue <span class="sc">&lt;</span></span>
-<span id="cb43-3"><a href="inleiding.html#cb43-3" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.05</span>)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb43-4"><a href="inleiding.html#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
+<span id="cb43-2"><a href="inleiding.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>verschil,<span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue),<span class="at">color=</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="inleiding.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb43-4"><a href="inleiding.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb43-5"><a href="inleiding.html#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="inleiding.html#cb44-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="inleiding.html#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
+<span id="cb44-2"><a href="inleiding.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="inleiding.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb44-4"><a href="inleiding.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-21-2.png" width="672" /></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="inleiding.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="inleiding.html#cb45-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## $x
 ## [1] &quot;&quot;
 ## 
@@ -1277,31 +1327,31 @@ We exploreren vervolgens de data in de steekproef.</p>
 <h4><span class="header-section-number">1.4.5.1</span> Grotere steekproef?<a href="inleiding.html#grotere-steekproef" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Wat gebeurt er als we de steekproef verhogen naar 50 observaties per groep?</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="inleiding.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11145</span>)</span>
-<span id="cb47-2"><a href="inleiding.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per</span></span>
-<span id="cb47-3"><a href="inleiding.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># groep</span></span>
-<span id="cb47-4"><a href="inleiding.html#cb47-4" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb47-5"><a href="inleiding.html#cb47-5" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb47-6"><a href="inleiding.html#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-7"><a href="inleiding.html#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet</span></span>
-<span id="cb47-8"><a href="inleiding.html#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co"># telkens opnieuw hoeven te doen</span></span>
-<span id="cb47-9"><a href="inleiding.html#cb47-9" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb47-10"><a href="inleiding.html#cb47-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
-<span id="cb47-11"><a href="inleiding.html#cb47-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-12"><a href="inleiding.html#cb47-12" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb47-13"><a href="inleiding.html#cb47-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
-<span id="cb47-14"><a href="inleiding.html#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-15"><a href="inleiding.html#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie Om snelle functies te kunnen</span></span>
-<span id="cb47-16"><a href="inleiding.html#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="co"># gebruiken nemen we eerst nSim steekproeven en</span></span>
-<span id="cb47-17"><a href="inleiding.html#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="co"># berekenen we daarna alles.</span></span>
-<span id="cb47-18"><a href="inleiding.html#cb47-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-19"><a href="inleiding.html#cb47-19" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> malSamps <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nSamp, <span class="at">ncol =</span> nSim)</span>
-<span id="cb47-20"><a href="inleiding.html#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim) {</span>
-<span id="cb47-21"><a href="inleiding.html#cb47-21" aria-hidden="true" tabindex="-1"></a>    femSamps[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
-<span id="cb47-22"><a href="inleiding.html#cb47-22" aria-hidden="true" tabindex="-1"></a>    malSamps[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(mal<span class="sc">$</span>Height, nSamp)</span>
-<span id="cb47-23"><a href="inleiding.html#cb47-23" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb47-24"><a href="inleiding.html#cb47-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-25"><a href="inleiding.html#cb47-25" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">verschil =</span> <span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(malSamps),</span>
-<span id="cb47-26"><a href="inleiding.html#cb47-26" aria-hidden="true" tabindex="-1"></a>    Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, malSamps))</span>
+<span id="cb47-2"><a href="inleiding.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per groep</span></span>
+<span id="cb47-3"><a href="inleiding.html#cb47-3" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb47-4"><a href="inleiding.html#cb47-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb47-5"><a href="inleiding.html#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="inleiding.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
+<span id="cb47-7"><a href="inleiding.html#cb47-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb47-8"><a href="inleiding.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb47-9"><a href="inleiding.html#cb47-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-10"><a href="inleiding.html#cb47-10" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb47-11"><a href="inleiding.html#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
+<span id="cb47-12"><a href="inleiding.html#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="inleiding.html#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
+<span id="cb47-14"><a href="inleiding.html#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.</span></span>
+<span id="cb47-15"><a href="inleiding.html#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="inleiding.html#cb47-16" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> malSamps <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nSamp, <span class="at">ncol =</span> nSim)</span>
+<span id="cb47-17"><a href="inleiding.html#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim)</span>
+<span id="cb47-18"><a href="inleiding.html#cb47-18" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb47-19"><a href="inleiding.html#cb47-19" aria-hidden="true" tabindex="-1"></a>  femSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb47-20"><a href="inleiding.html#cb47-20" aria-hidden="true" tabindex="-1"></a>  malSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(mal<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb47-21"><a href="inleiding.html#cb47-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-22"><a href="inleiding.html#cb47-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-23"><a href="inleiding.html#cb47-23" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb47-24"><a href="inleiding.html#cb47-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil =</span> <span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(malSamps),</span>
+<span id="cb47-25"><a href="inleiding.html#cb47-25" aria-hidden="true" tabindex="-1"></a>  Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, malSamps)</span>
+<span id="cb47-26"><a href="inleiding.html#cb47-26" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb47-27"><a href="inleiding.html#cb47-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-28"><a href="inleiding.html#cb47-28" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 10000</code></pre>
@@ -1310,14 +1360,17 @@ We exploreren vervolgens de data in de steekproef.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="inleiding.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="inleiding.html#cb53-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb53-2"><a href="inleiding.html#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> verschil, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(pvalue), <span class="at">color =</span> pvalue <span class="sc">&lt;</span></span>
-<span id="cb53-3"><a href="inleiding.html#cb53-3" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.05</span>)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb53-4"><a href="inleiding.html#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
+<span id="cb53-2"><a href="inleiding.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>verschil,<span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue),<span class="at">color=</span>pvalue<span class="sc">&lt;</span><span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="inleiding.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb53-4"><a href="inleiding.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="inleiding.html#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="inleiding.html#cb54-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a href="inleiding.html#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
+<span id="cb54-2"><a href="inleiding.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>verschil)) <span class="sc">+</span></span>
+<span id="cb54-3"><a href="inleiding.html#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb54-4"><a href="inleiding.html#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="inleiding.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="inleiding.html#cb55-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## $x
 ## [1] &quot;&quot;
 ## 
@@ -1340,44 +1393,47 @@ We exploreren vervolgens de data in de steekproef.</p>
 <li><p>We doen de simulatiestudie opnieuw voor steekproeven met 5 subjecten per groep</p></li>
 </ul>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="inleiding.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">13245</span>)</span>
-<span id="cb57-2"><a href="inleiding.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per</span></span>
-<span id="cb57-3"><a href="inleiding.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># groep</span></span>
-<span id="cb57-4"><a href="inleiding.html#cb57-4" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb57-5"><a href="inleiding.html#cb57-5" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb57-6"><a href="inleiding.html#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-7"><a href="inleiding.html#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet</span></span>
-<span id="cb57-8"><a href="inleiding.html#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="co"># telkens opnieuw hoeven te doen</span></span>
-<span id="cb57-9"><a href="inleiding.html#cb57-9" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb57-10"><a href="inleiding.html#cb57-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
-<span id="cb57-11"><a href="inleiding.html#cb57-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-12"><a href="inleiding.html#cb57-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie Om snelle functies te kunnen</span></span>
-<span id="cb57-13"><a href="inleiding.html#cb57-13" aria-hidden="true" tabindex="-1"></a><span class="co"># gebruiken nemen we eerst nSim steekproeven en</span></span>
-<span id="cb57-14"><a href="inleiding.html#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="co"># berekenen we daarna alles.</span></span>
-<span id="cb57-15"><a href="inleiding.html#cb57-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-16"><a href="inleiding.html#cb57-16" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> femSamps2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nSamp, <span class="at">ncol =</span> nSim)</span>
-<span id="cb57-17"><a href="inleiding.html#cb57-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim) {</span>
-<span id="cb57-18"><a href="inleiding.html#cb57-18" aria-hidden="true" tabindex="-1"></a>    femSamps[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
-<span id="cb57-19"><a href="inleiding.html#cb57-19" aria-hidden="true" tabindex="-1"></a>    femSamps2[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
-<span id="cb57-20"><a href="inleiding.html#cb57-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb57-21"><a href="inleiding.html#cb57-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-22"><a href="inleiding.html#cb57-22" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">verschil =</span> <span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(femSamps2),</span>
-<span id="cb57-23"><a href="inleiding.html#cb57-23" aria-hidden="true" tabindex="-1"></a>    Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, femSamps2))</span>
+<span id="cb57-2"><a href="inleiding.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per groep</span></span>
+<span id="cb57-3"><a href="inleiding.html#cb57-3" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb57-4"><a href="inleiding.html#cb57-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb57-5"><a href="inleiding.html#cb57-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="inleiding.html#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
+<span id="cb57-7"><a href="inleiding.html#cb57-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb57-8"><a href="inleiding.html#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb57-9"><a href="inleiding.html#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-10"><a href="inleiding.html#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
+<span id="cb57-11"><a href="inleiding.html#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.</span></span>
+<span id="cb57-12"><a href="inleiding.html#cb57-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-13"><a href="inleiding.html#cb57-13" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> femSamps2 <span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>nSamp, <span class="at">ncol=</span>nSim)</span>
+<span id="cb57-14"><a href="inleiding.html#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim)</span>
+<span id="cb57-15"><a href="inleiding.html#cb57-15" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb57-16"><a href="inleiding.html#cb57-16" aria-hidden="true" tabindex="-1"></a>  femSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb57-17"><a href="inleiding.html#cb57-17" aria-hidden="true" tabindex="-1"></a>  femSamps2[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb57-18"><a href="inleiding.html#cb57-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb57-19"><a href="inleiding.html#cb57-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-20"><a href="inleiding.html#cb57-20" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb57-21"><a href="inleiding.html#cb57-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil=</span><span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(femSamps2),</span>
+<span id="cb57-22"><a href="inleiding.html#cb57-22" aria-hidden="true" tabindex="-1"></a>  Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, femSamps2)</span>
+<span id="cb57-23"><a href="inleiding.html#cb57-23" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb57-24"><a href="inleiding.html#cb57-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-25"><a href="inleiding.html#cb57-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 213</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="inleiding.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&gt;=</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 9558</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="inleiding.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="inleiding.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil<span class="sc">&gt;</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 229</code></pre>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="inleiding.html#cb63-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb63-2"><a href="inleiding.html#cb63-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> verschil, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(pvalue), <span class="at">color =</span> pvalue <span class="sc">&lt;</span></span>
-<span id="cb63-3"><a href="inleiding.html#cb63-3" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.05</span>)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb63-4"><a href="inleiding.html#cb63-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
+<span id="cb63-2"><a href="inleiding.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>verschil,<span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue),<span class="at">color=</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb63-3"><a href="inleiding.html#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb63-4"><a href="inleiding.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb63-5"><a href="inleiding.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="inleiding.html#cb64-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb64-2"><a href="inleiding.html#cb64-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
+<span id="cb64-2"><a href="inleiding.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span></span>
+<span id="cb64-3"><a href="inleiding.html#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb64-4"><a href="inleiding.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="inleiding.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="inleiding.html#cb65-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## $x
 ## [1] &quot;&quot;
 ## 
@@ -1388,44 +1444,47 @@ We exploreren vervolgens de data in de steekproef.</p>
 <p><em>Wat gebeurt er als we het aantal observaties verhogen?</em></p>
 <p>We simuleren opnieuw experimenten met 50 subjecten per groep maar we trekken de subjecten opnieuw telkens uit de populatie van vrouwen.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="inleiding.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1345</span>)</span>
-<span id="cb67-2"><a href="inleiding.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per</span></span>
-<span id="cb67-3"><a href="inleiding.html#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co"># groep</span></span>
-<span id="cb67-4"><a href="inleiding.html#cb67-4" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb67-5"><a href="inleiding.html#cb67-5" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb67-6"><a href="inleiding.html#cb67-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-7"><a href="inleiding.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet</span></span>
-<span id="cb67-8"><a href="inleiding.html#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="co"># telkens opnieuw hoeven te doen</span></span>
-<span id="cb67-9"><a href="inleiding.html#cb67-9" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb67-10"><a href="inleiding.html#cb67-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
-<span id="cb67-11"><a href="inleiding.html#cb67-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-12"><a href="inleiding.html#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie Om snelle functies te kunnen</span></span>
-<span id="cb67-13"><a href="inleiding.html#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="co"># gebruiken nemen we eerst nSim steekproeven en</span></span>
-<span id="cb67-14"><a href="inleiding.html#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="co"># berekenen we daarna alles.</span></span>
-<span id="cb67-15"><a href="inleiding.html#cb67-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-16"><a href="inleiding.html#cb67-16" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> femSamps2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nSamp, <span class="at">ncol =</span> nSim)</span>
-<span id="cb67-17"><a href="inleiding.html#cb67-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim) {</span>
-<span id="cb67-18"><a href="inleiding.html#cb67-18" aria-hidden="true" tabindex="-1"></a>    femSamps[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
-<span id="cb67-19"><a href="inleiding.html#cb67-19" aria-hidden="true" tabindex="-1"></a>    femSamps2[, i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
-<span id="cb67-20"><a href="inleiding.html#cb67-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb67-21"><a href="inleiding.html#cb67-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-22"><a href="inleiding.html#cb67-22" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">verschil =</span> <span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(femSamps2),</span>
-<span id="cb67-23"><a href="inleiding.html#cb67-23" aria-hidden="true" tabindex="-1"></a>    Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, femSamps2))</span>
+<span id="cb67-2"><a href="inleiding.html#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aantal simulaties en steekproefgrootte per groep</span></span>
+<span id="cb67-3"><a href="inleiding.html#cb67-3" aria-hidden="true" tabindex="-1"></a>nSim <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb67-4"><a href="inleiding.html#cb67-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb67-5"><a href="inleiding.html#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-6"><a href="inleiding.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
+<span id="cb67-7"><a href="inleiding.html#cb67-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb67-8"><a href="inleiding.html#cb67-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb67-9"><a href="inleiding.html#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-10"><a href="inleiding.html#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
+<span id="cb67-11"><a href="inleiding.html#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Om snelle functies te kunnen gebruiken nemen we eerst nSim steekproeven en berekenen we daarna alles.</span></span>
+<span id="cb67-12"><a href="inleiding.html#cb67-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-13"><a href="inleiding.html#cb67-13" aria-hidden="true" tabindex="-1"></a>femSamps <span class="ot">&lt;-</span> femSamps2 <span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow=</span>nSamp, <span class="at">ncol=</span>nSim)</span>
+<span id="cb67-14"><a href="inleiding.html#cb67-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nSim)</span>
+<span id="cb67-15"><a href="inleiding.html#cb67-15" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb67-16"><a href="inleiding.html#cb67-16" aria-hidden="true" tabindex="-1"></a>  femSamps[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb67-17"><a href="inleiding.html#cb67-17" aria-hidden="true" tabindex="-1"></a>  femSamps2[,i] <span class="ot">&lt;-</span> <span class="fu">sample</span>(fem<span class="sc">$</span>Height, nSamp)</span>
+<span id="cb67-18"><a href="inleiding.html#cb67-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb67-19"><a href="inleiding.html#cb67-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-20"><a href="inleiding.html#cb67-20" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb67-21"><a href="inleiding.html#cb67-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil=</span><span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(femSamps2),</span>
+<span id="cb67-22"><a href="inleiding.html#cb67-22" aria-hidden="true" tabindex="-1"></a>  Rfast<span class="sc">::</span><span class="fu">ttests</span>(femSamps, femSamps2)</span>
+<span id="cb67-23"><a href="inleiding.html#cb67-23" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb67-24"><a href="inleiding.html#cb67-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-25"><a href="inleiding.html#cb67-25" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 271</code></pre>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="inleiding.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&gt;=</span> <span class="fl">0.05</span>)</span></code></pre></div>
 <pre><code>## [1] 9501</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="inleiding.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="inleiding.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(res<span class="sc">$</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> res<span class="sc">$</span>verschil<span class="sc">&gt;</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 228</code></pre>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="inleiding.html#cb73-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb73-2"><a href="inleiding.html#cb73-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> verschil, <span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(pvalue), <span class="at">color =</span> pvalue <span class="sc">&lt;</span></span>
-<span id="cb73-3"><a href="inleiding.html#cb73-3" aria-hidden="true" tabindex="-1"></a>        <span class="fl">0.05</span>)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb73-4"><a href="inleiding.html#cb73-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
+<span id="cb73-2"><a href="inleiding.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>verschil,<span class="at">y=</span><span class="sc">-</span><span class="fu">log10</span>(pvalue),<span class="at">color=</span>pvalue <span class="sc">&lt;</span> <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb73-3"><a href="inleiding.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb73-4"><a href="inleiding.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb73-5"><a href="inleiding.html#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Statistische Significantie (-log10 p)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="inleiding.html#cb74-1" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
-<span id="cb74-2"><a href="inleiding.html#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
+<span id="cb74-2"><a href="inleiding.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> verschil)) <span class="sc">+</span></span>
+<span id="cb74-3"><a href="inleiding.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb74-4"><a href="inleiding.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="inleiding.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="inleiding.html#cb75-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## $x
 ## [1] &quot;&quot;
 ## 
@@ -1474,12 +1533,15 @@ We hebben dus een controle nodig!</p>
 </div>
 <div id="data" class="section level4 hasAnchor" number="1.5.1.2">
 <h4><span class="header-section-number">1.5.1.2</span> Data<a href="inleiding.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="inleiding.html#cb77-1" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">group =</span> <span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;controls&quot;</span>, <span class="st">&quot;noConcent&quot;</span>),</span>
-<span id="cb77-2"><a href="inleiding.html#cb77-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">grade =</span> <span class="fu">c</span>(<span class="st">&quot;g2&quot;</span>, <span class="st">&quot;g1g3&quot;</span>, <span class="st">&quot;g2&quot;</span>), <span class="at">vaccin =</span> <span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>,</span>
-<span id="cb77-3"><a href="inleiding.html#cb77-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;no&quot;</span>, <span class="st">&quot;no&quot;</span>), <span class="at">total =</span> <span class="fu">c</span>(<span class="dv">221998</span>, <span class="dv">725173</span>, <span class="dv">123605</span>),</span>
-<span id="cb77-4"><a href="inleiding.html#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">polio =</span> <span class="fu">c</span>(<span class="dv">54</span>, <span class="dv">391</span>, <span class="dv">56</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb77-5"><a href="inleiding.html#cb77-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">noPolio =</span> total <span class="sc">-</span> polio)</span>
-<span id="cb77-6"><a href="inleiding.html#cb77-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="inleiding.html#cb77-1" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb77-2"><a href="inleiding.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">group=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>,<span class="st">&quot;controls&quot;</span>,<span class="st">&quot;noConcent&quot;</span>),</span>
+<span id="cb77-3"><a href="inleiding.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">grade=</span><span class="fu">c</span>(<span class="st">&quot;g2&quot;</span>,<span class="st">&quot;g1g3&quot;</span>,<span class="st">&quot;g2&quot;</span>),</span>
+<span id="cb77-4"><a href="inleiding.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vaccin=</span><span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;no&quot;</span>),</span>
+<span id="cb77-5"><a href="inleiding.html#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">total=</span><span class="fu">c</span>(<span class="dv">221998</span>,<span class="dv">725173</span>,<span class="dv">123605</span>),</span>
+<span id="cb77-6"><a href="inleiding.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">polio=</span><span class="fu">c</span>(<span class="dv">54</span>,<span class="dv">391</span>,<span class="dv">56</span>)</span>
+<span id="cb77-7"><a href="inleiding.html#cb77-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb77-8"><a href="inleiding.html#cb77-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">noPolio =</span> total <span class="sc">-</span> polio)</span>
+<span id="cb77-9"><a href="inleiding.html#cb77-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1578,9 +1640,8 @@ en 391 bij de controle groep.</p>
 <li>we maken de tabel opnieuw</li>
 </ol>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="inleiding.html#cb78-1" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> nfip <span class="sc">%&gt;%</span></span>
-<span id="cb78-2"><a href="inleiding.html#cb78-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">incidencePM =</span> <span class="fu">round</span>(nfip<span class="sc">$</span>polio<span class="sc">/</span>nfip<span class="sc">$</span>total <span class="sc">*</span></span>
-<span id="cb78-3"><a href="inleiding.html#cb78-3" aria-hidden="true" tabindex="-1"></a>        <span class="fl">1e+06</span>, <span class="dv">0</span>))</span>
-<span id="cb78-4"><a href="inleiding.html#cb78-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<span id="cb78-2"><a href="inleiding.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incidencePM =</span> <span class="fu">round</span>(nfip<span class="sc">$</span>polio<span class="sc">/</span>nfip<span class="sc">$</span>total<span class="sc">*</span><span class="fl">1e6</span>,<span class="dv">0</span>))</span>
+<span id="cb78-3"><a href="inleiding.html#cb78-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1715,12 +1776,16 @@ We kunnen aan de hand van het experiment het effect van de vaccinatie niet corre
 </div>
 <div id="data-1" class="section level4 hasAnchor" number="1.5.3.2">
 <h4><span class="header-section-number">1.5.3.2</span> Data<a href="inleiding.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="inleiding.html#cb79-1" aria-hidden="true" tabindex="-1"></a>salk <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;noConcent&quot;</span>),</span>
-<span id="cb79-2"><a href="inleiding.html#cb79-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">&quot;vaccine&quot;</span>, <span class="st">&quot;placebo&quot;</span>, <span class="st">&quot;none&quot;</span>), <span class="at">total =</span> <span class="fu">c</span>(<span class="dv">200745</span>,</span>
-<span id="cb79-3"><a href="inleiding.html#cb79-3" aria-hidden="true" tabindex="-1"></a>        <span class="dv">201229</span>, <span class="dv">338778</span>), <span class="at">polio =</span> <span class="fu">c</span>(<span class="dv">57</span>, <span class="dv">142</span>, <span class="dv">157</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb79-4"><a href="inleiding.html#cb79-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">noPolio =</span> total <span class="sc">-</span> polio, <span class="at">incidencePM =</span> <span class="fu">round</span>(polio<span class="sc">/</span>total <span class="sc">*</span></span>
-<span id="cb79-5"><a href="inleiding.html#cb79-5" aria-hidden="true" tabindex="-1"></a>        <span class="fl">1e+06</span>, <span class="dv">0</span>))</span>
-<span id="cb79-6"><a href="inleiding.html#cb79-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(salk, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="inleiding.html#cb79-1" aria-hidden="true" tabindex="-1"></a>salk <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb79-2"><a href="inleiding.html#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">group=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>,<span class="st">&quot;control&quot;</span>,<span class="st">&quot;noConcent&quot;</span>),</span>
+<span id="cb79-3"><a href="inleiding.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment=</span><span class="fu">c</span>(<span class="st">&quot;vaccine&quot;</span>,<span class="st">&quot;placebo&quot;</span>,<span class="st">&quot;none&quot;</span>),</span>
+<span id="cb79-4"><a href="inleiding.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">total=</span><span class="fu">c</span>(<span class="dv">200745</span>,<span class="dv">201229</span>, <span class="dv">338778</span>),<span class="at">polio=</span><span class="fu">c</span>(<span class="dv">57</span>,<span class="dv">142</span>,<span class="dv">157</span>)</span>
+<span id="cb79-5"><a href="inleiding.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb79-6"><a href="inleiding.html#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb79-7"><a href="inleiding.html#cb79-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">noPolio =</span> total<span class="sc">-</span>polio,</span>
+<span id="cb79-8"><a href="inleiding.html#cb79-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidencePM =</span> <span class="fu">round</span>(polio<span class="sc">/</span>total<span class="sc">*</span><span class="fl">1e6</span>,<span class="dv">0</span>)</span>
+<span id="cb79-9"><a href="inleiding.html#cb79-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb79-10"><a href="inleiding.html#cb79-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(salk, <span class="st">&quot;html&quot;</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr>

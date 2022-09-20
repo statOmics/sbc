@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Hoofdstuk 3 Studiedesign | Inleiding tot de Biostatistiek 2022-2023</title>
-  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Hoofdstuk 3 Studiedesign | Inleiding tot de Biostatistiek 2022-2023" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta property="og:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="github-repo" content="statOmics/statistiek2deBach" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hoofdstuk 3 Studiedesign | Inleiding tot de Biostatistiek 2022-2023" />
   
-  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="twitter:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   
 
 <meta name="author" content="Lieven Clement" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -722,10 +726,63 @@ de infectie-status te bepalen. Om dezelfde reden zijn ook dierenfysiologen ideal
 behandeling werd toegediend, wordt deze studie <em>dubbel blind</em>
 genoemd. Dubbel blinde studies vereisen dat de verschillende interventies er
 hetzelfde uitzien.</p>
-<p>Tabellen <a href="#tab:nfipStudy"><strong>??</strong></a> en <a href="#tab:dbrcStudy"><strong>??</strong></a> geven de resultaten weer die geobserveerd
+<table>
+<caption>
+<span id="tab:nfipStudy">Tabel 3.1: </span>De NFIP studie: aantal kinderen en incidentie (uitgedrukt per
+100000 kinderen per jaar).
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Aantal
+</th>
+<th style="text-align:right;">
+Incidentie
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Vaccin
+</td>
+<td style="text-align:right;">
+225000
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Controle
+</td>
+<td style="text-align:right;">
+725000
+</td>
+<td style="text-align:right;">
+54
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Geen toestemming
+</td>
+<td style="text-align:right;">
+125000
+</td>
+<td style="text-align:right;">
+44
+</td>
+</tr>
+</tbody>
+</table>
+<p>Tabellen <a href="chap-design.html#tab:nfipStudy">3.1</a> en <a href="chap-design.html#tab:dbrcStudy">3.2</a> geven de resultaten weer die geobserveerd
 werden in de NFIP studie en het <em>dubbel blinde gerandomiseerd
 gecontroleerde</em> (in het Engels: <em>double blind randomized controlled</em>)
-experiment. Op basis van Tabel <a href="#tab:dbrcStudy"><strong>??</strong></a> stellen we vast dat de incidentie
+experiment. Op basis van Tabel <a href="chap-design.html#tab:dbrcStudy">3.2</a> stellen we vast dat de incidentie
 daalt van 71 tot 28 gevallen per 100000 per jaar als gevolg van
 toediening van het vaccin. De enige vraag die resteert is of dergelijk
 verschil in incidentie gewoon door toeval kan ontstaan wanneer in
@@ -734,9 +791,62 @@ te observeren door toeval, wanneer het vaccin geen effect heeft. We mogen
 dus besluiten dat het Salk vaccin effectief is.</p>
 <p>Merk tenslotte op dat er inderdaad confounding optreedt in de NFIP studie. Immers
 de polio-incidentie lijkt er veel minder te dalen dan in de gerandomiseerde studie, namelijk van 54 naar 25
-per 100000 per jaar als gevolg van het vaccin (zie Tabel <a href="#tab:nfipStudy"><strong>??</strong></a>). De oorzaak is dat
+per 100000 per jaar als gevolg van het vaccin (zie Tabel <a href="chap-design.html#tab:nfipStudy">3.1</a>). De oorzaak is dat
 de controlegroep in deze studie kinderen bevat die minder vatbaar zijn voor
 polio dan de vaccin-groep.</p>
+<table>
+<caption>
+<span id="tab:dbrcStudy">Tabel 3.2: </span>De gerandomiseerd gecontroleerde studie: aantal kinderen en incidentie (uitgedrukt per
+100000 kinderen per jaar).
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Aantal
+</th>
+<th style="text-align:right;">
+Incidentie
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Vaccin
+</td>
+<td style="text-align:right;">
+200000
+</td>
+<td style="text-align:right;">
+28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Controle
+</td>
+<td style="text-align:right;">
+200000
+</td>
+<td style="text-align:right;">
+71
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Geen toestemming
+</td>
+<td style="text-align:right;">
+350000
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+</tbody>
+</table>
 <!---break-->
 </div>
 <div id="gerandomiseerde-gecontroleerde-studies" class="section level3 hasAnchor" number="3.3.2">
@@ -1049,7 +1159,7 @@ anders behandeld worden bij de toelatingsprocedure.</p>
 <p>Omdat de toelatingsexamens verschillend waren naargelang de studierichting,
 werd bovenstaande analyse per studierichting opgesplitst om na te gaan welke
 faculteiten verantwoordelijk waren voor mogelijke discriminatie. De
-resultaten voor de 6 grootste richtingen staan in Tabel <a href="#tab:sexbias"><strong>??</strong></a>
+resultaten voor de 6 grootste richtingen staan in Tabel <a href="chap-design.html#tab:sexbias">3.3</a>
 getabuleerd (resultaten voor de andere richtingen waren analoog). In alle
 studierichtingen ligt het slaagpercentage hoger bij de meisjes dan bij de
 jongens, behalve in richting E waar de jongens het lichtjes beter doen. Dit
@@ -1057,17 +1167,144 @@ lijkt paradoxaal, wetende dat het algemene slaagpercentage voor de jongens
 dat van de meisjes ruim overstijgt. Hoe kunnen we dit verklaren?</p>
 <p>De verklaring is dat de moeilijkheidsgraad van de studierichting (en verwant
 hiermee de keuze van studierichting) een confounder is voor de associatie
-tussen geslacht en de slaagkans. Immers, zoals blijkt uit Tabel <a href="#tab:sexbias"><strong>??</strong></a> hebben jongens meer de neiging om studierichtingen te kiezen
+tussen geslacht en de slaagkans. Immers, zoals blijkt uit Tabel <a href="chap-design.html#tab:sexbias">3.3</a> hebben jongens meer de neiging om studierichtingen te kiezen
 waar de slaagkansen hoog zijn: meer dan 50% van de jongens schreven zich in
 voor studierichtingen A en B, waar de slaagkansen hoger waren dan 50%; meer
 dan 90% van de meisjes kandideerde voor de andere studierichtingen die veel
 zwaardere toelatingsexamens hadden.</p>
-<p>De vergelijking van de slaagkansen per studierichting in Tabel <a href="#tab:sexbias"><strong>??</strong></a>
+<p>De vergelijking van de slaagkansen per studierichting in Tabel <a href="chap-design.html#tab:sexbias">3.3</a>
 levert een analyse op die gecontroleerd is voor de keuze van
 studierichting. Na deze controle blijkt relatief weinig verschil in
 slaagkansen tussen jongens en meisjes. De statistische les is dat relaties
 tussen percentages kunnen omkeren naarmate men ze al dan niet in subgroepen
 bekijkt. Dit noemt men <em>Simpson’s paradox</em>.</p>
+<table>
+<caption>
+<span id="tab:sexbias">Tabel 3.3: </span>Resultaten van de toelatingsexamens volgens geslacht en studierichting.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Jongens(aantal)
+</th>
+<th style="text-align:right;">
+Jongens(geslaagd %)
+</th>
+<th style="text-align:right;">
+Meisjes(aantal)
+</th>
+<th style="text-align:right;">
+Meisjes (geslaagd %)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+825
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:right;">
+108
+</td>
+<td style="text-align:right;">
+82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+560
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+325
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+593
+</td>
+<td style="text-align:right;">
+34
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+417
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+375
+</td>
+<td style="text-align:right;">
+35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E
+</td>
+<td style="text-align:right;">
+191
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+393
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:right;">
+373
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+341
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Einde voorbeeld</strong></p>
 <p><code>{.example, name="Confounders in de NHANES studie"}</code></p>
 <p>De National Health and Nutrition Examination Survey
@@ -1174,7 +1411,7 @@ hoewel gevaccineerde (niet-gevaccineerde) kinderen <em>cases</em> (<em>controles
 werden genoemd.</p>
 <p><code>{.example, name="Genetische associatiestudies", label="brcaLeu"}</code></p>
 <p>Genetische associatiestudies zijn erop gericht om na te gaan of polymorfismen (d.i. verschillen in DNA sequentie tussen individuen) in bepaalde genen geassocieerd zijn met bepaalde fenotypes, bijvoorbeeld of het polymorfisme in het BRCA1 gen geassocieerd is met borstkanker. Vaak bestudeert men relatief zeldzame aandoeningen, in welk geval case-controle studies zeer efficiënt zijn. Immers, door via het design vast te leggen dat het DNA-profiel moet gemeten worden van 100 borstkankercases en 100 controles kan men met een beperkt aantal metingen toch een voldoende aantal cases evalueren. In prospectieve studies daarentegen zou men met een borstkankerprevalentie van 1% al 10000 mensen moeten evalueren om een 100-tal cases te garanderen.</p>
-<p>In dit voorbeeld beschouwen we zo’n case-controle studie die 800 borstkankercases en 572 controles omvatte. Informatie omtrent het BRCA1-polymorfisme werd bekomen via DNA-analyse en staat getabuleerd in Tabel <a href="#tab:leu"><strong>??</strong></a>.
+<p>In dit voorbeeld beschouwen we zo’n case-controle studie die 800 borstkankercases en 572 controles omvatte. Informatie omtrent het BRCA1-polymorfisme werd bekomen via DNA-analyse en staat getabuleerd in Tabel <a href="chap-design.html#tab:leu">3.4</a>.
 We stellen vast dat 89 van de 800 cases het allel Leu/Leu bezitten, of 11.1%, en 56 van de 572 controles, of 9.8%. Dit suggereert dat de aanwezigheid van het allel Leu/Leu prevalenter is bij mensen met borstkanker. In latere hoofdstukken zullen
 we vaststellen dat dergelijk verschil in prevalentie van blootstelling aan
 het allel Leu/Leu voldoende klein is om door toeval te kunnen ontstaan wanneer er in
@@ -1183,6 +1420,85 @@ werkelijkheid geen associatie is tussen het polymorfisme in BRCA1 en borstkanker
 veralgemeenbaar is naar de ganse bevolking. Dit komt doordat het percentage
 borstkankerpatiënten in deze studie vastgekozen is door het design en dus
 niet het werkelijke risico op borstkanker weerspiegelt!</p>
+<table>
+<caption>
+<span id="tab:leu">Tabel 3.4: </span>Kruistabel van borstkanker-status versus BRCA1-allel.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Genotype
+</th>
+<th style="text-align:right;">
+Controles
+</th>
+<th style="text-align:right;">
+Cases
+</th>
+<th style="text-align:right;">
+totaal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pro/Pro
+</td>
+<td style="text-align:right;">
+266
+</td>
+<td style="text-align:right;">
+342
+</td>
+<td style="text-align:right;">
+608
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pro/Leu
+</td>
+<td style="text-align:right;">
+250
+</td>
+<td style="text-align:right;">
+369
+</td>
+<td style="text-align:right;">
+619
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leu/Leu
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+145
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Totaal
+</td>
+<td style="text-align:right;">
+572
+</td>
+<td style="text-align:right;">
+800
+</td>
+<td style="text-align:right;">
+1372
+</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Einde voorbeeld</strong></p>
 <p>Er zijn 2 mogelijke variaties van case-controle studies. In <em>niet-gematchte case-controle studies</em> is de controlegroep een goedgekozen
 steekproef uit de populatie subjecten zonder de

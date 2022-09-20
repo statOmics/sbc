@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Hoofdstuk 10 Algemeen lineair model | Inleiding tot de Biostatistiek 2022-2023</title>
-  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Hoofdstuk 10 Algemeen lineair model | Inleiding tot de Biostatistiek 2022-2023" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta property="og:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="github-repo" content="statOmics/statistiek2deBach" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hoofdstuk 10 Algemeen lineair model | Inleiding tot de Biostatistiek 2022-2023" />
   
-  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="twitter:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   
 
 <meta name="author" content="Lieven Clement" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -539,8 +543,8 @@ Het doel van de studie is om de associatie van de PSA te bestuderen in functie v
 <div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb535-1"><a href="chap-glm.html#cb535-1" aria-hidden="true" tabindex="-1"></a>prostate<span class="sc">$</span>svi <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(prostate<span class="sc">$</span>svi)</span></code></pre></div>
 <div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="chap-glm.html#cb536-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
 <span id="cb536-2"><a href="chap-glm.html#cb536-2" aria-hidden="true" tabindex="-1"></a>prostate <span class="sc">%&gt;%</span></span>
-<span id="cb536-3"><a href="chap-glm.html#cb536-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>pgg45) <span class="sc">%&gt;%</span></span>
-<span id="cb536-4"><a href="chap-glm.html#cb536-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggpairs</span>()</span></code></pre></div>
+<span id="cb536-3"><a href="chap-glm.html#cb536-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>pgg45)  <span class="sc">%&gt;%</span></span>
+<span id="cb536-4"><a href="chap-glm.html#cb536-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:lpsaAll"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/lpsaAll-1.png" alt="Scatterplot matrix voor de observaties in de prostaat kanker dataset." width="100%" />
 <p class="caption">
@@ -627,7 +631,7 @@ waarde van <span class="math inline">\(X_j\)</span>, maar dezelfde waarde hebben
 E(Y|X_f,X_s,X_p,X_r)=\beta_0 +\beta_v X_v+\beta_w X_w+\beta_s X_s,
 \]</span></p>
 <p>wijzigt dit resultaat vrij behoorlijk, zoals onderstaande output aangeeft.</p>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="chap-glm.html#cb539-1" aria-hidden="true" tabindex="-1"></a>lmVWS <span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa <span class="sc">~</span> lcavol <span class="sc">+</span> lweight <span class="sc">+</span> svi, prostate)</span>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb539-1"><a href="chap-glm.html#cb539-1" aria-hidden="true" tabindex="-1"></a>lmVWS <span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa<span class="sc">~</span>lcavol <span class="sc">+</span> lweight <span class="sc">+</span> svi, prostate)</span>
 <span id="cb539-2"><a href="chap-glm.html#cb539-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmVWS)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -757,7 +761,7 @@ In geval van lineariteit maar schendingen van homoscedasticiteit of normaliteit 
 <p>Afwijkingen van lineariteit kunnen opnieuw worden opgespoord d.m.v. een <em>residuplot</em>. Deze wordt weergegeven in Figuur <a href="chap-glm.html#fig:prosLinDiag1">10.3</a> links boven. Als de veronderstelling van lineariteit opgaat, krijgt men in een residuplot geen patroon te zien.
 De residuen zijn immers gemiddeld nul voor elke waarde van de predictoren en zouden dus mooi rond nul moeten variëren.
 Dat is inderdaad het geval voor het meervoudig lineaire regressiemodel dat we hebben gefit o.b.v. de prostaat dataset.</p>
-<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="chap-glm.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<div class="sourceCode" id="cb545"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb545-1"><a href="chap-glm.html#cb545-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb545-2"><a href="chap-glm.html#cb545-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lmVWS)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:prosLinDiag1"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/prosLinDiag1-1.png" alt="Diagnostische plots voor het nagaan van de veronderstellingen van het lineair regressiemodel waarbij lpsa gemodelleerd wordt a.d.h.v. de predictoren lcavol, lweight en svi." width="100%" />
@@ -798,9 +802,8 @@ Y_i = \beta_0 + \beta_v x_{iv} + \beta_w x_{iw} +\beta_s x_{is} + \beta_{vw} x_{
 <p>Deze termen kwantificeren de <em>interactie-effecten</em> van respectievelijk de predictoren <span class="math inline">\(x_v\)</span> en <span class="math inline">\(x_s\)</span>; en van <span class="math inline">\(x_w\)</span> en <span class="math inline">\(x_s\)</span> op de gemiddelde uitkomst.
 In dit model worden de termen <span class="math inline">\(\beta_vx_{iv}\)</span>, <span class="math inline">\(\beta_wx_{iw}\)</span> en <span class="math inline">\(\beta_sx_{is}\)</span> dikwijls de <em>hoofdeffecten</em> van de predictoren <span class="math inline">\(x_v\)</span>, <span class="math inline">\(x_w\)</span> en <span class="math inline">\(x_s\)</span> genoemd.</p>
 <p>We schatten dit model nu in R. De interacties worden toegevoegd door een term toe te voegen in de formule met de naam van twee variabelen die wordt gescheiden door een <code>:</code>.</p>
-<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="chap-glm.html#cb546-1" aria-hidden="true" tabindex="-1"></a>lmVWS_IntVS_WS <span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa <span class="sc">~</span> lcavol <span class="sc">+</span> lweight <span class="sc">+</span> svi <span class="sc">+</span></span>
-<span id="cb546-2"><a href="chap-glm.html#cb546-2" aria-hidden="true" tabindex="-1"></a>    svi<span class="sc">:</span>lcavol <span class="sc">+</span> svi<span class="sc">:</span>lweight, <span class="at">data =</span> prostate)</span>
-<span id="cb546-3"><a href="chap-glm.html#cb546-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmVWS_IntVS_WS)</span></code></pre></div>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="chap-glm.html#cb546-1" aria-hidden="true" tabindex="-1"></a>lmVWS_IntVS_WS <span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa <span class="sc">~</span> lcavol <span class="sc">+</span> lweight <span class="sc">+</span> svi <span class="sc">+</span> svi<span class="sc">:</span>lcavol <span class="sc">+</span> svi<span class="sc">:</span>lweight,<span class="at">data=</span>prostate)</span>
+<span id="cb546-2"><a href="chap-glm.html#cb546-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmVWS_IntVS_WS)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lpsa ~ lcavol + lweight + svi + svi:lcavol + svi:lweight, 
@@ -880,9 +883,8 @@ E(Y|X_v=x_v+1,X_w=x_w,X_s=x_s) − E(X_v=x_v,X_w=x_w,X_s=x_s) \\
 <p>wanneer het log-prostaatgewicht <span class="math inline">\(X_w=c\)</span> en de <span class="math inline">\(X_s=x_s\)</span> status ongewijzigd blijven. Merk op dat het ‘effect’ van een wijzing in het tumorvolume bij
 constant log-prostaat gewicht nu inderdaad afhankelijk is van de hoogte van het log-prostaatgewicht <span class="math inline">\(x_w\)</span>.</p>
 <p>We schatten nu opnieuw de parameters van het model in R.</p>
-<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="chap-glm.html#cb548-1" aria-hidden="true" tabindex="-1"></a>lmVWS_IntVW <span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa <span class="sc">~</span> lcavol <span class="sc">+</span> lweight <span class="sc">+</span> svi <span class="sc">+</span> lcavol<span class="sc">:</span>lweight,</span>
-<span id="cb548-2"><a href="chap-glm.html#cb548-2" aria-hidden="true" tabindex="-1"></a>    prostate)</span>
-<span id="cb548-3"><a href="chap-glm.html#cb548-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmVWS_IntVW)</span></code></pre></div>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="chap-glm.html#cb548-1" aria-hidden="true" tabindex="-1"></a>lmVWS_IntVW <span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa<span class="sc">~</span>lcavol <span class="sc">+</span> lweight <span class="sc">+</span> svi <span class="sc">+</span> lcavol<span class="sc">:</span>lweight ,prostate)</span>
+<span id="cb548-2"><a href="chap-glm.html#cb548-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmVWS_IntVW)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = lpsa ~ lcavol + lweight + svi + lcavol:lweight, 
@@ -1120,8 +1122,7 @@ De waarden van de schattingen zijn niet alleen verschillend van wat we in het ad
 De oorzaak moet gezocht worden in het probleem van multicollineariteit.
 Wanneer 2 predictoren sterk gecorreleerd zijn, dan delen ze voor een groot stuk dezelfde informatie en is het moeilijk om de afzonderlijke effecten van beiden op de uitkomst te schatten. Dit uit zich in het feit dat de computationele berekening van de kleinste kwadratenschatters onstabiel wordt, in die zin dat kleine wijzigingen aan de gegevens of het toevoegen of weglaten van een predictorvariabele een belangrijke impact kunnen hebben op de grootte, en zelfs het teken, van de geschatte regressieparameters.
 Een tweede effect van multicollineariteit is dat standaard errors bij de geschatte regressieparameters fel kunnen worden opgeblazen en de bijhorende betrouwbaarheidsintervallen bijgevolg zeer breed kunnen worden. Zolang men enkel predicties tracht te bekomen op basis van het regressiemodel zonder daarbij te extrapoleren buiten het bereik van de predictoren is multicollineariteit geen probleem.</p>
-<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="chap-glm.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">cbind</span>(prostate<span class="sc">$</span>lcavol, prostate<span class="sc">$</span>lweight, prostate<span class="sc">$</span>lcavol <span class="sc">*</span></span>
-<span id="cb554-2"><a href="chap-glm.html#cb554-2" aria-hidden="true" tabindex="-1"></a>    prostate<span class="sc">$</span>lweight))</span></code></pre></div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="chap-glm.html#cb554-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(<span class="fu">cbind</span>(prostate<span class="sc">$</span>lcavol,prostate<span class="sc">$</span>lweight,prostate<span class="sc">$</span>lcavol<span class="sc">*</span>prostate<span class="sc">$</span>lweight))</span></code></pre></div>
 <pre><code>##           [,1]      [,2]      [,3]
 ## [1,] 1.0000000 0.1941283 0.9893127
 ## [2,] 0.1941283 1.0000000 0.2835608
@@ -1225,26 +1226,23 @@ We zullen in de practica zien dat we i.p.v. de data te centreren evengoed een te
 </iframe>
 <p>In onderstaande code wordt data gesimuleerd om de impact van outliers te illustreren.</p>
 <div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="chap-glm.html#cb566-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">112358</span>)</span>
-<span id="cb566-2"><a href="chap-glm.html#cb566-2" aria-hidden="true" tabindex="-1"></a>nobs <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb566-3"><a href="chap-glm.html#cb566-3" aria-hidden="true" tabindex="-1"></a>sdy <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb566-4"><a href="chap-glm.html#cb566-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> nobs)</span>
-<span id="cb566-5"><a href="chap-glm.html#cb566-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">5</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(nobs, <span class="at">sd =</span> sdy)</span>
-<span id="cb566-6"><a href="chap-glm.html#cb566-6" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, <span class="fl">0.5</span>)</span>
-<span id="cb566-7"><a href="chap-glm.html#cb566-7" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(y, <span class="dv">10</span> <span class="sc">+</span> <span class="dv">5</span> <span class="sc">*</span> <span class="fl">1.5</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">sd =</span> sdy))</span>
-<span id="cb566-8"><a href="chap-glm.html#cb566-8" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, <span class="fl">1.5</span>)</span>
-<span id="cb566-9"><a href="chap-glm.html#cb566-9" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(y, y1[<span class="dv">21</span>])</span>
-<span id="cb566-10"><a href="chap-glm.html#cb566-10" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">c</span>(x, <span class="fl">1.5</span>)</span>
-<span id="cb566-11"><a href="chap-glm.html#cb566-11" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="fu">c</span>(y, <span class="dv">11</span>)</span>
-<span id="cb566-12"><a href="chap-glm.html#cb566-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">xlim =</span> <span class="fu">range</span>(<span class="fu">c</span>(x1, x2, x3)), <span class="at">ylim =</span> <span class="fu">range</span>(<span class="fu">c</span>(y1,</span>
-<span id="cb566-13"><a href="chap-glm.html#cb566-13" aria-hidden="true" tabindex="-1"></a>    y2, y3)))</span>
-<span id="cb566-14"><a href="chap-glm.html#cb566-14" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">c</span>(x1[<span class="dv">21</span>], x2[<span class="dv">21</span>], x3[<span class="dv">21</span>]), <span class="fu">c</span>(y1[<span class="dv">21</span>], y2[<span class="dv">21</span>],</span>
-<span id="cb566-15"><a href="chap-glm.html#cb566-15" aria-hidden="true" tabindex="-1"></a>    y3[<span class="dv">21</span>]), <span class="at">pch =</span> <span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="at">col =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb566-16"><a href="chap-glm.html#cb566-16" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb566-17"><a href="chap-glm.html#cb566-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y1 <span class="sc">~</span> x1), <span class="at">col =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb566-18"><a href="chap-glm.html#cb566-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y2 <span class="sc">~</span> x2), <span class="at">col =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb566-19"><a href="chap-glm.html#cb566-19" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y3 <span class="sc">~</span> x3), <span class="at">col =</span> <span class="dv">4</span>, <span class="at">lty =</span> <span class="dv">4</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb566-20"><a href="chap-glm.html#cb566-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb566-21"><a href="chap-glm.html#cb566-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))), <span class="at">text.col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code></pre></div>
+<span id="cb566-2"><a href="chap-glm.html#cb566-2" aria-hidden="true" tabindex="-1"></a>nobs<span class="ot">&lt;-</span><span class="dv">20</span></span>
+<span id="cb566-3"><a href="chap-glm.html#cb566-3" aria-hidden="true" tabindex="-1"></a>sdy<span class="ot">&lt;-</span><span class="dv">1</span></span>
+<span id="cb566-4"><a href="chap-glm.html#cb566-4" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">length=</span>nobs)</span>
+<span id="cb566-5"><a href="chap-glm.html#cb566-5" aria-hidden="true" tabindex="-1"></a>y<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">+</span><span class="dv">5</span><span class="sc">*</span>x<span class="sc">+</span><span class="fu">rnorm</span>(nobs,<span class="at">sd=</span>sdy)</span>
+<span id="cb566-6"><a href="chap-glm.html#cb566-6" aria-hidden="true" tabindex="-1"></a>x1<span class="ot">&lt;-</span><span class="fu">c</span>(x,<span class="fl">0.5</span>)</span>
+<span id="cb566-7"><a href="chap-glm.html#cb566-7" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">c</span>(y,<span class="dv">10</span><span class="sc">+</span><span class="dv">5</span><span class="sc">*</span><span class="fl">1.5</span><span class="sc">+</span><span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="at">sd=</span>sdy))</span>
+<span id="cb566-8"><a href="chap-glm.html#cb566-8" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(x,<span class="fl">1.5</span>)</span>
+<span id="cb566-9"><a href="chap-glm.html#cb566-9" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">c</span>(y,y1[<span class="dv">21</span>])</span>
+<span id="cb566-10"><a href="chap-glm.html#cb566-10" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">c</span>(x,<span class="fl">1.5</span>)</span>
+<span id="cb566-11"><a href="chap-glm.html#cb566-11" aria-hidden="true" tabindex="-1"></a>y3 <span class="ot">&lt;-</span> <span class="fu">c</span>(y,<span class="dv">11</span>)</span>
+<span id="cb566-12"><a href="chap-glm.html#cb566-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y,<span class="at">xlim=</span><span class="fu">range</span>(<span class="fu">c</span>(x1,x2,x3)),<span class="at">ylim=</span><span class="fu">range</span>(<span class="fu">c</span>(y1,y2,y3)))</span>
+<span id="cb566-13"><a href="chap-glm.html#cb566-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">c</span>(x1[<span class="dv">21</span>],x2[<span class="dv">21</span>],x3[<span class="dv">21</span>]),<span class="fu">c</span>(y1[<span class="dv">21</span>],y2[<span class="dv">21</span>],y3[<span class="dv">21</span>]),<span class="at">pch=</span><span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),<span class="at">col=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb566-14"><a href="chap-glm.html#cb566-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x),<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb566-15"><a href="chap-glm.html#cb566-15" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y1<span class="sc">~</span>x1),<span class="at">col=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">2</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb566-16"><a href="chap-glm.html#cb566-16" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y2<span class="sc">~</span>x2),<span class="at">col=</span><span class="dv">3</span>,<span class="at">lty=</span><span class="dv">3</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb566-17"><a href="chap-glm.html#cb566-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(y3<span class="sc">~</span>x3),<span class="at">col=</span><span class="dv">4</span>,<span class="at">lty=</span><span class="dv">4</span>,<span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb566-18"><a href="chap-glm.html#cb566-18" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="at">lty=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="at">legend=</span><span class="fu">paste</span>(<span class="st">&quot;lm&quot;</span>,<span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))),<span class="at">text.col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:influential"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/influential-1.png" alt="Impact van outliers op de regressie. Regressie zonder outliers (zwart), regressie met outlier 1 (groen), regressie met outlier 2 (rood), regressie met outlier 3 (blauw)." width="100%" />
 <p class="caption">
@@ -1265,17 +1263,13 @@ D_i=\frac{\sum_{j=1}^n(\hat{Y}_j-\hat{Y}_{j(i)})^2}{p\textrm{MSE}}
 <p>Indien de Cook’s distance <span class="math inline">\(D_i\)</span> groot is, dan heeft de <span class="math inline">\(i\)</span>-de observatie een grote invloed op de predicties en geschatte parameters. In het bijzonder stelt men dat een extreme Cook’s distance het 50% percentiel van de <span class="math inline">\(F_{p,n-p}\)</span>-verdeling overschrijdt.</p>
 <p>Deze plots komen standaard bij diagnose van het lineair model.
 We evalueren dit voor het additieve model en het model met de lcavol:lweight interactie voor de prostaatkanker studie.</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="chap-glm.html#cb567-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb567-2"><a href="chap-glm.html#cb567-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lmVWS, <span class="at">which =</span> <span class="dv">5</span>)</span>
-<span id="cb567-3"><a href="chap-glm.html#cb567-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lmVWS_IntVW, <span class="at">which =</span> <span class="dv">5</span>)</span>
-<span id="cb567-4"><a href="chap-glm.html#cb567-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cooks.distance</span>(lmVWS), <span class="at">type =</span> <span class="st">&quot;h&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,</span>
-<span id="cb567-5"><a href="chap-glm.html#cb567-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>), <span class="at">main =</span> <span class="st">&quot;Additive model&quot;</span>)</span>
-<span id="cb567-6"><a href="chap-glm.html#cb567-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">qf</span>(<span class="fl">0.5</span>, <span class="fu">length</span>(lmVWS<span class="sc">$</span>coef), <span class="fu">nrow</span>(prostate) <span class="sc">-</span></span>
-<span id="cb567-7"><a href="chap-glm.html#cb567-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(lmVWS<span class="sc">$</span>coef)), <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb567-8"><a href="chap-glm.html#cb567-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cooks.distance</span>(lmVWS_IntVW), <span class="at">type =</span> <span class="st">&quot;h&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,</span>
-<span id="cb567-9"><a href="chap-glm.html#cb567-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>), <span class="at">main =</span> <span class="st">&quot;Model with lcavol:lweight interaction&quot;</span>)</span>
-<span id="cb567-10"><a href="chap-glm.html#cb567-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">qf</span>(<span class="fl">0.5</span>, <span class="fu">length</span>(lmVWS_IntVW<span class="sc">$</span>coef), <span class="fu">nrow</span>(prostate) <span class="sc">-</span></span>
-<span id="cb567-11"><a href="chap-glm.html#cb567-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(lmVWS_IntVW<span class="sc">$</span>coef)), <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="chap-glm.html#cb567-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb567-2"><a href="chap-glm.html#cb567-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lmVWS,<span class="at">which=</span><span class="dv">5</span>)</span>
+<span id="cb567-3"><a href="chap-glm.html#cb567-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lmVWS_IntVW,<span class="at">which=</span><span class="dv">5</span>)</span>
+<span id="cb567-4"><a href="chap-glm.html#cb567-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cooks.distance</span>(lmVWS),<span class="at">type=</span><span class="st">&quot;h&quot;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">main=</span><span class="st">&quot;Additive model&quot;</span>)</span>
+<span id="cb567-5"><a href="chap-glm.html#cb567-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">qf</span>(<span class="fl">0.5</span>,<span class="fu">length</span>(lmVWS<span class="sc">$</span>coef),<span class="fu">nrow</span>(prostate)<span class="sc">-</span><span class="fu">length</span>(lmVWS<span class="sc">$</span>coef)),<span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb567-6"><a href="chap-glm.html#cb567-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cooks.distance</span>(lmVWS_IntVW),<span class="at">type=</span><span class="st">&quot;h&quot;</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">main=</span><span class="st">&quot;Model with lcavol:lweight interaction&quot;</span>)</span>
+<span id="cb567-7"><a href="chap-glm.html#cb567-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="fu">qf</span>(<span class="fl">0.5</span>,<span class="fu">length</span>(lmVWS_IntVW<span class="sc">$</span>coef),<span class="fu">nrow</span>(prostate)<span class="sc">-</span><span class="fu">length</span>(lmVWS_IntVW<span class="sc">$</span>coef)),<span class="at">lty=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:prosCooksAdditiveInt"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/prosCooksAdditiveInt-1.png" alt="Evaluatie van de invloed van individuele observaties op het additieve model (links) en het model met de lcavol:lweight interactie (rechts)." width="100%" />
 <p class="caption">
@@ -1286,7 +1280,7 @@ Figuur 10.8: Evaluatie van de invloed van individuele observaties op het additie
 <p>Eenmaal men vastgesteld heeft dat een observatie invloedrijk is, kan men zogenaamde <em>DFBETAS</em> gebruiken om te bepalen op welke parameter(s) ze een grote invloed uitoefent. De DFBETAS van de <span class="math inline">\(i\)</span>-de observatie vormen een diagnostische maat voor de invloed van die observatie <em>op elke regressieparameter afzonderlijk</em>, in tegenstelling tot de Cook’s distance die de invloed op alle parameters tegelijk evalueert. In het bijzonder bekomt men de DFBETAS voor de <span class="math inline">\(i\)</span>-de observatie en de <span class="math inline">\(j\)</span>-de parameter door de <span class="math inline">\(j\)</span>-de parameter <span class="math inline">\(\hat{\beta}_j\)</span> te vergelijken met de parameter <span class="math inline">\(\hat{\beta}_{j(i)}\)</span> die men zou bekomen indien het regressiemodel gefit werd zonder de <span class="math inline">\(i\)</span>-de observatie in de analyse te betrekken:</p>
 <p><span class="math display">\[\textrm{DFBETAS}_{j(i)}=\frac{\hat{\beta}_{j}-\hat{\beta}_{j(i)}}{\textrm{SD}(\hat{\beta}_{j})}\]</span></p>
 <p>Uit bovenstaande uitdrukking volgt dat het teken van de DFBETAS voor de <span class="math inline">\(i\)</span>-de observatie aangeeft of het weglaten van die observatie uit de analyse een stijging (DFBETAS<span class="math inline">\(&lt;0\)</span>) of daling (DFBETAS<span class="math inline">\(&gt;0\)</span>) in de overeenkomstige parameter veroorzaakt. In het bijzonder stelt men dat een DFBETAS extreem is wanneer ze 1 overschrijdt in kleine tot middelgrote datasets en <span class="math inline">\(2/\sqrt{n}\)</span> overschrijdt in grote datasets.</p>
-<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="chap-glm.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="chap-glm.html#cb568-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb568-2"><a href="chap-glm.html#cb568-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dfbetasPlots</span>(lmVWS)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:prosDfBetasAdditive"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/prosDfBetasAdditive-1.png" alt="DFBETAS voor additieve model in prostaatkanker." width="100%" />
@@ -1294,7 +1288,7 @@ Figuur 10.8: Evaluatie van de invloed van individuele observaties op het additie
 Figuur 10.9: DFBETAS voor additieve model in prostaatkanker.
 </p>
 </div>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="chap-glm.html#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="chap-glm.html#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb569-2"><a href="chap-glm.html#cb569-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dfbetasPlots</span>(lmVWS_IntVW)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:prosDfBetasInt"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/prosDfBetasInt-1.png" alt="DFBETAS voor model met lcavol:lweight interactie." width="100%" />
@@ -1304,12 +1298,12 @@ Figuur 10.10: DFBETAS voor model met lcavol:lweight interactie.
 </div>
 <p>De Cooks distances en de DFBETAS plots geven aan dat observatie 32 het grootste effect heeft op de regressieparameters. Daarnaast heeft deze observatie ook een extreme “influence”.</p>
 <p>We gaan observatie 32 nu wat beter bestuderen.</p>
-<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="chap-glm.html#cb570-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(prostate[<span class="dv">32</span>, <span class="st">&quot;lweight&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="chap-glm.html#cb570-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(prostate[<span class="dv">32</span>,<span class="st">&quot;lweight&quot;</span>])</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 1
 ##   lweight
 ##     &lt;dbl&gt;
 ## 1    449.</code></pre>
-<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="chap-glm.html#cb572-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">exp</span>(prostate<span class="sc">$</span>lweight), <span class="at">ylab =</span> <span class="st">&quot;Prostaatgewicht (g)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="chap-glm.html#cb572-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">exp</span>(prostate<span class="sc">$</span>lweight),<span class="at">ylab=</span><span class="st">&quot;Prostaatgewicht (g)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:prosInfl"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/prosInfl-1.png" alt="Boxplot met outlier voor prostaatgewicht." width="100%" />
 <p class="caption">
@@ -1348,11 +1342,15 @@ De auteurs die de dataset uit de originele publicatie hebben opgenomen in een ha
 <p>We fitten een model op basis van de gemiddelde systolische bloeddruk (<code>BPSysAve</code>) in functie van de leeftijd, geslacht en een interactie tussen leeftijd en geslacht voor volwassen blanke subjecten uit de NHANES studie.</p>
 <div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="chap-glm.html#cb573-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
 <span id="cb573-2"><a href="chap-glm.html#cb573-2" aria-hidden="true" tabindex="-1"></a>bpData <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb573-3"><a href="chap-glm.html#cb573-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Race1 <span class="sc">==</span> <span class="st">&quot;White&quot;</span> <span class="sc">&amp;</span> Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(BPSysAve))</span>
-<span id="cb573-4"><a href="chap-glm.html#cb573-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb573-5"><a href="chap-glm.html#cb573-5" aria-hidden="true" tabindex="-1"></a>mBp1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">~</span> Age <span class="sc">*</span> Gender, bpData)</span>
-<span id="cb573-6"><a href="chap-glm.html#cb573-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb573-7"><a href="chap-glm.html#cb573-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mBp1)</span></code></pre></div>
+<span id="cb573-3"><a href="chap-glm.html#cb573-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(</span>
+<span id="cb573-4"><a href="chap-glm.html#cb573-4" aria-hidden="true" tabindex="-1"></a>  Race1 <span class="sc">==</span><span class="st">&quot;White&quot;</span> <span class="sc">&amp;</span></span>
+<span id="cb573-5"><a href="chap-glm.html#cb573-5" aria-hidden="true" tabindex="-1"></a>    Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span></span>
+<span id="cb573-6"><a href="chap-glm.html#cb573-6" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(BPSysAve)</span>
+<span id="cb573-7"><a href="chap-glm.html#cb573-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb573-8"><a href="chap-glm.html#cb573-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb573-9"><a href="chap-glm.html#cb573-9" aria-hidden="true" tabindex="-1"></a>mBp1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">~</span> Age<span class="sc">*</span>Gender, bpData)</span>
+<span id="cb573-10"><a href="chap-glm.html#cb573-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb573-11"><a href="chap-glm.html#cb573-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mBp1)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-208-1.png" width="672" /></p>
 <ul>
 <li><p>Aannames van het model zijn niet voldaan!</p>
@@ -1366,10 +1364,9 @@ De auteurs die de dataset uit de originele publicatie hebben opgenomen in een ha
 <div id="transformatie" class="section level4 hasAnchor" number="10.8.2.1">
 <h4><span class="header-section-number">10.8.2.1</span> Transformatie<a href="chap-glm.html#transformatie" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>We fitten een model op basis van de log2 getransformeerde gemiddelde systolische bloeddruk (<code>BPSysAve</code>) in functie van de leeftijd, geslacht en een interactie tussen leeftijd en geslacht.</p>
-<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="chap-glm.html#cb574-1" aria-hidden="true" tabindex="-1"></a>mBp2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">%&gt;%</span></span>
-<span id="cb574-2"><a href="chap-glm.html#cb574-2" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">~</span> Age <span class="sc">*</span> Gender, bpData)</span>
-<span id="cb574-3"><a href="chap-glm.html#cb574-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb574-4"><a href="chap-glm.html#cb574-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mBp2)</span></code></pre></div>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="chap-glm.html#cb574-1" aria-hidden="true" tabindex="-1"></a>mBp2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">%&gt;%</span> log2 <span class="sc">~</span> Age<span class="sc">*</span>Gender, bpData)</span>
+<span id="cb574-2"><a href="chap-glm.html#cb574-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb574-3"><a href="chap-glm.html#cb574-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mBp2)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-209-1.png" width="672" /></p>
 <ul>
 <li>De residuen tonen nog steeds heteroscedasticiteit.</li>
@@ -1387,13 +1384,13 @@ De auteurs die de dataset uit de originele publicatie hebben opgenomen in een ha
 <li>We kunnen de variantie van Y schatten voor elke observatie d.m.v de kwadraten van de predicties voor alle data punten a.d.h.v model voor de standard deviatie.</li>
 <li>De inferentie blijft asymptotisch geldig.</li>
 </ol>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="chap-glm.html#cb575-1" aria-hidden="true" tabindex="-1"></a>mSd <span class="ot">&lt;-</span> <span class="fu">lm</span>(mBp1<span class="sc">$</span>res <span class="sc">%&gt;%</span></span>
-<span id="cb575-2"><a href="chap-glm.html#cb575-2" aria-hidden="true" tabindex="-1"></a>    abs <span class="sc">~</span> mBp2<span class="sc">$</span>fitted)</span></code></pre></div>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="chap-glm.html#cb575-1" aria-hidden="true" tabindex="-1"></a>mSd <span class="ot">&lt;-</span> <span class="fu">lm</span>(mBp1<span class="sc">$</span>res <span class="sc">%&gt;%</span> abs <span class="sc">~</span> mBp2<span class="sc">$</span>fitted)</span></code></pre></div>
 <p>We schatten het model nu opnieuw:</p>
-<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="chap-glm.html#cb576-1" aria-hidden="true" tabindex="-1"></a>mBp3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">~</span> Age <span class="sc">*</span> Gender, bpData, <span class="at">w =</span> <span class="dv">1</span><span class="sc">/</span>mSd<span class="sc">$</span>fitted<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="chap-glm.html#cb576-1" aria-hidden="true" tabindex="-1"></a>mBp3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">~</span> Age<span class="sc">*</span>Gender, bpData, <span class="at">w =</span> <span class="dv">1</span><span class="sc">/</span>mSd<span class="sc">$</span>fitted<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <p>De residuen vertonen nog steeds heteroscedasticiteit.</p>
 <div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="chap-glm.html#cb577-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">residuals =</span> mBp3<span class="sc">$</span>residuals, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">%&gt;%</span></span>
-<span id="cb577-2"><a href="chap-glm.html#cb577-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(fit, residuals)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<span id="cb577-2"><a href="chap-glm.html#cb577-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(fit,residuals)) <span class="sc">+</span></span>
+<span id="cb577-3"><a href="chap-glm.html#cb577-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
 <p>Na het herschalen van de residuen a.d.h.v. de standard deviatie (vermenigvuldigen met vierkantswortel van het gewicht) zijn de geschaalde residuen homoscedastisch.</p>
 <p>De parameters worden geschat door de gewogen kleinste kwadraten techniek.</p>
@@ -1402,9 +1399,9 @@ SSE = \sum\limits_{i=1}^n w_i e_i^2
 \]</span></p>
 <p>met <span class="math inline">\(w_i = 1/\hat \sigma^2_i\)</span>.</p>
 <p>De gewogen regressie zal dus correct rekening houden met heteroscedasticiteit.</p>
-<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="chap-glm.html#cb578-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">scaled_residuals =</span> mBp3<span class="sc">$</span>residuals<span class="sc">/</span>mSd<span class="sc">$</span>fitted,</span>
-<span id="cb578-2"><a href="chap-glm.html#cb578-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">%&gt;%</span></span>
-<span id="cb578-3"><a href="chap-glm.html#cb578-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(fit, scaled_residuals)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="chap-glm.html#cb578-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">scaled_residuals =</span> mBp3<span class="sc">$</span>residuals<span class="sc">/</span>mSd<span class="sc">$</span>fitted, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">%&gt;%</span></span>
+<span id="cb578-2"><a href="chap-glm.html#cb578-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(fit,scaled_residuals)) <span class="sc">+</span></span>
+<span id="cb578-3"><a href="chap-glm.html#cb578-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-213-1.png" width="672" /></p>
 <!---break-->
 </div>
@@ -1496,10 +1493,12 @@ H_0: \beta_\text{Age} = \beta_\text{Age:Gendermale} = 0
 <h4><span class="header-section-number">10.8.3.2</span> Posthoc testen<a href="chap-glm.html#posthoc-testen" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>De posthoc testen kunnen we opnieuw uitvoeren a.d.h.v. het multcomp pakket.</p>
 <div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="chap-glm.html#cb583-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
-<span id="cb583-2"><a href="chap-glm.html#cb583-2" aria-hidden="true" tabindex="-1"></a>bpPosthoc <span class="ot">&lt;-</span> <span class="fu">glht</span>(mBp3, <span class="at">linfct =</span> <span class="fu">c</span>(<span class="st">&quot;Age = 0&quot;</span>, <span class="st">&quot;Age + Age:Gendermale = 0&quot;</span>,</span>
-<span id="cb583-3"><a href="chap-glm.html#cb583-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Age:Gendermale = 0&quot;</span>))</span>
-<span id="cb583-4"><a href="chap-glm.html#cb583-4" aria-hidden="true" tabindex="-1"></a>bpPosthoc <span class="sc">%&gt;%</span></span>
-<span id="cb583-5"><a href="chap-glm.html#cb583-5" aria-hidden="true" tabindex="-1"></a>    summary</span></code></pre></div>
+<span id="cb583-2"><a href="chap-glm.html#cb583-2" aria-hidden="true" tabindex="-1"></a>bpPosthoc <span class="ot">&lt;-</span> <span class="fu">glht</span>(mBp3, <span class="at">linfct=</span><span class="fu">c</span>(</span>
+<span id="cb583-3"><a href="chap-glm.html#cb583-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Age = 0&quot;</span>,</span>
+<span id="cb583-4"><a href="chap-glm.html#cb583-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Age + Age:Gendermale = 0&quot;</span>,</span>
+<span id="cb583-5"><a href="chap-glm.html#cb583-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Age:Gendermale = 0&quot;</span>)</span>
+<span id="cb583-6"><a href="chap-glm.html#cb583-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb583-7"><a href="chap-glm.html#cb583-7" aria-hidden="true" tabindex="-1"></a>bpPosthoc <span class="sc">%&gt;%</span> summary</span></code></pre></div>
 <pre><code>## 
 ##   Simultaneous Tests for General Linear Hypotheses
 ## 
@@ -1518,9 +1517,8 @@ H_0: \beta_\text{Age} = \beta_\text{Age:Gendermale} = 0
 ## Signif. codes:  
 ## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## (Adjusted p values reported -- single-step method)</code></pre>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="chap-glm.html#cb585-1" aria-hidden="true" tabindex="-1"></a>bpPosthocBI <span class="ot">&lt;-</span> bpPosthoc <span class="sc">%&gt;%</span></span>
-<span id="cb585-2"><a href="chap-glm.html#cb585-2" aria-hidden="true" tabindex="-1"></a>    confint</span>
-<span id="cb585-3"><a href="chap-glm.html#cb585-3" aria-hidden="true" tabindex="-1"></a>bpPosthocBI</span></code></pre></div>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="chap-glm.html#cb585-1" aria-hidden="true" tabindex="-1"></a>bpPosthocBI <span class="ot">&lt;-</span> bpPosthoc <span class="sc">%&gt;%</span> confint</span>
+<span id="cb585-2"><a href="chap-glm.html#cb585-2" aria-hidden="true" tabindex="-1"></a>bpPosthocBI</span></code></pre></div>
 <pre><code>## 
 ##   Simultaneous Confidence Intervals
 ## 
@@ -1571,17 +1569,20 @@ Het gemiddelde bloeddrukverschil tussen personen in leeftijd verschillen is gemi
 <div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="chap-glm.html#cb587-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(faraway)</span>
 <span id="cb587-2"><a href="chap-glm.html#cb587-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(rats)</span>
 <span id="cb587-3"><a href="chap-glm.html#cb587-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb587-4"><a href="chap-glm.html#cb587-4" aria-hidden="true" tabindex="-1"></a>rats <span class="ot">&lt;-</span> rats <span class="sc">%&gt;%</span></span>
-<span id="cb587-5"><a href="chap-glm.html#cb587-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">time =</span> time <span class="sc">*</span> <span class="dv">10</span>)</span>
+<span id="cb587-4"><a href="chap-glm.html#cb587-4" aria-hidden="true" tabindex="-1"></a>rats <span class="ot">&lt;-</span> rats <span class="sc">%&gt;%</span> </span>
+<span id="cb587-5"><a href="chap-glm.html#cb587-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time=</span>time <span class="sc">*</span> <span class="dv">10</span>)</span>
 <span id="cb587-6"><a href="chap-glm.html#cb587-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb587-7"><a href="chap-glm.html#cb587-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb587-8"><a href="chap-glm.html#cb587-8" aria-hidden="true" tabindex="-1"></a>rats <span class="sc">%&gt;%</span></span>
-<span id="cb587-9"><a href="chap-glm.html#cb587-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggpairs</span>()</span></code></pre></div>
+<span id="cb587-8"><a href="chap-glm.html#cb587-8" aria-hidden="true" tabindex="-1"></a>rats <span class="sc">%&gt;%</span> </span>
+<span id="cb587-9"><a href="chap-glm.html#cb587-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-217-1.png" width="672" /></p>
 <p>De data exploratie suggereert een effect van beide factoren.</p>
 <div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb588-1"><a href="chap-glm.html#cb588-1" aria-hidden="true" tabindex="-1"></a>rats <span class="sc">%&gt;%</span></span>
-<span id="cb588-2"><a href="chap-glm.html#cb588-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treat, <span class="at">y =</span> time)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb588-3"><a href="chap-glm.html#cb588-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>poison) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;time (h)&quot;</span>)</span></code></pre></div>
+<span id="cb588-2"><a href="chap-glm.html#cb588-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>treat,<span class="at">y=</span>time)) <span class="sc">+</span> </span>
+<span id="cb588-3"><a href="chap-glm.html#cb588-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb588-4"><a href="chap-glm.html#cb588-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb588-5"><a href="chap-glm.html#cb588-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>poison) <span class="sc">+</span></span>
+<span id="cb588-6"><a href="chap-glm.html#cb588-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;time (h)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-218-1.png" width="672" /></p>
 <ul>
 <li>Er zou een interactie kunnen zijn tussen behandeling en gif, het effect van het gif op de overlevingstijd hangt dan af van de behandeling en vice versa.</li>
@@ -1606,7 +1607,7 @@ y_i &amp;=&amp; \beta_0  + \\
 \end{array}
 \]</span></p>
 <p>met <span class="math inline">\(i = 1, \ldots, n\)</span>, <span class="math inline">\(n=48\)</span>, en, <span class="math inline">\(x_{iII}\)</span>, <span class="math inline">\(x_{iIII}\)</span>, <span class="math inline">\(x_{iB}\)</span>, <span class="math inline">\(x_{iC}\)</span> en <span class="math inline">\(x_{iD}\)</span> dummy variabelen voor respectievelijk gif II, III, behandeling B, C, en D.</p>
-<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="chap-glm.html#cb589-1" aria-hidden="true" tabindex="-1"></a>rats1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> poison <span class="sc">*</span> treat, rats)</span>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="chap-glm.html#cb589-1" aria-hidden="true" tabindex="-1"></a>rats1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time<span class="sc">~</span>poison<span class="sc">*</span>treat, rats)</span>
 <span id="cb589-2"><a href="chap-glm.html#cb589-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rats1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1658,23 +1659,27 @@ y_i &amp;=&amp; \beta_0  + \\
 <div id="logaritmische-transformatie" class="section level5 hasAnchor" number="10.9.3.1.1">
 <h5><span class="header-section-number">10.9.3.1.1</span> Logaritmische transformatie<a href="chap-glm.html#logaritmische-transformatie" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb592-1"><a href="chap-glm.html#cb592-1" aria-hidden="true" tabindex="-1"></a>rats <span class="sc">%&gt;%</span></span>
-<span id="cb592-2"><a href="chap-glm.html#cb592-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treat, <span class="at">y =</span> <span class="fu">log2</span>(time))) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb592-3"><a href="chap-glm.html#cb592-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>poison)</span></code></pre></div>
+<span id="cb592-2"><a href="chap-glm.html#cb592-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>treat,<span class="at">y=</span><span class="fu">log2</span>(time))) <span class="sc">+</span> </span>
+<span id="cb592-3"><a href="chap-glm.html#cb592-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb592-4"><a href="chap-glm.html#cb592-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb592-5"><a href="chap-glm.html#cb592-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>poison)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
-<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="chap-glm.html#cb593-1" aria-hidden="true" tabindex="-1"></a>rats2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">%&gt;%</span></span>
-<span id="cb593-2"><a href="chap-glm.html#cb593-2" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">~</span> poison <span class="sc">*</span> treat, rats)</span>
-<span id="cb593-3"><a href="chap-glm.html#cb593-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rats2)</span></code></pre></div>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="chap-glm.html#cb593-1" aria-hidden="true" tabindex="-1"></a>rats2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">%&gt;%</span> log2<span class="sc">~</span>poison<span class="sc">*</span>treat, rats)</span>
+<span id="cb593-2"><a href="chap-glm.html#cb593-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rats2)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-220-2.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-220-3.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-220-4.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-220-5.png" width="672" /></p>
 <p>Log transformatie verwijdert heteroscedasticiteit niet volledig.</p>
 </div>
 <div id="reciproke-transformatie" class="section level5 hasAnchor" number="10.9.3.1.2">
 <h5><span class="header-section-number">10.9.3.1.2</span> Reciproke transformatie<a href="chap-glm.html#reciproke-transformatie" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb594-1"><a href="chap-glm.html#cb594-1" aria-hidden="true" tabindex="-1"></a>rats <span class="sc">%&gt;%</span></span>
-<span id="cb594-2"><a href="chap-glm.html#cb594-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> treat, <span class="at">y =</span> <span class="dv">1</span><span class="sc">/</span>time)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb594-3"><a href="chap-glm.html#cb594-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>poison) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;rate of dying (1/h)&quot;</span>)</span></code></pre></div>
+<span id="cb594-2"><a href="chap-glm.html#cb594-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>treat,<span class="at">y=</span><span class="dv">1</span><span class="sc">/</span>time)) <span class="sc">+</span> </span>
+<span id="cb594-3"><a href="chap-glm.html#cb594-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span> </span>
+<span id="cb594-4"><a href="chap-glm.html#cb594-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb594-5"><a href="chap-glm.html#cb594-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>poison) <span class="sc">+</span> </span>
+<span id="cb594-6"><a href="chap-glm.html#cb594-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span> (<span class="st">&quot;rate of dying (1/h)&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
-<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="chap-glm.html#cb595-1" aria-hidden="true" tabindex="-1"></a>rats3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="dv">1</span><span class="sc">/</span>time <span class="sc">~</span> poison <span class="sc">*</span> treat, rats)</span>
-<span id="cb595-2"><a href="chap-glm.html#cb595-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rats3)</span></code></pre></div>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="chap-glm.html#cb595-1" aria-hidden="true" tabindex="-1"></a>rats3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="dv">1</span><span class="sc">/</span>time<span class="sc">~</span>poison<span class="sc">*</span>treat, rats)</span>
+<span id="cb595-2"><a href="chap-glm.html#cb595-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rats3) </span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-221-2.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-221-3.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-221-4.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-221-5.png" width="672" /></p>
 <p>De reciproke transformatie lijkt beter.
 Transformaties bemoeilijken soms de interpretatie.
@@ -1694,7 +1699,7 @@ Hier kan de reciproke transformatie echter worden geïnterpreteerd als de “sne
 <p>Er zijn meerdere interactie termen in het model.
 We kunnen deze eerst samen testen a.d.h.v. van de resultaten uit de anova tabel.</p>
 <div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb596-1"><a href="chap-glm.html#cb596-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb596-2"><a href="chap-glm.html#cb596-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(rats3, <span class="at">type =</span> <span class="st">&quot;III&quot;</span>)</span></code></pre></div>
+<span id="cb596-2"><a href="chap-glm.html#cb596-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(rats3, <span class="at">type=</span><span class="st">&quot;III&quot;</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: 1/time
@@ -1712,11 +1717,11 @@ We kunnen deze eerst samen testen a.d.h.v. van de resultaten uit de anova tabel.
 <p>De interactie tussen gif en behandeling is niet significant op het 5% niveau.</p>
 <p>Een veelgebruikte methode is om de niet-significante interactie te verwijderen uit het model.</p>
 <p>We verkrijgen dan een additief model wat toelaat om de effecten van de twee factoren afzonderlijk te bestuderen.</p>
-<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="chap-glm.html#cb598-1" aria-hidden="true" tabindex="-1"></a>rats4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="dv">1</span><span class="sc">/</span>time <span class="sc">~</span> poison <span class="sc">+</span> treat, rats)</span>
+<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb598-1"><a href="chap-glm.html#cb598-1" aria-hidden="true" tabindex="-1"></a>rats4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="dv">1</span><span class="sc">/</span>time<span class="sc">~</span>poison <span class="sc">+</span> treat, rats)</span>
 <span id="cb598-2"><a href="chap-glm.html#cb598-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rats4)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-223-1.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-223-2.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-223-3.png" width="672" /><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-223-4.png" width="672" /></p>
 <p>We zien wel iets meer afwijkingen in de residu plot.</p>
-<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="chap-glm.html#cb599-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(rats4, <span class="at">type =</span> <span class="st">&quot;III&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="chap-glm.html#cb599-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(rats4, <span class="at">type=</span><span class="st">&quot;III&quot;</span>)</span></code></pre></div>
 <pre><code>## Anova Table (Type III tests)
 ## 
 ## Response: 1/time
@@ -1731,9 +1736,8 @@ We kunnen deze eerst samen testen a.d.h.v. van de resultaten uit de anova tabel.
 <p>De anova tabel toont dat het effect van gif en behandeling beiden extreem siginficant zijn (beide <span class="math inline">\(p&lt;&lt; 0.001\)</span>).</p>
 <p>Het additieve model laat toe om de effecten van het type gif en de behandeling afzonderlijke te bestuderen via een post-hoc analyse.</p>
 <div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="chap-glm.html#cb601-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
-<span id="cb601-2"><a href="chap-glm.html#cb601-2" aria-hidden="true" tabindex="-1"></a>comparisons <span class="ot">&lt;-</span> <span class="fu">glht</span>(rats4, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">poison =</span> <span class="st">&quot;Tukey&quot;</span>,</span>
-<span id="cb601-3"><a href="chap-glm.html#cb601-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> <span class="st">&quot;Tukey&quot;</span>))</span>
-<span id="cb601-4"><a href="chap-glm.html#cb601-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comparisons)</span></code></pre></div>
+<span id="cb601-2"><a href="chap-glm.html#cb601-2" aria-hidden="true" tabindex="-1"></a>comparisons <span class="ot">&lt;-</span> <span class="fu">glht</span>(rats4, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">poison =</span> <span class="st">&quot;Tukey&quot;</span>, <span class="at">treat=</span><span class="st">&quot;Tukey&quot;</span>))</span>
+<span id="cb601-3"><a href="chap-glm.html#cb601-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(comparisons)</span></code></pre></div>
 <pre><code>## 
 ##   Simultaneous Tests for General Linear Hypotheses
 ## 
@@ -1791,11 +1795,9 @@ We kunnen deze eerst samen testen a.d.h.v. van de resultaten uit de anova tabel.
 ## treat: C - B == 0      0.1085267  0.0511538  0.1658996
 ## treat: D - B == 0      0.0299064 -0.0274665  0.0872794
 ## treat: D - C == 0     -0.0786203 -0.1359932 -0.0212473</code></pre>
-<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="chap-glm.html#cb605-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(comparisons, <span class="at">yaxt =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb605-2"><a href="chap-glm.html#cb605-2" aria-hidden="true" tabindex="-1"></a>contrastNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;II-I&quot;</span>, <span class="st">&quot;III-I&quot;</span>, <span class="st">&quot;III-II&quot;</span>, <span class="st">&quot;B-A&quot;</span>,</span>
-<span id="cb605-3"><a href="chap-glm.html#cb605-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;C-A&quot;</span>, <span class="st">&quot;D-A&quot;</span>, <span class="st">&quot;C-B&quot;</span>, <span class="st">&quot;D-B&quot;</span>, <span class="st">&quot;D-C&quot;</span>)</span>
-<span id="cb605-4"><a href="chap-glm.html#cb605-4" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="fu">length</span>(contrastNames)<span class="sc">:</span><span class="dv">1</span>), <span class="at">labels =</span> contrastNames,</span>
-<span id="cb605-5"><a href="chap-glm.html#cb605-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="chap-glm.html#cb605-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(comparisons,<span class="at">yaxt=</span><span class="st">&quot;none&quot;</span>)</span>
+<span id="cb605-2"><a href="chap-glm.html#cb605-2" aria-hidden="true" tabindex="-1"></a>contrastNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;II-I&quot;</span>,<span class="st">&quot;III-I&quot;</span>,<span class="st">&quot;III-II&quot;</span>,<span class="st">&quot;B-A&quot;</span>,<span class="st">&quot;C-A&quot;</span>,<span class="st">&quot;D-A&quot;</span>,<span class="st">&quot;C-B&quot;</span>,<span class="st">&quot;D-B&quot;</span>,<span class="st">&quot;D-C&quot;</span>)</span>
+<span id="cb605-3"><a href="chap-glm.html#cb605-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>,<span class="at">at=</span><span class="fu">c</span>(<span class="fu">length</span>(contrastNames)<span class="sc">:</span><span class="dv">1</span>), <span class="at">labels=</span>contrastNames,<span class="at">las=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-225-1.png" width="672" /></p>
 </div>
 <div id="niet-significante-interactie-term-in-het-model-weerhouden" class="section level4 hasAnchor" number="10.9.4.2">
@@ -1805,8 +1807,7 @@ Het zou immers kunnen dat de power van het experiment te klein is om de interact
 We kunnen er ook voor kiezen om de niet significante interactie term in het model te laten.</p>
 <p>Als de interactie significant zou zijn geweest, betekent dit dat het effect van het gif op de snelheid van sterven afhangt van de behandeling en vice versa.
 Dan kunnen we het effect van het type gif en de behandeling op de overlevingstijd niet afzonderlijk bestuderen.</p>
-<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="chap-glm.html#cb606-1" aria-hidden="true" tabindex="-1"></a>ExploreModelMatrix<span class="sc">::</span><span class="fu">VisualizeDesign</span>(rats, <span class="sc">~</span>poison <span class="sc">*</span></span>
-<span id="cb606-2"><a href="chap-glm.html#cb606-2" aria-hidden="true" tabindex="-1"></a>    treat)<span class="sc">$</span>plot</span></code></pre></div>
+<div class="sourceCode" id="cb606"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb606-1"><a href="chap-glm.html#cb606-1" aria-hidden="true" tabindex="-1"></a>ExploreModelMatrix<span class="sc">::</span><span class="fu">VisualizeDesign</span>(rats,<span class="sc">~</span>poison<span class="sc">*</span>treat)<span class="sc">$</span>plot</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-226-1.png" width="672" /></p>
 <p>We zouden dan het effect van het type gif afzonderlijk moeten bestuderen voor elke behandeling:</p>
@@ -1876,33 +1877,45 @@ Dan kunnen we het effect van het type gif en de behandeling op de overlevingstij
 <li>D-B: <span class="math inline">\(H_0: \beta_{D}+\beta_{III:D}-\beta_{B}-\beta_{III:B}=0\)</span></li>
 <li>D-C: <span class="math inline">\(H_0: \beta_{D}+\beta_{III:D}-\beta_{C}-\beta_{III:C}=0\)</span></li>
 </ul>
-<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="chap-glm.html#cb608-1" aria-hidden="true" tabindex="-1"></a>comparisonsInt <span class="ot">&lt;-</span> <span class="fu">glht</span>(rats3, <span class="at">linfct =</span> <span class="fu">c</span>(<span class="st">&quot;poisonII = 0&quot;</span>,</span>
-<span id="cb608-2"><a href="chap-glm.html#cb608-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;poisonIII = 0&quot;</span>, <span class="st">&quot;poisonIII - poisonII = 0&quot;</span>, <span class="st">&quot;poisonII + poisonII:treatB = 0&quot;</span>,</span>
-<span id="cb608-3"><a href="chap-glm.html#cb608-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;poisonIII + poisonIII:treatB = 0&quot;</span>, <span class="st">&quot;poisonIII + poisonIII:treatB - poisonII- poisonII:treatB = 0&quot;</span>,</span>
-<span id="cb608-4"><a href="chap-glm.html#cb608-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;poisonII + poisonII:treatC = 0&quot;</span>, <span class="st">&quot;poisonIII + poisonIII:treatC = 0&quot;</span>,</span>
-<span id="cb608-5"><a href="chap-glm.html#cb608-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;poisonIII + poisonIII:treatC - poisonII- poisonII:treatC = 0&quot;</span>,</span>
-<span id="cb608-6"><a href="chap-glm.html#cb608-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;poisonII + poisonII:treatD = 0&quot;</span>, <span class="st">&quot;poisonIII + poisonIII:treatD = 0&quot;</span>,</span>
-<span id="cb608-7"><a href="chap-glm.html#cb608-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;poisonIII + poisonIII:treatD - poisonII- poisonII:treatD = 0&quot;</span>,</span>
-<span id="cb608-8"><a href="chap-glm.html#cb608-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatB = 0&quot;</span>, <span class="st">&quot;treatC = 0&quot;</span>, <span class="st">&quot;treatD = 0&quot;</span>, <span class="st">&quot;treatC - treatB = 0&quot;</span>,</span>
-<span id="cb608-9"><a href="chap-glm.html#cb608-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD - treatB = 0&quot;</span>, <span class="st">&quot;treatD - treatC = 0&quot;</span>, <span class="st">&quot;treatB + poisonII:treatB = 0&quot;</span>,</span>
-<span id="cb608-10"><a href="chap-glm.html#cb608-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatC + poisonII:treatC = 0&quot;</span>, <span class="st">&quot;treatD + poisonII:treatD = 0&quot;</span>,</span>
-<span id="cb608-11"><a href="chap-glm.html#cb608-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatC + poisonII:treatC - treatB - poisonII:treatB = 0&quot;</span>,</span>
-<span id="cb608-12"><a href="chap-glm.html#cb608-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD + poisonII:treatD - treatB - poisonII:treatB = 0&quot;</span>,</span>
-<span id="cb608-13"><a href="chap-glm.html#cb608-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD + poisonII:treatD - treatC - poisonII:treatC = 0&quot;</span>,</span>
-<span id="cb608-14"><a href="chap-glm.html#cb608-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatB + poisonIII:treatB = 0&quot;</span>, <span class="st">&quot;treatC + poisonIII:treatC = 0&quot;</span>,</span>
-<span id="cb608-15"><a href="chap-glm.html#cb608-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD + poisonIII:treatD = 0&quot;</span>, <span class="st">&quot;treatC + poisonIII:treatC - treatB - poisonIII:treatB = 0&quot;</span>,</span>
-<span id="cb608-16"><a href="chap-glm.html#cb608-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD + poisonIII:treatD - treatB - poisonIII:treatB = 0&quot;</span>,</span>
-<span id="cb608-17"><a href="chap-glm.html#cb608-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD + poisonIII:treatD - treatC - poisonIII:treatC = 0&quot;</span>))</span>
-<span id="cb608-18"><a href="chap-glm.html#cb608-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb608-19"><a href="chap-glm.html#cb608-19" aria-hidden="true" tabindex="-1"></a>contrastNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">each =</span> <span class="dv">3</span>),</span>
-<span id="cb608-20"><a href="chap-glm.html#cb608-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="fu">apply</span>(<span class="fu">combn</span>(<span class="fu">c</span>(<span class="st">&quot;I&quot;</span>, <span class="st">&quot;II&quot;</span>, <span class="st">&quot;III&quot;</span>), <span class="dv">2</span>)[<span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>, ],</span>
-<span id="cb608-21"><a href="chap-glm.html#cb608-21" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>, paste, <span class="at">collapse =</span> <span class="st">&quot;-&quot;</span>), <span class="dv">4</span>), <span class="at">sep =</span> <span class="st">&quot;: &quot;</span>),</span>
-<span id="cb608-22"><a href="chap-glm.html#cb608-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;I&quot;</span>, <span class="st">&quot;II&quot;</span>, <span class="st">&quot;III&quot;</span>), <span class="at">each =</span> <span class="dv">6</span>), <span class="fu">rep</span>(<span class="fu">apply</span>(<span class="fu">combn</span>(<span class="fu">c</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]),</span>
-<span id="cb608-23"><a href="chap-glm.html#cb608-23" aria-hidden="true" tabindex="-1"></a>        <span class="dv">2</span>)[<span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>, ], <span class="dv">2</span>, paste, <span class="at">collapse =</span> <span class="st">&quot;-&quot;</span>), <span class="dv">3</span>), <span class="at">sep =</span> <span class="st">&quot;: &quot;</span>))</span>
-<span id="cb608-24"><a href="chap-glm.html#cb608-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb608-25"><a href="chap-glm.html#cb608-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(comparisonsInt, <span class="at">yaxt =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb608-26"><a href="chap-glm.html#cb608-26" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="fu">length</span>(contrastNames)<span class="sc">:</span><span class="dv">1</span>), <span class="at">labels =</span> contrastNames,</span>
-<span id="cb608-27"><a href="chap-glm.html#cb608-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="chap-glm.html#cb608-1" aria-hidden="true" tabindex="-1"></a>comparisonsInt <span class="ot">&lt;-</span> <span class="fu">glht</span>(rats3, <span class="at">linfct =</span> <span class="fu">c</span>(</span>
+<span id="cb608-2"><a href="chap-glm.html#cb608-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonII = 0&quot;</span>,</span>
+<span id="cb608-3"><a href="chap-glm.html#cb608-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII = 0&quot;</span>,</span>
+<span id="cb608-4"><a href="chap-glm.html#cb608-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII - poisonII = 0&quot;</span>,</span>
+<span id="cb608-5"><a href="chap-glm.html#cb608-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonII + poisonII:treatB = 0&quot;</span>,</span>
+<span id="cb608-6"><a href="chap-glm.html#cb608-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII + poisonIII:treatB = 0&quot;</span>,</span>
+<span id="cb608-7"><a href="chap-glm.html#cb608-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII + poisonIII:treatB - poisonII- poisonII:treatB = 0&quot;</span>,  </span>
+<span id="cb608-8"><a href="chap-glm.html#cb608-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonII + poisonII:treatC = 0&quot;</span>,</span>
+<span id="cb608-9"><a href="chap-glm.html#cb608-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII + poisonIII:treatC = 0&quot;</span>,</span>
+<span id="cb608-10"><a href="chap-glm.html#cb608-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII + poisonIII:treatC - poisonII- poisonII:treatC = 0&quot;</span>,  </span>
+<span id="cb608-11"><a href="chap-glm.html#cb608-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonII + poisonII:treatD = 0&quot;</span>,</span>
+<span id="cb608-12"><a href="chap-glm.html#cb608-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII + poisonIII:treatD = 0&quot;</span>,</span>
+<span id="cb608-13"><a href="chap-glm.html#cb608-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII + poisonIII:treatD - poisonII- poisonII:treatD = 0&quot;</span>,  </span>
+<span id="cb608-14"><a href="chap-glm.html#cb608-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatB = 0&quot;</span>,</span>
+<span id="cb608-15"><a href="chap-glm.html#cb608-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatC = 0&quot;</span>,</span>
+<span id="cb608-16"><a href="chap-glm.html#cb608-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD = 0&quot;</span>,</span>
+<span id="cb608-17"><a href="chap-glm.html#cb608-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatC - treatB = 0&quot;</span>,</span>
+<span id="cb608-18"><a href="chap-glm.html#cb608-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD - treatB = 0&quot;</span>,</span>
+<span id="cb608-19"><a href="chap-glm.html#cb608-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD - treatC = 0&quot;</span>,</span>
+<span id="cb608-20"><a href="chap-glm.html#cb608-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatB + poisonII:treatB = 0&quot;</span>,</span>
+<span id="cb608-21"><a href="chap-glm.html#cb608-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatC + poisonII:treatC = 0&quot;</span>,</span>
+<span id="cb608-22"><a href="chap-glm.html#cb608-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + poisonII:treatD = 0&quot;</span>,</span>
+<span id="cb608-23"><a href="chap-glm.html#cb608-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatC + poisonII:treatC - treatB - poisonII:treatB = 0&quot;</span>,</span>
+<span id="cb608-24"><a href="chap-glm.html#cb608-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + poisonII:treatD - treatB - poisonII:treatB = 0&quot;</span>,</span>
+<span id="cb608-25"><a href="chap-glm.html#cb608-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + poisonII:treatD - treatC - poisonII:treatC = 0&quot;</span>,</span>
+<span id="cb608-26"><a href="chap-glm.html#cb608-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatB + poisonIII:treatB = 0&quot;</span>,</span>
+<span id="cb608-27"><a href="chap-glm.html#cb608-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatC + poisonIII:treatC = 0&quot;</span>,</span>
+<span id="cb608-28"><a href="chap-glm.html#cb608-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + poisonIII:treatD = 0&quot;</span>,</span>
+<span id="cb608-29"><a href="chap-glm.html#cb608-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatC + poisonIII:treatC - treatB - poisonIII:treatB = 0&quot;</span>,</span>
+<span id="cb608-30"><a href="chap-glm.html#cb608-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + poisonIII:treatD - treatB - poisonIII:treatB = 0&quot;</span>,</span>
+<span id="cb608-31"><a href="chap-glm.html#cb608-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + poisonIII:treatD - treatC - poisonIII:treatC = 0&quot;</span>)</span>
+<span id="cb608-32"><a href="chap-glm.html#cb608-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb608-33"><a href="chap-glm.html#cb608-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb608-34"><a href="chap-glm.html#cb608-34" aria-hidden="true" tabindex="-1"></a>contrastNames<span class="ot">&lt;-</span></span>
+<span id="cb608-35"><a href="chap-glm.html#cb608-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">paste</span>(<span class="fu">rep</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>],<span class="at">each=</span><span class="dv">3</span>),<span class="fu">rep</span>(<span class="fu">apply</span>(<span class="fu">combn</span>(<span class="fu">c</span>(<span class="st">&quot;I&quot;</span>,<span class="st">&quot;II&quot;</span>,<span class="st">&quot;III&quot;</span>),<span class="dv">2</span>)[<span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>,],<span class="dv">2</span>,paste,<span class="at">collapse=</span><span class="st">&quot;-&quot;</span>) ,<span class="dv">4</span>),<span class="at">sep=</span><span class="st">&quot;: &quot;</span>),</span>
+<span id="cb608-36"><a href="chap-glm.html#cb608-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;I&quot;</span>,<span class="st">&quot;II&quot;</span>,<span class="st">&quot;III&quot;</span>),<span class="at">each=</span><span class="dv">6</span>),<span class="fu">rep</span>(<span class="fu">apply</span>(<span class="fu">combn</span>(<span class="fu">c</span>(LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]),<span class="dv">2</span>)[<span class="dv">2</span><span class="sc">:</span><span class="dv">1</span>,],<span class="dv">2</span>,paste,<span class="at">collapse=</span><span class="st">&quot;-&quot;</span>) ,<span class="dv">3</span>),<span class="at">sep=</span><span class="st">&quot;: &quot;</span>))</span>
+<span id="cb608-37"><a href="chap-glm.html#cb608-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb608-38"><a href="chap-glm.html#cb608-38" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(comparisonsInt,<span class="at">yaxt=</span><span class="st">&quot;none&quot;</span>)</span>
+<span id="cb608-39"><a href="chap-glm.html#cb608-39" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>,<span class="at">at=</span><span class="fu">c</span>(<span class="fu">length</span>(contrastNames)<span class="sc">:</span><span class="dv">1</span>), <span class="at">labels=</span>contrastNames,<span class="at">las=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-227-1.png" width="672" /></p>
 <p>In onze studie was de interactie echter niet significant. Het effect van het gif (II-I, III-I en III- II) verandert dus niet significant volgens de behandeling (A, B, C, en D) en vice versa. Voor onze dataset lijkt het dus zinvol om</p>
 <ol style="list-style-type: decimal">
@@ -1927,32 +1940,28 @@ H_0:\beta_{III} + \frac{1}{4} \times \beta_{III:B} +  \frac{1}{4} \times\beta_{I
 \]</span></li>
 </ul>
 <p>We schatten met onderstaande code alle gemiddelde contrasten a.d.h.v. het model met interactie.</p>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="chap-glm.html#cb609-1" aria-hidden="true" tabindex="-1"></a>contrasts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;poisonII + 1/4*poisonII:treatB + 1/4*poisonII:treatC + 1/4*poisonII:treatD = 0&quot;</span>,</span>
-<span id="cb609-2"><a href="chap-glm.html#cb609-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;poisonIII + 1/4*poisonIII:treatB + 1/4*poisonIII:treatC + 1/4*poisonIII:treatD= 0&quot;</span>,</span>
-<span id="cb609-3"><a href="chap-glm.html#cb609-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;poisonIII + 1/4*poisonIII:treatB + 1/4*poisonIII:treatC + 1/4*poisonIII:treatD - poisonII - 1/4*poisonII:treatB - 1/4*poisonII:treatC - 1/4*poisonII:treatD = 0&quot;</span>,</span>
-<span id="cb609-4"><a href="chap-glm.html#cb609-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatB + 1/3*poisonII:treatB + 1/3*poisonIII:treatB = 0&quot;</span>,</span>
-<span id="cb609-5"><a href="chap-glm.html#cb609-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatC + 1/3*poisonII:treatC + 1/3*poisonIII:treatC = 0&quot;</span>,</span>
-<span id="cb609-6"><a href="chap-glm.html#cb609-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD + 1/3*poisonII:treatD + 1/3*poisonIII:treatD = 0&quot;</span>,</span>
-<span id="cb609-7"><a href="chap-glm.html#cb609-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatC + 1/3*poisonII:treatC + 1/3*poisonIII:treatC - treatB - 1/3*poisonII:treatB - 1/3*poisonIII:treatB = 0&quot;</span>,</span>
-<span id="cb609-8"><a href="chap-glm.html#cb609-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD + 1/3*poisonII:treatD + 1/3*poisonIII:treatD  - treatB - 1/3*poisonII:treatB - 1/3*poisonIII:treatB = 0&quot;</span>,</span>
-<span id="cb609-9"><a href="chap-glm.html#cb609-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;treatD + 1/3*poisonII:treatD + 1/3*poisonIII:treatD  - treatC - 1/3*poisonII:treatC - 1/3*poisonIII:treatC = 0&quot;</span>)</span>
-<span id="cb609-10"><a href="chap-glm.html#cb609-10" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="chap-glm.html#cb609-1" aria-hidden="true" tabindex="-1"></a>contrasts <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb609-2"><a href="chap-glm.html#cb609-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonII + 1/4*poisonII:treatB + 1/4*poisonII:treatC + 1/4*poisonII:treatD = 0&quot;</span>,</span>
+<span id="cb609-3"><a href="chap-glm.html#cb609-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII + 1/4*poisonIII:treatB + 1/4*poisonIII:treatC + 1/4*poisonIII:treatD= 0&quot;</span>,</span>
+<span id="cb609-4"><a href="chap-glm.html#cb609-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;poisonIII + 1/4*poisonIII:treatB + 1/4*poisonIII:treatC + 1/4*poisonIII:treatD - poisonII - 1/4*poisonII:treatB - 1/4*poisonII:treatC - 1/4*poisonII:treatD = 0&quot;</span>,</span>
+<span id="cb609-5"><a href="chap-glm.html#cb609-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatB + 1/3*poisonII:treatB + 1/3*poisonIII:treatB = 0&quot;</span>,</span>
+<span id="cb609-6"><a href="chap-glm.html#cb609-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatC + 1/3*poisonII:treatC + 1/3*poisonIII:treatC = 0&quot;</span>,</span>
+<span id="cb609-7"><a href="chap-glm.html#cb609-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + 1/3*poisonII:treatD + 1/3*poisonIII:treatD = 0&quot;</span>,</span>
+<span id="cb609-8"><a href="chap-glm.html#cb609-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatC + 1/3*poisonII:treatC + 1/3*poisonIII:treatC - treatB - 1/3*poisonII:treatB - 1/3*poisonIII:treatB = 0&quot;</span>,</span>
+<span id="cb609-9"><a href="chap-glm.html#cb609-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + 1/3*poisonII:treatD + 1/3*poisonIII:treatD  - treatB - 1/3*poisonII:treatB - 1/3*poisonIII:treatB = 0&quot;</span>,</span>
+<span id="cb609-10"><a href="chap-glm.html#cb609-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;treatD + 1/3*poisonII:treatD + 1/3*poisonIII:treatD  - treatC - 1/3*poisonII:treatC - 1/3*poisonIII:treatC = 0&quot;</span>) </span>
 <span id="cb609-11"><a href="chap-glm.html#cb609-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb609-12"><a href="chap-glm.html#cb609-12" aria-hidden="true" tabindex="-1"></a>comparisonsInt2 <span class="ot">&lt;-</span> <span class="fu">glht</span>(rats3, <span class="at">linfct =</span> contrasts)</span>
-<span id="cb609-13"><a href="chap-glm.html#cb609-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(comparisonsInt2, <span class="at">yaxt =</span> <span class="st">&quot;none&quot;</span>)</span>
-<span id="cb609-14"><a href="chap-glm.html#cb609-14" aria-hidden="true" tabindex="-1"></a>contrastNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;II-I&quot;</span>, <span class="st">&quot;III-I&quot;</span>, <span class="st">&quot;III-II&quot;</span>, <span class="st">&quot;B-A&quot;</span>,</span>
-<span id="cb609-15"><a href="chap-glm.html#cb609-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;C-A&quot;</span>, <span class="st">&quot;D-A&quot;</span>, <span class="st">&quot;C-B&quot;</span>, <span class="st">&quot;D-B&quot;</span>, <span class="st">&quot;D-C&quot;</span>)</span>
-<span id="cb609-16"><a href="chap-glm.html#cb609-16" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="fu">length</span>(contrastNames)<span class="sc">:</span><span class="dv">1</span>), <span class="at">labels =</span> contrastNames,</span>
-<span id="cb609-17"><a href="chap-glm.html#cb609-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb609-12"><a href="chap-glm.html#cb609-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb609-13"><a href="chap-glm.html#cb609-13" aria-hidden="true" tabindex="-1"></a>comparisonsInt2 <span class="ot">&lt;-</span> <span class="fu">glht</span>(rats3, <span class="at">linfct =</span> contrasts</span>
+<span id="cb609-14"><a href="chap-glm.html#cb609-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb609-15"><a href="chap-glm.html#cb609-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(comparisonsInt2,<span class="at">yaxt=</span><span class="st">&quot;none&quot;</span>)</span>
+<span id="cb609-16"><a href="chap-glm.html#cb609-16" aria-hidden="true" tabindex="-1"></a>contrastNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;II-I&quot;</span>,<span class="st">&quot;III-I&quot;</span>,<span class="st">&quot;III-II&quot;</span>,<span class="st">&quot;B-A&quot;</span>,<span class="st">&quot;C-A&quot;</span>,<span class="st">&quot;D-A&quot;</span>,<span class="st">&quot;C-B&quot;</span>,<span class="st">&quot;D-B&quot;</span>,<span class="st">&quot;D-C&quot;</span>)</span>
+<span id="cb609-17"><a href="chap-glm.html#cb609-17" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>,<span class="at">at=</span><span class="fu">c</span>(<span class="fu">length</span>(contrastNames)<span class="sc">:</span><span class="dv">1</span>), <span class="at">labels=</span>contrastNames,<span class="at">las=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-228-1.png" width="672" /></p>
 <p>De geschatte effectgroottes zijn inderdaad exact gelijk als bij het model zonder interactie omdat het experiment gebalanceerd is.</p>
 <p>De standaard errors verschillen wel lichtjes.
 Dat is het gevolg van de errors die verschillen tussen beiden modellen alsook het aantal vrijheidsgraden van de errors (n-p).</p>
-<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="chap-glm.html#cb610-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">Additive_coef =</span> <span class="fu">summary</span>(comparisons)<span class="sc">$</span>test<span class="sc">$</span>coef,</span>
-<span id="cb610-2"><a href="chap-glm.html#cb610-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Additive_se =</span> <span class="fu">summary</span>(comparisons)<span class="sc">$</span>test<span class="sc">$</span>sigma,</span>
-<span id="cb610-3"><a href="chap-glm.html#cb610-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Int_coef =</span> <span class="fu">summary</span>(comparisonsInt2)<span class="sc">$</span>test<span class="sc">$</span>coef,</span>
-<span id="cb610-4"><a href="chap-glm.html#cb610-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">int_se =</span> <span class="fu">summary</span>(comparisonsInt2)<span class="sc">$</span>test<span class="sc">$</span>sigma) <span class="sc">%&gt;%</span></span>
-<span id="cb610-5"><a href="chap-glm.html#cb610-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="chap-glm.html#cb610-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">Additive_coef=</span><span class="fu">summary</span>(comparisons)<span class="sc">$</span>test<span class="sc">$</span>coef,<span class="at">Additive_se=</span><span class="fu">summary</span>(comparisons)<span class="sc">$</span>test<span class="sc">$</span>sigma,<span class="at">Int_coef=</span><span class="fu">summary</span>(comparisonsInt2)<span class="sc">$</span>test<span class="sc">$</span>coef,<span class="at">int_se=</span><span class="fu">summary</span>(comparisonsInt2)<span class="sc">$</span>test<span class="sc">$</span>sigma) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##                  Additive_coef Additive_se Int_coef
 ## poison: II - I           0.047       0.017    0.047
 ## poison: III - I          0.200       0.017    0.200

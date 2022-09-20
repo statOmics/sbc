@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Hoofdstuk 8 Niet-parametrische statistiek | Inleiding tot de Biostatistiek 2022-2023</title>
-  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Hoofdstuk 8 Niet-parametrische statistiek | Inleiding tot de Biostatistiek 2022-2023" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta property="og:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="github-repo" content="statOmics/statistiek2deBach" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hoofdstuk 8 Niet-parametrische statistiek | Inleiding tot de Biostatistiek 2022-2023" />
   
-  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="twitter:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   
 
 <meta name="author" content="Lieven Clement" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -525,14 +529,14 @@ Boxplots en qqplots van de data worden weergegeven in Figuur <a href="niet-param
 <div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="niet-parametrische-statistiek.html#cb390-1" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/chol.txt&quot;</span>)</span>
 <span id="cb390-2"><a href="niet-parametrische-statistiek.html#cb390-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb390-3"><a href="niet-parametrische-statistiek.html#cb390-3" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb390-4"><a href="niet-parametrische-statistiek.html#cb390-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">as.factor</span>(group))</span>
+<span id="cb390-4"><a href="niet-parametrische-statistiek.html#cb390-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">as.factor</span>(group))</span>
 <span id="cb390-5"><a href="niet-parametrische-statistiek.html#cb390-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb390-6"><a href="niet-parametrische-statistiek.html#cb390-6" aria-hidden="true" tabindex="-1"></a>nGroups <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb390-7"><a href="niet-parametrische-statistiek.html#cb390-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(group) <span class="sc">%&gt;%</span></span>
-<span id="cb390-8"><a href="niet-parametrische-statistiek.html#cb390-8" aria-hidden="true" tabindex="-1"></a>    table</span>
+<span id="cb390-7"><a href="niet-parametrische-statistiek.html#cb390-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb390-8"><a href="niet-parametrische-statistiek.html#cb390-8" aria-hidden="true" tabindex="-1"></a>  table</span>
 <span id="cb390-9"><a href="niet-parametrische-statistiek.html#cb390-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb390-10"><a href="niet-parametrische-statistiek.html#cb390-10" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> nGroups <span class="sc">%&gt;%</span></span>
-<span id="cb390-11"><a href="niet-parametrische-statistiek.html#cb390-11" aria-hidden="true" tabindex="-1"></a>    sum</span>
+<span id="cb390-11"><a href="niet-parametrische-statistiek.html#cb390-11" aria-hidden="true" tabindex="-1"></a>  sum</span>
 <span id="cb390-12"><a href="niet-parametrische-statistiek.html#cb390-12" aria-hidden="true" tabindex="-1"></a>chol</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 2
 ##    group cholest
@@ -547,18 +551,20 @@ Boxplots en qqplots van de data worden weergegeven in Figuur <a href="niet-param
 ##  8 2         186
 ##  9 2         198
 ## 10 2         160</code></pre>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="niet-parametrische-statistiek.html#cb392-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
-<span id="cb392-2"><a href="niet-parametrische-statistiek.html#cb392-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> cholest)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb392-3"><a href="niet-parametrische-statistiek.html#cb392-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="niet-parametrische-statistiek.html#cb392-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span>  </span>
+<span id="cb392-2"><a href="niet-parametrische-statistiek.html#cb392-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>group,<span class="at">y=</span>cholest)) <span class="sc">+</span></span>
+<span id="cb392-3"><a href="niet-parametrische-statistiek.html#cb392-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb392-4"><a href="niet-parametrische-statistiek.html#cb392-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cholBox"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/cholBox-1.png" alt="Boxplot van de cholesterol concentratie in het bloed bij hartpatiënten (groep 1) en gezonde individuen (groep 2)." width="100%" />
 <p class="caption">
 Figuur 8.1: Boxplot van de cholesterol concentratie in het bloed bij hartpatiënten (groep 1) en gezonde individuen (groep 2).
 </p>
 </div>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="niet-parametrische-statistiek.html#cb393-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
-<span id="cb393-2"><a href="niet-parametrische-statistiek.html#cb393-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> cholest)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb393-3"><a href="niet-parametrische-statistiek.html#cb393-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="niet-parametrische-statistiek.html#cb393-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>cholest)) <span class="sc">+</span></span>
+<span id="cb393-2"><a href="niet-parametrische-statistiek.html#cb393-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb393-3"><a href="niet-parametrische-statistiek.html#cb393-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb393-4"><a href="niet-parametrische-statistiek.html#cb393-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:cholQQ"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/cholQQ-1.png" alt="Qqplot van de cholesterol concentratie in het bloed bij hartpatiënten (groep 1) en gezonde individuen (groep 2)." width="100%" />
 <p class="caption">
@@ -629,10 +635,10 @@ Als <span class="math inline">\(m\)</span> niet te groot is dan kunnen alle unie
 Voor iedere unique permutatie <span class="math inline">\(g \in \cal{G}\)</span> wordt de teststatistiek <span class="math inline">\(t^*_g\)</span> berekend<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a>.</p>
 <p>We kunnen alle m=252 permutaties in R genereren a.d.h.v. de functie <code>combn(n,n_1)</code>.
 Dit wordt geïllustreerd in de onderstaande R code:</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="niet-parametrische-statistiek.html#cb400-1" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">combn</span>(n, nGroups[<span class="dv">1</span>])</span>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="niet-parametrische-statistiek.html#cb400-1" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">combn</span>(n,nGroups[<span class="dv">1</span>])</span>
 <span id="cb400-2"><a href="niet-parametrische-statistiek.html#cb400-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(G)</span></code></pre></div>
 <pre><code>## [1]   5 252</code></pre>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="niet-parametrische-statistiek.html#cb402-1" aria-hidden="true" tabindex="-1"></a>G[, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="niet-parametrische-statistiek.html#cb402-1" aria-hidden="true" tabindex="-1"></a>G[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
 ## [1,]    1    1    1    1    1    1    1    1    1     1
 ## [2,]    2    2    2    2    2    2    2    2    2     2
@@ -642,21 +648,24 @@ Dit wordt geïllustreerd in de onderstaande R code:</p>
 <p>De matrix G bevat voor elke permutatie de volgnummers van de observaties die tot de eerste groep zullen behoren.
 We tonen enkel de eerste 10 permutaties.
 We kunnen nu de teststatistiek berekenen voor de originele steekproef en voor elke permutatie</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="niet-parametrische-statistiek.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Originele test statistiek</span></span>
-<span id="cb404-2"><a href="niet-parametrische-statistiek.html#cb404-2" aria-hidden="true" tabindex="-1"></a>tOrig <span class="ot">=</span> <span class="fu">t.test</span>(cholest <span class="sc">~</span> group, chol)<span class="sc">$</span>statistic</span>
-<span id="cb404-3"><a href="niet-parametrische-statistiek.html#cb404-3" aria-hidden="true" tabindex="-1"></a><span class="co"># bereken alle permutatiecombinaties en voer voor</span></span>
-<span id="cb404-4"><a href="niet-parametrische-statistiek.html#cb404-4" aria-hidden="true" tabindex="-1"></a><span class="co"># elke combinantie een functie uit die de t-test</span></span>
-<span id="cb404-5"><a href="niet-parametrische-statistiek.html#cb404-5" aria-hidden="true" tabindex="-1"></a><span class="co"># statistiek berekent voor de gepermuteerde</span></span>
-<span id="cb404-6"><a href="niet-parametrische-statistiek.html#cb404-6" aria-hidden="true" tabindex="-1"></a><span class="co"># groepslabels</span></span>
-<span id="cb404-7"><a href="niet-parametrische-statistiek.html#cb404-7" aria-hidden="true" tabindex="-1"></a>tOrig <span class="ot">&lt;-</span> <span class="fu">t.test</span>(cholest <span class="sc">~</span> group, chol)<span class="sc">$</span>statistic</span>
-<span id="cb404-8"><a href="niet-parametrische-statistiek.html#cb404-8" aria-hidden="true" tabindex="-1"></a>tOrig</span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="niet-parametrische-statistiek.html#cb404-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Originele test statistiek</span></span>
+<span id="cb404-2"><a href="niet-parametrische-statistiek.html#cb404-2" aria-hidden="true" tabindex="-1"></a>tOrig<span class="ot">=</span><span class="fu">t.test</span>(cholest<span class="sc">~</span>group,chol)<span class="sc">$</span>statistic</span>
+<span id="cb404-3"><a href="niet-parametrische-statistiek.html#cb404-3" aria-hidden="true" tabindex="-1"></a><span class="co">#bereken alle permutatiecombinaties en voer voor</span></span>
+<span id="cb404-4"><a href="niet-parametrische-statistiek.html#cb404-4" aria-hidden="true" tabindex="-1"></a><span class="co">#elke combinantie een functie uit die de t-test statistiek</span></span>
+<span id="cb404-5"><a href="niet-parametrische-statistiek.html#cb404-5" aria-hidden="true" tabindex="-1"></a><span class="co">#berekent voor de gepermuteerde groepslabels</span></span>
+<span id="cb404-6"><a href="niet-parametrische-statistiek.html#cb404-6" aria-hidden="true" tabindex="-1"></a>tOrig <span class="ot">&lt;-</span> <span class="fu">t.test</span>(cholest <span class="sc">~</span> group, chol)<span class="sc">$</span>statistic</span>
+<span id="cb404-7"><a href="niet-parametrische-statistiek.html#cb404-7" aria-hidden="true" tabindex="-1"></a>tOrig</span></code></pre></div>
 <pre><code>##        t 
 ## 3.664425</code></pre>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="niet-parametrische-statistiek.html#cb406-1" aria-hidden="true" tabindex="-1"></a>tStar <span class="ot">&lt;-</span> <span class="fu">combn</span>(n, nGroups[<span class="dv">1</span>], <span class="cf">function</span>(g, y) {</span>
-<span id="cb406-2"><a href="niet-parametrische-statistiek.html#cb406-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t.test</span>(y[g], y[<span class="sc">-</span>g])<span class="sc">$</span>statistic</span>
-<span id="cb406-3"><a href="niet-parametrische-statistiek.html#cb406-3" aria-hidden="true" tabindex="-1"></a>}, <span class="at">y =</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb406-4"><a href="niet-parametrische-statistiek.html#cb406-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(cholest))</span>
-<span id="cb406-5"><a href="niet-parametrische-statistiek.html#cb406-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tStar)</span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="niet-parametrische-statistiek.html#cb406-1" aria-hidden="true" tabindex="-1"></a>tStar <span class="ot">&lt;-</span> <span class="fu">combn</span>(</span>
+<span id="cb406-2"><a href="niet-parametrische-statistiek.html#cb406-2" aria-hidden="true" tabindex="-1"></a>  n,</span>
+<span id="cb406-3"><a href="niet-parametrische-statistiek.html#cb406-3" aria-hidden="true" tabindex="-1"></a>  nGroups[<span class="dv">1</span>],</span>
+<span id="cb406-4"><a href="niet-parametrische-statistiek.html#cb406-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(g,y) {</span>
+<span id="cb406-5"><a href="niet-parametrische-statistiek.html#cb406-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t.test</span>(y[g],y[<span class="sc">-</span>g])<span class="sc">$</span>statistic</span>
+<span id="cb406-6"><a href="niet-parametrische-statistiek.html#cb406-6" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb406-7"><a href="niet-parametrische-statistiek.html#cb406-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> chol <span class="sc">%&gt;%</span> <span class="fu">pull</span>(cholest)</span>
+<span id="cb406-8"><a href="niet-parametrische-statistiek.html#cb406-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb406-9"><a href="niet-parametrische-statistiek.html#cb406-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tStar)</span></code></pre></div>
 <pre><code>## [1] 3.6644253 1.6397911 2.3973923 1.5876250 1.9217173
 ## [6] 0.9967105</code></pre>
 <div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="niet-parametrische-statistiek.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(tStar)</span></code></pre></div>
@@ -664,8 +673,9 @@ We kunnen nu de teststatistiek berekenen voor de originele steekproef en voor el
 <p>Merk op dat <code>y[g]</code> de data selecteert met volgnummers g uit de vector y en <code>y[-g]</code> de data waarvoor de volgnummers niet tot g behoren.
 De vector <code>tStar</code> bevat de waarden van de teststatistiek <span class="math inline">\(t^*_g\)</span> voor alle <span class="math inline">\(g \in {\cal{G}}\)</span>.</p>
 <p>We kunnen nu de verdeling van de teststatistiek onder <span class="math inline">\(H_0\)</span> bestuderen.</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="niet-parametrische-statistiek.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(tStar, <span class="at">bins =</span> <span class="dv">50</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="st">&quot;permutatiestatistiek t&quot;</span><span class="sc">^</span><span class="st">&quot;*&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb410-2"><a href="niet-parametrische-statistiek.html#cb410-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> tOrig, <span class="at">col =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="niet-parametrische-statistiek.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(tStar,<span class="at">bins=</span><span class="dv">50</span>) <span class="sc">+</span></span>
+<span id="cb410-2"><a href="niet-parametrische-statistiek.html#cb410-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">expression</span>(<span class="st">&quot;permutatiestatistiek t&quot;</span><span class="sc">^</span><span class="st">&quot;*&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb410-3"><a href="niet-parametrische-statistiek.html#cb410-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span>tOrig,<span class="at">col=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:tPermDist"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/tPermDist-1.png" alt="Exacte permutatie nuldistributie van de Welch t-test voor het cholestorol voorbeeld. Bovenaan histogram van elke mogelijke waarde voor de test-statistiek. Onderaan een gewoon histogram met balkbreedtes gelijk aan 1. De geobserveerde waarde voor de test-statistiek is aangeduid met een rode verticale lijn." width="100%" />
 <p class="caption">
@@ -685,7 +695,7 @@ Voor een permutatietest is de <span class="math inline">\(p\)</span>-waarde voor
 <p>Aangezien de permutatienuldistrubutie van <span class="math inline">\(T\)</span> bepaald wordt door <span class="math inline">\(t^*_g\)</span>, <span class="math inline">\(g \in{\cal{G}}\)</span>, berekenen we</p>
 <p><span class="math display">\[p  = \text{P}_0\left[\left\vert T\right\vert \geq \left\vert t\right\vert \mid \mathbf{y}\right] = \frac{\#\{g\in {\cal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m},\]</span></p>
 <p>m.a.w. als de ratio van het aantal permutaties waarvoor de statistiek minstens even extreem is als de geobserveerde statistiek op het totaal aantal permutaties. In R kunnen we dit als volgt berekenen.</p>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="niet-parametrische-statistiek.html#cb411-1" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(tStar) <span class="sc">&gt;=</span> <span class="fu">abs</span>(tOrig))</span>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="niet-parametrische-statistiek.html#cb411-1" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(tStar)<span class="sc">&gt;=</span><span class="fu">abs</span>(tOrig))</span>
 <span id="cb411-2"><a href="niet-parametrische-statistiek.html#cb411-2" aria-hidden="true" tabindex="-1"></a>pval</span></code></pre></div>
 <pre><code>## [1] 0.01587302</code></pre>
 <p>We vinden dus een <span class="math inline">\(p\)</span>-waarde van 0.0159. Aangezien <span class="math inline">\(p&lt;5\%\)</span>, besluiten we op het <span class="math inline">\(5\%\)</span> significantieniveau dat de distributies van de cholestorol concentraties niet gelijk zijn bij hartpatiënten en bij gezonde personen.
@@ -725,17 +735,15 @@ tenslotte, krijgt rank <span class="math inline">\(n\)</span>.</p>
 <p><strong>Einde Definitie</strong></p>
 <p>De rank transformatie wordt geïllustreerd op basis van het cholestorol voorbeeld.</p>
 <div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="niet-parametrische-statistiek.html#cb413-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
-<span id="cb413-2"><a href="niet-parametrische-statistiek.html#cb413-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(cholest)</span></code></pre></div>
+<span id="cb413-2"><a href="niet-parametrische-statistiek.html#cb413-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest)</span></code></pre></div>
 <pre><code>##  [1] 244 206 242 278 236 188 212 186 198 160</code></pre>
 <div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="niet-parametrische-statistiek.html#cb415-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
-<span id="cb415-2"><a href="niet-parametrische-statistiek.html#cb415-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(cholest) <span class="sc">%&gt;%</span></span>
-<span id="cb415-3"><a href="niet-parametrische-statistiek.html#cb415-3" aria-hidden="true" tabindex="-1"></a>    rank</span></code></pre></div>
+<span id="cb415-2"><a href="niet-parametrische-statistiek.html#cb415-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest) <span class="sc">%&gt;%</span></span>
+<span id="cb415-3"><a href="niet-parametrische-statistiek.html#cb415-3" aria-hidden="true" tabindex="-1"></a>  rank</span></code></pre></div>
 <pre><code>##  [1]  9  5  8 10  7  3  6  2  4  1</code></pre>
 <p>Soms komen <em>ties</em> voor in de data, i.e. minstens twee observaties hebben dezelfde numerieke waarde. Een klein voorbeeld:</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="niet-parametrische-statistiek.html#cb417-1" aria-hidden="true" tabindex="-1"></a>metTies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">403</span>, <span class="dv">507</span>, <span class="dv">507</span>, <span class="dv">610</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">830</span>,</span>
-<span id="cb417-2"><a href="niet-parametrische-statistiek.html#cb417-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">900</span>)</span>
-<span id="cb417-3"><a href="niet-parametrische-statistiek.html#cb417-3" aria-hidden="true" tabindex="-1"></a>metTies <span class="sc">%&gt;%</span></span>
-<span id="cb417-4"><a href="niet-parametrische-statistiek.html#cb417-4" aria-hidden="true" tabindex="-1"></a>    rank</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="niet-parametrische-statistiek.html#cb417-1" aria-hidden="true" tabindex="-1"></a>metTies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">403</span>, <span class="dv">507</span>, <span class="dv">507</span>, <span class="dv">610</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">830</span>, <span class="dv">900</span>)</span>
+<span id="cb417-2"><a href="niet-parametrische-statistiek.html#cb417-2" aria-hidden="true" tabindex="-1"></a>metTies <span class="sc">%&gt;%</span> rank</span></code></pre></div>
 <pre><code>## [1] 1.0 2.5 2.5 4.0 6.0 6.0 6.0 8.0 9.0</code></pre>
 <p>De numerieke waarde 507 komt tweemaal voor en de numerieke waarde 651 komt driemaal voor. Dit zijn voorbeelden van <em>ties</em>.
 Wanneer <em>ties</em> voorkomen, wordt dikwijls de definitie van <em>midranks</em> toegepast voor de rank-transformatie.</p>
@@ -757,7 +765,7 @@ Deze uitkomsten kunnen ook gerepresenteerd worden door <span class="math inline"
 ## group   &quot;2&quot;   &quot;2&quot;  
 ## cholest &quot;198&quot; &quot;160&quot;</code></pre>
 <div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="niet-parametrische-statistiek.html#cb421-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb421-2"><a href="niet-parametrische-statistiek.html#cb421-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(cholest)</span>
+<span id="cb421-2"><a href="niet-parametrische-statistiek.html#cb421-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest)</span>
 <span id="cb421-3"><a href="niet-parametrische-statistiek.html#cb421-3" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
 <pre><code>##  [1] 244 206 242 278 236 188 212 186 198 160</code></pre>
 <div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="niet-parametrische-statistiek.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rank</span>(z)</span></code></pre></div>
@@ -823,16 +831,16 @@ Voor een gegeven steekproefgrootte <span class="math inline">\(n\)</span>, en ve
 <p>De output geeft de teststatistiek <span class="math inline">\(W=\)</span> 24.
 In volgende lijnen berekenen we <span class="math inline">\(S_1\)</span> en <span class="math inline">\(S_2\)</span> manueel voor de dataset.</p>
 <div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="niet-parametrische-statistiek.html#cb427-1" aria-hidden="true" tabindex="-1"></a>S1 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb427-2"><a href="niet-parametrische-statistiek.html#cb427-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cholRank =</span> <span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
-<span id="cb427-3"><a href="niet-parametrische-statistiek.html#cb427-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb427-4"><a href="niet-parametrische-statistiek.html#cb427-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
-<span id="cb427-5"><a href="niet-parametrische-statistiek.html#cb427-5" aria-hidden="true" tabindex="-1"></a>    sum</span>
+<span id="cb427-2"><a href="niet-parametrische-statistiek.html#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank=</span><span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
+<span id="cb427-3"><a href="niet-parametrische-statistiek.html#cb427-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb427-4"><a href="niet-parametrische-statistiek.html#cb427-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
+<span id="cb427-5"><a href="niet-parametrische-statistiek.html#cb427-5" aria-hidden="true" tabindex="-1"></a>  sum</span>
 <span id="cb427-6"><a href="niet-parametrische-statistiek.html#cb427-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb427-7"><a href="niet-parametrische-statistiek.html#cb427-7" aria-hidden="true" tabindex="-1"></a>S2 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb427-8"><a href="niet-parametrische-statistiek.html#cb427-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">cholRank =</span> <span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
-<span id="cb427-9"><a href="niet-parametrische-statistiek.html#cb427-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb427-10"><a href="niet-parametrische-statistiek.html#cb427-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
-<span id="cb427-11"><a href="niet-parametrische-statistiek.html#cb427-11" aria-hidden="true" tabindex="-1"></a>    sum</span>
+<span id="cb427-8"><a href="niet-parametrische-statistiek.html#cb427-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank =</span> <span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
+<span id="cb427-9"><a href="niet-parametrische-statistiek.html#cb427-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb427-10"><a href="niet-parametrische-statistiek.html#cb427-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
+<span id="cb427-11"><a href="niet-parametrische-statistiek.html#cb427-11" aria-hidden="true" tabindex="-1"></a>  sum</span>
 <span id="cb427-12"><a href="niet-parametrische-statistiek.html#cb427-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb427-13"><a href="niet-parametrische-statistiek.html#cb427-13" aria-hidden="true" tabindex="-1"></a>S1</span></code></pre></div>
 <pre><code>## [1] 39</code></pre>
@@ -847,21 +855,22 @@ U_1 = \sum_{i=1}^{n_1}\sum_{k=1}^{n_2} \text{I}\left\{Y_{i1}\geq Y_{k2}\right\}.
 Er wordt voor elke observatie uit de eerste groep geteld hoeveel keer zij groter of gelijk is aan een observatie uit de tweede groep.
 We berekenen de Mann-Whitney statistiek nu manueel in R.</p>
 <div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="niet-parametrische-statistiek.html#cb431-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb431-2"><a href="niet-parametrische-statistiek.html#cb431-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb431-3"><a href="niet-parametrische-statistiek.html#cb431-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
+<span id="cb431-2"><a href="niet-parametrische-statistiek.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb431-3"><a href="niet-parametrische-statistiek.html#cb431-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
 <span id="cb431-4"><a href="niet-parametrische-statistiek.html#cb431-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb431-5"><a href="niet-parametrische-statistiek.html#cb431-5" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb431-6"><a href="niet-parametrische-statistiek.html#cb431-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb431-7"><a href="niet-parametrische-statistiek.html#cb431-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
+<span id="cb431-6"><a href="niet-parametrische-statistiek.html#cb431-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb431-7"><a href="niet-parametrische-statistiek.html#cb431-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
 <span id="cb431-8"><a href="niet-parametrische-statistiek.html#cb431-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb431-9"><a href="niet-parametrische-statistiek.html#cb431-9" aria-hidden="true" tabindex="-1"></a>u1Hlp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(y1, <span class="cf">function</span>(y1i, y2) {</span>
-<span id="cb431-10"><a href="niet-parametrische-statistiek.html#cb431-10" aria-hidden="true" tabindex="-1"></a>    y1i <span class="sc">&gt;=</span> y2</span>
-<span id="cb431-11"><a href="niet-parametrische-statistiek.html#cb431-11" aria-hidden="true" tabindex="-1"></a>}, <span class="at">y2 =</span> y2)</span>
-<span id="cb431-12"><a href="niet-parametrische-statistiek.html#cb431-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb431-13"><a href="niet-parametrische-statistiek.html#cb431-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(u1Hlp) <span class="ot">&lt;-</span> y1</span>
-<span id="cb431-14"><a href="niet-parametrische-statistiek.html#cb431-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(u1Hlp) <span class="ot">&lt;-</span> y2</span>
-<span id="cb431-15"><a href="niet-parametrische-statistiek.html#cb431-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb431-16"><a href="niet-parametrische-statistiek.html#cb431-16" aria-hidden="true" tabindex="-1"></a>u1Hlp</span></code></pre></div>
+<span id="cb431-9"><a href="niet-parametrische-statistiek.html#cb431-9" aria-hidden="true" tabindex="-1"></a>u1Hlp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
+<span id="cb431-10"><a href="niet-parametrische-statistiek.html#cb431-10" aria-hidden="true" tabindex="-1"></a>  y1,</span>
+<span id="cb431-11"><a href="niet-parametrische-statistiek.html#cb431-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(y1i,y2) {y1i<span class="sc">&gt;=</span>y2},</span>
+<span id="cb431-12"><a href="niet-parametrische-statistiek.html#cb431-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">y2=</span>y2)</span>
+<span id="cb431-13"><a href="niet-parametrische-statistiek.html#cb431-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-14"><a href="niet-parametrische-statistiek.html#cb431-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(u1Hlp) <span class="ot">&lt;-</span> y1</span>
+<span id="cb431-15"><a href="niet-parametrische-statistiek.html#cb431-15" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(u1Hlp) <span class="ot">&lt;-</span> y2</span>
+<span id="cb431-16"><a href="niet-parametrische-statistiek.html#cb431-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-17"><a href="niet-parametrische-statistiek.html#cb431-17" aria-hidden="true" tabindex="-1"></a>u1Hlp</span></code></pre></div>
 <pre><code>##      244   206  242  278  236
 ## 188 TRUE  TRUE TRUE TRUE TRUE
 ## 212 TRUE FALSE TRUE TRUE TRUE
@@ -873,7 +882,7 @@ We berekenen de Mann-Whitney statistiek nu manueel in R.</p>
 <pre><code>## [1] 24</code></pre>
 <p>Er kan worden aangetoond dat</p>
 <p><span class="math display">\[U_1 = S_1 - \frac{1}{2}n_1(n_1+1).\]</span></p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="niet-parametrische-statistiek.html#cb435-1" aria-hidden="true" tabindex="-1"></a>S1 <span class="sc">-</span> nGroups[<span class="dv">1</span>] <span class="sc">*</span> (nGroups[<span class="dv">1</span>] <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="niet-parametrische-statistiek.html#cb435-1" aria-hidden="true" tabindex="-1"></a>S1<span class="sc">-</span>nGroups[<span class="dv">1</span>]<span class="sc">*</span>(nGroups[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>##  1 
 ## 24</code></pre>
 <p>Hieruit concluderen we (1) dat <span class="math inline">\(U_1\)</span> en <span class="math inline">\(S_1\)</span> dezelfde informatie bevatten, (2) dat <span class="math inline">\(U_1\)</span> ook een rankstatistiek is en dat exacte testen gebaseerd op <span class="math inline">\(U_1\)</span> en <span class="math inline">\(S_1\)</span> equivalent zijn.</p>
@@ -887,7 +896,7 @@ Stel <span class="math inline">\(Y_j\)</span> een willekeurige uitkomst uit beha
 We voerden inderdaad <span class="math inline">\(n_1 \times n_2\)</span> vergelijkingen uit.</p>
 <div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="niet-parametrische-statistiek.html#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(u1Hlp)</span></code></pre></div>
 <pre><code>## [1] 0.96</code></pre>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="niet-parametrische-statistiek.html#cb439-1" aria-hidden="true" tabindex="-1"></a>U1<span class="sc">/</span>(nGroups[<span class="dv">1</span>] <span class="sc">*</span> nGroups[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="niet-parametrische-statistiek.html#cb439-1" aria-hidden="true" tabindex="-1"></a>U1<span class="sc">/</span>(nGroups[<span class="dv">1</span>]<span class="sc">*</span>nGroups[<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>##    1 
 ## 0.96</code></pre>
 <p>De kans <span class="math inline">\(\text{P}\left[Y_1 \geq Y_2\right]\)</span> wordt een <strong>probabilistische index</strong> (Engels: <em>probabilistic index</em>) genoemd.
@@ -900,7 +909,7 @@ Als <span class="math inline">\(H_0\)</span> waar is, dan is <span class="math i
 <p>De R functie <code>wilcox.test</code> geeft niet de Wilcoxon rank sum statistiek, maar wel de Mann-Whitney statistiek <span class="math inline">\(U_1\)</span>.
 We weten echter dat exacte permutatietesten gebaseerd op <span class="math inline">\(U_1\)</span>, <span class="math inline">\(U_2\)</span>, <span class="math inline">\(S_1\)</span> of <span class="math inline">\(S_2\)</span> dezelfde resultaten geven.
 We bekijken nogmaals de output</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="niet-parametrische-statistiek.html#cb441-1" aria-hidden="true" tabindex="-1"></a>wTest <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(cholest <span class="sc">~</span> group, <span class="at">data =</span> chol)</span>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="niet-parametrische-statistiek.html#cb441-1" aria-hidden="true" tabindex="-1"></a>wTest <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(cholest<span class="sc">~</span>group, <span class="at">data =</span> chol)</span>
 <span id="cb441-2"><a href="niet-parametrische-statistiek.html#cb441-2" aria-hidden="true" tabindex="-1"></a>wTest</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum exact test
@@ -942,12 +951,11 @@ Na drie weken werden de dieren afgemaakt en werd genotoxiciteit van DMH in de le
 De lengte van de comet staart is een proxy voor het aantal strengbreuken.
 De onderzoekers wensen na te gaan of er verschillen zijn in de DNA schade tengevolge van de DMH dosis.
 Boxplots van de data worden weergegeven in Figuur <a href="niet-parametrische-statistiek.html#fig:dnaBox">8.4</a>.</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="niet-parametrische-statistiek.html#cb447-1" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/dna.txt&quot;</span>,</span>
-<span id="cb447-2"><a href="niet-parametrische-statistiek.html#cb447-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">&quot; &quot;</span>)</span>
-<span id="cb447-3"><a href="niet-parametrische-statistiek.html#cb447-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb447-4"><a href="niet-parametrische-statistiek.html#cb447-4" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> dna <span class="sc">%&gt;%</span></span>
-<span id="cb447-5"><a href="niet-parametrische-statistiek.html#cb447-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">dose =</span> <span class="fu">as.factor</span>(dna<span class="sc">$</span>dose))</span>
-<span id="cb447-6"><a href="niet-parametrische-statistiek.html#cb447-6" aria-hidden="true" tabindex="-1"></a>dna</span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="niet-parametrische-statistiek.html#cb447-1" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/dna.txt&quot;</span>,<span class="at">delim=</span><span class="st">&quot; &quot;</span>)</span>
+<span id="cb447-2"><a href="niet-parametrische-statistiek.html#cb447-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb447-3"><a href="niet-parametrische-statistiek.html#cb447-3" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> dna <span class="sc">%&gt;%</span></span>
+<span id="cb447-4"><a href="niet-parametrische-statistiek.html#cb447-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dose =</span> <span class="fu">as.factor</span>(dna<span class="sc">$</span>dose))</span>
+<span id="cb447-5"><a href="niet-parametrische-statistiek.html#cb447-5" aria-hidden="true" tabindex="-1"></a>dna</span></code></pre></div>
 <pre><code>## # A tibble: 24 × 3
 ##    id    length dose 
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;fct&gt;
@@ -963,8 +971,9 @@ Boxplots van de data worden weergegeven in Figuur <a href="niet-parametrische-st
 ## 10 Rat10   52.1 1.25 
 ## # … with 14 more rows</code></pre>
 <div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="niet-parametrische-statistiek.html#cb449-1" aria-hidden="true" tabindex="-1"></a>dna <span class="sc">%&gt;%</span></span>
-<span id="cb449-2"><a href="niet-parametrische-statistiek.html#cb449-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> length, <span class="at">fill =</span> dose)) <span class="sc">+</span></span>
-<span id="cb449-3"><a href="niet-parametrische-statistiek.html#cb449-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<span id="cb449-2"><a href="niet-parametrische-statistiek.html#cb449-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose,<span class="at">y=</span>length,<span class="at">fill=</span>dose))<span class="sc">+</span></span>
+<span id="cb449-3"><a href="niet-parametrische-statistiek.html#cb449-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb449-4"><a href="niet-parametrische-statistiek.html#cb449-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dnaBox"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/dnaBox-1.png" alt="Boxplot van de comet staart lengte in functie van de DMH dosis." width="100%" />
 <p class="caption">
@@ -972,8 +981,10 @@ Figuur 8.4: Boxplot van de comet staart lengte in functie van de DMH dosis.
 </p>
 </div>
 <div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="niet-parametrische-statistiek.html#cb450-1" aria-hidden="true" tabindex="-1"></a>dna <span class="sc">%&gt;%</span></span>
-<span id="cb450-2"><a href="niet-parametrische-statistiek.html#cb450-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> length)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb450-3"><a href="niet-parametrische-statistiek.html#cb450-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>dose)</span></code></pre></div>
+<span id="cb450-2"><a href="niet-parametrische-statistiek.html#cb450-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>length)) <span class="sc">+</span></span>
+<span id="cb450-3"><a href="niet-parametrische-statistiek.html#cb450-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb450-4"><a href="niet-parametrische-statistiek.html#cb450-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb450-5"><a href="niet-parametrische-statistiek.html#cb450-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>dose)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dnaQQ"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/dnaQQ-1.png" alt="QQ-plots van de comet staart lengte per DMH dosis." width="100%" />
 <p class="caption">
@@ -1029,8 +1040,9 @@ Merk wel op dat er slechts 6 observaties zijn per groep wat eigenlijk te weinig 
 <p>Het is belangrijk om op te merken dat de R-functie <code>kruskal.test</code> steeds de asymptotische benadering gebruikt voor de berekening van de <span class="math inline">\(p\)</span>-waarden. Met slechts 6 observaties per groep, is dit geen optimale benadering van de exacte <span class="math inline">\(p\)</span>-waarde!
 Met de <code>coin</code> R package kunnen we de exacte <span class="math inline">\(p\)</span>-waarde wel berekenen via het argument <code>distribution='exact'</code>of benaderen a.d.h.v. simulaties <code>distribution=approximate(B=100000)</code>, waarbij B het aantal permutaties is.</p>
 <div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="niet-parametrische-statistiek.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(coin)</span>
-<span id="cb453-2"><a href="niet-parametrische-statistiek.html#cb453-2" aria-hidden="true" tabindex="-1"></a>kwPerm <span class="ot">&lt;-</span> <span class="fu">kruskal_test</span>(length <span class="sc">~</span> dose, <span class="at">data =</span> dna, <span class="at">distribution =</span> <span class="fu">approximate</span>(<span class="at">nresample =</span> <span class="fl">1e+05</span>))</span>
-<span id="cb453-3"><a href="niet-parametrische-statistiek.html#cb453-3" aria-hidden="true" tabindex="-1"></a>kwPerm</span></code></pre></div>
+<span id="cb453-2"><a href="niet-parametrische-statistiek.html#cb453-2" aria-hidden="true" tabindex="-1"></a>kwPerm <span class="ot">&lt;-</span> <span class="fu">kruskal_test</span>(length <span class="sc">~</span> dose, <span class="at">data =</span> dna,</span>
+<span id="cb453-3"><a href="niet-parametrische-statistiek.html#cb453-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">distribution =</span> <span class="fu">approximate</span>(<span class="at">nresample =</span> <span class="dv">100000</span>))</span>
+<span id="cb453-4"><a href="niet-parametrische-statistiek.html#cb453-4" aria-hidden="true" tabindex="-1"></a>kwPerm</span></code></pre></div>
 <pre><code>## 
 ##  Approximative Kruskal-Wallis Test
 ## 
@@ -1075,17 +1087,24 @@ Dit kunnen we niet bekomen uit de <code>pairwise.wilcox.test</code> output.
 Hiervoor zullen we de individuele wilcoxon testen aan moeten roepen.</p>
 <div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="niet-parametrische-statistiek.html#cb457-1" aria-hidden="true" tabindex="-1"></a>nGroep <span class="ot">&lt;-</span> <span class="fu">table</span>(dna<span class="sc">$</span>dose)</span>
 <span id="cb457-2"><a href="niet-parametrische-statistiek.html#cb457-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb457-3"><a href="niet-parametrische-statistiek.html#cb457-3" aria-hidden="true" tabindex="-1"></a>probInd <span class="ot">&lt;-</span> <span class="fu">combn</span>(<span class="fu">levels</span>(dna<span class="sc">$</span>dose), <span class="dv">2</span>, <span class="cf">function</span>(x) {</span>
-<span id="cb457-4"><a href="niet-parametrische-statistiek.html#cb457-4" aria-hidden="true" tabindex="-1"></a>    test <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(length <span class="sc">~</span> dose, dna <span class="sc">%&gt;%</span></span>
-<span id="cb457-5"><a href="niet-parametrische-statistiek.html#cb457-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(dose <span class="sc">%in%</span> x))</span>
-<span id="cb457-6"><a href="niet-parametrische-statistiek.html#cb457-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(test<span class="sc">$</span>statistic<span class="sc">/</span><span class="fu">prod</span>(nGroep[x]))</span>
-<span id="cb457-7"><a href="niet-parametrische-statistiek.html#cb457-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb457-8"><a href="niet-parametrische-statistiek.html#cb457-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb457-9"><a href="niet-parametrische-statistiek.html#cb457-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(probInd) <span class="ot">&lt;-</span> <span class="fu">combn</span>(dna <span class="sc">%&gt;%</span></span>
-<span id="cb457-10"><a href="niet-parametrische-statistiek.html#cb457-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(dose) <span class="sc">%&gt;%</span></span>
-<span id="cb457-11"><a href="niet-parametrische-statistiek.html#cb457-11" aria-hidden="true" tabindex="-1"></a>    levels, <span class="dv">2</span>, paste, <span class="at">collapse =</span> <span class="st">&quot;vs&quot;</span>)</span>
-<span id="cb457-12"><a href="niet-parametrische-statistiek.html#cb457-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb457-13"><a href="niet-parametrische-statistiek.html#cb457-13" aria-hidden="true" tabindex="-1"></a>probInd</span></code></pre></div>
+<span id="cb457-3"><a href="niet-parametrische-statistiek.html#cb457-3" aria-hidden="true" tabindex="-1"></a>probInd <span class="ot">&lt;-</span> <span class="fu">combn</span>(</span>
+<span id="cb457-4"><a href="niet-parametrische-statistiek.html#cb457-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">levels</span>(dna<span class="sc">$</span>dose),</span>
+<span id="cb457-5"><a href="niet-parametrische-statistiek.html#cb457-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>,</span>
+<span id="cb457-6"><a href="niet-parametrische-statistiek.html#cb457-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) {</span>
+<span id="cb457-7"><a href="niet-parametrische-statistiek.html#cb457-7" aria-hidden="true" tabindex="-1"></a>         test <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(</span>
+<span id="cb457-8"><a href="niet-parametrische-statistiek.html#cb457-8" aria-hidden="true" tabindex="-1"></a>       length<span class="sc">~</span>dose,</span>
+<span id="cb457-9"><a href="niet-parametrische-statistiek.html#cb457-9" aria-hidden="true" tabindex="-1"></a>       dna <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dose<span class="sc">%in%</span>x)</span>
+<span id="cb457-10"><a href="niet-parametrische-statistiek.html#cb457-10" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb457-11"><a href="niet-parametrische-statistiek.html#cb457-11" aria-hidden="true" tabindex="-1"></a>         <span class="fu">return</span>(test<span class="sc">$</span>statistic<span class="sc">/</span><span class="fu">prod</span>(nGroep[x]))</span>
+<span id="cb457-12"><a href="niet-parametrische-statistiek.html#cb457-12" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb457-13"><a href="niet-parametrische-statistiek.html#cb457-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-14"><a href="niet-parametrische-statistiek.html#cb457-14" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(probInd) <span class="ot">&lt;-</span> <span class="fu">combn</span>(</span>
+<span id="cb457-15"><a href="niet-parametrische-statistiek.html#cb457-15" aria-hidden="true" tabindex="-1"></a>  dna <span class="sc">%&gt;%</span> <span class="fu">pull</span>(dose) <span class="sc">%&gt;%</span> levels,</span>
+<span id="cb457-16"><a href="niet-parametrische-statistiek.html#cb457-16" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>,</span>
+<span id="cb457-17"><a href="niet-parametrische-statistiek.html#cb457-17" aria-hidden="true" tabindex="-1"></a>  paste,</span>
+<span id="cb457-18"><a href="niet-parametrische-statistiek.html#cb457-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse=</span><span class="st">&quot;vs&quot;</span>)</span>
+<span id="cb457-19"><a href="niet-parametrische-statistiek.html#cb457-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb457-20"><a href="niet-parametrische-statistiek.html#cb457-20" aria-hidden="true" tabindex="-1"></a>probInd</span></code></pre></div>
 <pre><code>##   0vs1.25    0vs2.5      0vs5 1.25vs2.5   1.25vs5 
 ## 0.0000000 0.0000000 0.0000000 0.4444444 0.2777778 
 ##    2.5vs5 

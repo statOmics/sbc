@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Hoofdstuk 4 Data exploratie en beschrijvende statistiek | Inleiding tot de Biostatistiek 2022-2023</title>
-  <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Hoofdstuk 4 Data exploratie en beschrijvende statistiek | Inleiding tot de Biostatistiek 2022-2023" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta property="og:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="github-repo" content="statOmics/statistiek2deBach" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Hoofdstuk 4 Data exploratie en beschrijvende statistiek | Inleiding tot de Biostatistiek 2022-2023" />
   
-  <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
+  <meta name="twitter:description" content="Inleiding tot de Biostatistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   
 
 <meta name="author" content="Lieven Clement" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -527,8 +531,262 @@ Figuur 4.1: Verschillende stappen in een studie. In dit hoofdstuk ligt de focus 
 <p>Dit hoofdstuk zullen werken rond een centrale dataset: de NHANES studie.</p>
 <p><code>{.example, name="NHANES studie",label="nhanesEx"}</code></p>
 <p>De National Health and Nutrition Examination Survey
-(NHANES) wordt sinds 1960 op regelmatige basis of genomen. In dit voorbeeld maken we gebruik van de gegevens die werden verzameld tussen 2009-2012 bij 10000 Amerikanen en die werden opgenomen in het R-pakket NHANES. Er werd een groot aantal fysische, demografische, nutritionele, levelsstijl en gezondheidskarakteristieken gecollecteerd in deze studie (zie Tabel <a href="#tab:nhanesDatExpl"><strong>??</strong></a>). Merk op dat ontbrekende waarnemingen hier gecodeerd worden a.d.h.b. de code <code>NA</code> (Not Available / Missing Value)</p>
+(NHANES) wordt sinds 1960 op regelmatige basis of genomen. In dit voorbeeld maken we gebruik van de gegevens die werden verzameld tussen 2009-2012 bij 10000 Amerikanen en die werden opgenomen in het R-pakket NHANES. Er werd een groot aantal fysische, demografische, nutritionele, levelsstijl en gezondheidskarakteristieken gecollecteerd in deze studie (zie Tabel <a href="chap-describe.html#tab:nhanesDatExpl">4.1</a>). Merk op dat ontbrekende waarnemingen hier gecodeerd worden a.d.h.b. de code <code>NA</code> (Not Available / Missing Value)</p>
 <p><strong>Einde voorbeeld</strong></p>
+<table>
+<caption>
+<span id="tab:nhanesDatExpl">Tabel 4.1: </span>Overzicht van een aantal variabelen uit de NHANES studie.
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+ID
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:right;">
+Age
+</th>
+<th style="text-align:left;">
+Race1
+</th>
+<th style="text-align:right;">
+Weight
+</th>
+<th style="text-align:right;">
+Height
+</th>
+<th style="text-align:right;">
+BMI
+</th>
+<th style="text-align:right;">
+BPSysAve
+</th>
+<th style="text-align:right;">
+TotChol
+</th>
+<th style="text-align:left;">
+SmokeNow
+</th>
+<th style="text-align:left;">
+Smoke100
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+51624
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+34
+</td>
+<td style="text-align:left;">
+White
+</td>
+<td style="text-align:right;">
+87.4
+</td>
+<td style="text-align:right;">
+164.7
+</td>
+<td style="text-align:right;">
+32.22
+</td>
+<td style="text-align:right;">
+113
+</td>
+<td style="text-align:right;">
+3.49
+</td>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51625
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Other
+</td>
+<td style="text-align:right;">
+17.0
+</td>
+<td style="text-align:right;">
+105.4
+</td>
+<td style="text-align:right;">
+15.30
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51630
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:left;">
+White
+</td>
+<td style="text-align:right;">
+86.7
+</td>
+<td style="text-align:right;">
+168.4
+</td>
+<td style="text-align:right;">
+30.57
+</td>
+<td style="text-align:right;">
+112
+</td>
+<td style="text-align:right;">
+6.70
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+<td style="text-align:left;">
+Yes
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51638
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+White
+</td>
+<td style="text-align:right;">
+29.8
+</td>
+<td style="text-align:right;">
+133.1
+</td>
+<td style="text-align:right;">
+16.82
+</td>
+<td style="text-align:right;">
+86
+</td>
+<td style="text-align:right;">
+4.86
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51646
+</td>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+White
+</td>
+<td style="text-align:right;">
+35.2
+</td>
+<td style="text-align:right;">
+130.6
+</td>
+<td style="text-align:right;">
+20.64
+</td>
+<td style="text-align:right;">
+107
+</td>
+<td style="text-align:right;">
+4.09
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+51647
+</td>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:left;">
+White
+</td>
+<td style="text-align:right;">
+75.7
+</td>
+<td style="text-align:right;">
+166.7
+</td>
+<td style="text-align:right;">
+27.24
+</td>
+<td style="text-align:right;">
+118
+</td>
+<td style="text-align:right;">
+5.82
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+No
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="sec:univar" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Univariate beschrijving van de variabelen<a href="chap-describe.html#sec:univar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -544,21 +802,22 @@ en of er eventuele <em>uitschieters</em> (d.i. extreme
 metingen of <em>outliers</em>) zijn. Met outliers worden observaties
 aangegeven die ten opzichte van de geobserveerde verdeling van de waarden in
 de data set, extreem zijn, buitenbeentjes.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="chap-describe.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># De data van de NHANES studie bevindt zich in</span></span>
-<span id="cb142-2"><a href="chap-describe.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="co"># het R package NHANES</span></span>
-<span id="cb142-3"><a href="chap-describe.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)  <span class="co">#laad NHANES package</span></span>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="chap-describe.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co">#De data van de NHANES studie bevindt zich</span></span>
+<span id="cb142-2"><a href="chap-describe.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="co">#in het R package NHANES</span></span>
+<span id="cb142-3"><a href="chap-describe.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES) <span class="co">#laad NHANES package</span></span>
 <span id="cb142-4"><a href="chap-describe.html#cb142-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-5"><a href="chap-describe.html#cb142-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NHANES is een data frame met de gegevens De</span></span>
-<span id="cb142-6"><a href="chap-describe.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="co"># rijen bevatten informatie over elk subject De</span></span>
-<span id="cb142-7"><a href="chap-describe.html#cb142-7" aria-hidden="true" tabindex="-1"></a><span class="co"># kolommen de variabelen die werden geregistreerd</span></span>
-<span id="cb142-8"><a href="chap-describe.html#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="co"># vb variabele Gender, BMI, ... Een variabele</span></span>
-<span id="cb142-9"><a href="chap-describe.html#cb142-9" aria-hidden="true" tabindex="-1"></a><span class="co"># (kolom) kan uit de dataframe worden gehaald</span></span>
-<span id="cb142-10"><a href="chap-describe.html#cb142-10" aria-hidden="true" tabindex="-1"></a><span class="co"># door gebruik van het $ teken en de naam van de</span></span>
-<span id="cb142-11"><a href="chap-describe.html#cb142-11" aria-hidden="true" tabindex="-1"></a><span class="co"># variabele We slaan de frequentietabel voor</span></span>
-<span id="cb142-12"><a href="chap-describe.html#cb142-12" aria-hidden="true" tabindex="-1"></a><span class="co"># variable Gender op in object &#39;tab&#39;</span></span>
-<span id="cb142-13"><a href="chap-describe.html#cb142-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-14"><a href="chap-describe.html#cb142-14" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">table</span>(NHANES<span class="sc">$</span>Gender)</span>
-<span id="cb142-15"><a href="chap-describe.html#cb142-15" aria-hidden="true" tabindex="-1"></a>tab</span></code></pre></div>
+<span id="cb142-5"><a href="chap-describe.html#cb142-5" aria-hidden="true" tabindex="-1"></a><span class="co">#NHANES is een data frame met de gegevens</span></span>
+<span id="cb142-6"><a href="chap-describe.html#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="co">#De rijen bevatten informatie over elk subject</span></span>
+<span id="cb142-7"><a href="chap-describe.html#cb142-7" aria-hidden="true" tabindex="-1"></a><span class="co">#De kolommen de variabelen die werden geregistreerd</span></span>
+<span id="cb142-8"><a href="chap-describe.html#cb142-8" aria-hidden="true" tabindex="-1"></a><span class="co">#vb variabele Gender, BMI, ...</span></span>
+<span id="cb142-9"><a href="chap-describe.html#cb142-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Een variabele (kolom) kan uit de dataframe</span></span>
+<span id="cb142-10"><a href="chap-describe.html#cb142-10" aria-hidden="true" tabindex="-1"></a><span class="co">#worden gehaald door gebruik van het $ teken</span></span>
+<span id="cb142-11"><a href="chap-describe.html#cb142-11" aria-hidden="true" tabindex="-1"></a><span class="co">#en de naam van de variabele</span></span>
+<span id="cb142-12"><a href="chap-describe.html#cb142-12" aria-hidden="true" tabindex="-1"></a><span class="co"># We slaan de frequentietabel voor variable Gender</span></span>
+<span id="cb142-13"><a href="chap-describe.html#cb142-13" aria-hidden="true" tabindex="-1"></a><span class="co"># op in object &#39;tab&#39;</span></span>
+<span id="cb142-14"><a href="chap-describe.html#cb142-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-15"><a href="chap-describe.html#cb142-15" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">table</span>(NHANES<span class="sc">$</span>Gender)</span>
+<span id="cb142-16"><a href="chap-describe.html#cb142-16" aria-hidden="true" tabindex="-1"></a>tab</span></code></pre></div>
 <pre><code>## 
 ## female   male 
 ##   5020   4980</code></pre>
@@ -569,7 +828,8 @@ de data set, extreem zijn, buitenbeentjes.</p>
 <li>We voegen een laag met een barplot toe via de functie <code>geom_bar</code>. We definiëren de kleur via het argument <code>fill</code></li>
 </ol>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="chap-describe.html#cb144-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb144-2"><a href="chap-describe.html#cb144-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
+<span id="cb144-2"><a href="chap-describe.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Gender)) <span class="sc">+</span></span>
+<span id="cb144-3"><a href="chap-describe.html#cb144-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">&quot;steelblue&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-62-1.png" width="672" />
 Er zijn weinig methoden voorhanden om <em>nominale</em> variabelen te
 beschrijven. In Voorbeeld <a href="#exm:nhanesEx"><strong>??</strong></a> is de variable <em>Gender</em>
@@ -625,8 +885,9 @@ Een populair alternatief voor het tak en blad diagram is de <em>eenvoudige frequ
 <li>Indien je het wenst kan je op een histogram met densities ook nog een laag toevoegen met een niet parametrische densiteitsschatter voor de verdeling d.m.v. de <code>geom_density</code> functie.</li>
 </ol>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="chap-describe.html#cb147-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb147-2"><a href="chap-describe.html#cb147-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> BMI)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..,</span>
-<span id="cb147-3"><a href="chap-describe.html#cb147-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> ..count..), <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
+<span id="cb147-2"><a href="chap-describe.html#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BMI)) <span class="sc">+</span></span>
+<span id="cb147-3"><a href="chap-describe.html#cb147-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),<span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb147-4"><a href="chap-describe.html#cb147-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:histo"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/histo-1.png" alt="Histogram van het BMI in de NHANES studie." width="100%" />
 <p class="caption">
@@ -678,7 +939,7 @@ waarvoor de cumulatieve frequentie gelijk is aan <span class="math inline">\(k/1
 observaties aan voldoen neemt men vaak het gemiddelde van die waarden.</p>
 <p><strong>Einde definitie</strong></p>
 <p>In R kunnen die als volgt worden bekomen</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="chap-describe.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(NHANES<span class="sc">$</span>BMI, <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="chap-describe.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(NHANES<span class="sc">$</span>BMI,<span class="fu">c</span>(<span class="fl">0.25</span>,.<span class="dv">5</span>,.<span class="dv">75</span>),<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>##   25%   50%   75% 
 ## 21.58 25.98 30.89</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:boxBMI"></span>
@@ -689,7 +950,8 @@ Figuur 4.3: Boxplot van BMI in de NHANES studie.
 </div>
 <p>In ggplot maak je de boxplot als volgt:</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="chap-describe.html#cb150-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb150-2"><a href="chap-describe.html#cb150-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> BMI)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<span id="cb150-2"><a href="chap-describe.html#cb150-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>,<span class="at">y=</span>BMI)) <span class="sc">+</span></span>
+<span id="cb150-3"><a href="chap-describe.html#cb150-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <p>Bij de inspectie van een dataset speelt het detecteren van outliers in het
 algemeen een belangrijke rol. Ze kunnen wijzen op fouten, zoals tikfouten of
@@ -741,10 +1003,10 @@ groot nadeel van het gemiddelde is dat het zeer gevoelig is aan de
 aanwezigheid van outliers in de dataset. Om die reden is het vooral een
 interessante maat van locatie wanneer de verdeling van de observaties (zoals
 weergegeven door bijvoorbeeld een histogram) min of meer symmetrisch is.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="chap-describe.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NHANES<span class="sc">$</span>BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="chap-describe.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NHANES<span class="sc">$</span>BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 26.66014</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="chap-describe.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co"># opnieuw is de na.rm statement hier nodig omdat</span></span>
-<span id="cb153-2"><a href="chap-describe.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ontbrekende waarden voorkomen.</span></span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="chap-describe.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co">#opnieuw is de na.rm statement hier nodig</span></span>
+<span id="cb153-2"><a href="chap-describe.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="co">#omdat ontbrekende waarden voorkomen.</span></span></code></pre></div>
 <p><em>Indien men de grootste observatie (81.25) vervangt door 8125 om als het ware ene tikfout voor te stellen, dan wijzigt het rekenkundig gemiddelde naar 27.5 en dat terwijl er bijna 10000 BMI metingen zijn. Merk op dat het gemiddelde vrij sterk beïnvloed kan worden door één outlier.</em></p>
 <p><strong>Eigenschap</strong></p>
 <p>Als alle uitkomsten <span class="math inline">\(x_i\)</span> met een willekeurige constante <span class="math inline">\(a\)</span>
@@ -789,15 +1051,14 @@ voordeel van de mediaan is dat ze niet gevoelig is aan outliers. In het bijzonde
 ze vaak nuttig aangewend worden wanneer sommige gegevens <em>gecensureerd</em>
 zijn. Dit wil zeggen dat men voor een aantal gegevens enkel weet dat ze
 boven of onder een bepaalde drempelwaarde liggen.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="chap-describe.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(NHANES<span class="sc">$</span>BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="chap-describe.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(NHANES<span class="sc">$</span>BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 25.98</code></pre>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="chap-describe.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merk op dat we hier gebruik maken van het</span></span>
-<span id="cb156-2"><a href="chap-describe.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="co"># argument na.rm=TRUE Dit komt omdat we niet</span></span>
-<span id="cb156-3"><a href="chap-describe.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="co"># beschikken over het BMI voor elke persoon:</span></span>
-<span id="cb156-4"><a href="chap-describe.html#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ontbrekende waarnemingen Die worden in R als</span></span>
-<span id="cb156-5"><a href="chap-describe.html#cb156-5" aria-hidden="true" tabindex="-1"></a><span class="co"># een NA voorgesteld Als we het argument</span></span>
-<span id="cb156-6"><a href="chap-describe.html#cb156-6" aria-hidden="true" tabindex="-1"></a><span class="co"># na.rm=TRUE gebruiken wordt de mediaan berekend</span></span>
-<span id="cb156-7"><a href="chap-describe.html#cb156-7" aria-hidden="true" tabindex="-1"></a><span class="co"># op basis van de beschikbare observaties</span></span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="chap-describe.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Merk op dat we hier gebruik maken van het argument na.rm=TRUE</span></span>
+<span id="cb156-2"><a href="chap-describe.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Dit komt omdat we niet beschikken over het BMI</span></span>
+<span id="cb156-3"><a href="chap-describe.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="co">#voor elke persoon: ontbrekende waarnemingen</span></span>
+<span id="cb156-4"><a href="chap-describe.html#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Die worden in R als een NA voorgesteld</span></span>
+<span id="cb156-5"><a href="chap-describe.html#cb156-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Als we het argument na.rm=TRUE gebruiken wordt</span></span>
+<span id="cb156-6"><a href="chap-describe.html#cb156-6" aria-hidden="true" tabindex="-1"></a><span class="co">#de mediaan berekend op basis van de beschikbare observaties</span></span></code></pre></div>
 <p>Indien men de grootste observatie (81.25) vervangt 8125, dan wijzigt de mediaan niet.
 Merk ook op dat de mediaan lager is dan het gemiddelde, hij is minder gevoelig voor de outliers in de dataset.</p>
 <p><code>{.definition, name="modus"}</code>
@@ -889,21 +1150,30 @@ originele schaal door er de exponentiële functie van te nemen:</p>
 <li><p>In Genomics wordt de <span class="math inline">\(\log_2\)</span> transformatie veel gebruikt.</p></li>
 <li><p>Een verschil van 1 op <span class="math inline">\(\log_2\)</span> schaal betekent een verdubbeling op de originele schaal <span class="math inline">\(FC=2\)</span>.</p></li>
 </ul>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="chap-describe.html#cb157-1" aria-hidden="true" tabindex="-1"></a>logSummary <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb157-2"><a href="chap-describe.html#cb157-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb157-3"><a href="chap-describe.html#cb157-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">logMean =</span> <span class="fu">mean</span>(BMI <span class="sc">%&gt;%</span></span>
-<span id="cb157-4"><a href="chap-describe.html#cb157-4" aria-hidden="true" tabindex="-1"></a>        log2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">sd =</span> <span class="fu">sd</span>(BMI <span class="sc">%&gt;%</span></span>
-<span id="cb157-5"><a href="chap-describe.html#cb157-5" aria-hidden="true" tabindex="-1"></a>        log2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">mean =</span> <span class="fu">mean</span>(BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb157-6"><a href="chap-describe.html#cb157-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">median =</span> <span class="fu">median</span>(BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb157-7"><a href="chap-describe.html#cb157-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">geoMean =</span> <span class="dv">2</span><span class="sc">^</span>logMean)</span>
-<span id="cb157-8"><a href="chap-describe.html#cb157-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb157-9"><a href="chap-describe.html#cb157-9" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb157-10"><a href="chap-describe.html#cb157-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb157-11"><a href="chap-describe.html#cb157-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> BMI <span class="sc">%&gt;%</span></span>
-<span id="cb157-12"><a href="chap-describe.html#cb157-12" aria-hidden="true" tabindex="-1"></a>        log2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..,</span>
-<span id="cb157-13"><a href="chap-describe.html#cb157-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> ..count..), <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb157-14"><a href="chap-describe.html#cb157-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> logSummary<span class="sc">$</span>logMean,</span>
-<span id="cb157-15"><a href="chap-describe.html#cb157-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">sd =</span> logSummary<span class="sc">$</span>sd))</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="chap-describe.html#cb157-1" aria-hidden="true" tabindex="-1"></a>logSummary <span class="ot">&lt;-</span></span>
+<span id="cb157-2"><a href="chap-describe.html#cb157-2" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb157-3"><a href="chap-describe.html#cb157-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb157-4"><a href="chap-describe.html#cb157-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb157-5"><a href="chap-describe.html#cb157-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">logMean =</span> <span class="fu">mean</span>(BMI <span class="sc">%&gt;%</span> log2,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb157-6"><a href="chap-describe.html#cb157-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(BMI <span class="sc">%&gt;%</span> log2,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb157-7"><a href="chap-describe.html#cb157-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb157-8"><a href="chap-describe.html#cb157-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="fu">median</span>(BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb157-9"><a href="chap-describe.html#cb157-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb157-10"><a href="chap-describe.html#cb157-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">geoMean=</span><span class="dv">2</span><span class="sc">^</span>logMean)</span>
+<span id="cb157-11"><a href="chap-describe.html#cb157-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb157-12"><a href="chap-describe.html#cb157-12" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb157-13"><a href="chap-describe.html#cb157-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb157-14"><a href="chap-describe.html#cb157-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BMI <span class="sc">%&gt;%</span> log2)) <span class="sc">+</span></span>
+<span id="cb157-15"><a href="chap-describe.html#cb157-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb157-16"><a href="chap-describe.html#cb157-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),</span>
+<span id="cb157-17"><a href="chap-describe.html#cb157-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb157-18"><a href="chap-describe.html#cb157-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb157-19"><a href="chap-describe.html#cb157-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm,</span>
+<span id="cb157-20"><a href="chap-describe.html#cb157-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>,</span>
+<span id="cb157-21"><a href="chap-describe.html#cb157-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb157-22"><a href="chap-describe.html#cb157-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean=</span>logSummary<span class="sc">$</span>logMean,</span>
+<span id="cb157-23"><a href="chap-describe.html#cb157-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd=</span>logSummary<span class="sc">$</span>sd)</span>
+<span id="cb157-24"><a href="chap-describe.html#cb157-24" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:histLogBMI"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/histLogBMI-1.png" alt="Boxplot van BMI en log(BMI) in de NHANES studie." width="100%" />
 <p class="caption">
@@ -1000,15 +1270,14 @@ hun standaarddeviatie met <span class="math inline">\(|a|\)</span> (de absolute 
 uitkomsten <span class="math inline">\(a\)</span> wordt opgeteld, wijzigen hun variantie en standaarddeviatie
 niet.</p>
 <p><strong>Einde eigenschap</strong></p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="chap-describe.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Het gebruik van functie sd() levert de</span></span>
-<span id="cb160-2"><a href="chap-describe.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="co"># standarddeviatie van de variabele BMI in de</span></span>
-<span id="cb160-3"><a href="chap-describe.html#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="co"># NHANES dataset.  Het na.rm=TRUE argument wordt</span></span>
-<span id="cb160-4"><a href="chap-describe.html#cb160-4" aria-hidden="true" tabindex="-1"></a><span class="co"># gebruikt omdat er ontbrekende waarnemingen</span></span>
-<span id="cb160-5"><a href="chap-describe.html#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="co"># voorkomen.</span></span>
-<span id="cb160-6"><a href="chap-describe.html#cb160-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(NHANES<span class="sc">$</span>BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="chap-describe.html#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Het gebruik van functie sd() levert de standarddeviatie</span></span>
+<span id="cb160-2"><a href="chap-describe.html#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="co"># van de variabele BMI in de NHANES dataset.</span></span>
+<span id="cb160-3"><a href="chap-describe.html#cb160-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Het na.rm=TRUE argument wordt gebruikt omdat er</span></span>
+<span id="cb160-4"><a href="chap-describe.html#cb160-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ontbrekende waarnemingen voorkomen.</span></span>
+<span id="cb160-5"><a href="chap-describe.html#cb160-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(NHANES<span class="sc">$</span>BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 7.376579</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="chap-describe.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># levert de variantie van de variabele BMI</span></span>
-<span id="cb162-2"><a href="chap-describe.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(NHANES<span class="sc">$</span>BMI, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="chap-describe.html#cb162-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># levert de variantie van de variabele BMI</span></span>
+<span id="cb162-2"><a href="chap-describe.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(NHANES<span class="sc">$</span>BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 54.41392</code></pre>
 <p>Wanneer een variabele niet Normaal verdeeld is (dit is bijvoorbeeld het
 geval voor het BMI gezien het niet symmetrisch verdeeld is), dan
@@ -1087,11 +1356,9 @@ Normaliteit.</p>
 <div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="chap-describe.html#cb164-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb164-2"><a href="chap-describe.html#cb164-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">18</span></span>
 <span id="cb164-3"><a href="chap-describe.html#cb164-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">9</span></span>
-<span id="cb164-4"><a href="chap-describe.html#cb164-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb164-4"><a href="chap-describe.html#cb164-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span><span class="dv">9</span></span>
 <span id="cb164-5"><a href="chap-describe.html#cb164-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb164-6"><a href="chap-describe.html#cb164-6" aria-hidden="true" tabindex="-1"></a>normSim <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> nSamp, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma),</span>
-<span id="cb164-7"><a href="chap-describe.html#cb164-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> n) <span class="sc">%&gt;%</span></span>
-<span id="cb164-8"><a href="chap-describe.html#cb164-8" aria-hidden="true" tabindex="-1"></a>    as.data.frame</span></code></pre></div>
+<span id="cb164-6"><a href="chap-describe.html#cb164-6" aria-hidden="true" tabindex="-1"></a>normSim <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>nSamp,<span class="at">mean=</span>mu,<span class="at">sd=</span>sigma),<span class="at">nrow=</span>n) <span class="sc">%&gt;%</span> as.data.frame</span></code></pre></div>
 <p>We gaan nu de data visualiseren.</p>
 <ul>
 <li>Merk op dat de data niet in het tidy formaat is.</li>
@@ -1103,16 +1370,18 @@ Normaliteit.</p>
 <li><p>Aan de hand van de functie <code>facet_wrap</code> kunnen we de data opsplitsen volgens de variabele samp. We krijgen dus een histogram voor elk sample.</p></li>
 </ol>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="chap-describe.html#cb165-1" aria-hidden="true" tabindex="-1"></a>normSim <span class="sc">%&gt;%</span></span>
-<span id="cb165-2"><a href="chap-describe.html#cb165-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(samp, data) <span class="sc">%&gt;%</span></span>
-<span id="cb165-3"><a href="chap-describe.html#cb165-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> data)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..,</span>
-<span id="cb165-4"><a href="chap-describe.html#cb165-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> ..count..), <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..)) <span class="sc">+</span></span>
-<span id="cb165-5"><a href="chap-describe.html#cb165-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>samp)</span></code></pre></div>
+<span id="cb165-2"><a href="chap-describe.html#cb165-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(samp,data) <span class="sc">%&gt;%</span></span>
+<span id="cb165-3"><a href="chap-describe.html#cb165-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>data)) <span class="sc">+</span></span>
+<span id="cb165-4"><a href="chap-describe.html#cb165-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),<span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb165-5"><a href="chap-describe.html#cb165-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..)) <span class="sc">+</span></span>
+<span id="cb165-6"><a href="chap-describe.html#cb165-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>samp)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 <p>Gezien er vrij weinig data punten zijn en omdat er veel distributies vergeleken moeten worden is het handiger om dit via een boxplot te doen.</p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="chap-describe.html#cb166-1" aria-hidden="true" tabindex="-1"></a>normSim <span class="sc">%&gt;%</span></span>
-<span id="cb166-2"><a href="chap-describe.html#cb166-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(samp, data) <span class="sc">%&gt;%</span></span>
-<span id="cb166-3"><a href="chap-describe.html#cb166-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> samp, <span class="at">y =</span> data)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb166-4"><a href="chap-describe.html#cb166-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<span id="cb166-2"><a href="chap-describe.html#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(samp,data) <span class="sc">%&gt;%</span></span>
+<span id="cb166-3"><a href="chap-describe.html#cb166-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> samp,<span class="at">y =</span> data)) <span class="sc">+</span></span>
+<span id="cb166-4"><a href="chap-describe.html#cb166-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb166-5"><a href="chap-describe.html#cb166-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 <p>Hoewel alle observaties in alle steekproeven uit dezelfde populatie zijn getrokken zien we toch vrij grote fluctuaties van steekproef tot steekproef in de mediaan, maar zeker ook in de boxgrootte en het bereik van de data in elke steekproef. Dus ondanks het feit dat we over een vrij grote steekproef beschikken (20 observaties) is er toch een grote variabiliteit van steekproef tot steekproef.</p>
 <p>We gaan nu normaliteit na via QQ-plot.</p>
@@ -1123,9 +1392,11 @@ Normaliteit.</p>
 <li>Voeg een laag toe met de rechte in de QQ-plot via de functie <code>geom_qq_line</code> om te kunnen evalueren hoe goed de data een normale verdeling volgt.</li>
 </ol>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="chap-describe.html#cb167-1" aria-hidden="true" tabindex="-1"></a>normSim <span class="sc">%&gt;%</span></span>
-<span id="cb167-2"><a href="chap-describe.html#cb167-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(samp, data) <span class="sc">%&gt;%</span></span>
-<span id="cb167-3"><a href="chap-describe.html#cb167-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> data)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
-<span id="cb167-4"><a href="chap-describe.html#cb167-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>samp)</span></code></pre></div>
+<span id="cb167-2"><a href="chap-describe.html#cb167-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(samp,data) <span class="sc">%&gt;%</span></span>
+<span id="cb167-3"><a href="chap-describe.html#cb167-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>data)) <span class="sc">+</span></span>
+<span id="cb167-4"><a href="chap-describe.html#cb167-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb167-5"><a href="chap-describe.html#cb167-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb167-6"><a href="chap-describe.html#cb167-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>samp)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <p>Zelf voor Normal data zien we duidelijk nog afwijkingen door sampling variabiliteit! De plots laten ons toe om ons visueel te trainen om QQ-plots van Normale data te herkennen.</p>
 <p>Om de interpretatie van de QQ-plot goed te kunnen illustreren gaan we een histogram en QQ-plot naast elkaar zetten.
@@ -1136,17 +1407,19 @@ D.m.v. het package <code>gridExtra</code> kunnen we meerdere GG-plot objecten in
 <li>Gebruik de functie <code>grid.arrange</code> om de objecten p1 en p2 af te beelden en we geven aan dat we dit in 2 kolommen zullen doen <code>ncol=2</code>. (je kan ook de dimensie in rijen geven (nrow=1))</li>
 </ol>
 <div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="chap-describe.html#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb168-2"><a href="chap-describe.html#cb168-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb168-3"><a href="chap-describe.html#cb168-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(BMI)) <span class="sc">%&gt;%</span></span>
-<span id="cb168-4"><a href="chap-describe.html#cb168-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> BMI)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..,</span>
-<span id="cb168-5"><a href="chap-describe.html#cb168-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> ..count..)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;BMI&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;All females in study&quot;</span>) <span class="sc">+</span></span>
-<span id="cb168-6"><a href="chap-describe.html#cb168-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..))</span>
-<span id="cb168-7"><a href="chap-describe.html#cb168-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-8"><a href="chap-describe.html#cb168-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb168-9"><a href="chap-describe.html#cb168-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(BMI)) <span class="sc">%&gt;%</span></span>
-<span id="cb168-10"><a href="chap-describe.html#cb168-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> BMI)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>()</span>
-<span id="cb168-11"><a href="chap-describe.html#cb168-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-12"><a href="chap-describe.html#cb168-12" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb168-2"><a href="chap-describe.html#cb168-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(BMI)) <span class="sc">%&gt;%</span></span>
+<span id="cb168-3"><a href="chap-describe.html#cb168-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BMI))<span class="sc">+</span></span>
+<span id="cb168-4"><a href="chap-describe.html#cb168-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb168-5"><a href="chap-describe.html#cb168-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">xlab</span>(<span class="st">&quot;BMI&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-6"><a href="chap-describe.html#cb168-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ggtitle</span>(<span class="st">&quot;All females in study&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-7"><a href="chap-describe.html#cb168-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..))</span>
+<span id="cb168-8"><a href="chap-describe.html#cb168-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-9"><a href="chap-describe.html#cb168-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(BMI)) <span class="sc">%&gt;%</span></span>
+<span id="cb168-10"><a href="chap-describe.html#cb168-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>BMI)) <span class="sc">+</span></span>
+<span id="cb168-11"><a href="chap-describe.html#cb168-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb168-12"><a href="chap-describe.html#cb168-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span>
+<span id="cb168-13"><a href="chap-describe.html#cb168-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-14"><a href="chap-describe.html#cb168-14" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 <p>The QQ-plot toont dat de kwantielen van de data in de steekproef</p>
 <ul>
@@ -1165,7 +1438,71 @@ D.m.v. het package <code>gridExtra</code> kunnen we meerdere GG-plot objecten in
 <p>Een bioloog verzamelt `s nachts bladerafval op een lukrake plaats van 1 m<span class="math inline">\(^2\)</span>
 in 2 wouden, waarvan 1 met klei- en 1 met kalkgrond. Op elke plaats telt hij het aantal houtluizen van de species
 Armadilidium of Oniscus, met als doel na te gaan of de ene soort vaker voorkomt op kleigrond dan op
-kalkgrond<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>. Tabel <a href="#tab:cox"><strong>??</strong></a> toont de bekomen gegevens. Hier stelt <span class="math inline">\(a\)</span> (<span class="math inline">\(c\)</span>) het aantal houtluizen van de soort Armadilidium (Oniscus) voor op kleigrond, en <span class="math inline">\(b\)</span> (<span class="math inline">\(d\)</span>) het aantal houtluizen van de soort Armadilidium (Oniscus) op kalkgrond.</p>
+kalkgrond<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>. Tabel <a href="chap-describe.html#tab:cox">4.2</a> toont de bekomen gegevens. Hier stelt <span class="math inline">\(a\)</span> (<span class="math inline">\(c\)</span>) het aantal houtluizen van de soort Armadilidium (Oniscus) voor op kleigrond, en <span class="math inline">\(b\)</span> (<span class="math inline">\(d\)</span>) het aantal houtluizen van de soort Armadilidium (Oniscus) op kalkgrond.</p>
+<table>
+<caption>
+<span id="tab:cox">Tabel 4.2: </span>Kruistabel van species houtluis versus type grond.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Armadil.
+</th>
+<th style="text-align:left;">
+Oniscus
+</th>
+<th style="text-align:left;">
+Totaal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Klei
+</td>
+<td style="text-align:left;">
+14 (a)
+</td>
+<td style="text-align:left;">
+6 (c)
+</td>
+<td style="text-align:left;">
+20 (a+c)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kalk
+</td>
+<td style="text-align:left;">
+22 (b)
+</td>
+<td style="text-align:left;">
+46 (d)
+</td>
+<td style="text-align:left;">
+68 (b+d)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Totaal
+</td>
+<td style="text-align:left;">
+36 (a+b)
+</td>
+<td style="text-align:left;">
+52 (c+d)
+</td>
+<td style="text-align:left;">
+88 (n)
+</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Einde voorbeeld</strong></p>
 <p>Er zijn verschillende manieren om de resultaten van deze studie te
 beschrijven. De kans dat 1 van beide species houtluizen van de soort Armadilidium is, is <span class="math inline">\(p_{kl}=a/(a+c)=0.70\)</span> of 70% op kleigrond en <span class="math inline">\(p_{ka}=b/(b+d)=0.32\)</span> of 32% op kalkgrond.</p>
@@ -1210,7 +1547,7 @@ leggen hoeveel van hen al dan niet blootgesteld zijn.</p>
 <div id="subsec:retrospect" class="section level3 hasAnchor" number="4.5.2">
 <h3><span class="header-section-number">4.5.2</span> Retrospectieve studies<a href="chap-describe.html#subsec:retrospect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Beschouw de case-controle studie uit Voorbeeld <a href="#exm:brcaLeu"><strong>??</strong></a>, waarvan
-de gegevens samengevat zijn in Tabel <a href="#tab:leu2"><strong>??</strong></a>. Omdat men in
+de gegevens samengevat zijn in Tabel <a href="chap-describe.html#tab:leu2">4.3</a>. Omdat men in
 zo’n design op zoek gaat naar <span class="math inline">\(a+b+c\)</span> lukraak gekozen controles en <span class="math inline">\(d+e+f\)</span> lukraak
 gekozen cases, liggen de marges <span class="math inline">\(a+b+c\)</span> en <span class="math inline">\(d+e+f\)</span> vast en is het bijgevolg
 onmogelijk om het risico op case (bvb. risico op borstkanker) te schatten. Dit is noch mogelijk binnen de
@@ -1220,6 +1557,85 @@ in de tabel vast gegeven veronderstellen, zijn hier zinvol. Dit heeft tot
 gevolg dat <em>het relatief risico</em> op de aandoening (d.w.z. op <em>case</em>)
 in de populatie voor blootgestelden versus niet-blootgestelden niet
 rechtstreeks kan geschat worden op basis van gegevens uit een <em>case-controle studie</em>. Analoog kan ook het bijhorende <em>absolute risicoverschil niet geschat</em> worden.</p>
+<table>
+<caption>
+<span id="tab:leu2">Tabel 4.3: </span>Kruistabel van borstkanker-status versus BRCA1-allel.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Genotype
+</th>
+<th style="text-align:left;">
+Controles
+</th>
+<th style="text-align:left;">
+Cases
+</th>
+<th style="text-align:left;">
+Totaal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Pro/Pro
+</td>
+<td style="text-align:left;">
+266 (a)
+</td>
+<td style="text-align:left;">
+342 (d)
+</td>
+<td style="text-align:left;">
+608 (a+d)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pro/Leu
+</td>
+<td style="text-align:left;">
+250 (b)
+</td>
+<td style="text-align:left;">
+369 (e)
+</td>
+<td style="text-align:left;">
+619 (b+e)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leu/Leu
+</td>
+<td style="text-align:left;">
+56 (c)
+</td>
+<td style="text-align:left;">
+89 (f)
+</td>
+<td style="text-align:left;">
+145 (c+f)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Totaal
+</td>
+<td style="text-align:left;">
+572 (a+b+c)
+</td>
+<td style="text-align:left;">
+800 (d+e+f)
+</td>
+<td style="text-align:left;">
+1372 (n)
+</td>
+</tr>
+</tbody>
+</table>
 <p>Wel heeft men informatie over de kans om het allel Leu/Leu aan te treffen bij cases, <span class="math inline">\(\pi_1=f/(d+e+f)=89/800=11.1\%\)</span>, en de kans op het allel Leu/Leu bij controles, <span class="math inline">\(\pi_0=c/(a+b+c)=56/572=9.8\%\)</span>. Het relatief risico op blootstelling voor cases versus
 controles is bijgevolg <span class="math inline">\(11.1/9.8=1.14\)</span>. Vrouwen met borstkanker hebben dus
 14% meer kans om de allelcombinatie Leu/Leu te hebben op het BRCA1 gen dan vrouwen zonder borstkanker.
@@ -1257,7 +1673,7 @@ OR=\frac{\mbox{odds}_T}{\mbox{odds}_C}
 \end{equation*}\]</span>
 van de odds op deze gebeurtenis in populaties T en C.</p>
 <p><strong>Einde definitie</strong></p>
-<p>Op basis van de gegevens in Tabel <a href="#tab:leu2"><strong>??</strong></a> kan de odds ratio op
+<p>Op basis van de gegevens in Tabel <a href="chap-describe.html#tab:leu2">4.3</a> kan de odds ratio op
 blootstelling voor cases versus controles geschat worden d.m.v. het kruisproduct</p>
 <p><span class="math display">\[\begin{equation*}
 \frac{ \frac{ f/(d+e+f)}{(d+e)/(d+e+f)} }{ \frac{c/(a+b+c)}{(a+b)/(a+b+c)}} = \frac{f(a+b)}{c (d+e)}
@@ -1344,15 +1760,75 @@ in de kolommen uitgezet en de verschillende waarden die de andere variabele
 aanneemt in de rijen. In elke cel van de tabel (die overeenkomt met 1
 specifieke combinatie van waarden voor beide variabelen) wordt de frequentie
 neergeschreven.</p>
-<p>Tabel <a href="#tab:genderBMI"><strong>??</strong></a> toont zo’n kruistabel voor het aantal mannen en vrouwen per BMI klasse. Dergelijke eenvoudige kruistabel met slechts 2 rijen en 4 kolommen, noemt men ook een <span class="math inline">\(2\times 4\)</span> tabel.</p>
+<table>
+<caption>
+<span id="tab:genderBMI">Tabel 4.4: </span>Kruistabel van Gender vs BMI klasse.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+12.0_18.5
+</th>
+<th style="text-align:right;">
+18.5_to_24.9
+</th>
+<th style="text-align:right;">
+25.0_to_29.9
+</th>
+<th style="text-align:right;">
+30.0_plus
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+female
+</td>
+<td style="text-align:right;">
+629
+</td>
+<td style="text-align:right;">
+1616
+</td>
+<td style="text-align:right;">
+1179
+</td>
+<td style="text-align:right;">
+1402
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+male
+</td>
+<td style="text-align:right;">
+648
+</td>
+<td style="text-align:right;">
+1295
+</td>
+<td style="text-align:right;">
+1485
+</td>
+<td style="text-align:right;">
+1349
+</td>
+</tr>
+</tbody>
+</table>
+<p>Tabel <a href="chap-describe.html#tab:genderBMI">4.4</a> toont zo’n kruistabel voor het aantal mannen en vrouwen per BMI klasse. Dergelijke eenvoudige kruistabel met slechts 2 rijen en 4 kolommen, noemt men ook een <span class="math inline">\(2\times 4\)</span> tabel.</p>
 </div>
 <div id="subsec:asskwalcont" class="section level3 hasAnchor" number="4.6.2">
 <h3><span class="header-section-number">4.6.2</span> Associatie tussen één kwalitatieve en één continue variabele<a href="chap-describe.html#subsec:asskwalcont" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Boxplots zijn meer compact dan een histogram en laat om die reden gemakkelijker vergelijkingen tussen verschillende groepen toe. Twee dergelijke boxplots
 worden getoond in Figuur <a href="chap-describe.html#fig:boxplotCholGender">4.5</a>.</p>
 <div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="chap-describe.html#cb169-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb169-2"><a href="chap-describe.html#cb169-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">y =</span> <span class="fu">log</span>(DirectChol))) <span class="sc">+</span></span>
-<span id="cb169-3"><a href="chap-describe.html#cb169-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;log(Direct Cholestorol)&quot;</span>)</span></code></pre></div>
+<span id="cb169-2"><a href="chap-describe.html#cb169-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> <span class="fu">log</span>(DirectChol))) <span class="sc">+</span></span>
+<span id="cb169-3"><a href="chap-describe.html#cb169-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb169-4"><a href="chap-describe.html#cb169-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;log(Direct Cholestorol)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:boxplotCholGender"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/boxplotCholGender-1.png" alt="Boxplot van log-getransformeerde directe HDL cholestorol concentratie in functie van Gender voor alle subjecten van de NHANES studie." width="100%" />
 <p class="caption">
@@ -1376,9 +1852,10 @@ Gezien we weten dat <span class="math inline">\(\log(C_2)-\log(C_1)=\log(C_2/C_1
 </ol>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="chap-describe.html#cb170-1" aria-hidden="true" tabindex="-1"></a>ap <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/GTPB/PSLS20/master/data/armpit.csv&quot;</span>)</span>
 <span id="cb170-2"><a href="chap-describe.html#cb170-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-3"><a href="chap-describe.html#cb170-3" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span></span>
-<span id="cb170-4"><a href="chap-describe.html#cb170-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> trt, <span class="at">y =</span> rel)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb170-5"><a href="chap-describe.html#cb170-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
+<span id="cb170-3"><a href="chap-describe.html#cb170-3" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<span id="cb170-4"><a href="chap-describe.html#cb170-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
+<span id="cb170-5"><a href="chap-describe.html#cb170-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb170-6"><a href="chap-describe.html#cb170-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
 <p>Dot-plots zijn bijzonder interessant in pre-test post-test designs waar dezelfde subjecten op
 verschillende tijdstippen worden geobserveerd. In dat geval kunnen de uitkomsten
@@ -1386,14 +1863,13 @@ uitgezet worden op de Y-as en de tijdstippen op de X-as, en kunnen de
 metingen voor eenzelfde subject worden verbonden met een lijn.</p>
 <p>Een
 voorbeeld hiervan is weergegeven in Figuur <a href="chap-describe.html#fig:captoDot">4.6</a>. De figuur vat de gegevens samen van de captopril studie die de centrale dataset vormt van Hoofdstuk <a href="chap-besluit.html#chap-besluit">5</a>. In de studie wenst men het effect van een bloeddrukverlagend geneesmiddel captopril evalueren. Voor elke patiënt in de studie werd de systolische bloeddruk twee keer gemeten: één keer voor en één keer na de behandeling met het bloeddruk verlagende medicijn captopril. In Figuur <a href="chap-describe.html#fig:captoDot">4.6</a> worden de metingen van dezelfde patiënt met een lijntje verbonden. Hierdoor krijgen we een heel duidelijk beeld van de gegevens. Namelijk, we krijgen een sterke indruk dat de bloeddruk daalt na het toedienen van captopril gezien we bijna voor alle patiënten een daling observeren.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="chap-describe.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eerst lezen we de data in. Deze bevindt zich in</span></span>
-<span id="cb171-2"><a href="chap-describe.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="co"># de subdirectory dataset Het is een tekstbestand</span></span>
-<span id="cb171-3"><a href="chap-describe.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="co"># waarbij de kolommen van elkaar gescheiden zijn</span></span>
-<span id="cb171-4"><a href="chap-describe.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="co"># d.m.v comma&#39;s. sep=&#39;,&#39; De eerste rij bevat de</span></span>
-<span id="cb171-5"><a href="chap-describe.html#cb171-5" aria-hidden="true" tabindex="-1"></a><span class="co"># namen van de variabelen</span></span>
-<span id="cb171-6"><a href="chap-describe.html#cb171-6" aria-hidden="true" tabindex="-1"></a>captopril <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/captopril.txt&quot;</span>,</span>
-<span id="cb171-7"><a href="chap-describe.html#cb171-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>)</span>
-<span id="cb171-8"><a href="chap-describe.html#cb171-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(captopril)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="chap-describe.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Eerst lezen we de data in.</span></span>
+<span id="cb171-2"><a href="chap-describe.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Deze bevindt zich in de subdirectory dataset</span></span>
+<span id="cb171-3"><a href="chap-describe.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Het is een tekstbestand waarbij de kolommen van elkaar gescheiden zijn d.m.v comma&#39;s.</span></span>
+<span id="cb171-4"><a href="chap-describe.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="co">#sep=&quot;,&quot;</span></span>
+<span id="cb171-5"><a href="chap-describe.html#cb171-5" aria-hidden="true" tabindex="-1"></a><span class="co">#De eerste rij bevat de namen van de variabelen</span></span>
+<span id="cb171-6"><a href="chap-describe.html#cb171-6" aria-hidden="true" tabindex="-1"></a>captopril <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/captopril.txt&quot;</span>,<span class="at">header=</span><span class="cn">TRUE</span>,<span class="at">sep=</span><span class="st">&quot;,&quot;</span>)</span>
+<span id="cb171-7"><a href="chap-describe.html#cb171-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(captopril)</span></code></pre></div>
 <pre><code>##   id SBPb DBPb SBPa DBPa
 ## 1  1  210  130  201  125
 ## 2  2  169  122  165  121
@@ -1401,14 +1877,19 @@ voorbeeld hiervan is weergegeven in Figuur <a href="chap-describe.html#fig:capto
 ## 4  4  160  104  157  106
 ## 5  5  167  112  147  101
 ## 6  6  176  101  145   85</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="chap-describe.html#cb173-1" aria-hidden="true" tabindex="-1"></a>captoprilTidy <span class="ot">&lt;-</span> captopril <span class="sc">%&gt;%</span></span>
-<span id="cb173-2"><a href="chap-describe.html#cb173-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(type, bp, <span class="sc">-</span>id)</span>
-<span id="cb173-3"><a href="chap-describe.html#cb173-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb173-4"><a href="chap-describe.html#cb173-4" aria-hidden="true" tabindex="-1"></a>captoprilTidy <span class="sc">%&gt;%</span></span>
-<span id="cb173-5"><a href="chap-describe.html#cb173-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;SBPa&quot;</span>, <span class="st">&quot;SBPb&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb173-6"><a href="chap-describe.html#cb173-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;SBPb&quot;</span>, <span class="st">&quot;SBPa&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb173-7"><a href="chap-describe.html#cb173-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> bp)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
-<span id="cb173-8"><a href="chap-describe.html#cb173-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="chap-describe.html#cb173-1" aria-hidden="true" tabindex="-1"></a>captoprilTidy <span class="ot">&lt;-</span></span>
+<span id="cb173-2"><a href="chap-describe.html#cb173-2" aria-hidden="true" tabindex="-1"></a>  captopril <span class="sc">%&gt;%</span></span>
+<span id="cb173-3"><a href="chap-describe.html#cb173-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(type,bp,<span class="sc">-</span>id)</span>
+<span id="cb173-4"><a href="chap-describe.html#cb173-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb173-5"><a href="chap-describe.html#cb173-5" aria-hidden="true" tabindex="-1"></a>captoprilTidy <span class="sc">%&gt;%</span></span>
+<span id="cb173-6"><a href="chap-describe.html#cb173-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">&quot;SBPa&quot;</span>,<span class="st">&quot;SBPb&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb173-7"><a href="chap-describe.html#cb173-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(</span>
+<span id="cb173-8"><a href="chap-describe.html#cb173-8" aria-hidden="true" tabindex="-1"></a>    type,</span>
+<span id="cb173-9"><a href="chap-describe.html#cb173-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;SBPb&quot;</span>,<span class="st">&quot;SBPa&quot;</span>))</span>
+<span id="cb173-10"><a href="chap-describe.html#cb173-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb173-11"><a href="chap-describe.html#cb173-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>type,<span class="at">y=</span>bp)) <span class="sc">+</span></span>
+<span id="cb173-12"><a href="chap-describe.html#cb173-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb173-13"><a href="chap-describe.html#cb173-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:captoDot"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/captoDot-1.png" alt="Dotplot van de systolische bloeddruk in de captopril studie voor en na het toedienen van het bloeddruk verlagend middel captopril." width="100%" />
 <p class="caption">
@@ -1428,57 +1909,62 @@ Figuur 4.6: Dotplot van de systolische bloeddruk in de captopril studie voor en 
 <li>In het ggplot commando de lengte selecteren in de x-as en het gewicht in de y-as.</li>
 <li>Een laag toevoegen d.m.v. <code>geom_point</code> om een scatterplot te bekomen van y i.f.v. x.</li>
 </ol>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="chap-describe.html#cb174-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb174-2"><a href="chap-describe.html#cb174-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb174-3"><a href="chap-describe.html#cb174-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height, <span class="at">y =</span> Weight)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="chap-describe.html#cb174-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">%&gt;%</span></span>
+<span id="cb174-2"><a href="chap-describe.html#cb174-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb174-3"><a href="chap-describe.html#cb174-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height,<span class="at">y=</span>Weight)) <span class="sc">+</span></span>
+<span id="cb174-4"><a href="chap-describe.html#cb174-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 <p>Er is een duidelijke associatie tussen gewicht en lengte: als de lengte stijgt dan stijgt het gewicht gemiddeld ook. Er is echter veel variabiliteit en ook een indicatie dat het gewicht is scheef verdeeld naar rechts.</p>
 <p>We exploreren eerst de data univariaat: variabele per variabele. Om een histogram en QQ-plot naast elkaar af te beelden slaan we de plots eerst op als een object en maken we gebruik van de <code>grid.arrange</code> functie van het gridExtra package om de plots naast elkaar te plotten.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="chap-describe.html#cb175-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb175-2"><a href="chap-describe.html#cb175-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb175-3"><a href="chap-describe.html#cb175-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..,</span>
-<span id="cb175-4"><a href="chap-describe.html#cb175-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> ..count..)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;All females in study&quot;</span>) <span class="sc">+</span></span>
-<span id="cb175-5"><a href="chap-describe.html#cb175-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..))</span>
-<span id="cb175-6"><a href="chap-describe.html#cb175-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb175-7"><a href="chap-describe.html#cb175-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb175-8"><a href="chap-describe.html#cb175-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb175-9"><a href="chap-describe.html#cb175-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> Height)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>()</span>
-<span id="cb175-10"><a href="chap-describe.html#cb175-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="chap-describe.html#cb175-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> NHANES<span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb175-2"><a href="chap-describe.html#cb175-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb175-3"><a href="chap-describe.html#cb175-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb175-4"><a href="chap-describe.html#cb175-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">xlab</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">+</span></span>
+<span id="cb175-5"><a href="chap-describe.html#cb175-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;All females in study&quot;</span>) <span class="sc">+</span></span>
+<span id="cb175-6"><a href="chap-describe.html#cb175-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..))</span>
+<span id="cb175-7"><a href="chap-describe.html#cb175-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb175-8"><a href="chap-describe.html#cb175-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> NHANES<span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb175-9"><a href="chap-describe.html#cb175-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>Height)) <span class="sc">+</span></span>
+<span id="cb175-10"><a href="chap-describe.html#cb175-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb175-11"><a href="chap-describe.html#cb175-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span>
+<span id="cb175-12"><a href="chap-describe.html#cb175-12" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 <p>De lengte data zijn duidelijk approximatief normaal verdeeld.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="chap-describe.html#cb176-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb176-2"><a href="chap-describe.html#cb176-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb176-3"><a href="chap-describe.html#cb176-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Weight)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..,</span>
-<span id="cb176-4"><a href="chap-describe.html#cb176-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> ..count..)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;All females in study&quot;</span>) <span class="sc">+</span></span>
-<span id="cb176-5"><a href="chap-describe.html#cb176-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..))</span>
-<span id="cb176-6"><a href="chap-describe.html#cb176-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-7"><a href="chap-describe.html#cb176-7" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb176-8"><a href="chap-describe.html#cb176-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb176-9"><a href="chap-describe.html#cb176-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> Weight)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>()</span>
-<span id="cb176-10"><a href="chap-describe.html#cb176-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb176-11"><a href="chap-describe.html#cb176-11" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p3, p4, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="chap-describe.html#cb176-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> NHANES<span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb176-2"><a href="chap-describe.html#cb176-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Weight)) <span class="sc">+</span></span>
+<span id="cb176-3"><a href="chap-describe.html#cb176-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb176-4"><a href="chap-describe.html#cb176-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">xlab</span>(<span class="st">&quot;Weight&quot;</span>) <span class="sc">+</span></span>
+<span id="cb176-5"><a href="chap-describe.html#cb176-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;All females in study&quot;</span>) <span class="sc">+</span></span>
+<span id="cb176-6"><a href="chap-describe.html#cb176-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..))</span>
+<span id="cb176-7"><a href="chap-describe.html#cb176-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb176-8"><a href="chap-describe.html#cb176-8" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> NHANES<span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb176-9"><a href="chap-describe.html#cb176-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>Weight)) <span class="sc">+</span></span>
+<span id="cb176-10"><a href="chap-describe.html#cb176-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb176-11"><a href="chap-describe.html#cb176-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span>
+<span id="cb176-12"><a href="chap-describe.html#cb176-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb176-13"><a href="chap-describe.html#cb176-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p3,p4,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
 <p>De gewichtsdata zijn inderdaad scheef verdeeld!</p>
 <p>Na log transformatie zijn de gewichtsdata minder scheef, maar nog steeds niet Normaal verdeeld.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="chap-describe.html#cb177-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb177-2"><a href="chap-describe.html#cb177-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb177-3"><a href="chap-describe.html#cb177-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Weight <span class="sc">%&gt;%</span></span>
-<span id="cb177-4"><a href="chap-describe.html#cb177-4" aria-hidden="true" tabindex="-1"></a>        log2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..,</span>
-<span id="cb177-5"><a href="chap-describe.html#cb177-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> ..count..)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;Weight (log2)&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;All females in study&quot;</span>) <span class="sc">+</span></span>
-<span id="cb177-6"><a href="chap-describe.html#cb177-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..))</span>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="chap-describe.html#cb177-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> NHANES<span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb177-2"><a href="chap-describe.html#cb177-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Weight<span class="sc">%&gt;%</span>log2)) <span class="sc">+</span></span>
+<span id="cb177-3"><a href="chap-describe.html#cb177-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb177-4"><a href="chap-describe.html#cb177-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">xlab</span>(<span class="st">&quot;Weight (log2)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb177-5"><a href="chap-describe.html#cb177-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;All females in study&quot;</span>) <span class="sc">+</span></span>
+<span id="cb177-6"><a href="chap-describe.html#cb177-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..))</span>
 <span id="cb177-7"><a href="chap-describe.html#cb177-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-8"><a href="chap-describe.html#cb177-8" aria-hidden="true" tabindex="-1"></a>p6 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb177-9"><a href="chap-describe.html#cb177-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb177-10"><a href="chap-describe.html#cb177-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> Weight <span class="sc">%&gt;%</span></span>
-<span id="cb177-11"><a href="chap-describe.html#cb177-11" aria-hidden="true" tabindex="-1"></a>        log2)) <span class="sc">+</span> <span class="fu">geom_qq</span>() <span class="sc">+</span> <span class="fu">geom_qq_line</span>()</span>
+<span id="cb177-8"><a href="chap-describe.html#cb177-8" aria-hidden="true" tabindex="-1"></a>p6<span class="ot">&lt;-</span> NHANES<span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb177-9"><a href="chap-describe.html#cb177-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>Weight<span class="sc">%&gt;%</span>log2)) <span class="sc">+</span></span>
+<span id="cb177-10"><a href="chap-describe.html#cb177-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb177-11"><a href="chap-describe.html#cb177-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span>
 <span id="cb177-12"><a href="chap-describe.html#cb177-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-13"><a href="chap-describe.html#cb177-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p5, p6, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb177-13"><a href="chap-describe.html#cb177-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p5,p6,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>De scheefheid is er nog maar is sterk gereduceerd. We maken nu een plot van lengte in functie van het log<span class="math inline">\(_2\)</span> getransformeerde gewicht.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="chap-describe.html#cb178-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb178-2"><a href="chap-describe.html#cb178-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb178-3"><a href="chap-describe.html#cb178-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height, <span class="at">y =</span> Weight <span class="sc">%&gt;%</span></span>
-<span id="cb178-4"><a href="chap-describe.html#cb178-4" aria-hidden="true" tabindex="-1"></a>        log2)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Weight (log2)&quot;</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="chap-describe.html#cb178-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">%&gt;%</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb178-2"><a href="chap-describe.html#cb178-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height,<span class="at">y=</span>Weight <span class="sc">%&gt;%</span> log2)) <span class="sc">+</span></span>
+<span id="cb178-3"><a href="chap-describe.html#cb178-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Weight (log2)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb178-4"><a href="chap-describe.html#cb178-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
 <p>We introduceren nu een statistiek om de associatie te schatten: de correlatie.</p>
 <!---break-->
@@ -1519,13 +2005,12 @@ Figuur 4.7: Bijdrage van individuele metingen in de correlatie.
 </p>
 </div>
 <p>We berekenen vervolgens de correlatie voor lengte, gewicht en het log getransformeerde gewicht.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="chap-describe.html#cb179-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb179-2"><a href="chap-describe.html#cb179-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb179-3"><a href="chap-describe.html#cb179-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Weight, Height) <span class="sc">%&gt;%</span></span>
-<span id="cb179-4"><a href="chap-describe.html#cb179-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">log2Weight =</span> Weight <span class="sc">%&gt;%</span></span>
-<span id="cb179-5"><a href="chap-describe.html#cb179-5" aria-hidden="true" tabindex="-1"></a>        log2) <span class="sc">%&gt;%</span></span>
-<span id="cb179-6"><a href="chap-describe.html#cb179-6" aria-hidden="true" tabindex="-1"></a>    na.exclude <span class="sc">%&gt;%</span></span>
-<span id="cb179-7"><a href="chap-describe.html#cb179-7" aria-hidden="true" tabindex="-1"></a>    cor</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="chap-describe.html#cb179-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">%&gt;%</span></span>
+<span id="cb179-2"><a href="chap-describe.html#cb179-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb179-3"><a href="chap-describe.html#cb179-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Weight,Height) <span class="sc">%&gt;%</span></span>
+<span id="cb179-4"><a href="chap-describe.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log2Weight=</span>Weight<span class="sc">%&gt;%</span>log2) <span class="sc">%&gt;%</span></span>
+<span id="cb179-5"><a href="chap-describe.html#cb179-5" aria-hidden="true" tabindex="-1"></a>  na.exclude <span class="sc">%&gt;%</span></span>
+<span id="cb179-6"><a href="chap-describe.html#cb179-6" aria-hidden="true" tabindex="-1"></a>  cor</span></code></pre></div>
 <pre><code>##               Weight    Height log2Weight
 ## Weight     1.0000000 0.2845792  0.9811638
 ## Height     0.2845792 1.0000000  0.3074578
@@ -1541,19 +2026,17 @@ Figuur 4.7: Bijdrage van individuele metingen in de correlatie.
 <p>In figuur <a href="chap-describe.html#fig:corOutlier">4.8</a> wordt de impact van outliers op de Pearson correlatie geïllustreerd d.m.v. gesimuleerde data met één outlier. We zien dat de correlatie bijna halveert ten gevolge van de outlier!</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="chap-describe.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
 <span id="cb181-2"><a href="chap-describe.html#cb181-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>)</span>
-<span id="cb181-3"><a href="chap-describe.html#cb181-3" aria-hidden="true" tabindex="-1"></a>simData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> x <span class="sc">*</span> <span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(x)))</span>
-<span id="cb181-4"><a href="chap-describe.html#cb181-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> simData <span class="sc">%&gt;%</span></span>
-<span id="cb181-5"><a href="chap-describe.html#cb181-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">&quot;cor =&quot;</span>,</span>
-<span id="cb181-6"><a href="chap-describe.html#cb181-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor</span>(simData[, <span class="dv">1</span>], simData[, <span class="dv">2</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb181-7"><a href="chap-describe.html#cb181-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(., <span class="dv">2</span>)))</span>
-<span id="cb181-8"><a href="chap-describe.html#cb181-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-9"><a href="chap-describe.html#cb181-9" aria-hidden="true" tabindex="-1"></a>outlier <span class="ot">&lt;-</span> <span class="fu">rbind</span>(simData, <span class="fu">c</span>(<span class="dv">2</span>, <span class="sc">-</span><span class="dv">4</span>))</span>
-<span id="cb181-10"><a href="chap-describe.html#cb181-10" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> outlier <span class="sc">%&gt;%</span></span>
-<span id="cb181-11"><a href="chap-describe.html#cb181-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">&quot;cor =&quot;</span>,</span>
-<span id="cb181-12"><a href="chap-describe.html#cb181-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor</span>(outlier[, <span class="dv">1</span>], outlier[, <span class="dv">2</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb181-13"><a href="chap-describe.html#cb181-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(., <span class="dv">2</span>)))</span>
-<span id="cb181-14"><a href="chap-describe.html#cb181-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb181-15"><a href="chap-describe.html#cb181-15" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb181-3"><a href="chap-describe.html#cb181-3" aria-hidden="true" tabindex="-1"></a>simData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x,<span class="at">y=</span>x<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(x)))</span>
+<span id="cb181-4"><a href="chap-describe.html#cb181-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> simData <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb181-5"><a href="chap-describe.html#cb181-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb181-6"><a href="chap-describe.html#cb181-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">&quot;cor =&quot;</span>,<span class="fu">cor</span>(simData[,<span class="dv">1</span>],simData[,<span class="dv">2</span>]) <span class="sc">%&gt;%</span> <span class="fu">round</span>(.,<span class="dv">2</span>)))</span>
+<span id="cb181-7"><a href="chap-describe.html#cb181-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-8"><a href="chap-describe.html#cb181-8" aria-hidden="true" tabindex="-1"></a>outlier<span class="ot">&lt;-</span> <span class="fu">rbind</span>(simData,<span class="fu">c</span>(<span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>))</span>
+<span id="cb181-9"><a href="chap-describe.html#cb181-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> outlier <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb181-10"><a href="chap-describe.html#cb181-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb181-11"><a href="chap-describe.html#cb181-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">&quot;cor =&quot;</span>,<span class="fu">cor</span>(outlier[,<span class="dv">1</span>],outlier[,<span class="dv">2</span>]) <span class="sc">%&gt;%</span> <span class="fu">round</span>(.,<span class="dv">2</span>)))</span>
+<span id="cb181-12"><a href="chap-describe.html#cb181-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-13"><a href="chap-describe.html#cb181-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:corOutlier"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/corOutlier-1.png" alt="Correlatie van gesimuleerde data met 1 outlier" width="672" />
 <p class="caption">
@@ -1565,13 +2048,12 @@ Figuur 4.8: Correlatie van gesimuleerde data met 1 outlier
 <h4><span class="header-section-number">4.7.2.2</span> De Pearson correlatie pikt enkel linear associatie op<a href="chap-describe.html#de-pearson-correlatie-pikt-enkel-linear-associatie-op" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In figuur <a href="chap-describe.html#fig:corQuad">4.9</a> simuleren we data met een kwadratisch verband en observeren we dat de correlatie bijna nul is!</p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="chap-describe.html#cb182-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
-<span id="cb182-2"><a href="chap-describe.html#cb182-2" aria-hidden="true" tabindex="-1"></a>quadratic <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(x)))</span>
-<span id="cb182-3"><a href="chap-describe.html#cb182-3" aria-hidden="true" tabindex="-1"></a>quadratic <span class="sc">%&gt;%</span></span>
-<span id="cb182-4"><a href="chap-describe.html#cb182-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">&quot;cor =&quot;</span>,</span>
-<span id="cb182-5"><a href="chap-describe.html#cb182-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor</span>(quadratic[, <span class="dv">1</span>], quadratic[, <span class="dv">2</span>]) <span class="sc">%&gt;%</span></span>
-<span id="cb182-6"><a href="chap-describe.html#cb182-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">round</span>(., <span class="dv">2</span>))) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(quadratic[,</span>
-<span id="cb182-7"><a href="chap-describe.html#cb182-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>]), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(quadratic[,</span>
-<span id="cb182-8"><a href="chap-describe.html#cb182-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>]), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<span id="cb182-2"><a href="chap-describe.html#cb182-2" aria-hidden="true" tabindex="-1"></a>quadratic <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x,<span class="at">y=</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(x)))</span>
+<span id="cb182-3"><a href="chap-describe.html#cb182-3" aria-hidden="true" tabindex="-1"></a>quadratic <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb182-4"><a href="chap-describe.html#cb182-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb182-5"><a href="chap-describe.html#cb182-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">&quot;cor =&quot;</span>,<span class="fu">cor</span>(quadratic[,<span class="dv">1</span>],quadratic[,<span class="dv">2</span>]) <span class="sc">%&gt;%</span> <span class="fu">round</span>(.,<span class="dv">2</span>))) <span class="sc">+</span></span>
+<span id="cb182-6"><a href="chap-describe.html#cb182-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(quadratic[,<span class="dv">2</span>]),<span class="at">col=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb182-7"><a href="chap-describe.html#cb182-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(quadratic[,<span class="dv">1</span>]),<span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:corQuad"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/corQuad-1.png" alt="Correlatie van gesimuleerde data met een kwadratisch verband. De data in de bovenste kwadranten compenseren elkaar als het ware alsook in de onderste kwadranten (ongeveer evenveel positieve en negatieve bijdragen door de data in de correlatie)" width="672" />
 <p class="caption">
@@ -1598,12 +2080,12 @@ Figuur 4.9: Correlatie van gesimuleerde data met een kwadratisch verband. De dat
 <ul>
 <li>Spearman correlatie</li>
 </ul>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="chap-describe.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(outlier, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="chap-describe.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(outlier,<span class="at">method=</span><span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>##           x         y
 ## x 1.0000000 0.6571429
 ## y 0.6571429 1.0000000</code></pre>
 <p>We verifiëren dat de Spearman correlatie de Pearson correlatie is van rang getransformeerde data. Die wordt bekomen door de observaties te ordenen van klein naar groot en elke observatie te vervangen door zijn rangorde.</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="chap-describe.html#cb187-1" aria-hidden="true" tabindex="-1"></a>rankData <span class="ot">&lt;-</span> <span class="fu">apply</span>(outlier, <span class="dv">2</span>, rank)</span>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="chap-describe.html#cb187-1" aria-hidden="true" tabindex="-1"></a>rankData<span class="ot">&lt;-</span><span class="fu">apply</span>(outlier,<span class="dv">2</span>,rank)</span>
 <span id="cb187-2"><a href="chap-describe.html#cb187-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rankData)</span></code></pre></div>
 <pre><code>##           x         y
 ## x 1.0000000 0.6571429
@@ -1611,13 +2093,12 @@ Figuur 4.9: Correlatie van gesimuleerde data met een kwadratisch verband. De dat
 <p>We berekenen nu de Spearman correlatie in de NHANES studie.
 We observeren dat de correlatie tussen lengte en gewicht, en lengte en log2 getransformeerd gewicht exact gelijk is.
 Dat is logisch want de log-transformatie is een monotone transformatie en verandert de ordening van de data dus niet, de ranks van gewicht en deze van het log gewicht zijn identiek!</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="chap-describe.html#cb189-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb189-2"><a href="chap-describe.html#cb189-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb189-3"><a href="chap-describe.html#cb189-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Weight, Height) <span class="sc">%&gt;%</span></span>
-<span id="cb189-4"><a href="chap-describe.html#cb189-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">log2Weight =</span> Weight <span class="sc">%&gt;%</span></span>
-<span id="cb189-5"><a href="chap-describe.html#cb189-5" aria-hidden="true" tabindex="-1"></a>        log2) <span class="sc">%&gt;%</span></span>
-<span id="cb189-6"><a href="chap-describe.html#cb189-6" aria-hidden="true" tabindex="-1"></a>    na.exclude <span class="sc">%&gt;%</span></span>
-<span id="cb189-7"><a href="chap-describe.html#cb189-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cor</span>(<span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="chap-describe.html#cb189-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">%&gt;%</span></span>
+<span id="cb189-2"><a href="chap-describe.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb189-3"><a href="chap-describe.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Weight,Height) <span class="sc">%&gt;%</span></span>
+<span id="cb189-4"><a href="chap-describe.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log2Weight=</span>Weight<span class="sc">%&gt;%</span>log2) <span class="sc">%&gt;%</span></span>
+<span id="cb189-5"><a href="chap-describe.html#cb189-5" aria-hidden="true" tabindex="-1"></a>  na.exclude <span class="sc">%&gt;%</span></span>
+<span id="cb189-6"><a href="chap-describe.html#cb189-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">method=</span><span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>##               Weight    Height log2Weight
 ## Weight     1.0000000 0.2892776  1.0000000
 ## Height     0.2892776 1.0000000  0.2892776
