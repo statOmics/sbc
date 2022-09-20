@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Hoofdstuk 6 Enkelvoudige lineaire regressie | Cursus Inleiding tot de Biostatistiek 2022-2023</title>
+  <title>Hoofdstuk 6 Enkelvoudige lineaire regressie | Inleiding tot de Biostatistiek 2022-2023</title>
   <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="generator" content="bookdown 0.29.1 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Hoofdstuk 6 Enkelvoudige lineaire regressie | Cursus Inleiding tot de Biostatistiek 2022-2023" />
+  <meta property="og:title" content="Hoofdstuk 6 Enkelvoudige lineaire regressie | Inleiding tot de Biostatistiek 2022-2023" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   <meta name="github-repo" content="statOmics/statistiek2deBach" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Hoofdstuk 6 Enkelvoudige lineaire regressie | Cursus Inleiding tot de Biostatistiek 2022-2023" />
+  <meta name="twitter:title" content="Hoofdstuk 6 Enkelvoudige lineaire regressie | Inleiding tot de Biostatistiek 2022-2023" />
   
   <meta name="twitter:description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie" />
   
@@ -52,10 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -483,7 +479,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Cursus Inleiding tot de Biostatistiek 2022-2023</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Inleiding tot de Biostatistiek 2022-2023</a>
           </h1>
         </div>
 
@@ -499,7 +495,7 @@ div.csl-indent {
 </ul>
 <p>Link naar webpage/script die wordt gebruik in de kennisclips:</p>
 <ul>
-<li><a href="https://statomics.github.io/sbc21/rmd/06-linearRegression.html">script Hoofdstuk6</a></li>
+<li><a href="https://statomics.github.io/sbc/rmd/06-linearRegression.html">script Hoofdstuk6</a></li>
 </ul>
 <div id="inleiding-5" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Inleiding<a href="chap-linReg.html#inleiding-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -516,8 +512,9 @@ De genexpressie werd gemeten op de tumor biopsie die werd genomen voordat de beh
 De studie is een retrospectieve studie in de zin dat niet werd geëxperimenteerd en dat de genexpressie werd geëvalueerd als gevolg van de blootstelling die de individuen hebben ondergaan in het verleden.</p>
 <p>In dit hoofdstuk zullen we een subset van de data gebruiken om de associatie te bestuderen tussen de genexpressie van twee sleutelgenen bij borstkanker: de estrogeen receptor 1 (ESR1) gen, een belangrijke biomerker voor de prognose van de patiënt, en het S100A8 gen dat een prominente rol speelt in de regulatie van inflammatie en immuun respons.</p>
 <p>De data is opgeslagen in een tekst bestand met naam <code>brca.csv</code> op de github repository van de cursus.</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="chap-linReg.html#cb298-1" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc21/master/data/breastcancer.csv&quot;</span>)</span>
-<span id="cb298-2"><a href="chap-linReg.html#cb298-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(brca),<span class="at">caption=</span><span class="st">&quot;Overzicht van de variabelen in de borstkanker dataset.&quot;</span>,<span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="chap-linReg.html#cb298-1" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/breastcancer.csv&quot;</span>)</span>
+<span id="cb298-2"><a href="chap-linReg.html#cb298-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(brca), <span class="at">caption =</span> <span class="st">&quot;Overzicht van de variabelen in de borstkanker dataset.&quot;</span>,</span>
+<span id="cb298-3"><a href="chap-linReg.html#cb298-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <table>
 <caption>
 <span id="tab:brcaMicroLin">Tabel 6.1: </span>Overzicht van de variabelen in de borstkanker dataset.
@@ -758,10 +755,8 @@ tamoxifen
 <p>In dit hoofdstuk zullen we om didactische redenen eerst werken met de expressiemetingen op de originele schaal.
 De expressie van het S100A8 gen wordt weergegeven in Figuur <a href="chap-linReg.html#fig:s100a8Boxplot">6.1</a>. Op de originele schaal zien we drie heel grote outliers. Omwille van didactische redenen worden deze eerst verwijderd uit de dataset. In principe mogen outliers enkel worden verwijderd uit een studie als daar een goede reden voor is. We kunnen op basis van de informatie over de studie echter niet argumenteren waarom de outliers niet representatief zijn, zoals bijvoorbeeld wel het geval zou zijn wanneer zich meetfouten of problemen voordeden m.b.t. deze observaties in de studie. Later in het hoofdstuk zullen we zien hoe we op een correcte wijze alle data kunnen modelleren.</p>
 <div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="chap-linReg.html#cb299-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
-<span id="cb299-2"><a href="chap-linReg.html#cb299-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>, <span class="at">y=</span>S100A8)) <span class="sc">+</span></span>
-<span id="cb299-3"><a href="chap-linReg.html#cb299-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb299-4"><a href="chap-linReg.html#cb299-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
-<span id="cb299-5"><a href="chap-linReg.html#cb299-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;S100A8 expressie&quot;</span>)</span></code></pre></div>
+<span id="cb299-2"><a href="chap-linReg.html#cb299-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> S100A8)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb299-3"><a href="chap-linReg.html#cb299-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;S100A8 expressie&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:s100a8Boxplot"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/s100a8Boxplot-1.png" alt="Expressie van het S100A8 gen." width="100%" />
 <p class="caption">
@@ -771,9 +766,11 @@ Figuur 6.1: Expressie van het S100A8 gen.
 <p>Om meerdere variabelen in de borstkanker dataset te bestuderen, kunnen we gebruik maken van de grafische scatterplot matrix voorstelling (zie Figuur <a href="chap-linReg.html#fig:brcaGenAl">6.2</a>). Hierbij wordt een matrix met paarsgewijze dotplots voor alle variabelen geproduceerd.</p>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="chap-linReg.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
 <span id="cb300-2"><a href="chap-linReg.html#cb300-2" aria-hidden="true" tabindex="-1"></a>brcaSubset <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span></span>
-<span id="cb300-3"><a href="chap-linReg.html#cb300-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(S100A8<span class="sc">&lt;</span><span class="dv">2000</span>)</span>
-<span id="cb300-4"><a href="chap-linReg.html#cb300-4" aria-hidden="true" tabindex="-1"></a><span class="co">#progress = FALSE zo dat ggpairs niet de vooruitgang print van het plotten</span></span>
-<span id="cb300-5"><a href="chap-linReg.html#cb300-5" aria-hidden="true" tabindex="-1"></a>brcaSubset[,<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)] <span class="sc">%&gt;%</span> <span class="fu">ggpairs</span>(<span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb300-3"><a href="chap-linReg.html#cb300-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(S100A8 <span class="sc">&lt;</span> <span class="dv">2000</span>)</span>
+<span id="cb300-4"><a href="chap-linReg.html#cb300-4" aria-hidden="true" tabindex="-1"></a><span class="co"># progress = FALSE zo dat ggpairs niet de</span></span>
+<span id="cb300-5"><a href="chap-linReg.html#cb300-5" aria-hidden="true" tabindex="-1"></a><span class="co"># vooruitgang print van het plotten</span></span>
+<span id="cb300-6"><a href="chap-linReg.html#cb300-6" aria-hidden="true" tabindex="-1"></a>brcaSubset[, <span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)] <span class="sc">%&gt;%</span></span>
+<span id="cb300-7"><a href="chap-linReg.html#cb300-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggpairs</span>(<span class="at">progress =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaGenAl"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaGenAl-1.png" alt="Scatterplot matrix voor de observaties in de borstkanker dataset na verwijdering van outliers in de S100A8 expressie (merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset)." width="100%" />
 <p class="caption">
@@ -791,9 +788,8 @@ We zien dat de genexpressie van S100A8 gemiddeld gezien daalt voor patiënten me
 <li>voeg een “smooth line” toe <code>geom_smooth()</code></li>
 </ol>
 <div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="chap-linReg.html#cb301-1" aria-hidden="true" tabindex="-1"></a>brcaSubset <span class="sc">%&gt;%</span></span>
-<span id="cb301-2"><a href="chap-linReg.html#cb301-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>ESR1, <span class="at">y=</span>S100A8)) <span class="sc">+</span></span>
-<span id="cb301-3"><a href="chap-linReg.html#cb301-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb301-4"><a href="chap-linReg.html#cb301-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div>
+<span id="cb301-2"><a href="chap-linReg.html#cb301-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ESR1, <span class="at">y =</span> S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb301-3"><a href="chap-linReg.html#cb301-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaSmooth"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaSmooth-1.png" alt="Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met smoother die het verband tussen beide genen samenvat (na verwijdering van outliers in de S100A8 expressie, merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset)." width="100%" />
 <p class="caption">
@@ -840,10 +836,9 @@ Dat wordt geïllustreerd in Figuur <a href="chap-linReg.html#fig:brcaLin1">6.4</
 <li>voeg een rechte toe <code>geom_smooth()</code> met <code>method = "lm"</code> (linear model). (We zetten <code>se = FALSE</code> om geen puntgewijze betrouwbaarheidsintervallen weer te geven)</li>
 </ol>
 <div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="chap-linReg.html#cb302-1" aria-hidden="true" tabindex="-1"></a>brcaSubset <span class="sc">%&gt;%</span></span>
-<span id="cb302-2"><a href="chap-linReg.html#cb302-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ESR1, <span class="at">y =</span> S100A8)) <span class="sc">+</span></span>
-<span id="cb302-3"><a href="chap-linReg.html#cb302-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb302-4"><a href="chap-linReg.html#cb302-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb302-5"><a href="chap-linReg.html#cb302-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb302-2"><a href="chap-linReg.html#cb302-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ESR1, <span class="at">y =</span> S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb302-3"><a href="chap-linReg.html#cb302-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb302-4"><a href="chap-linReg.html#cb302-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLin1"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLin1-1.png" alt="Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met lineair model dat het verband tussen beide genen samenvat (na verwijdering van outliers in de S100A8 expressie, merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset zoals we verder in dit hoofdstuk zullen zien)." width="100%" />
 <p class="caption">
@@ -1067,7 +1062,7 @@ De residuen zijn immers gemiddeld nul voor elke waarde van de predictor en zoude
 gemiddelde uitkomst correct te voorspellen. Bijvoorbeeld, wanneer de residu’s een kwadratisch patroon onthullen, dan kunnen we schrijven dat bij benadering <span class="math inline">\(e_i\approx \delta_0+\delta_1 x_i+\delta_2 x_i^2\)</span> voor zekere getallen <span class="math inline">\(\delta_0,\delta_1,\delta_2\)</span>, en bijgevolg
 dat de uitkomst <span class="math inline">\(y_i=\hat{\alpha}+\hat{\beta}x_i+e_i\approx (\hat{\alpha}+\delta_0)+(\hat{\beta}+\delta_1)x_i+\delta_2 x_i^2\)</span> (op een foutterm na) een kwadratische functie is van <span class="math inline">\(x_i\)</span>. In dat geval is het aangewezen om op een kwadratisch regressiemodel over te stappen (zie Hoofdstuk <a href="chap-glm.html#chap-glm">10</a>).
 Residuplots worden standaard gegenereerd door de R-software. Hier worden de residuen echter geplot ten opzichte van de gefitte waarden wat eenvoudiger is wanneer meerdere predictoren in het model worden opgenomen (zie Hoofdstuk <a href="chap-glm.html#chap-glm">10</a>).</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="chap-linReg.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="chap-linReg.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb309-2"><a href="chap-linReg.html#cb309-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm1)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLinDiag1"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLinDiag1-1.png" alt="Diagnostische plots voor het nagaan van de veronderstellingen van het lineair regressiemodel waarbij de S100A8 expressie wordt gemodelleerd i.f.v de ESR1 expressie (na verwijdering van 3 outliers)." width="100%" />
@@ -1134,18 +1129,14 @@ In de genexpressie literatuur wordt veelal gebruik gemaak van <span class="math 
 Wanneer men gen-expressie op log-schaal modelleert, modellert men dus in feite proportionele verschillen op de originele schaal wat ook meer relevant is vanuit een biologisch standpunt.</p>
 <p>In deze sectie zullen we beide genexpressies <span class="math inline">\(\log_2\)</span> transformeren en een log-lineaire regressie uitvoeren. Zoals we zullen zien vormen de outliers in de S100A8 expressie na log-transformatie ook geen problemen meer.</p>
 <div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="chap-linReg.html#cb310-1" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span></span>
-<span id="cb310-2"><a href="chap-linReg.html#cb310-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb310-3"><a href="chap-linReg.html#cb310-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">log2S100A8 =</span> <span class="fu">log2</span>(S100A8),</span>
-<span id="cb310-4"><a href="chap-linReg.html#cb310-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">log2ESR1 =</span> <span class="fu">log2</span>(ESR1)</span>
-<span id="cb310-5"><a href="chap-linReg.html#cb310-5" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb310-6"><a href="chap-linReg.html#cb310-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb310-7"><a href="chap-linReg.html#cb310-7" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log2S100A8 <span class="sc">~</span> log2ESR1, brca)</span>
-<span id="cb310-8"><a href="chap-linReg.html#cb310-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb310-9"><a href="chap-linReg.html#cb310-9" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
-<span id="cb310-10"><a href="chap-linReg.html#cb310-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span></span>
-<span id="cb310-11"><a href="chap-linReg.html#cb310-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb310-12"><a href="chap-linReg.html#cb310-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb310-13"><a href="chap-linReg.html#cb310-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb310-2"><a href="chap-linReg.html#cb310-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">log2S100A8 =</span> <span class="fu">log2</span>(S100A8), <span class="at">log2ESR1 =</span> <span class="fu">log2</span>(ESR1))</span>
+<span id="cb310-3"><a href="chap-linReg.html#cb310-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb310-4"><a href="chap-linReg.html#cb310-4" aria-hidden="true" tabindex="-1"></a>lm2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log2S100A8 <span class="sc">~</span> log2ESR1, brca)</span>
+<span id="cb310-5"><a href="chap-linReg.html#cb310-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb310-6"><a href="chap-linReg.html#cb310-6" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
+<span id="cb310-7"><a href="chap-linReg.html#cb310-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb310-8"><a href="chap-linReg.html#cb310-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb310-9"><a href="chap-linReg.html#cb310-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLogLin"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLogLin-1.png" alt="Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met smoother en lineair model die het verband tussen beide genen samenvatten (outliers worden niet langer verwijderd uit de dataset)." width="100%" />
 <p class="caption">
@@ -1158,7 +1149,7 @@ Daarnaast kunnen we alle data meenemen in de analyse en kan het model geen negat
 In Figuur <a href="chap-linReg.html#fig:brcaLogLin2">6.8</a> zien we tevens dat er niet langer afwijkingen zijn van lineariteit, normaliteit en gelijkheid van variantie.
 De residuen in de residu-plot liggen mooi rond nul en hebben een constante spreiding.
 De QQ-plot toont geen systematische afwijkingen van normaliteit en de plot links beneden toont ook geen trend in de variantie van de residuen.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="chap-linReg.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="chap-linReg.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb311-2"><a href="chap-linReg.html#cb311-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm2)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLogLin2"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLogLin2-1.png" alt="Diagnostische plots voor het lineair model voor log2-S100A8 expressie in functie van de log2-ESR1." width="100%" />
@@ -1218,7 +1209,7 @@ Omdat de logaritmische transformatie een monotone transformatie is, kunnen we oo
 <div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="chap-linReg.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^-</span>lm2<span class="sc">$</span>coef[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## log2ESR1 
 ##   3.0623</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="chap-linReg.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^-</span><span class="fu">confint</span>(lm2)[<span class="dv">2</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="chap-linReg.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^-</span><span class="fu">confint</span>(lm2)[<span class="dv">2</span>, ]</span></code></pre></div>
 <pre><code>##    2.5 %   97.5 % 
 ## 3.786977 2.476298</code></pre>
 <p>Een patiënt met een ESR1 expressie die 2 keer zo hoog is als die van een andere patiënt, zal gemiddeld een S100A8-expressie hebben die 3.06 keer lager is (95% BI [2.48,3.79]).</p>
@@ -1261,11 +1252,9 @@ De predictorwaarden (x-waarden) voor het berekenen van gemiddelde uitkomsten kun
 Betrouwbaarheidsintervallen op de geschatte gemiddelde uitkomsten kunnen worden verkregen d.m.v. het argument <code>interval="confidence"</code>.
 Zonder het newdata argument wordt de gemiddelde uitkomsten berekend voor alle predictorwaarden van de dataset.</p>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="chap-linReg.html#cb322-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">140</span><span class="sc">:</span><span class="dv">4000</span>)</span>
-<span id="cb322-2"><a href="chap-linReg.html#cb322-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
-<span id="cb322-3"><a href="chap-linReg.html#cb322-3" aria-hidden="true" tabindex="-1"></a>  lm2,</span>
-<span id="cb322-4"><a href="chap-linReg.html#cb322-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">log2ESR1=</span>grid),</span>
-<span id="cb322-5"><a href="chap-linReg.html#cb322-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
-<span id="cb322-6"><a href="chap-linReg.html#cb322-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(g)</span></code></pre></div>
+<span id="cb322-2"><a href="chap-linReg.html#cb322-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">log2ESR1 =</span> grid),</span>
+<span id="cb322-3"><a href="chap-linReg.html#cb322-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
+<span id="cb322-4"><a href="chap-linReg.html#cb322-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(g)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 11.89028 10.76082 13.01974
 ## 2 11.87370 10.74721 13.00019
@@ -1275,11 +1264,9 @@ Zonder het newdata argument wordt de gemiddelde uitkomsten berekend voor alle pr
 ## 6 11.80854 10.69372 12.92336</code></pre>
 <p>De gemiddelde uitkomst en hun 95% puntgewijze betrouwbaarheidsintervallen kunnen eveneens grafisch worden weergegeven (Figuur <a href="chap-linReg.html#fig:brcaLogLinPred1">6.9</a>)</p>
 <div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="chap-linReg.html#cb324-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
-<span id="cb324-2"><a href="chap-linReg.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span></span>
-<span id="cb324-3"><a href="chap-linReg.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb324-4"><a href="chap-linReg.html#cb324-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb324-5"><a href="chap-linReg.html#cb324-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;ESR1 (log2)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb324-6"><a href="chap-linReg.html#cb324-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;S100A8 (log2)&quot;</span>)</span></code></pre></div>
+<span id="cb324-2"><a href="chap-linReg.html#cb324-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb324-3"><a href="chap-linReg.html#cb324-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;ESR1 (log2)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb324-4"><a href="chap-linReg.html#cb324-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;S100A8 (log2)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLogLinPred1"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLogLinPred1-1.png" alt="Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met model schattingen en 95$\%$ betrouwbaarheidsintervallen." width="100%" />
 <p class="caption">
@@ -1289,27 +1276,24 @@ Figuur 6.9: Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 e
 <p>De gemiddelde uitkomst en hun 95% betrouwbaarheidsintervallen kunnen makkelijk worden teruggetransformeerd naar de originele schaal, zodat een geometrisch gemiddelde wordt bekomen met 95% betrouwbaarheidsintervallen op het geometrische gemiddelde.
 Deze kunnen dan grafisch worden weergegeven op de originele schaal in een gewone scatterplot (Figuur <a href="chap-linReg.html#fig:brcaLogLinPred2">6.10</a> links) of in een scatterplot met logaritmische assen (Figuur <a href="chap-linReg.html#fig:brcaLogLinPred2">6.10</a> rechts).
 In Figuur <a href="chap-linReg.html#fig:brcaLogLinPred2">6.10</a> (links) is het duidelijk dat we met het model na log-transformatie een exponentieel verband kunnen modelleren op de originele schaal.</p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="chap-linReg.html#cb325-1" aria-hidden="true" tabindex="-1"></a>newdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="at">grid=</span> <span class="dv">2</span><span class="sc">^</span>grid, <span class="dv">2</span><span class="sc">^</span>g))</span>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="chap-linReg.html#cb325-1" aria-hidden="true" tabindex="-1"></a>newdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="at">grid =</span> <span class="dv">2</span><span class="sc">^</span>grid, <span class="dv">2</span><span class="sc">^</span>g))</span>
 <span id="cb325-2"><a href="chap-linReg.html#cb325-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb325-3"><a href="chap-linReg.html#cb325-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> ESR1, <span class="at">y =</span> S100A8)) <span class="sc">+</span></span>
-<span id="cb325-4"><a href="chap-linReg.html#cb325-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb325-5"><a href="chap-linReg.html#cb325-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid, <span class="at">y =</span> fit), newdata) <span class="sc">+</span></span>
-<span id="cb325-6"><a href="chap-linReg.html#cb325-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid, <span class="at">y =</span> lwr), newdata, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb325-7"><a href="chap-linReg.html#cb325-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid, <span class="at">y =</span> upr), newdata, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb325-8"><a href="chap-linReg.html#cb325-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;ESR1&quot;</span>) <span class="sc">+</span></span>
-<span id="cb325-9"><a href="chap-linReg.html#cb325-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;S100A8&quot;</span>)</span>
-<span id="cb325-10"><a href="chap-linReg.html#cb325-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb325-11"><a href="chap-linReg.html#cb325-11" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> ESR1, <span class="at">y =</span> S100A8)) <span class="sc">+</span></span>
-<span id="cb325-12"><a href="chap-linReg.html#cb325-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb325-13"><a href="chap-linReg.html#cb325-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid, <span class="at">y =</span> fit), newdata) <span class="sc">+</span></span>
-<span id="cb325-14"><a href="chap-linReg.html#cb325-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid, <span class="at">y =</span> lwr), newdata, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb325-15"><a href="chap-linReg.html#cb325-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid,<span class="at">y =</span> upr), newdata, <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span></span>
-<span id="cb325-16"><a href="chap-linReg.html#cb325-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&#39;log2&#39;</span>) <span class="sc">+</span></span>
-<span id="cb325-17"><a href="chap-linReg.html#cb325-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&#39;log2&#39;</span>) <span class="sc">+</span></span>
-<span id="cb325-18"><a href="chap-linReg.html#cb325-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;log2 ESR1&quot;</span>) <span class="sc">+</span></span>
-<span id="cb325-19"><a href="chap-linReg.html#cb325-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;log2 S100A8&quot;</span>)</span>
-<span id="cb325-20"><a href="chap-linReg.html#cb325-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb325-21"><a href="chap-linReg.html#cb325-21" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb325-3"><a href="chap-linReg.html#cb325-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span></span>
+<span id="cb325-4"><a href="chap-linReg.html#cb325-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ESR1, <span class="at">y =</span> S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb325-5"><a href="chap-linReg.html#cb325-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid, <span class="at">y =</span> fit), newdata) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid,</span>
+<span id="cb325-6"><a href="chap-linReg.html#cb325-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> lwr), newdata, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid,</span>
+<span id="cb325-7"><a href="chap-linReg.html#cb325-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> upr), newdata, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;ESR1&quot;</span>) <span class="sc">+</span></span>
+<span id="cb325-8"><a href="chap-linReg.html#cb325-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;S100A8&quot;</span>)</span>
+<span id="cb325-9"><a href="chap-linReg.html#cb325-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb325-10"><a href="chap-linReg.html#cb325-10" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span></span>
+<span id="cb325-11"><a href="chap-linReg.html#cb325-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ESR1, <span class="at">y =</span> S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb325-12"><a href="chap-linReg.html#cb325-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid, <span class="at">y =</span> fit), newdata) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid,</span>
+<span id="cb325-13"><a href="chap-linReg.html#cb325-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> lwr), newdata, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid,</span>
+<span id="cb325-14"><a href="chap-linReg.html#cb325-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> upr), newdata, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb325-15"><a href="chap-linReg.html#cb325-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">&quot;log2&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;log2 ESR1&quot;</span>) <span class="sc">+</span></span>
+<span id="cb325-16"><a href="chap-linReg.html#cb325-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;log2 S100A8&quot;</span>)</span>
+<span id="cb325-17"><a href="chap-linReg.html#cb325-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb325-18"><a href="chap-linReg.html#cb325-18" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLogLinPred2"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLogLinPred2-1.png" alt="Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met model schattingen (geometrische gemiddeldes) een 95$\%$ betrouwbaarheidsintervallen (links: originele schaal, rechts: originele schaal met logaritmische assen)." width="100%" />
 <p class="caption">
@@ -1346,11 +1330,9 @@ Merk op dat dit predictie-interval een verbeterde versie is van een referentie-i
 De predictorwaarden (x-waarden) voor het berekenen van de predicties<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a> worden opnieuw meegegeven via het <code>newdata</code> argument.
 PIs op de predicties kunnen worden verkregen d.m.v. het argument <code>interval="prediction"</code>.</p>
 <div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="chap-linReg.html#cb326-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="dv">140</span><span class="sc">:</span><span class="dv">4000</span>)</span>
-<span id="cb326-2"><a href="chap-linReg.html#cb326-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
-<span id="cb326-3"><a href="chap-linReg.html#cb326-3" aria-hidden="true" tabindex="-1"></a>  lm2,</span>
-<span id="cb326-4"><a href="chap-linReg.html#cb326-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">log2ESR1=</span>grid),</span>
-<span id="cb326-5"><a href="chap-linReg.html#cb326-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>)</span>
-<span id="cb326-6"><a href="chap-linReg.html#cb326-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(p)</span></code></pre></div>
+<span id="cb326-2"><a href="chap-linReg.html#cb326-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">predict</span>(lm2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">log2ESR1 =</span> grid),</span>
+<span id="cb326-3"><a href="chap-linReg.html#cb326-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span>
+<span id="cb326-4"><a href="chap-linReg.html#cb326-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(p)</span></code></pre></div>
 <pre><code>##        fit      lwr      upr
 ## 1 11.89028 9.510524 14.27004
 ## 2 11.87370 9.495354 14.25205
@@ -1363,18 +1345,12 @@ Merk op dat de intervallen veel breder zijn dan de betrouwbaarheidsintervallen.
 Merk ook op dat de meeste observaties binnen de predictie-intervallen liggen.
 We verwachten inderdaad gemiddeld 95% van de observaties binnen de predictie-intervallen.
 Dat is niet zo voor de betrouwbaarheidsintervallen, die immers geen informatie geven over de verwachte locatie van een nieuwe observatie, maar wel over waar men het conditioneel gemiddelde verwacht op basis van de steekproef!</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="chap-linReg.html#cb328-1" aria-hidden="true" tabindex="-1"></a>preddata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="at">grid =</span> grid,p))</span>
-<span id="cb328-2"><a href="chap-linReg.html#cb328-2" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>log2ESR1,<span class="at">y=</span>log2S100A8)) <span class="sc">+</span></span>
-<span id="cb328-3"><a href="chap-linReg.html#cb328-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb328-4"><a href="chap-linReg.html#cb328-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb328-5"><a href="chap-linReg.html#cb328-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb328-6"><a href="chap-linReg.html#cb328-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> grid,<span class="at">y =</span> lwr),</span>
-<span id="cb328-7"><a href="chap-linReg.html#cb328-7" aria-hidden="true" tabindex="-1"></a>    preddata,</span>
-<span id="cb328-8"><a href="chap-linReg.html#cb328-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb328-9"><a href="chap-linReg.html#cb328-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb328-10"><a href="chap-linReg.html#cb328-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> grid,<span class="at">y =</span> upr),</span>
-<span id="cb328-11"><a href="chap-linReg.html#cb328-11" aria-hidden="true" tabindex="-1"></a>    preddata,</span>
-<span id="cb328-12"><a href="chap-linReg.html#cb328-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="chap-linReg.html#cb328-1" aria-hidden="true" tabindex="-1"></a>preddata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="at">grid =</span> grid, p))</span>
+<span id="cb328-2"><a href="chap-linReg.html#cb328-2" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
+<span id="cb328-3"><a href="chap-linReg.html#cb328-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb328-4"><a href="chap-linReg.html#cb328-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid,</span>
+<span id="cb328-5"><a href="chap-linReg.html#cb328-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> lwr), preddata, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> grid,</span>
+<span id="cb328-6"><a href="chap-linReg.html#cb328-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> upr), preddata, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLogLinPred3"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLogLinPred3-1.png" alt="Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met model voorspellingen en 95$\%$ betrouwbaarheidsintervallen en 95$\%$ predictie-intervallen. Rode lijn: predictie interval, grijze band: betrouwbaarheidsinterval, zwarte lijn: lineair model" width="100%" />
 <p class="caption">
@@ -1394,31 +1370,24 @@ Het PI zal eveneens de onzekerheid meenemen op de parameterschattingen (gemiddel
 </ul>
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="chap-linReg.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
 <span id="cb329-2"><a href="chap-linReg.html#cb329-2" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb329-3"><a href="chap-linReg.html#cb329-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(DirectChol))</span>
+<span id="cb329-3"><a href="chap-linReg.html#cb329-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(DirectChol))</span>
 <span id="cb329-4"><a href="chap-linReg.html#cb329-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb329-5"><a href="chap-linReg.html#cb329-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span>(</span>
-<span id="cb329-6"><a href="chap-linReg.html#cb329-6" aria-hidden="true" tabindex="-1"></a>  fem <span class="sc">%&gt;%</span></span>
-<span id="cb329-7"><a href="chap-linReg.html#cb329-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(DirectChol) <span class="sc">%&gt;%</span></span>
-<span id="cb329-8"><a href="chap-linReg.html#cb329-8" aria-hidden="true" tabindex="-1"></a>  log2 <span class="sc">%&gt;%</span></span>
-<span id="cb329-9"><a href="chap-linReg.html#cb329-9" aria-hidden="true" tabindex="-1"></a>  mean <span class="sc">+</span></span>
-<span id="cb329-10"><a href="chap-linReg.html#cb329-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>) <span class="sc">*</span></span>
-<span id="cb329-11"><a href="chap-linReg.html#cb329-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span></span>
-<span id="cb329-12"><a href="chap-linReg.html#cb329-12" aria-hidden="true" tabindex="-1"></a>    (fem <span class="sc">%&gt;%</span></span>
-<span id="cb329-13"><a href="chap-linReg.html#cb329-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(DirectChol) <span class="sc">%&gt;%</span></span>
-<span id="cb329-14"><a href="chap-linReg.html#cb329-14" aria-hidden="true" tabindex="-1"></a>      log2 <span class="sc">%&gt;%</span></span>
-<span id="cb329-15"><a href="chap-linReg.html#cb329-15" aria-hidden="true" tabindex="-1"></a>      sd)</span>
-<span id="cb329-16"><a href="chap-linReg.html#cb329-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb329-5"><a href="chap-linReg.html#cb329-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span>(fem <span class="sc">%&gt;%</span></span>
+<span id="cb329-6"><a href="chap-linReg.html#cb329-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(DirectChol) <span class="sc">%&gt;%</span></span>
+<span id="cb329-7"><a href="chap-linReg.html#cb329-7" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">%&gt;%</span></span>
+<span id="cb329-8"><a href="chap-linReg.html#cb329-8" aria-hidden="true" tabindex="-1"></a>    mean <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> (fem <span class="sc">%&gt;%</span></span>
+<span id="cb329-9"><a href="chap-linReg.html#cb329-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(DirectChol) <span class="sc">%&gt;%</span></span>
+<span id="cb329-10"><a href="chap-linReg.html#cb329-10" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">%&gt;%</span></span>
+<span id="cb329-11"><a href="chap-linReg.html#cb329-11" aria-hidden="true" tabindex="-1"></a>    sd))</span></code></pre></div>
 <pre><code>## [1] 0.8361311 2.4397130</code></pre>
 <ul>
 <li>Predictie interval</li>
 </ul>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="chap-linReg.html#cb331-1" aria-hidden="true" tabindex="-1"></a>lmChol <span class="ot">&lt;-</span> <span class="fu">lm</span>(DirectChol <span class="sc">%&gt;%</span> log2 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>fem)</span>
-<span id="cb331-2"><a href="chap-linReg.html#cb331-2" aria-hidden="true" tabindex="-1"></a>predInt <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
-<span id="cb331-3"><a href="chap-linReg.html#cb331-3" aria-hidden="true" tabindex="-1"></a>  lmChol,</span>
-<span id="cb331-4"><a href="chap-linReg.html#cb331-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval=</span><span class="st">&quot;prediction&quot;</span>,</span>
-<span id="cb331-5"><a href="chap-linReg.html#cb331-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">noPred=</span><span class="dv">1</span>)</span>
-<span id="cb331-6"><a href="chap-linReg.html#cb331-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb331-7"><a href="chap-linReg.html#cb331-7" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">2</span><span class="sc">^</span>predInt,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="chap-linReg.html#cb331-1" aria-hidden="true" tabindex="-1"></a>lmChol <span class="ot">&lt;-</span> <span class="fu">lm</span>(DirectChol <span class="sc">%&gt;%</span></span>
+<span id="cb331-2"><a href="chap-linReg.html#cb331-2" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> fem)</span>
+<span id="cb331-3"><a href="chap-linReg.html#cb331-3" aria-hidden="true" tabindex="-1"></a>predInt <span class="ot">&lt;-</span> <span class="fu">predict</span>(lmChol, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>,</span>
+<span id="cb331-4"><a href="chap-linReg.html#cb331-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">noPred =</span> <span class="dv">1</span>))</span>
+<span id="cb331-5"><a href="chap-linReg.html#cb331-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">2</span><span class="sc">^</span>predInt, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##    fit  lwr  upr
 ## 1 1.43 0.84 2.44</code></pre>
 <p>Merk op dat het voorspellingsinterval bijna gelijk is aan het referentie-interval voor de grote steekproef. We konden de parameters inderdaad heel precies schatten.</p>
@@ -1428,33 +1397,26 @@ Het PI zal eveneens de onzekerheid meenemen op de parameterschattingen (gemiddel
 </ul>
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="chap-linReg.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb333-2"><a href="chap-linReg.html#cb333-2" aria-hidden="true" tabindex="-1"></a>fem10 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb333-3"><a href="chap-linReg.html#cb333-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(DirectChol)) <span class="sc">%&gt;%</span></span>
-<span id="cb333-4"><a href="chap-linReg.html#cb333-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">10</span>)</span>
+<span id="cb333-3"><a href="chap-linReg.html#cb333-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(DirectChol)) <span class="sc">%&gt;%</span></span>
+<span id="cb333-4"><a href="chap-linReg.html#cb333-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
 <span id="cb333-5"><a href="chap-linReg.html#cb333-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb333-6"><a href="chap-linReg.html#cb333-6" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span>(</span>
-<span id="cb333-7"><a href="chap-linReg.html#cb333-7" aria-hidden="true" tabindex="-1"></a>  fem10 <span class="sc">%&gt;%</span></span>
-<span id="cb333-8"><a href="chap-linReg.html#cb333-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(DirectChol) <span class="sc">%&gt;%</span></span>
-<span id="cb333-9"><a href="chap-linReg.html#cb333-9" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">%&gt;%</span></span>
-<span id="cb333-10"><a href="chap-linReg.html#cb333-10" aria-hidden="true" tabindex="-1"></a>    mean <span class="sc">+</span></span>
-<span id="cb333-11"><a href="chap-linReg.html#cb333-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>) <span class="sc">*</span></span>
-<span id="cb333-12"><a href="chap-linReg.html#cb333-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span></span>
-<span id="cb333-13"><a href="chap-linReg.html#cb333-13" aria-hidden="true" tabindex="-1"></a>      (fem10 <span class="sc">%&gt;%</span></span>
-<span id="cb333-14"><a href="chap-linReg.html#cb333-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pull</span>(DirectChol) <span class="sc">%&gt;%</span></span>
-<span id="cb333-15"><a href="chap-linReg.html#cb333-15" aria-hidden="true" tabindex="-1"></a>        log2 <span class="sc">%&gt;%</span></span>
-<span id="cb333-16"><a href="chap-linReg.html#cb333-16" aria-hidden="true" tabindex="-1"></a>        sd)</span>
-<span id="cb333-17"><a href="chap-linReg.html#cb333-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb333-6"><a href="chap-linReg.html#cb333-6" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span>(fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb333-7"><a href="chap-linReg.html#cb333-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(DirectChol) <span class="sc">%&gt;%</span></span>
+<span id="cb333-8"><a href="chap-linReg.html#cb333-8" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">%&gt;%</span></span>
+<span id="cb333-9"><a href="chap-linReg.html#cb333-9" aria-hidden="true" tabindex="-1"></a>    mean <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> (fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb333-10"><a href="chap-linReg.html#cb333-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(DirectChol) <span class="sc">%&gt;%</span></span>
+<span id="cb333-11"><a href="chap-linReg.html#cb333-11" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">%&gt;%</span></span>
+<span id="cb333-12"><a href="chap-linReg.html#cb333-12" aria-hidden="true" tabindex="-1"></a>    sd))</span></code></pre></div>
 <pre><code>## [1] 0.8976012 2.2571645</code></pre>
 <p>Het referentie-interval is veel smaller dan in de grote steekproef.</p>
 <ul>
 <li>Predictie interval</li>
 </ul>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="chap-linReg.html#cb335-1" aria-hidden="true" tabindex="-1"></a>lmChol10 <span class="ot">&lt;-</span> <span class="fu">lm</span>(DirectChol <span class="sc">%&gt;%</span> log2 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> fem10)</span>
-<span id="cb335-2"><a href="chap-linReg.html#cb335-2" aria-hidden="true" tabindex="-1"></a>predInt10 <span class="ot">&lt;-</span> <span class="fu">predict</span>(</span>
-<span id="cb335-3"><a href="chap-linReg.html#cb335-3" aria-hidden="true" tabindex="-1"></a>  lmChol10,</span>
-<span id="cb335-4"><a href="chap-linReg.html#cb335-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>,</span>
-<span id="cb335-5"><a href="chap-linReg.html#cb335-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">noPred=</span><span class="dv">1</span>)</span>
-<span id="cb335-6"><a href="chap-linReg.html#cb335-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb335-7"><a href="chap-linReg.html#cb335-7" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">2</span><span class="sc">^</span>predInt10, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="chap-linReg.html#cb335-1" aria-hidden="true" tabindex="-1"></a>lmChol10 <span class="ot">&lt;-</span> <span class="fu">lm</span>(DirectChol <span class="sc">%&gt;%</span></span>
+<span id="cb335-2"><a href="chap-linReg.html#cb335-2" aria-hidden="true" tabindex="-1"></a>    log2 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> fem10)</span>
+<span id="cb335-3"><a href="chap-linReg.html#cb335-3" aria-hidden="true" tabindex="-1"></a>predInt10 <span class="ot">&lt;-</span> <span class="fu">predict</span>(lmChol10, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>,</span>
+<span id="cb335-4"><a href="chap-linReg.html#cb335-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">noPred =</span> <span class="dv">1</span>))</span>
+<span id="cb335-5"><a href="chap-linReg.html#cb335-5" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">2</span><span class="sc">^</span>predInt10, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##    fit  lwr  upr
 ## 1 1.42 0.81 2.49</code></pre>
 <ul>
@@ -1482,13 +1444,12 @@ Deze kwadratensom kan worden gebruikt om de variantie te schatten van de <strong
 </ul>
 <p>Een grafische interpretatie van SSTot wordt weergegeven in Figuur <a href="chap-linReg.html#fig:brcaLogSSR">6.13</a>.</p>
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="chap-linReg.html#cb337-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
-<span id="cb337-2"><a href="chap-linReg.html#cb337-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> log2S100A8, <span class="at">x =</span> log2ESR1)) <span class="sc">+</span></span>
-<span id="cb337-3"><a href="chap-linReg.html#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb337-4"><a href="chap-linReg.html#cb337-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(log2S100A8))) <span class="sc">+</span></span>
-<span id="cb337-5"><a href="chap-linReg.html#cb337-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">xend =</span> log2ESR1, <span class="at">y=</span>log2S100A8,</span>
-<span id="cb337-6"><a href="chap-linReg.html#cb337-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yend =</span><span class="fu">mean</span>(log2S100A8)), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb337-7"><a href="chap-linReg.html#cb337-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;ESR1 expressie (log2)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb337-8"><a href="chap-linReg.html#cb337-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;S100A8 expressie (log2)&quot;</span>)</span></code></pre></div>
+<span id="cb337-2"><a href="chap-linReg.html#cb337-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> log2S100A8, <span class="at">x =</span> log2ESR1)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb337-3"><a href="chap-linReg.html#cb337-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(log2S100A8))) <span class="sc">+</span></span>
+<span id="cb337-4"><a href="chap-linReg.html#cb337-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">xend =</span> log2ESR1,</span>
+<span id="cb337-5"><a href="chap-linReg.html#cb337-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> log2S100A8, <span class="at">yend =</span> <span class="fu">mean</span>(log2S100A8)), <span class="at">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb337-6"><a href="chap-linReg.html#cb337-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;ESR1 expressie (log2)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb337-7"><a href="chap-linReg.html#cb337-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;S100A8 expressie (log2)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLogSSTot"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLogSSTot-1.png" alt="Interpretatie van de totale kwadratensom (SSTot): de som van de kwadratische afwijkingen rond het steekproefgemiddelde." width="100%" />
 <p class="caption">
@@ -1503,17 +1464,17 @@ Het kan ook geïnterpreteerd worden als een maat voor de afwijking tussen de ges
 Deze laatste is dus eigenlijk een schatting van de regressierechte <span class="math inline">\(g(x)=\beta_0\)</span>, waarin <span class="math inline">\(\beta_0\)</span> geschat wordt door <span class="math inline">\(\bar{Y}\)</span>.
 Anders geformuleerd: SSR meet de grootte van het regressie-effect zodat <span class="math inline">\(\text{SSR} \approx 0\)</span> duidt op geen effect van de regressor en <span class="math inline">\(\text{SSR}&gt;0\)</span> duidt op een effect van de regressor. We voelen reeds aan dat <span class="math inline">\(\text{SSR}\)</span> zal kunnen worden gebruikt voor het ontwikkelen van een statistische test die de associatie tussen <span class="math inline">\(X\)</span> en <span class="math inline">\(Y\)</span> evalueert.</p>
 <p>Een grafische interpretatie van SSR wordt weergegeven in Figuur <a href="chap-linReg.html#fig:brcaLogSSR">6.13</a>.</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="chap-linReg.html#cb338-1" aria-hidden="true" tabindex="-1"></a>lm2_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">log2S100A8 =</span> brca<span class="sc">$</span>log2S100A8, <span class="at">fitted =</span> lm2<span class="sc">$</span>fitted.values, <span class="at">log2ESR1 =</span> brca<span class="sc">$</span>log2ESR1)</span>
-<span id="cb338-2"><a href="chap-linReg.html#cb338-2" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
-<span id="cb338-3"><a href="chap-linReg.html#cb338-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span></span>
-<span id="cb338-4"><a href="chap-linReg.html#cb338-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb338-5"><a href="chap-linReg.html#cb338-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>log2ESR1, <span class="at">y =</span>lm2<span class="sc">$</span>fitted), <span class="at">pch =</span> <span class="dv">2</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb338-6"><a href="chap-linReg.html#cb338-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>,<span class="at">size=</span><span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)  <span class="sc">+</span></span>
-<span id="cb338-7"><a href="chap-linReg.html#cb338-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(log2S100A8))) <span class="sc">+</span></span>
-<span id="cb338-8"><a href="chap-linReg.html#cb338-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> lm2_df, <span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">xend =</span> log2ESR1,</span>
-<span id="cb338-9"><a href="chap-linReg.html#cb338-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">y =</span> fitted, <span class="at">yend =</span>  <span class="fu">mean</span>(log2S100A8)), <span class="at">lty =</span><span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb338-10"><a href="chap-linReg.html#cb338-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;S100A8 expressie (log2)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb338-11"><a href="chap-linReg.html#cb338-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;ESR1 expressie (log2)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="chap-linReg.html#cb338-1" aria-hidden="true" tabindex="-1"></a>lm2_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">log2S100A8 =</span> brca<span class="sc">$</span>log2S100A8,</span>
+<span id="cb338-2"><a href="chap-linReg.html#cb338-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">fitted =</span> lm2<span class="sc">$</span>fitted.values, <span class="at">log2ESR1 =</span> brca<span class="sc">$</span>log2ESR1)</span>
+<span id="cb338-3"><a href="chap-linReg.html#cb338-3" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
+<span id="cb338-4"><a href="chap-linReg.html#cb338-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb338-5"><a href="chap-linReg.html#cb338-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> lm2<span class="sc">$</span>fitted), <span class="at">pch =</span> <span class="dv">2</span>,</span>
+<span id="cb338-6"><a href="chap-linReg.html#cb338-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb338-7"><a href="chap-linReg.html#cb338-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(log2S100A8))) <span class="sc">+</span></span>
+<span id="cb338-8"><a href="chap-linReg.html#cb338-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_segment</span>(<span class="at">data =</span> lm2_df, <span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">xend =</span> log2ESR1,</span>
+<span id="cb338-9"><a href="chap-linReg.html#cb338-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> fitted, <span class="at">yend =</span> <span class="fu">mean</span>(log2S100A8)), <span class="at">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb338-10"><a href="chap-linReg.html#cb338-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;S100A8 expressie (log2)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb338-11"><a href="chap-linReg.html#cb338-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&quot;ESR1 expressie (log2)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLogSSR"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLogSSR-1.png" alt="Interpretatie van de kwadratensom van de regressie (SSR): de som van de kwadratische afwijkingen tussen de geschatte regressierechte en het steekproefgemiddelde van de uitkomsten." width="100%" />
 <p class="caption">
@@ -1526,14 +1487,13 @@ Figuur 6.13: Interpretatie van de kwadratensom van de regressie (SSR): de som va
 Hoe kleiner SSE, hoe beter de fit (schatting) van de regressierechte voor predictiedoeleinden. We hebben deze immers geminimaliseerd om tot de kleinste kwadratenschatters te komen.</p>
 <p>Een interpretatie van SSE voor het log-log model wordt weergegeven in Figuur <a href="chap-linReg.html#fig:brcaLogSSE">6.14</a>.</p>
 <div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="chap-linReg.html#cb339-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
-<span id="cb339-2"><a href="chap-linReg.html#cb339-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span></span>
-<span id="cb339-3"><a href="chap-linReg.html#cb339-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb339-4"><a href="chap-linReg.html#cb339-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>log2ESR1, <span class="at">y =</span>lm2<span class="sc">$</span>fitted), <span class="at">pch =</span> <span class="dv">2</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb339-5"><a href="chap-linReg.html#cb339-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>,<span class="at">size=</span><span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)  <span class="sc">+</span></span>
-<span id="cb339-6"><a href="chap-linReg.html#cb339-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> lm2_df, <span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">xend =</span> log2ESR1,</span>
-<span id="cb339-7"><a href="chap-linReg.html#cb339-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">y =</span> fitted, <span class="at">yend =</span>  log2S100A8), <span class="at">lty =</span><span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb339-8"><a href="chap-linReg.html#cb339-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;S100A8 expressie (log2)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb339-9"><a href="chap-linReg.html#cb339-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;ESR1 expressie (log2)&quot;</span>)</span></code></pre></div>
+<span id="cb339-2"><a href="chap-linReg.html#cb339-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb339-3"><a href="chap-linReg.html#cb339-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> lm2<span class="sc">$</span>fitted), <span class="at">pch =</span> <span class="dv">2</span>,</span>
+<span id="cb339-4"><a href="chap-linReg.html#cb339-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb339-5"><a href="chap-linReg.html#cb339-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">size =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="at">data =</span> lm2_df,</span>
+<span id="cb339-6"><a href="chap-linReg.html#cb339-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">xend =</span> log2ESR1, <span class="at">y =</span> fitted,</span>
+<span id="cb339-7"><a href="chap-linReg.html#cb339-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">yend =</span> log2S100A8), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb339-8"><a href="chap-linReg.html#cb339-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;S100A8 expressie (log2)&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;ESR1 expressie (log2)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLogSSE"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLogSSE-1.png" alt="Interpretatie van de kwadratensom van de error (SSE): de som van de kwadratische afwijkingen tussen uitkomsten en de predicties op de geschatte regressierechte." width="100%" />
 <p class="caption">
@@ -1729,9 +1689,9 @@ Het regressiemodel blijft ongewijzigd,</p>
    &amp;=&amp; S_p^2 .
 \end{array}\]</span></p>
 <p>De testen voor <span class="math inline">\(H_0:\beta_1=0\)</span> vs. <span class="math inline">\(H_1:\beta_1\neq0\)</span> kunnen gebruikt worden voor het testen van de nulhypothese van de two-sample <span class="math inline">\(t\)</span>-test, <span class="math inline">\(H_0:\mu_1=\mu_2\)</span> t.o.v. <span class="math inline">\(H_1:\mu_1\neq\mu_2\)</span>.</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="chap-linReg.html#cb344-1" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>node<span class="ot">=</span><span class="fu">as.factor</span>(brca<span class="sc">$</span>node)</span>
-<span id="cb344-2"><a href="chap-linReg.html#cb344-2" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(age<span class="sc">~</span>node,brca)</span>
-<span id="cb344-3"><a href="chap-linReg.html#cb344-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(age <span class="sc">~</span> node, brca, <span class="at">var.equal=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="chap-linReg.html#cb344-1" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>node <span class="ot">=</span> <span class="fu">as.factor</span>(brca<span class="sc">$</span>node)</span>
+<span id="cb344-2"><a href="chap-linReg.html#cb344-2" aria-hidden="true" tabindex="-1"></a>lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(age <span class="sc">~</span> node, brca)</span>
+<span id="cb344-3"><a href="chap-linReg.html#cb344-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(age <span class="sc">~</span> node, brca, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -1763,7 +1723,7 @@ Het regressiemodel blijft ongewijzigd,</p>
 ## Residual standard error: 9.063 on 30 degrees of freedom
 ## Multiple R-squared:  0.207,  Adjusted R-squared:  0.1806 
 ## F-statistic: 7.833 on 1 and 30 DF,  p-value: 0.008879</code></pre>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="chap-linReg.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="chap-linReg.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
 <span id="cb348-2"><a href="chap-linReg.html#cb348-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm3)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:brcaLymf"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/brcaLymf-1.png" alt="Diagnostische plot voor het model waarbij leeftijd wordt gemodelleerd a.d.h.v. een dummy variabele voor factor lymfe knoop status." width="100%" />
@@ -1788,9 +1748,8 @@ Wanneer we een boxplot maken, zoals we ook deden in het hoofdstuk <a href="chap-
 Als we data simuleren die <span class="math inline">\(iid\)</span> normaal verdeeld zijn en deze at random opslitsen in twee groepen die gelijk zijn in grootte als die voor de lymfeknoop status (19 vs 13 patiënten) zien we dat een dergelijk verschil in IQR gerust kan voorkomen door toeval (Figuur <a href="chap-linReg.html#fig:boxSim">6.17</a>).
 We kunnen dus besluiten dat aan alle aannames is voldaan voor de statistische besluitvorming en dat we de R-output van het statistisch model voor de response age i.f.v de dummy variabele voor de node-status mogen gebruiken om conclusies te formuleren over de associatie tussen leeftijd en node status (zie hoger).</p>
 <div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="chap-linReg.html#cb349-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">%&gt;%</span></span>
-<span id="cb349-2"><a href="chap-linReg.html#cb349-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> node<span class="sc">%&gt;%</span>as.factor, <span class="at">y =</span> age)) <span class="sc">+</span></span>
-<span id="cb349-3"><a href="chap-linReg.html#cb349-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb349-4"><a href="chap-linReg.html#cb349-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;node&quot;</span>)</span></code></pre></div>
+<span id="cb349-2"><a href="chap-linReg.html#cb349-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> node <span class="sc">%&gt;%</span></span>
+<span id="cb349-3"><a href="chap-linReg.html#cb349-3" aria-hidden="true" tabindex="-1"></a>        as.factor, <span class="at">y =</span> age)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;node&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:boxNode"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/boxNode-1.png" alt="boxplot van de leeftijd vs lymfeknoop status in de borstkanker dataset." width="100%" />
 <p class="caption">
@@ -1805,16 +1764,12 @@ Figuur 6.16: boxplot van de leeftijd vs lymfeknoop status in de borstkanker data
 <li>Change label of y axis</li>
 </ol>
 <div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="chap-linReg.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">354</span>)</span>
-<span id="cb350-2"><a href="chap-linReg.html#cb350-2" aria-hidden="true" tabindex="-1"></a>sim_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb350-3"><a href="chap-linReg.html#cb350-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">node =</span> <span class="fu">rep</span>(brca<span class="sc">$</span>node, <span class="dv">9</span>),</span>
-<span id="cb350-4"><a href="chap-linReg.html#cb350-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">iid =</span> <span class="fu">rnorm</span>(<span class="dv">9</span> <span class="sc">*</span> <span class="fu">nrow</span>(brca), <span class="at">sd =</span> <span class="fu">sigma</span>(lm3)),</span>
-<span id="cb350-5"><a href="chap-linReg.html#cb350-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sim =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">each =</span> <span class="dv">32</span>)</span>
-<span id="cb350-6"><a href="chap-linReg.html#cb350-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb350-7"><a href="chap-linReg.html#cb350-7" aria-hidden="true" tabindex="-1"></a>sim_df <span class="sc">%&gt;%</span></span>
-<span id="cb350-8"><a href="chap-linReg.html#cb350-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> node, <span class="at">y=</span>iid)) <span class="sc">+</span></span>
-<span id="cb350-9"><a href="chap-linReg.html#cb350-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb350-10"><a href="chap-linReg.html#cb350-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(.<span class="sc">~</span>sim) <span class="sc">+</span></span>
-<span id="cb350-11"><a href="chap-linReg.html#cb350-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">paste0</span>(<span class="st">&quot;iid N(0,&quot;</span>,<span class="fu">round</span>(<span class="fu">sigma</span>(lm3)<span class="sc">^</span><span class="dv">2</span>,<span class="dv">2</span>),<span class="st">&quot;)&quot;</span>))</span></code></pre></div>
+<span id="cb350-2"><a href="chap-linReg.html#cb350-2" aria-hidden="true" tabindex="-1"></a>sim_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">node =</span> <span class="fu">rep</span>(brca<span class="sc">$</span>node, <span class="dv">9</span>), <span class="at">iid =</span> <span class="fu">rnorm</span>(<span class="dv">9</span> <span class="sc">*</span></span>
+<span id="cb350-3"><a href="chap-linReg.html#cb350-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nrow</span>(brca), <span class="at">sd =</span> <span class="fu">sigma</span>(lm3)), <span class="at">sim =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">each =</span> <span class="dv">32</span>))</span>
+<span id="cb350-4"><a href="chap-linReg.html#cb350-4" aria-hidden="true" tabindex="-1"></a>sim_df <span class="sc">%&gt;%</span></span>
+<span id="cb350-5"><a href="chap-linReg.html#cb350-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> node, <span class="at">y =</span> iid)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb350-6"><a href="chap-linReg.html#cb350-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(. <span class="sc">~</span> sim) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">paste0</span>(<span class="st">&quot;iid N(0,&quot;</span>, <span class="fu">round</span>(<span class="fu">sigma</span>(lm3)<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb350-7"><a href="chap-linReg.html#cb350-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>), <span class="st">&quot;)&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:boxSim"></span>
 <img src="InleidingTotBiostatistiek_2022_2023_files/figure-html/boxSim-1.png" alt="Simulatie van normaal verdeelde gegevens met gelijk gemiddelde en variantie. Zoals in de borstkanker dataset zijn er 19 observaties in ene groep en 13 observaties in de andere groep. We zien dat er door puur toeval een behoorlijk verschil kan optreden in de IQR tussen beide groepen in de steekproef." width="100%" />
 <p class="caption">
