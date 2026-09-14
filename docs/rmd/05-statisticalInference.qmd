@@ -1,0 +1,2184 @@
+---
+title: "5. Statistische besluitvorming"
+author: "Lieven Clement"
+date: "statOmics, Ghent University (https://statomics.github.io)"
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    highlight-style: tango
+    code-tools: true
+    embed-resources: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = TRUE, comment = NA, echo = TRUE,
+                      message = FALSE, warning = FALSE)
+library(tidyverse)
+```
+
+
+```{r include=FALSE}
+#Do not run during the lecture when we work interactively
+set.seed(1314)
+```
+
+# Introduction
+## Population
+- Het doel van een wetenschappelijk onderzoek is om conclusies te trekken over de algemene populatie
+
+- Hier bestuderen we de invloed van Captopril op de bloeddruk van patiënten met hyptertensie.
+
+- We zullen data verzamelen en deze dan modelleren
+
+- We moeten de onderzoeksvraag altijd vertalen naar de modelparameters of een combinatie van modelparameters.
+
+- bv. het populatie gemiddelde
+  $$E(X)=\mu$$
+- Vermindert de gemiddelde bloeddruk bij patiënten met hypertensie na toedienen van Captopril?
+
+***
+
+## Overzicht
+
+- Experimenteel Design & Data Exploratie
+- Puntschatters (Schatting)
+- Interval schatters (Statistische inferentie)
+- Hypothese testen (Statistische inferentie)
+
+***
+
+# Captopril voorbeeld
+## Experimental design
+
+- 15 patiënten werden at random getrokken uit de populatie van patiënten met hypertensie
+- pre-test/post-test design: de systolische en diastolysche bloeddruk worden gemeten voor en na toedienen van Captopril.
+- Voordeel: We kunnen het effect van de Captopril toediening op de bloeddruk van de individuele patiënten beoordelen.
+- Nadeel?
+
+```{r pop2Samp2Pop,fig.asp=.8, fig.align='center',echo=FALSE}
+if ("pi"%in%ls()) rm("pi")
+kopvoeter<-function(x,y,angle=0,l=.2,cex.dot=.5,pch=19,col="black")
+{
+angle=angle/180*pi
+points(x,y,cex=cex.dot,pch=pch,col=col)
+lines(c(x,x+l*cos(-pi/2+angle)),c(y,y+l*sin(-pi/2+angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(pi+angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(pi+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2+pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2+pi/4+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2-pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2-pi/4+angle)),col=col)
+}
+
+par(mar=c(0,0,0,0),mai=c(0,0,0,0))
+plot(0,0,xlab="",ylab="",xlim=c(0,10),ylim=c(0,10),col=0,xaxt="none",yaxt="none",axes=FALSE)
+rect(0,6,10,10,border="red",lwd=2)
+text(.5,8,"populatie",srt=90,col="red",cex=2)
+symbols (3, 8, circles=1.5, col="red",add=TRUE,fg="red",inches=FALSE,lwd=2)
+grid=seq(0,1.3,.01)
+
+for (i in 1:50)
+{
+	angle1=runif(n=1,min=0,max=360)
+	angle2=runif(n=1,min=0,max=360)
+	radius=sample(grid,prob=grid^2*pi/sum(grid^2*pi),size=1)
+	kopvoeter(3+radius*cos(angle1/180*pi),8+radius*sin(angle1/180*pi),angle=angle2)
+}
+text(7.5,8,"Effect van Captopril in populatie",col="red",cex=1.2)
+
+rect(0,0,10,4,border="blue",lwd=2)
+text(.5,2,"sample",srt=90,col="blue",cex=2)
+symbols (3, 2, circles=1.5, col="red",add=TRUE,fg="blue",inches=FALSE,lwd=2)
+for (i in 0:2)
+	for (j in 0:4)
+{
+
+	kopvoeter(2.1+j*(3.9-2.1)/4,1.1+i)
+}
+text(7.5,2,"Effect van Captopril in steekproef",col="blue",cex=1.2)
+
+arrows(3,5.9,3,4.1,col="black",lwd=3)
+arrows(7,4.1,7,5.9,col="black",lwd=3)
+text(1.5,5,"EXP. DESIGN (1)",col="black",cex=1.2)
+text(8.5,5,"SCHATTEN &\nINFERENTIE (3)",col="black",cex=1.2)
+text(7.5,.5,"DATA EXPLORATIE &\nBESCHRIJVENDE STATISTIEK (2)",col="black",cex=1.2)
+```
+
+***
+
+## Data Exploratie en Beschrijvende Statistiek
+
+```{r}
+captopril <- read_csv("https://raw.githubusercontent.com/statOmics/sbc/master/data/captopril.txt")
+head(captopril)
+summary(captopril)
+```
+
+```{r}
+captoprilTidy <-
+  captopril %>%
+  gather(type,bp,-id)
+
+captoSum <- captoprilTidy %>%
+  group_by(type) %>%
+  summarize(
+    mean = mean(bp,na.rm=TRUE),
+    sd = sd(bp,na.rm=TRUE),
+    n = bp %>%
+      is.na %>%
+      `!` %>%
+      sum) %>%
+  mutate(se = sd/sqrt(n))
+
+captoSum
+
+captoSum %>%
+  ggplot(aes(x=type,y=mean)) +
+  geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd),width=.2) +
+  ylim(0,210) +
+  ylab("blood pressure (mmHg)")
+```
+
+- Deze figuur is niet informatief! Het toont de ruwe data niet enkel gemiddelden en de standaard deviatie voor een bloeddruk karakteristiek.
+
+```{r}
+captoprilTidy %>%
+  ggplot(aes(x=type,y=bp)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(position="jitter") +
+  ylim(0,210)
+```
+
+We zien dat veel van de ruimte die werd ingenomen door de barplot geen gegevens bevat!
+
+```{r}
+captoprilTidy %>%
+  ggplot(aes(x=type,y=bp)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(position="jitter")
+```
+
+- Deze plot zou informatief zijn geweest als de gegevens over verschillende individuen waren verzameld.
+
+- De bloeddruk wordt echter bij dezelfde patiënt gemeten!
+
+- We zullen een plot maken waar we de systolische bloeddruk filteren
+
+```{r}
+captoprilTidy %>%
+  filter(type%in%c("SBPa","SBPb")) %>%
+  mutate(type=factor(type,levels=c("SBPb","SBPa"))) %>%
+  ggplot(aes(x=type,y=bp)) +
+  geom_line(aes(group = id)) +
+  geom_point()
+```
+
+- We hebben gepaarde data. We kunnen het effect van de behandeling dus onmiddellijk inschatten door de bloeddruk na behandeling te vergelijken met de bloeddruk vóór de behandeling.
+
+```{r}
+captopril <-
+  captopril %>%
+  mutate(deltaSBP = SBPa - SBPb)
+
+captopril %>%
+  ggplot(aes(x="Systolic blood pressure",y=deltaSBP)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(position="jitter")+
+  ylab("Difference (mm mercury)") +
+  xlab("")
+```
+
+```{r}
+captopril %>%
+  summarize(
+    mean = mean(deltaSBP,na.rm=TRUE),
+    sd = sd(deltaSBP,na.rm=TRUE),
+    n = deltaSBP %>%
+      is.na %>%
+      `!` %>%
+      sum) %>%
+  mutate(se = sd/sqrt(n))
+```
+
+
+- Pre-test/post-test design: Effect van Captopril in de steekproef met  $X=\Delta_\text{na-voor}$!
+
+- Hoe modelleren we $X=\Delta_\text{na-voor}$ en schatten we het effect van Captopril?
+
+```{r}
+captopril %>%
+  ggplot(aes(sample=deltaSBP)) +
+  stat_qq() +
+  stat_qq_line()
+```
+
+De systolische bloeddruk verschillen zijn ongeveer normaal verdeeld.
+***
+
+## Schatten
+
+
+- Geen susbtantiële afwijkingen van normaliteit.
+
+- We kunnen aannemen dat de verschillen  $X \sim N(\mu, \sigma^2)$.
+
+- Het effect van Captopril in de populatie wordt weergegeven door het gemiddelde bloeddruk verschil $\mu$.
+
+- De gemiddelde bloeddruk $\mu$ in de populatie kan worden geschat met behulp van het steekproefgemiddelde $\bar x$ = `r round(mean(captopril$deltaSBP),2)`
+
+- De standaarddeviatie $\sigma$ met de steekproefstandaarddeviatie  $\text{S}$ = `r round(sd(captopril$deltaSBP),2)`.
+
+- Is het effect dat we in de steekproef observeren groot genoeg om te concluderen dat er een effect is van de captoprilbehandeling op de bloeddruk op populatieniveau?
+
+- Onze schattingen zullen van steekproef tot steekproef veranderen!
+
+- Hoe zijn de schatters $\bar X$ en $S$ verdeeld?
+
+
+# Punt schatters: het steekproefgemiddelde
+
+- Stel dat $X$ een willekeurige steekproef is uit de populatie en neem aan dat $X \sim N(\mu,\sigma^2)$
+
+- Schat $\mu$ op basis van de steekproef $X_1,...,X_n$, gebruik makende van het steekproefgemiddelde
+  $$\bar X = \frac{X_1+ X_2+ ... + X_n}{n} = \frac{\sum_{i=1}^{n} X_i}{n}$$ van willekeurige variabelen $X_1,X_2, ..., X_n$.
+
+- Steekproef gemiddelde $\bar X$ is een willekeurige variable dat varieert van steekproef tot steekproef.
+
+- Bestudeer de theoretische verdeling van het steekproefgemiddelde om inzicht te krijgen
+
+    1. in hoe het steekproefgemiddelde kan variëren in een nieuw gelijkaardig onderzoek
+    2. hoe ver $\bar X$ kan verschillen van het populatiegemiddelde $\mu$
+
+***
+
+## Overzicht
+
+
+1. Het steekproefgemiddelde is onvertekend
+2. Precisie van steekproefgemiddelde
+3. Distributie van steekproefgemiddelde
+
+***
+
+## Het steekproefgemiddelde is onvertekend
+
+- We kunnen het effect in de steekproef veralgemenen naar de populatie als de schatting in de steekproef een goede benadering is van de populatiewaarde.
+
+- De steekproef moet representatief zijn om de resultaten van de steekproef naar de populatie te generaliseren
+
+- Vermijd bias (zodat het populatiegemiddelde niet systematisch onder of overschat wordt)
+
+- Rapporteer hoe de steekproef is genomen!
+
+- Randomisatie!
+
+- Neem de proefpersonen willekeurig uit de populatie, zodat elke proefpersoon dezelfde kans heeft om in de steekproef terecht te komen
+
+- Proefpersonen met hyptertensie worden willekeurig uit de populatie genomen.
+
+
+- Eenvoudige willekeurige steekproef:  $X_1,...,X_n$ voor kenmerk $X$
+
+- $X_1,...,X_n$ hebben dezelfde distributie
+- Ze hebben hetzelfde gemiddelde $\mu$ en variantie $\sigma^2$
+
+- $E(X_1)=...=E(X_n)=\mu$ en $\text{Var}(X_1)=...=\text{Var}(X_n)=\sigma^2$
+
+- $\bar X$ is een *overtekende schatter* voor $\mu$
+
+<details><summary>Click to see proof</summary><p>
+\begin{eqnarray*}
+E(\bar X) &=& E \left(\frac{X_1+ X_2+ ... + X_n}{n}\right) \\
+&= & \frac{E(X_1)+ E(X_2)+ ... + E(X_n)}{n} \\
+&=& \frac{\mu + \mu + ... +\mu}{n} \\
+&= & \mu
+\end{eqnarray*}
+</p></details>
+
+***
+
+## Imprecisie/standard error
+
+- Ook voor representatieve steekproeven zijn de resultaten onnauwkeurig
+\vspace{10pt}
+- Verschillende steekproeven uit dezelfde populatie geven verschillende resultaten.
+
+- We illustreren dit met de NHANES studie
+
+    - We zullen 15 vrouwen willekeurig selecteren uit de NHANES studie en zullen hun cholesterolgehalte registreren.
+    - We herhalen dit 50 keer om de variatie van steekproef tot steekproef te beoordelen
+    - We plotten de boxplot voor iedere steekproef en duiden het gemiddelde aan.
+
+```{r}
+library(NHANES)
+
+fem <- NHANES %>%
+  filter(Gender=="female" & !is.na(DirectChol)) %>%
+  select("DirectChol")
+
+n <- 15 # number of subjects per sample
+nSim <- 50 # number of simulations
+
+femSamp <- matrix(nrow=n,ncol=nSim)
+for (j in 1:nSim)
+{
+  set.seed(2105)
+  femSamp[,j] <- sample(fem$DirectChol,15)
+  if (j<4) {
+    p <- femSamp %>%
+      log2 %>%
+      data.frame %>%
+      gather("sample","log2cholesterol") %>%
+      ggplot(aes(x=sample,y=log2cholesterol)) +
+      geom_boxplot() +
+      stat_summary(
+        fun.y=mean,
+        geom="point",
+        shape=19,
+        size=3,
+        color="red",
+        fill="red") +
+      geom_hline(yintercept = mean(fem$DirectChol %>% log2)) +
+      ylab("cholesterol (log2)")
+    print(p)
+  }
+}
+
+femSamp %>%
+  log2 %>%
+  data.frame %>%
+  gather("sample","log2cholesterol") %>%
+  ggplot(aes(x=sample,y=log2cholesterol)) +
+  geom_boxplot() +
+  stat_summary(fun.y=mean, geom="point", shape=19, size=3, color="red", fill="red") +
+  geom_hline(yintercept = mean(fem$DirectChol %>% log2)) +
+  ylab("cholesterol (log2)")
+```
+
+We observeren dat het steekproefgemiddelde fluctueert rond het gemiddelde van de populatie.
+
+Opdracht:
+
+1. Kopieer de code
+2. Vergroot de steekproefgrootte tot 100 proefpersonen
+3. Wat observeer je?
+
+***
+
+**Hoe doen we dit op basis van een enkele steekproef?**
+
+- Inzicht in hoe dicht we $\bar X$ tot$\mu$ kunnen verwachten?
+
+- Hoe varieert $\bar X$ van steekproef tot steekproef?
+
+- Variabiliteit op $\bar X$
+
+- Dit moeten we bepalen op basis van een enkele steekproef!
+
+- We moeten assumpties maken
+
+- We nemen aan dat de willekeurige variabelen $X_1, X_2, ..., X_n$ afkomstig zijn van $n$ *onafhankelijke* personen.
+
+- Voor de Captopril studie hebben we afhankelijke observaties
+
+    - Bloeddrukmetingen voor ($Y_{i,before}$) en na ($Y_{i,after}$) toediening van captopril aan dezelfde patiënt $i=1,\ldots,n$.
+    - We hebben ze omgezet in n onafhankelijke metingen door het verschil $Y_{i,na}-Y_{i,voor}$ te nemen.
+
+***
+
+### Variantie schatter voor $\bar X$
+
+$$\sigma^2_{\bar X}=\frac{\sigma^2}{n}$$
+
+- De standaarddeviatie van $\bar X$ rond $\mu$ is $\sqrt{n}$ keer kleiner dan de deviatie rond de originele observaties $X$.
+
+- Hoe meer observaties we hebben, des te nauwkeuriger $\bar X$.
+
+
+<details><summary>Click to see proof</summary><p>
+\begin{eqnarray*}
+\text{Var}(\bar X)&=&\text{Var} \left(\frac{X_1+ X_2+ ... + X_n}{n}\right) \\
+&\overset{*}{=} & \frac{\text{Var}(X_1)+ \text{Var}(X_2)+ ... + \text{Var}(X_n)}{n^2} \\
+&=& \frac{\sigma^2 + \sigma^2 + ... \sigma^2}{n^2} \\
+&= & \frac{\sigma^2}{n}.
+\end{eqnarray*}
+
+- (*) Dit is gebaseerd op de assumptie van onafhankelijkheid
+$$\text{Var}[a X_1 + b X_2] = a^2\text{Var}[X_1] + b^2 \text{Var}[X_2] + 2 ab\text{Covar}[X_1,X_2]$$
+
+    - Met $Covar[X_1,X_2]=0$ wanneer $X_1$ en $X_2$ onafhankelijk zijn.
+</p></details>s
+
+**Definitie: standaard error**
+
+De standaard deviatie van $\bar{X}$ is $\sigma/\sqrt{n}$ en wordt ook wel de **standaard error** van het gemiddelde genoemd.
+Over het algemeen verwijst men naar de standaarddeviatie van een schatter voor een bepaalde parameter $\theta$ met de term **standaard error** van de schatter die wordt aangeduid als $SE$
+
+***
+
+### Captopril voorbeeld
+
+
+- $n = 15$ verschillen in systolische bloeddruk
+
+- Stel dat de standaarddeviatie van de bloeddrukverschillen in de populatie $\sigma = 9.0$ mmHg is
+
+- Dan wordt de standaard error (SE) op de gemiddelde systolische bloeddruk verschillen $\bar X$:
+
+$$
+SE = \frac{9.0}{\sqrt{15}}=2.32\text{mmHg.}
+$$
+
+- Over het algemeen zijn $\sigma$, en dus de SE op het steekproefgemiddelde onbekend.
+- We moeten dus ook de standaarddeviatie van de steekproef schatten om de standaard error te verkrijgen.
+- Schatter: $SE=S/\sqrt{n},$
+- Met $S^2$ de steekproefvariantie van $X_1,...,X_n$  en $S$ de steekproefstandaarddeviatie
+
+- Voor het Captopril voorbeeld krijgen we:
+
+```{r}
+n <- length(captopril$deltaSBP)
+se <- sd(captopril$deltaSBP)/sqrt(n)
+se
+```
+
+***
+
+### standaarddeviatie vs standaard error
+
+#### Illustratie via herhaalde steekproeven
+
+- Verschillende steekproef groottes: 10, 50, 100
+- Neem 1000 steekproeven per steekproef grootte van de NHANES studie, voor iedere steekproef berekenen we:
+    - Het gemiddelde
+    - De steekproefstandaarddeviatie
+    - de standaard error
+- We maken een boxplot van de steekproefstandaardevaties en de standaard errors voor de verschillende steekproefgroottes
+
+- In plaats van een for loop te gebruiken zullen we de sapply functie gebruiken die efficiënter is. Het neemt een vector of lijst als invoer en past de functie toe op ieder element van de vector of lijst.
+
+```{r}
+set.seed(24)
+femSamp10 <- sapply(
+  1:1000,
+  function(j,x,size) sample(x,size),
+  size=10,
+  x=fem$DirectChol)
+
+femSamp50 <- sapply(
+  1:1000,
+  function(j,x,size) sample(x,size),
+  size=50,
+  x=fem$DirectChol)
+
+femSamp100 <- sapply(
+  1:1000,
+  function(j,x,size) sample(x,size),
+  size=100,
+  x=fem$DirectChol)
+
+res<-rbind(
+  femSamp10 %>%
+    log2%>%
+    as.data.frame %>%
+    gather(sample,log2Chol) %>%
+    group_by(sample)%>%
+    summarize_at("log2Chol",
+               list(median=~median(.,na.rm=TRUE),
+                    mean=~mean(.,na.rm=TRUE),
+                    sd=~sd(.,na.rm=TRUE),
+                    n=function(x) x%>%is.na%>%`!`%>%sum)) %>%
+    mutate(se=sd/sqrt(n)) ,
+
+  femSamp50 %>%
+    log2 %>%  
+    as.data.frame %>%
+    gather(sample,log2Chol) %>%
+    group_by(sample)%>%
+    summarize_at("log2Chol",
+               list(median=~median(.,na.rm=TRUE),
+                    mean=~mean(.,na.rm=TRUE),
+                    sd=~sd(.,na.rm=TRUE),
+                    n=function(x) x%>%is.na%>%`!`%>%sum)) %>%
+    mutate(se=sd/sqrt(n)),
+
+  femSamp100 %>%
+    log2 %>%
+    as.data.frame %>%
+    gather(sample,log2Chol) %>%
+    group_by(sample)%>%
+    summarize_at("log2Chol",
+               list(median=~median(.,na.rm=TRUE),
+                    mean=~mean(.,na.rm=TRUE),
+                    sd=~sd(.,na.rm=TRUE),
+                    n=function(x) x%>%is.na%>%`!`%>%sum)) %>%
+    mutate(se=sd/sqrt(n))
+  )
+```
+
+**Gemiddelden**
+
+We illustreren de impact van steekproefgrootte op de distributie van de gemiddeldes van verschillende steekproeven
+
+
+```{r}
+res %>%
+  ggplot(aes(x= n %>% as.factor,y = mean)) +
+  geom_boxplot() +
+  ylab("Direct cholesterol (log2)") +
+  xlab("sample size")
+```
+
+- Merk op dat de variatie van de steekproefgemiddelden inderdaad afneemt naarmate de steekproefgrootte toeneemt. De schatting wordt dus nauwkeuriger naarmate de steekproefgrootte toeneemt.
+
+***
+
+**Standard deviatie**
+
+We illustreren nu de impact van de steekproefgrootte op de verdeling van de standaarddeviatie van de verschillende steekproeven
+
+```{r}
+res %>%
+  ggplot(aes(x=n%>%as.factor,y=sd)) +
+  geom_boxplot() +
+  ylab("standard deviation") +
+  xlab("sample size")
+```
+
+- De standaarddeviatie blijft vergelijkbaar voor de steekproefgroottes.
+Het is gecentreerd rond dezelfde waarde: de standaarddeviatie in de populatie. Het vergroten van de steekproefgrootte heeft inderdaad geen invloed op de variabiliteit in de populatie!
+
+- Opnieuw zien we dat de variabiliteit van de standaarddeviatie afneemt naarmate de steekproefgrootte toeneemt. De standaarddeviatie kan dus ook nauwkeuriger worden geschat naarmate de steekproefgrootte toeneemt.
+
+***
+
+**Standaard error van het gemiddelde**
+
+Ten slotte illustreren we de impact van de steekproefgrootte op de verdeling van de standaarddeviatie van het gemiddelde van de verschillende steekproeven, de standaard error.
+
+```{r}
+res %>%
+ggplot(aes(x=n%>%as.factor,y=se)) +
+geom_boxplot() +
+ylab("standard error") +
+xlab("sample size")
+```
+
+- De standaard error (de schatter voor de nauwkeurigheid van het steekproefgemiddelde) vermindert aanzienlijk naarmate de steekproefgrootte toeneemt, wat opnieuw bevestigt dat de schatting van het steekproefgemiddelde nauwkeuriger wordt.
+
+***
+
+### Normaal verdeelde data
+
+- Voor normaal verdeelde data hebben we meerdere schatters voor het populatiegemiddelde $\mu$ bv. gemiddelde en mediaan.
+
+- Maar $\bar{X}$ is de overtekende schatter van $\mu$ met de kleinste standaard error
+
+-  $\bar{X}$ wijkt minder af van het gemiddelde $\mu$ dan de mediaan
+
+- We illustreren dit voor herhaalde steekproeven met steekproefgrootte 10
+
+```{r}
+res %>%
+  filter(n == 10) %>%
+  select(mean,median) %>%
+  gather(type,estimate) %>%
+  ggplot(aes(x = type,y = estimate)) +
+  geom_boxplot() +
+  geom_hline(yintercept = fem$DirectChol %>%
+    log2 %>%
+    mean) +
+  ggtitle("10 personen")
+```
+
+Vervolgens vergelijken we de verdeling van het gemiddelde en de mediaan in herhaalde steekproeven van steekproefgrootte 50.
+
+```{r}
+res %>%
+  filter(n == 50) %>%
+  select(mean, median) %>%
+  gather(type, estimate) %>%
+  ggplot(aes(x = type,y = estimate)) +
+  geom_boxplot()+
+  geom_hline(yintercept = fem$DirectChol %>%
+    log2 %>%
+    mean) +
+  ggtitle("50 personen")
+```
+
+## Verdeling van het steekproefgemiddelde
+
+
+- Hoe varieert $\bar X$ van steekproef tot steekproef?
+- Verdeling van $\bar X$?
+- Als $\bar X$ normaal verdeeld is, heeft de standaard error een goede interpretatie: de SE is de standaard deviatie van het steekproefgemiddelde.
+- Als de data $X_i$ normaal verdeeld zijn, is het steekproefgemiddelde ook normaal verdeeld.
+
+$$X_i \sim N(\mu,\sigma^2) \rightarrow  \bar X \sim N(\mu,  \sigma^2/n)$$
+
+***
+
+### NHANES: cholesterol
+
+We illustreren dit nogmaals met een simulatie gebruik makende van de NHANES-studie.
+De log2-cholesterolwaarden zijn normaal verdeeld.
+
+```{r}
+ fem %>%
+  ggplot(aes(x = DirectChol %>% log2))+
+  geom_histogram(aes(y = ..density.., fill = ..count..)) +
+  xlab("Direct cholesterol (log2)") +
+  stat_function(
+    fun = dnorm,
+    color = "red",
+    args = list(
+      mean=mean(fem$DirectChol%>%log2),
+      sd = sd(fem$DirectChol%>%log2)
+      )
+    ) +
+  ggtitle("Alle vrouwen in NHANES studie")
+
+fem %>%
+  ggplot(aes(sample = DirectChol %>% log2)) +
+  stat_qq() +
+  stat_qq_line() +
+  ggtitle("Alle vrouwen in NHANES study")
+```
+
+***
+
+##### Evalueer de verdeling van het gemiddelde voor steekproeven van grootte 10
+
+We onderzoeken de resultaten voor de steekproefgrootte van 10.
+
+We bekijken eerst de plot voor de eerste steekproef.
+
+```{r}
+femSamp10[,1] %>%
+  log2 %>%
+  as.data.frame %>%
+  ggplot(aes(x=.))+
+    geom_histogram(aes(y=..density.., fill=..count..),bins=10) +
+    xlab("Direct cholesterol (log2)") +
+    stat_function(
+      fun=dnorm,
+      color="red",
+      args=list(
+        mean=femSamp10[,1]%>%log2%>%mean, sd=femSamp10[,1]%>%log2%>%sd)
+      ) +
+    ggtitle("10 random females") +
+    xlim(fem$DirectChol %>% log2 %>% range)
+```
+
+Vervolgens kijken we naar de verdeling van het steekproefgemiddelde over 1000 steekproeven van steekproefgrootte 10.
+
+```{r}
+femSamp10 %>%
+  log2 %>%
+  colMeans %>%
+  as.data.frame %>%
+  ggplot(aes(x=.)) +
+  geom_histogram(aes(y=..density.., fill=..count..),bins=15) +
+  xlab("Mean cholesterol (log2)") +
+  stat_function(
+    fun=dnorm,
+    color="red",
+    args=list(
+      mean=femSamp10%>%log2%>% colMeans %>% mean,
+      sd=femSamp10%>%log2%>% colMeans %>% sd)
+    ) +
+  ggtitle("Means on 10 females")
+
+femSamp10 %>%
+  log2%>%
+  colMeans %>%
+  as.data.frame %>%  
+  ggplot(aes(sample=.)) +
+  stat_qq() +
+  stat_qq_line() +
+  ggtitle("Means on 10 females")
+```
+
+**We hebben dus bevestigd dat het gemiddelde ongeveer normaal verdeeld is voor studies met 5 en 10 vrouwen, terwijl de originele gegevens ongeveer normaal verdeeld zijn.**
+
+***
+
+#### Captopril studie
+
+- De systolische bloeddrukverschillen in de Captopril studie zijn bij benadering normaal verdeeld.
+
+- s.e.= 2.32 mm Hg
+
+- In 95 van de 100 studies met n = 15 proefpersonen verwachten we dat het steekproefgemiddelde van de systolische bloeddrukverschillen ($\bar X$) op minder dan $2 \times 2.32 = 4.64$mm Hg van het werkelijk populatiegemiddelde van de bloeddrukverschillen geschat wordt.
+
+***
+
+### Niet-normaal verdeelde data
+
+- Als individuele observaties geen normale verdeling hebben,  is $\bar X$ nog steeds \textit{ongeveer} normaal verdeeld
+wanneer het aantal observaties groot genoeg is.
+
+- Hoe groot moet de steekproef zijn om de normale benadering te laten werken?
+
+- Dit hangt af van de scheefheid van de distributie!
+
+***
+
+#### NHANES: cholesterol
+
+- We kunnen dit evalueren in de NHanes-studie als we de gegevens niet log2 transformeren.
+
+```{r}
+fem %>%
+   ggplot(aes(x=DirectChol))+
+   geom_histogram(aes(y=..density.., fill=..count..)) +
+   xlab("Direct cholesterol") +
+   stat_function(
+     fun=dnorm,
+     color="red",
+     args=list(
+       mean=mean(fem$DirectChol),
+       sd=sd(fem$DirectChol))
+
+    ) +
+   ggtitle("All females in Nhanes study")
+
+ fem %>%
+  ggplot(aes(sample=DirectChol)) +
+  stat_qq() +
+  stat_qq_line() +
+  ggtitle("All females in Nhanes study")
+```
+
+De cholesterol data zijn duidelijk niet-normaal verdeeld.
+
+##### Verdeling van het steekproefgemiddelde voor verschillende steekproefgroottes
+
+```{r}
+set.seed(121)
+femSamp5 <- sapply(
+  1:1000,
+  function(j,x,size) sample(x,size),
+  size = 5,
+  x = fem$DirectChol)
+
+femSamp5 %>%
+  colMeans %>%
+  as.data.frame %>% ggplot(aes(x=.)) +
+  geom_histogram(aes(y=..density.., fill=..count..),bins=15) +
+  xlab("Mean cholesterol") +
+  stat_function(
+    fun=dnorm,
+    color="red",
+    args=list(
+      mean=femSamp5%>% colMeans %>% mean,
+      sd=femSamp5%>% colMeans %>% sd)
+    ) +
+  ggtitle("Means on 5 females")
+
+femSamp5 %>%
+  colMeans %>%
+  as.data.frame %>%  
+  ggplot(aes(sample=.)) +
+  stat_qq() +
+  stat_qq_line() +
+  ggtitle("Means on 5 females")
+
+
+femSamp10 %>%
+  colMeans %>%
+  as.data.frame %>% ggplot(aes(x=.)) +
+  geom_histogram(aes(y=..density.., fill=..count..),bins=15) +
+  xlab("Mean cholesterol") +
+  stat_function(
+    fun=dnorm,
+    color="red",
+    args=list(
+      mean=femSamp10%>% colMeans %>% mean,
+      sd=femSamp10%>% colMeans %>% sd)
+    ) +
+ggtitle("Means on 10 females")
+
+femSamp10 %>%
+  colMeans %>%
+  as.data.frame %>%  
+  ggplot(aes(sample=.)) +
+  stat_qq() +
+  stat_qq_line() +
+  ggtitle("Means on 10 females")
+
+femSamp50 %>%
+  colMeans %>%
+  as.data.frame %>%  
+  ggplot(aes(sample=.)) +
+  stat_qq() +
+  stat_qq_line() +
+  ggtitle("Means on 50 females")
+
+femSamp100 %>%
+  colMeans %>%
+  as.data.frame %>%  
+  ggplot(aes(sample=.)) +
+  stat_qq() +
+  stat_qq_line() +
+  ggtitle("Means on 100 females")
+```
+
+- **We merken op dat wanneer de data niet normaal verdeeld zijn, de verdeling van het steekproefgemiddelde niet normaal verdeeld is over kleine steekproeven**
+
+- **Voor grote steekproeven is het steekproefgemiddelde van niet-normale gegevens echter nog steeds ongeveer normaal verdeeld.**
+
+***
+
+### Centrale limietstelling
+
+Laat $X_1, \ldots, X_n$ een reeks willekeurige variabelen zijn die onafhankelijk van dezelfde verdeling (populatie) worden getrokken. Zolang de steekproefgrootte n voldoende groot is, is het steekproefgemiddelde $\bar X$ ongeveer normaal verdeeld, ongeacht de verdeling van de waarnemingen $X_i$.
+
+### Overzicht van de verdeling van het gemiddelde
+
+![](https://www.nature.com/articles/nmeth.2613.pdf){width=100%}
+
+***
+
+# Interval schatters
+
+- $\bar X$ varieert rond $\mu$
+
+- hier zullen we een interval ontwikkelen rond $\bar X$ dat de waarde $\mu$ bevat met een waarschijnlijkheid van 95% voor een willekeurige steekproef.
+
+- We nemen eerst aan dat $\sigma^2$ bekend is en we zullen deze aanname later versoepelen.
+
+***
+
+## Normaal verdeelde data met gekende variantie
+
+- $X\sim N(\mu,\sigma^2) \rightarrow \bar X\sim N\left(\mu,\frac{\sigma^2}{n}\right)$
+
+- 95% referentie-interval voor het steekproefgemiddelde
+
+\begin{equation*}
+\left[\mu - 1.96 \frac{\sigma}{\sqrt{n}},\mu + 1.96 \frac{\sigma}{\sqrt{n}}%
+\right]
+\end{equation*}
+
+- Het interval bevat het steekproefgemiddelde van een willekeurige steekproef met een kans van 95%.
+
+- We kunnen dit niet berekenen aangezien $\mu$ niet gekend is.
+
+- Schat $\mu$ met $\bar X$.  
+\begin{equation*}
+\left[\bar X - 1.96 \frac{\sigma}{\sqrt{n}},\bar X + 1.96 \frac{\sigma}{\sqrt{n}}\right]
+\end{equation*}
+
+
+- Meer bruikbare interpretatie:
+\vspace{15pt}
+- herschrijf $\mu - 1.96 \ \sigma/\sqrt{n} < \bar{X}$ as $\mu < \bar{X} + 1.96 \ \sigma/\sqrt{n}$.
+
+Zodat we kunnen schrijven
+\begin{eqnarray*}
+95\% &=& P( \mu - 1.96 \ \sigma/\sqrt{n} < \bar{X} < \mu + 1.96 \ \sigma/\sqrt{n} ) \\
+&=&P( \bar{X} - 1.96 \ \sigma/\sqrt{n} < \mu < \bar{X} + 1.96 \ \sigma/\sqrt{n} )
+\end{eqnarray*}
+
+***
+
+**Definitie van 95% betrouwbaarheids interval op het gemiddelde**
+Voor een willekeurige steekproef bevat het interval
+\begin{equation}  
+[\bar{X} - 1.96 \ \sigma/\sqrt{n} , \bar{X} + 1.96 \ \sigma/\sqrt{n} ],
+\end{equation}
+het populatiegemiddelde $\mu$ met een kans van 95%.
+
+***
+
+- De kans dat het BI voor een willekeurige steekproef de populatieparameter
+ $\mu$ bevat, dus 95%, wordt ook wel het **betrouwbaarheidsniveau** genoemd.
+
+- Merk op dat de onder- en bovengrens van het interval ook willekeurige variabelen zijn die van steekproef tot steekproef variëren. Verschillende steekproeven resulteren inderdaad in verschillende betrouwbaarheidsintervallen omdat ze gebaseerd zijn op verschillende waarnemingen.
+
+- Het zijn dus *stochastische intervallen*
+
+- 95% van de steekproeven zullen een 95% betrouwbaarheidsinterval produceren dat het populatiegemiddelde $\mu$ zal bevatten. De overige 5% zullen intervallen produceren die het populatiegemiddelde niet bevatten.
+
+- Op basis van één interval kun je niet concluderen dat het de werkelijke populatieparameter bevat, omdat de waarde ervan onbekend is.
+
+Over het algemeen is de standaarddeviatie ongekend en moet het geschat worden.
+
+- Voor grote $n$, zal $[\bar{X} - 1.96 \ s/\sqrt{n} , \bar{X} + 1.96 \ s/\sqrt{n} ]$ het populatiegemiddelde bevatten met een probabiliteit van 95%.
+
+***
+
+### NHANES log2 cholesterol voorbeeld
+
+#### 1 steekproef
+
+```{r}
+set.seed(3146)
+samp50 <- sample(fem$DirectChol,50)
+
+ll <- mean(samp50 %>% log2) - 1.96*sd(samp50 %>% log2)/sqrt(50)
+ul <- mean(samp50 %>% log2) + 1.96*sd(samp50 %>% log2)/sqrt(50)
+popMean <- mean(fem$DirectChol%>%log2)
+
+c(ll=ll,ul=ul,popMean=popMean)
+```
+
+#### Herhaalde steekproeven
+
+```{r}
+res$ll <- res$mean-1.96*res$se
+res$ul <- res$mean+1.96*res$se
+mu <- fem$DirectChol%>%
+  log2%>%
+  mean
+
+res$inside<- res$ll <= mu & mu <= res$ul
+res$n <- as.factor(res$n)
+res %>%
+  group_by(n) %>%
+  summarize(coverage=mean(inside)) %>%
+  spread(n,coverage)
+```
+
+- Merk op dat de omvang in de steekproeven met 10 waarnemingen te laag is omdat we geen rekening houden met de onzekerheid in de schatting van de standaarddeviatie.
+
+- Als we kijken naar de eerste 20 intervallen, bevat `r sum((!res[res$n==10,"inside"])[1:20])`  van de 20 niet het populatiegemiddelde.
+
+```{r}
+res %>%
+  filter(n==10) %>%
+  slice(1:20) %>%
+  ggplot(aes(x = sample,y = mean,color = inside)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = mean-1.96*se,ymax = mean+1.96*se))+
+  geom_hline(yintercept = fem$DirectChol %>% log2 %>% mean) +
+  ggtitle("20 CI for N = 10") +
+  ylim(range(fem$DirectChol %>% log2))
+```
+
+***
+
+- Voor grote steekproeven (100) is de omvang prima omdat we de standaarddeviatie met een relatief hoge precisie kunnen schatten.
+
+```{r}
+res %>%
+  filter(n == 50) %>%
+  slice(1:20) %>%
+  ggplot(aes(x = sample,y = mean,color = inside)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = mean-1.96*se,ymax = mean+1.96*se))+
+  geom_hline(yintercept = fem$DirectChol %>% log2 %>% mean) +
+  ggtitle("20 CI for N = 50") +
+  ylim(range(fem$DirectChol %>% log2))
+
+res %>%
+  filter(n == 100) %>%
+  slice(1:20) %>%
+  ggplot(aes(x = sample,y = mean,color = inside)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = mean-1.96*se,ymax = mean+1.96*se))+
+  geom_hline(yintercept = fem$DirectChol %>% log2 %>% mean) +
+  ggtitle("20 CI for N = 100") +
+  ylim(range(fem$DirectChol %>% log2))
+```
+
+- Wat heb je geobserveerd voor de intervalbreedte?
+
+***
+
+### Andere betrouwbaarheidsniveaus
+
+- We kunnen $z_{2.5\%}=1.96$ vervangen door een ander kwantiel van de normale verdeling $z_{\alpha/2} om een interval te krijgen met een ander betrouwbaarheidsniveau $1-\alpha$.
+
+- Betrouwbaarheidsintervallen worden niet alleen gebruikt voor het gemiddelde, maar ook voor andere populatieparameters.
+
+***
+
+## Ongekende variantie
+
+In echte voorbeelden is $\sigma$ ongekend en wordt het geschat op basis van de steekproef met behulp van de standaarddeviatie $S$.
+
+- De vorige intervallen waren iets te klein omdat ze geen rekening hielden met de onzekerheid over de schatting van $S$.
+
+- Als $n$ groot is, ligt $S$ in de buurt van $\sigma$.
+
+- Vandaar dat ${(\bar{X} - \mu)}/{(S/\sqrt{n}) }$ ongeveer standaard normaal verdeeld is en
+\begin{equation*}
+\left[\bar{X} - z_{\alpha/2} \ \frac{S}{\sqrt{n}} , \bar{X} + z_{\alpha/2} \
+\frac{S}{\sqrt{n}}\right]
+\end{equation*}
+is een geschatte $(1- \alpha)100\%$ CI voor $\mu$.
+
+- Voor kleine steekproeven geldt dit niet meer (e.g. n=10)
+
+De schatting van $S$ introduceert extra onzekerheid in de gestandaardiseerde waarde ${(\bar{X} - \mu)}/{(S/\sqrt{n})}$. Zijn distributie
+
+- is nog steeds symmetrisch maar heeft zwaardere staarten dan de normale verdeling.
+
+- Het hangt van $n$ af hoeveel zwaarder de staarten zijn
+
+- is een (Student) $t$-verdeling met $n-1$ *vrijheidsgraden*.
+
+***
+
+### T-verdeling
+
+Formeel: Let $X_1, X_2, ..., X_n$ een onafhankelijke willekeurige steekproef zijn uit een normale verdeling $N(\mu, \sigma^2)$, dan volgt $(\bar{X} - \mu)/(S/\sqrt{n})$ een $t$-verdeling met $n-1$ vrijheidsgraden.
+
+De densiteit van een t-verdeling kan worden berekend in R met de functie `dt`. Het heeft argumenten 'x' voor het kwantiel en 'df' voor de vrijheidsgraden.
+
+```{r}
+grid <- seq(-5,5,.1)
+densDist <- cbind(grid,dnorm(grid), sapply(c(2,5,10),dt,x=grid))
+colnames(densDist) <- c("x","normal",paste0("t",c(2,5,10)))
+
+densDist %>%
+  as.data.frame %>%
+  gather(dist,dens,-x) %>%
+  ggplot(aes(x=x,y=dens,color=dist)) +
+  geom_line() +
+  xlab("x") +
+  ylab("Densiteit")
+```
+
+
+t-verdelingen hebben zwaardere staarten dan de normale verdeling $\rightarrow$ grotere kantielen, dus bredere intervallen voor hetzelfde betrouwbaarheidsniveau.
+
+- Dit geeft de extra onzekerheid weer voor het schatten van $S$.
+
+- Als $n \rightarrow \infty$ dan $t(df) \rightarrow N(0,1)$
+
+
+- kwantielen van de $t$-verdeling kunnen worden berekend in R met behulp van `qt`. bv. 95%, 97.5%, 99.5% kwantiel voor een t-verdeling met 14 vrijheidsgraden.
+```{r}
+qt(.975,df=14)
+qt(c(.95,.975,.995),df=14)
+```
+
+- Deze kwantielen kunnen gebruikt worden om de 90%, 95% and 99% CI te berekenen.
+
+- 97.5% kwantiel`r round(qt(.975,df=14),2)` van een t-verdeling met $n-1=14$ vrijheidsgraden is inderdaad groter dan die van een standaard normale verdeling `r round(qnorm(.975),2)`.
+
+***
+### Betrouwbaarheidsinterval gebaseerd op de t-verdeling
+
+De $100\% (1-\alpha)$ CI voor het gemiddelde $\mu$ van een normaal verdeelde willekeurige variabele $X$ met ongekende variantie is
+
+\begin{equation*}
+\left[\bar{X} - t_{n-1, \alpha/2} \frac{s}{\sqrt{n}} , \bar{X} + t_{n-1,
+\alpha/2} \frac{s}{\sqrt{n}}\right]
+\end{equation*}
+
+- We vervangen eenvoudig het $(1-\alpha/2)100\%$ kwantiel van de normale verdeling door die van de t-verdeling met $n-1$ vrijheidsgraden.
+
+### Captopril voorbeeld
+
+
+95% CI voor de gemiddelde bloeddrukverandering wordt
+
+```{r}
+mean(captopril$deltaSBP) -  qt(.975,df=14)*sd(captopril$deltaSBP)/sqrt(15)
+mean(captopril$deltaSBP) + qt(.975,df=14)*sd(captopril$deltaSBP)/sqrt(15)
+```
+
+Het 99% CI is gegeven door
+```{r}
+mean(captopril$deltaSBP) -  qt(.995,df=14)*sd(captopril$deltaSBP)/sqrt(15)
+mean(captopril$deltaSBP) + qt(.995,df=14)*sd(captopril$deltaSBP)/sqrt(15)
+```
+
+Merk op dat nul buiten het interval ligt en dat het gehele interval negatief is, wat aangeeft dat er gemiddeld een groot effect is van het toedienen van captopril op de bloeddruk van patiënten met hypertensie.
+
+***
+
+### Interpretatie van het betrouwbaarheidsinterval
+
+- We zullen opnieuw steekproeven trekken van de grote NHANES studie en deze keer BI's bestuderen voor log2-cholesterol steekproefwaarden. We voeren eerst herhaalde experimenten uit met steekproefgrootte 10.
+
+```{r}
+res$n <- as.character(res$n) %>%
+  as.double(res$n)
+
+res$ll <- res$mean-qt(0.975,df=res$n-1)*res$se
+res$ul <- res$mean+qt(0.975,df=res$n-1)*res$se
+
+mu <- fem$DirectChol%>%log2%>%mean
+
+res$inside <- res$ll<=mu & mu<=res$ul
+res$n <- as.factor(res$n)
+
+res %>%
+  group_by(n) %>%
+  summarize(coverage=mean(inside)) %>%
+  spread(n,coverage)
+```
+
+We zien dat de omvang van de intervallen nu worden gecontroleerd op hun nominale betrouwbaarheidsniveau van 95%.
+
+```{r}
+res %>%
+  filter(n==10) %>%
+  slice(1:20) %>%
+  ggplot(aes(x=sample,y=mean,color=inside)) +
+  geom_point() +
+  geom_errorbar(
+    aes(ymin=mean-qt(0.975,df=9)*se,
+    ymax=mean+qt(0.975,df=9)*se))+
+  geom_hline(yintercept = fem$DirectChol %>% log2 %>% mean) +
+  ggtitle("20 CI for N=10") +
+  ylim(range(fem$DirectChol %>% log2))
+```
+
+***
+Opdracht
+
+Voer de bovenstaande simulatie studie opnieuw uit maar verdubbel de steekproefgrootte. Welke impact heeft dit op de BIs?
+***
+
+![](https://www.nature.com/articles/nmeth.2659.pdf){width=100%}
+
+***
+
+## Rapporteren?
+
+
+- Rapporteer altijd de onzekerheid over de resultaten!
+
+- Conclusies op basis van een puntschatting kunnen erg misleidend zijn.
+
+- Bij een statistische analyse rapporteren we daarom altijd betrouwbaarheidsintervallen
+
+- Ze zijn klein genoeg om informatief te zijn, maar bijna nooit misleidend
+
+- Ze vormen een goede afweging tussen statistische significantie en biologische relevantie.
+
+
+- Rapporteer altijd de onzekerheid op de resultaten!
+
+- Bij een statistische analyse rapporteren we daarom altijd betrouwbaarheidsintervallen
+
+- De intervallen zijn klein genoeg om informatief te zijn, maar bijna nooit misleidend
+
+- Ze vormen een goede afweging tussen statistische significantie en biologische relevantie.
+
+- We concluderen dat de populatieparameter in het interval ligt en weten dat deze stelling geldt met een probabiliteit van 95% voor willekeurige steekproeven.
+
+### Captopril voorbeeld
+
+We concluderen dat de bloeddruk gemiddeld met
+`r abs(round(mean(captopril$deltaSBP),1))`mmHg vermindert na toediening van captopril (95% CI [`r paste(round(mean(captopril$deltaSBP)+qt(c(0.025,.975),n-1)*sd(captopril$deltaSBP)/sqrt(n),1),collapse=",")`]mmHg).
+
+Op basis van deze resultaten is het duidelijk dat de behandeling een sterke bloeddrukdaling veroorzaakt bij patiënten met hypertensie.
+
+# Hypothese testen
+
+## Captopril voorbeeld:
+Onderzoekers willen beoordelen of het medicijn captopril de bloeddruk verlaagt bij patiënten met hypertensie.
+
+- Heeft het toedienen van captopril wel of geen effect op de systolische bloeddruk?
+
+- Het ligt niet voor de hand om dergelijke conclusies te trekken op basis van een kleine steekproef
+
+- Het is onzeker of we de observaties in de steekproef naar de populatie kunnen veralgemenen!
+
+-  Is het schijnbaar gunstige effect systematisch of willekeurig?
+
+```{r}
+captoprilTidy %>%
+  filter(type%in%c("SBPa","SBPb")) %>%
+  mutate(type=factor(type,levels=c("SBPb","SBPa"))) %>%
+  ggplot(aes(x=type,y=bp)) +
+  geom_line(aes(group = id)) +
+  geom_point()
+```
+
+```{r}
+captopril$deltaSBP <- captopril$SBPa-captopril$SBPb
+captopril%>%
+  ggplot(aes(x="Systolic blood pressure",y=deltaSBP)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(position="jitter")+
+  ylab("Difference (mm mercury)") +
+  xlab("")
+```
+
+
+- Het gemiddelde bloeddrukverschil $\bar X$ is een natuurlijke basis om onze beslissingen op te baseren.
+
+$$\bar x\text{=`r round(mean(captopril$deltaSBP),2)` (s=`r round(sd(captopril$deltaSBP),2)`, SE=`r round(sd(captopril$deltaSBP)/sqrt(15),2)`)}$$
+
+- Het is niet voldoende dat $\bar{x}< 0$ om te concluderen dat de systolische bloeddruk gemiddeld lager is bij toediening van Captopril *op het niveau van de gehele populatie*.
+
+- Om het effect dat we in de steekproef waarnemen te veralgemenen naar de populatie, moet het voldoende groot zijn.
+
+- Maar hoe groot?
+
+***
+
+### Hypothese testen
+
+- Voor dit doel zijn statistische hypothesetests ontwikkeld
+- Deze geven een zwart/wit antwoord
+- Het is bijna onmogelijk om een wetenschappelijke publicate te lezen zonder resultaten van statistische testen
+- Volgens het *falsificatie principe* van Popper kunnen we nooit een hypothese bewijzen op basis van gegevens.
+
+    - Daarom introduceren we twee hypothesen: een nulhypothese $H_0$ en een alternatieve hypothese $H_1$.
+
+    - We zullen proberen de nulhypothese te ontkrachten op basis van de statistische test.
+
+#### Captopril
+
+- Op basis van de steekproef kunnen we niet bewijzen dat er een effect is van het toedienen van captopril ($H_1$, alternatieve hypothese).
+
+- We veronderstellen daarom dat er geen effect is van captopril
+
+    - We noemen dit de nulhypothese $H_0$.
+
+    - Falsify ("probeer te ontkrachten") de $H_0$.
+
+    - Hoe waarschijnlijk is het om een effect waar te nemen dat minstens zo groot is als wat we in de steekproef in een willekeurige steekproef hebben gezien als $H_0$ waar is?  
+
+***
+
+
+#### Permutatie test
+
+
+- Onder $H_0$ zijn de bloeddrukmetingen voor en na toediening van captopril twee "base line" bloeddrukmetingen voor een patiënt
+
+- Onder H$_0$ kunnen we de bloeddrukmetingen voor iedere patiënt in willekeurige volgorde plaatsen (permuteren).
+
+
+```{r}
+set.seed(35)
+captoprilSamp <- captopril
+perm <- sample(c(FALSE, TRUE), 15, replace = TRUE)
+captoprilSamp$SBPa[perm] <- captopril$SBPb[perm]
+captoprilSamp$SBPb[perm] <- captopril$SBPa[perm]
+captoprilSamp$deltaSBP <- captoprilSamp$SBPa-captoprilSamp$SBPb
+captoprilSamp %>%
+  gather(type, bp, -id) %>%
+  filter(type %in% c("SBPa","SBPb")) %>%
+  mutate(type = factor(type, levels = c("SBPb", "SBPa")))%>%
+  ggplot(aes(x = type,y = bp)) +
+  geom_line(aes(group = id)) +
+  geom_point()
+```
+
+
+
+
+```{r}
+data.frame(
+  deltaSBP = c(captopril$deltaSBP,captoprilSamp$deltaSBP),
+  shuffled=rep(c(FALSE,TRUE),each=15)
+  ) %>%
+  ggplot(aes(x = shuffled, y = deltaSBP)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_point(position = "jitter")+
+  stat_summary(
+    fun.y = mean,
+    geom = "point",
+    shape = 19,
+    size = 3,
+    color = "red",
+    fill = "red") +
+  ylab("Difference (mm mercury)")
+```
+
+We permuteren opnieuw
+
+
+```{r}
+captoprilSamp <- captopril
+perm <- sample(c(FALSE,TRUE), 15, replace = TRUE)
+captoprilSamp$SBPa[perm] <- captopril$SBPb[perm]
+captoprilSamp$SBPb[perm] <- captopril$SBPa[perm]
+captoprilSamp$deltaSBP <- captoprilSamp$SBPa-captoprilSamp$SBPb
+captoprilSamp %>%
+  gather(type, bp, -id) %>%
+  filter(type %in% c("SBPa","SBPb")) %>%
+  mutate(type = factor(type, levels = c("SBPb", "SBPa")))%>%
+  ggplot(aes(x = type,y = bp)) +
+  geom_line(aes(group = id)) +
+  geom_point()
+
+data.frame(
+  deltaSBP = c(captopril$deltaSBP,captoprilSamp$deltaSBP),
+  shuffled=rep(c(FALSE,TRUE),each=15)
+  ) %>%
+  ggplot(aes(x = shuffled, y = deltaSBP)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_point(position = "jitter")+
+  stat_summary(
+    fun.y = mean,
+    geom = "point",
+    shape = 19,
+    size = 3,
+    color = "red",
+    fill = "red") +
+  ylab("Difference (mm mercury)")
+```
+
+
+- Er zijn $2^{15}$ = `r format(2^15)` mogelijke permutaties!
+- We hoeven in principe alleen de tekens van de waargenomen bloeddrukverschillen $x$ te wisselen als we permuteren.
+
+```{r}
+permH <- expand.grid(
+  replicate(
+    15,
+    c(-1,1),
+    simplify=FALSE)
+  ) %>%
+  t
+
+permH[,1:5]
+```
+
+- We zullen dit voor alle mogelijke permutaties doen en we zullen het gemiddelde bijhouden.
+
+
+```{r}
+#calculate the means for the permuted data
+muPerm <- colMeans(permH*captopril$deltaSBP)
+muPerm %>%
+  as.data.frame %>%
+  ggplot(aes(x=.)) +
+  geom_histogram() +
+  geom_vline(
+    xintercept = mean(captopril$deltaSBP),
+    col = "blue")
+
+sum(muPerm <= mean(captopril$deltaSBP))
+mean(muPerm <= mean(captopril$deltaSBP))
+```
+
+-  We zien dat maar 1 van de gemiddelden die werden verkregen onder $H_0$ (door permutatie) zo extreem was als het steekproefgemiddelde dat we in de captopril-studie hebben waargenomen.
+
+- Dus de kans om een bloeddrukdaling waar te nemen die groter of gelijk is dan die in de captopril-studie in een willekeurige steekproef onder de nulhypothese, is 1 op de `r format(2^15)`.
+
+We hebben dus sterk bewijs dat $H_0$ onjuist is en daarom verwerpen we $H_0$ en concluderen $H_1$: het toedienen van captopril heeft een effect op de bloeddruk van patiënten met hypertensie.
+
+***
+
+### Pivot
+
+- In de praktijk gebruiken we altijd statistieken die de effectgrootte (gemiddeld verschil) afwegen tegen ruis (standaard error)
+
+- Als we de nulhypothese ontkrachten, standaardiseren we het gemiddelde rond $\mu_0 = 0$ het gemiddelde onder $H_0$
+
+$$t=\frac{\bar X-\mu_0}{se_{\bar X}}$$
+
+- Voor het Captopril voorbeeld wordt dit:
+$$\frac{`r round(mean(captopril$deltaSBP),2)`-0}{`r round(sd(captopril$deltaSBP)/sqrt(15),2)`}=`r round(mean(captopril$deltaSBP)/(sd(captopril$deltaSBP)/sqrt(15)),2)`$$
+
+
+We bepalen nu de nulverdeling van teststatistiek t met permutatie.
+
+```{r}
+deltaPerms <- permH*captopril$deltaSBP
+tPerm <- colMeans(deltaPerms)/(apply(deltaPerms,2,sd)/sqrt(15))
+tOrig <- mean(captopril$deltaSBP)/sd(captopril$deltaSBP)*sqrt(15)
+
+tPermPlot <- tPerm %>%
+  as.data.frame %>%
+  ggplot(aes(x = .)) +
+  geom_histogram(aes(y = ..density.., fill = ..count..)) +
+  geom_vline(xintercept = tOrig,col = "blue")
+tPermPlot
+```
+
+- Opnieuw heeft slechts 1 van de permutaties een t-statistiek die zo extreem is als de statistiek die wordt waargenomen in de captopril-studie.
+
+Wanneer er geen effect van captopril is, is het bijna onmogelijk om een teststatistiek te verkrijgen die zo extreem is als degene die werd waargenomen (  t=`r round(tOrig,2)`).
+
+-De kans om een grotere bloeddrukdaling waar te nemen dan degene die we in onze steekproef hebben waargenomen in een willekeurige steekproef onder $H_0$ is 1/`r format(2^15)`.
+
+- We noemen deze kans de *p-waarde*.
+
+- Het meet de sterkte van het bewijs tegen de nulwaarde: hoe kleiner de p-waarde, hoe meer bewijs we hebben dat de nulwaarde niet waar is.
+
+- De verdeling heeft een mooie klokvorm.
+
+***
+
+### Hoe beslissen we?
+
+Wanneer is de p-waarde klein genoeg om te concluderen dat er sterk bewijs is tegen de nulhypothese?
+
+- We werken doorgaans met een significantieniveau van $\alpha = 0,05$
+
+- We stellen dat we de test hebben uitgevoerd op het significantieniveau van 5%
+
+***
+
+
+### Permutatietests zijn computationeel veeleisend
+
+- Kunnen we beoordelen hoe extreem de bloeddrukdaling was zonder permutatie?
+
+- We weten dat de bloeddrukverschillen ongeveer normaal verdeeld zijn, dus
+
+$$t=\frac{\bar X - \mu}{se_{\bar X}}$$
+
+volgt een t-verdeling (met 14 vrijheidsgraden voor het Captopril voorbeeld).
+
+
+- Onder H$_0$ $\mu=0$ en $$t=\frac{\bar X-0}{se_{\bar X}}\sim f_{T,14}$$
+
+```{r}
+tPermPlot +
+  stat_function(
+    fun = dt,
+    color = "red",
+    args = list(df=14))
+```
+
+
+- Merk op dat de permutatie-nulverdeling inderdaad overeenkomt met een t-verdeling met 14 vrijheidsgraden.
+
+- Zodat we de statistische test kunnen uitvoeren met behulp van statistische modellen van de gegevens.
+
+- Hiervoor moeten we assumpties maken, die we verifiëren in de data exploratie.
+
+
+***
+
+
+## Hypotheses
+
+Vertaal de onderzoeksvraag naar een nulhypothese ($H_0$) en een alternatieve hypothese ($H_1$)
+
+Eerst moeten we de onderzoeksvraag vertalen naar een geparametriseerd statistisch model.  
+
+- Uit het experimentele ontwerp volgt dat  $$X_1,...,X_n \text{ i.i.d } f(X),$$ met $f(X)$ de dichtheidsfunctie van bloeddrukverschillen.
+
+- **vereenvoudig**: neem aan dat $f(X)$ gekend is met uitzondering van een eindig dimensionale set parameters $\mathbf{\theta}$ die nog moet worden geschat (parametrisch statistisch model).
+
+### Captopril voorbeeld
+
+$X \sim N(\mu,\sigma^2)$ with $\mathbf{\theta}=(\mu,\sigma^2)$, the mean $\mu$ and variance $\sigma^2$.
+
+De onderzoeksvraag is nu vertaald in termen van de gemiddelde bloeddrukdaling:: $\mu = E_f[X]$.
+
+De **alternatieve hypothese**  is geformuleerd in termen van een parameter van $f(X)$  moet uitdrukken wat de onderzoekers met het onderzoek willen bewijzen.
+
+- hier:
+$$H_1: \mu<0.$$ Gemiddeld daalt de bloeddruk van patiënten met hypertensie na toediening van captopril.
+
+
+De **nul hypothese** drukt over het algemeen een nulvoorwaarde uit, d.w.z wanneer er niets uitzonderlijks gebeurt.
+
+- Onderzoekers proberen doorgaans via empirisch onderzoek aan te tonen dat het observeren van de gegevens onder de nul hoogst onwaarschijnlijk is, zodat ze de nulhypothese kunnen verwerpen:
+**Falsificatie principe**.
+
+- De **nul hypothese wordt doorgaans uitgedrukt met dezelfde modelparameter als die wordt gebruikt voor $H_1$.**
+
+- Hier:
+$$H_0 : \mu=0$$ d.w.z. gemiddeld blijft de systolische bloeddruk ongewijzigd na toediening van captopril.
+
+
+***
+
+## Test-statistiek
+
+
+
+Zodra de populatie, de parameters en $H_0$ en $H_1$ zijn bepaald, volgt men bij hypothesetesten de volgende rationale:
+
+Construeer een teststatistiek zodat deze
+
+1. het bewijs meet in de steekproef,
+\vspace{10pt}
+2. tegen de nulhypothese, en
+\vspace{10pt}
+3. in het voordeel van de alternatieve hypothese.
+
+Een teststatistiek moet dus een functie zijn van de waarnemingen in de steekproef.
+
+
+### Captopril voorbeeld
+
+
+$$T=\frac{\bar{X}-\mu_0}{\text{SE}_{\bar X}}$$
+Met $\mu_0=0$ onder $H_0$
+
+Opnieuw
+
+- Als $H_0$ geldt, is er geen effect van captopril op de bloeddruk in de populatie en dan verwachten we teststatistiek $T$ dicht bij 0.
+
+- Als $H_1$ waar is, verwachten we $T <0$.
+
+- In het captopril voorbeeld observeren we $t=(-18.93-0)/2.33=-8.12$.
+
+- Is $t = -8.12$ in absolute waarde groot genoeg om te concluderen dat  $\mu < 0$ en met welk vertrouwen kunnen we deze conclusie trekken?
+
+- We weten dat t een t-verdeling volgt met 14 vrijheidsgraden onder $H_0$  
+
+
+***
+
+## p-waarde
+
+De p-waarde is de probabiliteit die $H_0$ en $H_1$ afweegt.
+
+De manier waarop we het berekenen is contextafhankelijk
+
+- Voor het Captopril voorbeeld hebben we
+  $$
+    p = P\left[T \leq t \mid H_0\right] = \text{P}_0\left[T\leq t\right],
+  $$
+De index "0" in $\text{P}_0\left[.\right]$ geeft aan dat de kans wordt berekend onder $H_0$.
+
+Het geeft de kans weer om een teststatistiek $T$ te bekomen die lager of gelijk is aan de waarde die wordt waargenomen in de huidige steekproef in een willekeurige steekproef onder $H_0$ waar te nemen.
+    - d.w.z. de kans om een teststatistiek $T$ te vinden in een willekeurige steekproef onder $H_0$ met een waarde die extremer is (meer in de richting van $H_1$) dan die waargenomen in de huidige steekproef.
+
+### Captopril Voorbeeld
+
+
+- De $p$-waarde voor het captopril voorbeeld wordt als volgt berekend.
+  $$p= \text{P}_0\left[T\leq -8.12\right]=F_t(-8.12;14) = 0.6\ 10^{-6}.$$
+
+  met $F_t(;14)$  de cumulatieve verdelingsfunctie van een t-verdeling met 14 vrijheidsgraden:
+
+$$F_t(x;14)=\int\limits_{-\infty}^{x} f_t(x;14).$$
+
+en $f_t(.;14)$ de dichtheidsfunctie van de t-verdeling.
+
+- We berekenen deze kans in R met `pt(x,df)`
+
+    - De waarde van de waargenomen teststatistiek `x` en
+    - het aantal vrijheidsgraden van de t-verdeling "df".
+
+- `pt(x,df)` berekent de kans om een waarde kleiner of gelijk aan x waar te nemen als we een willekeurige steekproef zouden trekken uit een t-verdeling met df vrijheidsgraden.
+
+```{r}
+n <- length(captopril$deltaSBP)
+stat <- (mean(captopril$deltaSBP)-0)/(sd(captopril$deltaSBP)/sqrt(n))
+stat
+pt(stat,n-1)
+```
+
+
+In de praktijk gaan we de test niet zelf berekenen, maar gebruiken we de functie t.test:
+
+```{r}
+t.test(captopril$deltaSBP, alternative = "less")
+```
+
+Merk op dat we het argument `alternative="less"` moeten specificeren, zodat de p-waarde in de linker staart wordt berekend.
+
+
+De functie geeft ook een eenzijdig interval omdat we in één richting testen.
+
+***
+
+### Definitie van de p-waarde
+
+De **p-waarde** (ook wel het ** waargenomen significantieniveau ** genoemd) is de kans om een teststatistiek in een willekeurige steekproef waar te nemen onder de nulhypothese die even extreem of extremer is dan de teststatistiek die in de huidige steekproef is waargenomen
+
+
+- Hoe kleiner de kans, hoe meer bewijs tegen $H_0$.
+
+- Merk op dat de p-waarde ** niet ** de kans is dat de nulhypothese waar is!
+
+- Het woord "extreem" geeft aan in welke richting de teststatistiek waarschijnlijker is onder de alternatieve hypothese.
+
+- In het voorbeeld $H_1: \mu < 0$ n we verwachten dus zeer negatieve waarden voor $t$ onder $H_1$.
+
+- Vanuit de definitie geven kleine p-waarden aan dat de geobserveerde teststatistiek onwaarschijniljk is in de veronderstelling dat $H_0$ correct is.
+
+- Dus een kleine waarde van $p$-waarde betekent dat we ** $H_0$ ** moeten afwijzen ten gunste van $H_1$.
+
+- De drempel die we gebruiken om de $p$-waarde te vergelijken, wordt het **significantie nievau** genoemd en wordt aangegeven met $\alpha$.
+
+- Een statistische test uitgevoerd op het $\alpha$ significantie niveau wordt ook wel een **niveau-$\alpha$ test**.
+
+Een test resultaat is *statistisch significant* als $p<\alpha$
+
+- $\alpha$ wordt gewoonlijk gezet op 5\%.
+
+- Hoe kleiner de p-waarde hoe `significanter' het testresultaat afwijkt van wat onder $H_0$ verwacht kan worden.
+
+- Het vat het bewijs tegen de nul samen.
+
+$$\begin{array}{cl}>0.10 & \text{ non significant (no evidence)}\\0.05-0.10 & \text{ marginal significant, weak evidence (do not use this yourself)}\\0.01-0.05 & \text{ significant}\\0.001-0.01 & \text{strongly significant}\\<0.001 & \text{ extremely significant}\end{array}$$
+
+***
+
+## Kritieke waarde
+
+```{r  out.width='100%', fig.asp=.8, fig.align='center',echo=FALSE}
+par(mar=c(6,6,6,2))
+grid <-seq(-10,10,.01)
+tcrit <- qt(0.05,n-1)
+reject <- c(grid[grid<tcrit],tcrit)
+plot(grid,dt(grid,n-1),type="l",lwd=2,xlab="t-statistic",ylab="density",cex.lab=2,cex.axis=2,cex.main=2)
+abline(v=mean(captopril$deltaSBP)/se,col=2,lwd=2,lty=2)
+abline(v=qt(c(.05),n-1),col=2,lty=1,lwd=2)
+text(c(-5,-5,5,5),c(.21,.19,.21,.19),label=c("rejection-","region","acception-","region"),col=c(2,2,4,4))
+arrows(-100,.4,mean(captopril$deltaSBP)/se,.4,lwd=2,col=2,angle=20,length=.1)
+text(-10,.35,label="p-value",srt=90,col=2)
+arrows(-100,.2,tcrit,.2,lwd=2,col=2,angle=20,length=.1)
+text(pos=4,mean(captopril$deltaSBP)/se,.02,label=paste("t=",round(mean(captopril$deltaSBP)/se,2)),col=2)
+arrows(100,.2,tcrit,.2,lwd=2,col=4,angle=20,length=.1)
+text(pos=4,tcrit,.02,label=paste("t-crit=",round(tcrit,2)),col=2)
+polygon(c(reject,tcrit,-10),c(dt(reject,n-1),0,0),col=2,border=2)
+text(-3.5,.05,label=expression(paste(alpha,"=0.05")),col=2)
+arrows(-2,0.02,-3.5,.04,col=2,lwd=2,angle=20,length=.1)
+```
+
+***
+
+## Beslissingsfouten
+
+De beslissing om $H_0$ te accepteren of te verwerpen wordt genomen op basis van een enkele steekproef.
+Er kan een verkeerde beslissing zijn genomen.
+
+```{r,echo=FALSE}
+library("kableExtra")
+DecisionErrors=data.frame(Conclusion=c("Accept H0","Reject H0"),"H0"=c("OK","Type I ($\\alpha$)"),"H1"=c("Type II ($\\beta$)","OK"))
+knitr::kable(DecisionErrors,,align="c")%>%
+  kable_styling( position = "center") %>%
+  add_header_above(c(" " = 1, "Reality" = 2))
+```
+ - Type I error, $\alpha$: de nul hypothese wordt ten onrechte verworpen (vals positief)
+ \vspace{10pt}
+ - Type II error, $\beta$: de nulhypothese wordt ten onrechte aanvaard
+
+ - Beslissing is ook stochastisch! Zie eerste hoofdstuk van de cursus
+
+### Captopril Voorbeeld
+
+- $H_0$: Het toedienen van captopril heeft geen effect op de systolische bloeddruk
+
+- $H_1$: Het toedienen van captopril leidt gemiddeld tot een verlaging van de bloeddruk
+
+- **Type I error**: er is gemiddeld geen bloeddrukdaling bij toediening van captopril, maar we concluderen dat er een effect is van captopril.
+
+- **Type II error**: er is gemiddeld een bloeddrukdaling bij toediening van captopril, maar deze wordt niet opgemerkt door de statistische test.
+
+***
+
+### Type I fout wordt gecontroleerd
+
+
+De type I-fout wordt gecontroleerd door de constructie van de statistische test.
+
+$$\text{P}\left[\text{type I error}\right]=\text{P}\left[\text{reject }H_0 \mid H_0\right] = \text{P}_0\left[T<t_{n-1;1-\alpha}\right]=\alpha $$
+
+
+- Het significantieniveau $\alpha$ is de kans om een type I-fout te maken.
+
+- De statistische test zorgt ervoor dat de kans op een type I-fout wordt gecontroleerd op het significantieniveau $\alpha$.
+
+- De kans om $H_0$ correct te accepteren is $1-\alpha$.
+
+- We kunnen aantonen dat de p-waarde onder $H_0$ uniform verdeeld is.
+
+- Het testen van statistische hypothesen leidt dus tot een uniforme beslissingsstrategie.
+
+We illustreren dit in een simulatiestudie
+
+- n=15
+- $\mu=0$ mmHg, er is dus geen effect van de behandeling
+- $\sigma =9$ mmHg
+- 1000 gesimuleerde steekproeven
+
+```{r}
+nsim <- 10000
+n <- 15
+sigma <- 9
+mu <- 0
+mu0 <- 0
+alpha <- 0.05
+
+#simulate nsim samples of size n
+deltaSim <- matrix(
+  rnorm(n*nsim,mu,sigma),
+  nrow=n,
+  ncol=nsim)
+
+pSim <- apply(
+  deltaSim,
+  2,
+  function(x, mu, alternative)    
+    t.test(x,
+      mu = mu,
+      alternative = alternative)$p.value,
+      mu = mu0,
+      alternative="less"
+  )
+
+mean(pSim<alpha)
+
+pSim %>%
+  as.data.frame %>%
+  ggplot(aes(x=.)) +
+  geom_histogram() +
+  xlim(0,1)
+```
+
+- De type I-fout is inderdaad ongeveer 0,05
+- De p-waarden zijn uniform
+***
+
+### Type II fout
+
+- Type II-fout bepalen is minder duidelijk.
+- We moeten redeneren onder $H_1$
+- In the captopril voorbeeld is $H_1: \mu<0$
+- Er zijn veel mogelijke alternatieven
+- De verdeling onder $H_1$ is niet volledig gespecificeerd
+
+- *oplossing:* kies een specifieke distributie onder $H_1$.
+
+ $$H_1(\delta): \mu=0-\delta \text{ for }\delta>0.$$
+
+- bijv. een bloeddrukverschil van 2 mmHg
+
+- type II wordt ook wel de **kracht** of "power" genoemd. Het is de kans om de alternatieve hypothese te aanvaarden.
+
+- Het wordt niet gegarandeerd door het design van de test
+
+- Het hangt af van de experimentele opzet van de studie
+
+
+```{r}
+nsim <- 10000
+n <- 15
+sigma <- 9
+mu <- -2
+mu0 <- 0
+alpha <- 0.05
+
+#simulate nsim samples of size n
+deltaSim <- matrix(
+  rnorm(n*nsim, mu, sigma),
+  nrow=n,
+  ncol=nsim)
+
+pSim <- apply(
+  deltaSim,
+  2,
+  function(x,mu,alternative)          
+    t.test(x,
+      mu = mu,
+      alternative = alternative)$p.value,
+      mu = mu0,
+      alternative = "less"
+  )
+
+mean(pSim<alpha)
+pSim %>%
+  as.data.frame %>%
+  ggplot(aes(x=.)) +
+  geom_histogram() +
+  xlim(0,1)
+```
+- We observeren dat een power van `r mean(pSim<alpha)` of een type II error van `r 1-mean(pSim<alpha)`.
+
+***
+
+- Wanneer we de steekproefgrootte vergroten
+
+
+```{r}
+nsim <- 10000
+n <- 30
+sigma <- 9
+mu <- -2
+mu0 <- 0
+alpha <- 0.05
+
+#simulate nsim samples of size n
+deltaSim <- matrix(
+  rnorm(n*nsim, mu, sigma),
+  nrow=n,
+  ncol=nsim)
+
+pSim <- apply(
+  deltaSim,
+  2,
+  function(x,mu,alternative)          
+    t.test(x,
+      mu = mu,
+      alternative = alternative)$p.value,
+      mu = mu0,
+      alternative = "less"
+  )
+
+mean(pSim < alpha)
+pSim %>%
+  as.data.frame %>%
+  ggplot(aes(x=.)) +
+  geom_histogram() +
+  xlim(0,1)
+```
+
+- Het vergroten van de steekproefgrootte leidt tot een hogere power.
+- Toch blijft de power om zo'n kleine bloeddrukdaling op te vangen erg laag.
+- Een daling van 2 mmHg is ook niet relevant voor farmaceutische bedrijven.
+
+![](https://www.nature.com/articles/nmeth.2738.pdf){width=100%}
+
+***
+
+### Interpretatie
+
+Stel dat een bepaalde steekproef $p < \alpha$, d.w.z. $H_0$  afwijzen
+
+- Twee mogelijkheden
+
+    - Correcte beslissing,
+	  - of type I fout.
+
+- We weten dat de kans op een type-I fout klein is, d.w.z. $\alpha=0.05$.
+
+
+Aan de andere kant als $p\geq\alpha$ en we $H_0$ niet afwijzen hebben we ook twee opties:
+
+  - Correcte beslissing,
+  - of we hebben een type II fout gemaakt.
+
+De kans op een type II fout ($\beta$) wordt niet gecontroleerd op een specifieke waarde.
+
+Statistische test is geconstrueerd om alleen de kans op een type I-fout op  $\alpha$ te controleren.
+
+Om wetenschappelijk correct te zijn, moeten we een pessimistische houding aannemen en moeten we toegeven dat $\beta$ groot kan zijn (d.w.z. een kleine power om het alternatief te detecteren).
+
+Dus,
+
+- $p < \alpha$ we verwerpen $H_0$
+
+    - We concluderen dat $H_1$ waarschijnlijk correct is
+	  - We noemen dit een sterke conclusie
+
+- $p \geq \alpha$ accepteer $H_0$  
+
+	  - Betekent niet dat we $H_0$ correct accepteren.
+  	- We kunnen enkel concluderen dat de gegevens onvoldoende bewzijs hebben tegen de $H_0$ in voordeel van $H_1$.
+    - Dit noemen we een zwakke conclusie
+    - We concluderen doorgaans dat het effect van de behandeling niet significant is.
+
+***
+
+## Conclusies captopril voorbeeld
+
+
+De test die we hebben uitgevoerd, wordt aangeduid als
+
+
+- De **enkele steekproef t-test** op het verschil of
+
+- een **gepaarde t-test**. We beschikken inderdaad over gepaarde observaties voor elke patiënt.
+
+- De test is eenzijdig gedaan omdat we testen tegen het alternatief van een bloeddrukdaling.
+
+- Beide tests (één voorbeeld van een t-test op het verschil en een gepaarde t-test) geven dezelfde resultaten:
+
+```{r}
+t.test(captopril$deltaSBP,alternative="less")
+```
+
+```{r}
+t.test(captopril$SBPa,captopril$SBPb,paired=TRUE,alternative="less")
+```
+
+***
+
+### Conclusie
+
+Er is gemiddeld een extreem significante bloeddrukdaling bij toediening van captopril aan patiënten met hypertensie. De systolische bloeddruk daalt gemiddeld met 18,9 mmHg bij de behandeling met captopril  (95% CI [$-\infty,-14.82$] mmHg).
+
+Let op dat
+
+1. Er wordt een eenzijdig interval gerapporteerd omdat we alleen geïnteresseerd zijn in een bloeddrukdaling.
+
+2. Vanwege de pretest / posttest opzet kunnen we geen onderscheid maken tussen het effect van de behandeling en een placebo-effect. Er was geen goede controle! Het ontbreken van een goede controle komt meestal voor bij pre-test / post-test designs. Hoe hadden we het design kunnen verbeteren?
+
+***
+
+## eenzijdig or tweezijdige testen?
+
+De test in het captopril-voorbeeld was een eenzijdige test. We proberen alleen te detecteren of de captoprilbehandeling gemiddeld de bloeddruk verlaagt.
+
+
+Stel dat we het bloeddrukverschil hebben gedefinieerd als  $X_{i}^\prime=Y_{i}^\text{before}-Y_{i}^\text{after}$
+
+- Nu duidt een positieve waarde op een bloeddrukdaling
+
+- De gemiddelde verandering in bloeddruk wordt nu aangeduid als $\mu^\prime=\text{E}[X^\prime]$.
+
+- Dus nu moeten we een eenzijdige test gebruiken om $H_0: \mu^\prime=0$ te beoordelen tegen $H_1: \mu^\prime>0$.
+
+- p-waarde wordt nu:
+$$p=\text{P}_0\left[T\geq t\right].$$
+
+***
+
+Analyse gebaseerd op $X^\prime$: Argument `alternative="greater"` Zo dat we $H_1: \mu^\prime>0$ gebruiken:
+```{r}
+t.test(captopril$SBPb-captopril$SBPa, alternative="greater")
+```
+
+
+Natuurlijk behalen we dezelfde resultaten. Alleen het teken is verwisseld.
+
+
+### Tweezijdige test
+
+
+Stel dat onderzoekers het werkingsmechanisme van het nieuwe medicijn captopril in de ontwerpfase wilden beoordelen en veronderstel dat gezonde proefpersonen in een vroege fase van de medicijnontwikkeling werden gebruikt.
+
+In dit geval zou het interessant zijn geweest om zowel bloeddrukdalingen als stijgingen waar te nemen.
+
+Dan hebben we een tweezijdige teststrategie nodig
+
+$$H_0: \mu=0$$
+tegen de alternatieve hypothese
+
+$$H_1: \mu\neq0,$$
+
+zodat het gemiddelde onder het alternatief verschilt van nul.
+
+Het kunnen zowel positieve als negatieve veranderingen zijn en we wisten van tevoren niet in welke richting het werkelijke gemiddelde zal afwijken van $H_1$.
+
+
+We kunnen een tweezijdige test uitvoeren op het $\alpha=5\%$ significantieniveau door
+
+```{r out.width='100%', fig.asp=.8, fig.align='center',echo=FALSE}
+grid <-seq(-10,10,.01)
+tcrit <- qt(0.975,n-1)
+reject1 <- c(grid[grid< -tcrit],-tcrit)
+reject2 <- c(tcrit,grid[grid>tcrit])
+
+plot(grid,dt(grid,n-1),type="l",lwd=2,xlab="t-statistic",ylab="density",ylim=c(-.05,.4))
+abline(v=c(-1,1)*mean(captopril$deltaSBP)/se,col=2,lwd=2,lty=2)
+abline(v=c(-1,1)*tcrit,col=2,lty=1,lwd=2)
+text(c(-5,-5,5,5),c(-.03,-.05,-.03,-.05),label=c("rejection-","region","rejection-","region"),col=c(2,2,2,2))
+text(c(0,0),c(-.03,-.05),label=c("acception-","regio"),col=c(4,4))
+
+arrows(-100,.4,-abs(mean(captopril$deltaSBP)/se),.4,lwd=2,col=2,angle=20,length=.1)
+arrows(100,.4,abs(mean(captopril$deltaSBP)/se),.4,lwd=2,col=2,angle=20,length=.1)
+text(-10,.35,label="p-value",srt=90,col=2)
+text(10,.35,label="p-value",srt=90,col=2)
+
+arrows(-100,-.04,-tcrit,-.04,lwd=2,col=2,angle=20,length=.1)
+arrows(100,-.04,tcrit,-.04,lwd=2,col=2,angle=20,length=.1)
+
+polygon(c(reject1,-tcrit,-10),c(dt(reject1,n-1),0,0),col=2,border=2)
+polygon(c(tcrit,reject2,tcrit),c(0,dt(reject2,n-1),0),col=2,border=2)
+
+text(-3.5,.05,label=expression(paste(alpha,"/2=2.5%")),col=2)
+text(3.6,.05,label=expression(paste(alpha,"/2=2.5%")),col=2)
+arrows(-3,0.02,-3.5,.04,col=2,lwd=2,angle=20,length=.1)
+arrows(3,0.02,3.5,.04,col=2,lwd=2,angle=20,length=.1)
+```
+
+***
+
+Het argument `alternative` van  de `t.test` functie is heeft default waarde `alternative="two.sided"`.
+
+```{r}
+t.test(captopril$deltaSBP)
+```
+
+- We behalen nog steeds een buitengewoon significant resultaat.
+- De p-waarde is dubbel zo groot omdat we tweezijdig testen.
+
+Inderdaad
+
+$$p=P_0[T \leq -\vert t \vert] + P_0[T \geq \vert t \vert] = P_0[\vert T \vert \geq \vert t \vert] = 2 \times P_0[T \geq \vert t \vert]$$
+
+
+- We verkrijgen ook een tweezijdig betrouwbaarheidsinterval
+
+***
+
+### Eénzijdige of tweezijdige test?
+
+Met een eenzijdige test kunnen we $H_0$ gemakkelijker afwijzen op voorwaarde dat $H_1$ waar is dan met een tweezijdige test.
+
+
+- Alle informatie wordt gebruikt om in één richting te testen
+
+- De beslissing om eenzijdig te testen moet in de ontwerpfase worden genomen voordat het experiment wordt uitgevoerd
+
+- Zelfs als we sterke a priori aannames hebben, zijn we er niet helemaal zeker van, anders zouden we geen reden hebben om het onderzoek te doen.
+
+- Als we in de ontwerpfase een eenzijdige test voorstellen en we zien een resultaat in tegengestelde richting dat statistisch significant zou zijn, kunnen we geen conclusies trekken uit het experiment.
+
+- In de ontwerpfase hebben we dit resultaat uitgesloten omdat het zo onverwacht is dat het een vals positief moet zijn.
+
+- Daarom worden eenzijdige tests niet aanbevolen.
+
+Een tweezijdige test kan altijd worden verdedigd en stelt u in staat elke afwijking van $H_0$ te detecteren en wordt ten zeerste aanbevolen.
+
+
+Het is **nooit toegestaan** om een tweezijdige test te veranderen in een eenzijdige test op basis van wat er in de steekproef is waargenomen! Anders wordt de type I-fout van de teststrategie niet correct gecontroleerd.
+
+***
+
+We illustreren dit in onderstaande simulatiestudie:
+
+1. correcte tweezijdige test en
+2. eenzijdige test met zijn teken gebaseerd op wat werd waargenomen in de steekproef.
+
+
+```{r}
+set.seed(115)
+mu <- 0
+sigma <- 9.0
+nSim <- 1000
+alpha <- 0.05
+n <- 15
+
+pvalsCor <-
+  pvalsInCor <-
+  array(0,nSim)
+
+for (i in 1:nSim)
+{
+	x <- rnorm(n, mean = mu, sd = sigma)
+	pvalsCor[i] <- t.test(x)$p.value
+	if (mean(x) < 0)
+		pvalsInCor[i] <- t.test(x, alternative = "less")$p.value else
+		pvalsInCor[i] <- t.test(x, alternative = "greater")$p.value
+}
+
+mean(pvalsCor < 0.05)
+mean(pvalsInCor < 0.05)
+```
+
+- Type I-fout correct gecontroleerd op  $\alpha$ voor tweezijdige test.
+- Type I-fout niet correct gecontroleerd wanneer we eenzijdig testen op basis van wat we in de steekproef hebben waargenomen.
+
+# Nature column over testen
+
+![](https://www.nature.com/articles/nmeth.2698.pdf){width=100%}
+
+# Geclusterde metingen
+
+- Data niet altijd onafhankelijk.
+- Consequenties voor schatten van standaard errors
+
+## Voorbeeld
+
+- Studiedesign met $n$ planten
+- Expressie van bepaald gen wordt 2 maal gemeten
+- Men is geïnteresseerd in gemiddelde genexpressie.
+- $Y_{i1}$ en $Y_{i2}$ de eerste en tweede meting
+voor plant $i=1,...,n$:
+\begin{equation*}
+\bar Y = \sum_{i=1}^n \frac{Y_{i1}+Y_{i2}}{2n}
+\end{equation*}
+
+- Stel planten onafhankelijk
+- Eerste en tweede metingen even variabel ()$\text{Var}(Y_{i1})=\text{Var}(Y_{i2})=\sigma^2$)
+- Variantie op steekproefgemiddelde:
+\begin{eqnarray*}
+\text{Var}(\bar Y)&=&\sum_{i=1}^n \frac{\text{Var}(Y_{i1}+Y_{i2})}{4n^2} \\
+&=&\sum_{i=1}^n \frac{\sigma^2+\sigma^2+2\text{Cor}(Y_{i1},Y_{i2})\sigma^2}{%
+4n^2} \\
+&=&\frac{\sigma^2}{2n}\{1+\text{Cor}(Y_{1},Y_{2})\}
+\end{eqnarray*}
+
+- Metingen afkomstig van zelfde plant doorgaans
+positief met elkaar gecorreleerd zijn
+- $SE_{\bar Y}$ dus
+groter dan bij $2n$ metingen van $2n$ verschillende
+planten
+- Gegeven eerste meting $Y_{i1}$ brengt de tweede meting $Y_{i2}$ geen volledig nieuwe informatie bij
+- Er is bijgevolg minder informatie beschikbaar om het gemiddelde te
+schatten dan wanneer alle gegevens van verschillende planten afkomstig
+waren.
+
+Wat bij twee extremen:
+
+- Stel dat $\text{Cor}(Y_{1},Y_{2})=1$ tweede meting geen nieuwe informatie en zelfde nauwkeurigheid als wanneer we alleen de n eerste metingen beschouwen
+- Wanneer $\text{Cor}(Y_{1},Y_{2})=0$, tweede meting volledig nieuwe informatie en dus eenzelfde nauwkeurigheid als bij 1 meting voor $2n$ i.p.v. $n$ verschillende planten. Vermits
+\[\frac{\sigma^2}{2n}\{1+\text{Cor}(Y_{1},Y_{2})\}\geq \frac{\sigma^2}{2n}\]
+
+*Wanneer de correlatie tussen herhaalde genexpressie metingen positief is (hetgeen we verwachten), zal men in de praktijk meer preciese resultaten bekomen door 1 meting te bepalen voor $2n$ verschillende planten dan door 2 metingen te bepalen voor $n$ verschillende planten.*
+
+- Als er evenveel herhaalde metingen zijn voor elk subject/experimentele unit (vb plant) dan kan men metingen ook reduceren naar $n$ onafhankelijke metingen door het gemiddelde te berekenen per experimentele unit.
+- Omdat de gemiddeldes per experimentele unit zijn gebaseerd op evenveel herhaalde metingen zal de precisie van die gemiddeldes hetzelfde zijn.
+- Bij verschillend aantal herhaalde metingen per experimentele unit kan men NIET met gemiddeldes per Exp. unit werken want die hebben anders een verschillende precisie
+$longrightarrow$ dan zijn meer geavanceerde methoden nodig!
+
+## Captopril
+
+- Metingen geclusterd: twee systolische bloeddrukmetingen per patiënt
+
+    - 1 meting voor en
+    - 1 meting na het toedienen van captopril.
+
+- Gemiddelde bloeddrukverandering $\mu$  schatten a.d.h.v. gegevens
+$$(Y_{i1} , Y_{i2}),$$
+voor subjecten $i = 1, ..., n$.
+
+$$\bar X = \sum_{i=1}^n \frac{Y_{i2}-Y_{i1}}{n}$$
+
+Uit rekenregels voor variantie:
+\begin{eqnarray*}
+\text{Var}\left[\bar X\right]&=&\sum_{i=1}^n \frac{\text{Var}\left[Y_{i1}-Y_{i2}\right]}{n^2}\\
+&=&\sum_{i=1}^n \frac{\sigma^2_1+\sigma^2_2-2\text{Cor}\left[Y_{i1},Y_{i2}\right]\sigma_1\sigma_2}{n^2}\\
+&=&\frac{\sigma^2_1+\sigma^2_2-2\text{Cor}\left[Y_{i1},Y_{i2}\right]\sigma_1\sigma_2}{n},\\
+\end{eqnarray*}
+
+```{r}
+#functie var op een matrix berekent varianties sigma_1^2, sigma_2^2
+#covariantie sigma_{12}
+vars <- var(captopril[,c("SBPb","SBPa")])
+vars
+cor(captopril$SBPa,captopril$SBPb)
+
+varXbarDelta <- (vars[1,1]+vars[2,2]-2*vars[1,2])/15
+sqrt(varXbarDelta)
+```
+
+- Metingen heel sterk gecorreleerd.  Variantie op het verschil veel lager dan op de originele metingen!
+
+- alternatieve methode om de standard error te bepalen:
+
+  - gecorreleerde metingen tot 1 meting te reduceren
+  - kan enkel voor design met gepaarde metingen (2 metingen per patient)
+  - Alle verschillen zijn onafhankelijk.
+
+$$X_{i}=Y_{ai}-Y_{bi}$$
+   - vervolgens standard error op $\bar X$.
+
+In het captopril voorbeeld wordt de schatting
+```{r}
+sd(captopril$deltaSBP)/sqrt(15)
+```
+
+- Exact dezelfde schatting voor standard error
+
+- Groot voordeel van design:
+
+    - bloeddrukmetingen voor en na sterk positief gecorreleerd $\longrightarrow$ variantie van verschil veel lager dan dat op originele bloeddrukmetingen
+
+    - Iedere patiënt dient immers als zijn eigen controle
+    - We kunnen variabiliteit in bloeddrukmetingen tussen patiënten uit de analyse verwijderen!
+
+- Een gepaard experiment is speciale vorm van randomized complete block design:
+
+    - Elke persoon is een blok en
+    - Elke behandeling getest blok: een controle bloeddrukmeting en een bloeddrukmeting na toedienen van captopril
+    - Er is een grote variabiliteit tussen blokken! $\longrightarrow$ Bloeddruk hoog voor meestal ook bloeddruk hoog na captopril behandeling.
+    - standaarddeviatie in bloeddruk tussen patienten voor toedienen van captopril bedraagt  `r round(sd(captopril$SBPb),1)` mmHg.
+
+    - Effect van captopril schatten binnen patient.
+    - Door het blokdesign variabiliteit tussen patiënten uit de analyse weren.
+    - Voor een gepaard design kan dat door b.v. analyse op bloeddrukverschillen.
+    - Standaard error op bloeddruk verschillen tussen patiënten is inderdaad veel lager `r round(sd(captopril$deltaSBP),2)`.
+    - Voor blok design met meer metingen per blok analyse met meervoudig regressie model (Hoofdstuk 10).
+
+Hoe kunnen we het captopril experiment verder verbeteren?
+
+***

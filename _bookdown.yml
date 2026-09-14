@@ -1,0 +1,34 @@
+book_filename: "Statistiek_2026_2027"
+language:
+  ui:
+    chapter_name: "Hoofdstuk "
+  label:
+    fig: 'Figuur '
+    tab: 'Tabel '
+    eq: 'Vergelijking '
+    thm: 'Theorema '
+    lem: 'Lemma '
+    def: 'Definitie '
+    cor: 'Corollary '
+    prp: 'Eigenschap '
+    exm: 'Voorbeeld '
+    exr: 'Oefening '
+    proof: 'Bewijs '
+    remark: 'Opmerking '
+    solution: 'Oplossing '
+repo: https://github.com/statOmics/statistiek2deBach
+output_dir: docs
+rmd_files: [
+  "index.Rmd",
+  "01-Inleiding.Rmd",
+  "02-Concepten.Rmd",
+  "03-Proefopzet.Rmd",
+  "04-DataExploratie.Rmd",
+  "05-StatistischeBesluitvorming.Rmd",
+  "06-LineareRegressie.Rmd",
+  "07-VariantieAnalyse.Rmd",
+  "08-NietParametrischeStatistiek.Rmd",
+  "09-CategorischeDataAnalyse.Rmd",
+  "10-GeneralLinearModel.Rmd",
+  "References.Rmd"
+  ]

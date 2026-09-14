@@ -1,0 +1,757 @@
+---
+title: "8. Niet-parametrische statistieken"
+author: "Lieven Clement"
+date: "statOmics, Ghent University (https://statomics.github.io)"
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    highlight-style: tango
+    code-tools: true
+    embed-resources: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = TRUE, comment = NA, echo = TRUE,
+                      message = FALSE, warning = FALSE)
+library(tidyverse)
+library(Rmisc)
+set.seed(140)
+```
+
+# Inleiding
+
+Vorige hoofdstukken: parametrische methoden
+
+-  Inferentie enkel correct als voldaan aan param. veronderstellingen:
+
+	- distributionele veronderstellingen: v.b. Normaal verdeelde gegevens.
+	- gelijkheid van varianties (two-sample $t$-test en ANOVA)
+
+-  De $p$-waarde: $\text{P}_0\left[ \vert T\vert \geq \vert t \vert \right]$.
+
+    - Berekend o.b.v. nuldistributie van $T$ die afgeleid is van verdeling van observaties
+    - Fout als niet voldaan is aan veronderstellingen
+
+-  $95\%$ BI steunt eveneens op veronderstellingen. Niet voldaan: geen garantie dat intervallen populatie parameterwaarde omvatten met $95\%$ kans.
+
+***
+
+- Asymptotische theorie moeilijker te plaatsen: je kan stellen dat $t$-test asymptotisch niet-parametrisch is omdat bij erg grote steekproefgroottes de distributionele veronderstelling van normaliteit niet meer belangrijk is.
+
+- Parametrische aanpak:
+
+	- efficiënter: grotere power bij zelfde steekproefgrootte + smallere BI
+	- meer flexibel: makkelijker inzetbaar voor experimenten met meer complexe designs
+
+***
+
+# Vergelijken van twee groepen
+
+## Cholestorol voorbeeld
+
+- Cholestorolconcentratie in bloed
+  - 5 patiënten (groep=1) die twee dagen geleden een hartaanval deden
+  - bij 5 gezonde personen (groep=2).
+
+- Cholestorolconcentratie verschillend bij hartpatiënten en gezonde personen?
+
+```{r}
+chol <- read_tsv("https://raw.githubusercontent.com/statOmics/sbc/master/data/chol.txt")
+
+chol <- chol %>%
+  mutate(group = as.factor(group))
+
+nGroups <- chol %>%
+  pull(group) %>%
+  table
+
+n <- nGroups %>%
+  sum
+chol
+```
+
+***
+
+
+```{r, echo=FALSE,out.width='50%', fig.asp=.8, fig.align='center'}
+chol %>%  
+  ggplot(aes(x=group,y=cholest)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(position="jitter")
+
+chol %>% ggplot(aes(sample=cholest)) +
+  geom_qq() +
+  geom_qq_line() +
+  facet_wrap(~group)
+```
+
+- Mogelijks outliers
+- Moeilijk om inzicht te krijgen in verdeling: maar 5 observaties per groep
+
+***
+
+
+## Permutatie-testen
+
+Vraagstelling Cholestorol voorbeeld vertaling naar nulhypothese.
+Klassiek:
+$$H_0: \mu_1=\mu_2 \text{ versus } H_1: \mu_1\neq \mu_2.$$
+
+- Groep 1: Hartpatiënten
+- Groep 2: Gezonde individuen
+- Testen van deze hypotheses d.m.v. two-sample $t$-test.
+
+We gaan de voorwaarden na:
+
+- Normaliteit?
+- Gelijkheid van variantie?
+- Te weinig observaties per groep.
+- We kunnen veronderstellingen niet nagaan!
+- Gevaarlijk!
+- Oplossing: permutatietesten
+
+***
+
+### Hypothesen
+
+- $Y_{1j}$ en $Y_{2j}$ uitkomsten uit respectievelijk groep 1 en 2:
+$$Y_{1j} \text{ iid } N(\mu_1,\sigma^2) \;\;\;\text{ en }\;\;\; Y_{2j} \text{ iid } N(\mu_2,\sigma^2).$$
+- Onder $H_0:\mu_1=\mu_2$, wordt dit (stel $\mu=\mu_1=\mu_2$ onder $H_0$)
+$$ Y_{ij} \text{ iid } N(\mu,\sigma^2),$$
+
+- Drukt uit dat alle $n=n_1+n_2$ uitkomsten uit zelfde normale distributie komen en onafhankelijk zijn
+- Laat toe om oorspronkelijke nulhypothese anders te schrijven:
+\[H_0: f_1(y) = f_2(y) \text{ voor alle } y \]
+met
+
+  - $f_1$ en $f_2$ de verdeling van uitkomsten
+  - Bijkomende veronderstelling dat $f_1$ en $f_2$ normale verdelingen zijn.
+
+***
+
+Onder de alternatieve hypothese wordt een locatie-shift verondersteld:
+$$H_1: f_1(y)=f_2(y-\Delta) \;\;\;\text{ voor alle } y$$
+met
+
+- $\Delta=\mu_1-\mu_2$
+- en $f_1$ en $f_2$ normale verdelingen met dezelfde variantie.
+
+We illustreren dit in R voor $f_1\sim N(0,1)$ en $f_2\sim N(1,1)$ en $\Delta=-1$.
+```{r, size="tiny"}
+mu1 <- 0; mu2 <- 1; sigma1 <- sigma2 <- 1
+y <- -2:2
+delta <- mu1-mu2; delta
+rbind(dnorm(y,mu1,sigma1), dnorm(y-delta,mu2,sigma2))
+```
+
+***
+
+De permutatietesten die we ontwikkelen kunnen gebruikt worden voor het testen van
+\[
+  H_0: F_1=F_2 \;\;\;\text{ of }\;\;\; H_0:f_1=f_2.
+\]
+maar zonder de Normaliteitsveronderstellingen.
+
+We weten dat onder $H_0$ geldt dat :
+
+- Verdeling van de cholesterolconcentraties gelijk voor hartpatiënten en gezonde personen
+- Groep-labels van de `r n` personen niet informatief
+- Groepering gebruikt om originele teststatistiek te bepalen is onder de nulhypothese een van de vele groeperingen die allemaal even zinvol/even weinig zinvol zijn.
+- Elke groepering zou immers dezelfde uitkomsten hebben gegenereerd aangezien er geen effect is van de behandeling.
+- Bereken nulldistributie door permuteren van de groepslabels!
+
+***
+
+### Verdeling van de statistiek onder $H_0$
+
+- $m=\binom{n_1+n_2}{n_1}=\binom{n}{n_1}=\binom{n}{n_2}$ mogelijke unique permutaties $\cal{G}$ van de groepslabels.
+- In ons voorbeeld $m=$ `r choose(n,nGroups[1])`.
+- Als $m$ niet te groot is kunnen alle unieke permutaties van de groepslabels berekend worden.
+- Vervolgens wordt voor iedere unique permutatie $g \in \cal{G}$ de teststatistiek $t^*_g$ berekend
+- Hier de t-test statistiek door de originele uitkomsten te gebruiken die nu gekoppeld worden aan de gepermuteerde groepslabels $G_g^*$.
+
+***
+
+We kunnen alle m=`r choose(n,nGroups[1])` permutaties in R genereren a.d.h.v. de functie `combn(n,n_1)`.
+Dit wordt geïllustreerd in de onderstaande R code:
+
+- G bevat volgnummers van de observaties uit groep 1 voor elke permutatie d
+- We tonen enkel de eerste 10 permutaties.
+
+```{r,size="tiny"}
+G <- combn(n,nGroups[1])
+dim(G)
+G[,1:10]
+```
+
+***
+
+We berekenen nu de teststatistiek voor elke permutatie
+
+```{r,size="tiny"}
+tOrig <- t.test(cholest ~ group, chol)$statistic
+tOrig
+tStar <- combn(
+  n,
+  nGroups[1],
+	function(g,y) {
+    t.test(y[g],y[-g])$statistic
+    },
+  y = chol %>% pull(cholest)
+  )
+head(tStar)
+length(tStar)
+```
+
+***
+
+- We kunnen nu de verdeling van de teststatistiek onder $H_0$ bestuderen.
+- Originele statistiek (rode verticale lijn) is extreem
+
+```{r,out.width='80%', fig.asp=.8, fig.align='center',echo=FALSE}
+qplot(tStar,bins=50) +
+  xlab(expression("permutatiestatistiek t"^"*")) +
+  geom_vline(xintercept=tOrig,col=2)
+```
+
+***
+
+### p-waarde
+
+- Permutatienuldistributie $\longrightarrow$ hypothesetesten uitvoeren.
+
+- tweezijdige permutatie $p$-waarde
+  $$p=\text{P}_0\left[\vert T\vert \geq \vert t\vert \mid \mathbf{y}\right].$$
+
+- p-waarde geconditioneerd op geobserveerde cholesterolwaarden $\mathbf{y}=(y_{11},\ldots,y_{51},y_{12},\ldots,y_{52})^T$.
+
+- Gezien permutatienuldistrubutie van $T$ bepaald wordt door $t^*_g$, $g \in{\cal{G}}$, berekenen we
+$$p  = \frac{\#\{g\in {\cal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m}$$
+
+```{r}
+pval <- mean(abs(tStar)>=abs(tOrig))
+pval
+```
+
+***
+
+
+- Op het $5\%$ significantieniveau besluiten we dat de distributies van de cholesterol concentraties niet gelijk zijn bij hartpatiënten en bij gezonde personen. ($p=$ `r paste(format(pval,digits=3))`).
+
+
+- De $p$-waarde op basis van alle permutaties wordt een **exacte** $p$-waarde genoemd.
+- De permutatienuldistributie wordt een **exacte** nuldistributie genoemd.
+- De term **exact** betekent dat de resultaten correct zijn voor iedere steekproefgrootte $n$.
+
+
+- De kans op een type I fout wordt dus gecontroleerd door een permutatietest, maar wel conditioneel op de geobserveerde uitkomsten data $\mathbf{y}$.
+
+-  **We kunnen ons nu afvragen of we de conclusies kunnen veralgemenen naar de populatie toe? Het antwoord is ja, als de subjecten at random getrokken zijn uit de populatie.**
+
+- Het bewijs hiervan valt buiten het bestek van de cursus.
+
+***
+
+- Soms probleem omdat het aantal permutaties $m=\#{\cal{G}}$ erg groot is
+
+  - $\binom{20}{10}=$ `r format( choose(20,10),digits=3)`
+  - $\binom{30}{15}=$ `r format( choose(30,15),digits=3)`
+  - $\binom{40}{20}=$ `r format( choose(40,20),digits=3)`.
+
+- Daarom niet alle $g \in {\cal{G}}$ te beschouwen, maar groot aantal random permutaties uitvoeren (b.v. 10000)
+
+- Ter illustratie staat de code hiervan ook in de cursus.
+
+***
+
+### Hoe kunnen we conclusie interpreteren  
+
+- We permuteren immers t statistiek, effectgrootte locatie-shift
+
+- Als locatie-shift model niet opgaat is een significant resultaat moeilijk te interpreteren, tegenover welk alternatief testen we dan???
+
+- Locatie-shift kan niet worden nagegaan in kleine steekproeven...
+
+***
+
+## Rank Testen
+
+- Belangrijkste groep van niet-parametrische testen
+- Populariteit:
+  - Niet-parametrisch,
+  - Exacte $p$-waarden d.m.v.permutatienuldistributie.
+  - Geen nood aan aparte permutatienuldistributie voor iedere nieuwe dataset.
+  - Permutatienuldistributie van rank testen hangt alleen af van steekproefgroottes.
+  - Erg robust zijn tegen uitschieters (Engels: *outliers*)
+  - Nuttig als locatie-shift model niet opgaat.
+
+***
+
+### Ranks
+
+Rank testen starten vanuit rank-getransformeerde uitkomsten.
+
+- Beschouw $Y_1, \ldots, Y_n$.
+- Afwezigheid van twee gelijke observaties (i.e. geen *ties*).
+  $$R_i=R(Y_i) = \#\{Y_j: Y_j\leq Y_i; j=1,\ldots, n\}$$
+- Kleinste observatie krijgt dus rank 1, de tweede kleinste rank 2, enzovoort, en de grootste observatie,
+  tenslotte, krijgt rank $n$.
+
+```{r}
+chol %>%
+  pull(cholest)
+
+chol %>%
+  pull(cholest) %>%
+  rank
+```
+
+***
+
+Soms komen *ties* voor in de data, i.e. minstens twee observaties hebben dezelfde numerieke waarde. Een klein voorbeeld:
+
+```{r}
+metTies <- c(403, 507, 507, 610, 651, 651, 651, 830, 900)
+metTies %>% rank
+```
+
+- Ties: 507 komt tweemaal voor, 651 komt driemaal voor. Dit zijn voorbeelden van *ties*.
+- Wanneer *ties* voorkomen, worden *midranks* gebruikt.
+
+- **midrank** van observatie $Y_i$ wordt
+  \begin{eqnarray*}
+   R_i &=& \frac{ \#\{Y_j: Y_j\leq Y_i\} + ( \#\{Y_j: Y_j < Y_i\} +1)}{2}.
+   \end{eqnarray*}
+
+***
+
+- Dikwijls ranks nodig in de gepoolde steekproef
+- Bijvoorbeeld: $Y_{ij}$, $i=1,\ldots, n_j$ en $j=1,2$.
+- Uitkomsten kunnen worden voorgesteld door $Z_1,\ldots, Z_n$ ($n=n_1+n_2$), de uitkomsten uit de gepoolde steekproef.
+
+```{r}
+t(chol)
+z <- chol %>%
+  pull(cholest)
+z
+rank(z)
+```
+
+***
+
+### Wilcoxon-Mann-Whitney Test
+
+- Gelijktijdig ontwikkeld door  Wilcoxon en door Mann en Whitney
+-  **Wilcoxon-Mann-Whitney**, **Wilcoxon rank sum test**  of **Mann-Whitney U test**
+- $H_0: f_1=f_2$ vs $H_1: \mu_1\neq \mu_2$ (of de eenzijdige versies).
+- Eerst **locatie-shift** model veronderstellen later relaxeren we aanname.
+
+***
+
+- Klassieke t-test: verschil in steekproefgemiddelden $\bar{Y}_1-\bar{Y}_2$.
+- Hier: verschil in steekgroepgemiddelde op basis van rank-getransformeerde uitkomsten.
+- Ranks op basis van gepoolde sample (na samenvoegen van uitkomsten uit groep 1 en groep 2)
+
+***
+
+- $R_{ij}=R(Y_{ij})$ is de rank van uitkomst $Y_{ij}$ in de gepoolde steekproef.
+\[
+  T = \frac{1}{n_1}\sum_{i=1}^{n_1} R(Y_{i1}) - \frac{1}{n_2}\sum_{i=1}^{n_2} R(Y_{i2}) .
+\]
+
+- Onder $H_0$ verwachten we dat gemiddelde rank in de eerste groep ongeveer gelijk is aan de gemiddelde rank in de tweede groep en $T$ dicht bij nul.
+- Als $H_1$ waar is dan verwachten we dat gemiddelde ranks verschillen en dus dat $T$ niet dicht bij nul zal liggen.
+
+- Eigenlijk voldoende om enkel
+  $$S_1=\sum_{i=1}^{n_1} R(Y_{i1})$$.
+
+- $S_1$ is som van de ranks van observaties uit groep 1 vandaar de naam *rank sum test*.
+
+- Want
+\[
+  S_1+S_2 = \text{som van alle ranks} = 1+2+\cdots + n=\frac{1}{2}n(n+1).
+\]
+
+***
+
+- $S_1$ (of $S_2$) een goede teststatistiek
+- Permutatietestmethode toegepassen om exacte permutatienuldistributie te bekomen
+- Voor een gegeven steekproefgrootte $n$, en veronderstellend dat er geen *ties* zijn, zijn rank-getransformeerde uitkomsten altijd
+  $$1, 2, \ldots, n$$
+- Voor gegeven groepsgroottes $n_1$ en $n_2$, zal de permutatienuldistributie dan ook steeds dezelfde zijn!
+- Tot 1980 werd dit als een groot voordeel beschouwd omdat de nuldistributies voor gegeven $n_1$ en $n_2$ getabuleerd konden worden
+- Door rekencapaciteit speelt dit argument niet meer, wel andere belangrijke redenen.
+
+***
+
+
+- Vaak wordt gestandaardiseerde teststatistiek gebruikt
+\[
+  T = \frac{S_1-\text{E}_{0}\left[S_1\right]}{\sqrt{\text{Var}_{0}\left[S_1\right]}},
+\]
+- met $\text{E}_{0}\left[S_1\right]$ en $\text{Var}_{0}\left[S_1\right]$ de verwachtingswaarde en variantie van $S_1$ onder $H_0$.
+- Dit zijn dus het gemiddelde en variantie van de permutatienuldistributie van $S_1$.
+
+- Onder $H_0$ geldt
+ \[
+   \text{E}_{0}\left[S_1\right]= \frac{1}{2}n_1(n+1) \;\;\;\;\text{ en }\;\;\;\; \text{Var}_{0}\left[S_1\right]=\frac{1}{12}n_1n_2(n+1).
+ \]
+
+- Verder kan men onder $H_0$  en als $\min(n_1,n_2)\rightarrow \infty$ opgaat aantonen dat,
+ \[
+    T = \frac{S_1-\text{E}_{0}\left[S_1\right]}{\sqrt{\text{Var}_{0}\left[S_1\right]}} \rightarrow N(0,1).  
+ \]
+
+- Asymptotisch volgt gestandaardiseerde teststatistiek een standaardnormaal verdeling!
+
+***
+
+
+We illustreren de WMW test aan de hand van de R functie `wilcox.test`.
+```{r}
+wilcox.test(cholest ~ group, data = chol)
+```
+
+- We verwerpen $H_0$ ($p=$ `r format(wilcox.test(cholest ~ group,data=chol)$p.value,digits=2)` $<0.05$)
+
+- De output geeft de teststatistiek $W=$ `r wilcox.test(cholest~group,data=chol)$statistic`?
+
+- In volgende lijnen berekenen we  $S_1$ en $S_2$ manueel voor de dataset.
+```{r}
+S1 <- chol %>%
+  mutate(cholRank=rank(cholest)) %>%
+  filter(group==1) %>%
+  pull(cholRank) %>%
+  sum
+
+S2 <- chol %>%
+  mutate(cholRank = rank(cholest)) %>%
+  filter(group == 2) %>%
+  pull(cholRank) %>%
+  sum
+
+S1
+S2
+```
+
+***
+
+Waar komt  $W=$ `r wilcox.test(cholest~group,data=chol)$statistic` vandaan?
+
+### Mann and Whitney test
+
+- Mann en Whitney test in afwezigheid van ties:
+\[
+ U_1 = \sum_{i=1}^{n_1}\sum_{k=1}^{n_2} \text{I}\left\{Y_{i1}\geq Y_{k2}\right\}.
+\]
+
+- $\text{I}\left\{.\right\}$: indicator is 1 is als  uitdrukking waar is en 0 als dit niet het geval is.
+
+- U telt hoeveel keer observatie uit groep 1 $\geq$ observatie uit groep 2.
+
+```{r}
+y1 <- chol %>%
+  filter(group==1) %>%
+  pull("cholest")
+
+y2 <- chol %>%
+  filter(group==2) %>%
+  pull("cholest")
+
+u1Hlp <- sapply(
+  y1,
+  function(y1i,y2) {y1i>=y2},
+  y2=y2)
+
+colnames(u1Hlp) <- y1
+rownames(u1Hlp) <- y2
+```
+
+***
+
+```{r}
+u1Hlp
+U1 <- sum(u1Hlp)
+U1
+```
+
+Er kan worden aangetoond dat
+
+$$U_1 = S_1 - \frac{1}{2}n_1(n_1+1).$$
+
+```{r}
+S1-nGroups[1]*(nGroups[1]+1)/2
+```
+
+***
+
+1. $U_1$ en $S_1$ zelfde informatie
+2. $U_1$ ook rankstatistiek
+3. Exacte testen gebaseerd op $U_1$ en $S_1$ zijn equivalent.
+
+***
+
+- $U_1$ heeft interpretatievoordeel
+- Stel $Y_j$ een willekeurige uitkomst uit behandelingsgroep $j$ ($j=1,2$). Dan geldt
+\begin{eqnarray*}
+  \frac{1}{n_1n_2}\text{E}\left[U_1\right]
+     &=& \text{P}\left[Y_1 \geq Y_2\right].
+\end{eqnarray*}
+
+- Intuïtief voelen we dit aan:
+
+  - Op basis van steekproef kunnen we kans: gemiddelde van alle indicator waarden $\text{I}\left\{Y_{i1}\geq Y_{k2}\right\}$.
+
+  - $n_1 \times n_2$ vergelijkingen
+
+***
+
+```{r}
+mean(u1Hlp)
+U1/(nGroups[1]*nGroups[2])
+```
+
+
+\[\text{P}\left[Y_1 \geq Y_2\right]\]
+wordt een **probabilistische index** (Engels: *probabilistic index*) genoemd.
+
+- Kans dat een uitkomst uit groep1 $\geq$ dan uitkomst uit groep 2
+
+- Onder $H_0$:
+\[\text{P}\left[Y_1 \geq Y_2\right]=\frac{1}{2}\]
+
+***
+
+- R functie `wilcox.test` geeft niet de Wilcoxon rank sum statistiek, maar wel de Mann-Whitney statistiek $U_1$.
+- We bekijken nogmaals de output
+```{r}
+wTest <- wilcox.test(cholest~group, data = chol)
+wTest
+U1
+probInd <- wTest$statistic/prod(nGroups)
+probInd
+```
+
+***
+
+- Aangezien $p=$ `r format(wTest$p.value,digits=3)` $<0.05$ besluiten we op het $5\%$ significantieniveau dat de gemiddelde cholesterolconcentratie groter is bij hartpatiënten kort na een hartaanval dan bij gezonde personen.  (We nemen aan dat locatie-shift opgaat)
+
+- We weten ook dat een cholesterolwaarde van hartpatiënten met een kans van
+$U1/(n_1\times n_2)=$ `r probInd*100`% groter is die van gezonde personen.
+
+- We zouden de veronderstelling van de locatie-shift moeten nagaan, maar met slechts 5 observaties in elke behandelingsgroep is dit zinloos.
+
+***
+
+- Zonder locatie-shift veronderstelling blijft de conclusie in termen van de probabilistische index correct!
+
+- Dus wanneer we geen locatie-shift veronderstellen en een tweezijdige test uitvoeren testen we eigenlijk
+
+\[H_0: F_1=F_2 \text{ vs P}(Y_1 \geq Y_2) \neq 0.5.\]
+
+
+**Conclusie:** Er is een significant verschil in de distributie van de cholesterolconcentraties bij hartpatiënten 2 dagen na hun hartaanval en gezonde individuen ($p=$ `r format(wTest$p.value,digits=3)`). Het is meer waarschijnlijk om een hogere cholesterolconcentraties te observeren hartpatiënten  dan bij gezonde individuen. De puntschatting voor deze kans bedraagt `r probInd*100`%.
+
+***
+
+
+# Vergelijken van $g$ Behandelingen
+
+- Veralgemenen naar niet-parametrische tegenhangers van de $F$-test uit een one-way ANOVA.
+
+***
+
+## DMH Voorbeeld
+
+1,2-dimethylhydrazine dihydrochloride (DMH) testen op genotoxiciteit (EU directive)
+
+- 24 ratten
+- Vier groepen volgens dagelijkse DMH dosis
+
+  - controle
+  - laag
+  - medium
+  - hoog
+
+- Genotoxiciteit in de lever a.d.h.v. een comet assay op 150 levercellen per rat.
+- De onderzoekers wensen na te gaan of verschillen zijn in de DNA schade tengevolge van de DMH dosis.
+
+***
+
+Comet Assay:
+
+- DNA strengbreuken visualiseren
+- Lengte comet staart is proxy voor strengbreuken.
+
+![Comet assay](https://github.com/statOmics/sbc/raw/master/figures/comet.jpg){ width=50% }
+
+
+***
+
+```{r}
+dna <- read_delim("https://raw.githubusercontent.com/statOmics/sbc/master/data/dna.txt",delim=" ")
+
+dna <- dna %>%
+  mutate(dose = as.factor(dna$dose))
+dna
+```
+
+***
+
+```{r, echo=FALSE,out.width='100%', fig.asp=.8, fig.align='center'}
+dna %>%
+  ggplot(aes(x=dose,y=length,fill=dose))+
+  geom_boxplot() +
+  geom_point(position="jitter")
+
+dna %>%
+  ggplot(aes(sample=length)) +
+  geom_qq() +
+  geom_qq_line() +
+  facet_wrap(~dose)
+```
+
+- Indicatie dat controle groep andere variabiliteit heeft.
+- 6 observaties per groep te weinig om aannames na te gaan.
+
+
+***
+
+```{r, echo=FALSE,out.width='100%', fig.asp=.8, fig.align='center'}
+lm(length ~ dose, data = dna) %>%
+  plot
+```
+
+***
+
+## Kruskal-Wallis Rank Test
+
+- De Kruskal-Wallis Rank Test (KW-test) is een niet-parametrisch alternatief voor de ANOVA F-test.  
+
+-  klassieke $F$-teststatistiek kan geschreven worden als
+  \[
+    F = \frac{\text{SST}/(g-1)}{\text{SSE}/(n-g)} = \frac{\text{SST}/(g-1)}{(\text{SSTot}-\text{SST})/(n-g)} ,
+  \]
+-  met $g$ het aantal groepen.
+
+- SSTot hangt enkel af van uitkomsten $\mathbf{y}$ en zal niet variëren bij permutaties.
+- Voldoende om SST als teststatistiek te gebruiken.
+ $$\text{SST}=\sum_{j=1}^t n_j(\bar{Y}_j-\bar{Y})^2$$
+
+***
+
+-  De KW teststatistiek maakt gebruik van SST maar dan gebaseerd op de rank-getransformeerde uitkomsten^[we veronderstellen afwezigheid van *ties*],
+  \[
+     \text{SST} = \sum_{j=1}^g n_j \left(\bar{R}_j - \bar{R}\right)^2 = \sum_{j=1}^t n_j \left(\bar{R}_j - \frac{n+1}{2}\right)^2 ,
+  \]
+-  met $\bar{R}_j$ het gemiddelde van de ranks in behandelingsgroep $j$, en $\bar{R}$ het gemiddelde van alle ranks,
+  \[
+    \bar{R} = \frac{1}{n}(1+2+\cdots + n) = \frac{1}{n}\frac{1}{2}n(n+1) = \frac{n+1}{2}.
+  \]
+-  De KW teststatistiek wordt gegeven door
+  \[
+    KW = \frac{12}{n(n+1)}  \sum_{j=1}^g n_j \left(\bar{R}_j - \frac{n+1}{2}\right)^2.
+  \]
+-  De factor $\frac{12}{n(n+1)}$ zorgt ervoor dat $KW$ een eenvoudige asymptotische nuldistributie heeft. In het bijzonder, onder $H_0$, als $\min(n_1,\ldots, n_g)\rightarrow \infty$,
+  \[
+    KW  \rightarrow \chi^2_{g-1}.
+  \]
+
+***
+
+-  Exacte KW-test via permutatienuldistributie (die enkel afhangt van $n_1, \ldots, n_g$)
+  $$H_0: f_1=\ldots=f_g \text{ vs } H_1: \text{ minstens twee gemiddelden verschillend}.$$
+
+- Locatie-shift
+
+- Indien locatie-shift niet opgaat, moet $H_1$ geformuleerd worden in termen van probabilistische indexen:
+  $$H_0: f_1=\ldots=f_g \text{ vs } H_1: \exists\ j,k \in \{1,\ldots,g\} : \text{P}\left[Y_j\geq Y_k\right]\neq 0.5$$
+
+***
+
+## DNA Schade Voorbeeld
+
+```{r}
+kruskal.test(length ~ dose, data = dna)
+```
+
+- Op $5\%$ significantieniveau kan nulhypothese worden verworpen.
+
+- R-functie `kruskal.test` enkel asymptotische benadering voor berekening van $p$-waarden.
+
+- Met slechts 6 observaties per groep, is dit geen optimale benadering van de exacte $p$-waarde!
+
+***
+
+-  Met de `coin` R package kan de exacte $p$-waarde wel berekenen
+
+```{r,warning=FALSE,message=FALSE}
+library(coin)
+kwPerm <- kruskal_test(length ~ dose, data = dna,
+		    distribution = approximate(nresample = 100000))
+kwPerm
+```
+
+- We besluiten dat er een extreem significant verschil is in distributie van de DNA schade ten gevolge van de dosis.
+
+***
+
+## Posthoc analyse
+
+- Welke groepen zijn verschillend???
+
+- Posthoc analyse a.d.h.v WMW testen
+
+- Eigenlijk niet optimaal na KW-test want de data worden opnieuw gerangschikt!
+    - KW gebaseerd over ranks bepaalde over alle groepen
+    - WMW gebaseerd op ranks van twee groepen in vergelijking
+
+- Betere alternatieven bestaan maar vallen buiten bestek van de cursus
+
+```{r}
+pairwise.wilcox.test(dna$length,dna$dose)
+```
+
+- Alle DMH behandelingen verschillen significant van de controle.
+- U1 niet in `pairwise.wilcox.test` output.  Puntschatter op de kans op hogere DNA-schade?
+
+***
+
+```{r, echo=FALSE}
+pairWilcox <- pairwise.wilcox.test(dna$length,dna$dose)
+```
+
+```{r}
+nGroep <- table(dna$dose)
+probInd <- combn(
+  levels(dna$dose),
+  2,
+  function(x) {
+		 test <- wilcox.test(
+       length~dose,
+       dna %>% filter(dose%in%x)
+       )
+		 return(test$statistic/prod(nGroep[x]))
+	})
+names(probInd) <- combn(
+  dna %>% pull(dose) %>% levels,
+  2,
+  paste,
+  collapse="vs")
+probInd
+```
+
+Omdat er twijfels zijn of het locatie-shift model geldig is, doen we enkel uitspraken in termen van de probabilistische index.
+
+***
+
+## Conclusie
+
+- Er extreem significant verschil is in de distributie van de DNA-schade metingen tengevolge van de DMH behandeling ($p<0.001$ KW-test).
+- DNA-schade is meer waarschijnlijk na behandeling met DMH dan in de controle behandeling (alle p=0.013, WMW-testen).
+- De kansen op hogere DNA-schade na blootstelling aan DMH bedraagt 100% (Berekenen van BI op kans buiten bestek van cursus).
+- Er zijn geen significante verschillen in de distributies van de comet-lengtes tussen de DMH behandelingen onderling ($p=$ `r paste(format(range(pairWilcox$p.value[,-1],na.rm=TRUE),digits=2),collapse="-")`).
+- DMH vertoont dus al bij de lage dosis genotoxische effecten.
+- (Alle paarsgewijze testen werden gecorrigeerd voor multiple testing d.m.v. Holm's methode).

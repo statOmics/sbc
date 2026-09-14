@@ -1,0 +1,57 @@
+---
+title: "General Linear Model - Specific Designs"
+author: "Lieven Clement"
+date: "statOmics, Ghent University (https://statomics.github.io)"
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    highlight-style: tango
+    code-tools: true
+    embed-resources: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = TRUE, comment = NA, echo = TRUE,
+                      message = FALSE, warning = FALSE)
+library(tidyverse)
+```
+
+# Introduction
+
+In this section we will illustrate how specific designs, e.g. 
+
+- two-way anova designs
+- block designs 
+
+can be analysed using the general linear model. 
+
+# Two-way anova 
+
+## Data 
+
+
+48 rats were allocated to 
+
+- 3 poisons (I,II,III) and 
+- 4 treatments (A,B,C,D). 
+
+```{r}
+library(faraway)
+data(rats)
+
+library(GGally)
+rats %>%
+  ggpairs()
+```
+
+
+We have a design with a continuous response time (survival) and two factors: 
+
+- Poison: I, II, III
+- Treatment: A, B, C, D
+
+The data exploration indicates that there seems to be an effect of both treatment and poison. 
+
+

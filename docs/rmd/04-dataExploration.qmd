@@ -1,0 +1,702 @@
+---
+title: "4. Data Exploratie"
+author: "Lieven Clement"
+date: "statOmics, Ghent University (https://statomics.github.io)"
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    highlight-style: tango
+    code-tools: true
+    embed-resources: true
+---
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(include = TRUE, comment = NA, echo = TRUE,
+                      message = FALSE, warning = FALSE)
+library(tidyverse)
+library(NHANES)
+```
+
+```{r pop2Samp2PopH4, out.width='80%',fig.asp=.8, fig.align='center',echo=FALSE}
+if ("pi"%in%ls()) rm("pi")
+kopvoeter<-function(x,y,angle=0,l=.2,cex.dot=.5,pch=19,col="black")
+{
+angle=angle/180*pi
+points(x,y,cex=cex.dot,pch=pch,col=col)
+lines(c(x,x+l*cos(-pi/2+angle)),c(y,y+l*sin(-pi/2+angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(angle)),col=col)
+lines(c(x+l/2*cos(-pi/2+angle),x+l/2*cos(-pi/2+angle)+l/4*cos(pi+angle)),c(y+l/2*sin(-pi/2+angle),y+l/2*sin(-pi/2+angle)+l/4*sin(pi+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2+pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2+pi/4+angle)),col=col)
+lines(c(x+l*cos(-pi/2+angle),x+l*cos(-pi/2+angle)+l/2*cos(-pi/2-pi/4+angle)),c(y+l*sin(-pi/2+angle),y+l*sin(-pi/2+angle)+l/2*sin(-pi/2-pi/4+angle)),col=col)
+}
+
+par(mar=c(0,0,0,0),mai=c(0,0,0,0))
+plot(0,0,xlab="",ylab="",xlim=c(0,10),ylim=c(0,10),col=0,xaxt="none",yaxt="none",axes=FALSE)
+rect(0,6,10,10,border="red",lwd=2)
+text(.5,8,"population",srt=90,col="red",cex=2)
+symbols (3, 8, circles=1.5, col="red",add=TRUE,fg="red",inches=FALSE,lwd=2)
+set.seed(330)
+grid=seq(0,1.3,.01)
+
+for (i in 1:50)
+{
+	angle1=runif(n=1,min=0,max=360)
+	angle2=runif(n=1,min=0,max=360)
+	radius=sample(grid,prob=grid^2*pi/sum(grid^2*pi),size=1)
+	kopvoeter(3+radius*cos(angle1/180*pi),8+radius*sin(angle1/180*pi),angle=angle2)
+}
+text(7.5,8,"Cholesterol in populatie",col="red",cex=1.2)
+
+rect(0,0,10,4,border="blue",lwd=2)
+text(.5,2,"sample",srt=90,col="blue",cex=2)
+symbols (3, 2, circles=1.5, col="red",add=TRUE,fg="blue",inches=FALSE,lwd=2)
+for (i in 0:2)
+	for (j in 0:4)
+{
+
+	kopvoeter(2.1+j*(3.9-2.1)/4,1.1+i)
+}
+text(7.5,2,"Cholesterol in sample",col="blue",cex=1.2)
+
+arrows(3,5.9,3,4.1,col="black",lwd=3)
+arrows(7,4.1,7,5.9,col="black",lwd=3)
+text(1.5,5,"EXP. DESIGN (1)",col="black",cex=1.2)
+text(8.5,5,"ESTIMATIE &\nINFERENTIE (3)",col="black",cex=1.2)
+text(7.5,.5,"DATA EXPLORATIE &\nBESCHRIJVENDE STATISTIEK (2)",col="black",cex=1.2)
+```
+
+***
+
+# Waarom Data Exploratie en Beschrijvende Statistiek?
+
+1. Rapporteer de resultaten
+2. De data laten spreken door ze samen te vatten en te visualiseren
+3. Inzicht verwerven in data.
+4. Errors, anomaliën of zelfs fraude opsporen
+5. Aannames nagaan die belangrijk zijn voor de downstream statistische analyse, e.g. zijn de data normaal verdeeld.
+
+***
+
+# Univariate exploratie van kwantitatieve variabelen
+
+
+## Histogram
+
+```{r,echo=FALSE}
+library(NHANES)
+```
+
+```{r}
+NHANES %>% filter(Gender=="female") %>%
+ggplot(aes(x=DirectChol)) +
+geom_histogram(aes(y=..density.., fill=..count..),bins=30) +
+geom_density(aes(y=..density..))
+```
+
+
+1. Selecteer data voor dames en pipe resultaten naar ggplot.
+```
+NHANES %>% filter(Gender=="female")
+```
+
+2. Select data die je wenst te visualiseren
+
+```
+ggplot(aes(x=DirectChol)) +
+```
+
+3. Gelijke bins voor interpretatie en aantal bins: `bins` argument van functie `geom_hist`.
+
+4. *Relatieve* frequenties om histogramen grafisch te kunnen vergelijken (`..density..`)
+
+```
+geom_histogram(aes(y=..density.., fill=..count..)) +
+```
+
+5. Indien voldoende observaties: kernel density estimator om f(x) weer te gegeven
+
+```
+geom_density(aes(y=..density..))
+```
+
+***
+
+## Boxplot
+
+- Een kwantiel, $x_{a\%}$, is de waarde van een random variabele die correspondeert met een bepaalde probabiliteit $F(x_{a\%})=P[X\leq x_{a\%}=a\%]$.
+
+```{r fig.align='center',echo=FALSE}
+fem <- NHANES %>% filter(Gender=="female" & !is.na(DirectChol)) %>% select(DirectChol)
+boxplot(fem$DirectChol, ylab="Direct Cholesterol",cex.lab=1.5,cex.axis=1.5,cex.main=1.5)
+rangeCl<-quantile(fem$DirectChol,c(.25,.75))+c(-1,1)*diff(quantile(fem$DirectChol,c(.25,.75)))*1.5
+boxYs<-c(range(fem$DirectChol[fem$DirectChol<=rangeCl[2]&fem$DirectChol>=rangeCl[1]]),quantile(fem$DirectChol,c(.25,.5,.75)),rangeCl[2]+(max(fem$DirectChol)-rangeCl[2])/2)
+text(1.3,boxYs,labels=c("wisker","wisker","x25","mediaan","x75","outliers"),pos=4,cex=1.3)
+lines(c(1.1,1.3,1.3,1.1),c(rangeCl[2],rangeCl[2]+(max(fem$DirectChol)-rangeCl[2])/2,rangeCl[2]+(max(fem$DirectChol)-rangeCl[2])/2,max(fem$DirectChol)),lty=2)
+```
+
+Met ggplot moeten we altijd een x variabele weergeven om een boxplot te maken.
+Als we een string gebruiken om de x variabele te definiëren dan neemt ggplot aan dat alle data tot dezelfde groep behoort en wordt één boxplot weergegeven. Hier gebruiken we een string zonder karakters `x=""`
+
+```{r}
+NHANES %>%
+  filter(Gender=="female") %>%
+  ggplot(aes(x="",y=DirectChol)) +
+  geom_boxplot()
+```
+
+We kunnen de boxplot toevoegen door een nieuwe layer aan de plot toe te voegen met de  `geom_boxplot()` functie.
+
+Als de steekproef klein is kunnen we ook alle data weergeven in de plot via een extra layer a.d.h.v. de `geom_point()` functie.
+
+We gebruiken ook het `position="jitter"` argument zodat we alle data goed zien als er punten op elkaar zouden vallen.
+
+Merk op, dat we ook het `outlier.shape` argument in de `geom_boxplot` functie op NA zetten omdat outliers anders twee keer worden geplot: eens door geom_boxplot en een tweede keer door `geom_point`.
+
+In onderstaande grafiek plotten we de relatieve abundanties van **Staphylococcus** van de oksel microbiome case study.
+
+```{r}
+ap <- read_csv("https://raw.githubusercontent.com/statOmics/sbc/master/data/armpit.csv")
+ap
+
+ap %>%  
+  ggplot(aes(x=trt,y=rel)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(position="jitter")
+```
+
+Als we een factor variabele gebruiken als x krijgen we een boxplot voor elke behandelingsgroep.
+
+***
+
+## Beschrijvende statistiek
+
+### Centrale locatie: Gemiddelde of Mediaan?
+
+#### Gemiddelde
+
+Schatting van verwachte waarde van X of gemiddelde
+
+$$
+E[X] = \int\limits_{x \in \Omega} x f(x) dx
+$$
+
+in de steekproef:
+
+$$
+ \bar x = \sum\limits_{i=1}^n x_i \frac{1}{n}
+$$
+
+- In een periode van 30 jaar hopen mannen om gemiddeld 64.3 partners te hebben en vrouwen 2.8  \tiny{(Miller and Fishkin, 1997)}.\Normalsize
+
+***
+
+#### Mediaan
+
+- De mediaan van het aantal partners die mannen en vrouwen wensen gedurende de volgende 30 jaar is beiden 1 \tiny{(Miller and Fishkin, 1997)}\Normalsize
+
+***
+
+#### Wat gebeurt er?
+
+![](https://raw.githubusercontent.com/GTPB/PSLS20/gh-pages/assets/figs/partners.png){width=75%}
+
+- Het rekenkundig gemiddelde is heel gevoelig voor outliers!
+
+***
+
+### Geometrisch gemiddelde
+
+$$
+\sqrt[n]{\prod\limits_{i=1}^n x_i} = \exp\left\{\frac{1}{n} \sum_{i=1}^n \log(x_i)\right\}
+$$
+
+- Geometrisch gemiddelde ligt dichter bij de mediaan dan het gemiddelde
+
+- log-transformatie verwijdert scheefheid
+
+- Is vaak een meer geschikte maat voor centrale locatie dan de mediaan:
+
+1. Gebruikt alle observatie: is meer precies
+2. Is het rekenkundig gemiddelde van log-transformeerde data $\rightarrow$ klassieke statistische methoden kunnen direct worden gebruikt, b.v. hypothese testen en betrouwbaarheidsintervallen (zie hoofdstuk 5)
+3. Veel biologische en chemische variabelen zoals concentraties, intensiteiten, etc kunnen niet negatief zijn.
+4. Verschillen op log schaal hebben de betekenis van een `log fold change`:
+
+$$
+\log (B) - \log(A)= \log(\frac{B}{A})=\log(FC_\text{B vs A})
+$$
+
+- In Genomics wordt de $\log_2$ transformatie veel gebruikt.
+
+- Een verschil van 1 op $\log_2$ schaal betekent een verdubbeling op de originele schaal $FC=2$.
+
+```{r}
+logSummary <-
+NHANES %>% filter(Gender=="female") %>% summarize(logMean=mean(DirectChol %>% log2,na.rm=TRUE),sd=sd(DirectChol %>% log2,na.rm=TRUE),mean=mean(DirectChol,na.rm=TRUE),median=median(DirectChol,na.rm=TRUE)) %>% mutate(geoMean=2^logMean)
+
+NHANES %>% filter(Gender=="female") %>%
+ggplot(aes(x=DirectChol %>% log2)) +
+geom_histogram(aes(y=..density.., fill=..count..),bins=30) +
+geom_density(aes(y=..density..)) +
+  stat_function(fun=dnorm,color="red",args=list(mean=logSummary$logMean, sd=logSummary$sd))
+
+logSummary
+```
+
+- Het gemiddelde wordt inderdaad naar grotere waarden verschoven als de data scheef zijn.
+- Het geometrisch gemiddelde ligt dichter bij de mediaan.
+- De cholesterol data zijn veel meer symmetrisch na log transformatie en ze worden goed benaderd a.d.h.v. een Normale distributie.
+
+
+
+## Beschrijvende statistieken voor variabiliteit
+
+De variabiliteit rond de centrale waarde is cruciaal voor:
+
+1. Interesse in variabiliteit:
+    - biologen zijn vaak geïnteresseerd zijn hoe dieren en planten verspreid zijn in de studie regio.
+    - Chemici beogen vaak een reactieproces te bekomen voor de productie van stoffen waar de variabiliteit (constante kwaliteit).
+
+2. Vergelijken van groepen: het groepseffect is duidelijker als de response minder varabiliteit heeft.
+
+$\rightarrow$ kwantificatie van variabiliteit is cruciaal om systematische van random patronen te onderscheiden.
+
+- De response varieert binnen en tussen individuen, daarom hebben we statistiek nodig.
+
+- Daarom gaan we steeds de centrale locatie en de variabiliteit kwantificern.
+
+- Welk deel van de variabiliteit kunnen we verklaren (e.g. met de behandeling, leeftijd, etc.) en welk deel kunnen we niet verklaren?
+
+### Steekproef Variantie en Steekproef Standaarddeviatie
+
+Variantie:
+
+Schatting van de variantie
+
+$$
+E[(X-E[X])^2] = \int\limits_{ x \in \Omega} (x-E[X])^2 f(x) dx
+$$
+ in de steekproef:
+
+$$
+s_X^2= \sum\limits_{i=1}^n (X-\bar X)^2\frac{1}{n-1}
+$$
+- Interpretatie is moeilijk omdat het een andere eenheid heeft dan de metingen.
+
+- *Steekproef Standaarddeviatie*:
+$$
+s_X= \sqrt{s_x^2}
+$$
+
+- Heel informatief voor Normaal verdeelde observaties:
+
+    - $\pm$ 68% van de observaties valt binnen 1 standaard deviatie van het gemiddelde: $\bar{x} - s_x$ en $\bar{x} + s_x$
+    - $\pm$ 95% van de observaties binnen $\bar{x} - 2 s_x$ en $\bar{x} + 2 s_x$.
+
+- Deze intervallen worden ook 68% en 95% *referentie-intervallen* genoemd.
+
+- Als de data niet normaal verdeeld zijn, zijn deze referentie intervallen niet correct en dus niet bruikbaar.
+
+***
+
+### Interkwartiel range
+
+- Voor scheef verdeelde data is de standaarddeviatie (SD) niet zinvol
+- SD is heel gevoelig voor outliers
+
+- *Interkwartiel Range*: Afstand tussen eerste en derde kwartiel
+- Breedte van de box in de boxplot!
+
+```{r}
+NHANES %>% filter(Gender=="female") %>% summarize(IQR=IQR(DirectChol,na.rm=TRUE))
+```
+
+
+```{r}
+NHANES %>% filter(Gender=="female") %>%
+  ggplot(aes(x="",y=DirectChol)) +
+  geom_boxplot()
+```
+
+***
+
+# Normale benadering
+
+
+- Biologische and chemische data zijn vaak Normaal verdeeld na transformatie.
+
+- Als dat het geval is dan kunnen we veel inzicht in de data krijgen op basis van twee beschrijvende statistieken: het gemiddelde $\mu$ en de standaarddeviatie $\sigma$.
+
+***
+
+## Evaluatie met QQ-plots
+
+Als je analyse steunt op de aanname van normaliteit dan moet je die aanname evalueren.
+
+We gebruiken hiervoor *QQ-plots* of *quantile-quantile plots*.
+
+- Geobserveerde kwantielen van de observaties in de steekproef worden geplot tegen theoretische kwantielen op basis van de Normale verdeling.
+
+- Als de data Normaal verdeeld zijn dan liggen beide kwantielen op een lijn.
+
+- De punten in een QQ-plot voor data die Normaal verdeeld zijn worden op een rechte lijn verwacht.
+
+- Systematische afwijkingen van een rechte geven aan dat de data niet Normaal verdeeld zijn.
+
+- Merk op: we verwachten altijd random afwijkingen door random (biologische) variabiliteit.
+
+- Het is dus belangrijk om jezelf te oefenen om systematische van random afwijkingen te kunnen onderscheiden.
+
+***
+
+### Normale Gegevens
+- We simuleren eerst data van de Normal distribution om te tonen hoe QQ-plots eruit zien als de aanname van Normaliteit is voldaan.
+
+- We simuleren data voor 9 steekproeven met een gemiddeld van 18 en een standaard afwijking van 9.
+
+
+```{r}
+n <- 20
+mu <- 18
+sigma <- 9
+nSamp <-9
+
+normSim <- matrix(rnorm(n*nSamp,mean=mu,sd=sigma),nrow=n) %>% as.data.frame
+```
+
+We gaan nu de data visualiseren.
+
+- Merk op dat de data niet in het tidy formaat is.
+- De data voor elke groep/simulatie staat naast elkaar in de kolommen.
+
+1. We converteren het in het tidy formaat via de ```gather``` functie. Hierbij wordt een eerste kolom gemaakt samp die de kolomnamen van de originele dataset normSim voor elk overeenkomstig gesimuleerd data punt bij zal houden. De inhoud van de kolommen van de originele dataset normSim, de gesimuleerde waarden, worden opgeslagen in de variable met naam data.
+
+
+2. we maken een ggplot histogram  voor de variabele data  
+
+3. Aan de hand van de functie `facet_wrap` kunnen we de data opsplitsen volgens de variabele samp. We krijgen dus een histogram voor elk sample.
+
+```{r}
+normSim %>%
+  gather(samp,data) %>%
+  ggplot(aes(x=data)) +
+  geom_histogram(aes(y=..density.., fill=..count..),bins=30) +
+  geom_density(aes(y=..density..)) +
+  facet_wrap(~samp)
+```
+
+Gezien er vrij weinig data punten zijn en omdat er veel distributies vergeleken moeten worden is het handiger om dit via een boxplot te doen.
+
+```{r}
+normSim %>%
+  gather(samp,data) %>%
+  ggplot(aes(x = samp,y = data)) +
+  geom_boxplot(outlier.shape=NA) +
+  geom_point(position="jitter")
+```
+
+We gaan nu normaliteit na via QQ-plot.
+
+1. Zet data om in tidy data
+2. maak een ggplot object
+3. Voeg een laag toe met de QQ-plot via de functie `geom_qq`
+4. Voeg een laag toe met de rechte in de QQ-plot via de functie `geom_qq_line` om te kunnen evalueren hoe goed de data een normale verdeling volgt.
+
+```{r}
+normSim %>%
+  gather(samp,data) %>%
+  ggplot(aes(sample=data)) +
+  geom_qq() +
+  geom_qq_line() +
+  facet_wrap(~samp)
+```
+
+Zelf voor Normal data $\rightarrow$ afwijkingen door sampling variabiliteit!
+
+***
+
+### Echte data: BMI van vrouwen in de NHANES studie
+
+Om de interpretatie van de QQ-plot goed te kunnen illustreren gaan we een histogram en QQ-plot naast elkaar zetten.
+D.m.v. het package `gridExtra` kunnen we meerdere GG-plot objecten in een matrix op dezelfde plot afbeelden.
+
+1. We maken een eerste object aan met het histogram. We slaan dit nu op als object p1 in plaats van dit te visualiseren.
+2. Maake een object p2 met de QQ-plot
+3. Gebruik de functie `grid.arrange` om de objecten p1 en p2 af te beelden en we geven aan dat we dit in 2 kolommen zullen doen `ncol=2`. (je kan ook de dimensie in rijen geven (nrow=1))
+
+```{r}
+library(gridExtra)
+p1 <- NHANES %>% filter(Gender=="female"&!is.na(BMI)) %>%
+  ggplot(aes(x=BMI))+
+   geom_histogram(aes(y=..density.., fill=..count..)) +
+   xlab("BMI") +
+   ggtitle("All females in study") +
+  geom_density(aes(y=..density..))
+
+p2 <- NHANES %>% filter(Gender=="female"&!is.na(BMI)) %>%
+  ggplot(aes(sample=BMI)) +
+  geom_qq() +
+  geom_qq_line()
+
+grid.arrange(p1,p2,ncol=2)
+
+```
+
+The QQ-plot toont dat de kwantielen van de data in de steekproef
+
+- groter zijn (boven de lijn liggen) dan wat we verwachten voor Normaal verdeelde data in de linkerstaart: compressie van de linkerstaart t.o.v. de Normale verdeling .
+- groter zijn (boven de lijn liggen) dan wat we verwachten voor Normaal verdeelde data:: lange staart naar rechts.
+
+We zien dus duidelijk dat de data scheef verdeeld zijn naar rechts.
+
+***
+
+# Twee continue variabelen: Correlatie
+
+- NHANES studie
+- Lengte en gewicht voor vrouwen
+
+```{r}
+NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(x=Height,y=Weight)) +
+  geom_point()
+```
+
+- Duidelijke associatie tussen gewicht en lengte, maar het gewicht is scheef verdeeld naar rechts.
+
+We kijken eerst naar de univariate data: variabele per variabele:
+
+```{r}
+p1 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(x=Height)) +
+  geom_histogram(aes(y=..density.., fill=..count..)) +
+   xlab("Height") +
+  ggtitle("All females in study") +
+  geom_density(aes(y=..density..))
+
+p2 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(sample=Height)) +
+  geom_qq() +
+  geom_qq_line()
+grid.arrange(p1,p2,ncol=2)
+```
+
+
+```{r}
+p3 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(x=Weight)) +
+  geom_histogram(aes(y=..density.., fill=..count..)) +
+   xlab("Weight") +
+  ggtitle("All females in study") +
+  geom_density(aes(y=..density..))
+
+p4 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(sample=Weight)) +
+  geom_qq() +
+  geom_qq_line()
+
+grid.arrange(p3,p4,ncol=2)
+```
+
+De gewichtsdata zijn inderdaad scheef verdeeld!
+
+Na log transformatie zijn de gewichtsdata minder scheef, maar nog steeds niet Normaal verdeeld.
+
+```{r}
+p5 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(x=Weight%>%log2)) +
+  geom_histogram(aes(y=..density.., fill=..count..)) +
+   xlab("Weight (log2)") +
+  ggtitle("All females in study") +
+  geom_density(aes(y=..density..))
+
+p6<- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(sample=Weight%>%log2)) +
+  geom_qq() +
+  geom_qq_line()
+
+grid.arrange(p5,p6,ncol=2)
+```
+
+De scheefheid is er nog maar is sterk gereduceerd.
+
+```{r}
+NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(x=Height,y=Weight %>% log2)) +
+  ylab("Weight (log2)") +
+  geom_point()
+```
+
+***
+
+## Covariantie en Correlatie
+
+- Stel dat X en Y continue toevallig veranderlijke zijn
+- Voor elk subject i observeren we $(X_i,Y_i)$.
+- Covariantie: hoe variëren $X_i$ en $Y_i$ rond hun gemiddelde $(E[X],E[Y])$?
+
+$$\mbox{Covar}(X,Y)=E[(X-E[X])(Y-E[Y])]$$
+
+- Correlatie: standardiseer de covariantie volgens de variabiliteit van elke variabele:
+
+$$\mbox{Cor}(X,Y)=\frac{E[(X-E[X])(Y-E[Y])]}{\sqrt{E[(X-E[X])^2]}\sqrt{E[(Y-E[Y])^2]}}$$
+
+
+## Pearson Correlatie
+
+- Schat de correlatie tussen twee continue toevallig veranderlijken op basis van de data in de steekproef:
+
+$$
+\mbox{Cor}(X,Y)=\frac{\sum_{i=1}^{n}(X_{i}-\bar{X})(Y_{i}-\bar{Y})}{(n-1)s_{X}s_{Y}}
+$$
+
+- Positieve correlatie: $x \ \nearrow \ \Rightarrow \ y \ \nearrow$
+
+- Negatieve correlatie: $x \ \nearrow \ \Rightarrow \ y \ \searrow$
+
+- Correlatie altijd tussen -1 en 1
+
+```{r}
+means<-NHANES%>% filter(Age >= 18 & Gender=="female") %>% select(Weight,Height) %>% mutate(log2Weight=Weight%>%log2) %>% apply(.,2,mean,na.rm=TRUE)
+ranges<-NHANES%>% filter(Age >= 18 & Gender=="female") %>% select(Weight,Height) %>% mutate(log2Weight=Weight%>%log2) %>% apply(.,2,range,na.rm=TRUE)
+
+NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(x=Height,y=Weight %>% log2)) +
+  ylab("Weight (log2)") +
+  geom_point() +
+  geom_hline(yintercept=means["log2Weight"],color="red") +
+  geom_vline(xintercept=means["Height"],color="red") +
+  annotate(geom="text",
+           x=c(ranges[1,"Height"],ranges[1,"Height"],ranges[2,"Height"],ranges[2,"Height"]),
+           y=c(ranges[1,"log2Weight"],ranges[2,"log2Weight"],ranges[1,"log2Weight"],ranges[2,"log2Weight"]),
+           label=c("III: +","II: -","IV: -","I: +"),color="red",size=7)
+```
+
+```{r}
+NHANES%>%
+  filter(Age >= 18 & Gender=="female") %>%
+  ggplot(aes(x=Height,y=Weight)) +
+  ylab("Weight (kg)") +
+  geom_point() +
+  geom_hline(yintercept=means["Weight"],color="red") +
+  geom_vline(xintercept=means["Height"],color="red") +
+  annotate(geom="text",
+           x=c(ranges[1,"Height"],ranges[1,"Height"],ranges[2,"Height"],ranges[2,"Height"]),
+           y=c(ranges[1,"Weight"],ranges[2,"Weight"],ranges[1,"Weight"],ranges[2,"Weight"]),
+           label=c("III: +","II: -","IV: -","I: +"),color="red",size=7)
+```
+
+
+
+```{r}
+NHANES%>%
+  filter(Age >= 18 & Gender=="female") %>%
+  select(Weight,Height) %>%
+  mutate(log2Weight=Weight%>%log2) %>%
+  na.exclude %>%
+  cor
+```
+
+- Merk op  dat de correlatie lager is als de data niet worden getransformeerd.
+- De Pearson correlatie is gevoelig voor outliers!
+- Gebruik de Pearson correlatie niet voor scheef verdeelde data of data met outliers!
+
+### Impact van outliers
+
+Illustratie d.m.v. gesimuleerde data met één outlier.
+
+```{r}
+set.seed(100)
+x <- rnorm(20)
+simData <- data.frame(x=x,y=x*2 + rnorm(length(x)))
+simData %>% ggplot(aes(x=x,y=y)) +
+  geom_point() +
+  ggtitle(paste("cor =",cor(simData[,1],simData[,2]) %>% round(.,2)))
+
+outlier<- rbind(simData,c(2,-4))
+outlier %>% ggplot(aes(x=x,y=y)) +
+  geom_point() +
+  ggtitle(paste("cor =",cor(outlier[,1],outlier[,2]) %>% round(.,2)))
+```
+
+### Pearson correlatie pikt enkel linear associatie op:
+
+
+```{r}
+x <- rnorm(100)
+quadratic <- data.frame(x=x,y=x^2 + rnorm(length(x)))
+quadratic %>% ggplot(aes(x=x,y=y)) +
+  geom_point() +
+  ggtitle(paste("cor =",cor(quadratic[,1],quadratic[,2]) %>% round(.,2))) +
+  geom_hline(yintercept = mean(quadratic[,2]),col="red") +
+    geom_vline(xintercept = mean(quadratic[,1]),col="red")
+```
+
+
+## Verschillende groottes van correlatie
+
+```{r}
+set.seed(100)
+x <- rnorm(100)
+simData2<-cbind(x,1.5*x,sapply(1:7,function(sd,x) 1.5*x+rnorm(length(x),sd=sd),x=x),rnorm(length(x),sd=7))
+
+colnames(simData2)[-1]<-paste("cor",round(cor(simData2)[1,-1],2),sep="=")
+
+simData2 %>%
+  as.data.frame %>%
+  gather(cor,y,-x) %>%
+  ggplot(aes(x=x,y=y)) +
+  geom_point() +
+  facet_wrap(~cor)
+
+simData3 <- simData2
+simData3[,-1]<--simData2[,-1]
+colnames(simData3)[-1]<-paste("cor",round(cor(simData3)[1,-1],2),sep="=")
+
+simData3 %>%
+  as.data.frame %>%
+  gather(cor,y,-x) %>%
+  ggplot(aes(x=x,y=y)) +
+  geom_point() +
+  facet_wrap(~cor)
+```
+
+***
+
+## Spearman correlatie
+
+De Spearman correlatie is de Pearson correlatie na transformatie van de data naar ranks.   
+
+- Pearson correlatie
+```{r}
+cor(outlier)
+```
+
+- Spearman correlatie
+```{r}
+cor(outlier,method="spearman")
+```
+
+- Spearman correlatie is minder gevoelig voor outliers.
+
+- Pearson correlation op ranks
+```{r}
+rankData<-apply(outlier,2,rank)
+cor(rankData)
+```
+
+### NHANES voorbeeld
+
+```{r}
+NHANES%>%
+  filter(Age >= 18 & Gender=="female") %>%
+  select(Weight,Height) %>%
+  mutate(log2Weight=Weight%>%log2) %>%
+  na.exclude %>%
+  cor(method="spearman")
+```
+
+
+***

@@ -1,0 +1,26 @@
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Cursus Statistiek 2026-2027</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/rstudio/bookdown-demo/edit/master/%s
+    download: ["pdf", "epub"]
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+  colorlinks: true
+  linkcolor: blue
+  urlcolor: blue
+  citecolor: blue
+bookdown::epub_book: default
+bookdown::markdown_document2:
+  base_format: rmarkdown::md_document
+  variant: gfm
+  pandoc_options: --reference-location=section
+always_allow_html: true

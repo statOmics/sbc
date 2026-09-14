@@ -1,0 +1,324 @@
+---
+title: "9. Nonparametric Statistics - Wilcoxon-Mann-Whitney test"
+author: "Lieven Clement"
+date: "statOmics, Ghent University (https://statomics.github.io)"
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    highlight-style: tango
+    code-tools: true
+    embed-resources: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = TRUE, comment = NA, echo = TRUE,
+                      message = FALSE, warning = FALSE)
+library(tidyverse)
+library(Rmisc)
+set.seed(140)
+```
+
+
+#Intro
+
+Inferentie is alleen correct als de assumpties over de verdelingen correct zijn.
+
+- e.g Normale verdeling 
+- gelijke variantie 
+ 
+-  De $p$-waarde: $\text{P}_0\left[ \vert T\vert \geq \vert t \vert \right]$. 
+  	
+	- Berekend met de nulverdeling van $T$ die we hebben afgeleid onder de assumpties
+
+	- Onjuist als aannames worden geschonden  
+	
+-  $95\%$ BI bouwt ook voort op deze assumpties Als ze ongeldig zijn, bevatten de intervallen niet de populatieparameter met een waarschijnlijkheid van 95%.
+
+- Asymptotische theorie is moeilijker te plaatsen: de $t$-test is asymptotisch niet-parametrisch omdat voor zeer grote steekproeven de verdelingsveronderstellingen van normaliteit niet langer belangrijk zijn.
+
+- Indien de assumpties correct zijn, dan is de parametrische benadering:
+	- efficiënter: grotere power  met dezelfde steekproefgrootte + kleinere BI
+	- flexibeler: eenvoudiger om gegevens te analyseren met complexe ontwerpen
+
+	
+***
+
+## Cholesterol voorbeeld
+
+- Cholesterolconcentratie in bloed gemeten voor 
+  - 5 patiënten (groep = 1) twee dagen na een beroerte
+  - 5 gezonde proefpersonen (groep = 2).
+
+- Is de cholesterolconcentratie van hartpatiënten en gezonde proefpersonen gemiddeld verschillend? 
+
+```{r}
+chol <- read_tsv("https://raw.githubusercontent.com/statOmics/sbc/master/data/chol.txt")
+chol$group <- as.factor(chol$group)
+nGroups <- table(chol$group)
+n <- sum(nGroups)
+chol
+```
+
+***
+
+
+```{r, echo=FALSE, fig.align='center'}
+chol %>%  ggplot(aes(x=group,y=cholest)) + geom_boxplot(outlier.shape=NA) + geom_point(position="jitter")
+
+chol %>% ggplot(aes(sample=cholest)) + 
+  geom_qq() +
+  geom_qq_line() +
+  facet_wrap(~group) 
+```
+
+- Mogelijk uitschieters
+- Moeilijk om verdelingsaannames te beoordelen wanneer er slechts 5 waarnemingen beschikbaar zijn.
+
+
+# Rank Tests
+
+- Belangrijke groep niet-parametrische tests
+  - niet-parametrisch, 
+  - Exacte $p$-waarden met behulp van een permutatie-null-distributie. 
+  - Geen aparte permutatiedistributie nodig voor elke nieuwe dataset
+  - Permutatie nulverdeling van rangtesten hangt alleen af van de steekproefgrootte 
+  - Robuust voor uitschieters
+ 
+
+***
+
+#Ranks
+
+
+Rangtesten beginnen met in rang getransformeerde gegevens.
+
+- Laat $Y_1, \ldots, Y_n$. 
+- In de afwezigheid van *gedeelde plaatsen* 
+  $$R_i=R(Y_i) = \#\{Y_j: Y_j\leq Y_i; j=1,\ldots, n\}$$
+- Kleinste waarneming heeft rang 1, tweede kleinste rang 2, ..., grootste waarneming krijgt rang $n$ 
+
+```{r}
+chol$cholest
+rank(chol$cholest)
+```
+
+***
+
+## Gedeelde plaatsen 
+Soms zijn er *gedeelde plaatsen*: twee waarnemingen met identieke waarden
+
+```{r}
+withTies=c(403,507,507,610,651,651,651,830,900)
+rank(withTies)
+```
+
+- Gedeelde plaatsen: 507 komt twee keer voor, 651 komt drie keer voor
+- Indien er gedeelde plaatsen zijn worden *midranks* gebruikt. 
+
+- **midrank** van observatie $Y_i$ wordt
+  \begin{eqnarray*}
+   R_i &=& \frac{ \#\{Y_j: Y_j\leq Y_i\} + ( \#\{Y_j: Y_j < Y_i\} +1)}{2}.
+   \end{eqnarray*}
+
+***
+
+## Ranks van gepoolde steekproef
+
+- Laat  $Y_{ij}$, $i=1,\ldots, n_j$ waarnemingen zijn van twee behandeling groepen $j=1,2$.
+- Ze kunnen ook worden weergegeven door $Z_1,\ldots, Z_n$ ($n=n_1+n_2$), de uitkomsten van de gepoolde steekproef
+
+```{r}
+t(chol)
+z=chol$cholest
+z
+rank(z)
+```
+***
+
+# Wilcoxon-Mann-Whitney Test
+
+ Gelijktijdig ontwikkeld door Wilcoxon, en,  Mann and Whitney:  **Wilcoxon-Mann-Whitney**, **Wilcoxon rank sum test**  of **Mann-Whitney U test**
+
+## hypotheses
+  
+Onder $H_0$ is de verdeling van de twee groepen gelijk
+$$H_0: f_1=f_2$$
+  
+
+Onder het alternatief $H_1$ verschillen de distributies in locatie  $$H_1: \mu_1\neq \mu_2$$
+  
+$H_1$ gaat uit van **locatie-shift**, we zullen deze assumptie later versoepelen.
+
+## Test statistiek
+
+Klassieke T-test: verschil in steekproefgemiddelde $\bar{Y}_1-\bar{Y}_2$.
+
+hier: Verschil in steekproefgemiddelden op basis van in rangorde getransformeerde gegevens
+
+Rangen op basis van de gepoolde steekproef (bij samenvoeging van de waarnemingen van de twee groepen): $R_{ij}=R(Y_{ij})$ is de waarnemingsrang  $Y_{ij}$ in de gepoolde steekproef. 
+
+\[
+  T = \frac{1}{n_1}\sum_{i=1}^{n_1} R(Y_{i1}) - \frac{1}{n_2}\sum_{i=1}^{n_2} R(Y_{i2}) .
+\]
+
+- Onder $H_0$ verwachten we dat de gemiddelde rang van de eerste groep dicht bij die van de tweede groep ligt, dus $T$ is bijna nul.
+
+- Onder $H_1$ verwachten we dat de gemiddelde rangorde zal verschillen, zodat $T$ afwijkt van nul. 
+
+- Het is voldoende om alleen 
+  $$S_1=\sum_{i=1}^{n_1} R(Y_{i1})$$ te berekenen.
+
+- $S_1$ is de som van de rangen van de eerste groep: *rank sum test*.
+
+- Dit geldt omdat 
+\[
+  S_1+S_2 = \text{sum of all ranks} = 1+2+\cdots + n=\frac{1}{2}n(n+1).
+\]
+
+
+- $S_1$ (of $S_2$) is een goede test statistiek
+
+- Gebruik permutaties om de exacte permutatieverdeling te bepalen. (Permuteer de rangen tussen de groepen) 
+
+- Voor een gegeven $n$ en geen *gedeelde plaatsen* zijn de in rang getransformeerde gegevens altijd
+  $$1, 2, \ldots, n$$ 
+- Voor gegeven $n_1$ en $n_2$ is de permutatieverdeling altijd hetzelfde!
+- Met de huidige rekenkracht is dat niet zo belangrijk meer.
+
+***
+
+## Standardized statistic 
+
+Vaak wordt de gestandaardiseerde teststatistiek gebruikt
+\[
+  T = \frac{S_1-\text{E}_{0}\left[S_1\right]}{\sqrt{\text{Var}_{0}\left[S_1\right]}},
+\]
+
+- met $\text{E}_{0}\left[S_1\right]$ en $\text{Var}_{0}\left[S_1\right]$ het verwachte gemiddelde en de variantie van S1 onder $H_0$. 
+
+- Onder $H_0$
+ \[
+   \text{E}_{0}\left[S_1\right]= \frac{1}{2}n_1(n+1) \;\;\;\;\text{ en }\;\;\;\; \text{Var}_{0}\left[S_1\right]=\frac{1}{12}n_1n_2(n+1).
+ \]
+
+- Onder $H_0$ en wanneer $\min(n_1,n_2)\rightarrow \infty$
+ \[
+    T = \frac{S_1-\text{E}_{0}\left[S_1\right]}{\sqrt{\text{Var}_{0}\left[S_1\right]}} \rightarrow N(0,1).  
+ \]
+
+Asymptotisch volgt de gestandaardiseerde statistiek een standaard normale verdeling!
+
+
+***
+
+## Cholesterol voorbeeld 
+
+We illustreren het resultaat voor het cholesterolvoorbeeld met de R-functie `wilcox.test`. 
+```{r}
+wilcox.test(cholest~group,data=chol)
+```
+
+- We verwerpen $H_0$ ($p=$ `r format(wilcox.test(cholest~group,data=chol)$p.value,digits=2)` $<0.05$)
+
+- De output toont $W=$ `r wilcox.test(cholest~group,data=chol)$statistic`? 
+
+- Bereken 
+```{r}
+S1 <- sum(rank(chol$cholest)[chol$group==1])
+S1
+S2 <- sum(rank(chol$cholest)[chol$group==2]) 
+S2
+```
+
+- Waar komt $W=$ `r wilcox.test(cholest~group,data=chol)$statistic` vandaan? 
+
+***
+
+## Mann and Whitney test
+Mann and Whitney test in afwezigheid van gedeelde plaatsen:
+\[
+ U_1 = \sum_{i=1}^{n_1}\sum_{k=1}^{n_2} \text{I}\left\{Y_{i1}\geq Y_{k2}\right\}.
+\]
+
+- met $\text{I}\left\{.\right\}$ een indicator die gelijk is aan 1 als de uitdrukking waar is en anders nul.
+
+- U telt hoe vaak een waarneming van de eerste groep groter of gelijk is aan een waarneming uit de tweede groep.
+
+```{r}
+y1=subset(chol,group==1)$cholest
+y2=subset(chol,group==2)$cholest
+u1Hlp=sapply(y1,function(y1i,y2) {y1i>=y2},y2=y2)
+colnames(u1Hlp)=y1;rownames(u1Hlp)=y2
+```
+
+```{r}
+u1Hlp
+U1=sum(u1Hlp); U1
+```
+
+Het kan worden aangetoond dat $U_1 = S_1 - \frac{1}{2}n_1(n_1+1).$
+
+```{r}
+S1-nGroups[1]*(nGroups[1]+1)/2
+```
+
+1. $U_1$ en $S_1$ bevatten dezelfde informatie
+2. $U_1$ is ook een rang statistiek, en
+3. Exacte test gebaseerd op $U_1$ en $S_1$ zijn gelijkwaardig.
+ 
+
+***
+
+## Probabilistic index
+
+- $U_1$ heeft een betere interpretatie
+- Laat $Y_j$ een willekeurige waarneming uit groep $j$ ($j=1,2$) zijn. Dan
+\begin{eqnarray*}
+  \frac{1}{n_1n_2}\text{E}\left[U_1\right] 
+     &=& \text{P}\left[Y_1 \geq Y_2\right].
+\end{eqnarray*}
+
+We kunnen dus de kans schatten door het gemiddelde te berekenen van alle indicatorvariabele waarden $\text{I}\left\{Y_{i1}\geq Y_{k2}\right\}$. Merk op dat we  $n_1 \times n_2$ vergelijkingen hebben gemaakt
+
+```{r}
+mean(u1Hlp)
+U1/(nGroups[1]*nGroups[2])
+```
+
+- Waarschijnlijkheid  $\text{P}\left[Y_1 \geq Y_2\right]$ wordt de *probabilistische index* genoemd. 
+- Het is de kans dat een willekeurige waarneming van de eerste groep groter of gelijk is aan een willekeurige waarneming van de tweede groep  
+- Als $H_0$ geldt $\text{P}\left[Y_1 \geq Y_2\right]=\frac{1}{2}$.
+
+- R functie `wilcox.test` geeft niet de Wilcoxon rank som statistiek terug. Het geeft de Mann-Whitney statistiek $U_1$ terug.
+- Laten we het resultaat nog eens bekijken
+```{r}
+wTest<-wilcox.test(cholest~group,data=chol) 
+wTest
+U1
+probInd=wTest$statistic/prod(nGroups) 
+probInd
+```
+
+Omdat  $p=$ `r format(wTest$p.value,digits=3)` $<0.05$ concluderen we op het $5\%$ significantie niveau dat het gemiddelde cholesterolgehalte van hartpatiënten groter is dan dat van gezonde proefpersonen.
+
+  - Merk op dat we hebben aangenomen dat het location-shift-model geldig is in deze conclusie.
+  - We weten ook dat een hoger cholesterolgehalte bij hartpatiënten waarschijnlijker is dan bij gezonde proefpersonen en dat deze kans gelijk is aan
+$U1/(n_1\times n_2)=$ `r probInd*100`%. 
+  - We moeten de veronderstelling van locatieverschuiving beoordelen. Maar dit is niet mogelijk met slechts 5 waarnemingen.
+
+Zonder de aanname van locatieverschuiving blijft de conclusie in termen van de probabilistische index geldig!
+
+  - Dus als we niet uitgaan van locatieverschuiving, testen we op
+
+\[H_0: F_1=F_2 \text{ vs } H_1: P[Y_1 \geq Y_2] \neq 0.5.\]
+
+
+## Conclusie
+
+Er is een significant verschil in de verdeling van de cholesterolconcentratie van hartpatiënten twee dagen na een beroerte en die van gezonde proefpersonen (($p=$ `r format(wTest$p.value,digits=3)`). bij hartpatiënten is de kans groter dat ze een hoger cholesterolgehalte waarnemen dan bij gezonde proefpersonen. De puntschatter voor deze kans is `r probInd*100`%.
+
+
+***
+s

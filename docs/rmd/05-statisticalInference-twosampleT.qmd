@@ -1,0 +1,265 @@
+---
+title: "5. Statistical Inference: Two-sample t-test"
+author: "Lieven Clement"
+date: "statOmics, Ghent University (https://statomics.github.io)"
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    highlight-style: tango
+    code-tools: true
+    embed-resources: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(include = TRUE, comment = NA, echo = TRUE,
+                      message = FALSE, warning = FALSE)
+library(tidyverse)
+```
+
+# Case study: oksel microbiome
+
+- Okselgeur wordt niet veroorzaakt door zweet zelf. De geur wordt veroorzaakt door specifieke micro-organismen die behoren tot de groep van *Corynebacterium spp.* die zweet metaboliseren.
+Een andere groep van bacteriën zijn de *Staphylococcus spp.*, deze bacteriën metaboliseren zweet niet in stinkende metabolieten.
+
+- De CMET-groep aan de UGent doet onderzoek naar het transplanteren van het okselmicrobioom om mensen met stinkende oksels te redden.
+
+- Voorgestelde therapie:
+  	1. Verwijder oksel-microbioom met antibiotica
+    2. Beïnvloed okselmicrobioom met microbiële transplantatie  (https://youtu.be/9RIFyqLXdVw)
+
+## Experiment:
+
+- de personen worden at random verdeeld over twee behandelingsgroepen:
+
+    - placebo (enkel antibiotica)
+    - transplantatie (antibiotica en microbiële transplantatie).
+    - Zes weken na de behandeling worden stalen genomen.
+    - De relatieve abundantie van *Staphylococcus spp.* op *Corynebacterium spp.* + *Staphylococcus spp.* In het microbioom wordt gemeten via DGGE (*Denaturing Gradient Gel Electrophoresis*).
+
+***
+
+## Importeer de data
+
+```{r}
+ap<-read_csv("https://raw.githubusercontent.com/statOmics/sbc/master/data/armpit.csv")
+ap
+```
+
+## Data exploratie
+
+We plotten de relatieve abundanties in functie van de behandelde groep.
+
+```{r}
+ap %>%  
+  ggplot(aes(x=trt,y=rel)) +
+  geom_boxplot(outlier.shape=NA) + geom_point(position="jitter")
+
+ap %>% ggplot(aes(sample=rel)) +
+  geom_qq() +
+  geom_qq_line() +
+  facet_wrap(~trt)
+```
+
+***
+
+# Two-sample t-test
+## Notatie
+
+Stel dat $Y_{ij}$ de response is voor subjecten $i=1,\ldots, n_j$ van de populatie $j=1,2$.
+
+Gebruik van de term **behandeling** of **groep** in plaats van populatie
+
+Hier is de behandeling $j=1$ microbiële transplantatie versus $j=2$ placebo.
+
+We nemen aan dat
+
+$$Y_{ij}\text{ i.i.d. } N(\mu_j,\sigma^2)\;\;\;i=1,\ldots,n_i\;j=1,2.$$
+
+Merk op dat we gelijke varianties aannemen, dit wordt **homoscedastisch** genoemd.
+
+(Ongelijke varianties worden  **heteroscedastisch** genoemd)
+
+***
+
+## Hypotheses
+
+Test $$ H_0: \mu_1 = \mu_2 $$
+tegen
+$$  H_1: \mu_1 \neq \mu_2 .$$
+
+$H_1$ is opnieuw de onderzoekshypothese: de gemiddelde relatieve abundantie van *Staphylococcus spp.* is anders bij microbiële transplantatie dan bij placebobehandeling
+
+$H_0$ en $H_1$ kunnen ook worden gespecificeerd in termen van de effectgrootte tussen de twee behandelingen, $\mu_1-\mu_2$
+$$H_0: \mu_1-\mu_2 = 0,$$
+$$H_1: \mu_1-\mu_2 \neq 0.$$
+
+We kunnen de effectgrootte schatten met behulp van het verschil in steekproefgemiddelden:
+$$\hat \mu_1-\hat \mu_2=\bar Y_1 -\bar Y_2.$$
+
+***
+
+## Variantie schatter
+
+De experimentele eenheden zijn onafhankelijk, dus de steekproefgemiddelden zijn ook onafhankelijk en de variantie op het verschil is
+$$\text{Var}_{\bar Y_1 -\bar Y_2}=\frac{\sigma^2}{n_1}+\frac{\sigma^2}{n_2}=\sigma^2 \left(\frac{1}{n_1}+\frac{1}{n_2}\right).$$
+
+en de standaard error wordt:
+$$\sigma_{\bar Y_1 -\bar Y_2}=\sigma\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}.$$
+
+De variantie kan binnen elke groep geschat worden met behulp van de steekproefvariantie:
+
+$$S_1^2 = \frac{1}{n_1-1}\sum_{i=1}^{n_1} (Y_{i1}-\bar{Y}_1)^2.$$
+
+$$S_2^2 = \frac{1}{n_2-1}\sum_{i=1}^{n_2} (Y_{i2}-\bar{Y}_2)^2.$$
+
+Maar als we gelijke varianties $\sigma_1^2=\sigma_2^2=\sigma^2$ aannemen, dan kunnen we de variantie nauwkeuriger schatten door alle waarnemingen in beide groepen te gebruiken. Deze variantieschatter wordt ook wel de *gepoolde variantie schatter: $S^2_p$* genoemd.
+
+Dus $S_1^2$ en $S_2^2$ zijn schatters van dezelfde parameter $\sigma^2$.
+
+En we kunnen ze combineren tot één schatter op basis van alle $n_1+n_2$ observaties:
+
+$$  S_p^2 = \frac{n_1-1}{n_1+n_2-2} S_1^2 + \frac{n_2-1}{n_1+n_2-2} S_2^2 = \frac{1}{n_1+n_2-2}\sum_{j=1}^2\sum_{i=1}^{n_j} (Y_{ij} - \bar{Y}_j)^2.$$
+
+$$ S_p^2= \sum\limits_{j=1}^2\sum\limits_{i=1}^{n_j} \frac{(Y_{ij}-\bar{Y}_{.j})^2}{n_1+n_2-2}$$
+
+
+De gepoolde variantieschatter gebruikt de kwadratische afwijkingen van de observaties van hun groepsgemiddelde en heeft $n_1+n_2-2$ vrijheidsgraden.
+
+***
+
+## Test statistiek
+Two-sample $t$-teststatistiek:
+
+$$T = \frac{\bar{Y}_1-\bar{Y}_2}{\sqrt{\frac{S_p^2}{n_1}+\frac{S_p^2}{n_2}}} =
+  \frac{\bar{Y}_1 - \bar{Y}_2}{S_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}.$$
+
+De statistiek T volgt een t-verdeling met $n_1+n_2-2$. Onder $H_0$ zijn alle gegevens onafhankelijk, normaal verdeeld en hebben gelijke varianties.
+
+***
+
+## Oksel voorbeeld
+
+
+We kunnen de test implementeren in R:
+
+```{r}
+t.test(rel~trt,data=ap,var.equal=TRUE)
+```
+
+Op het $5\%$ significantieniveau verwerpen we de nulhypothese ten gunste van de alternatieve hypothese en concluderen we dat de relatieve abundantie van  *Staphylococcus spp.* gemiddeld extreem significant groter is in de transplantatiegroep dan in de placebogroep.
+
+Als er geen effect is van de transplantatie, hebben we een kans van minder dan 9 op $100000$ om een teststatistiek te observeren in een willekeurige steekproef die minstens zo extreem is als wat we in de okselmicrobioom studie hebben waargenomen.
+
+Dit is uiterst zeldzaam onder $H_0$.
+
+Indien $H_1$ correct is, verwachten we dat de teststatistiek groter is in absolute waarde en verwachten we kleine p-waarden. Daarom besluiten we dat er veel bewijs is tegen $H_0$ in het voordeel van $H_1$.  
+
+**Goede statistische praktijk** is om de $p$-waarde te rapporteren, maar ook de effectgrootte samen met het betrouwbaarheidsinterval. Zodat we de statistische significantie en de biologische relevantie kunnen beoordelen.
+
+### Conclusie
+
+Gemiddeld is de relatieve abundantie van *Staphylococcus spp.* in het microbioom van de oksel in de transplantatiegroep zeer significant verschillend van die in de placebogroep ($p<<0.001$). De relatieve abundantie van *Staphylococcus spp.* is gemiddeld  `r round(diff(t.test(rel~trt,data=ap,var.equal=TRUE)$estimate),1)`% groter in de transplantatiegroep dan in de placebo groep (95\% CI [`r paste(format(-t.test(rel~trt,data=ap,var.equal=TRUE)$conf.int[2:1],digits=2,nsmall=1),collapse=",")`]%).
+
+***
+
+# Aannames
+
+De geldigheid van de t-toets hangt af van de assumpties over de verdeling:
+
+- Onafhankelijkheid  (design)
+- One-sample t-test: normaliteit van de waarnemingen
+- Gepaarde t-test: normaliteit van het verschil  
+- Two-sample t-test: Normaliteit van de waarnemingen in beide groepen, en gelijke varianties.
+
+Als niet aan de aannames wordt voldaan, volgt de nulverdeling geen t-verdeling en zijn de p-waarden en kritische waarden onjuist.
+
+
+Om betrouwbaarheidsintervallen te construeren, vertrouwen we ook op deze aannames.
+
+- We hebben kwantielen uit de t-verdeling gebruikt om de onder- en bovengrens te berekenen.
+
+- De correcte coverage van het CI hangt af van deze assumpties.
+
+***
+
+## Evalueer normaliteit
+
+ - Boxplots en histogrammen: vorm van de verdeling en outliers
+
+ - QQ-plots
+
+Er bestaan ook hypothesetests (goodness-of-fit-test), maar hun nulhypothese is dat de gegevens normaal verdeeld zijn, dus we trekken een zwakke conclusie!
+
+  - Kolmogorov-Smirnov, Shapiro-Wilk en Anderson-Darling.
+  - In kleine monsters hebben ze een lage power
+  - In grote steekproeven signaleren ze vaak zeer kleine afwijkingen als significant
+
+Aanbeveling
+
+- Begin met grafische verkenning van de gegevens en houd rekening met de steekproefomvang om overinterpretatie van de plots te voorkomen.
+
+- Indien je twijfelt, gebruik dan simulatie waarbij u gegevens simuleert met dezelfde steekproefomvang uit een normale verdeling met hetzelfde gemiddelde en dezelfde variantie als degene die u in de steekproef hebt waargenomen
+
+- Als u afwijkingen van normaliteit hebt waargenomen, controleer dan in de literatuur hoe gevoelig uw methode is voor dergelijke afwijkingen van normaliteit. (Zo zijn T-tests bijvoorbeeld nogal ongevoelig voor afwijkingen, zolang de verdeling van de gegevens maar symmetrisch is.)
+
+-  In grote steekproeven kun je terugvallen op de centrale limietstelling.
+
+- Het is een mogelijkheid om de response te transformeren.
+
+***
+
+## Homoscedasticiteit
+
+- Boxplots: de boxgrootte is het interkwartielbereik (IQR), een robuste schatter van de variantie.
+
+- Als de verschillen niet groot zijn $\rightarrow$ homoscedasticiteit
+
+- Ook hier kun je simulatie gebruiken om inzicht te krijgen in de verschillen die je kunt verwachten.
+
+- Formele F-toets kan worden gebruikt om de varianties te vergelijken, maar onder de nul ga je hier ook uit van gelijke varianties, dus hier geldt dezelfde kritiek als voor normaliteitstesten.
+
+***
+
+## Welch modified t-test
+
+Als de gegevens heteroscedastisch zijn, kunt u een Welch two-sample T-test gebruiken, die niet langer de gepoolde variantie-schatter gebruikt.
+
+$$T =  \frac{\bar{Y}_1 - \bar{Y}_2}{\sqrt{\frac{S^2_1}{n_1}+\frac{S^2_2}{n_2}}}$$
+met $S^2_1$ en $S^2_2$ de steekproefvarianties in beide groepen.
+
+Deze statistiek volgt ongeveer een t-verdeling met een aantal vrijheidsgraden tussen $\text{min}(n_1-1,n_2-1)$ en $n_1+n_2-2$.
+
+In R worden de vrijheidsgraden geschat met behulp van de Welch-Satterthwaite benadering. U kunt dit doen door de functie `t.test` te gebruiken met het argument `var.equal = FALSE`.
+
+```{r}
+t.test(rel~trt,data=ap,var.equal=FALSE)
+```
+
+Merk op dat de Welch T-test in de titel is bijgekomen. De aangepaste vrijheidsgraden zijn $df = 17.876$ wat bijna overeenkomt met de vrijheidsgraden van de conventionele t-test, omdat de varianties ongeveer gelijk zijn.
+
+***
+
+# Hoe rapporteren?
+
+- In de wetenschappelijke literatuur is er teveel aandacht voor p-waarden
+
+-  Het is veel informatiever om een schatting te combineren met zijn betrouwbaarheidsinterval.
+
+**Rule of thumb**:
+
+Rapporteer een schatting samen met het betrouwbaarheidsinterval (en de p-waarde)
+
+1. Het resultaat van de test kan worden afgeleid uit het betrouwbaarheidsinterval
+2. Het staat de lezer toe om de **wetenschappelijke relevatie** te beoordelen.
+
+```{r}
+t.test(rel~trt,data=ap)
+```
+
+Het resultaat van een $\alpha$-level t-test komt overeen met het vergelijken van de effectgrootte onder $H_0$ met het $1-\alpha$ CI.
+
+Een effect kan statistisch zeer significant zijn, maar wetenschappelijk irrelevant. Met een CI zie je dit.
+
+***
