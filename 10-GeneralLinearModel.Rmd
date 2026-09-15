@@ -53,8 +53,8 @@ prostate$svi <- as.factor(prostate$svi)
 
 ```{r lpsaAll,fig.cap='Scatterplot matrix voor de observaties in de prostaat kanker dataset.', out.width='100%', fig.asp=.8, fig.align='center'}
 library(GGally)
-prostate %>%
-  dplyr::select(-pgg45)  %>%
+prostate |>
+  dplyr::select(-pgg45)  |>
   ggpairs()
 ```
 
@@ -805,7 +805,7 @@ Indien we een nauwkeurig regressiemodel kunnen opstellen op basis van de gegeven
 
 ```{r vetScatter,fig.cap='Scatterplot matrix van de dataset bodyfat.', out.width='100%', fig.asp=.8, fig.align='center', message=FALSE,echo=FALSE}
 bodyfat <- read_delim("https://raw.githubusercontent.com/statomics/sbc/master/data/bodyfat.txt",delim=" ")
-bodyfat %>% ggpairs()
+bodyfat |> ggpairs()
 ```
 
 Wanneer we de 3 predictoren simultaan aan een regressiemodel toevoegen, bekomen we de volgende output.
@@ -973,7 +973,7 @@ We fitten een model op basis van de gemiddelde systolische bloeddruk (`BPSysAve`
 
 ```{r}
 library(NHANES)
-bpData <- NHANES %>%
+bpData <- NHANES |>
 filter(
     Age >=6 & 
     Age <= 18 &
@@ -1069,9 +1069,9 @@ bpPosthoc <- glht(mBp1, linfct=c(
   "AgeMonths + AgeMonths:Gendermale = 0",
   "AgeMonths:Gendermale = 0")
   )
-bpPosthoc %>% summary
+bpPosthoc |> summary()
 
-bpPosthocBI <- bpPosthoc %>% confint
+bpPosthocBI <- bpPosthoc |> confint()
 bpPosthocBI
 ```
 
@@ -1119,18 +1119,18 @@ We transformeren de data eerst naar uren
 library(faraway)
 data(rats)
 
-rats <- rats %>% 
+rats <- rats |> 
   mutate(time=time * 10)
 
 library(GGally)
-rats %>% 
+rats |> 
   ggpairs()
 ```
 
 De data exploratie suggereert een effect van beide factoren. 
 
 ```{r}
-rats %>%
+rats |>
   ggplot(aes(x=treat,y=time)) + 
   geom_boxplot(outlier.shape=NA) + 
   geom_jitter() +
@@ -1178,13 +1178,13 @@ De errors zijn heteroscedastisch. De residu plot suggereert een relatie tussen g
 ##### Logaritmische transformatie 
 
 ```{r}
-rats %>%
+rats |>
   ggplot(aes(x=treat,y=log2(time))) + 
   geom_boxplot(outlier.shape=NA) + 
   geom_jitter() +
   facet_wrap(~poison)
 
-rats2 <- lm(time %>% log2~poison*treat, rats)
+rats2 <- lm(time |> log2()~poison*treat, rats)
 plot(rats2)
 ```
 
@@ -1193,7 +1193,7 @@ Log transformatie verwijdert heteroscedasticiteit niet volledig.
 ##### Reciproke transformatie
 
 ```{r}
-rats %>%
+rats |>
   ggplot(aes(x=treat,y=1/time)) + 
   geom_boxplot(outlier.shape=NA) + 
   geom_jitter() +
@@ -1423,7 +1423,7 @@ De standaard errors verschillen wel lichtjes.
 Dat is het gevolg van de errors die verschillen tussen beiden modellen alsook het aantal vrijheidsgraden van de errors (n-p). 
 
 ```{r}
-data.frame(Additive_coef=summary(comparisons)$test$coef,Additive_se=summary(comparisons)$test$sigma,Int_coef=summary(comparisonsInt2)$test$coef,int_se=summary(comparisonsInt2)$test$sigma) %>% round(3)
+data.frame(Additive_coef=summary(comparisons)$test$coef,Additive_se=summary(comparisons)$test$sigma,Int_coef=summary(comparisonsInt2)$test$coef,int_se=summary(comparisonsInt2)$test$sigma) |> round(3)
 ```
 
 <!---break-->
@@ -1435,12 +1435,12 @@ data.frame(Additive_coef=summary(comparisons)$test$coef,Additive_se=summary(comp
 
 Er is een extreem significant effect van het type gif en de behandeling op de snelheid van sterven bij ratten (p << 0.001).
 
-De interactie tussen gif en behandeling is niet significant (p = `r  Anova(rats3,type="III")["poison:treat","Pr(>F)"] %>% round(3)`). 
+De interactie tussen gif en behandeling is niet significant (p = `r  Anova(rats3,type="III")["poison:treat","Pr(>F)"] |> round(3)`). 
 
-De snelheid van sterven is gemiddeld `r confint(comparisonsInt2)$confint[contrastNames=="III-I",1] %>% round(2)`h$^{-1}$  en `r confint(comparisonsInt2)$confint[contrastNames=="III-II",1] %>% round(2)`h$^{-1}$ hoger voor ratten die blootgesteld worden aan gif III dan aan respectievelijk gif I en II (beide p << 0.001, 95% BI III-I: [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="III-I",-1],2),collapse=", ")`]h$^{-1}$, 95% BI III-II: [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="III-II",-1],2),collapse=", ")`]h$^{-1}$)
+De snelheid van sterven is gemiddeld `r confint(comparisonsInt2)$confint[contrastNames=="III-I",1] |> round(2)`h$^{-1}$  en `r confint(comparisonsInt2)$confint[contrastNames=="III-II",1] |> round(2)`h$^{-1}$ hoger voor ratten die blootgesteld worden aan gif III dan aan respectievelijk gif I en II (beide p << 0.001, 95% BI III-I: [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="III-I",-1],2),collapse=", ")`]h$^{-1}$, 95% BI III-II: [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="III-II",-1],2),collapse=", ")`]h$^{-1}$)
 De gemiddelde snelheid van sterven was niet significant verschillend tussen ratten die werden blootgesteld aan gif I en gif II (p=`r round(summary(comparisonsInt2)$test$pvalues[contrastNames=="II-I"],3)`).
 
-De snelheid van sterven is gemiddeld `r confint(comparisonsInt2)$confint[contrastNames=="B-A",1] %>% round(2) %>% abs`h$^{-1}$ en `r confint(comparisonsInt2)$confint[contrastNames=="D-A",1] %>% round(2)%>% abs`h$^{-1}$ hoger na behandeling A dan na behandeling B en D (p << 0.001, 95% BI B-A: [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="B-A",-1],2),collapse=", ")`]h$^{-1}$, 95% BI D-A: [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="D-A",-1],2),collapse=", ")`]h$^{-1}$). 
-De snelheid van sterven is gemiddeld `r confint(comparisonsInt2)$confint[contrastNames=="C-B",1] %>% round(2)`h$^{-1}$ en `r confint(comparisonsInt2)$confint[contrastNames=="D-C",1] %>% round(2) %>% abs`h$^{-1}$ hoger na behandeling C dan respectievelijk na behandeling B en D (C-B: p << 0.001, 95% CI [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="C-B",-1],2),collapse=", ")`]h$^{-1}$ , D-C: p = `r summary(comparisonsInt2)$test$pvalues[contrastNames=="D-C"] %>% round(3)`, 95% CI [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="D-C",-1],2),collapse=", ")`]h$^{-1}$). 
-De gemiddelde snelheid van sterven is niet significant verschillend tussen ratten behandeld met behandeling C vs A, en D vs B (p- waarden respectievelijk p = `r summary(comparisonsInt2)$test$pvalues[contrastNames=="C-A"] %>% round(3)` en p = `r summary(comparisonsInt2)$test$pvalues[contrastNames=="D-B"] %>% round(3)`).
+De snelheid van sterven is gemiddeld `r confint(comparisonsInt2)$confint[contrastNames=="B-A",1] |> round(2) |> abs()`h$^{-1}$ en `r confint(comparisonsInt2)$confint[contrastNames=="D-A",1] |> round(2)|> abs()`h$^{-1}$ hoger na behandeling A dan na behandeling B en D (p << 0.001, 95% BI B-A: [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="B-A",-1],2),collapse=", ")`]h$^{-1}$, 95% BI D-A: [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="D-A",-1],2),collapse=", ")`]h$^{-1}$). 
+De snelheid van sterven is gemiddeld `r confint(comparisonsInt2)$confint[contrastNames=="C-B",1] |> round(2)`h$^{-1}$ en `r confint(comparisonsInt2)$confint[contrastNames=="D-C",1] |> round(2) |> abs()`h$^{-1}$ hoger na behandeling C dan respectievelijk na behandeling B en D (C-B: p << 0.001, 95% CI [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="C-B",-1],2),collapse=", ")`]h$^{-1}$ , D-C: p = `r summary(comparisonsInt2)$test$pvalues[contrastNames=="D-C"] |> round(3)`, 95% CI [`r paste(round(confint(comparisonsInt2)$confint[contrastNames=="D-C",-1],2),collapse=", ")`]h$^{-1}$). 
+De gemiddelde snelheid van sterven is niet significant verschillend tussen ratten behandeld met behandeling C vs A, en D vs B (p- waarden respectievelijk p = `r summary(comparisonsInt2)$test$pvalues[contrastNames=="C-A"] |> round(3)` en p = `r summary(comparisonsInt2)$test$pvalues[contrastNames=="D-B"] |> round(3)`).
 

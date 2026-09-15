@@ -202,7 +202,7 @@ karakteristiek uit de studiepopulatie.
 
 ***
 
-##Intermezzo probabiliteitstheorie
+## Intermezzo probabiliteitstheorie
 
 ### Discrete toevallig veranderlijken
 
@@ -247,9 +247,9 @@ $P(X_j,X_k)= P(X_j)P(X_k)$
 
 ***
 
-#### Distributie of verdeling
+#### Verdeling
 
-- De distributie of de verdeling van een discrete toevallig veranderlijke $X$ beschrijft de kans op elke mogelijke waarde van de steekproefruimte.  
+- De verdeling van een discrete toevallig veranderlijke $X$ beschrijft de kans op elke mogelijke waarde van de steekproefruimte.
 
 - Voorbeeld: Gender is een binaire variabele (0: vrouw, 1: man) en binaire variabelen volgen een Bernoulli verdeling. 50.8% van de subjecten in de Amerikaanse populatie zijn vrouw en 49.2% is man.
 
@@ -261,7 +261,7 @@ $P(X_j,X_k)= P(X_j)P(X_k)$
     \end{array} \right . $$
 
 ```{r}
-tibble(X=c(0,1),prob=c(0.508,0.492)) %>%
+tibble(X=c(0,1),prob=c(0.508,0.492)) |>
   ggplot(aes(x=X,xend=X,y=0,yend=prob)) +
   geom_segment() +
   ylab("Probability")
@@ -272,7 +272,7 @@ Toevallig veranderlijke $X$ volgt een Bernoulli verdeling $B(\pi)$ met parameter
 
 ***
 
-#### Cumulative distributie functie
+#### Cumulatieve distributie functie
 
 - De cumulatieve distributie functie F(x) geeft de probabiliteit weer om een toevallige veranderlijke X te observeren waarvoor geldt dat $X\leq x$:
 $$ F(x) = \sum\limits_{\forall X\leq x} P(x)$$
@@ -280,18 +280,18 @@ $$ F(x) = \sum\limits_{\forall X\leq x} P(x)$$
 - Gender voorbeeld $F(0)=1-\pi$ and F(1)= P(X=0) + P(X=1)=1
 
 ```{r}
-tibble(X=c(0,1),cumprob=c(0.508,1)) %>%
-  ggplot(aes(x=X,xend=X,y=0,yend=cumprob)) +
-  geom_segment() +
+tibble(X=c(-0.5,0,1,1.5),cumprob=c(0,0.508,1,1)) |>
+  ggplot(aes(x=X,y=cumprob)) +
+  geom_step(direction="hv") +
   ylab("F(x)")
 ```
 
 - Dobbelsteen:
 
 ```{r}
-tibble(X=1:6,cumprob=cumsum(rep(1/6,6))) %>%
-  ggplot(aes(x=X,xend=X,y=rep(0,6),yend=cumprob)) +
-  geom_segment() +
+tibble(X=c(0.5,1:6,6.5),cumprob=c(0,cumsum(rep(1/6,6)),1)) |>
+  ggplot(aes(x=X,y=cumprob)) +
+  geom_step(direction="hv") +
   ylab("F(x)")
 ```
 
@@ -337,7 +337,7 @@ $$E[(X-E[X])^2]=\sum\limits_{x\in\Omega} (x-E[X])^2 P(X=x)$$
 
 - De kans om exact één bepaalde waarde aanneemt is daarom gelijk aan 0.
 
-- De distributie (verdeling) wordt daarom weergegeven a.d.h.v. de densiteitsfunctie of de dichtheidsfunctie $f(x)$
+- De verdeling wordt daarom weergegeven a.d.h.v. de densiteitsfunctie of de dichtheidsfunctie $f(x)$
 
 - Veel biologische karakteristieken zijn approximatief normaal verdeeld (lengte, bloeddruk, IQ, concentratie metingen na logaritmische transformatie)
     $$f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
@@ -357,7 +357,7 @@ iq <- tibble(
   IQ = seq(40,150,.1),
   Densiteit = dnorm(seq(40,150,.1),mean=100,sd=15)
   )
-iq %>%
+iq |>
   ggplot(aes(x=IQ,y=Densiteit)) +
   geom_line()
 ```
@@ -366,7 +366,7 @@ iq %>%
 
 ***
 
-####Cumulatieve distributie
+#### Cumulatieve distributie
 
 - Opnieuw is de cumulatieve distributie $F(X)=Pr(X\leq x)$.
 
@@ -378,8 +378,8 @@ $$F(x)=\int \limits_{-\infty}^x f(x) dx$$
 - We kunnen $F(x)$ berekenen voor een normaal verdeelde toevallig veranderlijke met de functie `pnorm` die opnieuw argumenten `mean` en `sd` heeft.
 
 ```{r}
-iq %>%
-  mutate(Probability=pnorm(IQ,mean=100,sd=15)) %>%
+iq |>
+  mutate(Probability=pnorm(IQ,mean=100,sd=15)) |>
   ggplot(aes(x=IQ,y=Probability)) +
   geom_line()
 ```
@@ -418,14 +418,14 @@ $$\int \limits_{x \in \Omega} f(x) dx=1$$
 
 $$\int \limits_{x \in \Omega} x f(x) dx$$
 
-- Voor de normale distributie
+- Voor de normale verdeling
 $$\int \limits_{-\infty}^{+\infty} x f(x) dx = \mu$$
 
 - De variantie $E[(X-E[X])^2]$   
 
 $$\int \limits_{x \in \Omega} (x-E[X])^2 f(x) dx$$
 
-- Voor de normale distributie bekomen we
+- Voor de normale verdeling bekomen we
 
 $$\int \limits_{-\infty}^{+\infty} (x-\mu)^2 f(x) dx = \sigma^2$$
 
@@ -434,7 +434,7 @@ $$\int \limits_{-\infty}^{+\infty} (x-\mu)^2 f(x) dx = \sigma^2$$
 $$SD=\sqrt{E[(X-E[X])^2]}$$
 
 
-DE SD voor de normale distributie, $\sigma$ heeft de mooie interpretatie dat ongeveer 68% van de populatie een waarde heeft voor de karakteristiek X binnen het interval van 1 standaardafwijking($\sigma$) rond het gemiddelde:
+DE SD voor de normale verdeling, $\sigma$ heeft de mooie interpretatie dat ongeveer 68% van de populatie een waarde heeft voor de karakteristiek X binnen het interval van 1 standaardafwijking($\sigma$) rond het gemiddelde:
 
 $$P(\mu-\sigma < X < \mu + \sigma) \approx 0.68$$
 
@@ -495,7 +495,7 @@ Voor een standaard normaal verdeelde toevallig veranderlijke valt inderdaad onge
 
 # Steekproef
 
-- In echte studies kennen we de distributie van een random veranderlijke in de populatie niet!
+- In echte studies kennen we de verdeling van een random veranderlijke in de populatie niet!
 
 - Omwille van financiële en logsitieke beperkingen kunen we bijna nooit de volledige populatie bestuderen.
 
@@ -506,9 +506,9 @@ Voor een standaard normaal verdeelde toevallig veranderlijke valt inderdaad onge
 
 - Steekproef $x_1, x_2, . . . , x_{n}$ kan als $n$ realisatie van dezelfde toevallig veranderlijke $X$ worden beschouwd voor subjecten $i = 1,2,...,n$.
 
-- De distributie in de populatie is ongekend en moet worden geschat op basis van de steekproef.  
+- De verdeling in de populatie is ongekend en moet worden geschat op basis van de steekproef.
 
-- Als we aannemen dat de gegevens een bepaalde distributie volgen (b.v. de normale verdeling $N(\mu,\sigma^2)$) dan moeten we enkel de populatie parameters ($\mu$ en $\sigma^2$) schatten op basis van de steekproef.
+- Als we aannemen dat de gegevens een bepaalde verdeling volgen (b.v. de normale verdeling $N(\mu,\sigma^2)$) dan moeten we enkel de populatie parameters ($\mu$ en $\sigma^2$) schatten op basis van de steekproef.
 
 - We noemen dit schattingen (engels: estimates) en noteren ze als volgt:  $\hat \mu$ en $\hat \sigma^2$.
 
@@ -538,19 +538,19 @@ Voor een standaard normaal verdeelde toevallig veranderlijke valt inderdaad onge
 
 ```{r}
 library(NHANES)
-NHANES %>% ggplot(aes(x=Gender)) + geom_bar()
+NHANES |> ggplot(aes(x=Gender)) + geom_bar()
 ```
 
 - Gender is een binaire variabele.
-- Het volgt een Bernoulli distributie.
-- De Bernoulli distributie heeft een parameter: het gemiddelde $\pi$.
+- Het volgt een Bernoulli verdeling.
+- De Bernoulli verdeling heeft een parameter: het gemiddelde $\pi$.
 - We kunnen $\pi$ schatten op basis van de steekproef door het steekproefgemiddelde te berekenen $\bar x = \sum\limits_{i=1}^n x_i$
 - Merk op dat het steekproefgemiddelde zelf een toevallig veranderlijke is! Het wijzigt ook van steekproef tot steekproef!
 
 
 ```{r}
-NHANES %>%
-  count(Gender) %>%
+NHANES |>
+  count(Gender) |>
   mutate(probability = n/sum(n))
 ```
 
@@ -558,13 +558,13 @@ NHANES %>%
 
 # Lengte
 
-## Empirische distributie
+## Empirische verdeling
 
-- We kunnen de distributie van de lengte voor volwassen vrouwen schatten aan de hand van het histogram.
+- We kunnen de verdeling van de lengte voor volwassen vrouwen schatten aan de hand van het histogram.
 
 ```{r}
-NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>%
+NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |>
   ggplot(aes(x=Height)) +
   geom_histogram()
 ```
@@ -572,13 +572,13 @@ NHANES %>%
 
 - We kunnen de cumulatieve distributie functie schatten door gebruik te maken van de empirische cumulatieve distributie functie.
     - Elke observatie werd één keer geobserveerd in het staal.
-    - Dus empirische cumulatieve distributie functie van het staal is een discrete distributie met probabiliteit 1/n op elke observatie.
+    - Dus empirische cumulatieve distributie functie van het staal is een discrete verdeling met probabiliteit 1/n op elke observatie.
     - De empirische cumulatieve distributie functie (ECDF) is gegeven door
     $$ECDF(x) = \sum\limits_{x_i \leq x} \frac{1}{n} = \frac{\# (x_i \leq x)}{n}$$
 
 ```{r}
-NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>%
+NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |>
   ggplot(aes(x=Height)) +
   stat_ecdf()
 ```
@@ -587,10 +587,10 @@ We kunnen de empirische cumulatieve distributie functie gebruiken om kansen te b
 Wat is de kans dat een vrouw kleiner is dan 150 cm.
 
 ```{r}
-ecdfFem <- NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>%
-  pull("Height") %>%
-  ecdf
+ecdfFem <- NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |>
+  pull("Height") |>
+  ecdf()
 ecdfFem(150)
 ```
 
@@ -598,19 +598,19 @@ ecdfFem(150)
 
 ```{r}
 set.seed(502)
-fem10<- NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>%
+fem10<- NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |>
   sample_n(size=10)
 
-fem10 %>%
+fem10 |>
   ggplot(aes(x=Height)) +
   stat_ecdf()
 ```
 
 ```{r}
-ecdfFem10 <- fem10 %>%
-  pull(Height) %>%
-  ecdf
+ecdfFem10 <- fem10 |>
+  pull(Height) |>
+  ecdf()
 ecdfFem10(150)
 ```
 
@@ -619,16 +619,16 @@ ecdfFem10(150)
 - Merk ook op dat we die kans ook hadden kunnen schatten door te berekenen hoeveel lengtemetingen er lager zijn dan 150.
 
 ```{r}
-NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>% count(Height <=150) %>%
+NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |> count(Height <=150) |>
   mutate(prob=n/sum(n))
 
 ecdfFem(150)
 ```
 
 ```{r}
-fem10 %>%
-  count(Height <=150) %>%
+fem10 |>
+  count(Height <=150) |>
   mutate(prob=n/sum(n))
 
 ecdfFem10(150)
@@ -643,7 +643,7 @@ ecdfFem10(150)
 - We kunnen dus aannemen dat de metingen approximatief normaal verdeeld zijn.
 
 
-- We kunnen de verdeling van de lengte metingen ook benaderen d.m.v. een normale distributie.
+- We kunnen de verdeling van de lengte metingen ook benaderen d.m.v. een normale verdeling.
 
 - We moeten hiervoor enkel twee parameters schatten:
     - gemiddelde via steekproefgemiddelde ($\hat\mu=\bar x$)
@@ -651,8 +651,8 @@ ecdfFem10(150)
 
 
 ```{r}
-HeightSum <- NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>%
+HeightSum <- NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |>
   summarize(mean=mean(Height),sd=sd(Height))
 HeightSum
 ```
@@ -660,8 +660,8 @@ HeightSum
 We zien dat de benadering goed werkt:
 
 ```{r}
-NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>%
+NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |>
   ggplot(aes(x=Height)) +
   geom_histogram(aes(y=..density.., fill=..count..)) +
   xlab("Lengte (cm)") +
@@ -679,14 +679,14 @@ NHANES %>%
 - We doen nu hetzelfde op basis van de steekproef met de 10 vrouwen.
 
 ```{r}
-HeightSum10 <- fem10 %>%
+HeightSum10 <- fem10 |>
   summarize(mean=mean(Height),sd=sd(Height))
 
 HeightSum10
 ```
 
 ```{r}
-fem10 %>%
+fem10 |>
   ggplot(aes(x=Height)) +
   geom_histogram(aes(y=..density.., fill=..count..),bins=10) +
   xlab("Lengte (cm)") +
@@ -718,7 +718,7 @@ pnorm(150,HeightSum10$mean[1],HeightSum10$sd[1])
 ecdfFem10(150)
 ```
 
-- Voor kleine steekproef is geschatte kans o.b.v. empirische distributie veel minder nauwkeurig.
+- Voor kleine steekproef is geschatte kans o.b.v. empirische verdeling veel minder nauwkeurig.
 
 - Kwantielen geschat o.b.v. kleine steekproef zijn immers vrij onzeker. Ze gebruiken immers maar een fractie van de data.   
 
@@ -732,7 +732,7 @@ ecdfFem10(150)
 
 - Typisch wordt een 95% referentie interval gebruikt zodat we voor 95% van de subjecten in de populatie verwachten dat ze een karakteristiek hebben die in het referentie interval ligt.
 
-- We kunnen dat opnieuw op basis van de empirische distributie.
+- We kunnen dat opnieuw op basis van de empirische verdeling.
 
 - We moeten hiervoor $\hat{F}(x_{2.5\%})=0.025$ en $\hat{F}(x_{97.5\%})=0.975$ berekenen zodat 95% van de observaties in de steekproef vallen in het interval [x_{2.5%},x_{97.5%}].
 
@@ -741,22 +741,22 @@ ecdfFem10(150)
 - Grote steekproef
 
 ```{r}
-NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>%
-  pull(Height) %>%
+NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |>
+  pull(Height) |>
   quantile(prob=c(0.025,0.975))
 ```
 
-- Op basis van de grote steekproef schatten we dat 95% van de vrouwen in de populatie een lengte heeft die ligt in het interval [`r NHANES %>%
-  filter(Gender=="female"&!is.na(Height)&Age>18) %>%
-  pull(Height) %>%
+- Op basis van de grote steekproef schatten we dat 95% van de vrouwen in de populatie een lengte heeft die ligt in het interval [`r NHANES |>
+  filter(Gender=="female"&!is.na(Height)&Age>18) |>
+  pull(Height) |>
   quantile(prob=c(0.025,0.975))`].
 
 - Kleine steekproef
 
 ```{r}
-fem10 %>%
-  pull(Height) %>%
+fem10 |>
+  pull(Height) |>
   quantile(prob=c(0.025,0.975))
 ```
 
@@ -765,7 +765,7 @@ fem10 %>%
 
 ### Normale benadering
 
-- We kunnen de functie qnorm gebruiken om quantielen te berekenen van de normale distributie.
+- We kunnen de functie qnorm gebruiken om quantielen te berekenen van de normale verdeling.
 
 - We weten dat een 95% referentie interval ongeveer binnen twee standaard deviaties rond het gemiddelde ligt.
 
@@ -789,9 +789,9 @@ qnorm(0.975,mean=HeightSum10$mean,sd=HeightSum10$sd)
 
 ## Conclusions
 
-- Voor de grote steekproef geven de empirische distributie en de normale benadering vergelijkbare resultaten.
+- Voor de grote steekproef geven de empirische verdeling en de normale benadering vergelijkbare resultaten.
 
-- Voor de kleine steekproef werkt de normale benadering beter dan de empirische distributie.
+- Voor de kleine steekproef werkt de normale benadering beter dan de empirische verdeling.
 
     - We kijken immers naar extreme quantielen 2.5% en 97.5%.
     - Er zijn inderdaad weinig gegevens in de steekproef die toelaten om deze quantielen direct te schatten.
@@ -802,11 +802,11 @@ qnorm(0.975,mean=HeightSum10$mean,sd=HeightSum10$sd)
 
 # Statistieken
 
-- Formule die we gebruiken om parameters van de distributie in de populatie te schatten op basis van een steekproef. We refereren hiernaar als statistieken of schatters.
+- Formule die we gebruiken om parameters van de verdeling in de populatie te schatten op basis van een steekproef. We refereren hiernaar als statistieken of schatters.
 
 - Het numerieke resultaat die wordt bekomen door deze formules te evalueren worden ook statistieken of schattingen genoemd.
 
-- Onderzoekers wensen ongekende parameters van de distributie in de populatie te kennen en schatten deze o.b.v. de steekproef.
+- Onderzoekers wensen ongekende parameters van de verdeling in de populatie te kennen en schatten deze o.b.v. de steekproef.
 
 - Omdat we statistieken berekenen o.b.v. de observaties in een steekproef, variëren statistieken ook van steekproef tot steekproef. Het zijn dus ook random variabelen en we noteren ze dus ook met hoofdletters (b.v. $\bar X$ voor het steekproefgemiddelde en $S^2$ voor de steekproefvariantie).
 

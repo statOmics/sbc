@@ -33,7 +33,7 @@ Until now we used models for a continuous response in function of categorical or
 
 # Test for a proportion 
 
-##Saksen-study
+## Saksen-study
 
 - Fairly closed population (few migration)
 - Probability that an unborn child is male?
@@ -140,7 +140,7 @@ $(x_1,x_2)$|$s$|$P(S = s)$|
 
 ***
 
-###General: $n$ independent samples
+### General: $n$ independent samples
 
 - Probability for $\pi$ on success ($X=1$)
 - Total number of successes $S$ (sum of all values of 1) can take $n+1$ possible values
@@ -792,8 +792,8 @@ We fit the model in R.
 
 - Note that we use the function `as.factor` to convert the cancer variable to a factor variable. - We further use the function `relevel` to specify the control treatment as the reference group.  
 ```{r}
-brca$cancer<-brca$cancer %>% as.factor %>% relevel("control")
-brca$variant<-brca$variant %>% as.factor %>% relevel("pro/pro")
+brca$cancer<-brca$cancer |> as.factor() |> relevel("control")
+brca$variant<-brca$variant |> as.factor() |> relevel("pro/pro")
 brcaLogit <- glm(cancer~variant,data=brca,family=binomial)
 summary(brcaLogit)
 ```
@@ -865,7 +865,7 @@ OR
 - Toxicolocal effect of carbon disulfite (CS$_2$) on beetles.
 - Research hypothesis is there an effect of the  CS$_2$ concentration on the mortality of beetles?
 
-##Design##
+## Design
 - 32 independent experiments
 - Each time 1 beatle is exposed to one of 8 CS$_2$ concentrations (mg/l).
 - The outcome: mortality ($y=1$) or survival ($y=0$).
@@ -904,18 +904,18 @@ summary(beatleModel)
 
 ```{r}
 
-beetlesTab<-table(beetles) %>% data.frame
+beetlesTab<-table(beetles) |> data.frame()
 
-data.frame(grid=seq(min(beetles$dose),max(beetles$dose),.1)) %>% 
+data.frame(grid=seq(min(beetles$dose),max(beetles$dose),.1)) |> 
   mutate(piHat=predict(beatleModel,
 	      newdata=data.frame(dose=grid),
-	      type="response")) %>% 
+	      type="response")) |> 
   ggplot(aes(grid,piHat))+
   geom_line() +
   xlab("dose") +
   ylab("probability (dead)") +
-  geom_text(aes(x=dose%>%as.character%>%as.double,y=status%>%as.character%>%as.double,label=Freq),beetlesTab%>%filter(status==0)) +
-geom_text(aes(x=dose%>%as.character%>%as.double,y=status%>%as.character%>%as.double,label=Freq),beetlesTab%>%filter(status==1))
+  geom_text(aes(x=dose|>as.character()|>as.double(),y=status|>as.character()|>as.double(),label=Freq),beetlesTab|>filter(status==0)) +
+geom_text(aes(x=dose|>as.character()|>as.double(),y=status|>as.character()|>as.double(),label=Freq),beetlesTab|>filter(status==1))
 ```
 
 

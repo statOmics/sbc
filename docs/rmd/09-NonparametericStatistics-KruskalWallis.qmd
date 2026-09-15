@@ -54,12 +54,12 @@ dna
 
 
 ```{r}
-dna %>% 
+dna |> 
   ggplot(aes(x=dose,y=length,fill=dose))+
   geom_boxplot() +
   geom_point(position="jitter")
 
-dna %>%
+dna |>
   ggplot(aes(sample=length)) +
   geom_qq() + 
   geom_qq_line() +

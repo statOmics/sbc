@@ -89,7 +89,10 @@ Men had locatie/tijdsbias kunnen verhinderen door het nemen van een aselecte ste
 
 Een aselecte steekproef is representatief voor de populatie 
 
-# Belangrijke concepten
+
+# Experimentele studies
+
+## Belangrijke concepten
 
 In een **experiment** gaat een onderzoeker een behandeling
 toepassen op **experimentele eenheden** en observeert hij/zij
@@ -112,9 +115,6 @@ b.v. pseudoreplicatie (technische herhalingen).
 potentieel een gedeelte van de variabiliteit in de response kan
 verklaren.
 
-
-# Experimentele studies
-
 ## Nood aan controle 
 
 - Salk study: Stel dat we iedereen vaccineren? 
@@ -127,6 +127,32 @@ te vergelijken tussen test- en controlegroep.
 Test en controle groepen dienen vergelijkbaar te zijn! 
 
 - Parallele studie: gelijktijdige vergelijking van test en controle!
+
+- Gecontroleerde NFIP studie: 
+
+```{r}
+nfip <- tibble(
+  group=c("cases","controls","noConcent"),
+  grade=c("g2","g1g3","g2"),
+  vaccin=c("yes","no","no"),
+  total=c(221998,725173,123605),
+  polio=c(54,391,56)
+  ) |>
+  mutate(noPolio = total - polio,
+         incidencePM = round(polio/total*1e6,0))
+knitr::kable(nfip, "html")
+```
+
+$\rightarrow$ Confounding
+
+```{r,echo=FALSE, fig.align = "center",out.width = '50%'}
+plot(c(0,0,1),c(-2,2,0),pch=c("S","V","P"),xaxt="none",yaxt="none",axes=FALSE,xlab="",ylab="",cex=4,ylim=c(-2.2,2.2))
+arrows(x0=0.1,x1=.9,y0=1.8,y1=0.1,lwd=4)
+arrows(x0=0.1,x1=.9,y0=-1.8,y1=-0.2,lwd=4)
+arrows(x0=0,x1=0,y0=-1.4,y1=1.4,lwd=4)
+```
+
+- We observeren een lagere polio (P) incidentie voor kinderen bij wie de ouders geen toestemming gaven dan in de controle groep.  
 
 - Ze mogen enkel verschillen in behandeling 
 
@@ -163,7 +189,7 @@ salk <- data.frame(
   group=c("cases","control","noConcent"),
   treatment=c("vaccine","placebo","none"),
   total=c(200745,201229, 338778),polio=c(57,142,157)
-  ) %>%
+  ) |>
   mutate(
     noPolio = total-polio,
     incidencePM = round(polio/total*1e6,0)
@@ -219,12 +245,9 @@ inherent vergelijkbaar zijn.
 
 # Factoriële designs 
 
-- Factoriële designs zijn experimenten die het effect van meer
-dan 1 interventie testen via een design dat toelaat om
-interacties tussen behandelingen te meten.
+- Factoriële designs zijn experimenten die het effect van meer dan 1 interventie testen via een design dat toelaat om interacties tussen behandelingen te meten.
 
-- d.w.z. dat het toelaat na te gaan of 2 interventies mekaar
-versterken of verzwakken.
+- d.w.z. dat het toelaat na te gaan of 2 interventies mekaar versterken of verzwakken.
 
 - Bijvoorbeeld: Wat is het effect van de concentratie waterstof peroxide en runderlever extract op de reactiesnelheid van catalase? 
 

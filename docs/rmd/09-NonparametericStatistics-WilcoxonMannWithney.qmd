@@ -21,7 +21,7 @@ set.seed(140)
 ```
 
 
-#Intro
+# Intro
 
 Inferentie is alleen correct als de assumpties over de verdelingen correct zijn.
 
@@ -65,9 +65,9 @@ chol
 
 
 ```{r, echo=FALSE, fig.align='center'}
-chol %>%  ggplot(aes(x=group,y=cholest)) + geom_boxplot(outlier.shape=NA) + geom_point(position="jitter")
+chol |>  ggplot(aes(x=group,y=cholest)) + geom_boxplot(outlier.shape=NA) + geom_point(position="jitter")
 
-chol %>% ggplot(aes(sample=cholest)) + 
+chol |> ggplot(aes(sample=cholest)) + 
   geom_qq() +
   geom_qq_line() +
   facet_wrap(~group) 
@@ -89,7 +89,7 @@ chol %>% ggplot(aes(sample=cholest)) +
 
 ***
 
-#Ranks
+# Ranks
 
 
 Rangtesten beginnen met in rang getransformeerde gegevens.

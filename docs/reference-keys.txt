@@ -2,8 +2,8 @@ fig:wetMet
 fig:pop2Samp2Pop
 exm:nhanesExConcepten
 tab:nhanesConcepten
-tab:nhanesConcepten2
 exm:unnamed-chunk-30
+fig:continu
 def:unnamed-chunk-41
 exr:unnamed-chunk-42
 def:unnamed-chunk-44
@@ -143,7 +143,6 @@ fig:prosDfBetasInt
 fig:prosInfl
 inleiding
 sec:wetMeth
-boutade-met-statistiek-kan-je-alles-bewijzen
 opzet-van-de-cursus
 case-study-oksel-microbiome
 experimenteel-design-proefopzet
@@ -178,7 +177,7 @@ toevalsveranderlijken-of-toevallige-veranderlijken
 beschrijven-van-de-populatie
 intermezzo-probabiliteitstheorie
 discrete-toevallig-veranderlijken
-distributie-of-verdeling
+verdeling
 cumulatieve-distributie-functie
 gemiddelde
 variantie
@@ -190,7 +189,7 @@ subsec:normalcalc
 steekproef
 nhanes-gender
 nhanes-lengte
-empirische-distributie
+empirische-verdeling
 normale-benadering
 referentie-intervallen
 normale-benadering-1

@@ -159,7 +159,7 @@ We maken nu een barplot voor de variabele gender
 2. Als aestetics definiëren we x=Gender
 3. We voegen een laag met een barplot toe via de functie `geom_bar`. We definiëren de kleur via het argument `fill`
 ```{r}
-NHANES %>%
+NHANES |>
   ggplot(aes(x=Gender)) +
   geom_bar(fill="steelblue")
 ```
@@ -207,7 +207,7 @@ Het grafisch equivalent van dergelijke frequentietabel noemt een *histogram*, he
 4. Indien je het wenst kan je op een histogram met densities ook nog een laag toevoegen met een niet parametrische densiteitsschatter voor de verdeling  d.m.v. de `geom_density` functie.
 
 ```{r histo,fig.cap='Histogram van het BMI in de NHANES studie.', out.width='100%', fig.asp=.8, fig.align='center'}
-NHANES %>%
+NHANES |>
   ggplot(aes(x=BMI)) +
   geom_histogram(aes(y=..density.., fill=..count..),bins=30) +
   geom_density()
@@ -290,7 +290,7 @@ lines(c(1.1,1.3,1.3,1.1),c(rangeCl[2],rangeCl[2]+(max(BMI)-rangeCl[2])/2,rangeCl
 In ggplot maak je de boxplot als volgt:
 
 ```{r}
-NHANES %>%
+NHANES |>
   ggplot(aes(x="",y=BMI)) +
   geom_boxplot()
 ```
@@ -554,19 +554,19 @@ $$
 
 ```{r histLogBMI,fig.cap='Boxplot van BMI en log(BMI) in de NHANES studie.', out.width='100%', fig.asp=.8, fig.align='center'}
 logSummary <-
-NHANES %>%
-  filter(Gender=="female") %>%
+NHANES |>
+  filter(Gender=="female") |>
   summarize(
-    logMean = mean(BMI %>% log2,na.rm=TRUE),
-    sd = sd(BMI %>% log2,na.rm=TRUE),
+    logMean = mean(BMI |> log2(),na.rm=TRUE),
+    sd = sd(BMI |> log2(),na.rm=TRUE),
     mean = mean(BMI,na.rm=TRUE),
     median = median(BMI,na.rm=TRUE)
-    ) %>%
+    ) |>
   mutate(geoMean=2^logMean)
 
-NHANES %>%
-  filter(Gender=="female") %>%
-  ggplot(aes(x=BMI %>% log2)) +
+NHANES |>
+  filter(Gender=="female") |>
+  ggplot(aes(x=BMI |> log2())) +
   geom_histogram(
     aes(y=..density.., fill=..count..),
     bins=30) +
@@ -798,7 +798,7 @@ mu <- 18
 sigma <- 9
 nSamp <-9
 
-normSim <- matrix(rnorm(n*nSamp,mean=mu,sd=sigma),nrow=n) %>% as.data.frame
+normSim <- matrix(rnorm(n*nSamp,mean=mu,sd=sigma),nrow=n) |> as.data.frame()
 ```
 
 We gaan nu de data visualiseren.
@@ -814,8 +814,8 @@ We gaan nu de data visualiseren.
 3. Aan de hand van de functie `facet_wrap` kunnen we de data opsplitsen volgens de variabele samp. We krijgen dus een histogram voor elk sample.
 
 ```{r}
-normSim %>%
-  gather(samp,data) %>%
+normSim |>
+  gather(samp,data) |>
   ggplot(aes(x=data)) +
   geom_histogram(aes(y=..density.., fill=..count..),bins=30) +
   geom_density(aes(y=..density..)) +
@@ -825,8 +825,8 @@ normSim %>%
 Gezien er vrij weinig data punten zijn en omdat er veel distributies vergeleken moeten worden is het handiger om dit via een boxplot te doen.
 
 ```{r}
-normSim %>%
-  gather(samp,data) %>%
+normSim |>
+  gather(samp,data) |>
   ggplot(aes(x = samp,y = data)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")
@@ -842,8 +842,8 @@ We gaan nu normaliteit na via QQ-plot.
 4. Voeg een laag toe met de rechte in de QQ-plot via de functie `geom_qq_line` om te kunnen evalueren hoe goed de data een normale verdeling volgt.
 
 ```{r}
-normSim %>%
-  gather(samp,data) %>%
+normSim |>
+  gather(samp,data) |>
   ggplot(aes(sample=data)) +
   geom_qq() +
   geom_qq_line() +
@@ -862,14 +862,14 @@ D.m.v. het package `gridExtra` kunnen we meerdere GG-plot objecten in een matrix
 
 ```{r}
 library(gridExtra)
-p1 <- NHANES %>% filter(Gender=="female"&!is.na(BMI)) %>%
+p1 <- NHANES |> filter(Gender=="female"&!is.na(BMI)) |>
   ggplot(aes(x=BMI))+
    geom_histogram(aes(y=..density.., fill=..count..)) +
    xlab("BMI") +
    ggtitle("All females in study") +
   geom_density(aes(y=..density..))
 
-p2 <- NHANES %>% filter(Gender=="female"&!is.na(BMI)) %>%
+p2 <- NHANES |> filter(Gender=="female"&!is.na(BMI)) |>
   ggplot(aes(sample=BMI)) +
   geom_qq() +
   geom_qq_line()
@@ -1153,7 +1153,7 @@ Boxplots zijn meer compact dan een histogram en laat om die reden gemakkelijker 
 worden getoond in Figuur \@ref(fig:boxplotCholGender).
 
 ```{r boxplotCholGender,fig.cap='Boxplot van log-getransformeerde directe HDL cholestorol concentratie in functie van Gender voor alle subjecten van de NHANES studie.', out.width='100%', fig.asp=.8, fig.align='center'}
-NHANES %>%
+NHANES |>
   ggplot(aes(x = Gender,y = log(DirectChol))) +
   geom_boxplot() +
   ylab("log(Direct Cholestorol)")
@@ -1181,7 +1181,7 @@ In onderstaande grafiek plotten we de relatieve abundanties van **Staphylococcus
 ```{r}
 ap <- read_csv("https://raw.githubusercontent.com/GTPB/PSLS20/master/data/armpit.csv")
 
-ap %>%  
+ap |>  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")
@@ -1205,15 +1205,15 @@ captopril <- read.table("https://raw.githubusercontent.com/statOmics/sbc/master/
 head(captopril)
 
 captoprilTidy <-
-  captopril %>%
+  captopril |>
   gather(type,bp,-id)
 
-captoprilTidy %>%
-  filter(type%in%c("SBPa","SBPb")) %>%
+captoprilTidy |>
+  filter(type%in%c("SBPa","SBPb")) |>
   mutate(type = factor(
     type,
     levels = c("SBPb","SBPa"))
-    ) %>%
+    ) |>
   ggplot(aes(x=type,y=bp)) +
   geom_line(aes(group = id)) +
   geom_point()
@@ -1237,8 +1237,8 @@ We voeren eerst een data exploratie uit waarbij we
 3. Een laag toevoegen d.m.v. `geom_point` om een scatterplot te bekomen van y i.f.v. x.
 
 ```{r}
-NHANES%>%
-  filter(Age >= 18 & Gender=="female") %>%
+NHANES|>
+  filter(Age >= 18 & Gender=="female") |>
   ggplot(aes(x=Height,y=Weight)) +
   geom_point()
 ```
@@ -1248,14 +1248,14 @@ Er is een duidelijke associatie tussen gewicht en lengte: als de lengte stijgt d
 We exploreren eerst de data univariaat: variabele per variabele. Om een histogram en QQ-plot naast elkaar af te beelden slaan we de plots eerst op als een object en maken we gebruik van de `grid.arrange` functie van het gridExtra package om de plots naast elkaar te plotten.
 
 ```{r}
-p1 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+p1 <- NHANES|> filter(Age >= 18 & Gender=="female") |>
   ggplot(aes(x=Height)) +
   geom_histogram(aes(y=..density.., fill=..count..)) +
    xlab("Height") +
   ggtitle("All females in study") +
   geom_density(aes(y=..density..))
 
-p2 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+p2 <- NHANES|> filter(Age >= 18 & Gender=="female") |>
   ggplot(aes(sample=Height)) +
   geom_qq() +
   geom_qq_line()
@@ -1266,14 +1266,14 @@ De lengte data zijn duidelijk approximatief normaal verdeeld.
 
 
 ```{r}
-p3 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+p3 <- NHANES|> filter(Age >= 18 & Gender=="female") |>
   ggplot(aes(x=Weight)) +
   geom_histogram(aes(y=..density.., fill=..count..)) +
    xlab("Weight") +
   ggtitle("All females in study") +
   geom_density(aes(y=..density..))
 
-p4 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
+p4 <- NHANES|> filter(Age >= 18 & Gender=="female") |>
   ggplot(aes(sample=Weight)) +
   geom_qq() +
   geom_qq_line()
@@ -1286,15 +1286,15 @@ De gewichtsdata zijn inderdaad scheef verdeeld!
 Na log transformatie zijn de gewichtsdata minder scheef, maar nog steeds niet Normaal verdeeld.
 
 ```{r}
-p5 <- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
-  ggplot(aes(x=Weight%>%log2)) +
+p5 <- NHANES|> filter(Age >= 18 & Gender=="female") |>
+  ggplot(aes(x=Weight|>log2())) +
   geom_histogram(aes(y=..density.., fill=..count..)) +
    xlab("Weight (log2)") +
   ggtitle("All females in study") +
   geom_density(aes(y=..density..))
 
-p6<- NHANES%>% filter(Age >= 18 & Gender=="female") %>%
-  ggplot(aes(sample=Weight%>%log2)) +
+p6<- NHANES|> filter(Age >= 18 & Gender=="female") |>
+  ggplot(aes(sample=Weight|>log2())) +
   geom_qq() +
   geom_qq_line()
 
@@ -1304,8 +1304,8 @@ grid.arrange(p5,p6,ncol=2)
 De scheefheid is er nog maar is sterk gereduceerd. We maken nu een plot van lengte in functie van het log$_2$ getransformeerde gewicht.
 
 ```{r}
-NHANES%>% filter(Age >= 18 & Gender=="female") %>%
-  ggplot(aes(x=Height,y=Weight %>% log2)) +
+NHANES|> filter(Age >= 18 & Gender=="female") |>
+  ggplot(aes(x=Height,y=Weight |> log2())) +
   ylab("Weight (log2)") +
   geom_point()
 ```
@@ -1358,11 +1358,11 @@ Deze schatter wordt ook wel de Pearson correlatie genoemd en heeft volgende eige
 In de figuur \@ref(fig:bijdrageCor) wordt de bijdrage weergegeven van individuele metingen in de correlatie. Als punten in het 1ste en 3de kwadrant liggen is er een positieve bijdrage van de observatie in de correlatie, als ze in het 2de en 4de kwadrant liggen is er een negatieve bijdrage.
 
 ```{r bijdrageCor, fig.cap='Bijdrage van individuele metingen in de correlatie.', echo=FALSE}
-means<-NHANES%>% filter(Age >= 18 & Gender=="female") %>% select(Weight,Height) %>% mutate(log2Weight=Weight%>%log2) %>% apply(.,2,mean,na.rm=TRUE)
-ranges<-NHANES%>% filter(Age >= 18 & Gender=="female") %>% select(Weight,Height) %>% mutate(log2Weight=Weight%>%log2) %>% apply(.,2,range,na.rm=TRUE)
+means<-NHANES|> filter(Age >= 18 & Gender=="female") |> select(Weight,Height) |> mutate(log2Weight=Weight|>log2()) |> apply(2,mean,na.rm=TRUE)
+ranges<-NHANES|> filter(Age >= 18 & Gender=="female") |> select(Weight,Height) |> mutate(log2Weight=Weight|>log2()) |> apply(2,range,na.rm=TRUE)
 
-NHANES%>% filter(Age >= 18 & Gender=="female") %>%
-  ggplot(aes(x=Height,y=Weight %>% log2)) +
+NHANES|> filter(Age >= 18 & Gender=="female") |>
+  ggplot(aes(x=Height,y=Weight |> log2())) +
   ylab("Weight (log2)") +
   geom_point() +
   geom_hline(yintercept=means["log2Weight"],color="red") +
@@ -1376,12 +1376,12 @@ NHANES%>% filter(Age >= 18 & Gender=="female") %>%
 We berekenen vervolgens de correlatie voor lengte, gewicht en het log getransformeerde gewicht.  
 
 ```{r}
-NHANES%>%
-  filter(Age >= 18 & Gender=="female") %>%
-  select(Weight,Height) %>%
-  mutate(log2Weight=Weight%>%log2) %>%
-  na.exclude %>%
-  cor
+NHANES|>
+  filter(Age >= 18 & Gender=="female") |>
+  select(Weight,Height) |>
+  mutate(log2Weight=Weight|>log2()) |>
+  na.exclude() |>
+  cor()
 ```
 
 Merk op dat:
@@ -1398,14 +1398,14 @@ In figuur \@ref(fig:corOutlier) wordt de impact van outliers op de Pearson corre
 set.seed(100)
 x <- rnorm(20)
 simData <- data.frame(x=x,y=x*2 + rnorm(length(x)))
-p1 <- simData %>% ggplot(aes(x=x,y=y)) +
+p1 <- simData |> ggplot(aes(x=x,y=y)) +
   geom_point() +
-  ggtitle(paste("cor =",cor(simData[,1],simData[,2]) %>% round(.,2)))
+  ggtitle(paste("cor =",cor(simData[,1],simData[,2]) |> round(2)))
 
 outlier<- rbind(simData,c(2,-4))
-p2 <- outlier %>% ggplot(aes(x=x,y=y)) +
+p2 <- outlier |> ggplot(aes(x=x,y=y)) +
   geom_point() +
-  ggtitle(paste("cor =",cor(outlier[,1],outlier[,2]) %>% round(.,2)))
+  ggtitle(paste("cor =",cor(outlier[,1],outlier[,2]) |> round(2)))
 
 grid.arrange(p1,p2,ncol=2)
 ```
@@ -1417,9 +1417,9 @@ In figuur \@ref(fig:corQuad) simuleren we data met een kwadratisch verband en ob
 ```{r corQuad, fig.cap="Correlatie van gesimuleerde data met een kwadratisch verband. De data in de bovenste kwadranten compenseren elkaar als het ware alsook in de onderste kwadranten (ongeveer evenveel positieve en negatieve bijdragen door de data in de correlatie)"}
 x <- rnorm(100)
 quadratic <- data.frame(x=x,y=x^2 + rnorm(length(x)))
-quadratic %>% ggplot(aes(x=x,y=y)) +
+quadratic |> ggplot(aes(x=x,y=y)) +
   geom_point() +
-  ggtitle(paste("cor =",cor(quadratic[,1],quadratic[,2]) %>% round(.,2))) +
+  ggtitle(paste("cor =",cor(quadratic[,1],quadratic[,2]) |> round(2))) +
   geom_hline(yintercept = mean(quadratic[,2]),col="red") +
     geom_vline(xintercept = mean(quadratic[,1]),col="red")
 ```
@@ -1436,9 +1436,9 @@ simData2<-cbind(x,1.5*x,sapply(1:7,function(sd,x) 1.5*x+rnorm(length(x),sd=sd),x
 
 colnames(simData2)[-1]<-paste("cor",round(cor(simData2)[1,-1],2),sep="=")
 
-simData2 %>%
-  as.data.frame %>%
-  gather(cor,y,-x) %>%
+simData2 |>
+  as.data.frame() |>
+  gather(cor,y,-x) |>
   ggplot(aes(x=x,y=y)) +
   geom_point() +
   facet_wrap(~cor)
@@ -1447,9 +1447,9 @@ simData3 <- simData2
 simData3[,-1]<--simData2[,-1]
 colnames(simData3)[-1]<-paste("cor",round(cor(simData3)[1,-1],2),sep="=")
 
-simData3 %>%
-  as.data.frame %>%
-  gather(cor,y,-x) %>%
+simData3 |>
+  as.data.frame() |>
+  gather(cor,y,-x) |>
   ggplot(aes(x=x,y=y)) +
   geom_point() +
   facet_wrap(~cor)
@@ -1481,11 +1481,11 @@ We observeren dat de correlatie tussen lengte en gewicht, en  lengte en log2 get
 Dat is logisch want de log-transformatie is een monotone transformatie en verandert de ordening van de data dus niet, de ranks van gewicht en deze van het log gewicht zijn identiek!
 
 ```{r}
-NHANES%>%
-  filter(Age >= 18 & Gender=="female") %>%
-  select(Weight,Height) %>%
-  mutate(log2Weight=Weight%>%log2) %>%
-  na.exclude %>%
+NHANES|>
+  filter(Age >= 18 & Gender=="female") |>
+  select(Weight,Height) |>
+  mutate(log2Weight=Weight|>log2()) |>
+  na.exclude() |>
   cor(method="spearman")
 ```
 

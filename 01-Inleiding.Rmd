@@ -71,13 +71,6 @@ text(c(0,2.2),rep(sqrt(3)/2,2),c("Theorie","Experiment"),col="darkred",cex=2)
 
 Een andere belangrijke rol van de Statistiek die verder in deze cursus wordt behandeld, is om de *reproduceerbaarheid* van wetenschappelijk onderzoek te waarborgen, binnen zelf gekozen probabiliteitsgrenzen (onzekerheid / zekerheid).
 
-## Boutade: met statistiek kan je alles bewijzen
-
-In de introductie tonen we aan dat je met statistiek niets kan bewijzen. Statistiek is een hulpmiddel om te leren uit data en om op een reproduceerbare manier conclusies te trekken uit empirisch onderzoek.
-Het is eerder zo dat men met foute toepassing van de statistiek alles probeert te bewijzen!
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jITG4mil1SE" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 ## Opzet van de cursus
 
 We leven in een tijd van big data en het is cruciaal om informatie uit cijfers te kunnen extraheren. Statistiek is nu net de wetenschap om te leren uit empirische gegevens.
@@ -271,15 +264,15 @@ In artikels en de media worden resultaten uit een steekproef vaak gerapporteerd 
 - We vatten de data eerst samen. We berekenen het gemiddelde en de standaard deviatie (een maat voor de spreiding, zie volgende hoofdstukken).
 We slaan het resultaat hiervan op in het object apRelSum via `apRelSum <-`.
 
-1. We pipen (via `%>%`) het `ap` dataframe naar de `group_by` functie om de data te groeperen per treatment trt: `group_by(trt)`.
+1. We pipen (via `|>`) het `ap` dataframe naar de `group_by` functie om de data te groeperen per treatment trt: `group_by(trt)`.
 
 2. We pipen het resultaat naar de `summarize_at` function om de "rel" variable samen te vatten en berekenen hierbij het gemiddelde en standaardafwijking. Omdat we de data eerst hebben gegroepeerd zullen we het gemiddelde en de standaard deviatie berekenen per groep.
 
 
 
 ```{r}
-apRelSum <- ap %>%
-  group_by(trt) %>%
+apRelSum <- ap |>
+  group_by(trt) |>
   summarize_at("rel",
                list(mean=mean,
                     sd=sd
@@ -296,7 +289,7 @@ apRelSum
 We kunnen ook een tabel in de webpagina of het pdf bestand integreren via het commando kable van het knitr pakket:
 
 ```{r}
-knitr::kable(apRelSum, 'html')
+knitr::kable(apRelSum, tableType)
 ```
 
 *Interpretatie*
@@ -323,7 +316,7 @@ We doen dit steeds via de aesthetics `aes` functie.   `aes(x=trt,y=mean)`
 3. We voegen foutenvlaggen toe om de onzekerheid op het gemiddelde weer te geven.  We doen dit via de `geom_errorbar` functie en specifiëren het minimum en maximum van de error bar. Het `width` argument wordt gebruikt om de breedte van de error bar smaller te maken dan deze van de bar.
 
 ```{r}
-apRelSum %>%
+apRelSum |>
   ggplot(aes(x=trt,y=mean)) +
   geom_bar(stat="identity") +
   geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd),width=.2)
@@ -346,7 +339,7 @@ We maken nu een boxplot voor de ap data
 3. We voegen een laag toe voor de boxplot dmv de functie `geom_boxplot()`
 
 ```{r}
-ap %>%  
+ap |>  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot()
 ```
@@ -365,7 +358,7 @@ Verder weten we dat er maar 10 observaties zijn in elke groep. Dat laat toe om d
 - We geven de ruwe data weer via de  `geom_point(position="jitter")` functie. We gebruiken hierbij het argument position='jitter' zodat we wat random ruis toevoegen aan de x-cordinaat zodat de gegevens elkaar niet overlappen.
 
 ```{r}
-ap %>%  
+ap |>  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")
@@ -493,8 +486,8 @@ We exploreren hiervoor eerst de lengte data in de NHANES studie. Omdat we heel v
     - We veranderen het label van de x-as met de `xlab` functie.
 
 ```{r}
-NHANES%>%  
-  filter(Age >= 18 & !is.na(Height)) %>%
+NHANES|>  
+  filter(Age >= 18 & !is.na(Height)) |>
   ggplot(aes(x = Height))+
   geom_histogram() +
   facet_grid(Gender ~ .) +
@@ -516,8 +509,8 @@ We maken nu een subset van de data die we zullen gebruiken om aan te tonen hoe d
   2. We selecteren enkel het geslacht en Lengte zodat de dataset geen onnodige variabelen bevat.
 
 ```{r}
-nhanesSub <- NHANES %>%
-  filter(Age >= 18 & !is.na(Height)) %>%
+nhanesSub <- NHANES |>
+  filter(Age >= 18 & !is.na(Height)) |>
   select(c("Gender","Height"))
 ```
 
@@ -527,23 +520,23 @@ We groeperen de data hiervoor op basis van het geslacht (variable Gender).
 
 ```{r}
 
-HeightSum <- nhanesSub %>%
-  group_by(Gender) %>%
+HeightSum <- nhanesSub |>
+  group_by(Gender) |>
   summarize_at("Height",
                list(mean = mean,
                sd = sd)
               )
 
 knitr::kable(
-  HeightSum %>%
+  HeightSum |>
   mutate_if(is.numeric, round, digits=1),
-  "html"
+  tableType
   )
 ```
 
 *Interpretatie*
 
-Vrouwen zijn gemiddeld `r HeightSum %>% filter(Gender=="female") %>% pull(mean) %>% round(.,1) ` cm HeightSum en mannen `r HeightSum %>% filter(Gender=="male") %>% pull(mean) %>% round(.,1)` cm.
+Vrouwen zijn gemiddeld `r HeightSum |> filter(Gender=="female") |> pull(mean) |> round(1) ` cm HeightSum en mannen `r HeightSum |> filter(Gender=="male") |> pull(mean) |> round(1)` cm.
 Wat onze intuïtie bevestigt dat mannen gemiddeld groter zijn dan vrouwen.
 
 <!---break-->
@@ -576,12 +569,12 @@ Wat onze intuïtie bevestigt dat mannen gemiddeld groter zijn dan vrouwen.
 ```{r}
 set.seed(1023)
 nSamp <- 5
-fem <- nhanesSub %>%
-  filter(Gender=="female") %>%
+fem <- nhanesSub |>
+  filter(Gender=="female") |>
   sample_n(size=5)
 
-mal <- nhanesSub %>%
-  filter(Gender=="male") %>%
+mal <- nhanesSub |>
+  filter(Gender=="male") |>
   sample_n(size=5)
 
 samp1 <- rbind(fem,mal)
@@ -596,14 +589,14 @@ We exploreren vervolgens de data in de steekproef.
 *Code*
 
 ```{r}
-samp1 %>%
+samp1 |>
   ggplot(aes(x=Height)) +
   geom_histogram() +
   facet_grid(Gender~.) +
   xlab("Lengte (cm)")
 
-HeightSumExp1 <- samp1 %>%
-  group_by(Gender) %>%
+HeightSumExp1 <- samp1 |>
+  group_by(Gender) |>
   summarize_at("Height",
                list(mean = mean,
                       sd = sd)
@@ -614,7 +607,7 @@ HeightSumExp1
 Histogram is niet zinvol als we maar zo weinig datapunten hebben. Een boxplot is meer geschikt om distributies te vergelijken als er weinig data zijn:
 
 ```{r echo=FALSE}
-samp1 %>%
+samp1 |>
   ggplot(aes(x = Gender,y = Height)) +
   geom_boxplot(outlier.shape = NA) +
   geom_point(position = "jitter") +
@@ -655,25 +648,25 @@ Als we het experiment herhalen selecteren we andere mensen en verkrijgen we ande
 
 ```{r}
 set.seed(1024)
-fem <- nhanesSub %>%
-  filter(Gender=="female") %>%
+fem <- nhanesSub |>
+  filter(Gender=="female") |>
   sample_n(size=5)
 
-mal <- nhanesSub %>%
-  filter(Gender=="male") %>%
+mal <- nhanesSub |>
+  filter(Gender=="male") |>
   sample_n(size=5)
 
 samp2 <- rbind(fem,mal)
 
-HeightSumExp2 <- samp2 %>%
-  group_by(Gender) %>%
+HeightSumExp2 <- samp2 |>
+  group_by(Gender) |>
   summarize_at("Height",
                list(mean=mean,
                     sd=sd)
               )
 HeightSumExp2
 
-samp2 %>%
+samp2 |>
   ggplot(aes(x = Gender,y = Height)) +
   geom_boxplot(outlier.shape = NA) +
   geom_point(position = "jitter") +
@@ -703,25 +696,25 @@ In de nieuwe steekproef zijn vrouwen gemiddeld `r round(abs(HeightSumExp2$mean[1
 ```{r}
 seed <- 88605
 set.seed(seed)
-fem <- nhanesSub %>%
-  filter(Gender=="female") %>%
+fem <- nhanesSub |>
+  filter(Gender=="female") |>
   sample_n(size=5)
 
-mal <- nhanesSub %>%
-  filter(Gender=="male") %>%
+mal <- nhanesSub |>
+  filter(Gender=="male") |>
   sample_n(size=5)
 
 samp3 <- rbind(fem,mal)
 
-HeightSumExp3 <- samp3 %>%
-  group_by(Gender) %>%
+HeightSumExp3 <- samp3 |>
+  group_by(Gender) |>
   summarize_at("Height",
                list(mean=mean,
                     sd=sd)
               )
 HeightSumExp3
 
-samp3 %>%
+samp3 |>
   ggplot(aes(x = Gender,y = Height)) +
   geom_boxplot(outlier.shape = NA) +
   geom_point(position = "jitter") +
@@ -772,7 +765,7 @@ $\rightarrow$ Met statistiek gaan we de kans op het trekken van foute conclusies
 
 ### Controle van beslissingsfouten 
 
-Deze sectie behandelen we vanaf academiejaar 2026-2027  in hoofdstuk 5. 
+Deze sectie slaan we in academiejaar 2026-2027 over en we komen hierop terug wanneer we beslissingsfouten zien in hoofdstuk 5. 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fdQ-EOX0Jc8" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -791,10 +784,10 @@ nSim <- 10000
 nSamp <- 5
 
 # We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
-fem <- nhanesSub %>%
+fem <- nhanesSub |>
   filter(Gender == "female")
 
-mal <- nhanesSub %>%
+mal <- nhanesSub |>
   filter(Gender == "male")
 
 # Simulatie studie
@@ -816,13 +809,13 @@ sum(res$pvalue < 0.05 & res$verschil < 0)
 sum(res$pvalue >= 0.05)
 sum(res$pvalue < 0.05 & res$verschil>0)
 
-res %>%
+res |>
   ggplot(aes(x=verschil,y=-log10(pvalue),color=pvalue < 0.05)) +
   geom_point() +
   xlab("Gemiddeld Verschil (cm)") +
   ylab("Statistische Significantie (-log10 p)")
 
-res %>%
+res |>
   ggplot(aes(y = verschil)) +
   geom_boxplot() +
   ylab("Gemiddeld Verschil (cm)") +
@@ -849,10 +842,10 @@ nSim <- 10000
 nSamp <- 50
 
 # We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
-fem <- nhanesSub %>%
+fem <- nhanesSub |>
   filter(Gender == "female")
 
-mal <- nhanesSub %>%
+mal <- nhanesSub |>
   filter(Gender == "male")
 
 # Simulatie studie
@@ -874,13 +867,13 @@ sum(res$pvalue < 0.05 & res$verschil < 0)
 sum(res$pvalue >= 0.05)
 sum(res$pvalue < 0.05 & res$verschil > 0)
 
-res %>%
+res |>
   ggplot(aes(x=verschil,y=-log10(pvalue),color=pvalue<0.05)) +
   geom_point() +
   xlab("Gemiddeld Verschil (cm)") +
   ylab("Statistische Significantie (-log10 p)")
 
-res %>%
+res |>
   ggplot(aes(y=verschil)) +
   geom_boxplot() +
   ylab("Gemiddeld Verschil (cm)") +
@@ -916,7 +909,7 @@ nSim <- 10000
 nSamp <- 5
 
 # We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
-fem <- nhanesSub %>%
+fem <- nhanesSub |>
   filter(Gender == "female")
 
 # Simulatie studie
@@ -938,13 +931,13 @@ sum(res$pvalue < 0.05 & res$verschil < 0)
 sum(res$pvalue >= 0.05)
 sum(res$pvalue < 0.05 & res$verschil>0)
 
-res %>%
+res |>
   ggplot(aes(x=verschil,y=-log10(pvalue),color=pvalue < 0.05)) +
   geom_point() +
   xlab("Gemiddeld Verschil (cm)") +
   ylab("Statistische Significantie (-log10 p)")
 
-res %>%
+res |>
   ggplot(aes(y = verschil)) +
   geom_boxplot() +
   ylab("Gemiddeld Verschil (cm)") +
@@ -966,7 +959,7 @@ nSim <- 10000
 nSamp <- 50
 
 # We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
-fem <- nhanesSub %>%
+fem <- nhanesSub |>
   filter(Gender == "female")
 
 # Simulatie studie
@@ -988,13 +981,13 @@ sum(res$pvalue < 0.05 & res$verschil < 0)
 sum(res$pvalue >= 0.05)
 sum(res$pvalue < 0.05 & res$verschil>0)
 
-res %>%
+res |>
   ggplot(aes(x=verschil,y=-log10(pvalue),color=pvalue < 0.05)) +
   geom_point() +
   xlab("Gemiddeld Verschil (cm)") +
   ylab("Statistische Significantie (-log10 p)")
 
-res %>%
+res |>
   ggplot(aes(y = verschil)) +
   geom_boxplot() +
   ylab("Gemiddeld Verschil (cm)") +
@@ -1056,9 +1049,9 @@ nfip <- tibble(
   vaccin=c("yes","no","no"),
   total=c(221998,725173,123605),
   polio=c(54,391,56)
-  ) %>%
+  ) |>
   mutate(noPolio = total - polio)
-knitr::kable(nfip, "html")
+knitr::kable(nfip, tableType)
 ```
 
 
@@ -1075,9 +1068,9 @@ We zullen daarom kijken naar polio incidentie per miljoen kinderen.
 2. we maken de tabel opnieuw
 
 ```{r}
-nfip <- nfip %>%
+nfip <- nfip |>
   mutate(incidencePM = round(nfip$polio/nfip$total*1e6,0))
-knitr::kable(nfip, "html")
+knitr::kable(nfip, tableType)
 ```
 
 - We observeren nu dat de incidentie meer dan dubbel zo hoog is in de controle groep als in de vaccinatie groep.
@@ -1128,12 +1121,12 @@ salk <- data.frame(
   group=c("cases","control","noConcent"),
   treatment=c("vaccine","placebo","none"),
   total=c(200745,201229, 338778),polio=c(57,142,157)
-  ) %>%
+  ) |>
   mutate(
     noPolio = total-polio,
     incidencePM = round(polio/total*1e6,0)
     )
-knitr::kable(salk, "html")
+knitr::kable(salk, tableType)
 ```
 
 - We observeren een veel groter effect nu cases en controles vergelijkbaar zijn, incidentie van respectievelijk `r salk$incidencePM[1]`  en `r salk$incidencePM[2]` per miljoen.

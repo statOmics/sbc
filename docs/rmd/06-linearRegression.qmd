@@ -43,7 +43,7 @@ brca
 
 
 ```{r out.width='70%', fig.align='center',warnings=FALSE}
-brca %>%
+brca |>
   ggplot(aes(x="", y=S100A8)) +
   geom_boxplot() +
   xlab("") +
@@ -54,9 +54,9 @@ brca %>%
 
 ```{r}
 library(GGally)
-brcaSubset <- brca %>%
+brcaSubset <- brca |>
   filter(S100A8<2000)
-brcaSubset[,-(1:4)] %>% ggpairs()
+brcaSubset[,-(1:4)] |> ggpairs()
 ```
 
 ## Associatie tussen ESR1 en S100A8 expressie
@@ -78,7 +78,7 @@ brcaSubset[,-(1:4)] %>% ggpairs()
 4. voeg een "smooth line" toe `geom_smooth()`
 
 ```{r fig.align='center'}
-brcaSubset %>%
+brcaSubset |>
   ggplot(aes(x=ESR1,y=S100A8)) +
   geom_point() +
   geom_smooth()
@@ -100,7 +100,7 @@ brcaSubset %>%
 5. voeg een rechte toe `geom_smooth()` met `method = "lm"` (linear model). (We zetten `se = FALSE` om geen puntgewijze betrouwbaarheidsintervallen weer te geven)
 
 ```{r fig.align='center'}
-brcaSubset %>%
+brcaSubset |>
   ggplot(aes(x = ESR1,y = S100A8)) +
   geom_point() +
   geom_smooth(se = FALSE, col = "grey") +
@@ -158,7 +158,7 @@ $\beta_1:$ verschil in gemiddelde uitkomst voor subjecten die verschillen in é�
 (Least squares)
 
 ```{r fig.align='center'}
-brcaSubset %>%
+brcaSubset |>
   ggplot(aes(x = ESR1, y = S100A8)) +
   geom_point() +
   geom_smooth(se = FALSE, col = "grey") +
@@ -327,7 +327,7 @@ summary(lm1)
 ## Lineariteit
 
 ```{r fig.align='center'}
-brcaSubset %>%
+brcaSubset |>
   ggplot(aes(x = ESR1, y = S100A8)) +
   geom_point() +
   geom_smooth(se = FALSE, col = "grey") +
@@ -422,24 +422,24 @@ Problemen met
 
 
 ```{r}
-brca %>%
+brca |>
   ggplot(aes(x = ESR1, y = S100A8)) +
   geom_point() +
   geom_smooth()
 ```
 
 ```{r}
-brca %>%
+brca |>
   ggplot(aes(
-    x = ESR1 %>% log2,
-    y = S100A8 %>% log2)
+    x = ESR1 |> log2(),
+    y = S100A8 |> log2())
     ) +
   geom_point() +
   geom_smooth()
 ```
 
 ```{r}
-lm2<-lm(S100A8 %>% log2 ~ ESR1 %>% log2, brca)
+lm2<-lm(S100A8 |> log2() ~ ESR1 |> log2(), brca)
 plot(lm2)
 summary(lm2)
 ```
@@ -534,10 +534,10 @@ head(g)
 Merk op dat we de nieuwe data die we gespecificeerd hebben voor de ESR1 expressie niet moeten transformeren omdat we het model fitten met de `lm`functie en de transformatie hebben gespecificeerd binnen die functie met behulp van het pipe commando!
 
 ```{r}
-brca %>% ggplot(
+brca |> ggplot(
   aes(
-    x = ESR1 %>% log2,
-    y = S100A8 %>% log2)
+    x = ESR1 |> log2(),
+    y = S100A8 |> log2())
   ) +
   geom_point() +
   geom_smooth(method = "lm")
@@ -546,7 +546,7 @@ brca %>% ggplot(
 ## Terugtransformatie
 ```{r}
 newdata<-data.frame(cbind(grid,2^g))
-brca %>%
+brca |>
   ggplot(aes(x = ESR1, y = S100A8)) +
   geom_point() +
   geom_line(aes(x=grid,y=fit),newdata) +
@@ -597,9 +597,9 @@ head(p)
 
 ```{r}
 preddata<-data.frame(
-  grid = grid%>%log2,
+  grid = grid|>log2(),
   p)
-brca %>% ggplot(aes(x=ESR1%>%log2,y=S100A8%>%log2)) +
+brca |> ggplot(aes(x=ESR1|>log2(),y=S100A8|>log2())) +
   geom_point() +
   geom_smooth(method="lm") +
      geom_line(aes(x=grid,y=lwr),preddata,color="blue") +
@@ -608,7 +608,7 @@ brca %>% ggplot(aes(x=ESR1%>%log2,y=S100A8%>%log2)) +
 
 ```{r}
 preddata<-data.frame(cbind(grid,2^p))
-brca %>% ggplot(aes(x = ESR1, y = S100A8)) +
+brca |> ggplot(aes(x = ESR1, y = S100A8)) +
   geom_point() +
   geom_line(
     aes(x = grid,y = fit),
@@ -641,27 +641,27 @@ brca %>% ggplot(aes(x = ESR1, y = S100A8)) +
 
 ```{r}
 library(NHANES)
-fem <- NHANES %>%
+fem <- NHANES |>
   filter(Gender=="female"&!is.na(DirectChol))
 
 2^(
-  fem %>%
-  pull(DirectChol) %>%
-  log2 %>%
-  mean +
+  fem |>
+  pull(DirectChol) |>
+  log2() |>
+  mean() +
     c(-1,1) *
     qnorm(0.975) *
-    (fem %>%
-      pull(DirectChol) %>%
-      log2 %>%
-      sd)
+    (fem |>
+      pull(DirectChol) |>
+      log2() |>
+      sd())
   )
 ```
 
 - Predictie interval
 
 ```{r}
-lmChol <- lm(DirectChol %>% log2 ~ 1, data=fem)
+lmChol <- lm(DirectChol |> log2() ~ 1, data=fem)
 predInt <- predict(
   lmChol,
   interval="prediction",
@@ -678,21 +678,21 @@ We zullen hetzelfde doen voor een kleine steekproef van 10 patiënten.
 
 ```{r}
 set.seed(1)
-fem10 <- NHANES %>%
-  filter(Gender=="female"&!is.na(DirectChol)) %>%
+fem10 <- NHANES |>
+  filter(Gender=="female"&!is.na(DirectChol)) |>
   sample_n(size=10)
 
 2^(
-  fem10 %>%
-    pull(DirectChol) %>%
-    log2 %>%
-    mean +
+  fem10 |>
+    pull(DirectChol) |>
+    log2() |>
+    mean() +
       c(-1,1) *
       qnorm(0.975) *
-      (fem10 %>%
-        pull(DirectChol) %>%
-        log2 %>%
-        sd)
+      (fem10 |>
+        pull(DirectChol) |>
+        log2() |>
+        sd())
   )
 ```
 
@@ -701,7 +701,7 @@ Het referentie-interval is veel smaller dan in de grote steekproef.
 - Predictie interval
 
 ```{r}
-lmChol10 <- lm(DirectChol %>% log2 ~ 1, data = fem10)
+lmChol10 <- lm(DirectChol |> log2() ~ 1, data = fem10)
 predInt10 <- predict(
   lmChol10,
   interval = "prediction",
@@ -927,11 +927,11 @@ plot(lm3)
 
 
 ```{r}
-brca %>%
+brca |>
   ggplot(
     aes(
-      x = node %>%
-        as.factor,
+      x = node |>
+        as.factor(),
       y = age)
       ) +
   geom_boxplot()
@@ -951,7 +951,7 @@ sim_df <- data.frame(
   iid = rnorm(9 * nrow(brca), sd = sigma(lm3)),
   sim = rep(1:9, each = 32)
   )
-sim_df %>%
+sim_df |>
   ggplot(aes(x = node, y=iid)) +
   geom_boxplot() +
   facet_wrap(.~sim) +

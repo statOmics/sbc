@@ -43,11 +43,11 @@ prostacyclin <- read_tsv("https://raw.githubusercontent.com/statOmics/sbc/master
 #dosis wordt als continue covariaat ingelezen
 #zet om naar een factor.
 
-prostacyclin <- prostacyclin %>%
+prostacyclin <- prostacyclin |>
   mutate(dose = as.factor(prostacyclin$dose))
 head(prostacyclin)
 
-prostacyclin %>%
+prostacyclin |>
   ggplot(aes(x = dose, y = prostac, fill = dose)) +
   geom_boxplot() +
   geom_point(position = "jitter") +
@@ -55,7 +55,7 @@ prostacyclin %>%
 ```
 
 ```{r prostBox2,fig.cap='Data-exploratie van het prostacycline niveau bij 36 ratten die behandeld werden met drie verschillende arachidonzuurconcentraties (12 ratten per behandeling). QQ-plot van prostacycline voor lage, matige en hoge dosisgroep.', out.width='100%', fig.asp=.8, fig.align='center'}
-prostacyclin %>%
+prostacyclin |>
   ggplot(aes(sample = prostac)) +
   geom_qq() +
   geom_qq_line() +
@@ -285,6 +285,7 @@ $$\text{SSTot} = \text{SST} + \text{SSE}.$$
 Waarbij SSTot opnieuw de totale variabiliteit voorstelt, met name de som van de kwadratische afwijking van de uitkomsten $Y_{i}$ t.o.v. het algemeen gemiddelde prostacycline niveau $\bar{Y}$ en SSE de residuele variabiliteit of de som van de kwadratische afwijkingen tussen de observaties $Y_{i}$ en de modelvoorspellingen (hier groepsgemiddelden) $\hat{g}(x_{i1},x_{i2})=\hat \mu_j=\bar Y_j$.
 
 De interpretatie van de deze kwadratensommen worden weergegeven in Figuur \@ref(fig:prostacSSTotSSE).
+
 ```{r prostacSSTotSSE,fig.cap='Interpretatie van de totale kwadratensom (SSTot, som van de kwadratische afwijkingen tussen de uitkomsten $Y_{i}$ en het steekproefgemiddelde van de uitkomsten $\\bar Y$, links) en van residuele kwadratensom (SSE, som van de kwadratische afwijkingen tussen de uitkomsten $Y_{i}$ en de groepsgemiddelden $\\bar Y_j$, rechts)', echo = FALSE}
 #attach dataframe dan kunnen we variabele namen rechtstreeks gebruiken
 #zonder dataframe naam en $-teken
@@ -341,7 +342,8 @@ anova(model1)
 
 We kunnen dus opnieuw besluiten dat er een extreem significant effect is van de dosering van arachidonzuur op de gemiddelde prostacycline concentratie in het bloed bij ratten ($p<<0.001$).
 
-In Figuur \@ref(fig:prostacF) wordt de F-verdeling weergegeven samen met de kritische waarde op het 5% significantie niveau en de geobserveerde F-statistiek voor het prostacycline voorbeeld.  
+In Figuur \@ref(fig:prostacF) wordt de F-verdeling weergegeven samen met de kritische waarde op het 5% significantie niveau en de geobserveerde F-statistiek voor het prostacycline voorbeeld.
+
 ```{r prostacF, fig.cap='Een F-verdeling met 2 vrijheidsgraden in de teller en 33 in de noemer. Het aanvaardingsgebied wordt weergegeven in blauw, de kritische waarde en de verwerpingsregio bij het $\\alpha=5\\%$ niveau in rood, en, de geobserveerde f-waarde  en de p-waarde worden in oranje.', out.width='100%', fig.asp=.8, fig.align='center', echo = FALSE}
 grid <- seq(0,17,.01)
 df1 <- anova(model1)[1,1]
@@ -369,7 +371,7 @@ Voorbeelden van meerdere F-verdelingen met een verschillend aantal vrijheidsgrad
 dists_df <- data.frame(dists = c(df(grid,1,5),df(grid,5,5),df(grid,10,30), df(grid,20,30),df(grid,50,50)),
                        grid = grid,
                        dists_group = as.factor(rep(1:5, each = length(grid))))
-dists_df %>%
+dists_df |>
   ggplot(aes(x = grid, y = dists, color = dists_group)) +
   geom_line(size = 1) +
   scale_color_discrete(name = "", labels = c("F(1,5)", "F(5,5)","F(10,30)","F(20,30)", "F(50,50)")) +
@@ -596,10 +598,11 @@ confint(model1.mcp)
 
 Merk op dat de Tukey methode smallere BIs en kleinere aangepaste p-waarden teruggeeft dan Bonferroni en dus minder conservatief is.
 De betrouwbaarheidsintervallen kunnen ook grafisch worden weergegeven wat handig is als er veel vergelijkingen worden uitgevoerd (zie Figuur \@ref(fig:prostacTukey)).
+
 ```{r prostacTukey, fig.cap='$95\\%$ experimentsgewijze betrouwbaarheidsintervallen voor de paarsgewijze verschillen in gemiddeld prostacycline niveau tussen alle arachidonzuur dosisgroepen. De BIs zijn gecorrigeerd voor multipliciteit via de Tukey methode.', out.width='100%', fig.asp=.8, fig.align='center'}
-model1.mcp %>%
-  confint %>%
-  plot
+model1.mcp |>
+  confint() |>
+  plot()
 ```
 
 Hierop zien we onmiddellijk dat het effect van de hoogste dosisgroep verschillend is van de laagste en middelste dosisgroep en dat er geen significant verschil is tussen de laagste en de middelste dosisgroep op het 5\% experimentsgewijze significantieniveau.

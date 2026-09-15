@@ -270,15 +270,15 @@ ap
 - We vatten de data eerst samen. We berekenen het gemiddelde en de standaard deviatie (een maat voor de spreiding, zie volgende hoofdstukken).
 We slaan het resultaat hiervan op in het object apRelSum via `apRelSum <-`.
 
-1. We pipen (via `%>%`) het `ap` dataframe naar de `group_by` functie om de data te groeperen per treatment trt: `group_by(trt)`.
+1. We pipen (via `|>`) het `ap` dataframe naar de `group_by` functie om de data te groeperen per treatment trt: `group_by(trt)`.
 
 2. We pipen het resultaat naar de `summarize_at` function om de "rel" variable samen te vatten en berekenen hierbij het gemiddelde en standaardafwijking. Omdat we de data eerst hebben gegroepeerd zullen we het gemiddelde en de standaard deviatie berekenen per groep.
 
 
 
 ```{r}
-apRelSum <- ap %>%
-  group_by(trt) %>%
+apRelSum <- ap |>
+  group_by(trt) |>
   summarize_at("rel",
                list(mean=mean,
                     sd=sd
@@ -318,7 +318,7 @@ We doen dit steeds via de aesthetics `aes` functie.   `aes(x=trt,y=mean)`
 3. We voegen foutenvlaggen toe om de onzekerheid op het gemiddelde weer te geven.  We doen dit via de `geom_errorbar` functie en specifiëren het minimum en maximum van de error bar. Het `width` argument wordt gebruikt om de breedte van de error bar smaller te maken dan deze van de bar.
 
 ```{r}
-apRelSum %>%
+apRelSum |>
   ggplot(aes(x=trt,y=mean)) +
   geom_bar(stat="identity") +
   geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd),width=.2) +
@@ -353,7 +353,7 @@ We maken nu een boxplot voor de ap data
 3. We voegen laag toe voor de boxplot dmv de functie `geom_boxplot()`
 
 ```{r}
-ap %>%  
+ap |>  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot() + 
   theme_minimal()
@@ -364,7 +364,7 @@ ap %>%
 Merk op dat we de plot ook op kunnen slaan als een object.
 
 ```{r}
-apBoxplot <- ap %>%  
+apBoxplot <- ap |>  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot() +
   theme_minimal()
@@ -390,7 +390,7 @@ Omdat er niet zoveel gegevens zijn kunnen we de data toevoegen aan de plot zonde
 - We geven de ruwe data weer via de  `geom_point(position="jitter")` functie. We gebruiken hierbij het argument position='jitter' zodat we wat random ruis toevoegen aan de x-cordinaat zodat de gegevens elkaar niet overlappen.
 
 ```{r}
-ap %>%  
+ap |>  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter") +
@@ -520,7 +520,7 @@ Gemiddeld is de relatieve abundantie van Staphylococcus in het microbiome van pe
 
 ## Random steekproeftrekking (Random sampling)
 
-- Wat wordt zijn de consequenties van het gebruik van een steekproef en van randomisatie?
+- Wat zijn de consequenties van het gebruik van een random steekproeftrekking?
 
 - Random steekproeftrekking is sterk gerelateerd met het concept van de populatie en scope van de studie.  
 
@@ -584,8 +584,8 @@ Onderzoeksvraag: hoe verschilt de lengte van volwassen mannen en vrouwen.
     - We veranderen het label van de x-as met de `xlab` functie.
 
 ```{r}
-NHANES%>%  
-  filter(Age >= 18 & !is.na(Height)) %>%
+NHANES|>  
+  filter(Age >= 18 & !is.na(Height)) |>
   ggplot(aes(x = Height))+
   geom_histogram() +
   facet_grid(Gender ~ .) +
@@ -600,14 +600,14 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 
 ***
 
-We maken nu een subset van de data die we zullen gebruiken om aan te tonen hoe de variabiliteit in kleine steekproeven kan variëren van steekproef tot steekproef.
+We maken nu een subset van de data die we zullen gebruiken om aan te tonen hoe de data in kleine steekproeven kan variëren van steekproef tot steekproef.
 
   1. We filteren op leeftijd en verwijderen ontbrekenden gegevens (NA, Not Available).
   2. We selecteren enkel het geslacht en Lengte zodat de dataset geen onnodige variabelen bevat.
 
 ```{r}
-nhanesSub <- NHANES %>%
-  filter(Age >= 18 & !is.na(Height)) %>%
+nhanesSub <- NHANES |>
+  filter(Age >= 18 & !is.na(Height)) |>
   select(c("Gender","Height"))
 ```
 
@@ -618,19 +618,35 @@ We groeperen de data hiervoor op basis van het geslacht (variable Gender).
 
 
 ```{r}
-
-HeightSum <- nhanesSub %>%
-  group_by(Gender) %>%
+HeightSum <- nhanesSub |>
+  group_by(Gender) |>
   summarize_at("Height",
                list(mean = mean,
                sd = sd)
               )
 
 knitr::kable(
-  HeightSum %>%
+  HeightSum |>
   mutate_if(is.numeric, round, digits=1)
   )
 ```
+
+Beide verdelingen: 
+
+- lijken een normale verdeling te volgen
+- met dezelfde variantie
+
+
+$\rightarrow$ ze verschillen dus enkel in gemiddelde. 
+
+- Onderzoeksvraag: "Is er een verschil in lengte tussen mannen en vrouwen?" 
+- kunnen vertalen naar 1 karakteristiek: het gemiddeld verschil in lengte
+
+```{r}
+HeightSum$mean[1]-HeightSum$mean[2]
+```
+
+Gemiddeld zijn volwassen Amerikaanse vrouwen 13.8 cm kleiner dan mannen. 
 
 ***
 
@@ -651,12 +667,12 @@ knitr::kable(
 ```{r}
 set.seed(1023)
 nSamp <- 5
-fem <- nhanesSub %>%
-  filter(Gender=="female") %>%
+fem <- nhanesSub |>
+  filter(Gender=="female") |>
   sample_n(size=5)
 
-mal <- nhanesSub %>%
-  filter(Gender=="male") %>%
+mal <- nhanesSub |>
+  filter(Gender=="male") |>
   sample_n(size=5)
 
 samp1 <- rbind(fem,mal)
@@ -669,15 +685,15 @@ samp1
 Data Exploratie
 
 ```{r}
-samp1 %>%
+samp1 |>
   ggplot(aes(x=Height)) +
   geom_histogram() +
   facet_grid(Gender~.) +
   xlab("Lengte (cm)") + 
   theme_minimal()
 
-HeightSumExp1 <- samp1 %>%
-  group_by(Gender) %>%
+HeightSumExp1 <- samp1 |>
+  group_by(Gender) |>
   summarize_at("Height",
                list(mean = mean,
                       sd = sd)
@@ -693,7 +709,7 @@ Histogram is niet zinvol als we maar zo weinig datapunten hebben.
 Boxplot is beter:
 
 ```{r echo=FALSE}
-samp1 %>%
+samp1 |>
   ggplot(aes(x = Gender,y = Height)) +
   geom_boxplot(outlier.shape = NA) +
   geom_point(position = "jitter") +
@@ -719,25 +735,25 @@ Als we het experiment herhalen selecteren we andere mensen en verkrijgen we ande
 
 ```{r}
 set.seed(1024)
-fem <- nhanesSub %>%
-  filter(Gender=="female") %>%
+fem <- nhanesSub |>
+  filter(Gender=="female") |>
   sample_n(size=5)
 
-mal <- nhanesSub %>%
-  filter(Gender=="male") %>%
+mal <- nhanesSub |>
+  filter(Gender=="male") |>
   sample_n(size=5)
 
 samp2 <- rbind(fem,mal)
 
-HeightSumExp2 <- samp2 %>%
-  group_by(Gender) %>%
+HeightSumExp2 <- samp2 |>
+  group_by(Gender) |>
   summarize_at("Height",
                list(mean=mean,
                     sd=sd)
               )
 HeightSumExp2
 
-samp2 %>%
+samp2 |>
   ggplot(aes(x = Gender,y = Height)) +
   geom_boxplot(outlier.shape = NA) +
   geom_point(position = "jitter") +
@@ -761,25 +777,25 @@ samp2 %>%
 ```{r}
 seed <- 88605
 set.seed(seed)
-fem <- nhanesSub %>%
-  filter(Gender=="female") %>%
+fem <- nhanesSub |>
+  filter(Gender=="female") |>
   sample_n(size=5)
 
-mal <- nhanesSub %>%
-  filter(Gender=="male") %>%
+mal <- nhanesSub |>
+  filter(Gender=="male") |>
   sample_n(size=5)
 
 samp3 <- rbind(fem,mal)
 
-HeightSumExp3 <- samp3 %>%
-  group_by(Gender) %>%
+HeightSumExp3 <- samp3 |>
+  group_by(Gender) |>
   summarize_at("Height",
                list(mean=mean,
                     sd=sd)
               )
 HeightSumExp3
 
-samp3 %>%
+samp3 |>
   ggplot(aes(x = Gender,y = Height)) +
   geom_boxplot(outlier.shape = NA) +
   geom_point(position = "jitter") +
@@ -806,10 +822,10 @@ nSim <- 10000
 nSamp <- 5
 
 # We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
-fem <- nhanesSub %>%
+fem <- nhanesSub |>
   filter(Gender == "female")
 
-mal <- nhanesSub %>%
+mal <- nhanesSub |>
   filter(Gender == "male")
 
 # Simulatie studie
@@ -825,7 +841,7 @@ for (i in 1:nSim)
 res <- data.frame(
   verschil=colMeans(femSamps) - colMeans(malSamps))
 
-res %>%
+res |>
   ggplot(aes(y=verschil)) +
   geom_boxplot() +
   ylab("Gemiddeld Verschil (cm)") +
@@ -842,10 +858,10 @@ nSim <- 10000
 nSamp <- 25
 
 # We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen
-fem <- nhanesSub %>%
+fem <- nhanesSub |>
   filter(Gender == "female")
 
-mal <- nhanesSub %>%
+mal <- nhanesSub |>
   filter(Gender == "male")
 
 # Simulatie studie
@@ -864,7 +880,7 @@ res2 <- data.frame(
 res2$ng <- 25
 res$ng <- 5
 
-rbind(res,res2) %>%
+rbind(res,res2) |>
   ggplot(aes(y=verschil)) +
   geom_boxplot() +
   ylab("Gemiddeld Verschil (cm)") +
@@ -918,7 +934,7 @@ nfip <- tibble(
   vaccin=c("yes","no","no"),
   total=c(221998,725173,123605),
   polio=c(54,391,56)
-  ) %>%
+  ) |>
   mutate(noPolio = total - polio)
 knitr::kable(nfip)
 ```
@@ -928,7 +944,7 @@ Vergelijk de polio incidentie?
 ***
 
 ```{r}
-nfip <- nfip %>%
+nfip <- nfip |>
   mutate(incidencePM = round(nfip$polio/nfip$total*1e6,0))
 knitr::kable(nfip)
 ```
@@ -982,7 +998,7 @@ salk <- data.frame(
   group=c("cases","control","noConcent"),
   treatment=c("vaccine","placebo","none"),
   total=c(200745,201229, 338778),polio=c(57,142,157)
-  ) %>%
+  ) |>
   mutate(
     noPolio = total-polio,
     incidencePM = round(polio/total*1e6,0)

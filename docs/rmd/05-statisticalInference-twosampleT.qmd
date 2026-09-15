@@ -52,11 +52,11 @@ ap
 We plotten de relatieve abundanties in functie van de behandelde groep.
 
 ```{r}
-ap %>%  
+ap |>  
   ggplot(aes(x=trt,y=rel)) +
   geom_boxplot(outlier.shape=NA) + geom_point(position="jitter")
 
-ap %>% ggplot(aes(sample=rel)) +
+ap |> ggplot(aes(sample=rel)) +
   geom_qq() +
   geom_qq_line() +
   facet_wrap(~trt)

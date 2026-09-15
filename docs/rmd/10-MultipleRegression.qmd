@@ -57,8 +57,8 @@ prostate$svi <- as.factor(prostate$svi)
 
 ```{r , out.width='100%', fig.asp=.8, fig.align='center',echo=FALSE}
 library(GGally)
-prostate %>%
-  dplyr::select(-pgg45)  %>%
+prostate |>
+  dplyr::select(-pgg45)  |>
   ggpairs()
 ```
 
@@ -145,7 +145,7 @@ summary(lmVWS)
 
 Na terug transformatie
 ```{r}
-lmVWS$coef %>% exp
+lmVWS$coef |> exp()
 ```
 
 ***
@@ -719,7 +719,7 @@ Voor de $j$-de parameter in het regressiemodel gedefinieerd wordt als
 
 ```{r out.width='90%', fig.asp=.8, fig.align='center', message=FALSE,echo=FALSE}
 bodyfat <- read_delim("https://raw.githubusercontent.com/statomics/sbc/master/data/bodyfat.txt",delim=" ")
-bodyfat %>% ggpairs()
+bodyfat |> ggpairs()
 ```
 
 ***
@@ -877,7 +877,7 @@ We fitten een model op basis van de gemiddelde systolische bloeddruk (`BPSysAve`
 
 ```{r}
 library(NHANES)
-bpData <- NHANES %>%
+bpData <- NHANES |>
 filter(
   Race1 =="White" &
     Age >= 18 &
@@ -901,7 +901,7 @@ plot(mBp1)
 We fitten een model op basis van de log2 getransformeerde gemiddelde systolische bloeddruk (`BPSysAve`) in functie van de leeftijd, geslacht en een interactie tussen leeftijd en geslacht.
 
 ```{r}
-mBp2 <- lm(BPSysAve %>% log2 ~ Age*Gender, bpData)
+mBp2 <- lm(BPSysAve |> log2() ~ Age*Gender, bpData)
 par(mfrow = c(2,2))
 plot(mBp2)
 ```
@@ -919,7 +919,7 @@ plot(mBp2)
 4. De inferentie blijft asymptotisch geldig.
 
 ```{r}
-mSd <- lm(mBp1$res %>% abs ~ mBp2$fitted)
+mSd <- lm(mBp1$res |> abs() ~ mBp2$fitted)
 ```
 
 We schatten het model nu opnieuw:
@@ -931,7 +931,7 @@ mBp3 <- lm(BPSysAve ~ Age*Gender, bpData, w = 1/mSd$fitted^2)
 De residuen vertonen nog steeds heteroscedasticiteit.
 
 ```{r}
-data.frame(residuals = mBp3$residuals, fit = mBp3$fitted) %>%
+data.frame(residuals = mBp3$residuals, fit = mBp3$fitted) |>
   ggplot(aes(fit,residuals)) +
   geom_point()
 ```
@@ -947,7 +947,7 @@ met $w_i = 1/\hat \sigma^2_i$.
 De gewogen regressie zal dus correct rekening houden met heteroscedasticiteit.
 
 ```{r}
-data.frame(scaled_residuals = mBp3$residuals/mSd$fitted, fit = mBp3$fitted) %>%
+data.frame(scaled_residuals = mBp3$residuals/mSd$fitted, fit = mBp3$fitted) |>
   ggplot(aes(fit,scaled_residuals)) +
   geom_point()
 ```
@@ -1007,9 +1007,9 @@ bpPosthoc <- glht(mBp3, linfct=c(
   "Age + Age:Gendermale = 0",
   "Age:Gendermale = 0")
   )
-bpPosthoc %>% summary
+bpPosthoc |> summary()
 
-bpPosthocBI <- bpPosthoc %>% confint
+bpPosthocBI <- bpPosthoc |> confint()
 bpPosthocBI
 ```
 

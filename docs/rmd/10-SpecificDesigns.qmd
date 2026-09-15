@@ -42,7 +42,7 @@ library(faraway)
 data(rats)
 
 library(GGally)
-rats %>%
+rats |>
   ggpairs()
 ```
 

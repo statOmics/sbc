@@ -57,7 +57,7 @@ De expressie van het S100A8 gen wordt weergegeven in Figuur \@ref(fig:s100a8Boxp
 
 
 ```{r s100a8Boxplot,fig.cap='Expressie van het S100A8 gen.', out.width='100%', fig.asp=.8, fig.align='center'}
-brca %>%
+brca |>
   ggplot(aes(x="", y=S100A8)) +
   geom_boxplot() +
   xlab("") +
@@ -68,10 +68,10 @@ Om meerdere variabelen in de borstkanker dataset te bestuderen, kunnen we gebrui
 
 ```{r brcaGenAl,fig.cap='Scatterplot matrix voor de observaties in de borstkanker dataset na verwijdering van outliers in de S100A8 expressie (merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset).', out.width='100%', fig.asp=.8, fig.align='center'}
 library(GGally)
-brcaSubset <- brca %>%
+brcaSubset <- brca |>
   filter(S100A8<2000)
 #progress = FALSE zo dat ggpairs niet de vooruitgang print van het plotten
-brcaSubset[,-(1:4)] %>% ggpairs(progress = FALSE)
+brcaSubset[,-(1:4)] |> ggpairs(progress = FALSE)
 ```
 
 In de scatterplot matrix zien we bijvoorbeeld dat er een positieve associatie lijkt te zijn tussen de leeftijd (age) en de lymfeknoop status (node; geeft aan of de lymfeknopen al dan niet aangetast zijn en chirurgisch werden verwijderd, node 0: niet aangetast, 1: aangetast). Daarnaast observeren we ook een indicatie voor een negatieve associatie (dalende trend) tussen de ESR1 en S100A8 gen expressie.
@@ -86,7 +86,7 @@ We zien dat de genexpressie van S100A8 gemiddeld gezien daalt voor patiënten me
 4. voeg een "smooth line" toe `geom_smooth()`
 
 ```{r brcaSmooth,fig.cap='Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met smoother die het verband tussen beide genen samenvat (na verwijdering van outliers in de S100A8 expressie, merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset).', out.width='100%', fig.asp=.8, fig.align='center'}
-brcaSubset %>%
+brcaSubset |>
   ggplot(aes(x=ESR1, y=S100A8)) +
   geom_point() +
   geom_smooth()
@@ -144,7 +144,7 @@ Dat wordt geïllustreerd in Figuur \@ref(fig:brcaLin1).
 5. voeg een rechte toe `geom_smooth()` met `method = "lm"` (linear model). (We zetten `se = FALSE` om geen puntgewijze betrouwbaarheidsintervallen weer te geven)
 
 ```{r brcaLin1,fig.cap='Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met lineair model dat het verband tussen beide genen samenvat (na verwijdering van outliers in de S100A8 expressie, merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset zoals we verder in dit hoofdstuk zullen zien).', out.width='100%', fig.asp=.8, fig.align='center'}
-brcaSubset %>%
+brcaSubset |>
   ggplot(aes(x = ESR1, y = S100A8)) +
   geom_point() +
   geom_smooth(se = FALSE, col = "grey") +
@@ -222,7 +222,7 @@ lm_df <- data.frame(
   fitted = lm1$fitted.values,
   ESR1 = brcaSubset$ESR1)
 
-brcaSubset %>%
+brcaSubset |>
   ggplot(aes(x= ESR1, y = S100A8)) +
   geom_point() +
   geom_point(aes(x=ESR1, y =lm1$fitted), pch = 2, size = 3, color = "red") +
@@ -506,7 +506,7 @@ Wanneer men gen-expressie op log-schaal modelleert, modellert men dus in feite p
 In deze sectie zullen we beide genexpressies $\log_2$ transformeren en een log-lineaire regressie uitvoeren. Zoals we zullen zien vormen de outliers in de S100A8 expressie na log-transformatie ook geen problemen meer.
 
 ```{r brcaLogLin,fig.cap='Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met smoother en lineair model die het verband tussen beide genen samenvatten (outliers worden niet langer verwijderd uit de dataset).', out.width='100%', fig.asp=.8, fig.align='center'}
-brca <- brca %>%
+brca <- brca |>
   mutate(
     log2S100A8 = log2(S100A8),
     log2ESR1 = log2(ESR1)
@@ -514,7 +514,7 @@ brca <- brca %>%
 
 lm2 <- lm(log2S100A8 ~ log2ESR1, brca)
 
-brca %>%
+brca |>
   ggplot(aes(x = log2ESR1, y = log2S100A8)) +
   geom_point() +
   geom_smooth(se = FALSE, col = "grey") +
@@ -668,7 +668,7 @@ head(g)
 De gemiddelde uitkomst en hun 95% puntgewijze betrouwbaarheidsintervallen kunnen eveneens grafisch worden weergegeven (Figuur \@ref(fig:brcaLogLinPred1))
 
 ```{r brcaLogLinPred1,fig.cap='Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met model schattingen en 95$\\%$ betrouwbaarheidsintervallen.', out.width='100%', fig.asp=.8, fig.align='center'}
-brca %>%
+brca |>
   ggplot(aes(x = log2ESR1, y = log2S100A8)) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -685,7 +685,7 @@ In Figuur \@ref(fig:brcaLogLinPred2) (links) is het duidelijk dat we met het mod
 
 newdata <- data.frame(cbind(grid= 2^grid, 2^g))
 
-p1 <- brca %>% ggplot(aes(x= ESR1, y = S100A8)) +
+p1 <- brca |> ggplot(aes(x= ESR1, y = S100A8)) +
   geom_point() +
   geom_line(aes(x = grid, y = fit), newdata) +
   geom_line(aes(x = grid, y = lwr), newdata, color="red") +
@@ -693,7 +693,7 @@ p1 <- brca %>% ggplot(aes(x= ESR1, y = S100A8)) +
   xlab("ESR1") +
   ylab("S100A8")
 
-p2 <- brca %>% ggplot(aes(x= ESR1, y = S100A8)) +
+p2 <- brca |> ggplot(aes(x= ESR1, y = S100A8)) +
   geom_point() +
   geom_line(aes(x = grid, y = fit), newdata) +
   geom_line(aes(x = grid, y = lwr), newdata, color="red") +
@@ -772,7 +772,7 @@ Dat is niet zo voor de betrouwbaarheidsintervallen, die immers geen informatie g
 
 ```{r brcaLogLinPred3,fig.cap='Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met model voorspellingen en 95$\\%$ betrouwbaarheidsintervallen en 95$\\%$ predictie-intervallen. Rode lijn: predictie interval, grijze band: betrouwbaarheidsinterval, zwarte lijn: lineair model', out.width='100%', fig.asp=.8, fig.align='center'}
 preddata <- data.frame(cbind(grid = grid,p))
-brca %>% ggplot(aes(x=log2ESR1,y=log2S100A8)) +
+brca |> ggplot(aes(x=log2ESR1,y=log2S100A8)) +
   geom_point() +
   geom_smooth(method="lm", color = "black") +
   geom_line(
@@ -804,27 +804,27 @@ Het PI zal eveneens de onzekerheid meenemen op de parameterschattingen (gemiddel
 
 ```{r}
 library(NHANES)
-fem <- NHANES %>%
+fem <- NHANES |>
   filter(Gender=="female"&!is.na(DirectChol))
 
 2^(
-  fem %>%
-  pull(DirectChol) %>%
-  log2 %>%
-  mean +
+  fem |>
+  pull(DirectChol) |>
+  log2() |>
+  mean() +
     c(-1,1) *
     qnorm(0.975) *
-    (fem %>%
-      pull(DirectChol) %>%
-      log2 %>%
-      sd)
+    (fem |>
+      pull(DirectChol) |>
+      log2() |>
+      sd())
   )
 ```
 
 - Predictie interval
 
 ```{r}
-lmChol <- lm(DirectChol %>% log2 ~ 1, data=fem)
+lmChol <- lm(DirectChol |> log2() ~ 1, data=fem)
 predInt <- predict(
   lmChol,
   interval="prediction",
@@ -841,21 +841,21 @@ We zullen hetzelfde doen voor een kleine steekproef van 10 patiënten.
 
 ```{r}
 set.seed(1)
-fem10 <- NHANES %>%
-  filter(Gender=="female"&!is.na(DirectChol)) %>%
+fem10 <- NHANES |>
+  filter(Gender=="female"&!is.na(DirectChol)) |>
   sample_n(size=10)
 
 2^(
-  fem10 %>%
-    pull(DirectChol) %>%
-    log2 %>%
-    mean +
+  fem10 |>
+    pull(DirectChol) |>
+    log2() |>
+    mean() +
       c(-1,1) *
       qnorm(0.975) *
-      (fem10 %>%
-        pull(DirectChol) %>%
-        log2 %>%
-        sd)
+      (fem10 |>
+        pull(DirectChol) |>
+        log2() |>
+        sd())
   )
 ```
 
@@ -864,7 +864,7 @@ Het referentie-interval is veel smaller dan in de grote steekproef.
 - Predictie interval
 
 ```{r}
-lmChol10 <- lm(DirectChol %>% log2 ~ 1, data = fem10)
+lmChol10 <- lm(DirectChol |> log2() ~ 1, data = fem10)
 predInt10 <- predict(
   lmChol10,
   interval = "prediction",
@@ -906,7 +906,7 @@ Een grafische interpretatie van SSTot wordt weergegeven in Figuur \@ref(fig:brca
 
 
 ```{r brcaLogSSTot,fig.cap='Interpretatie van de totale kwadratensom (SSTot): de som van de kwadratische afwijkingen rond het steekproefgemiddelde.', out.width='100%', fig.asp=.8, fig.align='center'}
-brca %>%
+brca |>
   ggplot(aes(y = log2S100A8, x = log2ESR1)) +
   geom_point(color = "blue") +
   geom_hline(aes(yintercept = mean(log2S100A8))) +
@@ -931,7 +931,7 @@ Een grafische interpretatie van SSR wordt weergegeven in Figuur \@ref(fig:brcaLo
 
 ```{r brcaLogSSR,fig.cap='Interpretatie van de kwadratensom van de regressie (SSR): de som van de kwadratische afwijkingen tussen de geschatte regressierechte en het steekproefgemiddelde van de uitkomsten.', out.width='100%', fig.asp=.8, fig.align='center'}
 lm2_df <- data.frame(log2S100A8 = brca$log2S100A8, fitted = lm2$fitted.values, log2ESR1 = brca$log2ESR1)
-brca %>%
+brca |>
   ggplot(aes(x= log2ESR1, y = log2S100A8)) +
   geom_point() +
   geom_point(aes(x=log2ESR1, y =lm2$fitted), pch = 2, size = 3, color = "red") +
@@ -952,8 +952,9 @@ Van SSE weten we reeds dat het een maat is voor de afwijking tussen de observati
 Hoe kleiner SSE, hoe beter de fit (schatting) van de regressierechte voor predictiedoeleinden. We hebben deze immers geminimaliseerd om tot de kleinste kwadratenschatters te komen.
 
 Een interpretatie van SSE voor het log-log model wordt weergegeven in Figuur \@ref(fig:brcaLogSSE).
+
 ```{r brcaLogSSE,fig.cap='Interpretatie van de kwadratensom van de error (SSE): de som van de kwadratische afwijkingen tussen uitkomsten en de predicties op de geschatte regressierechte.', out.width='100%', fig.asp=.8, fig.align='center'}
-brca %>%
+brca |>
   ggplot(aes(x= log2ESR1, y = log2S100A8)) +
   geom_point() +
   geom_point(aes(x=log2ESR1, y =lm2$fitted), pch = 2, size = 3, color = "red") +
@@ -1153,8 +1154,8 @@ Als we data simuleren die $iid$ normaal verdeeld zijn en deze at random opsplits
 We kunnen dus besluiten dat aan alle aannames is voldaan voor de statistische besluitvorming en dat we de R-output van het statistisch model voor de response age i.f.v de dummy variabele voor de node-status mogen gebruiken om conclusies te formuleren over de associatie tussen leeftijd en node status (zie hoger).
 
 ```{r boxNode,fig.cap='boxplot van de leeftijd vs lymfeknoop status in de borstkanker dataset.', out.width='100%', fig.asp=.8, fig.align='center'}
-brca %>%
-  ggplot(aes(x = node%>%as.factor, y = age)) +
+brca |>
+  ggplot(aes(x = node|>as.factor(), y = age)) +
   geom_boxplot() +
   xlab("node")
 ```
@@ -1173,7 +1174,7 @@ sim_df <- data.frame(
   iid = rnorm(9 * nrow(brca), sd = sigma(lm3)),
   sim = rep(1:9, each = 32)
   )
-sim_df %>%
+sim_df |>
   ggplot(aes(x = node, y=iid)) +
   geom_boxplot() +
   facet_wrap(.~sim) +

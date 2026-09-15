@@ -116,23 +116,20 @@ summary(captopril)
 
 ```{r}
 captoprilTidy <-
-  captopril %>%
+  captopril |>
   gather(type,bp,-id)
 
-captoSum <- captoprilTidy %>%
-  group_by(type) %>%
+captoSum <- captoprilTidy |>
+  group_by(type) |>
   summarize(
     mean = mean(bp,na.rm=TRUE),
     sd = sd(bp,na.rm=TRUE),
-    n = bp %>%
-      is.na %>%
-      `!` %>%
-      sum) %>%
+    n = sum(!is.na(bp))) |>
   mutate(se = sd/sqrt(n))
 
 captoSum
 
-captoSum %>%
+captoSum |>
   ggplot(aes(x=type,y=mean)) +
   geom_bar(stat="identity") +
   geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd),width=.2) +
@@ -143,7 +140,7 @@ captoSum %>%
 - Deze figuur is niet informatief! Het toont de ruwe data niet enkel gemiddelden en de standaard deviatie voor een bloeddruk karakteristiek.
 
 ```{r}
-captoprilTidy %>%
+captoprilTidy |>
   ggplot(aes(x=type,y=bp)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter") +
@@ -153,7 +150,7 @@ captoprilTidy %>%
 We zien dat veel van de ruimte die werd ingenomen door de barplot geen gegevens bevat!
 
 ```{r}
-captoprilTidy %>%
+captoprilTidy |>
   ggplot(aes(x=type,y=bp)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")
@@ -166,9 +163,9 @@ captoprilTidy %>%
 - We zullen een plot maken waar we de systolische bloeddruk filteren
 
 ```{r}
-captoprilTidy %>%
-  filter(type%in%c("SBPa","SBPb")) %>%
-  mutate(type=factor(type,levels=c("SBPb","SBPa"))) %>%
+captoprilTidy |>
+  filter(type%in%c("SBPa","SBPb")) |>
+  mutate(type=factor(type,levels=c("SBPb","SBPa"))) |>
   ggplot(aes(x=type,y=bp)) +
   geom_line(aes(group = id)) +
   geom_point()
@@ -178,10 +175,10 @@ captoprilTidy %>%
 
 ```{r}
 captopril <-
-  captopril %>%
+  captopril |>
   mutate(deltaSBP = SBPa - SBPb)
 
-captopril %>%
+captopril |>
   ggplot(aes(x="Systolic blood pressure",y=deltaSBP)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")+
@@ -190,14 +187,11 @@ captopril %>%
 ```
 
 ```{r}
-captopril %>%
+captopril |>
   summarize(
     mean = mean(deltaSBP,na.rm=TRUE),
     sd = sd(deltaSBP,na.rm=TRUE),
-    n = deltaSBP %>%
-      is.na %>%
-      `!` %>%
-      sum) %>%
+    n = sum(!is.na(deltaSBP))) |>
   mutate(se = sd/sqrt(n))
 ```
 
@@ -207,7 +201,7 @@ captopril %>%
 - Hoe modelleren we $X=\Delta_\text{na-voor}$ en schatten we het effect van Captopril?
 
 ```{r}
-captopril %>%
+captopril |>
   ggplot(aes(sample=deltaSBP)) +
   stat_qq() +
   stat_qq_line()
@@ -313,8 +307,8 @@ E(\bar X) &=& E \left(\frac{X_1+ X_2+ ... + X_n}{n}\right) \\
 ```{r}
 library(NHANES)
 
-fem <- NHANES %>%
-  filter(Gender=="female" & !is.na(DirectChol)) %>%
+fem <- NHANES |>
+  filter(Gender=="female" & !is.na(DirectChol)) |>
   select("DirectChol")
 
 n <- 15 # number of subjects per sample
@@ -326,10 +320,10 @@ for (j in 1:nSim)
   set.seed(2105)
   femSamp[,j] <- sample(fem$DirectChol,15)
   if (j<4) {
-    p <- femSamp %>%
-      log2 %>%
-      data.frame %>%
-      gather("sample","log2cholesterol") %>%
+    p <- femSamp |>
+      log2() |>
+      data.frame() |>
+      gather("sample","log2cholesterol") |>
       ggplot(aes(x=sample,y=log2cholesterol)) +
       geom_boxplot() +
       stat_summary(
@@ -339,20 +333,20 @@ for (j in 1:nSim)
         size=3,
         color="red",
         fill="red") +
-      geom_hline(yintercept = mean(fem$DirectChol %>% log2)) +
+      geom_hline(yintercept = mean(fem$DirectChol |> log2())) +
       ylab("cholesterol (log2)")
     print(p)
   }
 }
 
-femSamp %>%
-  log2 %>%
-  data.frame %>%
-  gather("sample","log2cholesterol") %>%
+femSamp |>
+  log2() |>
+  data.frame() |>
+  gather("sample","log2cholesterol") |>
   ggplot(aes(x=sample,y=log2cholesterol)) +
   geom_boxplot() +
   stat_summary(fun.y=mean, geom="point", shape=19, size=3, color="red", fill="red") +
-  geom_hline(yintercept = mean(fem$DirectChol %>% log2)) +
+  geom_hline(yintercept = mean(fem$DirectChol |> log2())) +
   ylab("cholesterol (log2)")
 ```
 
@@ -479,40 +473,38 @@ femSamp100 <- sapply(
   x=fem$DirectChol)
 
 res<-rbind(
-  femSamp10 %>%
-    log2%>%
-    as.data.frame %>%
-    gather(sample,log2Chol) %>%
-    group_by(sample)%>%
+  femSamp10 |>
+    log2()|>
+    as.data.frame() |>
+    gather(sample,log2Chol) |>
+    group_by(sample)|>
     summarize_at("log2Chol",
                list(median=~median(.,na.rm=TRUE),
                     mean=~mean(.,na.rm=TRUE),
                     sd=~sd(.,na.rm=TRUE),
-                    n=function(x) x%>%is.na%>%`!`%>%sum)) %>%
+                    n=function(x) sum(!is.na(x)))) |>
     mutate(se=sd/sqrt(n)) ,
-
-  femSamp50 %>%
-    log2 %>%  
-    as.data.frame %>%
-    gather(sample,log2Chol) %>%
-    group_by(sample)%>%
+  femSamp50 |>
+    log2() |>  
+    as.data.frame() |>
+    gather(sample,log2Chol) |>
+    group_by(sample)|>
     summarize_at("log2Chol",
                list(median=~median(.,na.rm=TRUE),
                     mean=~mean(.,na.rm=TRUE),
                     sd=~sd(.,na.rm=TRUE),
-                    n=function(x) x%>%is.na%>%`!`%>%sum)) %>%
+                    n=function(x) sum(!is.na(x)))) |>
     mutate(se=sd/sqrt(n)),
-
-  femSamp100 %>%
-    log2 %>%
-    as.data.frame %>%
-    gather(sample,log2Chol) %>%
-    group_by(sample)%>%
+  femSamp100 |>
+    log2() |>
+    as.data.frame() |>
+    gather(sample,log2Chol) |>
+    group_by(sample)|>
     summarize_at("log2Chol",
                list(median=~median(.,na.rm=TRUE),
                     mean=~mean(.,na.rm=TRUE),
                     sd=~sd(.,na.rm=TRUE),
-                    n=function(x) x%>%is.na%>%`!`%>%sum)) %>%
+                    n=function(x) sum(!is.na(x)))) |>
     mutate(se=sd/sqrt(n))
   )
 ```
@@ -523,8 +515,8 @@ We illustreren de impact van steekproefgrootte op de distributie van de gemiddel
 
 
 ```{r}
-res %>%
-  ggplot(aes(x= n %>% as.factor,y = mean)) +
+res |>
+  ggplot(aes(x= n |> as.factor(),y = mean)) +
   geom_boxplot() +
   ylab("Direct cholesterol (log2)") +
   xlab("sample size")
@@ -539,8 +531,8 @@ res %>%
 We illustreren nu de impact van de steekproefgrootte op de verdeling van de standaarddeviatie van de verschillende steekproeven
 
 ```{r}
-res %>%
-  ggplot(aes(x=n%>%as.factor,y=sd)) +
+res |>
+  ggplot(aes(x=n|>as.factor(),y=sd)) +
   geom_boxplot() +
   ylab("standard deviation") +
   xlab("sample size")
@@ -558,8 +550,8 @@ Het is gecentreerd rond dezelfde waarde: de standaarddeviatie in de populatie. H
 Ten slotte illustreren we de impact van de steekproefgrootte op de verdeling van de standaarddeviatie van het gemiddelde van de verschillende steekproeven, de standaard error.
 
 ```{r}
-res %>%
-ggplot(aes(x=n%>%as.factor,y=se)) +
+res |>
+ggplot(aes(x=n|>as.factor(),y=se)) +
 geom_boxplot() +
 ylab("standard error") +
 xlab("sample size")
@@ -580,30 +572,30 @@ xlab("sample size")
 - We illustreren dit voor herhaalde steekproeven met steekproefgrootte 10
 
 ```{r}
-res %>%
-  filter(n == 10) %>%
-  select(mean,median) %>%
-  gather(type,estimate) %>%
+res |>
+  filter(n == 10) |>
+  select(mean,median) |>
+  gather(type,estimate) |>
   ggplot(aes(x = type,y = estimate)) +
   geom_boxplot() +
-  geom_hline(yintercept = fem$DirectChol %>%
-    log2 %>%
-    mean) +
+  geom_hline(yintercept = fem$DirectChol |>
+    log2() |>
+    mean()) +
   ggtitle("10 personen")
 ```
 
 Vervolgens vergelijken we de verdeling van het gemiddelde en de mediaan in herhaalde steekproeven van steekproefgrootte 50.
 
 ```{r}
-res %>%
-  filter(n == 50) %>%
-  select(mean, median) %>%
-  gather(type, estimate) %>%
+res |>
+  filter(n == 50) |>
+  select(mean, median) |>
+  gather(type, estimate) |>
   ggplot(aes(x = type,y = estimate)) +
   geom_boxplot()+
-  geom_hline(yintercept = fem$DirectChol %>%
-    log2 %>%
-    mean) +
+  geom_hline(yintercept = fem$DirectChol |>
+    log2() |>
+    mean()) +
   ggtitle("50 personen")
 ```
 
@@ -625,22 +617,22 @@ We illustreren dit nogmaals met een simulatie gebruik makende van de NHANES-stud
 De log2-cholesterolwaarden zijn normaal verdeeld.
 
 ```{r}
- fem %>%
-  ggplot(aes(x = DirectChol %>% log2))+
+ fem |>
+  ggplot(aes(x = DirectChol |> log2()))+
   geom_histogram(aes(y = ..density.., fill = ..count..)) +
   xlab("Direct cholesterol (log2)") +
   stat_function(
     fun = dnorm,
     color = "red",
     args = list(
-      mean=mean(fem$DirectChol%>%log2),
-      sd = sd(fem$DirectChol%>%log2)
+      mean=mean(fem$DirectChol|>log2()),
+      sd = sd(fem$DirectChol|>log2())
       )
     ) +
   ggtitle("Alle vrouwen in NHANES studie")
 
-fem %>%
-  ggplot(aes(sample = DirectChol %>% log2)) +
+fem |>
+  ggplot(aes(sample = DirectChol |> log2())) +
   stat_qq() +
   stat_qq_line() +
   ggtitle("Alle vrouwen in NHANES study")
@@ -655,46 +647,46 @@ We onderzoeken de resultaten voor de steekproefgrootte van 10.
 We bekijken eerst de plot voor de eerste steekproef.
 
 ```{r}
-femSamp10[,1] %>%
-  log2 %>%
-  as.data.frame %>%
-  ggplot(aes(x=.))+
+log2Chol <- femSamp10[,1] |>
+  log2()
+data.frame(log2Chol) |>
+  ggplot(aes(x=log2Chol))+
     geom_histogram(aes(y=..density.., fill=..count..),bins=10) +
     xlab("Direct cholesterol (log2)") +
     stat_function(
       fun=dnorm,
       color="red",
       args=list(
-        mean=femSamp10[,1]%>%log2%>%mean, sd=femSamp10[,1]%>%log2%>%sd)
+        mean=femSamp10[,1]|>log2()|>mean(), sd=femSamp10[,1]|>log2()|>sd())
       ) +
     ggtitle("10 random females") +
-    xlim(fem$DirectChol %>% log2 %>% range)
+    xlim(fem$DirectChol |> log2() |> range())
 ```
 
 Vervolgens kijken we naar de verdeling van het steekproefgemiddelde over 1000 steekproeven van steekproefgrootte 10.
 
 ```{r}
-femSamp10 %>%
-  log2 %>%
-  colMeans %>%
-  as.data.frame %>%
-  ggplot(aes(x=.)) +
+meanLog2Chol <- femSamp10 |>
+  log2() |>
+  colMeans()
+data.frame(meanLog2Chol) |>
+  ggplot(aes(x=meanLog2Chol)) +
   geom_histogram(aes(y=..density.., fill=..count..),bins=15) +
   xlab("Mean cholesterol (log2)") +
   stat_function(
     fun=dnorm,
     color="red",
     args=list(
-      mean=femSamp10%>%log2%>% colMeans %>% mean,
-      sd=femSamp10%>%log2%>% colMeans %>% sd)
+      mean=femSamp10|>log2()|> colMeans() |> mean(),
+      sd=femSamp10|>log2()|> colMeans() |> sd())
     ) +
   ggtitle("Means on 10 females")
 
-femSamp10 %>%
-  log2%>%
-  colMeans %>%
-  as.data.frame %>%  
-  ggplot(aes(sample=.)) +
+meanLog2Chol <- femSamp10 |>
+  log2()|>
+  colMeans()
+data.frame(meanLog2Chol) |>
+  ggplot(aes(sample=meanLog2Chol)) +
   stat_qq() +
   stat_qq_line() +
   ggtitle("Means on 10 females")
@@ -730,7 +722,7 @@ wanneer het aantal observaties groot genoeg is.
 - We kunnen dit evalueren in de NHanes-studie als we de gegevens niet log2 transformeren.
 
 ```{r}
-fem %>%
+fem |>
    ggplot(aes(x=DirectChol))+
    geom_histogram(aes(y=..density.., fill=..count..)) +
    xlab("Direct cholesterol") +
@@ -740,11 +732,10 @@ fem %>%
      args=list(
        mean=mean(fem$DirectChol),
        sd=sd(fem$DirectChol))
-
     ) +
    ggtitle("All females in Nhanes study")
 
- fem %>%
+ fem |>
   ggplot(aes(sample=DirectChol)) +
   stat_qq() +
   stat_qq_line() +
@@ -763,63 +754,63 @@ femSamp5 <- sapply(
   size = 5,
   x = fem$DirectChol)
 
-femSamp5 %>%
-  colMeans %>%
-  as.data.frame %>% ggplot(aes(x=.)) +
+meanChol <- femSamp5 |>
+  colMeans()
+data.frame(meanChol) |> ggplot(aes(x=meanChol)) +
   geom_histogram(aes(y=..density.., fill=..count..),bins=15) +
   xlab("Mean cholesterol") +
   stat_function(
     fun=dnorm,
     color="red",
     args=list(
-      mean=femSamp5%>% colMeans %>% mean,
-      sd=femSamp5%>% colMeans %>% sd)
+      mean=femSamp5|> colMeans() |> mean(),
+      sd=femSamp5|> colMeans() |> sd())
     ) +
   ggtitle("Means on 5 females")
 
-femSamp5 %>%
-  colMeans %>%
-  as.data.frame %>%  
-  ggplot(aes(sample=.)) +
+meanChol <- femSamp5 |>
+  colMeans()
+data.frame(meanChol) |>
+  ggplot(aes(sample=meanChol)) +
   stat_qq() +
   stat_qq_line() +
   ggtitle("Means on 5 females")
 
 
-femSamp10 %>%
-  colMeans %>%
-  as.data.frame %>% ggplot(aes(x=.)) +
+meanChol <- femSamp10 |>
+  colMeans()
+data.frame(meanChol) |> ggplot(aes(x=meanChol)) +
   geom_histogram(aes(y=..density.., fill=..count..),bins=15) +
   xlab("Mean cholesterol") +
   stat_function(
     fun=dnorm,
     color="red",
     args=list(
-      mean=femSamp10%>% colMeans %>% mean,
-      sd=femSamp10%>% colMeans %>% sd)
+      mean=femSamp10|> colMeans() |> mean(),
+      sd=femSamp10|> colMeans() |> sd())
     ) +
 ggtitle("Means on 10 females")
 
-femSamp10 %>%
-  colMeans %>%
-  as.data.frame %>%  
-  ggplot(aes(sample=.)) +
+meanChol <- femSamp10 |>
+  colMeans()
+data.frame(meanChol) |>
+  ggplot(aes(sample=meanChol)) +
   stat_qq() +
   stat_qq_line() +
   ggtitle("Means on 10 females")
 
-femSamp50 %>%
-  colMeans %>%
-  as.data.frame %>%  
-  ggplot(aes(sample=.)) +
+meanChol <- femSamp50 |>
+  colMeans()
+data.frame(meanChol) |>
+  ggplot(aes(sample=meanChol)) +
   stat_qq() +
   stat_qq_line() +
   ggtitle("Means on 50 females")
 
-femSamp100 %>%
-  colMeans %>%
-  as.data.frame %>%  
-  ggplot(aes(sample=.)) +
+meanChol <- femSamp100 |>
+  colMeans()
+data.frame(meanChol) |>
+  ggplot(aes(sample=meanChol)) +
   stat_qq() +
   stat_qq_line() +
   ggtitle("Means on 100 females")
@@ -918,9 +909,9 @@ Over het algemeen is de standaarddeviatie ongekend en moet het geschat worden.
 set.seed(3146)
 samp50 <- sample(fem$DirectChol,50)
 
-ll <- mean(samp50 %>% log2) - 1.96*sd(samp50 %>% log2)/sqrt(50)
-ul <- mean(samp50 %>% log2) + 1.96*sd(samp50 %>% log2)/sqrt(50)
-popMean <- mean(fem$DirectChol%>%log2)
+ll <- mean(samp50 |> log2()) - 1.96*sd(samp50 |> log2())/sqrt(50)
+ul <- mean(samp50 |> log2()) + 1.96*sd(samp50 |> log2())/sqrt(50)
+popMean <- mean(fem$DirectChol|>log2())
 
 c(ll=ll,ul=ul,popMean=popMean)
 ```
@@ -930,15 +921,15 @@ c(ll=ll,ul=ul,popMean=popMean)
 ```{r}
 res$ll <- res$mean-1.96*res$se
 res$ul <- res$mean+1.96*res$se
-mu <- fem$DirectChol%>%
-  log2%>%
-  mean
+mu <- fem$DirectChol|>
+  log2()|>
+  mean()
 
 res$inside<- res$ll <= mu & mu <= res$ul
 res$n <- as.factor(res$n)
-res %>%
-  group_by(n) %>%
-  summarize(coverage=mean(inside)) %>%
+res |>
+  group_by(n) |>
+  summarize(coverage=mean(inside)) |>
   spread(n,coverage)
 ```
 
@@ -947,15 +938,15 @@ res %>%
 - Als we kijken naar de eerste 20 intervallen, bevat `r sum((!res[res$n==10,"inside"])[1:20])`  van de 20 niet het populatiegemiddelde.
 
 ```{r}
-res %>%
-  filter(n==10) %>%
-  slice(1:20) %>%
+res |>
+  filter(n==10) |>
+  slice(1:20) |>
   ggplot(aes(x = sample,y = mean,color = inside)) +
   geom_point() +
   geom_errorbar(aes(ymin = mean-1.96*se,ymax = mean+1.96*se))+
-  geom_hline(yintercept = fem$DirectChol %>% log2 %>% mean) +
+  geom_hline(yintercept = fem$DirectChol |> log2() |> mean()) +
   ggtitle("20 CI for N = 10") +
-  ylim(range(fem$DirectChol %>% log2))
+  ylim(range(fem$DirectChol |> log2()))
 ```
 
 ***
@@ -963,25 +954,25 @@ res %>%
 - Voor grote steekproeven (100) is de omvang prima omdat we de standaarddeviatie met een relatief hoge precisie kunnen schatten.
 
 ```{r}
-res %>%
-  filter(n == 50) %>%
-  slice(1:20) %>%
+res |>
+  filter(n == 50) |>
+  slice(1:20) |>
   ggplot(aes(x = sample,y = mean,color = inside)) +
   geom_point() +
   geom_errorbar(aes(ymin = mean-1.96*se,ymax = mean+1.96*se))+
-  geom_hline(yintercept = fem$DirectChol %>% log2 %>% mean) +
+  geom_hline(yintercept = fem$DirectChol |> log2() |> mean()) +
   ggtitle("20 CI for N = 50") +
-  ylim(range(fem$DirectChol %>% log2))
+  ylim(range(fem$DirectChol |> log2()))
 
-res %>%
-  filter(n == 100) %>%
-  slice(1:20) %>%
+res |>
+  filter(n == 100) |>
+  slice(1:20) |>
   ggplot(aes(x = sample,y = mean,color = inside)) +
   geom_point() +
   geom_errorbar(aes(ymin = mean-1.96*se,ymax = mean+1.96*se))+
-  geom_hline(yintercept = fem$DirectChol %>% log2 %>% mean) +
+  geom_hline(yintercept = fem$DirectChol |> log2() |> mean()) +
   ggtitle("20 CI for N = 100") +
-  ylim(range(fem$DirectChol %>% log2))
+  ylim(range(fem$DirectChol |> log2()))
 ```
 
 - Wat heb je geobserveerd voor de intervalbreedte?
@@ -1034,9 +1025,9 @@ grid <- seq(-5,5,.1)
 densDist <- cbind(grid,dnorm(grid), sapply(c(2,5,10),dt,x=grid))
 colnames(densDist) <- c("x","normal",paste0("t",c(2,5,10)))
 
-densDist %>%
-  as.data.frame %>%
-  gather(dist,dens,-x) %>%
+densDist |>
+  as.data.frame() |>
+  gather(dist,dens,-x) |>
   ggplot(aes(x=x,y=dens,color=dist)) +
   geom_line() +
   xlab("x") +
@@ -1098,37 +1089,37 @@ Merk op dat nul buiten het interval ligt en dat het gehele interval negatief is,
 - We zullen opnieuw steekproeven trekken van de grote NHANES studie en deze keer BI's bestuderen voor log2-cholesterol steekproefwaarden. We voeren eerst herhaalde experimenten uit met steekproefgrootte 10.
 
 ```{r}
-res$n <- as.character(res$n) %>%
+res$n <- as.character(res$n) |>
   as.double(res$n)
 
 res$ll <- res$mean-qt(0.975,df=res$n-1)*res$se
 res$ul <- res$mean+qt(0.975,df=res$n-1)*res$se
 
-mu <- fem$DirectChol%>%log2%>%mean
+mu <- fem$DirectChol|>log2()|>mean()
 
 res$inside <- res$ll<=mu & mu<=res$ul
 res$n <- as.factor(res$n)
 
-res %>%
-  group_by(n) %>%
-  summarize(coverage=mean(inside)) %>%
+res |>
+  group_by(n) |>
+  summarize(coverage=mean(inside)) |>
   spread(n,coverage)
 ```
 
 We zien dat de omvang van de intervallen nu worden gecontroleerd op hun nominale betrouwbaarheidsniveau van 95%.
 
 ```{r}
-res %>%
-  filter(n==10) %>%
-  slice(1:20) %>%
+res |>
+  filter(n==10) |>
+  slice(1:20) |>
   ggplot(aes(x=sample,y=mean,color=inside)) +
   geom_point() +
   geom_errorbar(
     aes(ymin=mean-qt(0.975,df=9)*se,
     ymax=mean+qt(0.975,df=9)*se))+
-  geom_hline(yintercept = fem$DirectChol %>% log2 %>% mean) +
+  geom_hline(yintercept = fem$DirectChol |> log2() |> mean()) +
   ggtitle("20 CI for N=10") +
-  ylim(range(fem$DirectChol %>% log2))
+  ylim(range(fem$DirectChol |> log2()))
 ```
 
 ***
@@ -1186,9 +1177,9 @@ Onderzoekers willen beoordelen of het medicijn captopril de bloeddruk verlaagt b
 -  Is het schijnbaar gunstige effect systematisch of willekeurig?
 
 ```{r}
-captoprilTidy %>%
-  filter(type%in%c("SBPa","SBPb")) %>%
-  mutate(type=factor(type,levels=c("SBPb","SBPa"))) %>%
+captoprilTidy |>
+  filter(type%in%c("SBPa","SBPb")) |>
+  mutate(type=factor(type,levels=c("SBPb","SBPa"))) |>
   ggplot(aes(x=type,y=bp)) +
   geom_line(aes(group = id)) +
   geom_point()
@@ -1196,7 +1187,7 @@ captoprilTidy %>%
 
 ```{r}
 captopril$deltaSBP <- captopril$SBPa-captopril$SBPb
-captopril%>%
+captopril|>
   ggplot(aes(x="Systolic blood pressure",y=deltaSBP)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")+
@@ -1258,10 +1249,10 @@ perm <- sample(c(FALSE, TRUE), 15, replace = TRUE)
 captoprilSamp$SBPa[perm] <- captopril$SBPb[perm]
 captoprilSamp$SBPb[perm] <- captopril$SBPa[perm]
 captoprilSamp$deltaSBP <- captoprilSamp$SBPa-captoprilSamp$SBPb
-captoprilSamp %>%
-  gather(type, bp, -id) %>%
-  filter(type %in% c("SBPa","SBPb")) %>%
-  mutate(type = factor(type, levels = c("SBPb", "SBPa")))%>%
+captoprilSamp |>
+  gather(type, bp, -id) |>
+  filter(type %in% c("SBPa","SBPb")) |>
+  mutate(type = factor(type, levels = c("SBPb", "SBPa")))|>
   ggplot(aes(x = type,y = bp)) +
   geom_line(aes(group = id)) +
   geom_point()
@@ -1274,7 +1265,7 @@ captoprilSamp %>%
 data.frame(
   deltaSBP = c(captopril$deltaSBP,captoprilSamp$deltaSBP),
   shuffled=rep(c(FALSE,TRUE),each=15)
-  ) %>%
+  ) |>
   ggplot(aes(x = shuffled, y = deltaSBP)) +
   geom_boxplot(outlier.shape = NA) +
   geom_point(position = "jitter")+
@@ -1297,10 +1288,10 @@ perm <- sample(c(FALSE,TRUE), 15, replace = TRUE)
 captoprilSamp$SBPa[perm] <- captopril$SBPb[perm]
 captoprilSamp$SBPb[perm] <- captopril$SBPa[perm]
 captoprilSamp$deltaSBP <- captoprilSamp$SBPa-captoprilSamp$SBPb
-captoprilSamp %>%
-  gather(type, bp, -id) %>%
-  filter(type %in% c("SBPa","SBPb")) %>%
-  mutate(type = factor(type, levels = c("SBPb", "SBPa")))%>%
+captoprilSamp |>
+  gather(type, bp, -id) |>
+  filter(type %in% c("SBPa","SBPb")) |>
+  mutate(type = factor(type, levels = c("SBPb", "SBPa")))|>
   ggplot(aes(x = type,y = bp)) +
   geom_line(aes(group = id)) +
   geom_point()
@@ -1308,7 +1299,7 @@ captoprilSamp %>%
 data.frame(
   deltaSBP = c(captopril$deltaSBP,captoprilSamp$deltaSBP),
   shuffled=rep(c(FALSE,TRUE),each=15)
-  ) %>%
+  ) |>
   ggplot(aes(x = shuffled, y = deltaSBP)) +
   geom_boxplot(outlier.shape = NA) +
   geom_point(position = "jitter")+
@@ -1332,8 +1323,8 @@ permH <- expand.grid(
     15,
     c(-1,1),
     simplify=FALSE)
-  ) %>%
-  t
+  ) |>
+  t()
 
 permH[,1:5]
 ```
@@ -1344,9 +1335,8 @@ permH[,1:5]
 ```{r}
 #calculate the means for the permuted data
 muPerm <- colMeans(permH*captopril$deltaSBP)
-muPerm %>%
-  as.data.frame %>%
-  ggplot(aes(x=.)) +
+data.frame(permMean = muPerm) |>
+  ggplot(aes(x=permMean)) +
   geom_histogram() +
   geom_vline(
     xintercept = mean(captopril$deltaSBP),
@@ -1383,9 +1373,8 @@ deltaPerms <- permH*captopril$deltaSBP
 tPerm <- colMeans(deltaPerms)/(apply(deltaPerms,2,sd)/sqrt(15))
 tOrig <- mean(captopril$deltaSBP)/sd(captopril$deltaSBP)*sqrt(15)
 
-tPermPlot <- tPerm %>%
-  as.data.frame %>%
-  ggplot(aes(x = .)) +
+tPermPlot <- data.frame(permT = tPerm) |>
+  ggplot(aes(x=permT)) +
   geom_histogram(aes(y = ..density.., fill = ..count..)) +
   geom_vline(xintercept = tOrig,col = "blue")
 tPermPlot
@@ -1641,8 +1630,8 @@ Er kan een verkeerde beslissing zijn genomen.
 ```{r,echo=FALSE}
 library("kableExtra")
 DecisionErrors=data.frame(Conclusion=c("Accept H0","Reject H0"),"H0"=c("OK","Type I ($\\alpha$)"),"H1"=c("Type II ($\\beta$)","OK"))
-knitr::kable(DecisionErrors,,align="c")%>%
-  kable_styling( position = "center") %>%
+knitr::kable(DecisionErrors,,align="c")|>
+  kable_styling( position = "center") |>
   add_header_above(c(" " = 1, "Reality" = 2))
 ```
  - Type I error, $\alpha$: de nul hypothese wordt ten onrechte verworpen (vals positief)
@@ -1715,9 +1704,8 @@ pSim <- apply(
 
 mean(pSim<alpha)
 
-pSim %>%
-  as.data.frame %>%
-  ggplot(aes(x=.)) +
+data.frame(pValue = pSim) |>
+  ggplot(aes(x=pValue)) +
   geom_histogram() +
   xlim(0,1)
 ```
@@ -1773,9 +1761,8 @@ pSim <- apply(
   )
 
 mean(pSim<alpha)
-pSim %>%
-  as.data.frame %>%
-  ggplot(aes(x=.)) +
+data.frame(pValue = pSim) |>
+  ggplot(aes(x=pValue)) +
   geom_histogram() +
   xlim(0,1)
 ```
@@ -1812,9 +1799,8 @@ pSim <- apply(
   )
 
 mean(pSim < alpha)
-pSim %>%
-  as.data.frame %>%
-  ggplot(aes(x=.)) +
+data.frame(pValue = pSim) |>
+  ggplot(aes(x=pValue)) +
   geom_histogram() +
   xlim(0,1)
 ```

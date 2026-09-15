@@ -861,13 +861,13 @@ We fitten het model in R.
 - en dat we de functie `relevel` gebruiken om de controles als referentie groep de definiëren: eerste niveau van de factor.
 
 ```{r}
-brca <- brca %>%
+brca <- brca |>
   mutate(
-    cancer = cancer %>%
-      as.factor %>%
+    cancer = cancer |>
+      as.factor() |>
       relevel("control"),
-    variant = variant %>%
-      as.factor %>%
+    variant = variant |>
+      as.factor() |>
       relevel("pro/pro")
   )
 
@@ -991,41 +991,41 @@ summary(beetleModel)
 
 ```{r}
 
-beetlesTab<-table(beetles) %>% data.frame
+beetlesTab<-table(beetles) |> data.frame()
 
 data.frame(
     grid = seq(
       min(beetles$dose),
       max(beetles$dose),.1)
-  ) %>%
+  ) |>
   mutate(piHat = predict(beetleModel,
 	      newdata = data.frame(dose=grid),
 	      type = "response")
-  ) %>%
+  ) |>
   ggplot(aes(grid, piHat))+
   geom_line() +
   xlab("dose") +
   ylab("probability (dead)") +
   geom_text(
-    aes(x = dose %>%
-          as.character %>%
-          as.double,
-        y = status %>%
-          as.character %>%
-          as.double,
+    aes(x = dose |>
+          as.character() |>
+          as.double(),
+        y = status |>
+          as.character() |>
+          as.double(),
         label = Freq),
-    beetlesTab %>%
+    beetlesTab |>
       filter(status==0)
   ) +
   geom_text(
-    aes(x = dose %>%
-          as.character %>%
-          as.double,
-        y = status %>%
-          as.character %>%
-          as.double,
+    aes(x = dose |>
+          as.character() |>
+          as.double(),
+        y = status |>
+          as.character() |>
+          as.double(),
        label=Freq),
-   beetlesTab %>%
+   beetlesTab |>
     filter(status==1)
   )
 ```

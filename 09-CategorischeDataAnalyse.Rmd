@@ -745,6 +745,7 @@ Men kan aantonen dat ze onder de nulhypothese bij benadering een zogenaamde $\ch
 geval ze meer symmetrisch wordt.
 
 Figuur \@ref(fig:chidist) toont haar algemene vorm.
+
 ```{r chidist,fig.cap='Dichtheidsfuncties voor enkele Chi-kwadraat verdelingen', out.width='100%', fig.asp=.8, fig.align='center', echo = FALSE}
 grid <- seq(0,10,.1)
 plot(grid,
@@ -927,13 +928,13 @@ Het model wordt als volgt in R gefit:
 - en dat we de functie `relevel` gebruiken om de controles als referentie groep de definiëren: eerste niveau van de factor.
 
 ```{r}
-brca <- brca %>%
+brca <- brca |>
   mutate(
-    cancer = cancer %>%
-      as.factor %>%
+    cancer = cancer |>
+      as.factor() |>
       relevel("control"),
-    variant = variant %>%
-      as.factor %>%
+    variant = variant |>
+      as.factor() |>
       relevel("pro/pro")
   )
 
@@ -1043,41 +1044,41 @@ Het argument `type="response"` geeft aan dat we de predicties op de probabilitei
 Wanneer we dat niet specifiëren genereert het model predictie op de log odds schaal.
 
 ```{r keversFit,fig.cap='Fit van het logistische regressiemodel voor de kevers data. Het aantal kevers die dood/levend was per dosis is weergegeven met een cijfer.', out.width='100%', fig.asp=.8, fig.align='center'}
-beetlesTab<-table(beetles) %>% data.frame
+beetlesTab<-table(beetles) |> data.frame()
 
 data.frame(
     grid = seq(
       min(beetles$dose),
       max(beetles$dose),.1)
-  ) %>%
+  ) |>
   mutate(piHat = predict(beetleModel,
 	      newdata = data.frame(dose=grid),
 	      type = "response")
-  ) %>%
+  ) |>
   ggplot(aes(grid, piHat))+
   geom_line() +
   xlab("dose") +
   ylab("probability (dead)") +
   geom_text(
-    aes(x = dose %>%
-          as.character %>%
-          as.double,
-        y = status %>%
-          as.character %>%
-          as.double,
+    aes(x = dose |>
+          as.character() |>
+          as.double(),
+        y = status |>
+          as.character() |>
+          as.double(),
         label = Freq),
-    beetlesTab %>%
+    beetlesTab |>
       filter(status==0)
   ) +
   geom_text(
-    aes(x = dose %>%
-          as.character %>%
-          as.double,
-        y = status %>%
-          as.character %>%
-          as.double,
+    aes(x = dose |>
+          as.character() |>
+          as.double(),
+        y = status |>
+          as.character() |>
+          as.double(),
        label=Freq),
-   beetlesTab %>%
+   beetlesTab |>
     filter(status==1)
   )
 ```

@@ -60,15 +60,15 @@ Vorige hoofdstukken: parametrische methoden
 ```{r}
 chol <- read_tsv("https://raw.githubusercontent.com/statOmics/sbc/master/data/chol.txt")
 
-chol <- chol %>%
+chol <- chol |>
   mutate(group = as.factor(group))
 
-nGroups <- chol %>%
-  pull(group) %>%
-  table
+nGroups <- chol |>
+  pull(group) |>
+  table()
 
-n <- nGroups %>%
-  sum
+n <- nGroups |>
+  sum()
 chol
 ```
 
@@ -76,12 +76,12 @@ chol
 
 
 ```{r, echo=FALSE,out.width='50%', fig.asp=.8, fig.align='center'}
-chol %>%  
+chol |>  
   ggplot(aes(x=group,y=cholest)) +
   geom_boxplot(outlier.shape=NA) +
   geom_point(position="jitter")
 
-chol %>% ggplot(aes(sample=cholest)) +
+chol |> ggplot(aes(sample=cholest)) +
   geom_qq() +
   geom_qq_line() +
   facet_wrap(~group)
@@ -199,7 +199,7 @@ tStar <- combn(
 	function(g,y) {
     t.test(y[g],y[-g])$statistic
     },
-  y = chol %>% pull(cholest)
+  y = chol |> pull(cholest)
   )
 head(tStar)
 length(tStar)
@@ -300,12 +300,12 @@ Rank testen starten vanuit rank-getransformeerde uitkomsten.
   tenslotte, krijgt rank $n$.
 
 ```{r}
-chol %>%
+chol |>
   pull(cholest)
 
-chol %>%
-  pull(cholest) %>%
-  rank
+chol |>
+  pull(cholest) |>
+  rank()
 ```
 
 ***
@@ -314,7 +314,7 @@ Soms komen *ties* voor in de data, i.e. minstens twee observaties hebben dezelfd
 
 ```{r}
 metTies <- c(403, 507, 507, 610, 651, 651, 651, 830, 900)
-metTies %>% rank
+metTies |> rank()
 ```
 
 - Ties: 507 komt tweemaal voor, 651 komt driemaal voor. Dit zijn voorbeelden van *ties*.
@@ -333,7 +333,7 @@ metTies %>% rank
 
 ```{r}
 t(chol)
-z <- chol %>%
+z <- chol |>
   pull(cholest)
 z
 rank(z)
@@ -420,17 +420,17 @@ wilcox.test(cholest ~ group, data = chol)
 
 - In volgende lijnen berekenen we  $S_1$ en $S_2$ manueel voor de dataset.
 ```{r}
-S1 <- chol %>%
-  mutate(cholRank=rank(cholest)) %>%
-  filter(group==1) %>%
-  pull(cholRank) %>%
-  sum
+S1 <- chol |>
+  mutate(cholRank=rank(cholest)) |>
+  filter(group==1) |>
+  pull(cholRank) |>
+  sum()
 
-S2 <- chol %>%
-  mutate(cholRank = rank(cholest)) %>%
-  filter(group == 2) %>%
-  pull(cholRank) %>%
-  sum
+S2 <- chol |>
+  mutate(cholRank = rank(cholest)) |>
+  filter(group == 2) |>
+  pull(cholRank) |>
+  sum()
 
 S1
 S2
@@ -452,12 +452,12 @@ Waar komt  $W=$ `r wilcox.test(cholest~group,data=chol)$statistic` vandaan?
 - U telt hoeveel keer observatie uit groep 1 $\geq$ observatie uit groep 2.
 
 ```{r}
-y1 <- chol %>%
-  filter(group==1) %>%
+y1 <- chol |>
+  filter(group==1) |>
   pull("cholest")
 
-y2 <- chol %>%
-  filter(group==2) %>%
+y2 <- chol |>
+  filter(group==2) |>
   pull("cholest")
 
 u1Hlp <- sapply(
@@ -593,7 +593,7 @@ Comet Assay:
 ```{r}
 dna <- read_delim("https://raw.githubusercontent.com/statOmics/sbc/master/data/dna.txt",delim=" ")
 
-dna <- dna %>%
+dna <- dna |>
   mutate(dose = as.factor(dna$dose))
 dna
 ```
@@ -601,12 +601,12 @@ dna
 ***
 
 ```{r, echo=FALSE,out.width='100%', fig.asp=.8, fig.align='center'}
-dna %>%
+dna |>
   ggplot(aes(x=dose,y=length,fill=dose))+
   geom_boxplot() +
   geom_point(position="jitter")
 
-dna %>%
+dna |>
   ggplot(aes(sample=length)) +
   geom_qq() +
   geom_qq_line() +
@@ -620,8 +620,8 @@ dna %>%
 ***
 
 ```{r, echo=FALSE,out.width='100%', fig.asp=.8, fig.align='center'}
-lm(length ~ dose, data = dna) %>%
-  plot
+lm(length ~ dose, data = dna) |>
+  plot()
 ```
 
 ***
@@ -731,12 +731,12 @@ probInd <- combn(
   function(x) {
 		 test <- wilcox.test(
        length~dose,
-       dna %>% filter(dose%in%x)
+       dna |> filter(dose%in%x)
        )
 		 return(test$statistic/prod(nGroep[x]))
 	})
 names(probInd) <- combn(
-  dna %>% pull(dose) %>% levels,
+  dna |> pull(dose) |> levels(),
   2,
   paste,
   collapse="vs")

@@ -2367,9 +2367,12 @@ window.Quarto = {
   </ul></li>
   <li><a href="#beschrijven-van-de-populatie" id="toc-beschrijven-van-de-populatie" class="nav-link" data-scroll-target="#beschrijven-van-de-populatie"><span class="header-section-number">5</span> Beschrijven van de populatie</a>
   <ul class="collapse">
-  <li><a href="#discrete-toevallig-veranderlijken" id="toc-discrete-toevallig-veranderlijken" class="nav-link" data-scroll-target="#discrete-toevallig-veranderlijken"><span class="header-section-number">5.0.1</span> Discrete toevallig veranderlijken</a></li>
-  <li><a href="#continue-toevallig-veranderlijke" id="toc-continue-toevallig-veranderlijke" class="nav-link" data-scroll-target="#continue-toevallig-veranderlijke"><span class="header-section-number">5.0.2</span> Continue toevallig veranderlijke</a></li>
-  <li><a href="#standardisatie" id="toc-standardisatie" class="nav-link" data-scroll-target="#standardisatie"><span class="header-section-number">5.1</span> Standardisatie</a></li>
+  <li><a href="#intermezzo-probabiliteitstheorie" id="toc-intermezzo-probabiliteitstheorie" class="nav-link" data-scroll-target="#intermezzo-probabiliteitstheorie"><span class="header-section-number">5.1</span> Intermezzo probabiliteitstheorie</a>
+  <ul class="collapse">
+  <li><a href="#discrete-toevallig-veranderlijken" id="toc-discrete-toevallig-veranderlijken" class="nav-link" data-scroll-target="#discrete-toevallig-veranderlijken"><span class="header-section-number">5.1.1</span> Discrete toevallig veranderlijken</a></li>
+  <li><a href="#continue-toevallig-veranderlijke" id="toc-continue-toevallig-veranderlijke" class="nav-link" data-scroll-target="#continue-toevallig-veranderlijke"><span class="header-section-number">5.1.2</span> Continue toevallig veranderlijke</a></li>
+  </ul></li>
+  <li><a href="#standardisatie" id="toc-standardisatie" class="nav-link" data-scroll-target="#standardisatie"><span class="header-section-number">5.2</span> Standardisatie</a></li>
   </ul></li>
   <li><a href="#steekproef" id="toc-steekproef" class="nav-link" data-scroll-target="#steekproef"><span class="header-section-number">6</span> Steekproef</a>
   <ul class="collapse">
@@ -2629,9 +2632,10 @@ window.Quarto = {
 </ul></li>
 </ul>
 <hr>
-<p>##Intermezzo probabiliteitstheorie</p>
-<section id="discrete-toevallig-veranderlijken" class="level3" data-number="5.0.1">
-<h3 data-number="5.0.1" class="anchored" data-anchor-id="discrete-toevallig-veranderlijken"><span class="header-section-number">5.0.1</span> Discrete toevallig veranderlijken</h3>
+<section id="intermezzo-probabiliteitstheorie" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="intermezzo-probabiliteitstheorie"><span class="header-section-number">5.1</span> Intermezzo probabiliteitstheorie</h2>
+<section id="discrete-toevallig-veranderlijken" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="discrete-toevallig-veranderlijken"><span class="header-section-number">5.1.1</span> Discrete toevallig veranderlijken</h3>
 <ul>
 <li><p>Stel dat we een discrete random variabele meten <span class="math inline">\(X\)</span></p></li>
 <li><p>Alle mogelijke waarden voor <span class="math inline">\(X\)</span> worden de steekproefruimte <span class="math inline">\(\Omega\)</span> genoemd.</p>
@@ -2662,8 +2666,8 @@ window.Quarto = {
 <li><p>Als we twee subjecten (j en k) onafhankelijk trekken van de populatie dan is de gezamelijke probabiliteit <span class="math inline">\(P(X_j,X_k)= P(X_j)P(X_k)\)</span></p></li>
 </ul>
 <hr>
-<section id="distributie-of-verdeling" class="level4" data-number="5.0.1.1">
-<h4 data-number="5.0.1.1" class="anchored" data-anchor-id="distributie-of-verdeling"><span class="header-section-number">5.0.1.1</span> Distributie of verdeling</h4>
+<section id="distributie-of-verdeling" class="level4" data-number="5.1.1.1">
+<h4 data-number="5.1.1.1" class="anchored" data-anchor-id="distributie-of-verdeling"><span class="header-section-number">5.1.1.1</span> Distributie of verdeling</h4>
 <ul>
 <li><p>De distributie of de verdeling van een discrete toevallig veranderlijke <span class="math inline">\(X\)</span> beschrijft de kans op elke mogelijke waarde van de steekproefruimte.</p></li>
 <li><p>Voorbeeld: Gender is een binaire variabele (0: vrouw, 1: man) en binaire variabelen volgen een Bernoulli verdeling. 50.8% van de subjecten in de Amerikaanse populatie zijn vrouw en 49.2% is man.</p></li>
@@ -2674,7 +2678,7 @@ window.Quarto = {
   \end{array} \right . \]</span></p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="fl">0.492</span>)) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="fl">0.492</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="dv">0</span>,<span class="at">yend=</span>prob)) <span class="sc">+</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Probability&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2689,14 +2693,14 @@ window.Quarto = {
 <p>Toevallig veranderlijke <span class="math inline">\(X\)</span> volgt een Bernoulli verdeling <span class="math inline">\(B(\pi)\)</span> met parameter <span class="math inline">\(\pi=0.492\)</span>, <span class="math display">\[B(\pi)= \pi^x(1-\pi)^{(1-x)}\]</span></p>
 <hr>
 </section>
-<section id="cumulative-distributie-functie" class="level4" data-number="5.0.1.2">
-<h4 data-number="5.0.1.2" class="anchored" data-anchor-id="cumulative-distributie-functie"><span class="header-section-number">5.0.1.2</span> Cumulative distributie functie</h4>
+<section id="cumulative-distributie-functie" class="level4" data-number="5.1.1.2">
+<h4 data-number="5.1.1.2" class="anchored" data-anchor-id="cumulative-distributie-functie"><span class="header-section-number">5.1.1.2</span> Cumulative distributie functie</h4>
 <ul>
 <li><p>De cumulatieve distributie functie F(x) geeft de probabiliteit weer om een toevallige veranderlijke X te observeren waarvoor geldt dat <span class="math inline">\(X\leq x\)</span>: <span class="math display">\[ F(x) = \sum\limits_{\forall X\leq x} P(x)\]</span></p></li>
 <li><p>Gender voorbeeld <span class="math inline">\(F(0)=1-\pi\)</span> and F(1)= P(X=0) + P(X=1)=1</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">cumprob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">cumprob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="dv">0</span>,<span class="at">yend=</span>cumprob)) <span class="sc">+</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;F(x)&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2712,7 +2716,7 @@ window.Quarto = {
 <li>Dobbelsteen:</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">cumprob=</span><span class="fu">cumsum</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,<span class="dv">6</span>))) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">cumprob=</span><span class="fu">cumsum</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,<span class="dv">6</span>))) <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">6</span>),<span class="at">yend=</span>cumprob)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;F(x)&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2726,8 +2730,8 @@ window.Quarto = {
 </div>
 <hr>
 </section>
-<section id="gemiddelde" class="level4" data-number="5.0.1.3">
-<h4 data-number="5.0.1.3" class="anchored" data-anchor-id="gemiddelde"><span class="header-section-number">5.0.1.3</span> Gemiddelde</h4>
+<section id="gemiddelde" class="level4" data-number="5.1.1.3">
+<h4 data-number="5.1.1.3" class="anchored" data-anchor-id="gemiddelde"><span class="header-section-number">5.1.1.3</span> Gemiddelde</h4>
 <p>Het gemiddelde of de verwachte waarde <span class="math inline">\(E[X]\)</span> van een discrete toevallig veranderlijke <span class="math inline">\(X\)</span> is gegeven door:</p>
 <p><span class="math display">\[E[X]=\sum\limits_{x\in\Omega} x P(X=x)\]</span></p>
 <ul>
@@ -2741,8 +2745,8 @@ window.Quarto = {
 <p><span class="math inline">\(E[X]= 1 \times \frac{1}{6} + 2 \times \frac{1}{6} + \ldots + 6 \times \frac{1}{6} =\)</span> 3.5</p>
 <hr>
 </section>
-<section id="variantie" class="level4" data-number="5.0.1.4">
-<h4 data-number="5.0.1.4" class="anchored" data-anchor-id="variantie"><span class="header-section-number">5.0.1.4</span> Variantie</h4>
+<section id="variantie" class="level4" data-number="5.1.1.4">
+<h4 data-number="5.1.1.4" class="anchored" data-anchor-id="variantie"><span class="header-section-number">5.1.1.4</span> Variantie</h4>
 <p>De variantie is een maat voor de variabiliteit van een toevallig veranderlijke en wordt gegeven door:</p>
 <p><span class="math display">\[E[(X-E[X])^2]=\sum\limits_{x\in\Omega} (x-E[X])^2 P(X=x)\]</span></p>
 <ul>
@@ -2756,8 +2760,8 @@ window.Quarto = {
 <hr>
 </section>
 </section>
-<section id="continue-toevallig-veranderlijke" class="level3" data-number="5.0.2">
-<h3 data-number="5.0.2" class="anchored" data-anchor-id="continue-toevallig-veranderlijke"><span class="header-section-number">5.0.2</span> Continue toevallig veranderlijke</h3>
+<section id="continue-toevallig-veranderlijke" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="continue-toevallig-veranderlijke"><span class="header-section-number">5.1.2</span> Continue toevallig veranderlijke</h3>
 <ul>
 <li><p>Een continue toevallig veranderlijke kan binnen bepaalde grenzen alle mogelijke waarden aannemen.</p></li>
 <li><p>De kans om exact één bepaalde waarde aanneemt is daarom gelijk aan 0.</p></li>
@@ -2774,7 +2778,7 @@ window.Quarto = {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">IQ =</span> <span class="fu">seq</span>(<span class="dv">40</span>,<span class="dv">150</span>,.<span class="dv">1</span>),</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Densiteit =</span> <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="dv">40</span>,<span class="dv">150</span>,.<span class="dv">1</span>),<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">|&gt;</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>IQ,<span class="at">y=</span>Densiteit)) <span class="sc">+</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -2789,7 +2793,8 @@ window.Quarto = {
 <li>Binnen bepaalde grenzen kunnen continue toevallig veranderlijken alle mogelijke waarden aannemen dus is <span class="math inline">\(\Omega\)</span> oneindig groot.</li>
 </ul>
 <hr>
-<p>####Cumulatieve distributie</p>
+<section id="cumulatieve-distributie" class="level4" data-number="5.1.2.1">
+<h4 data-number="5.1.2.1" class="anchored" data-anchor-id="cumulatieve-distributie"><span class="header-section-number">5.1.2.1</span> Cumulatieve distributie</h4>
 <ul>
 <li><p>Opnieuw is de cumulatieve distributie <span class="math inline">\(F(X)=Pr(X\leq x)\)</span>.</p></li>
 <li><p>Omdat X continu is berekenen we deze probabiliteit a.d.h.v. een integraal <span class="math display">\[F(x)=\int \limits_{-\infty}^x f(x) dx\]</span></p></li>
@@ -2797,8 +2802,8 @@ window.Quarto = {
 <li><p>We kunnen <span class="math inline">\(F(x)\)</span> berekenen voor een normaal verdeelde toevallig veranderlijke met de functie <code>pnorm</code> die opnieuw argumenten <code>mean</code> en <code>sd</code> heeft.</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Probability=</span><span class="fu">pnorm</span>(IQ,<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Probability=</span><span class="fu">pnorm</span>(IQ,<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>IQ,<span class="at">y=</span>Probability)) <span class="sc">+</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -2839,8 +2844,9 @@ window.Quarto = {
 <li><p>De oppervlakte onder de dichtheidsfunctie is dus 1!</p></li>
 </ul>
 <hr>
-<section id="gemiddelde-en-variantie" class="level4" data-number="5.0.2.1">
-<h4 data-number="5.0.2.1" class="anchored" data-anchor-id="gemiddelde-en-variantie"><span class="header-section-number">5.0.2.1</span> Gemiddelde en variantie</h4>
+</section>
+<section id="gemiddelde-en-variantie" class="level4" data-number="5.1.2.2">
+<h4 data-number="5.1.2.2" class="anchored" data-anchor-id="gemiddelde-en-variantie"><span class="header-section-number">5.1.2.2</span> Gemiddelde en variantie</h4>
 <ul>
 <li>Het gemiddelde of de verwachte waarde is</li>
 </ul>
@@ -2885,8 +2891,9 @@ window.Quarto = {
 <hr>
 </section>
 </section>
-<section id="standardisatie" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="standardisatie"><span class="header-section-number">5.1</span> Standardisatie</h2>
+</section>
+<section id="standardisatie" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="standardisatie"><span class="header-section-number">5.2</span> Standardisatie</h2>
 <ul>
 <li>Normale data worden vaak gestandaardiseerd.</li>
 </ul>
@@ -2947,7 +2954,7 @@ window.Quarto = {
 <h1 data-number="7"><span class="header-section-number">7</span> Gender Example</h1>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Gender)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Gender)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2964,8 +2971,8 @@ window.Quarto = {
 <li>Merk op dat het steekproefgemiddelde zelf een toevallig veranderlijke is! Het wijzigt ook van steekproef tot steekproef!</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Gender) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">probability =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
@@ -2985,8 +2992,8 @@ window.Quarto = {
 <li>We kunnen de distributie van de lengte voor volwassen vrouwen schatten aan de hand van het histogram.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3006,8 +3013,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3020,10 +3027,10 @@ window.Quarto = {
 </div>
 <p>We kunnen de empirische cumulatieve distributie functie gebruiken om kansen te berekenen. Wat is de kans dat een vrouw kleiner is dan 150 cm.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ecdfFem <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  ecdf</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ecdfFem <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ecdf</span>()</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem</span>(<span class="dv">150</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.05222073</code></pre>
@@ -3032,11 +3039,11 @@ window.Quarto = {
 <pre><code>- We illustreren dit ook voor een steekproef van grootte 10</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">502</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>fem10<span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>fem10<span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">10</span>)</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">|&gt;</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3048,9 +3055,9 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ecdfFem10 <span class="ot">&lt;-</span> fem10 <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  ecdf</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ecdfFem10 <span class="ot">&lt;-</span> fem10 <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ecdf</span>()</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem10</span>(<span class="dv">150</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
@@ -3061,8 +3068,8 @@ window.Quarto = {
 <li><p>Merk ook op dat we die kans ook hadden kunnen schatten door te berekenen hoeveel lengtemetingen er lager zijn dan 150.</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span> <span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span> <span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">|&gt;</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob=</span>n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
@@ -3077,8 +3084,8 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">|&gt;</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob=</span>n<span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -3106,8 +3113,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(Height),<span class="at">sd=</span><span class="fu">sd</span>(Height))</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>HeightSum</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -3119,8 +3126,8 @@ window.Quarto = {
 </div>
 <p>We zien dat de benadering goed werkt:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>) <span class="sc">+</span></span>
@@ -3144,7 +3151,7 @@ window.Quarto = {
 <li>We doen nu hetzelfde op basis van de steekproef met de 10 vrouwen.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>HeightSum10 <span class="ot">&lt;-</span> fem10 <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>HeightSum10 <span class="ot">&lt;-</span> fem10 <span class="sc">|&gt;</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(Height),<span class="at">sd=</span><span class="fu">sd</span>(Height))</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>HeightSum10</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3156,7 +3163,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">|&gt;</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),<span class="at">bins=</span><span class="dv">10</span>) <span class="sc">+</span></span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>) <span class="sc">+</span></span>
@@ -3222,9 +3229,9 @@ window.Quarto = {
 <li><p>Grote steekproef</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">|&gt;</span></span>
 <span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> 2.5% 97.5% 
@@ -3236,8 +3243,8 @@ window.Quarto = {
 <li><p>Kleine steekproef</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">|&gt;</span></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    2.5%    97.5% 
@@ -4003,7 +4010,7 @@ window.Quarto = {
 <span id="cb62-202"><a href="#cb62-202" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-203"><a href="#cb62-203" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb62-204"><a href="#cb62-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-205"><a href="#cb62-205" aria-hidden="true" tabindex="-1"></a>##Intermezzo probabiliteitstheorie</span>
+<span id="cb62-205"><a href="#cb62-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## Intermezzo probabiliteitstheorie</span></span>
 <span id="cb62-206"><a href="#cb62-206" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-207"><a href="#cb62-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### Discrete toevallig veranderlijken</span></span>
 <span id="cb62-208"><a href="#cb62-208" aria-hidden="true" tabindex="-1"></a></span>
@@ -4062,7 +4069,7 @@ window.Quarto = {
 <span id="cb62-261"><a href="#cb62-261" aria-hidden="true" tabindex="-1"></a>    \end{array} \right . $$</span>
 <span id="cb62-262"><a href="#cb62-262" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-265"><a href="#cb62-265" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-266"><a href="#cb62-266" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="fl">0.492</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb62-266"><a href="#cb62-266" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="fl">0.492</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb62-267"><a href="#cb62-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="dv">0</span>,<span class="at">yend=</span>prob)) <span class="sc">+</span></span>
 <span id="cb62-268"><a href="#cb62-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
 <span id="cb62-269"><a href="#cb62-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Probability&quot;</span>)</span>
@@ -4081,7 +4088,7 @@ window.Quarto = {
 <span id="cb62-282"><a href="#cb62-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Gender voorbeeld $F(0)=1-\pi$ and F(1)= P(X=0) + P(X=1)=1</span>
 <span id="cb62-283"><a href="#cb62-283" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-286"><a href="#cb62-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-287"><a href="#cb62-287" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">cumprob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb62-287"><a href="#cb62-287" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">cumprob=</span><span class="fu">c</span>(<span class="fl">0.508</span>,<span class="dv">1</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb62-288"><a href="#cb62-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="dv">0</span>,<span class="at">yend=</span>cumprob)) <span class="sc">+</span></span>
 <span id="cb62-289"><a href="#cb62-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
 <span id="cb62-290"><a href="#cb62-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;F(x)&quot;</span>)</span>
@@ -4090,7 +4097,7 @@ window.Quarto = {
 <span id="cb62-293"><a href="#cb62-293" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Dobbelsteen:</span>
 <span id="cb62-294"><a href="#cb62-294" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-297"><a href="#cb62-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-298"><a href="#cb62-298" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">cumprob=</span><span class="fu">cumsum</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,<span class="dv">6</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb62-298"><a href="#cb62-298" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">X=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">cumprob=</span><span class="fu">cumsum</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,<span class="dv">6</span>))) <span class="sc">|&gt;</span></span>
 <span id="cb62-299"><a href="#cb62-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>X,<span class="at">xend=</span>X,<span class="at">y=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">6</span>),<span class="at">yend=</span>cumprob)) <span class="sc">+</span></span>
 <span id="cb62-300"><a href="#cb62-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>() <span class="sc">+</span></span>
 <span id="cb62-301"><a href="#cb62-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;F(x)&quot;</span>)</span>
@@ -4158,7 +4165,7 @@ window.Quarto = {
 <span id="cb62-363"><a href="#cb62-363" aria-hidden="true" tabindex="-1"></a>  <span class="at">IQ =</span> <span class="fu">seq</span>(<span class="dv">40</span>,<span class="dv">150</span>,.<span class="dv">1</span>),</span>
 <span id="cb62-364"><a href="#cb62-364" aria-hidden="true" tabindex="-1"></a>  <span class="at">Densiteit =</span> <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="dv">40</span>,<span class="dv">150</span>,.<span class="dv">1</span>),<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)</span>
 <span id="cb62-365"><a href="#cb62-365" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb62-366"><a href="#cb62-366" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">%&gt;%</span></span>
+<span id="cb62-366"><a href="#cb62-366" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">|&gt;</span></span>
 <span id="cb62-367"><a href="#cb62-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>IQ,<span class="at">y=</span>Densiteit)) <span class="sc">+</span></span>
 <span id="cb62-368"><a href="#cb62-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
 <span id="cb62-369"><a href="#cb62-369" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4167,7 +4174,7 @@ window.Quarto = {
 <span id="cb62-372"><a href="#cb62-372" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-373"><a href="#cb62-373" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb62-374"><a href="#cb62-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-375"><a href="#cb62-375" aria-hidden="true" tabindex="-1"></a>####Cumulatieve distributie</span>
+<span id="cb62-375"><a href="#cb62-375" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Cumulatieve distributie</span></span>
 <span id="cb62-376"><a href="#cb62-376" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-377"><a href="#cb62-377" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Opnieuw is de cumulatieve distributie $F(X)=Pr(X\leq x)$.</span>
 <span id="cb62-378"><a href="#cb62-378" aria-hidden="true" tabindex="-1"></a></span>
@@ -4179,8 +4186,8 @@ window.Quarto = {
 <span id="cb62-384"><a href="#cb62-384" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We kunnen $F(x)$ berekenen voor een normaal verdeelde toevallig veranderlijke met de functie <span class="in">`pnorm`</span> die opnieuw argumenten <span class="in">`mean`</span> en <span class="in">`sd`</span> heeft.</span>
 <span id="cb62-385"><a href="#cb62-385" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-388"><a href="#cb62-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-389"><a href="#cb62-389" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">%&gt;%</span></span>
-<span id="cb62-390"><a href="#cb62-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Probability=</span><span class="fu">pnorm</span>(IQ,<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb62-389"><a href="#cb62-389" aria-hidden="true" tabindex="-1"></a>iq <span class="sc">|&gt;</span></span>
+<span id="cb62-390"><a href="#cb62-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Probability=</span><span class="fu">pnorm</span>(IQ,<span class="at">mean=</span><span class="dv">100</span>,<span class="at">sd=</span><span class="dv">15</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb62-391"><a href="#cb62-391" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>IQ,<span class="at">y=</span>Probability)) <span class="sc">+</span></span>
 <span id="cb62-392"><a href="#cb62-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
 <span id="cb62-393"><a href="#cb62-393" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4339,7 +4346,7 @@ window.Quarto = {
 <span id="cb62-550"><a href="#cb62-550" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-553"><a href="#cb62-553" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb62-554"><a href="#cb62-554" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
-<span id="cb62-555"><a href="#cb62-555" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Gender)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span>
+<span id="cb62-555"><a href="#cb62-555" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Gender)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span>
 <span id="cb62-556"><a href="#cb62-556" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-557"><a href="#cb62-557" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-558"><a href="#cb62-558" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Gender is een binaire variabele.</span>
@@ -4350,8 +4357,8 @@ window.Quarto = {
 <span id="cb62-563"><a href="#cb62-563" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-564"><a href="#cb62-564" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-567"><a href="#cb62-567" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-568"><a href="#cb62-568" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-569"><a href="#cb62-569" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb62-568"><a href="#cb62-568" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-569"><a href="#cb62-569" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb62-570"><a href="#cb62-570" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">probability =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
 <span id="cb62-571"><a href="#cb62-571" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-572"><a href="#cb62-572" aria-hidden="true" tabindex="-1"></a></span>
@@ -4364,8 +4371,8 @@ window.Quarto = {
 <span id="cb62-579"><a href="#cb62-579" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We kunnen de distributie van de lengte voor volwassen vrouwen schatten aan de hand van het histogram.</span>
 <span id="cb62-580"><a href="#cb62-580" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-583"><a href="#cb62-583" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-584"><a href="#cb62-584" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-585"><a href="#cb62-585" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-584"><a href="#cb62-584" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-585"><a href="#cb62-585" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb62-586"><a href="#cb62-586" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb62-587"><a href="#cb62-587" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
 <span id="cb62-588"><a href="#cb62-588" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4378,8 +4385,8 @@ window.Quarto = {
 <span id="cb62-595"><a href="#cb62-595" aria-hidden="true" tabindex="-1"></a>    $$ECDF(x) = \sum\limits_{x_i \leq x} \frac{1}{n} = \frac{<span class="sc">\#</span> (x_i \leq x)}{n}$$</span>
 <span id="cb62-596"><a href="#cb62-596" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-599"><a href="#cb62-599" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-600"><a href="#cb62-600" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-601"><a href="#cb62-601" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-600"><a href="#cb62-600" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-601"><a href="#cb62-601" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb62-602"><a href="#cb62-602" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb62-603"><a href="#cb62-603" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>()</span>
 <span id="cb62-604"><a href="#cb62-604" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4388,10 +4395,10 @@ window.Quarto = {
 <span id="cb62-607"><a href="#cb62-607" aria-hidden="true" tabindex="-1"></a>Wat is de kans dat een vrouw kleiner is dan 150 cm.</span>
 <span id="cb62-608"><a href="#cb62-608" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-611"><a href="#cb62-611" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-612"><a href="#cb62-612" aria-hidden="true" tabindex="-1"></a>ecdfFem <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-613"><a href="#cb62-613" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-614"><a href="#cb62-614" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-615"><a href="#cb62-615" aria-hidden="true" tabindex="-1"></a>  ecdf</span>
+<span id="cb62-612"><a href="#cb62-612" aria-hidden="true" tabindex="-1"></a>ecdfFem <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-613"><a href="#cb62-613" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-614"><a href="#cb62-614" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;Height&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-615"><a href="#cb62-615" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ecdf</span>()</span>
 <span id="cb62-616"><a href="#cb62-616" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem</span>(<span class="dv">150</span>)</span>
 <span id="cb62-617"><a href="#cb62-617" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-618"><a href="#cb62-618" aria-hidden="true" tabindex="-1"></a></span>
@@ -4399,19 +4406,19 @@ window.Quarto = {
 <span id="cb62-620"><a href="#cb62-620" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-623"><a href="#cb62-623" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb62-624"><a href="#cb62-624" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">502</span>)</span>
-<span id="cb62-625"><a href="#cb62-625" aria-hidden="true" tabindex="-1"></a>fem10<span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-626"><a href="#cb62-626" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-625"><a href="#cb62-625" aria-hidden="true" tabindex="-1"></a>fem10<span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-626"><a href="#cb62-626" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb62-627"><a href="#cb62-627" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">10</span>)</span>
 <span id="cb62-628"><a href="#cb62-628" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-629"><a href="#cb62-629" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb62-629"><a href="#cb62-629" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">|&gt;</span></span>
 <span id="cb62-630"><a href="#cb62-630" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb62-631"><a href="#cb62-631" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>()</span>
 <span id="cb62-632"><a href="#cb62-632" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-633"><a href="#cb62-633" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-636"><a href="#cb62-636" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-637"><a href="#cb62-637" aria-hidden="true" tabindex="-1"></a>ecdfFem10 <span class="ot">&lt;-</span> fem10 <span class="sc">%&gt;%</span></span>
-<span id="cb62-638"><a href="#cb62-638" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
-<span id="cb62-639"><a href="#cb62-639" aria-hidden="true" tabindex="-1"></a>  ecdf</span>
+<span id="cb62-637"><a href="#cb62-637" aria-hidden="true" tabindex="-1"></a>ecdfFem10 <span class="ot">&lt;-</span> fem10 <span class="sc">|&gt;</span></span>
+<span id="cb62-638"><a href="#cb62-638" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">|&gt;</span></span>
+<span id="cb62-639"><a href="#cb62-639" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ecdf</span>()</span>
 <span id="cb62-640"><a href="#cb62-640" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem10</span>(<span class="dv">150</span>)</span>
 <span id="cb62-641"><a href="#cb62-641" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-642"><a href="#cb62-642" aria-hidden="true" tabindex="-1"></a></span>
@@ -4420,16 +4427,16 @@ window.Quarto = {
 <span id="cb62-645"><a href="#cb62-645" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Merk ook op dat we die kans ook hadden kunnen schatten door te berekenen hoeveel lengtemetingen er lager zijn dan 150.</span>
 <span id="cb62-646"><a href="#cb62-646" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-649"><a href="#cb62-649" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-650"><a href="#cb62-650" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-651"><a href="#cb62-651" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span> <span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-650"><a href="#cb62-650" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-651"><a href="#cb62-651" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span> <span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">|&gt;</span></span>
 <span id="cb62-652"><a href="#cb62-652" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob=</span>n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
 <span id="cb62-653"><a href="#cb62-653" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-654"><a href="#cb62-654" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem</span>(<span class="dv">150</span>)</span>
 <span id="cb62-655"><a href="#cb62-655" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-656"><a href="#cb62-656" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-659"><a href="#cb62-659" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-660"><a href="#cb62-660" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
-<span id="cb62-661"><a href="#cb62-661" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-660"><a href="#cb62-660" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">|&gt;</span></span>
+<span id="cb62-661"><a href="#cb62-661" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Height <span class="sc">&lt;=</span><span class="dv">150</span>) <span class="sc">|&gt;</span></span>
 <span id="cb62-662"><a href="#cb62-662" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob=</span>n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
 <span id="cb62-663"><a href="#cb62-663" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-664"><a href="#cb62-664" aria-hidden="true" tabindex="-1"></a><span class="fu">ecdfFem10</span>(<span class="dv">150</span>)</span>
@@ -4452,8 +4459,8 @@ window.Quarto = {
 <span id="cb62-681"><a href="#cb62-681" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-682"><a href="#cb62-682" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-685"><a href="#cb62-685" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-686"><a href="#cb62-686" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-687"><a href="#cb62-687" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-686"><a href="#cb62-686" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-687"><a href="#cb62-687" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb62-688"><a href="#cb62-688" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(Height),<span class="at">sd=</span><span class="fu">sd</span>(Height))</span>
 <span id="cb62-689"><a href="#cb62-689" aria-hidden="true" tabindex="-1"></a>HeightSum</span>
 <span id="cb62-690"><a href="#cb62-690" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4461,8 +4468,8 @@ window.Quarto = {
 <span id="cb62-692"><a href="#cb62-692" aria-hidden="true" tabindex="-1"></a>We zien dat de benadering goed werkt:</span>
 <span id="cb62-693"><a href="#cb62-693" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-696"><a href="#cb62-696" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-697"><a href="#cb62-697" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-698"><a href="#cb62-698" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-697"><a href="#cb62-697" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-698"><a href="#cb62-698" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
 <span id="cb62-699"><a href="#cb62-699" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb62-700"><a href="#cb62-700" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
 <span id="cb62-701"><a href="#cb62-701" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>) <span class="sc">+</span></span>
@@ -4480,14 +4487,14 @@ window.Quarto = {
 <span id="cb62-713"><a href="#cb62-713" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We doen nu hetzelfde op basis van de steekproef met de 10 vrouwen.</span>
 <span id="cb62-714"><a href="#cb62-714" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-717"><a href="#cb62-717" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-718"><a href="#cb62-718" aria-hidden="true" tabindex="-1"></a>HeightSum10 <span class="ot">&lt;-</span> fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb62-718"><a href="#cb62-718" aria-hidden="true" tabindex="-1"></a>HeightSum10 <span class="ot">&lt;-</span> fem10 <span class="sc">|&gt;</span></span>
 <span id="cb62-719"><a href="#cb62-719" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean=</span><span class="fu">mean</span>(Height),<span class="at">sd=</span><span class="fu">sd</span>(Height))</span>
 <span id="cb62-720"><a href="#cb62-720" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-721"><a href="#cb62-721" aria-hidden="true" tabindex="-1"></a>HeightSum10</span>
 <span id="cb62-722"><a href="#cb62-722" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-723"><a href="#cb62-723" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-726"><a href="#cb62-726" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-727"><a href="#cb62-727" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
+<span id="cb62-727"><a href="#cb62-727" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">|&gt;</span></span>
 <span id="cb62-728"><a href="#cb62-728" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb62-729"><a href="#cb62-729" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),<span class="at">bins=</span><span class="dv">10</span>) <span class="sc">+</span></span>
 <span id="cb62-730"><a href="#cb62-730" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>) <span class="sc">+</span></span>
@@ -4542,22 +4549,22 @@ window.Quarto = {
 <span id="cb62-783"><a href="#cb62-783" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Grote steekproef</span>
 <span id="cb62-784"><a href="#cb62-784" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-787"><a href="#cb62-787" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-788"><a href="#cb62-788" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb62-789"><a href="#cb62-789" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-790"><a href="#cb62-790" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
+<span id="cb62-788"><a href="#cb62-788" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb62-789"><a href="#cb62-789" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(Height)<span class="sc">&amp;</span>Age<span class="sc">&gt;</span><span class="dv">18</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-790"><a href="#cb62-790" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">|&gt;</span></span>
 <span id="cb62-791"><a href="#cb62-791" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span>
 <span id="cb62-792"><a href="#cb62-792" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-793"><a href="#cb62-793" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-794"><a href="#cb62-794" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Op basis van de grote steekproef schatten we dat 95% van de vrouwen in de populatie een lengte heeft die ligt in het interval [`r NHANES %&gt;%</span>
-<span id="cb62-795"><a href="#cb62-795" aria-hidden="true" tabindex="-1"></a>  filter(Gender==&quot;female&quot;&amp;!is.na(Height)&amp;Age&gt;18) %&gt;%</span>
-<span id="cb62-796"><a href="#cb62-796" aria-hidden="true" tabindex="-1"></a>  pull(Height) %&gt;%</span>
+<span id="cb62-794"><a href="#cb62-794" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Op basis van de grote steekproef schatten we dat 95% van de vrouwen in de populatie een lengte heeft die ligt in het interval [`r NHANES |&gt;</span>
+<span id="cb62-795"><a href="#cb62-795" aria-hidden="true" tabindex="-1"></a>  filter(Gender==&quot;female&quot;&amp;!is.na(Height)&amp;Age&gt;18) |&gt;</span>
+<span id="cb62-796"><a href="#cb62-796" aria-hidden="true" tabindex="-1"></a>  pull(Height) |&gt;</span>
 <span id="cb62-797"><a href="#cb62-797" aria-hidden="true" tabindex="-1"></a>  quantile(prob=c(0.025,0.975))`].</span>
 <span id="cb62-798"><a href="#cb62-798" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-799"><a href="#cb62-799" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Kleine steekproef</span>
 <span id="cb62-800"><a href="#cb62-800" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-803"><a href="#cb62-803" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-804"><a href="#cb62-804" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">%&gt;%</span></span>
-<span id="cb62-805"><a href="#cb62-805" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
+<span id="cb62-804"><a href="#cb62-804" aria-hidden="true" tabindex="-1"></a>fem10 <span class="sc">|&gt;</span></span>
+<span id="cb62-805"><a href="#cb62-805" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">|&gt;</span></span>
 <span id="cb62-806"><a href="#cb62-806" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</span>
 <span id="cb62-807"><a href="#cb62-807" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-808"><a href="#cb62-808" aria-hidden="true" tabindex="-1"></a></span>
