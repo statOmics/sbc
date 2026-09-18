@@ -128,17 +128,18 @@
     }
   }
 
-  // Quarto's own scroll-tracking (quarto.js, loaded as type="module" and
-  // thus implicitly deferred) registers a DOMContentLoaded listener that
-  // captures a live reference to <nav id="TOC">. This script is a plain
-  // synchronous <script> that runs while the document is still parsing, so
-  // a DOMContentLoaded listener registered here would fire *before*
-  // quarto.js's — moving the TOC out from under it before it captures its
-  // reference. Wait for window "load" instead, which always runs after
-  // quarto.js has finished initializing.
-  if (document.readyState === "complete") {
-    init();
-  } else {
-    window.addEventListener("load", init);
-  }
+  // This script is loaded via include-after-body, i.e. right before
+  // </body>: the sidebar and TOC markup it operates on are already fully
+  // parsed into the DOM by the time it runs, so there is no need to wait
+  // for DOMContentLoaded (and definitely not for window "load", which
+  // would also wait on every embedded YouTube iframe on the page --
+  // noticeably slow and janky, especially on mobile). Quarto's own
+  // scroll-tracking script (quarto.js, a deferred module) caches a
+  // reference to <nav id="TOC"> once, in its own DOMContentLoaded handler,
+  // whichever order that runs in relative to this script -- but it's a
+  // reference to the actual DOM node, so relocating that same node later
+  // (rather than cloning it) keeps the reference valid regardless of
+  // execution order. Verified by testing real scroll-driven highlighting
+  // after this change.
+  init();
 })();
