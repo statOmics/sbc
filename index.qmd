@@ -1,5 +1,4 @@
 ---
-title: "Cursus Statistiek 2026-2027"
 author: "Lieven Clement"
 date: last-modified
 description: "Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie & de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie"
@@ -41,10 +40,10 @@ Lieven, September 2020
 <!---noNum-->
 
 
-- Een html versie van de cursus is beschikbaar op https://statomics.github.io/sbc/ waardoor alle voorbeelden en code in deze cursus makkelijk in R kunnen worden gereproduceerd, wat handig kan zijn wanneer je zelf r-markdown scripts ontwikkelt.
+- Een html versie van de cursus is beschikbaar op <https://statomics.github.io/sbc/> waardoor alle voorbeelden en code in deze cursus makkelijk in R kunnen worden gereproduceerd, wat handig kan zijn wanneer je zelf r-markdown scripts ontwikkelt.
 
-- Een pdf versie van de cursus is beschikbaar op https://statomics.github.io/sbc/Statistiek_2026_2027.pdf
+- Een pdf versie van de cursus is beschikbaar op <https://statomics.github.io/sbc/Statistiek_2026_2027.pdf>
 
-- Voor een introductie tot R en Data Visualisatie raden we de eerste twee delen aan van het ebook https://rafalab.github.io/dsbook/ van prof. Rafael Irizarry. Deze zijn herwerkt in de interactieve Dodona cursus https://dodona.be/en/courses/6616/
+- Voor een introductie tot R en Data Visualisatie raden we de eerste twee delen aan van het ebook <https://rafalab.github.io/dsbook/> van prof. Rafael Irizarry. Deze zijn herwerkt in de interactieve Dodona cursus <https://dodona.be/en/courses/6616/>
 
-- De oefeningen vanaf hoofdstuk 5 vind je in de interactieve Dodona cursus https://dodona.be/en/courses/6617/
+- De oefeningen vanaf hoofdstuk 5 vind je in de interactieve Dodona cursus <https://dodona.be/en/courses/6617/>

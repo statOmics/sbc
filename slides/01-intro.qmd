@@ -42,8 +42,8 @@ Statistische geletterdheid is cruciaal om resultaten en publicaties kritisch te 
 
 ![](https://images.vrt.be/width1280/2018/06/27/4e72098d-7a0d-11e8-abcc-02b7b76bf47f.jpg){width=70%}
 
-- https://www.vrt.be/vrtnws/nl/2018/10/22/gezocht-mensen-met-penetrante-lijfgeur-om-probiotische-deodor/
-- https://youtu.be/9RIFyqLXdVw
+- <https://www.vrt.be/vrtnws/nl/2018/10/22/gezocht-mensen-met-penetrante-lijfgeur-om-probiotische-deodor/>
+- <https://youtu.be/9RIFyqLXdVw>
 
 ***
 
@@ -166,7 +166,7 @@ DGGE
 
 ![](https://journals.plos.org/plosone/article/figure/image?size=large&download=&id=10.1371/journal.pone.0070538.g001){width=70%}
 
-https://doi.org/10.1371/journal.pone.0070538
+<https://doi.org/10.1371/journal.pone.0070538>
 
 ***
 

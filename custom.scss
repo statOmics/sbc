@@ -1,0 +1,100 @@
+/*-- scss:defaults --*/
+// Palette matches the SGA (Statistical Genomics) course, for a consistent
+// look across statOmics courses.
+
+$brand-green: #4F704F;
+$bg-green-light: #f4f8f4;
+$dot-purple: #948EC0;
+$dot-orange: #E8A87C;
+$text-dark: #333333;
+
+$primary: $brand-green;
+$body-color: $text-dark;
+
+$headings-font-weight: 700;
+$headings-color: $brand-green;
+
+$sidebar-bg: #ffffff;
+$sidebar-fg: #666666;
+$sidebar-border-color: #666666;
+
+/*-- scss:rules --*/
+
+// Book title at the top of the sidebar
+.sidebar-title a {
+  color: $brand-green;
+}
+
+// Active chapter link in the book's left sidebar
+.sidebar-item-container a.sidebar-link.active {
+  color: $brand-green !important;
+  background-color: $bg-green-light;
+  border-left: 4px solid $dot-purple;
+  padding-left: 10px;
+}
+
+// Active section link in the merged chapter TOC (assets/sidebar-merge.css)
+.chapter-toc-nested a.active {
+  color: $brand-green !important;
+}
+
+// Blockquotes
+blockquote {
+  background: #fff8f4;
+  border-left: 6px solid $dot-orange;
+  padding: 1em;
+  margin: 1.5em 0;
+  font-style: normal;
+  border-radius: 0 4px 4px 0;
+
+  p {
+    color: #444;
+  }
+}
+
+// Code blocks
+div.sourceCode {
+  background-color: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  border-left: 4px solid $brand-green;
+}
+
+// Tables
+.table {
+  border-bottom: 2px solid $brand-green;
+
+  thead th {
+    background-color: $brand-green;
+    color: white;
+    border-bottom: none;
+  }
+}
+
+// Header numbering
+.header-section-number {
+  color: $brand-green !important;
+  margin-right: 0.5rem;
+}
+
+// Footnotes: in-text reference marker
+a.footnote-ref {
+  color: $dot-orange !important;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+// Footnotes: the endnote list itself (sbc renders footnotes as an endnote
+// list, not as margin asides like SGA does, so this targets that structure)
+.footnotes li {
+  border-left: 2px solid $dot-orange;
+  padding-left: 10px;
+
+  p {
+    color: $dot-purple;
+    font-size: 0.9em;
+  }
+}
+a.footnote-back {
+  color: $dot-orange !important;
+}

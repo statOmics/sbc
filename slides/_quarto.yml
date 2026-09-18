@@ -1,3 +1,6 @@
 project:
   title: "Statistiek - Lesmateriaal"
   output-dir: ../docs/rmd
+
+execute:
+  freeze: auto

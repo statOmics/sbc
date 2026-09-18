@@ -1,0 +1,105 @@
+/* Unified left sidebar: chapters + inline expandable section index.
+   Pairs with assets/sidebar-merge.js and format.html.toc-location: left. */
+
+#quarto-sidebar .sidebar-item-container {
+  display: flex;
+  align-items: center;
+}
+
+.chapter-toc-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  margin-right: 0.15rem;
+  color: var(--bs-secondary-color, #6c757d);
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+  visibility: hidden;
+}
+
+/* only show the toggle once we know (or are about to check) there's content */
+li.sidebar-item:hover > .sidebar-item-container > .chapter-toc-toggle,
+li.sidebar-item.chapter-expanded > .sidebar-item-container > .chapter-toc-toggle,
+li.sidebar-item.chapter-toc-loading > .sidebar-item-container > .chapter-toc-toggle {
+  visibility: visible;
+}
+
+li.sidebar-item.chapter-toc-empty > .sidebar-item-container > .chapter-toc-toggle {
+  visibility: hidden !important;
+}
+
+li.sidebar-item.chapter-expanded > .sidebar-item-container > .chapter-toc-toggle {
+  transform: rotate(90deg);
+}
+
+li.sidebar-item.chapter-toc-loading > .sidebar-item-container > .chapter-toc-toggle {
+  animation: chapter-toc-spin 1s linear infinite;
+}
+
+@keyframes chapter-toc-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Touch devices have no :hover, and Quarto's own off-canvas sidebar takes
+   over at this same breakpoint (991.98px) — make the toggle permanently
+   visible and give it a larger tap target there, instead of relying on
+   hover-to-reveal (which would make it undiscoverable on mobile). */
+@media (hover: none), (max-width: 991.98px) {
+  .chapter-toc-toggle {
+    visibility: visible;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 0.1rem;
+    margin-left: -0.35rem;
+  }
+  li.sidebar-item.chapter-toc-empty > .sidebar-item-container > .chapter-toc-toggle {
+    visibility: hidden !important;
+  }
+}
+
+.chapter-toc-nested {
+  display: none;
+  list-style: none;
+  padding-left: 1.05rem;
+  margin: 0.15rem 0 0.4rem 0;
+  border-left: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+li.sidebar-item.chapter-expanded > .chapter-toc-nested {
+  display: block;
+}
+
+.chapter-toc-nested a {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--bs-body-color, #495057);
+}
+
+.chapter-toc-nested a.active {
+  font-weight: 600;
+  color: var(--bs-link-color, #4F704F);
+}
+
+.chapter-toc-nested ul {
+  list-style: none;
+  padding-left: 0.85rem;
+  margin: 0;
+}
+
+/* .chapter-toc-nested is applied either directly to a <ul> (lazily fetched
+   chapters) or to a <nav> wrapping a <ul> (the active chapter's live TOC,
+   relocated as a whole to preserve Quarto's scroll-tracking); zero out the
+   browser's default <ul> padding for the latter case. */
+.chapter-toc-nested > ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.chapter-toc-nested .header-section-number {
+  color: var(--bs-secondary-color, #6c757d);
+  margin-right: 0.25rem;
+}

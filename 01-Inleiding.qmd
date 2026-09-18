@@ -135,7 +135,7 @@ Tijdens de eerste lezing van dit hoofdstuk is het nog niet belangrijk om te focu
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HkMCq3IBvRI" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-https://www.vrt.be/vrtnws/nl/2018/10/22/gezocht-mensen-met-penetrante-lijfgeur-om-probiotische-deodor/
+<https://www.vrt.be/vrtnws/nl/2018/10/22/gezocht-mensen-met-penetrante-lijfgeur-om-probiotische-deodor/>
 
 <iframe width="560" height="315" src="https://youtube.com/embed/9RIFyqLXdVw" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -196,7 +196,7 @@ Waarbij een bandenpatroon ontstaat volgens de lengte van het 16s rRNA.
 
 
 ![](./figures/dgge.png){width=70%}
-Foto van een DGGE gel van het oksel microbiome (bron: https://doi.org/10.1371/journal.pone.0070538)
+Foto van een DGGE gel van het oksel microbiome (bron: <https://doi.org/10.1371/journal.pone.0070538>)
 
 Elke band in de DGGE correspondeert met een bacterie.
 Hoe helderder de band hoe meer van de bacterie in het microbiome voorkomt.

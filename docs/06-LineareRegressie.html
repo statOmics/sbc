@@ -8,7 +8,7 @@
 
 <meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie">
 
-<title>7&nbsp; Enkelvoudige lineaire regressie – Cursus Statistiek 2026-2027</title>
+<title>6&nbsp; Enkelvoudige lineaire regressie – Cursus Statistiek 2026-2027</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -99,7 +99,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a0984dfc9b14e5ed43f2f67bf11aaf08.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -158,6 +158,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="assets/sidebar-merge.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -169,7 +170,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Schakel zijbalknavigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-LineareRegressie.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-LineareRegressie.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Schakel zijbalknavigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Zoeken" onclick="window.quartoOpenSearch();">
@@ -217,128 +218,128 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Cursus Statistiek 2026-2027</span></span></a>
+ <span class="menu-text">Woord vooraf</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Inleiding.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inleiding</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Inleiding</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Concepten.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Belangrijke concepten &amp; conventies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Belangrijke concepten &amp; conventies</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Proefopzet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Studiedesign</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Studiedesign</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-DataExploratie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data exploratie en beschrijvende statistiek</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data exploratie en beschrijvende statistiek</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-StatistischeBesluitvorming.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistische besluitvorming</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistische besluitvorming</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-LineareRegressie.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-VariantieAnalyse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variantie analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variantie analyse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-NietParametrischeStatistiek.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Niet-parametrische statistiek</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Niet-parametrische statistiek</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-CategorischeDataAnalyse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorische data analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Categorische data analyse</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-GeneralLinearModel.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Algemeen lineair model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Algemeen lineair model</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-ModelSelectie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelselectie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modelselectie</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
     </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Inhoudsopgave</h2>
    
   <ul>
-  <li><a href="#inleiding" id="toc-inleiding" class="nav-link active" data-scroll-target="#inleiding"><span class="header-section-number">7.1</span> Inleiding</a>
+  <li><a href="#inleiding" id="toc-inleiding" class="nav-link active" data-scroll-target="#inleiding"><span class="header-section-number">6.1</span> Inleiding</a>
   <ul class="collapse">
-  <li><a href="#borstkanker-dataset" id="toc-borstkanker-dataset" class="nav-link" data-scroll-target="#borstkanker-dataset"><span class="header-section-number">7.1.1</span> Borstkanker dataset</a></li>
-  <li><a href="#data-exploratie" id="toc-data-exploratie" class="nav-link" data-scroll-target="#data-exploratie"><span class="header-section-number">7.1.2</span> Data exploratie</a></li>
-  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">7.1.3</span> Model</a></li>
+  <li><a href="#borstkanker-dataset" id="toc-borstkanker-dataset" class="nav-link" data-scroll-target="#borstkanker-dataset"><span class="header-section-number">6.1.1</span> Borstkanker dataset</a></li>
+  <li><a href="#data-exploratie" id="toc-data-exploratie" class="nav-link" data-scroll-target="#data-exploratie"><span class="header-section-number">6.1.2</span> Data exploratie</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">6.1.3</span> Model</a></li>
   </ul></li>
-  <li><a href="#lineaire-regressie" id="toc-lineaire-regressie" class="nav-link" data-scroll-target="#lineaire-regressie"><span class="header-section-number">7.2</span> Lineaire regressie</a></li>
-  <li><a href="#parameterschatting" id="toc-parameterschatting" class="nav-link" data-scroll-target="#parameterschatting"><span class="header-section-number">7.3</span> Parameterschatting</a></li>
-  <li><a href="#sec-linBesluit" id="toc-sec-linBesluit" class="nav-link" data-scroll-target="#sec-linBesluit"><span class="header-section-number">7.4</span> Statistische besluitvorming</a></li>
-  <li><a href="#nagaan-van-modelveronderstellingen" id="toc-nagaan-van-modelveronderstellingen" class="nav-link" data-scroll-target="#nagaan-van-modelveronderstellingen"><span class="header-section-number">7.5</span> Nagaan van modelveronderstellingen</a>
+  <li><a href="#lineaire-regressie" id="toc-lineaire-regressie" class="nav-link" data-scroll-target="#lineaire-regressie"><span class="header-section-number">6.2</span> Lineaire regressie</a></li>
+  <li><a href="#parameterschatting" id="toc-parameterschatting" class="nav-link" data-scroll-target="#parameterschatting"><span class="header-section-number">6.3</span> Parameterschatting</a></li>
+  <li><a href="#sec-linBesluit" id="toc-sec-linBesluit" class="nav-link" data-scroll-target="#sec-linBesluit"><span class="header-section-number">6.4</span> Statistische besluitvorming</a></li>
+  <li><a href="#nagaan-van-modelveronderstellingen" id="toc-nagaan-van-modelveronderstellingen" class="nav-link" data-scroll-target="#nagaan-van-modelveronderstellingen"><span class="header-section-number">6.5</span> Nagaan van modelveronderstellingen</a>
   <ul class="collapse">
-  <li><a href="#lineariteit" id="toc-lineariteit" class="nav-link" data-scroll-target="#lineariteit"><span class="header-section-number">7.5.1</span> Lineariteit</a></li>
-  <li><a href="#veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie" id="toc-veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie" class="nav-link" data-scroll-target="#veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie"><span class="header-section-number">7.5.2</span> Veronderstelling van homoscedasticiteit (gelijkheid van variantie)</a></li>
-  <li><a href="#veronderstelling-van-normaliteit" id="toc-veronderstelling-van-normaliteit" class="nav-link" data-scroll-target="#veronderstelling-van-normaliteit"><span class="header-section-number">7.5.3</span> Veronderstelling van normaliteit</a></li>
+  <li><a href="#lineariteit" id="toc-lineariteit" class="nav-link" data-scroll-target="#lineariteit"><span class="header-section-number">6.5.1</span> Lineariteit</a></li>
+  <li><a href="#veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie" id="toc-veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie" class="nav-link" data-scroll-target="#veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie"><span class="header-section-number">6.5.2</span> Veronderstelling van homoscedasticiteit (gelijkheid van variantie)</a></li>
+  <li><a href="#veronderstelling-van-normaliteit" id="toc-veronderstelling-van-normaliteit" class="nav-link" data-scroll-target="#veronderstelling-van-normaliteit"><span class="header-section-number">6.5.3</span> Veronderstelling van normaliteit</a></li>
   </ul></li>
-  <li><a href="#afwijkingen-van-modelveronderstellingen" id="toc-afwijkingen-van-modelveronderstellingen" class="nav-link" data-scroll-target="#afwijkingen-van-modelveronderstellingen"><span class="header-section-number">7.6</span> Afwijkingen van Modelveronderstellingen</a></li>
-  <li><a href="#besluitvorming-over-gemiddelde-uitkomst" id="toc-besluitvorming-over-gemiddelde-uitkomst" class="nav-link" data-scroll-target="#besluitvorming-over-gemiddelde-uitkomst"><span class="header-section-number">7.7</span> Besluitvorming over gemiddelde uitkomst</a></li>
-  <li><a href="#predictie-intervallen" id="toc-predictie-intervallen" class="nav-link" data-scroll-target="#predictie-intervallen"><span class="header-section-number">7.8</span> Predictie-intervallen</a>
+  <li><a href="#afwijkingen-van-modelveronderstellingen" id="toc-afwijkingen-van-modelveronderstellingen" class="nav-link" data-scroll-target="#afwijkingen-van-modelveronderstellingen"><span class="header-section-number">6.6</span> Afwijkingen van Modelveronderstellingen</a></li>
+  <li><a href="#besluitvorming-over-gemiddelde-uitkomst" id="toc-besluitvorming-over-gemiddelde-uitkomst" class="nav-link" data-scroll-target="#besluitvorming-over-gemiddelde-uitkomst"><span class="header-section-number">6.7</span> Besluitvorming over gemiddelde uitkomst</a></li>
+  <li><a href="#predictie-intervallen" id="toc-predictie-intervallen" class="nav-link" data-scroll-target="#predictie-intervallen"><span class="header-section-number">6.8</span> Predictie-intervallen</a>
   <ul class="collapse">
-  <li><a href="#nhanes-voorbeeld" id="toc-nhanes-voorbeeld" class="nav-link" data-scroll-target="#nhanes-voorbeeld"><span class="header-section-number">7.8.1</span> NHANES voorbeeld</a></li>
+  <li><a href="#nhanes-voorbeeld" id="toc-nhanes-voorbeeld" class="nav-link" data-scroll-target="#nhanes-voorbeeld"><span class="header-section-number">6.8.1</span> NHANES voorbeeld</a></li>
   </ul></li>
-  <li><a href="#sec-linAnova" id="toc-sec-linAnova" class="nav-link" data-scroll-target="#sec-linAnova"><span class="header-section-number">7.9</span> Kwadratensommen en Anova-tabel</a>
+  <li><a href="#sec-linAnova" id="toc-sec-linAnova" class="nav-link" data-scroll-target="#sec-linAnova"><span class="header-section-number">6.9</span> Kwadratensommen en Anova-tabel</a>
   <ul class="collapse">
-  <li><a href="#determinatie-coëfficiënt" id="toc-determinatie-coëfficiënt" class="nav-link" data-scroll-target="#determinatie-coëfficiënt"><span class="header-section-number">7.9.1</span> Determinatie-coëfficiënt</a></li>
-  <li><a href="#f-testen-in-het-enkelvoudig-lineair-regressiemodel" id="toc-f-testen-in-het-enkelvoudig-lineair-regressiemodel" class="nav-link" data-scroll-target="#f-testen-in-het-enkelvoudig-lineair-regressiemodel"><span class="header-section-number">7.9.2</span> F-Testen in het enkelvoudig lineair regressiemodel</a></li>
-  <li><a href="#anova-tabel" id="toc-anova-tabel" class="nav-link" data-scroll-target="#anova-tabel"><span class="header-section-number">7.9.3</span> Anova Tabel</a></li>
+  <li><a href="#determinatie-coëfficiënt" id="toc-determinatie-coëfficiënt" class="nav-link" data-scroll-target="#determinatie-coëfficiënt"><span class="header-section-number">6.9.1</span> Determinatie-coëfficiënt</a></li>
+  <li><a href="#f-testen-in-het-enkelvoudig-lineair-regressiemodel" id="toc-f-testen-in-het-enkelvoudig-lineair-regressiemodel" class="nav-link" data-scroll-target="#f-testen-in-het-enkelvoudig-lineair-regressiemodel"><span class="header-section-number">6.9.2</span> F-Testen in het enkelvoudig lineair regressiemodel</a></li>
+  <li><a href="#anova-tabel" id="toc-anova-tabel" class="nav-link" data-scroll-target="#anova-tabel"><span class="header-section-number">6.9.3</span> Anova Tabel</a></li>
   </ul></li>
-  <li><a href="#sec-linDummy" id="toc-sec-linDummy" class="nav-link" data-scroll-target="#sec-linDummy"><span class="header-section-number">7.10</span> Dummy variabelen</a></li>
+  <li><a href="#sec-linDummy" id="toc-sec-linDummy" class="nav-link" data-scroll-target="#sec-linDummy"><span class="header-section-number">6.10</span> Dummy variabelen</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/statOmics/statistiek2deBach/edit/main/06-LineareRegressie.qmd" class="toc-action"><i class="bi bi-github"></i>Pagina bewerken</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-chap-linReg" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></span></h1>
+<h1 class="title"><span id="sec-chap-linReg" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></span></h1>
 </div>
 
 
@@ -363,13 +364,13 @@ window.Quarto = {
 <ul>
 <li><a href="https://statomics.github.io/sbc/rmd/06-linearRegression.html">script Hoofdstuk6</a></li>
 </ul>
-<section id="inleiding" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="inleiding"><span class="header-section-number">7.1</span> Inleiding</h2>
+<section id="inleiding" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="inleiding"><span class="header-section-number">6.1</span> Inleiding</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/w6xczw8JNpI" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <!---break-->
-<section id="borstkanker-dataset" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="borstkanker-dataset"><span class="header-section-number">7.1.1</span> Borstkanker dataset</h3>
+<section id="borstkanker-dataset" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="borstkanker-dataset"><span class="header-section-number">6.1.1</span> Borstkanker dataset</h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/aH0kNKVaLTA" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p><span class="citation" data-cites="sotiriou2006">Sotiriou e.a. (<a href="#ref-sotiriou2006" role="doc-biblioref">2006</a>)</span> publiceerden onderzoek naar de moleculaire basis van borstkanker. In de studie hebben de onderzoekers voor een groot aantal borstkanker patiënten klinische variabelen geregistreerd alsook de genexpressie in tumor weefsel gemeten voor duizenden genen m.b.v. microarray technologie. De genexpressie werd gemeten op de tumor biopsie die werd genomen voordat de behandeling werd gestart. De studie is een retrospectieve studie in de zin dat niet werd geëxperimenteerd en dat de genexpressie werd geëvalueerd als gevolg van de blootstelling die de individuen hebben ondergaan in het verleden.</p>
@@ -381,7 +382,7 @@ window.Quarto = {
 <div id="tbl-brcaMicroLin" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-brcaMicroLin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabel&nbsp;7.1: Overzicht van de variabelen in de borstkanker dataset.
+Tabel&nbsp;6.1: Overzicht van de variabelen in de borstkanker dataset.
 </figcaption>
 <div aria-describedby="tbl-brcaMicroLin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -493,10 +494,10 @@ Tabel&nbsp;7.1: Overzicht van de variabelen in de borstkanker dataset.
 </div>
 </div>
 </section>
-<section id="data-exploratie" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="data-exploratie"><span class="header-section-number">7.1.2</span> Data exploratie</h3>
-<p>In Sectie <a href="04-DataExploratie.html#sec-correlatie" class="quarto-xref"><span>5.7</span></a> werd de associatie tussen beide genen uitgebreid verkend. Daarin hebben we de genexpressie data eerst log-getransformeerd.</p>
-<p>In dit hoofdstuk zullen we om didactische redenen eerst werken met de expressiemetingen op de originele schaal. De expressie van het S100A8 gen wordt weergegeven in Figuur <a href="#fig-s100a8Boxplot" class="quarto-xref"><span>7.1</span></a>. Op de originele schaal zien we drie heel grote outliers. Omwille van didactische redenen worden deze eerst verwijderd uit de dataset. In principe mogen outliers enkel worden verwijderd uit een studie als daar een goede reden voor is. We kunnen op basis van de informatie over de studie echter niet argumenteren waarom de outliers niet representatief zijn, zoals bijvoorbeeld wel het geval zou zijn wanneer zich meetfouten of problemen voordeden m.b.t. deze observaties in de studie. Later in het hoofdstuk zullen we zien hoe we op een correcte wijze alle data kunnen modelleren.</p>
+<section id="data-exploratie" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="data-exploratie"><span class="header-section-number">6.1.2</span> Data exploratie</h3>
+<p>In Sectie <a href="04-DataExploratie.html#sec-correlatie" class="quarto-xref"><span>4.7</span></a> werd de associatie tussen beide genen uitgebreid verkend. Daarin hebben we de genexpressie data eerst log-getransformeerd.</p>
+<p>In dit hoofdstuk zullen we om didactische redenen eerst werken met de expressiemetingen op de originele schaal. De expressie van het S100A8 gen wordt weergegeven in Figuur <a href="#fig-s100a8Boxplot" class="quarto-xref"><span>6.1</span></a>. Op de originele schaal zien we drie heel grote outliers. Omwille van didactische redenen worden deze eerst verwijderd uit de dataset. In principe mogen outliers enkel worden verwijderd uit een studie als daar een goede reden voor is. We kunnen op basis van de informatie over de studie echter niet argumenteren waarom de outliers niet representatief zijn, zoals bijvoorbeeld wel het geval zou zijn wanneer zich meetfouten of problemen voordeden m.b.t. deze observaties in de studie. Later in het hoofdstuk zullen we zien hoe we op een correcte wijze alle data kunnen modelleren.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>, <span class="at">y=</span>S100A8)) <span class="sc">+</span></span>
@@ -510,13 +511,13 @@ Tabel&nbsp;7.1: Overzicht van de variabelen in de borstkanker dataset.
 <img src="06-LineareRegressie_files/figure-html/fig-s100a8Boxplot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s100a8Boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.1: Expressie van het S100A8 gen.
+Figuur&nbsp;6.1: Expressie van het S100A8 gen.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Om meerdere variabelen in de borstkanker dataset te bestuderen, kunnen we gebruik maken van de grafische scatterplot matrix voorstelling (zie Figuur <a href="#fig-brcaGenAl" class="quarto-xref"><span>7.2</span></a>). Hierbij wordt een matrix met paarsgewijze dotplots voor alle variabelen geproduceerd.</p>
+<p>Om meerdere variabelen in de borstkanker dataset te bestuderen, kunnen we gebruik maken van de grafische scatterplot matrix voorstelling (zie Figuur <a href="#fig-brcaGenAl" class="quarto-xref"><span>6.2</span></a>). Hierbij wordt een matrix met paarsgewijze dotplots voor alle variabelen geproduceerd.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>brcaSubset <span class="ot">&lt;-</span> brca <span class="sc">|&gt;</span></span>
@@ -530,14 +531,14 @@ Figuur&nbsp;7.1: Expressie van het S100A8 gen.
 <img src="06-LineareRegressie_files/figure-html/fig-brcaGenAl-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaGenAl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.2: Scatterplot matrix voor de observaties in de borstkanker dataset na verwijdering van outliers in de S100A8 expressie (merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset).
+Figuur&nbsp;6.2: Scatterplot matrix voor de observaties in de borstkanker dataset na verwijdering van outliers in de S100A8 expressie (merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>In de scatterplot matrix zien we bijvoorbeeld dat er een positieve associatie lijkt te zijn tussen de leeftijd (age) en de lymfeknoop status (node; geeft aan of de lymfeknopen al dan niet aangetast zijn en chirurgisch werden verwijderd, node 0: niet aangetast, 1: aangetast). Daarnaast observeren we ook een indicatie voor een negatieve associatie (dalende trend) tussen de ESR1 en S100A8 gen expressie.</p>
-<p>In dit hoofdstuk zullen we ons in het bijzonder focussen op de relatie tussen de ESR1 en de S100A8 gen expressie. Een individuele scatterplot met smoother (zie Figuur <a href="#fig-brcaSmooth" class="quarto-xref"><span>7.3</span></a>) geeft de associatie tussen beide genen nog beter weer. Smoothers kunnen trends visualiseren tussen variabelen zonder vooraf veronderstellingen te doen over de vorm van het verband en zijn daarom heel erg nuttig bij data exploratie. We zien dat de genexpressie van S100A8 gemiddeld gezien daalt voor patiënten met een hogere expressie van ESR1.</p>
+<p>In dit hoofdstuk zullen we ons in het bijzonder focussen op de relatie tussen de ESR1 en de S100A8 gen expressie. Een individuele scatterplot met smoother (zie Figuur <a href="#fig-brcaSmooth" class="quarto-xref"><span>6.3</span></a>) geeft de associatie tussen beide genen nog beter weer. Smoothers kunnen trends visualiseren tussen variabelen zonder vooraf veronderstellingen te doen over de vorm van het verband en zijn daarom heel erg nuttig bij data exploratie. We zien dat de genexpressie van S100A8 gemiddeld gezien daalt voor patiënten met een hogere expressie van ESR1.</p>
 <ol type="1">
 <li>pipe dataset naar ggplot</li>
 <li>selecteer data <code>ggplot(aes(x=ESR1,y=S100A8))</code></li>
@@ -556,16 +557,16 @@ Figuur&nbsp;7.2: Scatterplot matrix voor de observaties in de borstkanker datase
 <img src="06-LineareRegressie_files/figure-html/fig-brcaSmooth-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaSmooth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.3: Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met smoother die het verband tussen beide genen samenvat (na verwijdering van outliers in de S100A8 expressie, merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset).
+Figuur&nbsp;6.3: Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met smoother die het verband tussen beide genen samenvat (na verwijdering van outliers in de S100A8 expressie, merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="model" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="model"><span class="header-section-number">7.1.3</span> Model</h3>
-<p>Op basis van Figuur <a href="#fig-brcaSmooth" class="quarto-xref"><span>7.3</span></a> zien we dat er een relatie is tussen de S100A8 (Y) en ESR1 (X) expressie. De expressiemetingen voor het S100A8 gen zijn echter onderhevig aan ruis onder andere door biologische variabiliteit en technische variabiliteit. Voor een gegeven waarde <span class="math inline">\(X=x\)</span> neemt de genexpressie <span class="math inline">\(Y\)</span> dus niet steeds dezelfde waarde aan. Generiek kunnen we de S100A8 gen expressie dus beschrijven als</p>
+<section id="model" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="model"><span class="header-section-number">6.1.3</span> Model</h3>
+<p>Op basis van Figuur <a href="#fig-brcaSmooth" class="quarto-xref"><span>6.3</span></a> zien we dat er een relatie is tussen de S100A8 (Y) en ESR1 (X) expressie. De expressiemetingen voor het S100A8 gen zijn echter onderhevig aan ruis onder andere door biologische variabiliteit en technische variabiliteit. Voor een gegeven waarde <span class="math inline">\(X=x\)</span> neemt de genexpressie <span class="math inline">\(Y\)</span> dus niet steeds dezelfde waarde aan. Generiek kunnen we de S100A8 gen expressie dus beschrijven als</p>
 <p><span class="math display">\[\text{observatie = signaal + ruis.}\]</span></p>
 <p>Wiskundig kunnen we dat modelleren als</p>
 <p><span class="math display">\[Y_i=g(X_i)+\epsilon_i\]</span></p>
@@ -579,11 +580,11 @@ Figuur&nbsp;7.3: Scatterplot voor S100A8 expressie in functie van de ESR1 expres
 <p><span class="math display">\[E[\epsilon_i\vert X_i=x]=0.\]</span></p>
 </section>
 </section>
-<section id="lineaire-regressie" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="lineaire-regressie"><span class="header-section-number">7.2</span> Lineaire regressie</h2>
+<section id="lineaire-regressie" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="lineaire-regressie"><span class="header-section-number">6.2</span> Lineaire regressie</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/d0QptODQABY" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
-<p>Om accurate en interpreteerbare resultaten te bekomen gaat men vaak bepaalde veronderstellingen doen over de structuur van <span class="math inline">\(g(x)\)</span>. Zo modelleert men <span class="math inline">\(g(x)\)</span> vaak als een lineaire functie van ongekende parameters. Dat wordt geïllustreerd in Figuur <a href="#fig-brcaLin1" class="quarto-xref"><span>7.4</span></a>.</p>
+<p>Om accurate en interpreteerbare resultaten te bekomen gaat men vaak bepaalde veronderstellingen doen over de structuur van <span class="math inline">\(g(x)\)</span>. Zo modelleert men <span class="math inline">\(g(x)\)</span> vaak als een lineaire functie van ongekende parameters. Dat wordt geïllustreerd in Figuur <a href="#fig-brcaLin1" class="quarto-xref"><span>6.4</span></a>.</p>
 <ol type="1">
 <li>pipe dataset naar ggplot</li>
 <li>selecteer data <code>ggplot(aes(x=ESR1,y=S100A8))</code></li>
@@ -604,7 +605,7 @@ Figuur&nbsp;7.3: Scatterplot voor S100A8 expressie in functie van de ESR1 expres
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLin1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLin1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.4: Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met lineair model dat het verband tussen beide genen samenvat (na verwijdering van outliers in de S100A8 expressie, merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset zoals we verder in dit hoofdstuk zullen zien).
+Figuur&nbsp;6.4: Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met lineair model dat het verband tussen beide genen samenvat (na verwijdering van outliers in de S100A8 expressie, merk op dat we deze outliers in principe niet mochten verwijderen uit de dataset zoals we verder in dit hoofdstuk zullen zien).
 </figcaption>
 </figure>
 </div>
@@ -613,9 +614,9 @@ Figuur&nbsp;7.4: Scatterplot voor S100A8 expressie in functie van de ESR1 expres
 <p>Men veronderstelt dan het onderstaande lineaire regressiemodel</p>
 <p><span id="eq-linreg"><span class="math display">\[
 E(Y|X =x)=\beta_0 + \beta_1 x
-\tag{7.1}\]</span></span></p>
-<p>waarbij <span class="math inline">\(\beta_0\)</span> en <span class="math inline">\(\beta_1\)</span> ongekende modelparameters zijn. In deze uitdrukking stelt <span class="math inline">\(E(Y|X=x)\)</span> de waarde op de <span class="math inline">\(Y\)</span>-as voor, <span class="math inline">\(x\)</span> de waarde op de <span class="math inline">\(X\)</span>-as, het <em>intercept</em> <span class="math inline">\(\beta_0\)</span> stelt het snijpunt met de <span class="math inline">\(Y\)</span>-as voor en de <em>helling</em> <span class="math inline">\(\beta_1\)</span> geeft de richtingscoëfficiënt van de rechte weer. Uitdrukking <a href="#eq-linreg" class="quarto-xref"><span>7.1</span></a> wordt een <em>statistisch model</em> genoemd. Merk op dat dit model enkel een onderstelling maakt over het gemiddelde van de S100A8 expressie.</p>
-<p>Deze naamgeving suggereert dat het bepaalde onderstellingen legt op de verdeling van de geobserveerde gegevens. In het bijzonder onderstelt het dat de gemiddelde uitkomst lineair varieert in functie van één verklarende variabele <span class="math inline">\(X\)</span>. Om die reden wordt Model <a href="#eq-linreg" class="quarto-xref"><span>7.1</span></a> ook een <em>enkelvoudig lineair regressiemodel</em> genoemd. Onder dit model kan elke meting <span class="math inline">\(Y\)</span> op een foutterm <span class="math inline">\(\epsilon\)</span> na beschreven worden als een lineaire functie van de verklarende variabele <span class="math inline">\(X\)</span>, verder in deze cursus ook de predictor genoemd:</p>
+\tag{6.1}\]</span></span></p>
+<p>waarbij <span class="math inline">\(\beta_0\)</span> en <span class="math inline">\(\beta_1\)</span> ongekende modelparameters zijn. In deze uitdrukking stelt <span class="math inline">\(E(Y|X=x)\)</span> de waarde op de <span class="math inline">\(Y\)</span>-as voor, <span class="math inline">\(x\)</span> de waarde op de <span class="math inline">\(X\)</span>-as, het <em>intercept</em> <span class="math inline">\(\beta_0\)</span> stelt het snijpunt met de <span class="math inline">\(Y\)</span>-as voor en de <em>helling</em> <span class="math inline">\(\beta_1\)</span> geeft de richtingscoëfficiënt van de rechte weer. Uitdrukking <a href="#eq-linreg" class="quarto-xref"><span>6.1</span></a> wordt een <em>statistisch model</em> genoemd. Merk op dat dit model enkel een onderstelling maakt over het gemiddelde van de S100A8 expressie.</p>
+<p>Deze naamgeving suggereert dat het bepaalde onderstellingen legt op de verdeling van de geobserveerde gegevens. In het bijzonder onderstelt het dat de gemiddelde uitkomst lineair varieert in functie van één verklarende variabele <span class="math inline">\(X\)</span>. Om die reden wordt Model <a href="#eq-linreg" class="quarto-xref"><span>6.1</span></a> ook een <em>enkelvoudig lineair regressiemodel</em> genoemd. Onder dit model kan elke meting <span class="math inline">\(Y\)</span> op een foutterm <span class="math inline">\(\epsilon\)</span> na beschreven worden als een lineaire functie van de verklarende variabele <span class="math inline">\(X\)</span>, verder in deze cursus ook de predictor genoemd:</p>
 <p><span class="math display">\[Y=E(Y|X=x)+\epsilon=\beta_0+\beta_1 x+\epsilon\]</span></p>
 <p>waarbij <span class="math inline">\(\epsilon\)</span> de afwijking tussen de uitkomst en haar (conditioneel) gemiddelde waarde voorstelt, dit is de onzekerheid in de responsvariabele.</p>
 <p>Gezien het lineair regressiemodel onderstellingen doet over de verdeling van X en Y , kunnen deze onderstellingen ook vals zijn. Later in dit hoofdstuk zullen we zien hoe deze onderstellingen geëvalueerd kunnen worden. Als echter voldaan is aan de onderstellingen, laat dit een efficiënte data-analyse toe: alle observaties worden benut om te leren over verwachte uitkomst bij X = x.</p>
@@ -628,14 +629,14 @@ E(Y|X =x)=\beta_0 + \beta_1 x
 <p><span class="math display">\[\text{E}\left[Y|X=x+\delta\right]-\text{E}\left[Y|X=x\right]= \left[\beta_0+\beta_1(x+\delta)\right]-(\beta_0+\beta_1x)=\beta_1\delta\]</span></p>
 <p>waarbij <span class="math inline">\(\beta_1\)</span> het verschil is in gemiddelde uitkomst tussen subjecten die 1 eenheid verschillen in de genexpressie van het ESR1 gen.</p>
 </section>
-<section id="parameterschatting" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="parameterschatting"><span class="header-section-number">7.3</span> Parameterschatting</h2>
+<section id="parameterschatting" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="parameterschatting"><span class="header-section-number">6.3</span> Parameterschatting</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_Z3wseKXxjk" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
-<p>De parameters <span class="math inline">\(\beta_0\)</span> en <span class="math inline">\(\beta_1\)</span> zijn ongekenden. Indien de volledige studiepopulatie geobserveerd werd, dan zouden beide parameters exact bepaald kunnen worden (door bijvoorbeeld in 2 x-waarden de gemiddelde uitkomst te berekenen en vervolgens het resulterende stelsel van 2 vergelijkingen, bepaald door Model <a href="#eq-linreg" class="quarto-xref"><span>7.1</span></a>, op te lossen).</p>
+<p>De parameters <span class="math inline">\(\beta_0\)</span> en <span class="math inline">\(\beta_1\)</span> zijn ongekenden. Indien de volledige studiepopulatie geobserveerd werd, dan zouden beide parameters exact bepaald kunnen worden (door bijvoorbeeld in 2 x-waarden de gemiddelde uitkomst te berekenen en vervolgens het resulterende stelsel van 2 vergelijkingen, bepaald door Model <a href="#eq-linreg" class="quarto-xref"><span>6.1</span></a>, op te lossen).</p>
 <p>In de praktijk observeert men slechts een beperkte steekproef uit de studiepopulatie en is de taak om die parameters te schatten op basis van de beschikbare observaties. Deze schatting gebeurt door naar de lijn te zoeken die “het best past” bij de gegevens. Daarbij wil men dat bij een gegeven waarde <span class="math inline">\(x_i\)</span> voor het <span class="math inline">\(i\)</span>-de subject het punt op de regressielijn, <span class="math inline">\((x_i, \beta_0 + \beta_1 x_i)\)</span>, zo weinig mogelijk afwijkt van de overeenkomstige observatie <span class="math inline">\((x_i, y_i)\)</span>. Dit realiseert men door deze waarden voor <span class="math inline">\(\beta_0\)</span> en <span class="math inline">\(\beta_1\)</span> te kiezen die de som van die kwadratische afstanden tussen de voorspelde en geobserveerde punten,</p>
 <p><span class="math display">\[\sum_{i=1}^n (y_i-\beta_0-\beta_1 x_i)^2=\sum_{i=1}^n e_i^2\]</span></p>
-<p>zo klein mogelijk maakt. Waarbij <span class="math inline">\(e_i\)</span> de verticale afstanden van de observaties tot de gefitte regressierechte, ook wel residuen genoemd (zie Figuur <a href="#fig-brcaLinRes" class="quarto-xref"><span>7.5</span></a>).</p>
+<p>zo klein mogelijk maakt. Waarbij <span class="math inline">\(e_i\)</span> de verticale afstanden van de observaties tot de gefitte regressierechte, ook wel residuen genoemd (zie Figuur <a href="#fig-brcaLinRes" class="quarto-xref"><span>6.5</span></a>).</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-brcaLinRes" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -644,7 +645,7 @@ E(Y|X =x)=\beta_0 + \beta_1 x
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLinRes-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLinRes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.5: Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met lineair model (rode lijn) en residuen (zwarte gestreepte lijnen).
+Figuur&nbsp;6.5: Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met lineair model (rode lijn) en residuen (zwarte gestreepte lijnen).
 </figcaption>
 </figure>
 </div>
@@ -657,7 +658,7 @@ Figuur&nbsp;7.5: Scatterplot voor S100A8 expressie in functie van de ESR1 expres
 <p>en dat</p>
 <p><span class="math display">\[\hat{\beta_0}=\bar y - \hat{\beta}_1 \bar x \]</span></p>
 <p>Merk op dat de helling van de kleinste kwadratenlijn evenredig is met de correlatie tussen de uitkomst en de verklarende variabele.</p>
-<p>Voor gegeven schattingen <span class="math inline">\(\hat{\beta}_0\)</span> voor <span class="math inline">\(\beta_0\)</span> en <span class="math inline">\(\hat{\beta}_1\)</span> voor <span class="math inline">\(\beta_1\)</span> laat het lineaire regressiemodel <a href="#eq-linreg" class="quarto-xref"><span>7.1</span></a> toe om:</p>
+<p>Voor gegeven schattingen <span class="math inline">\(\hat{\beta}_0\)</span> voor <span class="math inline">\(\beta_0\)</span> en <span class="math inline">\(\hat{\beta}_1\)</span> voor <span class="math inline">\(\beta_1\)</span> laat het lineaire regressiemodel <a href="#eq-linreg" class="quarto-xref"><span>6.1</span></a> toe om:</p>
 <ul>
 <li>de verwachte uitkomst te voorspellen voor subjecten met een gegeven waarde <span class="math inline">\(x\)</span> voor de verklarende variabele. Deze kan geschat worden als <span class="math inline">\(\hat{\beta}_0+\hat{\beta}_1x\)</span>.</li>
 <li>na te gaan hoeveel de uitkomst gemiddeld verschilt tussen 2 groepen subjecten met een verschil van <span class="math inline">\(\delta\)</span> eenheden in de verklarende variabele. Namelijk:</li>
@@ -689,17 +690,17 @@ F-statistic: 23.93 on 1 and 27 DF,  p-value: 4.078e-05</code></pre>
 </div>
 </div>
 <p>De software rapporteert <span class="math inline">\(\hat{\beta}_0=\)</span> 208.47 en <span class="math inline">\(\hat{\beta}_1=\)</span>-0.059. We besluiten dat, de verwachte S100A8 expressie gemiddeld 59 eenheden lager ligt bij patiënten met een ESR1 expressieniveau die 1000 eenheden hoger ligt. Bovendien kunnen we de S100A8 expressie voorspellen die men mag verwachten bij een gegeven ESR1 expressieniveau. Bijvoorbeeld, bij een ESR1 expressieniveau van 1300 verwachten we een S100A8 expressieniveau van 208.47 <span class="math inline">\(-\)</span> 0.059 <span class="math inline">\(\times\)</span> 1300= 131.43.</p>
-<p>Merk op in Figuur <a href="#fig-brcaLin1" class="quarto-xref"><span>7.4</span></a> dat er in de dataset geen patiënt is geobserveerd die een ESR1 expressieniveau had van 1300. Op basis van de dataset zou het bijgevolg niet mogelijk zijn om, zonder gebruik te maken van een statistisch model, een schatting te bekomen voor de S100A8 expressie bij deze ESR1 expressiewaarde. Onder de veronderstelling dat de gemiddelde S100A8 expressie lineair varieert in functie van de ESR1 expressie, kunnen we alle observaties gebruiken om dit gemiddelde te schatten. Bijgevolg bekomen we een zinvol en precies resultaat, op voorwaarde dat aan de veronderstelling van lineariteit is voldaan. Het zal bijgevolg belangrijk zijn om de veronderstelling van lineariteit na te gaan (zie verder).</p>
+<p>Merk op in Figuur <a href="#fig-brcaLin1" class="quarto-xref"><span>6.4</span></a> dat er in de dataset geen patiënt is geobserveerd die een ESR1 expressieniveau had van 1300. Op basis van de dataset zou het bijgevolg niet mogelijk zijn om, zonder gebruik te maken van een statistisch model, een schatting te bekomen voor de S100A8 expressie bij deze ESR1 expressiewaarde. Onder de veronderstelling dat de gemiddelde S100A8 expressie lineair varieert in functie van de ESR1 expressie, kunnen we alle observaties gebruiken om dit gemiddelde te schatten. Bijgevolg bekomen we een zinvol en precies resultaat, op voorwaarde dat aan de veronderstelling van lineariteit is voldaan. Het zal bijgevolg belangrijk zijn om de veronderstelling van lineariteit na te gaan (zie verder).</p>
 <p>Gezien de lineariteit van het model enkel kan worden nagegaan over het geobserveerde bereik van de verklarende variabele (bijvoorbeeld, over het interval 396.1,3967.2), is het belangrijk om te begrijpen dat de resultaten van een lineair regressiemodel niet zomaar kunnen geëxtrapoleerd worden voorbij de kleinste of grootste geobserveerde <span class="math inline">\(X\)</span>-waarde. Met het model kunnen we de verwachte S100A8 intensiteit voor patiënten met een ESR1 expressie-niveau van 4500 schatten, maar de geobserveerde data laten niet toe om na te gaan of dit een betrouwbare schatting is. Het zou immers kunnen dat de regressielijn bij hoge waarden van de predictorvariabele afbuigt of opklimt waardoor een lineaire extrapolatie misleidend zou zijn. Merk zo bijvoorbeeld op dat predictie bij een ESR1 intensiteit van 4500 bijzonder misleidend is vermits ze een negatief resultaat oplevert wat onmogelijk is voor een intensiteitsmeting (208.47 <span class="math inline">\(+\)</span> -0.059 <span class="math inline">\(\times\)</span> 4500= -58.22).</p>
 </section>
-<section id="sec-linBesluit" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="sec-linBesluit"><span class="header-section-number">7.4</span> Statistische besluitvorming</h2>
+<section id="sec-linBesluit" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-linBesluit"><span class="header-section-number">6.4</span> Statistische besluitvorming</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GIg108WaOcQ" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p>Als de gegevens representatief zijn voor de populatie kan men in de regressiecontext eveneens aantonen dat de kleinste kwadraten schatters voor het intercept en de helling onvertekend zijn, m.a.w</p>
 <p><span class="math display">\[E[\hat \beta_0]=\beta_0 \text{ en } E[\hat \beta_1]=\beta_1\]</span></p>
 <p>Het feit dat de schatters gemiddeld (over een groot aantal vergelijkbare studies) niet afwijken van de waarden in de populatie, impliceert niet dat ze niet rond die waarde variëren. Om inzicht te krijgen hoe dicht we de parameterschatters bij het werkelijke intercept <span class="math inline">\(\beta_0\)</span> en de werkelijke helling <span class="math inline">\(\beta_1\)</span> mogen verwachten, wensen we bijgevolg ook haar variabiliteit te kennen.</p>
-<p>In de borstkanker dataset hebben we een negatieve associatie geobserveerd tussen de S100A8 en ESR1 gen expressie. Net zoals in Hoofdstuk <a href="05-StatistischeBesluitvorming.html" class="quarto-xref"><span>6</span></a> is het op basis van de puntschatters voor de helling niet duidelijk of dat verband werkelijk voorkomt in de populatie of indien we het verband door toeval hebben geobserveerd in de dataset. De schatting van de helling is immers onnauwkeurig en zal variëren van steekproef tot steekproef. Het resultaat van een data-analyse is dus niet interpreteerbaar zonder die variabiliteit in kaart te brengen.</p>
+<p>In de borstkanker dataset hebben we een negatieve associatie geobserveerd tussen de S100A8 en ESR1 gen expressie. Net zoals in Hoofdstuk <a href="05-StatistischeBesluitvorming.html" class="quarto-xref"><span>5</span></a> is het op basis van de puntschatters voor de helling niet duidelijk of dat verband werkelijk voorkomt in de populatie of indien we het verband door toeval hebben geobserveerd in de dataset. De schatting van de helling is immers onnauwkeurig en zal variëren van steekproef tot steekproef. Het resultaat van een data-analyse is dus niet interpreteerbaar zonder die variabiliteit in kaart te brengen.</p>
 <p>Om de resultaten uit de steekproef te kunnen veralgemenen naar de populatie zullen we in deze context eveneens inzicht nodig hebben op de verdeling van de parameterschatters. Om te kunnen voorspellen hoe de parameterschatters variëren van steekproef tot steekproef enkel en alleen op basis van slechts één steekproef zullen we naast de onderstelling van</p>
 <ol type="1">
 <li><em>Lineariteit</em></li>
@@ -720,12 +721,12 @@ F-statistic: 23.93 on 1 and 27 DF,  p-value: 4.078e-05</code></pre>
 <p>en dat de parameterschatters eveneens normaal verdeeld zijn</p>
 <p><span class="math display">\[\hat\beta_0 \sim N\left(\beta_0,\sigma^2_{\hat \beta_0}\right) \text{ en } \hat\beta_1 \sim N\left(\beta_1,\sigma^2_{\hat \beta_1}\right)\]</span></p>
 <p>Merk op dat de onzekerheid op de helling af zal nemen wanneer er meer observaties zijn en/of wanneer de observaties meer gespreid zijn. Voor het opzetten van een experiment kan dit belangrijke informatie zijn. Uiteraard wordt de precisie ook beïnvloed door de grootte van de variabiliteit van de observaties rond de rechte, <span class="math inline">\(\sigma^2\)</span>, maar dat heeft een onderzoeker meestal niet in de hand.</p>
-<p>De conditionele variantie (<span class="math inline">\(\sigma^2\)</span>) is echter niet gekend en is noodzakelijk voor de berekening van de variantie op de parameterschatters. We kunnen <span class="math inline">\(\sigma^2\)</span> echter ook schatten op basis van de observaties. Zoals beschreven in Hoofdstuk <a href="04-DataExploratie.html" class="quarto-xref"><span>5</span></a> kunnen we de variatie van de uitkomsten rond hun conditionele gemiddelde beschrijven d.m.v. de afwijkingen tussen de observaties <span class="math inline">\(y_i\)</span> en hun (geschatte) gemiddelde <span class="math inline">\(\hat{g}(x)=\hat{\beta}_0+\hat{\beta}_1x_i\)</span>, de residu’s. Het gemiddelde van die residu’s is echter altijd 0 omdat positieve en negatieve residu’s mekaar opheffen. Bijgevolg levert het gemiddelde residu geen goede maat op voor de variatie en is het beter om naar kwadratische afwijkingen <span class="math inline">\(e_i^2\)</span> te kijken. Net zoals de steekproefvariantie een goede schatter was voor de variantie (Sectie <a href="04-DataExploratie.html#sec-spreiding" class="quarto-xref"><span>5.3.2</span></a>), zal in de regressiecontext het gemiddelde van die kwadratische afwijkingen rond de regressierechte opnieuw een goede schatter zijn voor <span class="math inline">\(\sigma^2\)</span>. Deze schatter wordt in de literatuur ook wel de <em>mean squared error</em> (MSE) genoemd.</p>
+<p>De conditionele variantie (<span class="math inline">\(\sigma^2\)</span>) is echter niet gekend en is noodzakelijk voor de berekening van de variantie op de parameterschatters. We kunnen <span class="math inline">\(\sigma^2\)</span> echter ook schatten op basis van de observaties. Zoals beschreven in Hoofdstuk <a href="04-DataExploratie.html" class="quarto-xref"><span>4</span></a> kunnen we de variatie van de uitkomsten rond hun conditionele gemiddelde beschrijven d.m.v. de afwijkingen tussen de observaties <span class="math inline">\(y_i\)</span> en hun (geschatte) gemiddelde <span class="math inline">\(\hat{g}(x)=\hat{\beta}_0+\hat{\beta}_1x_i\)</span>, de residu’s. Het gemiddelde van die residu’s is echter altijd 0 omdat positieve en negatieve residu’s mekaar opheffen. Bijgevolg levert het gemiddelde residu geen goede maat op voor de variatie en is het beter om naar kwadratische afwijkingen <span class="math inline">\(e_i^2\)</span> te kijken. Net zoals de steekproefvariantie een goede schatter was voor de variantie (Sectie <a href="04-DataExploratie.html#sec-spreiding" class="quarto-xref"><span>4.3.2</span></a>), zal in de regressiecontext het gemiddelde van die kwadratische afwijkingen rond de regressierechte opnieuw een goede schatter zijn voor <span class="math inline">\(\sigma^2\)</span>. Deze schatter wordt in de literatuur ook wel de <em>mean squared error</em> (MSE) genoemd.</p>
 <p><span class="math display">\[\hat\sigma^2=MSE=\frac{\sum\limits_{i=1}^n \left(y_i-\hat\beta_0-\hat\beta_1\times x_i\right)^2}{n-2}=\frac{\sum\limits_{i=1}^n e^2_i}{n-2}.\]</span></p>
 <p>Voor het bekomen van deze schatter steunen we op onafhankelijkheid (aanname 2) en homoscedasticiteit (aanname 3). Merk op dat we bij deze schatter niet delen door het aantal observaties <span class="math inline">\(n\)</span>, maar door <span class="math inline">\(n-2\)</span>. Hierbij corrigeren we voor het feit dat voor de berekening van MSE 2 vrijheidsgraden worden gespendeerd aan het schatten van het intercept en de helling.</p>
 <p>Na het schatten van MSE kunnen we <span class="math inline">\(\sigma^2\)</span> door MSE vervangen zodat schatters worden bekomen voor de variantie en standard error op de schatters van model parameters,</p>
 <p><span class="math display">\[\text{SE}_{\hat{\beta}_0}=\hat\sigma_{\hat{\beta}_0}=\sqrt{\frac{\sum\limits_{i=1}^n X^2_i}{\sum\limits_{i=1}^n (X_i-\bar X)^2} \times\frac{\text{MSE}}{n}} \text{ en } \text{SE}_{\hat{\beta}_1}=\hat\sigma_{\hat{\beta}_1}=\sqrt{\frac{\text{MSE}}{\sum\limits_{i=1}^n (X_i-\bar X)^2}}\]</span></p>
-<p>Analoog als in Hoofdstuk <a href="05-StatistischeBesluitvorming.html" class="quarto-xref"><span>6</span></a> kunnen we opnieuw toetsen en betrouwbaarheidsintervallen construeren op basis van de teststatistieken</p>
+<p>Analoog als in Hoofdstuk <a href="05-StatistischeBesluitvorming.html" class="quarto-xref"><span>5</span></a> kunnen we opnieuw toetsen en betrouwbaarheidsintervallen construeren op basis van de teststatistieken</p>
 <p><span class="math display">\[T=\frac{\hat{\beta}_k-\beta_k}{SE(\hat{\beta}_k)} \text{ met } k=0,1.\]</span></p>
 <p>Als aan alle aannames is voldaan dan volgen deze statistieken <span class="math inline">\(T\)</span> een t-verdeling met n-2 vrijheidsgraden. Wanneer niet is voldaan aan de veronderstelling van normaliteit maar wel aan lineariteit, onafhankelijkheid en homoscedasticiteit dan kunnen we voor inferentie opnieuw beroep doen op de centrale limietstelling die zegt dat de statistiek T bij benadering een standaard Normaal verdeling zal volgen wanneer het aantal observaties voldoende groot is.</p>
 <p>In de borstkanker dataset hebben we een negatieve associatie geobserveerd tussen de S100A8 en ESR1 gen expressie. We kunnen het effect in de steekproef nu veralgemenen naar de populatie toe door een betrouwbaarheidsinterval te bouwen voor de helling:</p>
@@ -773,8 +774,8 @@ F-statistic: 23.93 on 1 and 27 DF,  p-value: 4.078e-05</code></pre>
 <p>De test geeft weer dat de associatie tussen de S100A8 en ESR1 genexpressie extreem significant is (p&lt;&lt;0.001). Als de nulhypothese waar is en als aan alle voorwaarden is voldaan dan is er een kans van 4 op 100000 om een helling te vinden die minstens even extreem is door toeval. Het is bijgevolg heel onwaarschijnlijk om dergelijke associatie te observeren in een steekproef wanneer de nulhypothese waar is.</p>
 <p>Vooraleer we een conclusie trekken is het echter belangrijk dat we alle aannames verifiëren omdat de statistische test en de betrouwbaarheidsintervallen anders incorrect zijn.</p>
 </section>
-<section id="nagaan-van-modelveronderstellingen" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="nagaan-van-modelveronderstellingen"><span class="header-section-number">7.5</span> Nagaan van modelveronderstellingen</h2>
+<section id="nagaan-van-modelveronderstellingen" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="nagaan-van-modelveronderstellingen"><span class="header-section-number">6.5</span> Nagaan van modelveronderstellingen</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/cs_IzOFFEwg" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p>Voor de statistische besluitvorming hebben we volgende aannames gedaan</p>
@@ -786,14 +787,14 @@ F-statistic: 23.93 on 1 and 27 DF,  p-value: 4.078e-05</code></pre>
 <li>Normaliteit</li>
 </ol>
 <p>Onafhankelijkheid is moeilijk te verifiëren op basis van de data, dat zou gegarandeerd moeten zijn door het design van de studie. Als we afwijkingen zien van lineariteit dan heeft besluitvorming geen zin gezien het de primaire veronderstelling is. In dat geval moeten we het conditioneel gemiddeld eerst beter modelleren. In geval van lineariteit maar schendingen van homoscedasticiteit of normaliteit dan weten we dat de besluitvorming mogelijks incorrect is omdat de teststatistiek dan niet langer een t-verdeling volgt.</p>
-<section id="lineariteit" class="level3" data-number="7.5.1">
-<h3 data-number="7.5.1" class="anchored" data-anchor-id="lineariteit"><span class="header-section-number">7.5.1</span> Lineariteit</h3>
+<section id="lineariteit" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="lineariteit"><span class="header-section-number">6.5.1</span> Lineariteit</h3>
 <p>De primaire veronderstelling in lineaire regressie-analyse is de aanname dat de uitkomst (afhankelijke variabele) lineair varieert ten opzichte van de verklarende variabele. Deze veronderstelling kan men gemakkelijk grafisch verifiëren op basis van een scatterplot waarbij men de uitkomst uitzet in functie van de verklarende variabele. Vervolgens gaat men na of het verband een lineair patroon volgt.<br>
-In Figuur <a href="#fig-brcaLin1" class="quarto-xref"><span>7.4</span></a> zien we systematische afwijkingen bij kleine en grote waarden voor de ESR1 expressie. De observaties liggen dan steeds systematisch boven de regressierechte wat aangeeft dat het gemiddelde in deze regio’s systematisch wordt onderschat. Afwijkingen van lineariteit worden vaak echter makkelijker opgespoord d.m.v. een <em>residuplot</em>. Dit is een scatterplot met de verklarende variabele op de <span class="math inline">\(X\)</span>-as en de <em>residuen</em> op de <span class="math inline">\(Y\)</span>-as</p>
+In Figuur <a href="#fig-brcaLin1" class="quarto-xref"><span>6.4</span></a> zien we systematische afwijkingen bij kleine en grote waarden voor de ESR1 expressie. De observaties liggen dan steeds systematisch boven de regressierechte wat aangeeft dat het gemiddelde in deze regio’s systematisch wordt onderschat. Afwijkingen van lineariteit worden vaak echter makkelijker opgespoord d.m.v. een <em>residuplot</em>. Dit is een scatterplot met de verklarende variabele op de <span class="math inline">\(X\)</span>-as en de <em>residuen</em> op de <span class="math inline">\(Y\)</span>-as</p>
 <p><span class="math display">\[e_i=y_i-\hat{g}(x_i)=y_i-\hat\beta_0-\hat\beta_1\times x_i,\]</span></p>
-<p>deze werden weergegeven in Figuur <a href="#fig-brcaLinRes" class="quarto-xref"><span>7.5</span></a>.</p>
+<p>deze werden weergegeven in Figuur <a href="#fig-brcaLinRes" class="quarto-xref"><span>6.5</span></a>.</p>
 <p>Als de veronderstelling van lineariteit opgaat, krijgt men in een residuplot geen patroon te zien. De residuen zijn immers gemiddeld nul voor elke waarde van de predictor en zouden dus mooi rond nul moeten variëren.</p>
-<p>Wanneer de residu’s echter een niet-lineair patroon onthullen, dan geeft dit aan dat extra termen in het model moeten worden opgenomen om de gemiddelde uitkomst correct te voorspellen. Bijvoorbeeld, wanneer de residu’s een kwadratisch patroon onthullen, dan kunnen we schrijven dat bij benadering <span class="math inline">\(e_i\approx \delta_0+\delta_1 x_i+\delta_2 x_i^2\)</span> voor zekere getallen <span class="math inline">\(\delta_0,\delta_1,\delta_2\)</span>, en bijgevolg dat de uitkomst <span class="math inline">\(y_i=\hat{\alpha}+\hat{\beta}x_i+e_i\approx (\hat{\alpha}+\delta_0)+(\hat{\beta}+\delta_1)x_i+\delta_2 x_i^2\)</span> (op een foutterm na) een kwadratische functie is van <span class="math inline">\(x_i\)</span>. In dat geval is het aangewezen om op een kwadratisch regressiemodel over te stappen (zie Hoofdstuk <a href="10-GeneralLinearModel.html" class="quarto-xref"><span>11</span></a>). Residuplots worden standaard gegenereerd door de R-software. Hier worden de residuen echter geplot ten opzichte van de gefitte waarden wat eenvoudiger is wanneer meerdere predictoren in het model worden opgenomen (zie Hoofdstuk <a href="10-GeneralLinearModel.html" class="quarto-xref"><span>11</span></a>).</p>
+<p>Wanneer de residu’s echter een niet-lineair patroon onthullen, dan geeft dit aan dat extra termen in het model moeten worden opgenomen om de gemiddelde uitkomst correct te voorspellen. Bijvoorbeeld, wanneer de residu’s een kwadratisch patroon onthullen, dan kunnen we schrijven dat bij benadering <span class="math inline">\(e_i\approx \delta_0+\delta_1 x_i+\delta_2 x_i^2\)</span> voor zekere getallen <span class="math inline">\(\delta_0,\delta_1,\delta_2\)</span>, en bijgevolg dat de uitkomst <span class="math inline">\(y_i=\hat{\alpha}+\hat{\beta}x_i+e_i\approx (\hat{\alpha}+\delta_0)+(\hat{\beta}+\delta_1)x_i+\delta_2 x_i^2\)</span> (op een foutterm na) een kwadratische functie is van <span class="math inline">\(x_i\)</span>. In dat geval is het aangewezen om op een kwadratisch regressiemodel over te stappen (zie Hoofdstuk <a href="10-GeneralLinearModel.html" class="quarto-xref"><span>10</span></a>). Residuplots worden standaard gegenereerd door de R-software. Hier worden de residuen echter geplot ten opzichte van de gefitte waarden wat eenvoudiger is wanneer meerdere predictoren in het model worden opgenomen (zie Hoofdstuk <a href="10-GeneralLinearModel.html" class="quarto-xref"><span>10</span></a>).</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm1)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
@@ -804,27 +805,27 @@ In Figuur <a href="#fig-brcaLin1" class="quarto-xref"><span>7.4</span></a> zien 
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLinDiag1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLinDiag1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.6: Diagnostische plots voor het nagaan van de veronderstellingen van het lineair regressiemodel waarbij de S100A8 expressie wordt gemodelleerd i.f.v de ESR1 expressie (na verwijdering van 3 outliers).
+Figuur&nbsp;6.6: Diagnostische plots voor het nagaan van de veronderstellingen van het lineair regressiemodel waarbij de S100A8 expressie wordt gemodelleerd i.f.v de ESR1 expressie (na verwijdering van 3 outliers).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>De residu plot voor het borstkanker voorbeeld wordt weergegeven in Figuur <a href="#fig-brcaLinDiag1" class="quarto-xref"><span>7.6</span></a> boven links. De residuen zijn niet overal mooi gespreid rond nul. Bij lage en hoge voorspelde waarden voor het model (dus bij hoge en lage waarden voor de predictor, negatieve helling) zijn de residuen overwegend positief wat opnieuw aangeeft dat het model de data in deze regio’s systematisch onderschat. Dat was ergens te verwachten gezien de smoother in Figuur <a href="#fig-brcaSmooth" class="quarto-xref"><span>7.3</span></a> immers eerder een exponentiëel verband suggereerde. Bovendien voorspelde het regressiemodel eveneens negatieve waarden voor de S100A8 expressie wat onmogelijk is voor intensiteitsmetingen die immers steeds positief zijn.</p>
+<p>De residu plot voor het borstkanker voorbeeld wordt weergegeven in Figuur <a href="#fig-brcaLinDiag1" class="quarto-xref"><span>6.6</span></a> boven links. De residuen zijn niet overal mooi gespreid rond nul. Bij lage en hoge voorspelde waarden voor het model (dus bij hoge en lage waarden voor de predictor, negatieve helling) zijn de residuen overwegend positief wat opnieuw aangeeft dat het model de data in deze regio’s systematisch onderschat. Dat was ergens te verwachten gezien de smoother in Figuur <a href="#fig-brcaSmooth" class="quarto-xref"><span>6.3</span></a> immers eerder een exponentiëel verband suggereerde. Bovendien voorspelde het regressiemodel eveneens negatieve waarden voor de S100A8 expressie wat onmogelijk is voor intensiteitsmetingen die immers steeds positief zijn.</p>
 </section>
-<section id="veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie" class="level3" data-number="7.5.2">
-<h3 data-number="7.5.2" class="anchored" data-anchor-id="veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie"><span class="header-section-number">7.5.2</span> Veronderstelling van homoscedasticiteit (gelijkheid van variantie)</h3>
-<p>Residuen en kwadratische residu’s dragen informatie in zich over residuele variabiliteit. Als er homoscedasiticiteit is dan verwachten we dat de residuen eenzelfde spreiding hebben voor elke waarde van de predictor en voor elke predictie. Als de spreiding in de residuen geassocieerd zijn met de verklarende variabelen, dan is er indicatie van heteroscedasticiteit. De diagnostische plots van het software pakket R geven een residu-plot weer en een plot van de vierkantswortel van de absolute waarde van de gestandaardiseerde error <span class="math inline">\(\sqrt{|e_i|/\sqrt{MSE}}\)</span> in functie van de predicties. De residu-plot voor het borstkanker voorbeeld Figuur <a href="#fig-brcaLinDiag1" class="quarto-xref"><span>7.6</span></a> boven links geeft afwijkingen weer van homoscedasiticiteit. De spreiding in de residuen lijkt toe te nemen met een toenemende waarde van de predictor. De plot beneden links is specifiek om de voorwaarde van gelijkheid van variantie na te gaan en geeft eveneens aan dat de variantie toeneemt met het conditioneel gemiddelde. Een dergelijke trend komt dikwijls voor bij concentratiemetingen en intensiteitsmetingen, die vaak een multiplicatieve errorstructuur vertonen i.p.v. een additieve error.</p>
+<section id="veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="veronderstelling-van-homoscedasticiteit-gelijkheid-van-variantie"><span class="header-section-number">6.5.2</span> Veronderstelling van homoscedasticiteit (gelijkheid van variantie)</h3>
+<p>Residuen en kwadratische residu’s dragen informatie in zich over residuele variabiliteit. Als er homoscedasiticiteit is dan verwachten we dat de residuen eenzelfde spreiding hebben voor elke waarde van de predictor en voor elke predictie. Als de spreiding in de residuen geassocieerd zijn met de verklarende variabelen, dan is er indicatie van heteroscedasticiteit. De diagnostische plots van het software pakket R geven een residu-plot weer en een plot van de vierkantswortel van de absolute waarde van de gestandaardiseerde error <span class="math inline">\(\sqrt{|e_i|/\sqrt{MSE}}\)</span> in functie van de predicties. De residu-plot voor het borstkanker voorbeeld Figuur <a href="#fig-brcaLinDiag1" class="quarto-xref"><span>6.6</span></a> boven links geeft afwijkingen weer van homoscedasiticiteit. De spreiding in de residuen lijkt toe te nemen met een toenemende waarde van de predictor. De plot beneden links is specifiek om de voorwaarde van gelijkheid van variantie na te gaan en geeft eveneens aan dat de variantie toeneemt met het conditioneel gemiddelde. Een dergelijke trend komt dikwijls voor bij concentratiemetingen en intensiteitsmetingen, die vaak een multiplicatieve errorstructuur vertonen i.p.v. een additieve error.</p>
 <p>Voor bepaalde types uitkomsten bestaan er <em>variantie-stabiliserende transformaties</em> voor de afhankelijke variabele die erop gericht zijn om de onderstelling van homoscedasticiteit te doen opgaan. Voor proporties of percentages, gebruikt men bijvoorbeeld vaak de arcsin-transformatie die de uitkomst <span class="math inline">\(Y\)</span> omzet in <span class="math inline">\(\arcsin\sqrt{Y}\)</span>, omdat men kan aantonen dat percentages (onder bepaalde onderstellingen) een constante variantie hebben na deze transformatie. Voor concentraties en intensiteitsmetingen gebruikt men dan weer vaak een logaritmische transformatie gezien deze (a) positief zijn, (b) vaak gekenmerkt worden door een variantie die toeneemt met het gemiddelde en (c) veelal een scheve verdeling vertonen maar rechts. Indien transformatie van de uitkomst niet helpt of niet wenselijk is (bijvoorbeeld, omdat het de interpretatie van het model niet ten goede komt) en er is een consistent patroon van ongelijke variantie (bijvoorbeeld, toenemende variantie in uitkomst bij toenemende predictorwaarden), dan kan men ook <em>gewogen kleinste kwadratenschatters</em> (in het Engels: <em>weighted least squares</em>) bepalen. Een verder alternatief is om <em>veralgemeende lineaire modellen</em> (in het Engels: <em>generalized linear models</em>) te schatten die tevens andere verdelingen voor de uitkomst dan de Normale verdeling toelaten. Beide klassen van oplossingen (d.i. gewogen kleinste kwadratenschatters en veralgemeende lineaire modellen) vallen echter buiten het bestek van deze cursus.</p>
 </section>
-<section id="veronderstelling-van-normaliteit" class="level3" data-number="7.5.3">
-<h3 data-number="7.5.3" class="anchored" data-anchor-id="veronderstelling-van-normaliteit"><span class="header-section-number">7.5.3</span> Veronderstelling van normaliteit</h3>
+<section id="veronderstelling-van-normaliteit" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="veronderstelling-van-normaliteit"><span class="header-section-number">6.5.3</span> Veronderstelling van normaliteit</h3>
 <p>Opnieuw kunnen we de veronderstelling van normaliteit nagaan door gebruik te maken van QQ-plots. Een QQ-plot van de afhankelijke variabele is misleidend omdat deze nagaat of de metingen voor alle subjecten samen Normaal verdeeld zijn. Dat is echter niet het geval gezien de normale verdeling per subject varieert. Elk subject kan immers andere waarde hebben voor de predictor <span class="math inline">\(X\)</span> (ESR1 expressie) en bijgevolg hebben ze een verschillend conditioneel gemiddelde. Normaal verdeelde uitkomsten bij gegeven <span class="math inline">\(x\)</span>-waarde impliceert echter dat de residu’s bij benadering Normaal verdeeld zijn. Afwijkingen van Normaliteit in een QQ-plot van de residu’s levert dus een indicatie dat de uitkomsten niet Normaal verdeeld zijn bij vaste <span class="math inline">\(x\)</span>.</p>
-<p>Figuur <a href="#fig-brcaLinDiag1" class="quarto-xref"><span>7.6</span></a> rechts boven geeft de QQ-plot weer van de residuen voor het borstkanker voorbeeld. We zien wat afwijkingen in de rechterstaart die wijzen op meerdere outliers of op observaties die systematisch hoger liggen dan wat verwacht kan worden op basis van de normaalverdeling. Dit is niet verrassend omdat heterogeniteit van de variantie vaak samengaat met niet-Normaliteit, i.h.b. scheefheid, van de gegevens. Dat komt vaak voor bij concentratie- en intensiteitsmetingen.</p>
+<p>Figuur <a href="#fig-brcaLinDiag1" class="quarto-xref"><span>6.6</span></a> rechts boven geeft de QQ-plot weer van de residuen voor het borstkanker voorbeeld. We zien wat afwijkingen in de rechterstaart die wijzen op meerdere outliers of op observaties die systematisch hoger liggen dan wat verwacht kan worden op basis van de normaalverdeling. Dit is niet verrassend omdat heterogeniteit van de variantie vaak samengaat met niet-Normaliteit, i.h.b. scheefheid, van de gegevens. Dat komt vaak voor bij concentratie- en intensiteitsmetingen.</p>
 </section>
 </section>
-<section id="afwijkingen-van-modelveronderstellingen" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="afwijkingen-van-modelveronderstellingen"><span class="header-section-number">7.6</span> Afwijkingen van Modelveronderstellingen</h2>
+<section id="afwijkingen-van-modelveronderstellingen" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="afwijkingen-van-modelveronderstellingen"><span class="header-section-number">6.6</span> Afwijkingen van Modelveronderstellingen</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CEgIqaqVj4M" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p>De primaire onderstelling in lineaire regressie-analyse is de aanname dat de uitkomst lineair varieert in de predictor. Wanneer residuplots suggereren dat aan deze onderstelling niet is voldaan, dan kan men overwegen om de verklarende variabele te transformeren. In genexpressie studies waarbij expressie als een covariaat wordt gebruikt om een andere variabele te verklaren, is het bijvoorbeeld vaak zo dat de (gemiddelde) uitkomst niet lineair varieert in functie van de predictor, maar wel in functie van het logaritme van de genexpressie. In dat geval kan men ervoor kiezen om de log-transformatie van de verklarende variabele als predictor in het model op te nemen. Vaak wordt in expressie studies een <span class="math inline">\(\log_2\)</span> transformatie gebruikt. In andere voorbeelden kan een andere transformatie dan de log-transformatie beter geschikt zijn, zoals de vierkantswortel (<span class="math inline">\(\sqrt{x}\)</span>) of inverse (<span class="math inline">\(1/x\)</span>) transformatie.</p>
@@ -835,7 +836,7 @@ Figuur&nbsp;7.6: Diagnostische plots voor het nagaan van de veronderstellingen v
 <p><span class="math display">\[E(Y|X)=\beta_0+\beta_1X+\beta_2X^2+\beta_3X^3\]</span></p>
 <p>zodat de regressiekromme een derdegraadspolynoom is. Deze methode kan gezien worden als een vorm van transformatie van de verklarende variabele en bezit wezenlijk dezelfde eigenschappen en voor- en nadelen. Een bijkomend voordeel is echter dat het hier niet nodig is om zelf een transformatie te zoeken, maar dat de methode zelf impliciet een goede polynoom als transformatie schat.</p>
 <p>Tenslotte kan men ook overwegen om, in plaats van de verklarende variabele, de uitkomst te transformeren. Bijvoorbeeld, wanneer de uitkomsten scheef verdeeld zijn naar rechts is het vaak aangewezen om een log-transformatie van de uitkomst uit te voeren en deze nieuwe variabele als uitkomst in het model op te nemen. Doorgaans verbetert dit niet alleen de lineariteit van het model, maar maakt het ook de residu’s beter Normaal verdeeld met een meer constante variabiliteit. Deze methode heeft dezelfde voor- en nadelen als transformatie van de verklarende variabele. Een groot verschil dat de keuze tussen beide methoden beïnvloedt is dat transformaties van de onafhankelijke variabele weinig of geen invloed hebben op de verdeling van de residu’s (tenzij via wijzigingen in hun gemiddelde) in tegenstelling tot transformaties van de afhankelijke variabele. In het bijzonder blijven Normaal verdeelde residu’s vrij Normaal verdeeld na transformatie van de verklarende variabele, terwijl ze mogelijks niet langer Normaal verdeeld zijn na transformatie van de uitkomst, en vice versa.</p>
-<p>In het borstkanker voorbeeld wordt de S100A8 genexpressie gemodelleerd in functie van de ESR1 genexpressie. Er waren problemen m.b.t. heteroscedasticiteit, mogelijkse afwijking van normaliteit (scheefheid naar rechts), negatieve concentratievoorspellingen die theoretisch niet mogelijk zijn en niet-lineairiteit. Dergelijke problemen treden veelal op bij concentratie en intensiteitsmetingen. Deze zijn vaak log-normaal verdeeld (normale verdeling na log-transformatie) en worden daarom vaak log-getransformeerd. Bovendien zagen we in Figuur <a href="#fig-brcaSmooth" class="quarto-xref"><span>7.3</span></a> eveneens een soort exponentiële trend. In de genexpressie literatuur wordt veelal gebruik gemaak van <span class="math inline">\(\log_2\)</span> transformatie gezien een verschil van 1 op log-schaal een verdubbeling impliceert in de expressie op de originele schaal. Wanneer men gen-expressie op log-schaal modelleert, modellert men dus in feite proportionele verschillen op de originele schaal wat ook meer relevant is vanuit een biologisch standpunt.</p>
+<p>In het borstkanker voorbeeld wordt de S100A8 genexpressie gemodelleerd in functie van de ESR1 genexpressie. Er waren problemen m.b.t. heteroscedasticiteit, mogelijkse afwijking van normaliteit (scheefheid naar rechts), negatieve concentratievoorspellingen die theoretisch niet mogelijk zijn en niet-lineairiteit. Dergelijke problemen treden veelal op bij concentratie en intensiteitsmetingen. Deze zijn vaak log-normaal verdeeld (normale verdeling na log-transformatie) en worden daarom vaak log-getransformeerd. Bovendien zagen we in Figuur <a href="#fig-brcaSmooth" class="quarto-xref"><span>6.3</span></a> eveneens een soort exponentiële trend. In de genexpressie literatuur wordt veelal gebruik gemaak van <span class="math inline">\(\log_2\)</span> transformatie gezien een verschil van 1 op log-schaal een verdubbeling impliceert in de expressie op de originele schaal. Wanneer men gen-expressie op log-schaal modelleert, modellert men dus in feite proportionele verschillen op de originele schaal wat ook meer relevant is vanuit een biologisch standpunt.</p>
 <p>In deze sectie zullen we beide genexpressies <span class="math inline">\(\log_2\)</span> transformeren en een log-lineaire regressie uitvoeren. Zoals we zullen zien vormen de outliers in de S100A8 expressie na log-transformatie ook geen problemen meer.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> brca <span class="sc">|&gt;</span></span>
@@ -858,13 +859,13 @@ Figuur&nbsp;7.6: Diagnostische plots voor het nagaan van de veronderstellingen v
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLogLin-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLogLin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.7: Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met smoother en lineair model die het verband tussen beide genen samenvatten (outliers worden niet langer verwijderd uit de dataset).
+Figuur&nbsp;6.7: Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met smoother en lineair model die het verband tussen beide genen samenvatten (outliers worden niet langer verwijderd uit de dataset).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>In Figuur <a href="#fig-brcaLogLin" class="quarto-xref"><span>7.7</span></a> zien we duidelijk een dalende lineaire trend van de S100A8 expressie i.f.v. de ESR1 expressie na log-transformatie. De smoother toont ook niet langer een afwijking aan van lineariteit. Daarnaast kunnen we alle data meenemen in de analyse en kan het model geen negatieve expressiewaarden meer voorspellen na terugtransformatie. In Figuur <a href="#fig-brcaLogLin2" class="quarto-xref"><span>7.8</span></a> zien we tevens dat er niet langer afwijkingen zijn van lineariteit, normaliteit en gelijkheid van variantie. De residuen in de residu-plot liggen mooi rond nul en hebben een constante spreiding. De QQ-plot toont geen systematische afwijkingen van normaliteit en de plot links beneden toont ook geen trend in de variantie van de residuen.</p>
+<p>In Figuur <a href="#fig-brcaLogLin" class="quarto-xref"><span>6.7</span></a> zien we duidelijk een dalende lineaire trend van de S100A8 expressie i.f.v. de ESR1 expressie na log-transformatie. De smoother toont ook niet langer een afwijking aan van lineariteit. Daarnaast kunnen we alle data meenemen in de analyse en kan het model geen negatieve expressiewaarden meer voorspellen na terugtransformatie. In Figuur <a href="#fig-brcaLogLin2" class="quarto-xref"><span>6.8</span></a> zien we tevens dat er niet langer afwijkingen zijn van lineariteit, normaliteit en gelijkheid van variantie. De residuen in de residu-plot liggen mooi rond nul en hebben een constante spreiding. De QQ-plot toont geen systematische afwijkingen van normaliteit en de plot links beneden toont ook geen trend in de variantie van de residuen.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm2)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
@@ -875,7 +876,7 @@ Figuur&nbsp;7.7: Scatterplot voor log2-S100A8 expressie in functie van de log2-E
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLogLin2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLogLin2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.8: Diagnostische plots voor het lineair model voor log2-S100A8 expressie in functie van de log2-ESR1.
+Figuur&nbsp;6.8: Diagnostische plots voor het lineair model voor log2-S100A8 expressie in functie van de log2-ESR1.
 </figcaption>
 </figure>
 </div>
@@ -961,11 +962,11 @@ log2ESR1    -1.921047 -1.308185</code></pre>
 <p><span class="math display">\[−10&lt; \beta_1&lt;10 \rightarrow 1.01 ^{\beta_1}−1 \approx \frac{\beta_1}{100}.\]</span></p>
 <p>Dus voor log-getransformeerde predictoren met kleine tot gematigde waarden voor <span class="math inline">\(\beta_1\)</span> kan de helling <span class="math inline">\(\beta_1\)</span> als volgt geïnterpreteerd worden: een 1% toename in de predictor resulteert gemiddeld in een <span class="math inline">\(\beta_1\)</span>% verschil in de uitkomst.</p>
 </section>
-<section id="besluitvorming-over-gemiddelde-uitkomst" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="besluitvorming-over-gemiddelde-uitkomst"><span class="header-section-number">7.7</span> Besluitvorming over gemiddelde uitkomst</h2>
+<section id="besluitvorming-over-gemiddelde-uitkomst" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="besluitvorming-over-gemiddelde-uitkomst"><span class="header-section-number">6.7</span> Besluitvorming over gemiddelde uitkomst</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Ix_ih2SxtKA" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
-<p>In de sectie <a href="#sec-linBesluit" class="quarto-xref"><span>7.4</span></a> toonden we dat de parameterschatters van het linear regressie model normaal verdeeld zijn onder de voorwaarden van onafhankelijkheid, lineariteit, homoscedasticiteit en (conditionele) normaliteit van de gegevens. Het regressie model wordt niet enkel gebruikt om de associatie tussen twee variabelen te bestuderen, maar ook om voorspellingen te doen van de response gegeven een gekende waarde voor de predictor. In dat geval wenst men vaak besluitvorming te doen over de gemiddelde uitkomst geschat met het model bij een gegeven waarde <span class="math inline">\(x\)</span>, m.a.w.</p>
+<p>In de sectie <a href="#sec-linBesluit" class="quarto-xref"><span>6.4</span></a> toonden we dat de parameterschatters van het linear regressie model normaal verdeeld zijn onder de voorwaarden van onafhankelijkheid, lineariteit, homoscedasticiteit en (conditionele) normaliteit van de gegevens. Het regressie model wordt niet enkel gebruikt om de associatie tussen twee variabelen te bestuderen, maar ook om voorspellingen te doen van de response gegeven een gekende waarde voor de predictor. In dat geval wenst men vaak besluitvorming te doen over de gemiddelde uitkomst geschat met het model bij een gegeven waarde <span class="math inline">\(x\)</span>, m.a.w.</p>
 <p><span class="math display">\[\hat{g}(x)= \hat{\beta}_0 + \hat{\beta}_1 x\]</span></p>
 <p>Hierbij is de gemiddelde uitkomst <span class="math inline">\(\hat{g}(x)\)</span> een schatter van het conditionele gemiddelde <span class="math inline">\(E[Y\vert X=x]\)</span>. Wanneer de parameterschatters een Normale verdeling volgen zal de schatter voor de gemiddelde uitkomst ook Normaal verdeeld zijn gezien het een lineaire combinatie is van de parameterschatters. Gezien de parameterschatters onvertekend zijn, is de schatter van de gemiddelde uitkomst dat ook.</p>
 <p>Men kan aantonen dat de standard error op de schatter voor de gemiddelde uitkomst</p>
@@ -993,7 +994,7 @@ log2ESR1    -1.921047 -1.308185</code></pre>
 6 11.80854 10.69372 12.92336</code></pre>
 </div>
 </div>
-<p>De gemiddelde uitkomst en hun 95% puntgewijze betrouwbaarheidsintervallen kunnen eveneens grafisch worden weergegeven (Figuur <a href="#fig-brcaLogLinPred1" class="quarto-xref"><span>7.9</span></a>)</p>
+<p>De gemiddelde uitkomst en hun 95% puntgewijze betrouwbaarheidsintervallen kunnen eveneens grafisch worden weergegeven (Figuur <a href="#fig-brcaLogLinPred1" class="quarto-xref"><span>6.9</span></a>)</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span></span>
@@ -1008,13 +1009,13 @@ log2ESR1    -1.921047 -1.308185</code></pre>
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLogLinPred1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLogLinPred1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.9: Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met model schattingen en 95<span class="math inline">\(\%\)</span> betrouwbaarheidsintervallen.
+Figuur&nbsp;6.9: Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met model schattingen en 95<span class="math inline">\(\%\)</span> betrouwbaarheidsintervallen.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>De gemiddelde uitkomst en hun 95% betrouwbaarheidsintervallen kunnen makkelijk worden teruggetransformeerd naar de originele schaal, zodat een geometrisch gemiddelde wordt bekomen met 95% betrouwbaarheidsintervallen op het geometrische gemiddelde. Deze kunnen dan grafisch worden weergegeven op de originele schaal in een gewone scatterplot (Figuur <a href="#fig-brcaLogLinPred2" class="quarto-xref"><span>7.10</span></a> links) of in een scatterplot met logaritmische assen (Figuur <a href="#fig-brcaLogLinPred2" class="quarto-xref"><span>7.10</span></a> rechts). In Figuur <a href="#fig-brcaLogLinPred2" class="quarto-xref"><span>7.10</span></a> (links) is het duidelijk dat we met het model na log-transformatie een exponentieel verband kunnen modelleren op de originele schaal.</p>
+<p>De gemiddelde uitkomst en hun 95% betrouwbaarheidsintervallen kunnen makkelijk worden teruggetransformeerd naar de originele schaal, zodat een geometrisch gemiddelde wordt bekomen met 95% betrouwbaarheidsintervallen op het geometrische gemiddelde. Deze kunnen dan grafisch worden weergegeven op de originele schaal in een gewone scatterplot (Figuur <a href="#fig-brcaLogLinPred2" class="quarto-xref"><span>6.10</span></a> links) of in een scatterplot met logaritmische assen (Figuur <a href="#fig-brcaLogLinPred2" class="quarto-xref"><span>6.10</span></a> rechts). In Figuur <a href="#fig-brcaLogLinPred2" class="quarto-xref"><span>6.10</span></a> (links) is het duidelijk dat we met het model na log-transformatie een exponentieel verband kunnen modelleren op de originele schaal.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>newdata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="at">grid=</span> <span class="dv">2</span><span class="sc">^</span>grid, <span class="dv">2</span><span class="sc">^</span>g))</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1044,15 +1045,15 @@ Figuur&nbsp;7.9: Scatterplot voor log2-S100A8 expressie in functie van de log2-E
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLogLinPred2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLogLinPred2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.10: Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met model schattingen (geometrische gemiddeldes) een 95<span class="math inline">\(\%\)</span> betrouwbaarheidsintervallen (links: originele schaal, rechts: originele schaal met logaritmische assen).
+Figuur&nbsp;6.10: Scatterplot voor S100A8 expressie in functie van de ESR1 expressie met model schattingen (geometrische gemiddeldes) een 95<span class="math inline">\(\%\)</span> betrouwbaarheidsintervallen (links: originele schaal, rechts: originele schaal met logaritmische assen).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="predictie-intervallen" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="predictie-intervallen"><span class="header-section-number">7.8</span> Predictie-intervallen</h2>
+<section id="predictie-intervallen" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="predictie-intervallen"><span class="header-section-number">6.8</span> Predictie-intervallen</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/U7p08lYVnPI" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p>Het geschatte regressiemodel kan ook worden gebruikt om een <strong>predictie</strong> te maken voor één uitkomst van één experiment waarbij een nieuwe uitkomst <span class="math inline">\(Y^*\)</span> bij een gegeven <span class="math inline">\(x\)</span> zal geobserveerd worden. Het is belangrijk in te zien dat dit experiment nog moet worden uitgevoerd. We wensen dus een nog niet-geobserveerde individuele uitkomst te voorspellen.</p>
@@ -1089,7 +1090,7 @@ Figuur&nbsp;7.10: Scatterplot voor S100A8 expressie in functie van de ESR1 expre
 6 11.80854 9.435698 14.18138</code></pre>
 </div>
 </div>
-<p>De predicties en hun 95% puntgewijze predictie-intervallen kunnen eveneens grafisch worden weergegeven (Figuur <a href="#fig-brcaLogLinPred3" class="quarto-xref"><span>7.11</span></a>). Merk op dat de intervallen veel breder zijn dan de betrouwbaarheidsintervallen. Merk ook op dat de meeste observaties binnen de predictie-intervallen liggen. We verwachten inderdaad gemiddeld 95% van de observaties binnen de predictie-intervallen. Dat is niet zo voor de betrouwbaarheidsintervallen, die immers geen informatie geven over de verwachte locatie van een nieuwe observatie, maar wel over waar men het conditioneel gemiddelde verwacht op basis van de steekproef!</p>
+<p>De predicties en hun 95% puntgewijze predictie-intervallen kunnen eveneens grafisch worden weergegeven (Figuur <a href="#fig-brcaLogLinPred3" class="quarto-xref"><span>6.11</span></a>). Merk op dat de intervallen veel breder zijn dan de betrouwbaarheidsintervallen. Merk ook op dat de meeste observaties binnen de predictie-intervallen liggen. We verwachten inderdaad gemiddeld 95% van de observaties binnen de predictie-intervallen. Dat is niet zo voor de betrouwbaarheidsintervallen, die immers geen informatie geven over de verwachte locatie van een nieuwe observatie, maar wel over waar men het conditioneel gemiddelde verwacht op basis van de steekproef!</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>preddata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="at">grid =</span> grid,p))</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>log2ESR1,<span class="at">y=</span>log2S100A8)) <span class="sc">+</span></span>
@@ -1110,15 +1111,15 @@ Figuur&nbsp;7.10: Scatterplot voor S100A8 expressie in functie van de ESR1 expre
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLogLinPred3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLogLinPred3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.11: Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met model voorspellingen en 95<span class="math inline">\(\%\)</span> betrouwbaarheidsintervallen en 95<span class="math inline">\(\%\)</span> predictie-intervallen. Rode lijn: predictie interval, grijze band: betrouwbaarheidsinterval, zwarte lijn: lineair model
+Figuur&nbsp;6.11: Scatterplot voor log2-S100A8 expressie in functie van de log2-ESR1 expressie met model voorspellingen en 95<span class="math inline">\(\%\)</span> betrouwbaarheidsintervallen en 95<span class="math inline">\(\%\)</span> predictie-intervallen. Rode lijn: predictie interval, grijze band: betrouwbaarheidsinterval, zwarte lijn: lineair model
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <!---break-->
-<section id="nhanes-voorbeeld" class="level3" data-number="7.8.1">
-<h3 data-number="7.8.1" class="anchored" data-anchor-id="nhanes-voorbeeld"><span class="header-section-number">7.8.1</span> NHANES voorbeeld</h3>
+<section id="nhanes-voorbeeld" class="level3" data-number="6.8.1">
+<h3 data-number="6.8.1" class="anchored" data-anchor-id="nhanes-voorbeeld"><span class="header-section-number">6.8.1</span> NHANES voorbeeld</h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/JCkCskNuYn8" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p>Aangezien een predictie-interval een verbeterde versie is van een referentie-interval bij ongekend populatie gemiddelde en de standaardafwijking, kunnen we a.d.h.v. de <code>lm(.)</code> functie referentie-intervallen beter vervangen door predictie-intervallen. Het PI zal eveneens de onzekerheid meenemen op de parameterschattingen (gemiddelde en standard error).</p>
@@ -1214,8 +1215,8 @@ Figuur&nbsp;7.11: Scatterplot voor log2-S100A8 expressie in functie van de log2-
 </ul>
 </section>
 </section>
-<section id="sec-linAnova" class="level2" data-number="7.9">
-<h2 data-number="7.9" class="anchored" data-anchor-id="sec-linAnova"><span class="header-section-number">7.9</span> Kwadratensommen en Anova-tabel</h2>
+<section id="sec-linAnova" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="sec-linAnova"><span class="header-section-number">6.9</span> Kwadratensommen en Anova-tabel</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kVWfeCOnhJM" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p>In deze sectie bespreken we de constructie van kwadratensommen die typisch in een tabel worden gegeven en die behoren tot de klassieke presentatiewijze van een regressie-analyse. De tabel wordt de variantie-analyse tabel of anova tabel genoemd.</p>
@@ -1225,9 +1226,9 @@ Figuur&nbsp;7.11: Scatterplot voor log2-S100A8 expressie in functie van de log2-
 <ul>
 <li>In dit hoofdstuk wordt de focus hoofdzakelijk gelegd op de <strong>conditionele distributie</strong> van <span class="math inline">\(Y\vert X=x\)</span>.</li>
 <li>We weten reeds dat MSE een schatter is van de variantie van de conditionele distributie van <span class="math inline">\(Y\vert X=x\)</span>.</li>
-<li>De <strong>marginale distributie</strong> van <span class="math inline">\(Y\)</span> is de verdeling van <span class="math inline">\(Y\)</span> wanneer we geen rekening houden met de waarde voor de predictor <span class="math inline">\(X\)</span>. Het heeft als gemiddelde <span class="math inline">\(E[Y]\)</span> wat geschat wordt door het steekproefgemiddelde <span class="math inline">\(\bar{Y}\)</span> en een variantie <span class="math inline">\(\text{var}[Y]\)</span> die geschat kan worden aan de hand van <span class="math inline">\(\frac{\text{SSTot}}{n-1}\)</span>, de steekproefvariantie van <span class="math inline">\(Y\)</span> (zie Sectie <a href="04-DataExploratie.html#sec-spreiding" class="quarto-xref"><span>5.3.2</span></a>).</li>
+<li>De <strong>marginale distributie</strong> van <span class="math inline">\(Y\)</span> is de verdeling van <span class="math inline">\(Y\)</span> wanneer we geen rekening houden met de waarde voor de predictor <span class="math inline">\(X\)</span>. Het heeft als gemiddelde <span class="math inline">\(E[Y]\)</span> wat geschat wordt door het steekproefgemiddelde <span class="math inline">\(\bar{Y}\)</span> en een variantie <span class="math inline">\(\text{var}[Y]\)</span> die geschat kan worden aan de hand van <span class="math inline">\(\frac{\text{SSTot}}{n-1}\)</span>, de steekproefvariantie van <span class="math inline">\(Y\)</span> (zie Sectie <a href="04-DataExploratie.html#sec-spreiding" class="quarto-xref"><span>4.3.2</span></a>).</li>
 </ul>
-<p>Een grafische interpretatie van SSTot wordt weergegeven in Figuur <a href="#fig-brcaLogSSR" class="quarto-xref"><span>7.13</span></a>.</p>
+<p>Een grafische interpretatie van SSTot wordt weergegeven in Figuur <a href="#fig-brcaLogSSR" class="quarto-xref"><span>6.13</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">|&gt;</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> log2S100A8, <span class="at">x =</span> log2ESR1)) <span class="sc">+</span></span>
@@ -1244,7 +1245,7 @@ Figuur&nbsp;7.11: Scatterplot voor log2-S100A8 expressie in functie van de log2-
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLogSSTot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLogSSTot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.12: Interpretatie van de totale kwadratensom (SSTot): de som van de kwadratische afwijkingen rond het steekproefgemiddelde.
+Figuur&nbsp;6.12: Interpretatie van de totale kwadratensom (SSTot): de som van de kwadratische afwijkingen rond het steekproefgemiddelde.
 </figcaption>
 </figure>
 </div>
@@ -1254,7 +1255,7 @@ Figuur&nbsp;7.12: Interpretatie van de totale kwadratensom (SSTot): de som van d
 <p>De kwadratensom van de regressie is gelijk aan</p>
 <p><span class="math display">\[\text{SSR} = \sum_{i=1}^n (\hat{Y}_i - \bar{Y})^2 = \sum_{i=1}^n (\hat{g}(x_i) - \bar{Y})^2.\]</span></p>
 <p>SSR is een maat voor de afwijking tussen de predicties op de geschatte regressierechte en het steekproefgemiddelde van de uitkomsten. Het kan ook geïnterpreteerd worden als een maat voor de afwijking tussen de geschatte regressierechte <span class="math inline">\(\hat{g}(x)=\hat\beta_0+\hat\beta_1x\)</span> en een “geschatte regressierechte” waarbij de regressor geen effect heeft op de gemiddelde uitkomst. Deze laatste is dus eigenlijk een schatting van de regressierechte <span class="math inline">\(g(x)=\beta_0\)</span>, waarin <span class="math inline">\(\beta_0\)</span> geschat wordt door <span class="math inline">\(\bar{Y}\)</span>. Anders geformuleerd: SSR meet de grootte van het regressie-effect zodat <span class="math inline">\(\text{SSR} \approx 0\)</span> duidt op geen effect van de regressor en <span class="math inline">\(\text{SSR}&gt;0\)</span> duidt op een effect van de regressor. We voelen reeds aan dat <span class="math inline">\(\text{SSR}\)</span> zal kunnen worden gebruikt voor het ontwikkelen van een statistische test die de associatie tussen <span class="math inline">\(X\)</span> en <span class="math inline">\(Y\)</span> evalueert.</p>
-<p>Een grafische interpretatie van SSR wordt weergegeven in Figuur <a href="#fig-brcaLogSSR" class="quarto-xref"><span>7.13</span></a>.</p>
+<p>Een grafische interpretatie van SSR wordt weergegeven in Figuur <a href="#fig-brcaLogSSR" class="quarto-xref"><span>6.13</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>lm2_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">log2S100A8 =</span> brca<span class="sc">$</span>log2S100A8, <span class="at">fitted =</span> lm2<span class="sc">$</span>fitted.values, <span class="at">log2ESR1 =</span> brca<span class="sc">$</span>log2ESR1)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">|&gt;</span></span>
@@ -1274,7 +1275,7 @@ Figuur&nbsp;7.12: Interpretatie van de totale kwadratensom (SSTot): de som van d
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLogSSR-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLogSSR-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.13: Interpretatie van de kwadratensom van de regressie (SSR): de som van de kwadratische afwijkingen tussen de geschatte regressierechte en het steekproefgemiddelde van de uitkomsten.
+Figuur&nbsp;6.13: Interpretatie van de kwadratensom van de regressie (SSR): de som van de kwadratische afwijkingen tussen de geschatte regressierechte en het steekproefgemiddelde van de uitkomsten.
 </figcaption>
 </figure>
 </div>
@@ -1283,7 +1284,7 @@ Figuur&nbsp;7.13: Interpretatie van de kwadratensom van de regressie (SSR): de s
 <p>Tenslotte herhalen we de <strong>kwadratensom van de fout</strong>:</p>
 <p><span class="math display">\[ \text{SSE} = \sum_{i=1}^n (Y_i-\hat{Y}_i )^2 = \sum_{i=1}^n \left\{Y_i-\hat{g}\left(x_i\right)\right\}^2.\]</span></p>
 <p>Van SSE weten we reeds dat het een maat is voor de afwijking tussen de observaties en de predicties bij de geobserveerde <span class="math inline">\(x_i\)</span> uit de steekproef. Hoe kleiner SSE, hoe beter de fit (schatting) van de regressierechte voor predictiedoeleinden. We hebben deze immers geminimaliseerd om tot de kleinste kwadratenschatters te komen.</p>
-<p>Een interpretatie van SSE voor het log-log model wordt weergegeven in Figuur <a href="#fig-brcaLogSSE" class="quarto-xref"><span>7.14</span></a>.</p>
+<p>Een interpretatie van SSE voor het log-log model wordt weergegeven in Figuur <a href="#fig-brcaLogSSE" class="quarto-xref"><span>6.14</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">|&gt;</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span> log2ESR1, <span class="at">y =</span> log2S100A8)) <span class="sc">+</span></span>
@@ -1301,7 +1302,7 @@ Figuur&nbsp;7.13: Interpretatie van de kwadratensom van de regressie (SSR): de s
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLogSSE-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLogSSE-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.14: Interpretatie van de kwadratensom van de error (SSE): de som van de kwadratische afwijkingen tussen uitkomsten en de predicties op de geschatte regressierechte.
+Figuur&nbsp;6.14: Interpretatie van de kwadratensom van de error (SSE): de som van de kwadratische afwijkingen tussen uitkomsten en de predicties op de geschatte regressierechte.
 </figcaption>
 </figure>
 </div>
@@ -1317,8 +1318,8 @@ Figuur&nbsp;7.14: Interpretatie van de kwadratensom van de error (SSE): de som v
 \end{eqnarray*}\]</span></p>
 <p>Merk op dat de dubbel product term wegvalt. Er kan aangetoond worden dat deze gelijk is aan nul. Dat valt buiten het bestek van deze cursus. De ontbinding van de totale kwadratensom kan als volgt worden geïnterpreteerd: De totale variabiliteit in de data (SSTot) wordt gedeeltelijk verklaard door het regressieverband (SSR). De variabiliteit die niet door het regressieverband verklaard wordt, is de residuele variabiliteit (SSE).</p>
 <!---break-->
-<section id="determinatie-coëfficiënt" class="level3" data-number="7.9.1">
-<h3 data-number="7.9.1" class="anchored" data-anchor-id="determinatie-coëfficiënt"><span class="header-section-number">7.9.1</span> Determinatie-coëfficiënt</h3>
+<section id="determinatie-coëfficiënt" class="level3" data-number="6.9.1">
+<h3 data-number="6.9.1" class="anchored" data-anchor-id="determinatie-coëfficiënt"><span class="header-section-number">6.9.1</span> Determinatie-coëfficiënt</h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/JGT-pwIjgaY" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p>De <strong>determinatiecoëfficiënt</strong> wordt gedefinieerd door</p>
@@ -1356,8 +1357,8 @@ F-statistic: 115.8 on 1 and 30 DF,  p-value: 8.07e-12</code></pre>
 </div>
 <p>In de output voor het borstkankervoorbeeld zien we een <span class="math inline">\(R^2\)</span>=0.79 en kunnen we besluiten dat 79% van de variabiliteit in de <span class="math inline">\(\log_2\)</span>-S100A8 expressie kan worden verklaard door de <span class="math inline">\(\log_2\)</span>-ESR1 expressie-waarden.</p>
 </section>
-<section id="f-testen-in-het-enkelvoudig-lineair-regressiemodel" class="level3" data-number="7.9.2">
-<h3 data-number="7.9.2" class="anchored" data-anchor-id="f-testen-in-het-enkelvoudig-lineair-regressiemodel"><span class="header-section-number">7.9.2</span> F-Testen in het enkelvoudig lineair regressiemodel</h3>
+<section id="f-testen-in-het-enkelvoudig-lineair-regressiemodel" class="level3" data-number="6.9.2">
+<h3 data-number="6.9.2" class="anchored" data-anchor-id="f-testen-in-het-enkelvoudig-lineair-regressiemodel"><span class="header-section-number">6.9.2</span> F-Testen in het enkelvoudig lineair regressiemodel</h3>
 <p>De kwadratensommen vormen de basis van een belangrijke klasse van hypothesetesten. De <span class="math inline">\(F\)</span>-teststatistiek wordt gedefinieerd als</p>
 <p><span class="math display">\[  F  = \frac{\text{MSR}}{\text{MSE}}\]</span></p>
 <p>met</p>
@@ -1370,8 +1371,8 @@ F-statistic: 115.8 on 1 and 30 DF,  p-value: 8.07e-12</code></pre>
 <p><span class="math display">\[  p = P_0\left[F\geq f\right]=1-F_F(f;1,n-2),\]</span></p>
 <p>de kans onder de nulhypothese<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> om een test statistiek F te bekomen die ten minste zo extreem is<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> als de waarde f die werd geobserveerd in de steekproef, <span class="math inline">\(F_F(.;1,n-2)\)</span> de cumulatieve distributie is van een F-verdeling met 1 vrijheidsgraad in de teller en n-2 vrijheidsgraden in de noemer. De kritieke waarde op het <span class="math inline">\(\alpha\)</span> significantieniveau is <span class="math inline">\(F_{1,n-2;1-\alpha}\)</span>.</p>
 </section>
-<section id="anova-tabel" class="level3" data-number="7.9.3">
-<h3 data-number="7.9.3" class="anchored" data-anchor-id="anova-tabel"><span class="header-section-number">7.9.3</span> Anova Tabel</h3>
+<section id="anova-tabel" class="level3" data-number="6.9.3">
+<h3 data-number="6.9.3" class="anchored" data-anchor-id="anova-tabel"><span class="header-section-number">6.9.3</span> Anova Tabel</h3>
 <p>De kwadratensommen en de F-test worden meestal in een zogenaamde variantie-analyse tabel of een anova tabel gerapporteerd.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -1432,8 +1433,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>We besluiten dus dat er een extreem significant lineair verband is tussen de <span class="math inline">\(\log_2\)</span> ESR1 expressie en de <span class="math inline">\(\log_2\)</span> S100A8 expressie. De <span class="math inline">\(F\)</span>-test is tweezijdig. Door te kijken naar het teken van <span class="math inline">\(\hat\beta_1\)</span> (<span class="math inline">\(\hat\beta_1=-1.615\)</span>) kunnen we tevens besluiten dat er een negatieve associatie is tussen beiden. Merk op dat de <span class="math inline">\(p\)</span>-waarde van de <span class="math inline">\(F\)</span>-test en de <span class="math inline">\(p\)</span>-waarde van de tweezijdige <span class="math inline">\(t\)</span>-test exact gelijk zijn. Voor het enkelvoudig lineair regressie-model zijn beide testen equivalent!</p>
 </section>
 </section>
-<section id="sec-linDummy" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="sec-linDummy"><span class="header-section-number">7.10</span> Dummy variabelen</h2>
+<section id="sec-linDummy" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="sec-linDummy"><span class="header-section-number">6.10</span> Dummy variabelen</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HTSlZimXkdw" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
 </iframe>
 <p>Het lineaire regressiemodel kan ook gebruikt worden voor het vergelijken van twee gemiddelden. In het Borstkanker voorbeeld kunnen we bijvoorbeeld nagaan of er een verschil is in de gemiddelde leeftijd van de patiënten met onaangetaste lymfeknopen en patiënten waarvan de lymfeknopen werden verwijderd.</p>
@@ -1516,7 +1517,7 @@ F-statistic: 7.833 on 1 and 30 DF,  p-value: 0.008879</code></pre>
 <img src="06-LineareRegressie_files/figure-html/fig-brcaLymf-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-brcaLymf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.15: Diagnostische plot voor het model waarbij leeftijd wordt gemodelleerd a.d.h.v. een dummy variabele voor factor lymfe knoop status.
+Figuur&nbsp;6.15: Diagnostische plot voor het model waarbij leeftijd wordt gemodelleerd a.d.h.v. een dummy variabele voor factor lymfe knoop status.
 </figcaption>
 </figure>
 </div>
@@ -1525,8 +1526,8 @@ Figuur&nbsp;7.15: Diagnostische plot voor het model waarbij leeftijd wordt gemod
 <p>We zien in de R output dat de output van de t-test en het lineaire model met 1 dummy variabele identieke resultaten geeft voor de test statistiek en de p-waarde. We zien eveneens een heel significante associatie tussen de leeftijd en de lymfe node status (p=0.009). De leeftijd van personen met aangetaste lymfeknopen is gemiddeld 9.1 jaar hoger dan die van patiënten zonder aantasting van de lymfeknopen.</p>
 <p><strong>Let op</strong>: We kunnen echter niet besluiten dat oudere personen een hoger risico hebben op aantasting van de lymfeknopen ten gevolge van hun leeftijd. Aangezien de studie een observationele studie is, kunnen de groepen patiënten met aangetaste lymfeknopen en niet-aangetaste lymfeknopen nog in andere karateristieken van elkaar verschillen. We kunnen dus enkel besluiten dat er een associatie is tussen de lymfeknoop status en de leeftijd. Het is dus niet noodzakelijkerwijs een causaal verband! Het is immers steeds <strong>moeilijk om causale verbanden</strong> te trekken op basis van <strong>observationele studies</strong> gezien <strong>confounding</strong> kan optreden. We hebben de patiënten immers niet kunnen randomiseren over de twee groepen, de lymfeknoopstatus werd niet geïnduceerd door de onderzoekers maar enkel geobserveerd en we kunnen daarom niet garanderen dat de patiënten enkel verschillen in de lymfeknoopstatus!</p>
 <p>Hetzelfde geldt voor het lineair model voor de <span class="math inline">\(\log_2\)</span>-S100A8-expressie. Aangezien we de ESR1-expressie niet experimenteel vast hebben kunnen leggen, kunnen we niet besluiten dat een hogere ESR1-expressie de S100A8-expressie doet verlagen. We hebben beide genexpressies enkel geobserveerd dus kunnen we alleen besluiten dat ze negatief geassocieerd zijn met elkaar. Om te evalueren of de expressie van een bepaald gen de expressie van ander genen beïnvloedt, gaat men vaak knockout constructen generenen in het labo, dat zijn mutanten die een bepaald gen niet tot expressie kunnen brengen. Wanneer de wild type (normale genotype) en de knockout dan onder identieke condities worden opgegroeid in het lab, weten onderzoekers dat verschillen in genexpressie worden geïnduceerd door de afwezigheid van de expressie van het knockout gen. Experimentele studies zijn immers essentieel om causale verbanden te kunnen trekken.</p>
-<p><strong>Veronderstellingen:</strong> We moeten echter ook nog de veronderstellingen van het model voor de leeftijd nagaan! In Figuur <a href="#fig-brcaLymf" class="quarto-xref"><span>7.15</span></a> zien we geen afwijkingen van normaliteit in de QQ-plot. Er lijkt echter wel een aanwijzing dat de variantie in beide groepen verschillend is. De residuen lijken meer gespreid in de groep met lagere gemiddelde leeftijd (node=0) dan in de groep met een hogere gemiddelde leeftijd (node=1).<br>
-Merk echter ook op dat er een verschil is in het aantal observaties in beide groepen. Wanneer we een boxplot maken, zoals we ook deden in het hoofdstuk <a href="05-StatistischeBesluitvorming.html" class="quarto-xref"><span>6</span></a> om gelijkheid van variantie na te gaan bij het uitvoeren van een t-test, zien we dat het verschil in interkwartiel afstand (IQR, boxgrootes) niet zo groot is (Figuur <a href="#fig-boxNode" class="quarto-xref"><span>7.16</span></a>). Als we data simuleren die <span class="math inline">\(iid\)</span> normaal verdeeld zijn en deze at random opsplitsen in twee groepen die gelijk zijn in grootte als die voor de lymfeknoop status (19 vs 13 patiënten) zien we dat een dergelijk verschil in IQR gerust kan voorkomen door toeval (Figuur <a href="#fig-boxSim" class="quarto-xref"><span>7.17</span></a>). We kunnen dus besluiten dat aan alle aannames is voldaan voor de statistische besluitvorming en dat we de R-output van het statistisch model voor de response age i.f.v de dummy variabele voor de node-status mogen gebruiken om conclusies te formuleren over de associatie tussen leeftijd en node status (zie hoger).</p>
+<p><strong>Veronderstellingen:</strong> We moeten echter ook nog de veronderstellingen van het model voor de leeftijd nagaan! In Figuur <a href="#fig-brcaLymf" class="quarto-xref"><span>6.15</span></a> zien we geen afwijkingen van normaliteit in de QQ-plot. Er lijkt echter wel een aanwijzing dat de variantie in beide groepen verschillend is. De residuen lijken meer gespreid in de groep met lagere gemiddelde leeftijd (node=0) dan in de groep met een hogere gemiddelde leeftijd (node=1).<br>
+Merk echter ook op dat er een verschil is in het aantal observaties in beide groepen. Wanneer we een boxplot maken, zoals we ook deden in het hoofdstuk <a href="05-StatistischeBesluitvorming.html" class="quarto-xref"><span>5</span></a> om gelijkheid van variantie na te gaan bij het uitvoeren van een t-test, zien we dat het verschil in interkwartiel afstand (IQR, boxgrootes) niet zo groot is (Figuur <a href="#fig-boxNode" class="quarto-xref"><span>6.16</span></a>). Als we data simuleren die <span class="math inline">\(iid\)</span> normaal verdeeld zijn en deze at random opsplitsen in twee groepen die gelijk zijn in grootte als die voor de lymfeknoop status (19 vs 13 patiënten) zien we dat een dergelijk verschil in IQR gerust kan voorkomen door toeval (Figuur <a href="#fig-boxSim" class="quarto-xref"><span>6.17</span></a>). We kunnen dus besluiten dat aan alle aannames is voldaan voor de statistische besluitvorming en dat we de R-output van het statistisch model voor de response age i.f.v de dummy variabele voor de node-status mogen gebruiken om conclusies te formuleren over de associatie tussen leeftijd en node status (zie hoger).</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>brca <span class="sc">|&gt;</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> node<span class="sc">|&gt;</span><span class="fu">as.factor</span>(), <span class="at">y =</span> age)) <span class="sc">+</span></span>
@@ -1539,7 +1540,7 @@ Merk echter ook op dat er een verschil is in het aantal observaties in beide gro
 <img src="06-LineareRegressie_files/figure-html/fig-boxNode-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxNode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.16: boxplot van de leeftijd vs lymfeknoop status in de borstkanker dataset.
+Figuur&nbsp;6.16: boxplot van de leeftijd vs lymfeknoop status in de borstkanker dataset.
 </figcaption>
 </figure>
 </div>
@@ -1571,7 +1572,7 @@ Figuur&nbsp;7.16: boxplot van de leeftijd vs lymfeknoop status in de borstkanker
 <img src="06-LineareRegressie_files/figure-html/fig-boxSim-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxSim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figuur&nbsp;7.17: Simulatie van normaal verdeelde gegevens met gelijk gemiddelde en variantie. Zoals in de borstkanker dataset zijn er 19 observaties in ene groep en 13 observaties in de andere groep. We zien dat er door puur toeval een behoorlijk verschil kan optreden in de IQR tussen beide groepen in de steekproef.
+Figuur&nbsp;6.17: Simulatie van normaal verdeelde gegevens met gelijk gemiddelde en variantie. Zoals in de borstkanker dataset zijn er 19 observaties in ene groep en 13 observaties in de andere groep. We zien dat er door puur toeval een behoorlijk verschil kan optreden in de IQR tussen beide groepen in de steekproef.
 </figcaption>
 </figure>
 </div>
@@ -1601,6 +1602,7 @@ Sotiriou, Christos, Pratyaksha Wirapati, Sherene Loi, e.a. 2006. <span>‘Gene e
 </section>
 
 </main> <!-- /main -->
+<script src="assets/sidebar-merge.js"></script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -2004,12 +2006,12 @@ Sotiriou, Christos, Pratyaksha Wirapati, Sherene Loi, e.a. 2006. <span>‘Gene e
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./05-StatistischeBesluitvorming.html" class="pagination-link" aria-label="Statistische besluitvorming">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistische besluitvorming</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistische besluitvorming</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./07-VariantieAnalyse.html" class="pagination-link" aria-label="Variantie analyse">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variantie analyse</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variantie analyse</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

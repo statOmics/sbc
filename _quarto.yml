@@ -56,12 +56,17 @@ crossref:
 execute:
   warning: false
   message: false
+  freeze: auto
 
 format:
   html:
-    theme: cosmo
+    theme: [cosmo, custom.scss]
     toc: true
+    toc-location: left
     number-sections: true
+    css: assets/sidebar-merge.css
+    include-after-body: assets/sidebar-merge-include.html
+    resources: assets/sidebar-merge.js
   pdf:
     documentclass: book
     classoption: [12pt]
@@ -70,7 +75,7 @@ format:
     cite-method: natbib
     keep-tex: true
     colorlinks: true
-    linkcolor: blue
-    urlcolor: blue
-    citecolor: blue
+    linkcolor: brandgreen
+    urlcolor: brandgreen
+    citecolor: brandgreen
   epub: default

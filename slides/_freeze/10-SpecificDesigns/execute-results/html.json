@@ -1,0 +1,17 @@
+{
+  "hash": "d6521cc0ff9a7fcd12e2928a7a82d1db",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"General Linear Model - Specific Designs\"\nauthor: \"Lieven Clement\"\ndate: \"statOmics, Ghent University (https://statomics.github.io)\"\nformat:\n  html:\n    toc: true\n    number-sections: true\n    theme: cosmo\n    highlight-style: tango\n    code-tools: true\n    embed-resources: true\n---\n\n\n\n# Introduction\n\nIn this section we will illustrate how specific designs, e.g. \n\n- two-way anova designs\n- block designs \n\ncan be analysed using the general linear model. \n\n# Two-way anova \n\n## Data \n\n\n48 rats were allocated to \n\n- 3 poisons (I,II,III) and \n- 4 treatments (A,B,C,D). \n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(faraway)\ndata(rats)\n\nlibrary(GGally)\nrats |>\n  ggpairs()\n```\n\n::: {.cell-output-display}\n![](10-SpecificDesigns_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n\n\nWe have a design with a continuous response time (survival) and two factors: \n\n- Poison: I, II, III\n- Treatment: A, B, C, D\n\nThe data exploration indicates that there seems to be an effect of both treatment and poison. \n\n\n",
+    "supporting": [
+      "10-SpecificDesigns_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

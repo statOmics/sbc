@@ -23,7 +23,7 @@ library(tidyverse)
 # Breast cancer dataset
 
 
-- subset van studie https://doi.org/10.1093/jnci/djj052
+- subset van studie <https://doi.org/10.1093/jnci/djj052>
 - 32 borstkanker patiënten met een estrogen recepter positieve tumor die tamoxifen chemotherapy behandeling ondergaan. Variabelen:
 
     - grade: histologische graad van tumor (graad 1 vs 3),
