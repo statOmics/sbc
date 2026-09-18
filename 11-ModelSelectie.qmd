@@ -1,0 +1,238 @@
+# Modelselectie {#sec-chap-modsel}
+
+```{r setup-common, include=FALSE}
+source("_common.R")
+```
+## Inleiding
+
+In de prostaatkanker dataset (Sectie -@sec-prostate) zijn veel predictoren aanwezig. 
+Automatische selectieprocedures kunnen behulpzaam zijn als het doel van het regressiemodel erin bestaat om (1) de uitkomst op basis van de predictoren te voorspellen; of (2) associaties tussen de uitkomst en predictoren te beschrijven.
+Net zoals in vele andere aspecten van de statistiek, zullen we een geobserveerde dataset (steekproef) gebruiken om tot een resultaat te komen (hier: een model) dat ruimer toepasbaar is dan enkel op de geobserveerde data. Het geselecteerde model moet toepasbaar zijn op de ruimere populatie waaruit de steekproefdata bekomen is en waarop de onderzoeksvraag van toepassing is. 
+
+Modelselectie kan dan omschreven worden als een methode voor het selecteren van een model dat best geschikt is voor het beantwoorden van de onderzoeksvraag.
+In dit hoofdstuk beperken we ons tot meervoudige lineaire regressiemodellen waarin sommige van de $p-1$ effecttermen mogelijks interactietermen voorstellen. Het totaal aantal mogelijke modellen is dan (zonder hiërarchie-restrictie) $2^{p-1}$ (ieder van de $p-1$ termen kan opgenomen worden in het model, of niet). 
+
+We onderscheiden de volgende algemene procedures:
+
+1. Alle mogelijke modellen worden geëvalueerd. Deze methode zal enkel haalbaar blijken als het aantal kandidaat modellen niet te groot is. 
+
+2. Niet alle modellen worden geëvalueerd (stapsgewijze procedures): De methode wordt geïnitialiseerd met een model. D.m.v. een regel en een evaluatiecriterium wordt het pad doorheen de modelruimte bepaald.
+
+Merk op dat we hiërarchisch moeten modelleren als we interactietermen toelaten. Een interactieterm mag nooit in het model voorkomen zonder de lagere orde termen. 
+
+## Modelselectie op basis van hypothesetesten
+
+Stel, we willen een model selecteren voor lpsa waarbij lcavol, lweight en svi als predictoren worden toegelaten, alsook alle paarsgewijze interactietermen. We zullen drie verschillende strategieën beschouwen: voorwaartse modelselectie, achterwaartse modelselectie en stapsgewijze modelselectie waarbij er in elke stap geëvalueerd wordt of een term in het model kan worden opgenomen en of er een andere term kan worden verwijderd. 
+
+### Voorwaartse modelselectie
+De procedure kan als volgt beschreven worden:
+
+1. Start met het minimale model $m_1$ met enkel het intercept
+2. Test voor alle modellen met slechts 1 predictor (er zijn dus $p-1$ dergelijke modellen) of de toegevoegde regressor significant verschillend is van 0 op het $\alpha_{\text{IN}}$ significantieniveau. 
+3. Indien geen enkele van de $p$-waarden kleiner is dan $\alpha_{\text{IN}}$, stop de procedure. Het finale model is het minimale model $m_1$,  $$
+   Y_i = \beta_0 + \epsilon_i 
+ $$ met $\epsilon_i \text{ i.i.d. } N(0,\sigma^2)$. 
+4. Indien er minstens 1 $p$-waarde kleiner is dan $\alpha_{\text{IN}}$, selecteer het model dat overeenkomt met de kleinste $p$-waarde. Dit model wordt $m_2$ genoemd. 
+5. Stel $k=2$.
+6.  Definieer de verzameling van modellen met 1 predictor toegevoegd aan $m_{k}$. Test dat de parameter van de toegevoegde regressor significant verschillend is van 0 op het $\alpha_{\text{IN}}$ significantieniveau. 
+7. Indien geen enkele van de $p$-waarden kleiner is dan $\alpha_{\text{IN}}$, stop de procedure. Het finale model is $$
+   Y_i = \beta_0 + \sum_{j \in m_k} \beta_j x_{ij} + \epsilon_i 
+ $$ met $\epsilon_i \text{ i.i.d. }  N(0,\sigma^2)$. 
+8. Indien er minstens één $p$-waarde kleiner is dan $\alpha_{\text{IN}}$, selecteer het model dat overeenkomt met de kleinste $p$-waarde. Dit model wordt $m_{k+1}$ genoemd. 
+9. Verhoog $k$ met 1 (i.e. $k\leftarrow k+1$) en ga naar stap 6.
+
+Voorbeeld voor lpsa. We laten interactietermen toe, maar de modelbouw moet zich houden aan de hiërarchie van hoofd- en interactietermen. We stellen $\alpha_{\text{IN}}=5\%$.
+
+```{r}
+m1 <- lm(lpsa ~ 1, data=prostate)
+add1(m1,scope=~lweight+lcavol+svi+lweight:lcavol+lweight:svi +lcavol:svi,test="F")
+
+m2 <- update(m1,~. + lcavol)
+add1(m2,scope=~lweight+lcavol+svi+lweight:lcavol+lweight:svi +lcavol:svi,test="F")
+
+
+m3 <- update(m2,~ . + lweight)
+add1(m3,scope=~lweight+lcavol+svi+lweight:lcavol+lweight:svi +lcavol:svi,test="F")
+
+
+m4 <- update(m3,~ . + svi)
+add1(m4,scope=~lweight+lcavol+svi+lweight:lcavol+lweight:svi +lcavol:svi,test="F")
+summary(m4)
+```
+
+Het geselecteerde model is
+$$Y_i  = \beta_0 + \beta_v X_{iv} + \beta_w X_{iw} + \beta_s X_{is} + \epsilon_i$$
+met $\epsilon_i \text{ i.i.d. } N(0,\sigma^2)$.
+
+
+### Achterwaartse modelselectie
+Achterwaartse modelselectie is een procedure die ook gekend staat als achterwaartse eliminatie (Engels: *backward elimination*). 
+
+De procedure start van het maximale model en gaat na welke predictoren uit het model kunnen worden verwijderd. 
+
+1. Start met het maximale model $m_1$ met alle $p-1$ regressoren
+2. Bouw alle modellen waar 1 predictor wordt weggelaten en ga via een F-test na of het verwijderen van de predictoren significant is op het $\alpha_{\text{OUT}}$ significantieniveau. Merk op dat deze test in model $m_1$ moet uitgevoerd worden. 
+3. Indien geen enkele van de $p$-waarden groter is dan $\alpha_{\text{OUT}}$, stop de procedure. Het finale model is het maximale model  $m_1$.
+4. Indien er minstens één $p$-waarde groter dan $\alpha_{\text{OUT}}$ is, selecteer het model dat overeenkomt met de grootste $p$-waarde. Dit model wordt $m_2$ genoemd. 
+5. Stel $k=2$
+6. Bouw alle modellen waar 1 predictor wordt weggelaten uit $m_k$ en ga via een F-test na of het verwijderen van de predictoren significant is op het $\alpha_{\text{OUT}}$ significantieniveau. Merk op dat deze test in model $m_k$ moet uitgevoerd worden. 
+7. Indien geen enkele van de $p$-waarden groter is dan $\alpha_{\text{OUT}}$, stop de procedure. Het finale model is $m_k$
+8. Indien er minstens één $p$-waarde groter is dan $\alpha_{\text{OUT}}$, selecteer het model dat overeenkomt met de grootste $p$-waarde. Dit model wordt $m_{k+1}$ genoemd. 
+9.  Verhoog $k$ met  één (i.e. $k\leftarrow k+1$) en ga naar stap 6.
+
+We passen de achterwaartse modelselectie toe op het prostaatkanker voorbeeld. We zoeken naar een model met enkel de belangrijke termen (i.e. significante termen) die geassocieerd zijn met lpsa. We laten interactietermen toe, maar de modelbouw moet zich houden aan de hiërarchie van hoofd- en interactietermen. We stellen $\alpha_{\text{OUT}}=5\%$.
+
+```{r}
+alphaOut <- 0.05
+m<- lm(lpsa~lweight+lcavol+svi+lweight:lcavol+lweight:svi +lcavol:svi,prostate)
+dropHlp<-drop1(m,test="F")
+dropHlp
+```
+
+Merk op dat eerst enkel de interactietermen worden getest. De hoofdeffecten mogen niet uit het model worden weggelaten zolang er interactie termen in het model zijn opgenomen waarin deze hoofdeffecten voorkomen. 
+
+```{r}
+while (sum(dropHlp[,6]>=alphaOut,na.rm=TRUE))
+{
+dropVarName<-rownames(dropHlp)[which.max(dropHlp[,6])]
+m <- update(m,as.formula(paste("~.-",dropVarName)))
+dropHlp<-drop1(m,test="F")
+print(dropHlp)
+}
+```
+
+Merk op dat opnieuw hetzelfde model wordt gekozen. Dat is in het algemeen niet het geval. 
+Vaak heeft achterwaartse modelselectie de eigenschap om te resulteren in een meer complex model dan voorwaartse selectie.
+
+### Stapsgewijze modelselectie
+Deze methode is een combinatie van voorwaartse en achterwaartse modelselectie. Het kan starten van het maximale of het minimale model. 
+We implementeren de methode, startende van het minimale model.
+In elke stap zal eerst worden gekeken of een predictor kan worden toegevoegd, vervolgens zal worden nagegaan of een predictor kan worden verwijderd van het model. 
+
+```{r}
+alphaIn <- alphaOut <- 0.05
+m <- lm(lpsa ~ 1 ,prostate)
+notConverged <- TRUE
+while (notConverged)
+{
+addHlp <- add1(m,scope= ~lweight+lcavol+svi+lweight:lcavol+lweight:svi +lcavol:svi,test="F")
+print(addHlp)
+addVarName<-rownames(addHlp)[which.min(addHlp[,6])]
+if ((sum(addHlp[,6] < alphaIn,na.rm=TRUE))>0) m <- update(m,as.formula(paste("~.+",addVarName)))
+dropHlp<-drop1(m,test="F")
+print(dropHlp)
+if ((sum(dropHlp[,6]>=alphaOut,na.rm=TRUE))>0) m <- update(m,as.formula(paste("~.-",dropVarName)))
+if ((sum(addHlp[,6] < alphaIn,na.rm=TRUE) + sum(dropHlp[,6]>=alphaOut,na.rm=TRUE))>0) notConverged <- TRUE else notConverged <- FALSE
+}
+```
+
+Merk op dat er voor dit voorbeeld nooit een predictor uit het model werd verwijderd eens die werd opgenomen in het model. Dat is in het algemeen niet het geval. 
+
+### Opmerkingen
+Eerst een opmerking over de toepassing van de drie modelselectiemethoden op het prostaat voorbeeld. De drie methoden resulteerden in hetzelfde finale geselecteerde model (met enkel hoofdeffecten van lcavol, lweight en svi). In het algemeen leiden de drie methoden niet noodzakelijk tot eenzelfde finale model. 
+
+De $p$-waarden in het geselecteerde model mogen niet geïnterpreteerd worden. Dit is minder eenvoudig om in te zien. We hebben immers meerdere hypothese testen uitgevoerd om tot dit model te komen. Bovendien zorgt de modelselectie ervoor dat enkel "significante" termen in het finale model staan; de selectieprocedure is dus een doelbewuste aanrijkingsprocedure. Herinner je dat de definitie van de $p$-waarde de kans onder $H_0$ is dat de teststatistiek "door zuiver toeval" minstens zo extreem is dan deze die waargenomen werd. Door de aanrijking via de modelselectieprocedure, is het niet langer "zuiver toeval" dat de teststatistiek groter is dan de geobserveerde.
+
+Er is geen theoretische basis voor de selectieprocedure. Intuïtief lijkt de procedure zinvol omdat we gewend zijn om beslissingen te nemen aan de hand van hypothesetesten, maar hypothesetesten zijn eigenlijk enkel geldig wanneer ze doelgericht toegepast worden om een vooraf (i.e. voor het observeren van de data) duidelijk omschreven onderzoeksvraag te beantwoorden. Bij modelselectie wordt het pad doorheen de modellenruimte bepaald door de geobserveerde data, waardoor de $p$-waarden hun betekenis verliezen,  i.e. de hypotheses worden niet vooraf door de onderzoekers geformuleerd, maar ze worden door de data bepaald.  
+
+De analyse van lpsa in het vorige hoofdstuk zou ook als modelselectie kunnen worden bekeken: we startten met het model met de hoofdeffecten en met interactietermen. Vervolgens werd getest of de interactieterm nul was. Indien de interactieterm niet significant was, dan werd deze verwijderd en werden de hoofdeffecten getest. Dit lijkt op een achterwaartse modelselectie, maar in dat voorbeeld moeten we de procedure interpreteren als een klassieke hypothesetest (voor interactie) waarvan de nulhypothese in de onderzoeksvraag verscholen lag en dus niet door de data gesuggereerd werd. 
+
+## Modelselectie voor predictie
+### Inleiding
+
+In het vroege stadium van de ontwikkeling van een nieuw geneesmiddel (Engels: *early drug development*) kijkt men tegenwoordig ook naar het effect van de werkzame stof (*compound*) op genexpressie. Dit kan een dieper inzicht geven in de werking van het geneesmiddel, of kan toxiciteit van de compound in een vroeg stadium detecteren (toxicogenomics). De gewenste activiteit van een compound wordt in vitro bepaald aan de hand van bio-assays (BA). De uitkomst is bv. een maat voor de bindingscapaciteiten van de compound aan de geviseerde receptor op de celwand (IC$_{50}$). Deze receptor wordt de target genoemd. 
+
+In deze vroege fase van de ontwikkeling van een geneesmiddel worden typisch 20 tot 50 gelijkaardige compounds uitvoerig getest. Op basis van de in vitro resultaten nemen de chemici beslissingen over hoe de molecules moeten aangepast worden om tot een (hopelijk) betere compound te komen (i.e. een hogere on-target activiteit en minder toxiciteit). 
+
+De kleine variaties in moleculaire structuur geven aanleiding tot variaties in BA en genexpressies. 
+
+De doelstelling van de studie is het opstellen van een model dat toelaat de bioactiviteit (BA) te voorspellen aan de hand van genexpressies in een levercellijn.
+
+In het volgend voorbeeld, wordt het effect van 35 compounds getest op de genexpressie van levercellen. De levercellen werden gedurende 24 uur blootgesteld aan de compound, waarna genexpressie gemeten werd m.b.v. microarrays. De on-target bioactiviteit van ieder van de 35 compounds wordt via een in-vitro bioassay bekomen (IC$_{50}$).
+
+We beperken ons hier tot 10 genen (geselecteerd door het onderzoeksteam op basis van a-priori kennis van de pathways betrokken bij de ontwikkeling van de ziekte). Figuur -@fig-MCXScatter toont de scatter plot matrix. 
+
+```{r fig-MCXScatter,fig.cap='Scatterplot matrix voor de observaties in de bioactiviteit dataset.', out.width='100%', fig.asp=.8, fig.align='center'}
+mcx<-read.table("https://raw.githubusercontent.com/statomics/sbc/master/data/mcx.txt",header=TRUE)
+head(mcx)
+plot(mcx)
+```
+
+Figuur -@fig-MCXScatter suggereert dat de BA uitkomst sterk gecorreleerd is met alle genexpressies, maar de figuur toont tevens dat vele genexpressies ook onderling sterk gecorreleerd zijn. Het zal dus waarschijnlijk niet nodig zijn om alle genen simultaan in het model op te nemen. Niettegenstaande de hypothesetest-gebaseerde methoden toepasbaar lijken, argumenteren we hier dat die methoden niet geschikt zijn in de huidige context. 
+
+De doelstelling is om een zo optimaal mogelijk model te selecteren dat gebruikt kan worden voor predictie van de uitkomst. Niettegenstaande de predictie voor een lineair regressiemodel gegeven wordt door $\hat{Y}=\beta_0+\sum_{j=1}^{p-1}\beta_jX_j$, weten we dat de $\beta$-parameters een interpretatie hebben met betrekking tot de gemiddelde uitkomst $\text{E}[Y\mid (X_1,\ldots,X_{p-1})]=\beta_0+\sum_{j=1}^{p-1}\beta_jX_j$. 
+Hypothesetesten voor $H_0:\beta_j=0$ gaan dus na of predictor $X_j$ (conditioneel op de andere regressoren in het model) gerelateerd is tot de gemiddelde uitkomst. Het al dan niet verwerpen van $H_0$ heeft niet enkel te maken met de werkelijke waarde van $\beta_j$, maar ook met de kracht van de hypothesetest en dus ook met de steekproefgrootte $n$. Hypothesetesten maken een afweging van de evidentie in de data tegen/voor de gestelde hypotheses die betrekking hebben op de gemiddelde uitkomst. Voor een goed predictiemodel is het minder belangrijk dat het model de werkelijkheid weerspiegelt met betrekking tot het verband tussen de gemiddelde uitkomst en de regressoren; het is enkel belangrijk dat het model goede predicties geeft voor individuele uitkomsten. Om deze reden wordt modelselectie voor predictiemodellen uitgevoerd door gebruik te maken van specifieke modelselectiecriteria die de kwaliteit van het predictieve karakter van een model kwantificeert.  
+
+### Selectie-criterium
+
+Het is aanlokkelijk om $R^2$ te gebruiken als een criterium voor hoe goed het model in staat is om predicties te maken, gezien het aangeeft hoeveel procent van de variabiliteit in de data verklaard kan worden door het model. 
+$R^2$ is echter geen goed criterium. Hoe complexer het model (hoe meer predictoren er worden opgenomen) hoe hoger $R^2$ wordt. $R^2 = 1-SSE/SSTot = SSR/SSTot$ en SSE (SSR) neemt immers steeds af(toe) als een extra predictor in het model wordt opgenomen terwijl SSTot constant blijft. 
+Het gebruik van $R^2$ zal dus aanleiding geven tot overfitting. We zullen immers steeds het meest complexe model selecteren. Hierdoor zal het model niet meer goed veralgemenen naar nieuwe data toe: het model wordt als het ware te goed getuned naar de dataset die is gebruikt om het model te trainen waardoor het niet meer bruikbaar is om predicties te doen. 
+
+Het Akaike Information Criterium (AIC) is een criterium dat een compromis maakt tussen de kwaliteit van de fit en de complexiteit van het model.
+$$AIC = -2 \text{ln } L(\hat \beta_0, \ldots, \hat \beta_{p-1}, \hat \sigma^2) + 2 (p+1),$$
+
+waarbij de eerste term het natuurlijke logaritme is van likelihood, die voor een steekproef van $n$ i.i.d. normaal verdeelde observaties met dichtheidsfunctie $f(Y_i \vert x_{i1} \ldots x_{ip-1}, \beta_0,\ldots, \beta_{p-1} ,\sigma^2)$ en conditioneel gemiddelde $E[Y_i \vert x_{i1} \ldots x_{ip-1}]=\beta_0 + \sum_{j=1}^{p-1} \beta_j x_{j}$ gedefinieerd is als:
+$$
+L(\beta_0, \ldots, \beta_{p-1}, \sigma^2) = \prod\limits_{i=1}^n f(y_i \vert x_{i1} \ldots x_{ip-1}, \beta_0,\ldots, \beta_{p-1} ,\sigma^2)
+$$
+
+De likelihood geeft dus weer hoe waarschijnlijk het is om de data te observeren onder het normale regressiemodel. 
+Gezien we de parameters niet kennen zullen we ze vervangen door de geschatte modelparameters. 
+We kunnen voor het Normale lineaire regressie model aantonen dat $-2 \text{ln } L(\hat \beta_0, \ldots, \hat \beta_{p-1}, \hat \sigma^2)$ evenredig is met SSE.
+Hoe slechter de fit is, hoe hoger het AIC criterium.
+
+De tweede term straft de kwaliteit van de fit als het ware af voor complexiteit. Merk op dat $p+1$ het aantal modelparameters is die we schatten met het normale regressie model: $p$ parameters van het lineaire model + de parameter $\sigma^2$. 
+Het AIC criterium zal dus ook toenemen i.f.v. de complexiteit van het model (aantal parameters). Hierdoor wordt een afweging gemaakt tussen de kwaliteit van de model fit (term 1) en de complexiteit van het model (term 2).
+
+Merk op dat de data analist het werkelijk model niet kent. Hij/zij zal dus verschillende kandidaat modellen met elkaar vergelijken. 
+Vervolgens wordt het model geselecteerd waaronder het zo waarschijnlijk mogelijk is om de geobserveerde data te trekken in een steekproef (eerste term minimaal, SSE zo laag mogelijk), maar zonder dat de modelcomplexiteit daarbij te hoog wordt (tweede term). De analist zal dus het modelselecteren met een zo klein mogelijke AIC. 
+
+Opnieuw kan men gebruik maken van voorwaarts, achterwaartse of stapsgewijze modelselectie. Dat kan eenvoudig in R worden geïmplementeerd a.d.h.v. de 'step' functie. 
+
+We passen de strategie nu toe op het bioactiviteitsvoorbeeld. 
+We zullen opnieuw voorwaartse, achterwaartse en stapsgewijze modelselectie uitvoeren. 
+
+Bij voorwaartse modelselectie starten we van een model zonder predictoren:
+
+```{r}
+m1 <- lm(BA~1,mcx)
+m1
+mfull <- lm(BA~.,mcx)
+mfull
+
+mForward <- step(m1,scope=formula(mfull),direction="forward")
+```
+
+Nu achterwaartse modelselectie:
+
+```{r}
+mBackward <- step(mfull,direction="backward")
+```
+
+We kunnen ook stapsgewijze modelselectie doen startende vanaf het meest eenvoudige model: 
+
+```{r}
+mForStep <- step(m1,scope=list(lower=formula(m1),upper=formula(mfull)), direction="both")
+```
+
+Nu stapsgewijze modelselectie startende vanaf het meest complexe model:
+
+```{r}
+mBackStep <- step(mfull,scope=list(lower=formula(m1),upper=formula(mfull)), direction="both")
+```
+
+
+```{r}
+mForward 
+mBackward
+mForStep
+mBackStep
+```
+
+### Alternatieve criteria
+
+Recent zijn er binnen de machine learning diverse alternatieve technieken voor modelbouw ontwikkeld die hoofdzakelijk steunen op crossvalidatie, d.i. een techniek waarbij men telkens het regressiemodel schat op basis van een subset van de observaties en haar performantie evalueert door na te gaan hoe goed ze de resterende observaties voorspelt. Deze methoden zijn nog beter geschikt voor het bouwen van predictiemodellen. Ze evalueren het model immers op data die het model nog niet heeft gezien tijdens de training (fitting) fase.  
+
+
+

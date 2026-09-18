@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl" xml:lang="nl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie">
+
+<title>8&nbsp; Variantie analyse – Cursus Statistiek 2026-2027</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-NietParametrischeStatistiek.html" rel="next">
+<link href="./06-LineareRegressie.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Geen resultaten",
+    "search-matching-documents-text": "Gevonden documenten",
+    "search-copy-link-title": "Kopieer link om te zoeken",
+    "search-hide-matches-text": "Extra overeenkomsten verbergen",
+    "search-more-match-text": "meer overeenkomst in dit document",
+    "search-more-matches-text": "meer overeenkomsten in dit document",
+    "search-clear-button-title": "Wissen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuleren",
+    "search-submit-button-title": "Verzenden",
+    "search-label": "Zoeken"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Schakel zijbalknavigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-VariantieAnalyse.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variantie analyse</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Schakel zijbalknavigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Zoeken" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cursus Statistiek 2026-2027</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/statOmics/statistiek2deBach" title="Broncode" class="quarto-navigation-tool px-1" aria-label="Broncode"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Statistiek_2026_2027.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Statistiek_2026_2027.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Zoeken"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Cursus Statistiek 2026-2027</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Inleiding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inleiding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Concepten.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Belangrijke concepten &amp; conventies</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Proefopzet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Studiedesign</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-DataExploratie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data exploratie en beschrijvende statistiek</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-StatistischeBesluitvorming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistische besluitvorming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-LineareRegressie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-VariantieAnalyse.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variantie analyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-NietParametrischeStatistiek.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Niet-parametrische statistiek</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-CategorischeDataAnalyse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorische data analyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-GeneralLinearModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Algemeen lineair model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-ModelSelectie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelselectie</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhoudsopgave</h2>
+   
+  <ul>
+  <li><a href="#inleiding" id="toc-inleiding" class="nav-link active" data-scroll-target="#inleiding"><span class="header-section-number">8.1</span> Inleiding</a>
+  <ul class="collapse">
+  <li><a href="#prostacycline-voorbeeld" id="toc-prostacycline-voorbeeld" class="nav-link" data-scroll-target="#prostacycline-voorbeeld"><span class="header-section-number">8.1.1</span> Prostacycline voorbeeld</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">8.1.2</span> Model</a></li>
+  </ul></li>
+  <li><a href="#variantie-analyse" id="toc-variantie-analyse" class="nav-link" data-scroll-target="#variantie-analyse"><span class="header-section-number">8.2</span> Variantie-analyse</a>
+  <ul class="collapse">
+  <li><a href="#model-1" id="toc-model-1" class="nav-link" data-scroll-target="#model-1"><span class="header-section-number">8.2.1</span> Model</a></li>
+  <li><a href="#kwadratensommen-en-anova" id="toc-kwadratensommen-en-anova" class="nav-link" data-scroll-target="#kwadratensommen-en-anova"><span class="header-section-number">8.2.2</span> Kwadratensommen en Anova</a></li>
+  <li><a href="#anova-test" id="toc-anova-test" class="nav-link" data-scroll-target="#anova-test"><span class="header-section-number">8.2.3</span> Anova-test</a></li>
+  <li><a href="#anova-tabel" id="toc-anova-tabel" class="nav-link" data-scroll-target="#anova-tabel"><span class="header-section-number">8.2.4</span> Anova Tabel</a></li>
+  </ul></li>
+  <li><a href="#post-hoc-analyse-meervoudig-vergelijken-van-gemiddelden" id="toc-post-hoc-analyse-meervoudig-vergelijken-van-gemiddelden" class="nav-link" data-scroll-target="#post-hoc-analyse-meervoudig-vergelijken-van-gemiddelden"><span class="header-section-number">8.3</span> Post hoc analyse: Meervoudig Vergelijken van Gemiddelden</a>
+  <ul class="collapse">
+  <li><a href="#naïeve-methode" id="toc-naïeve-methode" class="nav-link" data-scroll-target="#naïeve-methode"><span class="header-section-number">8.3.1</span> Naïeve methode</a></li>
+  <li><a href="#family-wise-error-rate" id="toc-family-wise-error-rate" class="nav-link" data-scroll-target="#family-wise-error-rate"><span class="header-section-number">8.3.2</span> Family-wise error rate</a></li>
+  </ul></li>
+  <li><a href="#conclusies-prostacycline-voorbeeld" id="toc-conclusies-prostacycline-voorbeeld" class="nav-link" data-scroll-target="#conclusies-prostacycline-voorbeeld"><span class="header-section-number">8.4</span> Conclusies: Prostacycline Voorbeeld</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/statOmics/statistiek2deBach/edit/main/07-VariantieAnalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Pagina bewerken</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-chap-anova" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variantie analyse</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Alle kennisclips die in dit hoofdstuk zijn verwerkt kan je in deze youtube playlist vinden:</p>
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PLZH1hP8_LbJIBVGNQ61zxMgc2srezPpnB">Kennisclips Hoofdstuk 7 Variantie Analyse</a></li>
+</ul>
+<p>Link naar webpage/script die wordt gebruik in de kennisclips:</p>
+<ul>
+<li><a href="https://statomics.github.io/sbc/rmd/07-Anova.html">script Hoofdstuk 7</a></li>
+</ul>
+<section id="inleiding" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="inleiding"><span class="header-section-number">8.1</span> Inleiding</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AQLPoGCm4RY" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<!---break-->
+<section id="prostacycline-voorbeeld" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="prostacycline-voorbeeld"><span class="header-section-number">8.1.1</span> Prostacycline voorbeeld</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5G9H7brVoA0" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Prostacycline is een lipide die een belangrijke rol speelt in vasodilatatie (bloedvatverwijding) en bloedstolling. Het inhibeert de activatie van bloedplaatjes en vermijdt de vorming van bloedklonters. Arachidonzuur speelt een belangrijke rol in de productieweg van prostacycline. Onderzoekers willen daarom bestuderen of het toedienen van arachidonzuur een effect heeft op het prostacycline niveau in het bloedplasma. Ze zetten hiervoor een proef op waarbij ze het effect van arachidonzuur zullen nagaan op het prostacycline niveau van ratten. Arachidonzuur wordt hierbij toegediend in drie verschillende concentraties (verklarende variabele met drie behandelingen): laag (L, 10 eenheden), gemiddeld (M, 25 eenheden) en een hoge dosis (H, 50 eenheden). Het prostacycline niveau in het bloedplasma wordt gemeten a.d.h.v. een gecalibreerde elisa fluorescentie meting (responsvariabele).<br>
+Het experiment is een <em>volledige gerandomiseerd proefopzet</em>, <em>“completely randomized design” CRD</em>. In totaal worden 36 ratten (experimentele eenheden) at random toegekend aan de drie behandelingsgroepen (12 ratten per groep). De data is opgeslagen in een tekst bestand met naam <code>prostacyclin.txt</code> in de folder dataset. Een boxplot en QQ-plots voor de data in elke groep worden weergegeven in Figuur <a href="#fig-prostBox" class="quarto-xref"><span>8.1</span></a> en <a href="#fig-prostBox2" class="quarto-xref"><span>8.2</span></a> respectievelijk.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>prostacyclin <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"https://raw.githubusercontent.com/statOmics/sbc/master/data/prostacyclin.txt"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#dosis wordt als continue covariaat ingelezen</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#zet om naar een factor.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>prostacyclin <span class="ot">&lt;-</span> prostacyclin <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dose =</span> <span class="fu">as.factor</span>(prostacyclin<span class="sc">$</span>dose))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(prostacyclin)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  prostac dose 
+    &lt;dbl&gt; &lt;fct&gt;
+1    19.2 10   
+2    10.8 10   
+3    33.6 10   
+4    11.9 10   
+5    15.9 10   
+6    33.3 10   </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prostacyclin <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> prostac, <span class="at">fill =</span> dose)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">"jitter"</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"prostacyclin (ng/ml)"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-prostBox" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prostBox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-VariantieAnalyse_files/figure-html/fig-prostBox-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prostBox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;8.1: Data-exploratie van het prostacycline niveau bij 36 ratten die behandeld werden met drie verschillende arachidonzuurconcentraties (12 ratten per behandeling). Boxplots van prostacycline niveau in functie van de dosis.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prostacyclin <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> prostac)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> dose)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-prostBox2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prostBox2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-VariantieAnalyse_files/figure-html/fig-prostBox2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prostBox2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;8.2: Data-exploratie van het prostacycline niveau bij 36 ratten die behandeld werden met drie verschillende arachidonzuurconcentraties (12 ratten per behandeling). QQ-plot van prostacycline voor lage, matige en hoge dosisgroep.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Figuur <a href="#fig-prostBox" class="quarto-xref"><span>8.1</span></a> geeft weer dat er een effect lijkt te zijn van de arachidonzuurdosis op de hoogte van het prostacycline niveau. In het bijzonder de hoge dosis lijkt het prostacycline niveau in het bloedplasma te laten toenemen.</p>
+<!---break-->
+</section>
+<section id="model" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="model"><span class="header-section-number">8.1.2</span> Model</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Gb2JaUOhRqk" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Op basis van de boxplots in Figuur <a href="#fig-prostBox" class="quarto-xref"><span>8.1</span></a> zien we dat de variantie gelijk lijkt te zijn tussen de verschillende behandelingsgroepen. Er is een indicatie dat het gemiddeld prostacycline niveau verschilt tussen de behandelingsgroepen. In het bijzonder voor de hoge dosisgroep H (50 eenheden). Er zijn geen grote verschillen in de interkwartiel range (box-groottes). De QQ-plots in Figuur <a href="#fig-prostBox2" class="quarto-xref"><span>8.2</span></a> tonen geen grote afwijkingen aan van Normaliteit. De QQ-plot geeft een indicatie dat mogelijks een outlier voorkomt in groep L. Deze wordt echter niet door de boxplots gesignaleerd.</p>
+<p>We kunnen dus volgend statistisch model voorop stellen:</p>
+<p><span class="math display">\[Y_i \vert \text{groep j} \sim N(\mu_j,\sigma^2),\]</span></p>
+<p>met <span class="math inline">\(j= \text{1, 2, 3}\)</span>, respectievelijk de lage, matige en hoge dosisgroep. Hierbij veronderstellen we dus dat de data Normaal verdeeld zijn met een gelijke variantie binnen elk van de <span class="math inline">\(g=3\)</span> groepen, <span class="math inline">\(\sigma^2\)</span>, maar met een verschillend groepsgemiddelde <span class="math inline">\(\mu_j\)</span>.</p>
+<p>De onderzoeksvraag kan nu vertaald worden in termen van het model. De onderzoekers wensen aan te tonen dat het arachidonzuur niveau een effect heeft op de gemiddelde prostacycline concentratie in het bloed.</p>
+<p>Dat vertaalt zich in volgende nulhypothese, de arachidonzuurconcentratie heeft geen effect op het gemiddelde prostacycline niveau bij ratten,</p>
+<p><span class="math display">\[H_0:\mu_1=\mu_2 = \mu_3\]</span></p>
+<p>en de alternatieve hypothese dat er een effect is van de arachidonzuurconcentratie op het gemiddelde prostacycline niveau bij ratten. Dat betekent dat minstens twee gemiddelden verschillend zijn</p>
+<p><span class="math display">\[H_1: \exists\ j,k \in \{1,\ldots,g\} : \mu_j\neq\mu_k.\]</span></p>
+<p>Of letterlijk: er bestaat minstens één koppel behandelingsgroepen (j en k) waarvoor het gemiddelde prostacycline niveau <span class="math inline">\(\mu_j\)</span> verschillend is van dat in groep <span class="math inline">\(k\)</span>, <span class="math inline">\(\mu_k\)</span>.</p>
+<p>Een naïeve benadering zou zijn om de nulhypothese op splitsen in partiële hypothesen</p>
+<p><span class="math display">\[H_{0jk}: \mu_j=\mu_k \text{ versus } H_{1jk}: \mu_j \neq \mu_k\]</span></p>
+<p>Waarbij de gemiddelden tussen de groepen twee aan twee worden vergeleken. Met deze procedure zouden we elk van deze partiële hypothesen kunnen testen met een two-sample <span class="math inline">\(t\)</span>-test. Dat zou echter leiden tot een probleem van meervoudig toetsen en een verlies aan power (zie verder). Voor dit voorbeeld zouden we met deze aanpak immers 3 t-testen moeten uitvoeren om de onderzoeksvraag te evalueren.</p>
+<p>In dit hoofdstuk zullen we methoden introduceren om <span class="math inline">\(H_0:\mu_1=\mu_2=\mu_3\)</span> vs <span class="math inline">\(H_1: \exists j,k \in \{1,\ldots,g\} : \mu_j\neq\mu_k\)</span> te testen met <strong>één enkele test</strong>. De correcte oplossing voor het testprobleem waarbij we een continue response meten en wensen te detecteren of er een verschil is in gemiddelde response tussen meerdere groepen wordt een <strong>variantie-analyse of ANOVA</strong> (ANalysis Of VAriance) genoemd.</p>
+</section>
+</section>
+<section id="variantie-analyse" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="variantie-analyse"><span class="header-section-number">8.2</span> Variantie-analyse</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LEdZZYT41_Y" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>We leiden de methode af voor de meest eenvoudige uitbreiding met 3 groepen (prostacycline voorbeeld), maar de veralgemening naar g groepen met <span class="math inline">\(g&gt;3\)</span> is triviaal.</p>
+<section id="model-1" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="model-1"><span class="header-section-number">8.2.1</span> Model</h3>
+<p>Zoals bij de t-test kunnen we het probleem ook modelleren a.d.h.v een lineair model door gebruik te maken van dummy variabelen (Sectie <a href="06-LineareRegressie.html#sec-linDummy" class="quarto-xref"><span>7.10</span></a>). We zullen hierbij steeds 1 dummy variable minder nodig hebben dan er groepen zijn.</p>
+<p>Voor het prostacycline voorbeeld zijn dus twee dummy variabelen nodig en kunnen we de data dus modelleren met onderstaand lineair regressiemodel: Stel dat <span class="math inline">\(Y_i\)</span> de uitkomst voorstelt van observatie <span class="math inline">\(i\)</span> (<span class="math inline">\(i=1,\ldots, n\)</span>), dan beschouwen we</p>
+<p><span id="eq-regmu3"><span class="math display">\[
+\begin{aligned}
+  Y_i &amp;= g(x_{i1},x_{i2}) + \epsilon_i\\
+  Y_i &amp;= \beta_0+\beta_1 x_{i1} +\beta_2 x_{i2} +\epsilon_i
+\end{aligned}
+\tag{8.1}\]</span></span></p>
+<p>waarbij de error term opnieuw i.i.d.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> normaal verdeeld wordt verondersteld met een constante variantie, <span class="math inline">\(\epsilon_i\sim N(0,\sigma^2)\)</span>, en waarbij de predictoren dummy-variabelen zijn:</p>
+<p><span class="math display">\[x_{i1} = \left\{ \begin{array}{ll}
+1 &amp; \text{ als observatie $i$ behoort tot middelste dosisgroep (M)} \\
+0 &amp; \text{ als observatie $i$ behoort tot  een andere dosisgroep} \end{array}\right. .\]</span></p>
+<p>en <span class="math display">\[x_{i2} = \left\{ \begin{array}{ll}
+1 &amp; \text{ als observatie $i$ behoort tot de hoogste dosisgroep (H)} \\
+0 &amp; \text{ als observatie $i$ behoort tot een andere dosisgroep} \end{array}\right. .\]</span></p>
+<p>De lage dosisgroep (L) met <span class="math inline">\(x_{i1}=x_{i2}=0\)</span> wordt in deze context de <strong>referentiegroep</strong> genoemd.</p>
+<p>Zoals in Sectie <a href="06-LineareRegressie.html#sec-linDummy" class="quarto-xref"><span>7.10</span></a> kunnen we het regressie-model opnieuw herschrijven als een model voor elke groep:</p>
+<ol type="1">
+<li>Voor observaties in <strong>dosisgroep L</strong> wordt het Model <a href="#eq-regmu3" class="quarto-xref"><span>8.1</span></a></li>
+</ol>
+<p><span class="math display">\[Y_i = \beta_0+\epsilon_i,\]</span></p>
+<p>met <span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span>.</p>
+<ol start="2" type="1">
+<li>Voor observaties in <strong>dosisgroep M</strong> wordt het Model <a href="#eq-regmu3" class="quarto-xref"><span>8.1</span></a></li>
+</ol>
+<p><span class="math display">\[Y_i = \beta_0+\beta_1 + \epsilon_i,\]</span></p>
+<p>met <span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span>.</p>
+<ol start="3" type="1">
+<li>Voor observaties in <strong>dosisgroep H</strong> wordt het Model <a href="#eq-regmu3" class="quarto-xref"><span>8.1</span></a></li>
+</ol>
+<p><span class="math display">\[Y_i = \beta_0+\beta_2 + \epsilon_i\]</span></p>
+<p>met <span class="math inline">\(\epsilon_i  \sim  N(0,\sigma^2)\)</span>.</p>
+<p>Hieruit volgt direct de interpretatie van de modelparameters:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+   \beta_0 &amp;=&amp;  \text{E}\left[Y_i \mid \text{behandeling met lage dosisgroep L}\right] \\
+   \beta_1 &amp;=&amp;  (\beta_0+\beta_1)-\beta_0 = \text{E}\left[Y_i \mid \text{behandeling M}\right] - \text{E}\left[Y_i \mid \text{behandeling L}\right] \\
+   \beta_2 &amp;=&amp;  (\beta_0+\beta_2)-\beta_0 = \text{E}\left[Y_i \mid \text{behandeling H}\right]-\text{E}\left[Y_i \mid \text{behandeling L}\right].
+\end{eqnarray*}\]</span></p>
+<p>of anders geformuleerd:</p>
+<ol type="1">
+<li>parameter <span class="math inline">\(\beta_0\)</span> is de gemiddelde uitkomst in de lage dosis groep L.</li>
+<li>Parameter <span class="math inline">\(\beta_1\)</span> is het effect (verschil in gemiddelde concentratie) van groep M t.o.v. groep L.</li>
+<li>Parameter <span class="math inline">\(\beta_2\)</span> is het effect van hoge dosis groep H t.o.v. groep L.</li>
+</ol>
+<p>We herformuleren de modellen gebruik makend van de <span class="math inline">\(\mu\)</span>-notaties:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+Y_{i\vert \text{dose=L}} &amp;=&amp; \beta_0+\epsilon_i = \mu_1+\epsilon_i \\
+Y_{i\vert \text{dose=M}} &amp;=&amp; \beta_0+\beta_1+ \epsilon_i = \mu_2+\epsilon_i \\
+Y_{i\vert \text{dose=H}} &amp;=&amp; \beta_0+\beta_2 + \epsilon_i = \mu_3+\epsilon_i .
+\end{eqnarray*}\]</span></p>
+<p>met <span class="math inline">\(\epsilon_i \sim N(0,\sigma^2)\)</span> en met</p>
+<p><span class="math display">\[  \mu_j = \text{E}\left[Y_i \mid \text{behandelingsgroep } j\right].\]</span></p>
+<p>De oorspronkelijk nulhypothese <span class="math inline">\(H_0:\mu_1=\mu_2=\mu_3\)</span> kan equivalent geformuleerd worden als</p>
+<p><span class="math display">\[H_0: \beta_1=\beta_2=0.\]</span></p>
+<p>Gezien Model <a href="#eq-regmu3" class="quarto-xref"><span>8.1</span></a> een lineair regressiemodel is, kunnen de methoden van lineaire regressie gebruikt worden voor het schatten van de parameters en hun varianties, het opstellen van hypothesetesten en betrouwbaarheidsintervallen. Het testen van <span class="math inline">\(H_0: \beta_1=\beta_2=0\)</span> gebeurt d.m.v. een <span class="math inline">\(F\)</span>-test. Hiermee is bijna de volledige oplossing bekomen.</p>
+<p>Voor het prostacycline voorbeeld bekomen we het volgende model in het software pakket R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(prostac <span class="sc">~</span> dose, <span class="at">data =</span> prostacyclin)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = prostac ~ dose, data = prostacyclin)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-35.167 -17.117  -4.958  17.927  41.133 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   40.108      6.150   6.521 2.10e-07 ***
+dose25         8.258      8.698   0.949    0.349    
+dose50        43.258      8.698   4.974 1.99e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 21.3 on 33 degrees of freedom
+Multiple R-squared:  0.458, Adjusted R-squared:  0.4252 
+F-statistic: 13.94 on 2 and 33 DF,  p-value: 4.081e-05</code></pre>
+</div>
+</div>
+<p>We zien dat R eveneens de lage klasse (dose10) kiest als referentie-klasse aangezien er enkel een intercept voorkomt en parameters voor dose25 (M) en dose50 (H). De output laat dus onmiddellijk toe om het effect te vergelijken tussen de middelste en laagste dosisgroep en de hoogste en laagste dosisgroep a.d.h.v. twee t-testen.<br>
+De volledige nulhypothese <span class="math inline">\(H_0: \beta_1=\beta_2=0\)</span> kan worden geëvalueerd op basis van de F-test onderaan in de output. De p-waarde van de test geeft aan dat er een extreem significant effect is van de arachidonzuurconcentratie op het gemiddelde prostacycline niveau (<span class="math inline">\(p&lt;&lt;0.001\)</span>). In de volgende Sectie tonen we dat de F-test opnieuw opgebouwd wordt d.m.v. kwadratensommen.</p>
+<!---break-->
+</section>
+<section id="kwadratensommen-en-anova" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="kwadratensommen-en-anova"><span class="header-section-number">8.2.2</span> Kwadratensommen en Anova</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lnpDPjMCY54" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Net zoals bij enkelvoudige regressie (Sectie <a href="06-LineareRegressie.html#sec-linAnova" class="quarto-xref"><span>7.9</span></a>) kunnen we opnieuw de kwadratensom van de regressie gebruiken bij het opstellen van de F-test. De kwadratensom van de regressie</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\text{SSR}&amp;=&amp;\sum\limits_{i=1}^n (\hat Y_{i} -\bar Y)^2
+\end{eqnarray*}\]</span> kan nu worden herschreven als <span class="math display">\[\begin{eqnarray*}
+\text{SSR}&amp;=&amp;\sum\limits_{i=1}^n (\hat Y_i -\bar Y)^2\\
+&amp;=&amp; \sum\limits_{i=1}^n (\hat{g} (x_{i1},x_{i2}) - \bar Y)^2\\
+&amp;=&amp; \sum\limits_{i=1}^n (\hat\beta_0+\hat\beta_1x_{i1}+\hat\beta_2x_{i2}) - \bar Y)^2\\
+&amp;=&amp; \sum\limits_{i=1}^{n_1} (\hat\beta_0 - \bar Y)^2 +\sum\limits_{i=1}^{n_2} (\hat\beta_0 + \hat\beta_1 - \bar Y)^2+\sum\limits_{i=1}^{n_3} (\hat\beta_0 + \hat\beta_2 - \bar Y)^2\\
+&amp;=&amp; \sum\limits_{i=1}^{n_1} (\bar Y_1- \bar Y)^2 +\sum\limits_{i=1}^{n_2} (\bar Y_2- \bar Y)^2+\sum\limits_{i=1}^{n_3} (\bar Y_3 - \bar Y)^2\\
+\end{eqnarray*}\]</span></p>
+<p>met <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span> en <span class="math inline">\(n_3\)</span> het aantal observaties in elke groep (<span class="math inline">\(n_1=n_2=n_3=12\)</span>).</p>
+<p>Net als in Sectie <a href="06-LineareRegressie.html#sec-linAnova" class="quarto-xref"><span>7.9</span></a> is SSR een maat voor de afwijking tussen de predicties van het anova model (groepsgemiddelden) en het steekproefgemiddelde van de uitkomsten. Het kan opnieuw geïnterpreteerd worden als een maat voor de afwijking tussen het geschatte Model <a href="#eq-regmu3" class="quarto-xref"><span>8.1</span></a> en een gereduceerd model met enkel een intercept. Deze laatste is dus eigenlijk een schatting van het model <span class="math inline">\(g(x_1,x_2)=\beta_0\)</span>, waarin <span class="math inline">\(\beta_0\)</span> geschat wordt door <span class="math inline">\(\bar{Y}\)</span>. Anders geformuleerd: SSR meet de grootte van het behandelingseffect zodat <span class="math inline">\(\text{SSR} \approx 0\)</span> duidt op de afwezigheid van het effect van de dummy variabelen en <span class="math inline">\(\text{SSR}&gt;0\)</span> duidt op een effect van de dummy variabelen. We voelen opnieuw aan dat <span class="math inline">\(\text{SSR}\)</span> zal kunnen worden gebruikt voor het ontwikkelen van een statistische test voor de evaluatie van het behandelingseffect. In de anova context heeft SSR <span class="math inline">\(g-1=3-1=2\)</span> vrijheidsgraden: de kwadratensom is opgebouwd op basis van <span class="math inline">\(g=3\)</span> groepsgemiddelden <span class="math inline">\(\bar Y_j\)</span> en we verliezen 1 vrijheidsgraad door de schatting van het algemeen steekproefgemiddelde <span class="math inline">\(\bar Y\)</span>. Wanneer we SSR interpreteren als een verschil tussen twee modellen, bekomen we eveneens een verschil van <span class="math inline">\(g-1=2\)</span> vrijheidsgraden: <span class="math inline">\(g=3\)</span> model parameters in het volledige model (intercept voor referentie klasse en g-1 parameters voor elk van de dummies) en 1 parameter voor het gereduceerde model (enkel intercept).</p>
+<p>In een ANOVA setting is het gebruikelijk om de kwadratensom van de regressie te noteren als <span class="math inline">\(\text{SST}\)</span>, de <strong>kwadratensom van de behandeling (treatment)</strong> of als SSBetween. De kwadratensom van de behandeling geeft inderdaad de variabiliteit weer tussen de groepen. Het meet immers de afwijkingen tussen de groepsgemiddelden <span class="math inline">\(\bar Y_j\)</span> en het steekproefgemiddelde <span class="math inline">\(\bar Y\)</span> (Zie Figuur <a href="#fig-prostacSST" class="quarto-xref"><span>8.3</span></a>). We kunnen eveneens opnieuw een overeenkomstige gemiddelde kwadratensom bekomen als</p>
+<p><span class="math display">\[\text{MST}=\text{SST}/(g-1).\]</span></p>
+<p>met het aantal groepen <span class="math inline">\(g=3\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-prostacSST" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prostacSST-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-VariantieAnalyse_files/figure-html/fig-prostacSST-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prostacSST-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;8.3: Interpretatie van de kwadratensom van de behandeling (SST): de som van de kwadratische afwijkingen tussen de groepsgemiddelden (<span class="math inline">\(\bar Y_j\)</span>) en het steekproefgemiddelde van de uitkomsten (<span class="math inline">\(\bar Y\)</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Opnieuw kunnen we de totale kwadratensom SSTot ontbinden in</p>
+<p><span class="math display">\[\text{SSTot} = \text{SST} + \text{SSE}.\]</span></p>
+<p>Waarbij SSTot opnieuw de totale variabiliteit voorstelt, met name de som van de kwadratische afwijking van de uitkomsten <span class="math inline">\(Y_{i}\)</span> t.o.v. het algemeen gemiddelde prostacycline niveau <span class="math inline">\(\bar{Y}\)</span> en SSE de residuele variabiliteit of de som van de kwadratische afwijkingen tussen de observaties <span class="math inline">\(Y_{i}\)</span> en de modelvoorspellingen (hier groepsgemiddelden) <span class="math inline">\(\hat{g}(x_{i1},x_{i2})=\hat \mu_j=\bar Y_j\)</span>.</p>
+<p>De interpretatie van de deze kwadratensommen worden weergegeven in Figuur <a href="#fig-prostacSSTotSSE" class="quarto-xref"><span>8.4</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-prostacSSTotSSE" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prostacSSTotSSE-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-VariantieAnalyse_files/figure-html/fig-prostacSSTotSSE-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prostacSSTotSSE-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;8.4: Interpretatie van de totale kwadratensom (SSTot, som van de kwadratische afwijkingen tussen de uitkomsten <span class="math inline">\(Y_{i}\)</span> en het steekproefgemiddelde van de uitkomsten <span class="math inline">\(\bar Y\)</span>, links) en van residuele kwadratensom (SSE, som van de kwadratische afwijkingen tussen de uitkomsten <span class="math inline">\(Y_{i}\)</span> en de groepsgemiddelden <span class="math inline">\(\bar Y_j\)</span>, rechts)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="anova-test" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="anova-test"><span class="header-section-number">8.2.3</span> Anova-test</h3>
+<p>Het testen van <span class="math inline">\(H_0: \beta_1=\ldots=\beta_{g-1}=0\)</span> vs <span class="math inline">\(H_1: \exists k \in\{1,\ldots,g-1\} : \beta_k \neq0\)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> kan d.m.v. onderstaande <span class="math inline">\(F\)</span>-test.</p>
+<p><span class="math display">\[F = \frac{\text{MST}}{\text{MSE}}\]</span></p>
+<p>met <span class="math inline">\(\text{MST}\)</span> de gemiddelde kwadratensom van de behandeling met <span class="math inline">\(g-1\)</span> vrijheidsgraden en <span class="math inline">\(\text{MSE}\)</span> de gemiddelde residuele kwadratensom uit het niet-gereduceerde model <a href="#eq-regmu3" class="quarto-xref"><span>8.1</span></a>, deze heeft <span class="math inline">\(n-g\)</span> vrijheidsgraden (met het aantal groepen <span class="math inline">\(g=3\)</span>). De teststatistiek vergelijkt dus variabiliteit verklaard door het model (MST) met de residuele variabiliteit (MSE) of met andere woorden vergelijkt het de variabiliteit tussen groepen (MST) met de variabiliteit binnen groepen (MSE). Grotere waarden voor de test-statistiek zijn minder waarschijnlijk onder de nulhypothese. Wanneer aan alle modelvoorwaarden is voldaan, dan volgt de statistiek onder de nulhypothese opnieuw een F-verdeling, <span class="math inline">\(F \sim F_{g-1,n-g}\)</span>, met <span class="math inline">\(g-1\)</span> vrijheidsgraden in de teller en <span class="math inline">\(n-g\)</span> vrijheidsgraden in de noemer.</p>
+</section>
+<section id="anova-tabel" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="anova-tabel"><span class="header-section-number">8.2.4</span> Anova Tabel</h3>
+<p>De kwadratensommen en de F-test worden meestal in een zogenaamde variantie-analyse tabel of een anova tabel gerapporteerd.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 29%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 19%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Df</th>
+<th style="text-align: left;">Sum Sq</th>
+<th style="text-align: left;">Mean Sq</th>
+<th style="text-align: left;">F value</th>
+<th style="text-align: left;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Treatment</td>
+<td style="text-align: left;">vrijheidsgraden SST</td>
+<td style="text-align: left;">SST</td>
+<td style="text-align: left;">MST</td>
+<td style="text-align: left;">f-statistiek</td>
+<td style="text-align: left;">p-waarde</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Error</td>
+<td style="text-align: left;">vrijheidsgraden SSE</td>
+<td style="text-align: left;">SSE</td>
+<td style="text-align: left;">MSE</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>De anovatabel voor het prostacycline voorbeeld kan als volgt in de R-software worden bekomen</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model1)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: prostac
+          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+dose       2  12658  6329.0  13.944 4.081e-05 ***
+Residuals 33  14979   453.9                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>We kunnen dus opnieuw besluiten dat er een extreem significant effect is van de dosering van arachidonzuur op de gemiddelde prostacycline concentratie in het bloed bij ratten (<span class="math inline">\(p&lt;&lt;0.001\)</span>).</p>
+<p>In Figuur <a href="#fig-prostacF" class="quarto-xref"><span>8.5</span></a> wordt de F-verdeling weergegeven samen met de kritische waarde op het 5% significantie niveau en de geobserveerde F-statistiek voor het prostacycline voorbeeld.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-prostacF" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prostacF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-VariantieAnalyse_files/figure-html/fig-prostacF-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prostacF-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;8.5: Een F-verdeling met 2 vrijheidsgraden in de teller en 33 in de noemer. Het aanvaardingsgebied wordt weergegeven in blauw, de kritische waarde en de verwerpingsregio bij het <span class="math inline">\(\alpha=5\%\)</span> niveau in rood, en, de geobserveerde f-waarde en de p-waarde worden in oranje.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Voorbeelden van meerdere F-verdelingen met een verschillend aantal vrijheidsgraden in teller en noemer worden weergegeven in Figuur <a href="#fig-ftheo" class="quarto-xref"><span>8.6</span></a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-ftheo" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ftheo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-VariantieAnalyse_files/figure-html/fig-ftheo-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ftheo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;8.6: Meerdere F-verdelingen met een verschillend aantal vrijheidsgraden in de teller en de noemer.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="post-hoc-analyse-meervoudig-vergelijken-van-gemiddelden" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="post-hoc-analyse-meervoudig-vergelijken-van-gemiddelden"><span class="header-section-number">8.3</span> Post hoc analyse: Meervoudig Vergelijken van Gemiddelden</h2>
+<section id="naïeve-methode" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="naïeve-methode"><span class="header-section-number">8.3.1</span> Naïeve methode</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vaH1SpGAVqY" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>In het eerste deel van dit hoofdstuk hebben we een <span class="math inline">\(F\)</span>-test besproken die gebruikt kan worden voor het testen van</p>
+<p><span class="math display">\[  H_0: \mu_1=\cdots = \mu_g \text{ versus } H_1: \text{niet } H_0.\]</span></p>
+<p>Dus als de nulhypothese verworpen wordt, dan wordt besloten dat er minstens twee gemiddelden verschillen van elkaar. De methode stelt ons echter niet in staat om te identificeren welke gemiddelden van elkaar verschillen.</p>
+<p>Een eerste, maar naïeve benadering van het probleem bestaat erin om de nulhypothese op te splitsen in partiële hypotheses</p>
+<p><span class="math display">\[H_{0jk}: \mu_j=\mu_k \text{ versus } H_{1jk}: \mu_j \neq \mu_k\]</span></p>
+<p>en deze partiële hypotheses te testen met two-sample <span class="math inline">\(t\)</span>-testen. Voor het vergelijken van groep <span class="math inline">\(j\)</span> met groep <span class="math inline">\(k\)</span> wordt de klassieke two-sample <span class="math inline">\(t\)</span>-test onder de veronderstelling van homoscedasticiteit gegeven door</p>
+<p><span class="math display">\[T_{jk} = \frac{\bar{Y}_j-\bar{Y}_k}{S_p\sqrt{\frac{1}{n_j}+\frac{1}{n_k}}} \sim t_{n-2}\]</span></p>
+<p>waarin <span class="math inline">\(S_p^2\)</span> de gepoolde variantieschatter is,</p>
+<p><span class="math display">\[S_p^2 = \frac{(n_j-1)S_j^2 + (n_k-1)S_k^2}{n_j+n_k-2}\]</span></p>
+<p>met <span class="math inline">\(S_j^2\)</span> en <span class="math inline">\(S_k^2\)</span> de steekproefvarianties van respectievelijk de uitkomsten uit groep <span class="math inline">\(j\)</span> en <span class="math inline">\(k\)</span>.</p>
+<p>In een ANOVA context wordt echter verondersteld dat in <strong>alle</strong> <span class="math inline">\(g\)</span> groepen de variantie van de uitkomsten dezelfde is (de residuele variantie <span class="math inline">\(\sigma^2\)</span>). Indien we dus <span class="math inline">\(S_p^2\)</span> gebruiken, dan is dit niet de meest efficiënte schatter omdat deze niet van alle data gebruik maakt<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. We kunnen dus efficiëntie winnen door MSE te gebruiken. Ter herinnering, MSE kan geschreven worden als</p>
+<p><span class="math display">\[\text{MSE}= \sum_{j=1}^g \frac{(n_j-1)S_j^2}{n-g}.\]</span></p>
+<p>De <span class="math inline">\(t\)</span>-testen voor het twee-aan-twee vergelijken van alle gemiddelden worden dus best gebaseerd op</p>
+<p><span class="math display">\[T_{jk} = \frac{\bar{Y}_j-\bar{Y}_k}{\text{MSE}\sqrt{\frac{1}{n_j}+\frac{1}{n_k}}} \sim t_{n-g}.\]</span></p>
+<p>We zullen hier eerst demonstreren dat het werken met <span class="math inline">\(m\)</span>-testen op het <span class="math inline">\(\alpha\)</span> significantieniveau een foute aanpak is die de kans op een type I fout niet onder controle kan houden. Dit zal aanleiding geven tot een meer algemene definitie van de type I fout.</p>
+<p>Alvorens de denkfout in de naïeve aanpak te demonsteren via simulaties, tonen we hoe de naïeve benadering in zijn werk zou gaan voor het prostacycline voorbeeld.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  prostacyclin,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise.t.test</span>(prostac, dose, <span class="st">"none"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pairwise comparisons using t tests with pooled SD 
+
+data:  prostac and dose 
+
+   10      25     
+25 0.34927 -      
+50 2e-05   0.00031
+
+P value adjustment method: none </code></pre>
+</div>
+</div>
+<p>Deze output toont de tweezijdige <span class="math inline">\(p\)</span>-waarden voor het testen van alle partiële hypotheses. We zouden hier kunnen besluiten dat het gemiddelde prostacycline niveau extreem significant verschillend is tussen de hoge en de lage dosis groep en tussen de hoge en de matige dosis groep (beide <span class="math inline">\(p&lt;&lt;0.001\)</span>). Verder is het gemiddelde prostacycline niveau niet significant verschillend is tussen de matige en de lage dosis groep.</p>
+<p>In onderstaande R code wordt een simulatiestudie opgezet (herhaalde steekproefname).</p>
+<ol type="1">
+<li>We simuleren uit een ANOVA model met <span class="math inline">\(g=3\)</span> groepen.</li>
+<li>De gemiddelden in het ANOVA model zijn gelijk aan elkaar, zodat de nulhypothese</li>
+</ol>
+<p><span class="math display">\[H_0: \mu_1=\mu_2=\mu_3\]</span></p>
+<p>opgaat. 3. Voor iedere gesimuleerde dataset zijn er <span class="math inline">\(m=3\)</span> paarsgewijze two-sample <span class="math inline">\(t\)</span>-testen 4. Zodra minstens één van de <span class="math inline">\(p\)</span>-waarden kleiner is dan het significantieniveau <span class="math inline">\(\alpha=5\%\)</span>, wordt de nulhypothese <span class="math inline">\(H_0: \mu_1=\mu_2=\mu_3\)</span> verworpen omdat er minstens twee gemiddelden verschillend zijn volgens de <span class="math inline">\(t\)</span>-testen. 5. We rapporteren de relatieve frequentie van het verwerpen van de globale nulhypothese, meer bepaald de kans op een type I fout van de test voor <span class="math inline">\(H_0: \mu_1=\mu_2=\mu_3\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># aantal behandelingen (g=3)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># aantal herhalingen in iedere groep</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g<span class="sc">*</span>ni <span class="co"># totaal aantal observaties</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># significantieniveau van een individuele test</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co">#aantal simulaties</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>) <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni)) <span class="co">#factor</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">cat</span>(i, <span class="st">"/"</span>, N, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>tests <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(y, trt, <span class="st">"none"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(tests<span class="sc">$</span>p.value, <span class="at">na.rm =</span> T) <span class="sc">&lt;</span> alpha</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(verwerp) cnt <span class="ot">&lt;-</span> cnt<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1000 / 10000 
+2000 / 10000 
+3000 / 10000 
+4000 / 10000 
+5000 / 10000 
+6000 / 10000 
+7000 / 10000 
+8000 / 10000 
+9000 / 10000 
+10000 / 10000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cnt<span class="sc">/</span>N</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1209</code></pre>
+</div>
+</div>
+<p>De simulatiestudie toont aan dat de kans op een type I fout gelijk is aan 12.1%, wat meer dan dubbel zo groot is dan de vooropgestelde <span class="math inline">\(\alpha=5\%\)</span>. Als we de simulatiestudie herhalen met <span class="math inline">\(g=5\)</span> groepen (i.e.&nbsp;m=g(g-1)/2=10 paarsgewijze <span class="math inline">\(t\)</span>-testen) dan vinden we <span class="math inline">\(28.0\%\)</span> in plaats van de gewenste <span class="math inline">\(5\%\)</span>. Deze simulaties illustreren het probleem van <strong>multipliciteit</strong> (Engels: <em>multiplicity</em>): de klassieke <span class="math inline">\(p\)</span>-waarden mogen enkel met het significantieniveau <span class="math inline">\(\alpha\)</span> vergeleken worden, indien het besluit op exact één <span class="math inline">\(p\)</span>-waarde gebaseerd is. Hier wordt het finale besluit (aldanniet verwerpen van <span class="math inline">\(H_0: \mu_1=\cdots =\mu_g\)</span>) gebaseerd op <span class="math inline">\(m=g\times(g-1)/2\)</span> <span class="math inline">\(p\)</span>-waarden, met <span class="math inline">\(g\)</span> het aantal groepen.</p>
+<p>In de volgende sectie breiden we het begrip van type I fout uit en introduceren we enkele oplossingen om met multipliciteit om te gaan.</p>
+<!---break-->
+</section>
+<section id="family-wise-error-rate" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="family-wise-error-rate"><span class="header-section-number">8.3.2</span> Family-wise error rate</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Tmwid9_KqUE" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Wanneer <span class="math inline">\(m&gt;1\)</span> toetsen worden aangewend om 1 beslissing te vormen, is het noodzakelijk te corrigeren voor het risico op vals positieve resultaten<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Meeste procedures voor meervoudig toetsen gaan ervan uit dat <em>alle <span class="math inline">\(m\)</span> nulhypotheses waar</em> zijn. Er wordt dan geprobeerd om het <em>risico op minstens 1 vals positief resultaat</em> te controleren op <strong>experimentgewijs significantieniveau <span class="math inline">\(\alpha_E\)</span></strong>, typisch <span class="math inline">\(\alpha_E=0.05\)</span>. In de engelstalige literatuur wordt het experimentgewijs significantieniveau <em>family-wise error rate (FWER)</em> genoemd.</p>
+<section id="bonferroni-correctie" class="level4" data-number="8.3.2.1">
+<h4 data-number="8.3.2.1" class="anchored" data-anchor-id="bonferroni-correctie"><span class="header-section-number">8.3.2.1</span> Bonferroni correctie</h4>
+<p>Bij het uitvoeren van <span class="math inline">\(m\)</span> onafhankelijke toetsen met elk significantieniveau <span class="math inline">\(\alpha\)</span>, is</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\alpha_E&amp;=&amp;\text{P}[\text{minstens 1 Type I fout}]\\
+&amp;=&amp;1-(1-\alpha)^m \leq m\alpha
+\end{eqnarray*}\]</span></p>
+<ul>
+<li>Als we 5 toetsen uitvoeren op het 5% significantieniveau is FWER <span class="math inline">\(\approx 25\%\)</span>.</li>
+<li>Door ze op het 1% significantieniveau uit te voeren, bekomen we FWER <span class="math inline">\(\approx 5\%\)</span>.</li>
+</ul>
+<p>De Bonferroni correctie houdt de FWER begrensd op <span class="math inline">\(\alpha_E\)</span> door <span class="math display">\[\alpha=\alpha_E/m\]</span> te kiezen voor het uitvoeren van de <span class="math inline">\(m\)</span> paarsgewijze vergelijkingen. Als alternatieve methode kunnen we ook</p>
+<ol type="1">
+<li><em>aangepaste p-waarden</em> rapporteren zodat we deze met het experimentgewijze <span class="math inline">\(\alpha_E\)</span> niveau kunnen vergelijken:</li>
+</ol>
+<p><span class="math display">\[\tilde{p}=min(m\times p,1)\]</span></p>
+<ol start="2" type="1">
+<li><span class="math inline">\((1-\alpha_E/m)100\%\)</span> betrouwbaarheidsintervallen rapporteren.</li>
+</ol>
+<p>Het gebruik van aangepaste p-waarden heeft als voordeel dat de lezer deze zelf kan interpreteren en hij/zij een maat kan geven voor de significantie op het experimentsgewijs significantie niveau. Merk op dat we de aangepaste p-waarden begrenzen op <span class="math inline">\(\tilde{p}=1\)</span> omdat p-waarden kansen zijn en steeds tussen 0 en 1 dienen te liggen.</p>
+<p>Onderstaande R code geeft de resultaten (gecorrigeerde <span class="math inline">\(p\)</span>-waarden) na correctie met de methode van Bonferroni.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  prostacyclin,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pairwise.t.test</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    prostac,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    dose,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">p.adjust.method=</span><span class="st">"bonferroni"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pairwise comparisons using t tests with pooled SD 
+
+data:  prostac and dose 
+
+   10      25     
+25 1.00000 -      
+50 6e-05   0.00094
+
+P value adjustment method: bonferroni </code></pre>
+</div>
+</div>
+<p>De conclusies blijven hetzelfde behalve dat de FWER nu gecontroleerd is <span class="math inline">\(\alpha=5\%\)</span> en de <span class="math inline">\(\tilde{p}\)</span>-waarden een factor 3 groter zijn.</p>
+<p>Dezelfde analyse kan uitgevoerd worden met het <code>multcomp</code> R package dat speciaal werd ontwikkeld voor multipliciteit in lineaire modellen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(multcomp)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>model1.mcp <span class="ot">&lt;-</span> <span class="fu">glht</span>(model1, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">dose =</span> <span class="st">"Tukey"</span>))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1.mcp, <span class="at">test =</span> <span class="fu">adjusted</span>(<span class="st">"bonferroni"</span>))</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: lm(formula = prostac ~ dose, data = prostacyclin)
+
+Linear Hypotheses:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+25 - 10 == 0    8.258      8.698   0.949 1.000000    
+50 - 10 == 0   43.258      8.698   4.974 5.98e-05 ***
+50 - 25 == 0   35.000      8.698   4.024 0.000943 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+(Adjusted p values reported -- bonferroni method)</code></pre>
+</div>
+</div>
+<p>Om Bonferroni aangepaste betrouwbaarheidsintervallen te verkrijgen moeten we eerst zelf functie definiëren in R om bonferroni kritische waarde te bepalen. We noemen deze functie <code>calpha_bon_t</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>calpha_bon_t <span class="ot">&lt;-</span> <span class="cf">function</span>(object, level)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">qt</span>(</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">1</span><span class="sc">-</span>level)<span class="sc">/</span><span class="dv">2</span><span class="sc">/</span><span class="fu">nrow</span>(object<span class="sc">$</span>linfct),</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        object<span class="sc">$</span>df)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model1.mcp, <span class="at">calpha =</span> calpha_bon_t)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Confidence Intervals
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: lm(formula = prostac ~ dose, data = prostacyclin)
+
+Quantile = 2.5222
+95% confidence level
+ 
+
+Linear Hypotheses:
+             Estimate lwr      upr     
+25 - 10 == 0   8.2583 -13.6790  30.1957
+50 - 10 == 0  43.2583  21.3210  65.1957
+50 - 25 == 0  35.0000  13.0626  56.9374</code></pre>
+</div>
+</div>
+<p>We zullen nu het effect van de Bonferroni correctie opnieuw nagaan via simulaties.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># aantal behandelingen (g=3)</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># aantal herhalingen in iedere groep</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g<span class="sc">*</span>ni <span class="co"># totaal aantal observaties</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># significantieniveau van een individuele test</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co">#aantal simulaties</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>) <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni)) <span class="co">#factor</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">cat</span>(i, <span class="st">"/"</span>, N, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>tests <span class="ot">&lt;-</span> <span class="fu">pairwise.t.test</span>(y, trt, <span class="st">"bonferroni"</span>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(tests<span class="sc">$</span>p.value, <span class="at">na.rm =</span> T) <span class="sc">&lt;</span> alpha</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(verwerp) cnt <span class="ot">&lt;-</span> cnt<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1000 / 10000 
+2000 / 10000 
+3000 / 10000 
+4000 / 10000 
+5000 / 10000 
+6000 / 10000 
+7000 / 10000 
+8000 / 10000 
+9000 / 10000 
+10000 / 10000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cnt<span class="sc">/</span>N</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0457</code></pre>
+</div>
+</div>
+<p>We vinden dus een FWER van 4.6% (een beetje conservatief). Wanneer we de simulaties doen voor <span class="math inline">\(g=5\)</span> groepen, vinden we een FWER van <span class="math inline">\(4.1\%\)</span> (conservatiever). Door de Bonferroni correctie is de kans op minstens één vals positief resultaat <span class="math inline">\(&lt; \alpha_E\)</span>. Hoewel de FWER wordt gecontroleerd door de Bonferroni methode, kan een verlies aan power worden verwacht aangezien het werkelijke niveau lager is dan het vooropgestelde 5% experimentsgewijs significantieniveau.</p>
+<!---break-->
+</section>
+<section id="methode-van-tukey" class="level4" data-number="8.3.2.2">
+<h4 data-number="8.3.2.2" class="anchored" data-anchor-id="methode-van-tukey"><span class="header-section-number">8.3.2.2</span> Methode van Tukey</h4>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/INhSwntlGU0" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>De methode van Tukey is een minder conservatieve methode voor het uitvoeren van post hoc testen. De implementatie benadert de nuldistributie van de posthoc test d.m.v. simulaties. De resultaten kunnen daarom lichtjes verschillen wanneer je de posthoc analyse opnieuw uitvoert.<br>
+De details van de methode vallen buiten het bestek van deze cursus. Via de implementatie in het multcomp package kunnen we opnieuw aangepaste p-waarden verkrijgen en aangepaste betrouwbaarheidsintervallen voor alle <span class="math inline">\(m\)</span> paarsgewijze testen. We hoeven zelf geen functies te definiëren voor het verkrijgen van Tukey gecorrigeerde BIs.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>model1.mcp <span class="ot">&lt;-</span> <span class="fu">glht</span>(model1, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">dose =</span> <span class="st">"Tukey"</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1.mcp)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: lm(formula = prostac ~ dose, data = prostacyclin)
+
+Linear Hypotheses:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+25 - 10 == 0    8.258      8.698   0.949 0.613390    
+50 - 10 == 0   43.258      8.698   4.974  &lt; 1e-04 ***
+50 - 25 == 0   35.000      8.698   4.024 0.000835 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+(Adjusted p values reported -- single-step method)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model1.mcp)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Confidence Intervals
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: lm(formula = prostac ~ dose, data = prostacyclin)
+
+Quantile = 2.4539
+95% family-wise confidence level
+ 
+
+Linear Hypotheses:
+             Estimate lwr      upr     
+25 - 10 == 0   8.2583 -13.0849  29.6016
+50 - 10 == 0  43.2583  21.9151  64.6016
+50 - 25 == 0  35.0000  13.6567  56.3433</code></pre>
+</div>
+</div>
+<p>Merk op dat de Tukey methode smallere BIs en kleinere aangepaste p-waarden teruggeeft dan Bonferroni en dus minder conservatief is. De betrouwbaarheidsintervallen kunnen ook grafisch worden weergegeven wat handig is als er veel vergelijkingen worden uitgevoerd (zie Figuur <a href="#fig-prostacTukey" class="quarto-xref"><span>8.7</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model1.mcp <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">confint</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-prostacTukey" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prostacTukey-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="07-VariantieAnalyse_files/figure-html/fig-prostacTukey-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prostacTukey-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;8.7: <span class="math inline">\(95\%\)</span> experimentsgewijze betrouwbaarheidsintervallen voor de paarsgewijze verschillen in gemiddeld prostacycline niveau tussen alle arachidonzuur dosisgroepen. De BIs zijn gecorrigeerd voor multipliciteit via de Tukey methode.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Hierop zien we onmiddellijk dat het effect van de hoogste dosisgroep verschillend is van de laagste en middelste dosisgroep en dat er geen significant verschil is tussen de laagste en de middelste dosisgroep op het 5% experimentsgewijze significantieniveau.</p>
+<p>Tenslotte gaan we ook via simulatie na of de Tukey methode de FWER correct kan controleren.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># aantal behandelingen (g=3)</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ni <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># aantal herhalingen in iedere groep</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> g<span class="sc">*</span>ni <span class="co"># totaal aantal observaties</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co"># significantieniveau van een individuele test</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span> <span class="co">#aantal simulaties</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">302</span>) <span class="co">#seed zodat resultaten exact geproduceerd kunnen worden</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>trt <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>g, ni)) <span class="co">#factor</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>cnt <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#teller voor aantal foutieve verwerpingen</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N) {</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (i <span class="sc">%%</span> <span class="dv">1000</span> <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">cat</span>(i, <span class="st">"/"</span>, N, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> trt)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>m.mcp <span class="ot">&lt;-</span> <span class="fu">glht</span>(m, <span class="at">linfct =</span> <span class="fu">mcp</span>(<span class="at">trt =</span> <span class="st">"Tukey"</span>))</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>tests <span class="ot">&lt;-</span> <span class="fu">summary</span>(m.mcp)<span class="sc">$</span>test</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>verwerp <span class="ot">&lt;-</span> <span class="fu">min</span>(</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.numeric</span>(tests<span class="sc">$</span>pvalues),</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm=</span>T) <span class="sc">&lt;</span> alpha</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(verwerp) cnt <span class="ot">&lt;-</span> cnt<span class="sc">+</span><span class="dv">1</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1000 / 10000 
+2000 / 10000 
+3000 / 10000 
+4000 / 10000 
+5000 / 10000 
+6000 / 10000 
+7000 / 10000 
+8000 / 10000 
+9000 / 10000 
+10000 / 10000 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cnt<span class="sc">/</span>N</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0503</code></pre>
+</div>
+</div>
+<p>We vinden dus een FWER van <span class="math inline">\(5.03\%\)</span> wat heel dicht bij het nominale FWER<span class="math inline">\(=5\%\)</span> ligt. Voor <span class="math inline">\(g=5\)</span> groepen, vinden we een FWER van <span class="math inline">\(5.2\%\)</span>, wat ook vrij goed is.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+</section>
+</section>
+</section>
+<section id="conclusies-prostacycline-voorbeeld" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="conclusies-prostacycline-voorbeeld"><span class="header-section-number">8.4</span> Conclusies: Prostacycline Voorbeeld</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z6JR-skWsdg" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>We overlopen nog eens de volledige analyse voor het prostacycline voorbeeld. Merk op dat we steeds eerst een anova analyse doen voordat posthoc testen worden uitgevoerd. De F-test heeft immers een hogere power voor het vinden van een effect van de behandelingen dan paarsgewijze t-testen omdat de F-test alle data gebruikt en voor deze test geen correctie voor multipliciteit nodig is om de algemene nulhypothese te evalueren.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model1)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: prostac
+          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+dose       2  12658  6329.0  13.944 4.081e-05 ***
+Residuals 33  14979   453.9                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1.mcp)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Tests for General Linear Hypotheses
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: lm(formula = prostac ~ dose, data = prostacyclin)
+
+Linear Hypotheses:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+25 - 10 == 0    8.258      8.698   0.949 0.613433    
+50 - 10 == 0   43.258      8.698   4.974  &lt; 1e-04 ***
+50 - 25 == 0   35.000      8.698   4.024 0.000922 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+(Adjusted p values reported -- single-step method)</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model1.mcp)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Simultaneous Confidence Intervals
+
+Multiple Comparisons of Means: Tukey Contrasts
+
+
+Fit: lm(formula = prostac ~ dose, data = prostacyclin)
+
+Quantile = 2.4526
+95% family-wise confidence level
+ 
+
+Linear Hypotheses:
+             Estimate lwr      upr     
+25 - 10 == 0   8.2583 -13.0736  29.5902
+50 - 10 == 0  43.2583  21.9264  64.5902
+50 - 25 == 0  35.0000  13.6681  56.3319</code></pre>
+</div>
+</div>
+<p>We kunnen dus concluderen dat er een extreem significant effect is van de arachidonzuurdosering op de gemiddelde prostacycline concentratie in het bloed bij ratten (<span class="math inline">\(p&lt;0.001\)</span>). De gemiddelde prostacycline concentratie is hoger bij de hoge arachidonzuur dosisgroep dan bij de lage en matige dosisgroep (beide <span class="math inline">\(p&lt;0.001\)</span>). De gemiddelde prostacycline concentratie in de hoge dosis groep is respectievelijk 43.3ng/ml (95% BI [21.9,64.6]ng/ml) en 35ng/ml (95% BI [13.6,56.4]ng/ml) hoger dan in de lage en matige dosis groep. Het verschil in gemiddelde prostacycline concentratie tussen de matige en lage dosisgroep is niet significant (p=0.61, 95% BI op gemiddelde verschil [-13.1,29.6]ng/ml). (De p-waarden en betrouwbaarheidsintervallen van de post-hoc tests werden gecorrigeerd voor multipliciteit d.m.v. de Tukey methode).</p>
+<p>Merk op dat we eveneens niet significante resultaten vermelden. Het is namelijk belangrijk om eveneens negatieve resultaten te rapporteren!</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>onafhankelijk en identiek verdeeld (i.i.d., independent and identically distributed)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Onder <span class="math inline">\(H_1\)</span> bestaat er dus minimum 1 dummy-variabele in het model waarvoor de overeenkomstige parameter <span class="math inline">\(\beta_k\)</span> verschillend is van nul onder de alternatieve hypothese<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>maar enkel van de data in de twee groepen die getest worden<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>De nulhypothese onterecht verwerpen<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>theoretisch moet dit <span class="math inline">\(5\%\)</span> zijn, maar we tonen “slechts” het resultaat gebaseerd op 10000 simulaties<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Gekopieerd!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Gekopieerd!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06-LineareRegressie.html" class="pagination-link" aria-label="Enkelvoudige lineaire regressie">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-NietParametrischeStatistiek.html" class="pagination-link" aria-label="Niet-parametrische statistiek">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Niet-parametrische statistiek</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/statOmics/statistiek2deBach/edit/main/07-VariantieAnalyse.qmd" class="toc-action"><i class="bi bi-github"></i>Pagina bewerken</a></li></ul></div></div></div></footer></body></html>

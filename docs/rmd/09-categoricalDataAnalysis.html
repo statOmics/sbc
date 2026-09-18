@@ -3509,13 +3509,13 @@ E[Y_i] &amp;=&amp; \pi_i\\\\
 <li>en dat we de functie <code>relevel</code> gebruiken om de controles als referentie groep de definiëren: eerste niveau van de factor.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> brca <span class="sc">|&gt;</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cancer =</span> cancer <span class="sc">%&gt;%</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>      as.factor <span class="sc">%&gt;%</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cancer =</span> cancer <span class="sc">|&gt;</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.factor</span>() <span class="sc">|&gt;</span></span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relevel</span>(<span class="st">&quot;control&quot;</span>),</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">variant =</span> variant <span class="sc">%&gt;%</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>      as.factor <span class="sc">%&gt;%</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">variant =</span> variant <span class="sc">|&gt;</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.factor</span>() <span class="sc">|&gt;</span></span>
 <span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relevel</span>(<span class="st">&quot;pro/pro&quot;</span>)</span>
 <span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
@@ -3618,15 +3618,15 @@ Multiple Comparisons of Means: Tukey Contrasts
 
 Fit: glm(formula = cancer ~ variant, family = binomial, data = brca)
 
-Quantile = 2.3258
+Quantile = 2.3253
 95% family-wise confidence level
  
 
 Linear Hypotheses:
                        Estimate lwr      upr     
-leu/leu - pro/pro == 0  0.21197 -0.22794  0.65188
-pro/leu - pro/pro == 0  0.13802 -0.13114  0.40718
-pro/leu - leu/leu == 0 -0.07395 -0.51403  0.36613</code></pre>
+leu/leu - pro/pro == 0  0.21197 -0.22786  0.65180
+pro/leu - pro/pro == 0  0.13802 -0.13109  0.40713
+pro/leu - leu/leu == 0 -0.07395 -0.51394  0.36604</code></pre>
 </div>
 </div>
 <ul>
@@ -3641,13 +3641,13 @@ pro/leu - leu/leu == 0 -0.07395 -0.51403  0.36613</code></pre>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>OR</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   Estimate       lwr      upr
-leu/leu - pro/pro 1.2361111 0.7961700 1.919151
-pro/leu - pro/pro 1.1480000 0.8770946 1.502579
-pro/leu - leu/leu 0.9287191 0.5980831 1.442139
+leu/leu - pro/pro 1.2361111 0.7962374 1.918989
+pro/leu - pro/pro 1.1480000 0.8771401 1.502501
+pro/leu - leu/leu 0.9287191 0.5981338 1.442017
 attr(,&quot;conf.level&quot;)
 [1] 0.95
 attr(,&quot;calpha&quot;)
-[1] 2.325776</code></pre>
+[1] 2.325328</code></pre>
 </div>
 </div>
 <ul>
@@ -3750,41 +3750,41 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <li>Een toename in de CS<span class="math inline">\(_2\)</span> dosis doet de kans op sterven toenemen.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">%&gt;%</span> data.frame</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">|&gt;</span> <span class="fu">data.frame</span>()</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="fu">seq</span>(</span>
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">min</span>(beetles<span class="sc">$</span>dose),</span>
 <span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">max</span>(beetles<span class="sc">$</span>dose),.<span class="dv">1</span>)</span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">piHat =</span> <span class="fu">predict</span>(beetleModel,</span>
 <span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose=</span>grid),</span>
 <span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(grid, piHat))<span class="sc">+</span></span>
 <span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;dose&quot;</span>) <span class="sc">+</span></span>
 <span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;probability (dead)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">%&gt;%</span></span>
-<span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
-<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
-<span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">%&gt;%</span></span>
-<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
-<span id="cb65-22"><a href="#cb65-22" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
+<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">|&gt;</span></span>
+<span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.double</span>(),</span>
+<span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">|&gt;</span></span>
+<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb65-22"><a href="#cb65-22" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.double</span>(),</span>
 <span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> Freq),</span>
-<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a>    beetlesTab <span class="sc">%&gt;%</span></span>
+<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a>    beetlesTab <span class="sc">|&gt;</span></span>
 <span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">0</span>)</span>
 <span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb65-28"><a href="#cb65-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">%&gt;%</span></span>
-<span id="cb65-29"><a href="#cb65-29" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
-<span id="cb65-30"><a href="#cb65-30" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
-<span id="cb65-31"><a href="#cb65-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">%&gt;%</span></span>
-<span id="cb65-32"><a href="#cb65-32" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
-<span id="cb65-33"><a href="#cb65-33" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
+<span id="cb65-28"><a href="#cb65-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">|&gt;</span></span>
+<span id="cb65-29"><a href="#cb65-29" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb65-30"><a href="#cb65-30" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.double</span>(),</span>
+<span id="cb65-31"><a href="#cb65-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">|&gt;</span></span>
+<span id="cb65-32"><a href="#cb65-32" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb65-33"><a href="#cb65-33" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.double</span>(),</span>
 <span id="cb65-34"><a href="#cb65-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">label=</span>Freq),</span>
-<span id="cb65-35"><a href="#cb65-35" aria-hidden="true" tabindex="-1"></a>   beetlesTab <span class="sc">%&gt;%</span></span>
+<span id="cb65-35"><a href="#cb65-35" aria-hidden="true" tabindex="-1"></a>   beetlesTab <span class="sc">|&gt;</span></span>
 <span id="cb65-36"><a href="#cb65-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">1</span>)</span>
 <span id="cb65-37"><a href="#cb65-37" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -5117,13 +5117,13 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <span id="cb66-889"><a href="#cb66-889" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>en dat we de functie <span class="in">`relevel`</span> gebruiken om de controles als referentie groep de definiëren: eerste niveau van de factor.</span>
 <span id="cb66-890"><a href="#cb66-890" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb66-893"><a href="#cb66-893" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb66-894"><a href="#cb66-894" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> brca <span class="sc">%&gt;%</span></span>
+<span id="cb66-894"><a href="#cb66-894" aria-hidden="true" tabindex="-1"></a>brca <span class="ot">&lt;-</span> brca <span class="sc">|&gt;</span></span>
 <span id="cb66-895"><a href="#cb66-895" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb66-896"><a href="#cb66-896" aria-hidden="true" tabindex="-1"></a>    <span class="at">cancer =</span> cancer <span class="sc">%&gt;%</span></span>
-<span id="cb66-897"><a href="#cb66-897" aria-hidden="true" tabindex="-1"></a>      as.factor <span class="sc">%&gt;%</span></span>
+<span id="cb66-896"><a href="#cb66-896" aria-hidden="true" tabindex="-1"></a>    <span class="at">cancer =</span> cancer <span class="sc">|&gt;</span></span>
+<span id="cb66-897"><a href="#cb66-897" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.factor</span>() <span class="sc">|&gt;</span></span>
 <span id="cb66-898"><a href="#cb66-898" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relevel</span>(<span class="st">&quot;control&quot;</span>),</span>
-<span id="cb66-899"><a href="#cb66-899" aria-hidden="true" tabindex="-1"></a>    <span class="at">variant =</span> variant <span class="sc">%&gt;%</span></span>
-<span id="cb66-900"><a href="#cb66-900" aria-hidden="true" tabindex="-1"></a>      as.factor <span class="sc">%&gt;%</span></span>
+<span id="cb66-899"><a href="#cb66-899" aria-hidden="true" tabindex="-1"></a>    <span class="at">variant =</span> variant <span class="sc">|&gt;</span></span>
+<span id="cb66-900"><a href="#cb66-900" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.factor</span>() <span class="sc">|&gt;</span></span>
 <span id="cb66-901"><a href="#cb66-901" aria-hidden="true" tabindex="-1"></a>      <span class="fu">relevel</span>(<span class="st">&quot;pro/pro&quot;</span>)</span>
 <span id="cb66-902"><a href="#cb66-902" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb66-903"><a href="#cb66-903" aria-hidden="true" tabindex="-1"></a></span>
@@ -5246,41 +5246,41 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <span id="cb66-1032"><a href="#cb66-1032" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb66-1033"><a href="#cb66-1033" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb66-1036"><a href="#cb66-1036" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb66-1037"><a href="#cb66-1037" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">%&gt;%</span> data.frame</span>
+<span id="cb66-1037"><a href="#cb66-1037" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">|&gt;</span> <span class="fu">data.frame</span>()</span>
 <span id="cb66-1038"><a href="#cb66-1038" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb66-1039"><a href="#cb66-1039" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
 <span id="cb66-1040"><a href="#cb66-1040" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="fu">seq</span>(</span>
 <span id="cb66-1041"><a href="#cb66-1041" aria-hidden="true" tabindex="-1"></a>      <span class="fu">min</span>(beetles<span class="sc">$</span>dose),</span>
 <span id="cb66-1042"><a href="#cb66-1042" aria-hidden="true" tabindex="-1"></a>      <span class="fu">max</span>(beetles<span class="sc">$</span>dose),.<span class="dv">1</span>)</span>
-<span id="cb66-1043"><a href="#cb66-1043" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb66-1043"><a href="#cb66-1043" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb66-1044"><a href="#cb66-1044" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">piHat =</span> <span class="fu">predict</span>(beetleModel,</span>
 <span id="cb66-1045"><a href="#cb66-1045" aria-hidden="true" tabindex="-1"></a>          <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">dose=</span>grid),</span>
 <span id="cb66-1046"><a href="#cb66-1046" aria-hidden="true" tabindex="-1"></a>          <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb66-1047"><a href="#cb66-1047" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb66-1047"><a href="#cb66-1047" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb66-1048"><a href="#cb66-1048" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(grid, piHat))<span class="sc">+</span></span>
 <span id="cb66-1049"><a href="#cb66-1049" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb66-1050"><a href="#cb66-1050" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;dose&quot;</span>) <span class="sc">+</span></span>
 <span id="cb66-1051"><a href="#cb66-1051" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;probability (dead)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb66-1052"><a href="#cb66-1052" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb66-1053"><a href="#cb66-1053" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">%&gt;%</span></span>
-<span id="cb66-1054"><a href="#cb66-1054" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
-<span id="cb66-1055"><a href="#cb66-1055" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
-<span id="cb66-1056"><a href="#cb66-1056" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">%&gt;%</span></span>
-<span id="cb66-1057"><a href="#cb66-1057" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
-<span id="cb66-1058"><a href="#cb66-1058" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
+<span id="cb66-1053"><a href="#cb66-1053" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">|&gt;</span></span>
+<span id="cb66-1054"><a href="#cb66-1054" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb66-1055"><a href="#cb66-1055" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.double</span>(),</span>
+<span id="cb66-1056"><a href="#cb66-1056" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">|&gt;</span></span>
+<span id="cb66-1057"><a href="#cb66-1057" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb66-1058"><a href="#cb66-1058" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.double</span>(),</span>
 <span id="cb66-1059"><a href="#cb66-1059" aria-hidden="true" tabindex="-1"></a>        <span class="at">label =</span> Freq),</span>
-<span id="cb66-1060"><a href="#cb66-1060" aria-hidden="true" tabindex="-1"></a>    beetlesTab <span class="sc">%&gt;%</span></span>
+<span id="cb66-1060"><a href="#cb66-1060" aria-hidden="true" tabindex="-1"></a>    beetlesTab <span class="sc">|&gt;</span></span>
 <span id="cb66-1061"><a href="#cb66-1061" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">0</span>)</span>
 <span id="cb66-1062"><a href="#cb66-1062" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb66-1063"><a href="#cb66-1063" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb66-1064"><a href="#cb66-1064" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">%&gt;%</span></span>
-<span id="cb66-1065"><a href="#cb66-1065" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
-<span id="cb66-1066"><a href="#cb66-1066" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
-<span id="cb66-1067"><a href="#cb66-1067" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">%&gt;%</span></span>
-<span id="cb66-1068"><a href="#cb66-1068" aria-hidden="true" tabindex="-1"></a>          as.character <span class="sc">%&gt;%</span></span>
-<span id="cb66-1069"><a href="#cb66-1069" aria-hidden="true" tabindex="-1"></a>          as.double,</span>
+<span id="cb66-1064"><a href="#cb66-1064" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> dose <span class="sc">|&gt;</span></span>
+<span id="cb66-1065"><a href="#cb66-1065" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb66-1066"><a href="#cb66-1066" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.double</span>(),</span>
+<span id="cb66-1067"><a href="#cb66-1067" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> status <span class="sc">|&gt;</span></span>
+<span id="cb66-1068"><a href="#cb66-1068" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.character</span>() <span class="sc">|&gt;</span></span>
+<span id="cb66-1069"><a href="#cb66-1069" aria-hidden="true" tabindex="-1"></a>          <span class="fu">as.double</span>(),</span>
 <span id="cb66-1070"><a href="#cb66-1070" aria-hidden="true" tabindex="-1"></a>       <span class="at">label=</span>Freq),</span>
-<span id="cb66-1071"><a href="#cb66-1071" aria-hidden="true" tabindex="-1"></a>   beetlesTab <span class="sc">%&gt;%</span></span>
+<span id="cb66-1071"><a href="#cb66-1071" aria-hidden="true" tabindex="-1"></a>   beetlesTab <span class="sc">|&gt;</span></span>
 <span id="cb66-1072"><a href="#cb66-1072" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">1</span>)</span>
 <span id="cb66-1073"><a href="#cb66-1073" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb66-1074"><a href="#cb66-1074" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>

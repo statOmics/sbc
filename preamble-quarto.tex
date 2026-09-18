@@ -1,0 +1,21 @@
+\usepackage{booktabs}
+\usepackage{amsthm}
+\usepackage{float}
+\usepackage{fontspec}
+%\setmainfont{cmunrm.otf}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+\AtBeginDocument{\hypersetup{linktoc=page}}
+\usepackage{a4wide}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{2ex}
+% grootte van de pagina
+\setlength{\topmargin}{-0.25in}
+\setlength{\oddsidemargin}{0.25in}					    
+\setlength{\evensidemargin}{0.25in}
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{9.0in}

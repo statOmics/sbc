@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl" xml:lang="nl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie">
+
+<title>12&nbsp; Modelselectie – Cursus Statistiek 2026-2027</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./10-GeneralLinearModel.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Geen resultaten",
+    "search-matching-documents-text": "Gevonden documenten",
+    "search-copy-link-title": "Kopieer link om te zoeken",
+    "search-hide-matches-text": "Extra overeenkomsten verbergen",
+    "search-more-match-text": "meer overeenkomst in dit document",
+    "search-more-matches-text": "meer overeenkomsten in dit document",
+    "search-clear-button-title": "Wissen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuleren",
+    "search-submit-button-title": "Verzenden",
+    "search-label": "Zoeken"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Schakel zijbalknavigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-ModelSelectie.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelselectie</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Schakel zijbalknavigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Zoeken" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cursus Statistiek 2026-2027</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/statOmics/statistiek2deBach" title="Broncode" class="quarto-navigation-tool px-1" aria-label="Broncode"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Statistiek_2026_2027.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Statistiek_2026_2027.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Zoeken"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Cursus Statistiek 2026-2027</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Inleiding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inleiding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Concepten.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Belangrijke concepten &amp; conventies</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Proefopzet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Studiedesign</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-DataExploratie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data exploratie en beschrijvende statistiek</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-StatistischeBesluitvorming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistische besluitvorming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-LineareRegressie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-VariantieAnalyse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variantie analyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-NietParametrischeStatistiek.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Niet-parametrische statistiek</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-CategorischeDataAnalyse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorische data analyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-GeneralLinearModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Algemeen lineair model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-ModelSelectie.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelselectie</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhoudsopgave</h2>
+   
+  <ul>
+  <li><a href="#inleiding" id="toc-inleiding" class="nav-link active" data-scroll-target="#inleiding"><span class="header-section-number">12.1</span> Inleiding</a></li>
+  <li><a href="#modelselectie-op-basis-van-hypothesetesten" id="toc-modelselectie-op-basis-van-hypothesetesten" class="nav-link" data-scroll-target="#modelselectie-op-basis-van-hypothesetesten"><span class="header-section-number">12.2</span> Modelselectie op basis van hypothesetesten</a>
+  <ul class="collapse">
+  <li><a href="#voorwaartse-modelselectie" id="toc-voorwaartse-modelselectie" class="nav-link" data-scroll-target="#voorwaartse-modelselectie"><span class="header-section-number">12.2.1</span> Voorwaartse modelselectie</a></li>
+  <li><a href="#achterwaartse-modelselectie" id="toc-achterwaartse-modelselectie" class="nav-link" data-scroll-target="#achterwaartse-modelselectie"><span class="header-section-number">12.2.2</span> Achterwaartse modelselectie</a></li>
+  <li><a href="#stapsgewijze-modelselectie" id="toc-stapsgewijze-modelselectie" class="nav-link" data-scroll-target="#stapsgewijze-modelselectie"><span class="header-section-number">12.2.3</span> Stapsgewijze modelselectie</a></li>
+  <li><a href="#opmerkingen" id="toc-opmerkingen" class="nav-link" data-scroll-target="#opmerkingen"><span class="header-section-number">12.2.4</span> Opmerkingen</a></li>
+  </ul></li>
+  <li><a href="#modelselectie-voor-predictie" id="toc-modelselectie-voor-predictie" class="nav-link" data-scroll-target="#modelselectie-voor-predictie"><span class="header-section-number">12.3</span> Modelselectie voor predictie</a>
+  <ul class="collapse">
+  <li><a href="#inleiding-1" id="toc-inleiding-1" class="nav-link" data-scroll-target="#inleiding-1"><span class="header-section-number">12.3.1</span> Inleiding</a></li>
+  <li><a href="#selectie-criterium" id="toc-selectie-criterium" class="nav-link" data-scroll-target="#selectie-criterium"><span class="header-section-number">12.3.2</span> Selectie-criterium</a></li>
+  <li><a href="#alternatieve-criteria" id="toc-alternatieve-criteria" class="nav-link" data-scroll-target="#alternatieve-criteria"><span class="header-section-number">12.3.3</span> Alternatieve criteria</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/statOmics/statistiek2deBach/edit/main/11-ModelSelectie.qmd" class="toc-action"><i class="bi bi-github"></i>Pagina bewerken</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-chap-modsel" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelselectie</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="inleiding" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="inleiding"><span class="header-section-number">12.1</span> Inleiding</h2>
+<p>In de prostaatkanker dataset (Sectie <a href="10-GeneralLinearModel.html#sec-prostate" class="quarto-xref"><span>11.1.1</span></a>) zijn veel predictoren aanwezig. Automatische selectieprocedures kunnen behulpzaam zijn als het doel van het regressiemodel erin bestaat om (1) de uitkomst op basis van de predictoren te voorspellen; of (2) associaties tussen de uitkomst en predictoren te beschrijven. Net zoals in vele andere aspecten van de statistiek, zullen we een geobserveerde dataset (steekproef) gebruiken om tot een resultaat te komen (hier: een model) dat ruimer toepasbaar is dan enkel op de geobserveerde data. Het geselecteerde model moet toepasbaar zijn op de ruimere populatie waaruit de steekproefdata bekomen is en waarop de onderzoeksvraag van toepassing is.</p>
+<p>Modelselectie kan dan omschreven worden als een methode voor het selecteren van een model dat best geschikt is voor het beantwoorden van de onderzoeksvraag. In dit hoofdstuk beperken we ons tot meervoudige lineaire regressiemodellen waarin sommige van de <span class="math inline">\(p-1\)</span> effecttermen mogelijks interactietermen voorstellen. Het totaal aantal mogelijke modellen is dan (zonder hiërarchie-restrictie) <span class="math inline">\(2^{p-1}\)</span> (ieder van de <span class="math inline">\(p-1\)</span> termen kan opgenomen worden in het model, of niet).</p>
+<p>We onderscheiden de volgende algemene procedures:</p>
+<ol type="1">
+<li><p>Alle mogelijke modellen worden geëvalueerd. Deze methode zal enkel haalbaar blijken als het aantal kandidaat modellen niet te groot is.</p></li>
+<li><p>Niet alle modellen worden geëvalueerd (stapsgewijze procedures): De methode wordt geïnitialiseerd met een model. D.m.v. een regel en een evaluatiecriterium wordt het pad doorheen de modelruimte bepaald.</p></li>
+</ol>
+<p>Merk op dat we hiërarchisch moeten modelleren als we interactietermen toelaten. Een interactieterm mag nooit in het model voorkomen zonder de lagere orde termen.</p>
+</section>
+<section id="modelselectie-op-basis-van-hypothesetesten" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="modelselectie-op-basis-van-hypothesetesten"><span class="header-section-number">12.2</span> Modelselectie op basis van hypothesetesten</h2>
+<p>Stel, we willen een model selecteren voor lpsa waarbij lcavol, lweight en svi als predictoren worden toegelaten, alsook alle paarsgewijze interactietermen. We zullen drie verschillende strategieën beschouwen: voorwaartse modelselectie, achterwaartse modelselectie en stapsgewijze modelselectie waarbij er in elke stap geëvalueerd wordt of een term in het model kan worden opgenomen en of er een andere term kan worden verwijderd.</p>
+<section id="voorwaartse-modelselectie" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="voorwaartse-modelselectie"><span class="header-section-number">12.2.1</span> Voorwaartse modelselectie</h3>
+<p>De procedure kan als volgt beschreven worden:</p>
+<ol type="1">
+<li>Start met het minimale model <span class="math inline">\(m_1\)</span> met enkel het intercept</li>
+<li>Test voor alle modellen met slechts 1 predictor (er zijn dus <span class="math inline">\(p-1\)</span> dergelijke modellen) of de toegevoegde regressor significant verschillend is van 0 op het <span class="math inline">\(\alpha_{\text{IN}}\)</span> significantieniveau.</li>
+<li>Indien geen enkele van de <span class="math inline">\(p\)</span>-waarden kleiner is dan <span class="math inline">\(\alpha_{\text{IN}}\)</span>, stop de procedure. Het finale model is het minimale model <span class="math inline">\(m_1\)</span>, <span class="math display">\[
+Y_i = \beta_0 + \epsilon_i
+\]</span> met <span class="math inline">\(\epsilon_i \text{ i.i.d. } N(0,\sigma^2)\)</span>.</li>
+<li>Indien er minstens 1 <span class="math inline">\(p\)</span>-waarde kleiner is dan <span class="math inline">\(\alpha_{\text{IN}}\)</span>, selecteer het model dat overeenkomt met de kleinste <span class="math inline">\(p\)</span>-waarde. Dit model wordt <span class="math inline">\(m_2\)</span> genoemd.</li>
+<li>Stel <span class="math inline">\(k=2\)</span>.</li>
+<li>Definieer de verzameling van modellen met 1 predictor toegevoegd aan <span class="math inline">\(m_{k}\)</span>. Test dat de parameter van de toegevoegde regressor significant verschillend is van 0 op het <span class="math inline">\(\alpha_{\text{IN}}\)</span> significantieniveau.</li>
+<li>Indien geen enkele van de <span class="math inline">\(p\)</span>-waarden kleiner is dan <span class="math inline">\(\alpha_{\text{IN}}\)</span>, stop de procedure. Het finale model is <span class="math display">\[
+Y_i = \beta_0 + \sum_{j \in m_k} \beta_j x_{ij} + \epsilon_i
+\]</span> met <span class="math inline">\(\epsilon_i \text{ i.i.d. }  N(0,\sigma^2)\)</span>.</li>
+<li>Indien er minstens één <span class="math inline">\(p\)</span>-waarde kleiner is dan <span class="math inline">\(\alpha_{\text{IN}}\)</span>, selecteer het model dat overeenkomt met de kleinste <span class="math inline">\(p\)</span>-waarde. Dit model wordt <span class="math inline">\(m_{k+1}\)</span> genoemd.</li>
+<li>Verhoog <span class="math inline">\(k\)</span> met 1 (i.e.&nbsp;<span class="math inline">\(k\leftarrow k+1\)</span>) en ga naar stap 6.</li>
+</ol>
+<p>Voorbeeld voor lpsa. We laten interactietermen toe, maar de modelbouw moet zich houden aan de hiërarchie van hoofd- en interactietermen. We stellen <span class="math inline">\(\alpha_{\text{IN}}=5\%\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>prostate)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m1,<span class="at">scope=</span><span class="sc">~</span>lweight<span class="sc">+</span>lcavol<span class="sc">+</span>svi<span class="sc">+</span>lweight<span class="sc">:</span>lcavol<span class="sc">+</span>lweight<span class="sc">:</span>svi <span class="sc">+</span>lcavol<span class="sc">:</span>svi,<span class="at">test=</span><span class="st">"F"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+lpsa ~ 1
+        Df Sum of Sq     RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;               127.918  28.837                      
+lweight  1    16.041 111.876  17.840  13.621 0.0003729 ***
+lcavol   1    69.003  58.915 -44.366 111.267 &lt; 2.2e-16 ***
+svi      1    41.011  86.907  -6.658  44.830 1.499e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">update</span>(m1,<span class="sc">~</span>. <span class="sc">+</span> lcavol)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m2,<span class="at">scope=</span><span class="sc">~</span>lweight<span class="sc">+</span>lcavol<span class="sc">+</span>svi<span class="sc">+</span>lweight<span class="sc">:</span>lcavol<span class="sc">+</span>lweight<span class="sc">:</span>svi <span class="sc">+</span>lcavol<span class="sc">:</span>svi,<span class="at">test=</span><span class="st">"F"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+lpsa ~ lcavol
+        Df Sum of Sq    RSS     AIC F value   Pr(&gt;F)   
+&lt;none&gt;               58.915 -44.366                    
+lweight  1    5.9485 52.966 -52.690 10.5569 0.001606 **
+svi      1    5.2375 53.677 -51.397  9.1719 0.003172 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>m3 <span class="ot">&lt;-</span> <span class="fu">update</span>(m2,<span class="sc">~</span> . <span class="sc">+</span> lweight)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m3,<span class="at">scope=</span><span class="sc">~</span>lweight<span class="sc">+</span>lcavol<span class="sc">+</span>svi<span class="sc">+</span>lweight<span class="sc">:</span>lcavol<span class="sc">+</span>lweight<span class="sc">:</span>svi <span class="sc">+</span>lcavol<span class="sc">:</span>svi,<span class="at">test=</span><span class="st">"F"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+lpsa ~ lcavol + lweight
+               Df Sum of Sq    RSS     AIC F value   Pr(&gt;F)   
+&lt;none&gt;                      52.966 -52.690                    
+svi             1    5.1814 47.785 -60.676  10.084 0.002029 **
+lweight:lcavol  1    0.1222 52.844 -50.914   0.215 0.643974   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m4 <span class="ot">&lt;-</span> <span class="fu">update</span>(m3,<span class="sc">~</span> . <span class="sc">+</span> svi)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">add1</span>(m4,<span class="at">scope=</span><span class="sc">~</span>lweight<span class="sc">+</span>lcavol<span class="sc">+</span>svi<span class="sc">+</span>lweight<span class="sc">:</span>lcavol<span class="sc">+</span>lweight<span class="sc">:</span>svi <span class="sc">+</span>lcavol<span class="sc">:</span>svi,<span class="at">test=</span><span class="st">"F"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+lpsa ~ lcavol + lweight + svi
+               Df Sum of Sq    RSS     AIC F value Pr(&gt;F)
+&lt;none&gt;                      47.785 -60.676               
+lweight:lcavol  1   0.36605 47.419 -59.422  0.7102 0.4016
+lweight:svi     1   1.16433 46.621 -61.069  2.2977 0.1330
+lcavol:svi      1   0.02434 47.761 -58.726  0.0469 0.8291</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m4)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lpsa ~ lcavol + lweight + svi, data = prostate)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.72964 -0.45764  0.02812  0.46403  1.57013 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.26809    0.54350  -0.493  0.62298    
+lcavol       0.55164    0.07467   7.388  6.3e-11 ***
+lweight      0.50854    0.15017   3.386  0.00104 ** 
+svi          0.66616    0.20978   3.176  0.00203 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7168 on 93 degrees of freedom
+Multiple R-squared:  0.6264,    Adjusted R-squared:  0.6144 
+F-statistic: 51.99 on 3 and 93 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Het geselecteerde model is <span class="math display">\[Y_i  = \beta_0 + \beta_v X_{iv} + \beta_w X_{iw} + \beta_s X_{is} + \epsilon_i\]</span> met <span class="math inline">\(\epsilon_i \text{ i.i.d. } N(0,\sigma^2)\)</span>.</p>
+</section>
+<section id="achterwaartse-modelselectie" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="achterwaartse-modelselectie"><span class="header-section-number">12.2.2</span> Achterwaartse modelselectie</h3>
+<p>Achterwaartse modelselectie is een procedure die ook gekend staat als achterwaartse eliminatie (Engels: <em>backward elimination</em>).</p>
+<p>De procedure start van het maximale model en gaat na welke predictoren uit het model kunnen worden verwijderd.</p>
+<ol type="1">
+<li>Start met het maximale model <span class="math inline">\(m_1\)</span> met alle <span class="math inline">\(p-1\)</span> regressoren</li>
+<li>Bouw alle modellen waar 1 predictor wordt weggelaten en ga via een F-test na of het verwijderen van de predictoren significant is op het <span class="math inline">\(\alpha_{\text{OUT}}\)</span> significantieniveau. Merk op dat deze test in model <span class="math inline">\(m_1\)</span> moet uitgevoerd worden.</li>
+<li>Indien geen enkele van de <span class="math inline">\(p\)</span>-waarden groter is dan <span class="math inline">\(\alpha_{\text{OUT}}\)</span>, stop de procedure. Het finale model is het maximale model <span class="math inline">\(m_1\)</span>.</li>
+<li>Indien er minstens één <span class="math inline">\(p\)</span>-waarde groter dan <span class="math inline">\(\alpha_{\text{OUT}}\)</span> is, selecteer het model dat overeenkomt met de grootste <span class="math inline">\(p\)</span>-waarde. Dit model wordt <span class="math inline">\(m_2\)</span> genoemd.</li>
+<li>Stel <span class="math inline">\(k=2\)</span></li>
+<li>Bouw alle modellen waar 1 predictor wordt weggelaten uit <span class="math inline">\(m_k\)</span> en ga via een F-test na of het verwijderen van de predictoren significant is op het <span class="math inline">\(\alpha_{\text{OUT}}\)</span> significantieniveau. Merk op dat deze test in model <span class="math inline">\(m_k\)</span> moet uitgevoerd worden.</li>
+<li>Indien geen enkele van de <span class="math inline">\(p\)</span>-waarden groter is dan <span class="math inline">\(\alpha_{\text{OUT}}\)</span>, stop de procedure. Het finale model is <span class="math inline">\(m_k\)</span></li>
+<li>Indien er minstens één <span class="math inline">\(p\)</span>-waarde groter is dan <span class="math inline">\(\alpha_{\text{OUT}}\)</span>, selecteer het model dat overeenkomt met de grootste <span class="math inline">\(p\)</span>-waarde. Dit model wordt <span class="math inline">\(m_{k+1}\)</span> genoemd.</li>
+<li>Verhoog <span class="math inline">\(k\)</span> met één (i.e.&nbsp;<span class="math inline">\(k\leftarrow k+1\)</span>) en ga naar stap 6.</li>
+</ol>
+<p>We passen de achterwaartse modelselectie toe op het prostaatkanker voorbeeld. We zoeken naar een model met enkel de belangrijke termen (i.e.&nbsp;significante termen) die geassocieerd zijn met lpsa. We laten interactietermen toe, maar de modelbouw moet zich houden aan de hiërarchie van hoofd- en interactietermen. We stellen <span class="math inline">\(\alpha_{\text{OUT}}=5\%\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alphaOut <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa<span class="sc">~</span>lweight<span class="sc">+</span>lcavol<span class="sc">+</span>svi<span class="sc">+</span>lweight<span class="sc">:</span>lcavol<span class="sc">+</span>lweight<span class="sc">:</span>svi <span class="sc">+</span>lcavol<span class="sc">:</span>svi,prostate)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dropHlp<span class="ot">&lt;-</span><span class="fu">drop1</span>(m,<span class="at">test=</span><span class="st">"F"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>dropHlp</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+lpsa ~ lweight + lcavol + svi + lweight:lcavol + lweight:svi + 
+    lcavol:svi
+               Df Sum of Sq    RSS     AIC F value Pr(&gt;F)
+&lt;none&gt;                      46.479 -57.365               
+lweight:lcavol  1   0.00012 46.479 -59.365  0.0002 0.9878
+lweight:svi     1   0.87392 47.352 -57.558  1.6922 0.1966
+lcavol:svi      1   0.14091 46.619 -59.071  0.2729 0.6027</code></pre>
+</div>
+</div>
+<p>Merk op dat eerst enkel de interactietermen worden getest. De hoofdeffecten mogen niet uit het model worden weggelaten zolang er interactie termen in het model zijn opgenomen waarin deze hoofdeffecten voorkomen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="fu">sum</span>(dropHlp[,<span class="dv">6</span>]<span class="sc">&gt;=</span>alphaOut,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dropVarName<span class="ot">&lt;-</span><span class="fu">rownames</span>(dropHlp)[<span class="fu">which.max</span>(dropHlp[,<span class="dv">6</span>])]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">update</span>(m,<span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"~.-"</span>,dropVarName)))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>dropHlp<span class="ot">&lt;-</span><span class="fu">drop1</span>(m,<span class="at">test=</span><span class="st">"F"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dropHlp)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+lpsa ~ lweight + lcavol + svi + lweight:svi + lcavol:svi
+            Df Sum of Sq    RSS     AIC F value Pr(&gt;F)
+&lt;none&gt;                   46.479 -59.365               
+lweight:svi  1   1.28188 47.761 -58.726  2.5098 0.1166
+lcavol:svi   1   0.14189 46.621 -61.069  0.2778 0.5994
+Single term deletions
+
+Model:
+lpsa ~ lweight + lcavol + svi + lweight:svi
+            Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;                   46.621 -61.069                      
+lcavol       1   28.1994 74.820 -17.184 55.6481 4.712e-11 ***
+lweight:svi  1    1.1643 47.785 -60.676  2.2977     0.133    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Single term deletions
+
+Model:
+lpsa ~ lweight + lcavol + svi
+        Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;               47.785 -60.676                      
+lweight  1    5.8924 53.677 -51.397  11.468  0.001039 ** 
+lcavol   1   28.0445 75.829 -17.884  54.581 6.304e-11 ***
+svi      1    5.1814 52.966 -52.690  10.084  0.002029 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Merk op dat opnieuw hetzelfde model wordt gekozen. Dat is in het algemeen niet het geval. Vaak heeft achterwaartse modelselectie de eigenschap om te resulteren in een meer complex model dan voorwaartse selectie.</p>
+</section>
+<section id="stapsgewijze-modelselectie" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="stapsgewijze-modelselectie"><span class="header-section-number">12.2.3</span> Stapsgewijze modelselectie</h3>
+<p>Deze methode is een combinatie van voorwaartse en achterwaartse modelselectie. Het kan starten van het maximale of het minimale model. We implementeren de methode, startende van het minimale model. In elke stap zal eerst worden gekeken of een predictor kan worden toegevoegd, vervolgens zal worden nagegaan of een predictor kan worden verwijderd van het model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alphaIn <span class="ot">&lt;-</span> alphaOut <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(lpsa <span class="sc">~</span> <span class="dv">1</span> ,prostate)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>notConverged <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (notConverged)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>addHlp <span class="ot">&lt;-</span> <span class="fu">add1</span>(m,<span class="at">scope=</span> <span class="sc">~</span>lweight<span class="sc">+</span>lcavol<span class="sc">+</span>svi<span class="sc">+</span>lweight<span class="sc">:</span>lcavol<span class="sc">+</span>lweight<span class="sc">:</span>svi <span class="sc">+</span>lcavol<span class="sc">:</span>svi,<span class="at">test=</span><span class="st">"F"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(addHlp)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>addVarName<span class="ot">&lt;-</span><span class="fu">rownames</span>(addHlp)[<span class="fu">which.min</span>(addHlp[,<span class="dv">6</span>])]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ((<span class="fu">sum</span>(addHlp[,<span class="dv">6</span>] <span class="sc">&lt;</span> alphaIn,<span class="at">na.rm=</span><span class="cn">TRUE</span>))<span class="sc">&gt;</span><span class="dv">0</span>) m <span class="ot">&lt;-</span> <span class="fu">update</span>(m,<span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"~.+"</span>,addVarName)))</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>dropHlp<span class="ot">&lt;-</span><span class="fu">drop1</span>(m,<span class="at">test=</span><span class="st">"F"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dropHlp)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ((<span class="fu">sum</span>(dropHlp[,<span class="dv">6</span>]<span class="sc">&gt;=</span>alphaOut,<span class="at">na.rm=</span><span class="cn">TRUE</span>))<span class="sc">&gt;</span><span class="dv">0</span>) m <span class="ot">&lt;-</span> <span class="fu">update</span>(m,<span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"~.-"</span>,dropVarName)))</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ((<span class="fu">sum</span>(addHlp[,<span class="dv">6</span>] <span class="sc">&lt;</span> alphaIn,<span class="at">na.rm=</span><span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">sum</span>(dropHlp[,<span class="dv">6</span>]<span class="sc">&gt;=</span>alphaOut,<span class="at">na.rm=</span><span class="cn">TRUE</span>))<span class="sc">&gt;</span><span class="dv">0</span>) notConverged <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="cf">else</span> notConverged <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term additions
+
+Model:
+lpsa ~ 1
+        Df Sum of Sq     RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;               127.918  28.837                      
+lweight  1    16.041 111.876  17.840  13.621 0.0003729 ***
+lcavol   1    69.003  58.915 -44.366 111.267 &lt; 2.2e-16 ***
+svi      1    41.011  86.907  -6.658  44.830 1.499e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Single term deletions
+
+Model:
+lpsa ~ lcavol
+       Df Sum of Sq     RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;               58.915 -44.366                      
+lcavol  1    69.003 127.918  28.837  111.27 &lt; 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Single term additions
+
+Model:
+lpsa ~ lcavol
+        Df Sum of Sq    RSS     AIC F value   Pr(&gt;F)   
+&lt;none&gt;               58.915 -44.366                    
+lweight  1    5.9485 52.966 -52.690 10.5569 0.001606 **
+svi      1    5.2375 53.677 -51.397  9.1719 0.003172 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Single term deletions
+
+Model:
+lpsa ~ lcavol + lweight
+        Df Sum of Sq     RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;                52.966 -52.690                      
+lcavol   1    58.910 111.876  17.840 104.549 &lt; 2.2e-16 ***
+lweight  1     5.949  58.915 -44.366  10.557  0.001606 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Single term additions
+
+Model:
+lpsa ~ lcavol + lweight
+               Df Sum of Sq    RSS     AIC F value   Pr(&gt;F)   
+&lt;none&gt;                      52.966 -52.690                    
+svi             1    5.1814 47.785 -60.676  10.084 0.002029 **
+lweight:lcavol  1    0.1222 52.844 -50.914   0.215 0.643974   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Single term deletions
+
+Model:
+lpsa ~ lcavol + lweight + svi
+        Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;               47.785 -60.676                      
+lcavol   1   28.0445 75.829 -17.884  54.581 6.304e-11 ***
+lweight  1    5.8924 53.677 -51.397  11.468  0.001039 ** 
+svi      1    5.1814 52.966 -52.690  10.084  0.002029 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+Single term additions
+
+Model:
+lpsa ~ lcavol + lweight + svi
+               Df Sum of Sq    RSS     AIC F value Pr(&gt;F)
+&lt;none&gt;                      47.785 -60.676               
+lweight:lcavol  1   0.36605 47.419 -59.422  0.7102 0.4016
+lweight:svi     1   1.16433 46.621 -61.069  2.2977 0.1330
+lcavol:svi      1   0.02434 47.761 -58.726  0.0469 0.8291
+Single term deletions
+
+Model:
+lpsa ~ lcavol + lweight + svi
+        Df Sum of Sq    RSS     AIC F value    Pr(&gt;F)    
+&lt;none&gt;               47.785 -60.676                      
+lcavol   1   28.0445 75.829 -17.884  54.581 6.304e-11 ***
+lweight  1    5.8924 53.677 -51.397  11.468  0.001039 ** 
+svi      1    5.1814 52.966 -52.690  10.084  0.002029 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Merk op dat er voor dit voorbeeld nooit een predictor uit het model werd verwijderd eens die werd opgenomen in het model. Dat is in het algemeen niet het geval.</p>
+</section>
+<section id="opmerkingen" class="level3" data-number="12.2.4">
+<h3 data-number="12.2.4" class="anchored" data-anchor-id="opmerkingen"><span class="header-section-number">12.2.4</span> Opmerkingen</h3>
+<p>Eerst een opmerking over de toepassing van de drie modelselectiemethoden op het prostaat voorbeeld. De drie methoden resulteerden in hetzelfde finale geselecteerde model (met enkel hoofdeffecten van lcavol, lweight en svi). In het algemeen leiden de drie methoden niet noodzakelijk tot eenzelfde finale model.</p>
+<p>De <span class="math inline">\(p\)</span>-waarden in het geselecteerde model mogen niet geïnterpreteerd worden. Dit is minder eenvoudig om in te zien. We hebben immers meerdere hypothese testen uitgevoerd om tot dit model te komen. Bovendien zorgt de modelselectie ervoor dat enkel “significante” termen in het finale model staan; de selectieprocedure is dus een doelbewuste aanrijkingsprocedure. Herinner je dat de definitie van de <span class="math inline">\(p\)</span>-waarde de kans onder <span class="math inline">\(H_0\)</span> is dat de teststatistiek “door zuiver toeval” minstens zo extreem is dan deze die waargenomen werd. Door de aanrijking via de modelselectieprocedure, is het niet langer “zuiver toeval” dat de teststatistiek groter is dan de geobserveerde.</p>
+<p>Er is geen theoretische basis voor de selectieprocedure. Intuïtief lijkt de procedure zinvol omdat we gewend zijn om beslissingen te nemen aan de hand van hypothesetesten, maar hypothesetesten zijn eigenlijk enkel geldig wanneer ze doelgericht toegepast worden om een vooraf (i.e.&nbsp;voor het observeren van de data) duidelijk omschreven onderzoeksvraag te beantwoorden. Bij modelselectie wordt het pad doorheen de modellenruimte bepaald door de geobserveerde data, waardoor de <span class="math inline">\(p\)</span>-waarden hun betekenis verliezen, i.e.&nbsp;de hypotheses worden niet vooraf door de onderzoekers geformuleerd, maar ze worden door de data bepaald.</p>
+<p>De analyse van lpsa in het vorige hoofdstuk zou ook als modelselectie kunnen worden bekeken: we startten met het model met de hoofdeffecten en met interactietermen. Vervolgens werd getest of de interactieterm nul was. Indien de interactieterm niet significant was, dan werd deze verwijderd en werden de hoofdeffecten getest. Dit lijkt op een achterwaartse modelselectie, maar in dat voorbeeld moeten we de procedure interpreteren als een klassieke hypothesetest (voor interactie) waarvan de nulhypothese in de onderzoeksvraag verscholen lag en dus niet door de data gesuggereerd werd.</p>
+</section>
+</section>
+<section id="modelselectie-voor-predictie" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="modelselectie-voor-predictie"><span class="header-section-number">12.3</span> Modelselectie voor predictie</h2>
+<section id="inleiding-1" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="inleiding-1"><span class="header-section-number">12.3.1</span> Inleiding</h3>
+<p>In het vroege stadium van de ontwikkeling van een nieuw geneesmiddel (Engels: <em>early drug development</em>) kijkt men tegenwoordig ook naar het effect van de werkzame stof (<em>compound</em>) op genexpressie. Dit kan een dieper inzicht geven in de werking van het geneesmiddel, of kan toxiciteit van de compound in een vroeg stadium detecteren (toxicogenomics). De gewenste activiteit van een compound wordt in vitro bepaald aan de hand van bio-assays (BA). De uitkomst is bv. een maat voor de bindingscapaciteiten van de compound aan de geviseerde receptor op de celwand (IC<span class="math inline">\(_{50}\)</span>). Deze receptor wordt de target genoemd.</p>
+<p>In deze vroege fase van de ontwikkeling van een geneesmiddel worden typisch 20 tot 50 gelijkaardige compounds uitvoerig getest. Op basis van de in vitro resultaten nemen de chemici beslissingen over hoe de molecules moeten aangepast worden om tot een (hopelijk) betere compound te komen (i.e.&nbsp;een hogere on-target activiteit en minder toxiciteit).</p>
+<p>De kleine variaties in moleculaire structuur geven aanleiding tot variaties in BA en genexpressies.</p>
+<p>De doelstelling van de studie is het opstellen van een model dat toelaat de bioactiviteit (BA) te voorspellen aan de hand van genexpressies in een levercellijn.</p>
+<p>In het volgend voorbeeld, wordt het effect van 35 compounds getest op de genexpressie van levercellen. De levercellen werden gedurende 24 uur blootgesteld aan de compound, waarna genexpressie gemeten werd m.b.v. microarrays. De on-target bioactiviteit van ieder van de 35 compounds wordt via een in-vitro bioassay bekomen (IC<span class="math inline">\(_{50}\)</span>).</p>
+<p>We beperken ons hier tot 10 genen (geselecteerd door het onderzoeksteam op basis van a-priori kennis van de pathways betrokken bij de ontwikkeling van de ziekte). Figuur <a href="#fig-MCXScatter" class="quarto-xref"><span>12.1</span></a> toont de scatter plot matrix.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mcx<span class="ot">&lt;-</span><span class="fu">read.table</span>(<span class="st">"https://raw.githubusercontent.com/statomics/sbc/master/data/mcx.txt"</span>,<span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mcx)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    BA    HOXB5    PNISR     ATRX LOC100505650   PLK1S1  DNAJC12    ZFHX4
+1 5.70 9.864744 9.421823 8.557665     11.08555 8.892243 8.198292 8.846125
+2 5.87 9.847176 9.301424 8.550591     11.18236 9.196701 8.343191 8.873578
+3 5.70 9.859438 9.360302 8.536606     11.03822 8.903690 8.231318 8.859549
+4 5.54 9.862448 9.283498 8.535854     10.98804 9.136609 8.292451 8.857473
+5 5.32 9.836761 9.309442 8.543522     10.94489 8.855404 8.197822 8.826820
+6 5.73 9.848315 9.318502 8.545635     11.01789 8.919469 8.272741 8.838364
+     BSDC1    FTSJ1    YPEL1
+1 8.848922 10.38470 8.265589
+2 9.022556 10.23077 8.426856
+3 8.888275 10.37585 8.244617
+4 8.985628 10.35854 8.257426
+5 8.832436 10.37179 8.250075
+6 8.864538 10.38892 8.280436</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcx)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-MCXScatter" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-MCXScatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11-ModelSelectie_files/figure-html/fig-MCXScatter-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-MCXScatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;12.1: Scatterplot matrix voor de observaties in de bioactiviteit dataset.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Figuur <a href="#fig-MCXScatter" class="quarto-xref"><span>12.1</span></a> suggereert dat de BA uitkomst sterk gecorreleerd is met alle genexpressies, maar de figuur toont tevens dat vele genexpressies ook onderling sterk gecorreleerd zijn. Het zal dus waarschijnlijk niet nodig zijn om alle genen simultaan in het model op te nemen. Niettegenstaande de hypothesetest-gebaseerde methoden toepasbaar lijken, argumenteren we hier dat die methoden niet geschikt zijn in de huidige context.</p>
+<p>De doelstelling is om een zo optimaal mogelijk model te selecteren dat gebruikt kan worden voor predictie van de uitkomst. Niettegenstaande de predictie voor een lineair regressiemodel gegeven wordt door <span class="math inline">\(\hat{Y}=\beta_0+\sum_{j=1}^{p-1}\beta_jX_j\)</span>, weten we dat de <span class="math inline">\(\beta\)</span>-parameters een interpretatie hebben met betrekking tot de gemiddelde uitkomst <span class="math inline">\(\text{E}[Y\mid (X_1,\ldots,X_{p-1})]=\beta_0+\sum_{j=1}^{p-1}\beta_jX_j\)</span>. Hypothesetesten voor <span class="math inline">\(H_0:\beta_j=0\)</span> gaan dus na of predictor <span class="math inline">\(X_j\)</span> (conditioneel op de andere regressoren in het model) gerelateerd is tot de gemiddelde uitkomst. Het al dan niet verwerpen van <span class="math inline">\(H_0\)</span> heeft niet enkel te maken met de werkelijke waarde van <span class="math inline">\(\beta_j\)</span>, maar ook met de kracht van de hypothesetest en dus ook met de steekproefgrootte <span class="math inline">\(n\)</span>. Hypothesetesten maken een afweging van de evidentie in de data tegen/voor de gestelde hypotheses die betrekking hebben op de gemiddelde uitkomst. Voor een goed predictiemodel is het minder belangrijk dat het model de werkelijkheid weerspiegelt met betrekking tot het verband tussen de gemiddelde uitkomst en de regressoren; het is enkel belangrijk dat het model goede predicties geeft voor individuele uitkomsten. Om deze reden wordt modelselectie voor predictiemodellen uitgevoerd door gebruik te maken van specifieke modelselectiecriteria die de kwaliteit van het predictieve karakter van een model kwantificeert.</p>
+</section>
+<section id="selectie-criterium" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="selectie-criterium"><span class="header-section-number">12.3.2</span> Selectie-criterium</h3>
+<p>Het is aanlokkelijk om <span class="math inline">\(R^2\)</span> te gebruiken als een criterium voor hoe goed het model in staat is om predicties te maken, gezien het aangeeft hoeveel procent van de variabiliteit in de data verklaard kan worden door het model. <span class="math inline">\(R^2\)</span> is echter geen goed criterium. Hoe complexer het model (hoe meer predictoren er worden opgenomen) hoe hoger <span class="math inline">\(R^2\)</span> wordt. <span class="math inline">\(R^2 = 1-SSE/SSTot = SSR/SSTot\)</span> en SSE (SSR) neemt immers steeds af(toe) als een extra predictor in het model wordt opgenomen terwijl SSTot constant blijft. Het gebruik van <span class="math inline">\(R^2\)</span> zal dus aanleiding geven tot overfitting. We zullen immers steeds het meest complexe model selecteren. Hierdoor zal het model niet meer goed veralgemenen naar nieuwe data toe: het model wordt als het ware te goed getuned naar de dataset die is gebruikt om het model te trainen waardoor het niet meer bruikbaar is om predicties te doen.</p>
+<p>Het Akaike Information Criterium (AIC) is een criterium dat een compromis maakt tussen de kwaliteit van de fit en de complexiteit van het model. <span class="math display">\[AIC = -2 \text{ln } L(\hat \beta_0, \ldots, \hat \beta_{p-1}, \hat \sigma^2) + 2 (p+1),\]</span></p>
+<p>waarbij de eerste term het natuurlijke logaritme is van likelihood, die voor een steekproef van <span class="math inline">\(n\)</span> i.i.d. normaal verdeelde observaties met dichtheidsfunctie <span class="math inline">\(f(Y_i \vert x_{i1} \ldots x_{ip-1}, \beta_0,\ldots, \beta_{p-1} ,\sigma^2)\)</span> en conditioneel gemiddelde <span class="math inline">\(E[Y_i \vert x_{i1} \ldots x_{ip-1}]=\beta_0 + \sum_{j=1}^{p-1} \beta_j x_{j}\)</span> gedefinieerd is als: <span class="math display">\[
+L(\beta_0, \ldots, \beta_{p-1}, \sigma^2) = \prod\limits_{i=1}^n f(y_i \vert x_{i1} \ldots x_{ip-1}, \beta_0,\ldots, \beta_{p-1} ,\sigma^2)
+\]</span></p>
+<p>De likelihood geeft dus weer hoe waarschijnlijk het is om de data te observeren onder het normale regressiemodel. Gezien we de parameters niet kennen zullen we ze vervangen door de geschatte modelparameters. We kunnen voor het Normale lineaire regressie model aantonen dat <span class="math inline">\(-2 \text{ln } L(\hat \beta_0, \ldots, \hat \beta_{p-1}, \hat \sigma^2)\)</span> evenredig is met SSE. Hoe slechter de fit is, hoe hoger het AIC criterium.</p>
+<p>De tweede term straft de kwaliteit van de fit als het ware af voor complexiteit. Merk op dat <span class="math inline">\(p+1\)</span> het aantal modelparameters is die we schatten met het normale regressie model: <span class="math inline">\(p\)</span> parameters van het lineaire model + de parameter <span class="math inline">\(\sigma^2\)</span>. Het AIC criterium zal dus ook toenemen i.f.v. de complexiteit van het model (aantal parameters). Hierdoor wordt een afweging gemaakt tussen de kwaliteit van de model fit (term 1) en de complexiteit van het model (term 2).</p>
+<p>Merk op dat de data analist het werkelijk model niet kent. Hij/zij zal dus verschillende kandidaat modellen met elkaar vergelijken. Vervolgens wordt het model geselecteerd waaronder het zo waarschijnlijk mogelijk is om de geobserveerde data te trekken in een steekproef (eerste term minimaal, SSE zo laag mogelijk), maar zonder dat de modelcomplexiteit daarbij te hoog wordt (tweede term). De analist zal dus het modelselecteren met een zo klein mogelijke AIC.</p>
+<p>Opnieuw kan men gebruik maken van voorwaarts, achterwaartse of stapsgewijze modelselectie. Dat kan eenvoudig in R worden geïmplementeerd a.d.h.v. de ‘step’ functie.</p>
+<p>We passen de strategie nu toe op het bioactiviteitsvoorbeeld. We zullen opnieuw voorwaartse, achterwaartse en stapsgewijze modelselectie uitvoeren.</p>
+<p>Bij voorwaartse modelselectie starten we van een model zonder predictoren:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BA<span class="sc">~</span><span class="dv">1</span>,mcx)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>m1</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = BA ~ 1, data = mcx)
+
+Coefficients:
+(Intercept)  
+       5.55  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mfull <span class="ot">&lt;-</span> <span class="fu">lm</span>(BA<span class="sc">~</span>.,mcx)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mfull</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = BA ~ ., data = mcx)
+
+Coefficients:
+ (Intercept)         HOXB5         PNISR          ATRX  LOC100505650  
+     -9.5823        1.1665        2.6174       -2.0386        0.3095  
+      PLK1S1       DNAJC12         ZFHX4         BSDC1         FTSJ1  
+      0.4614        0.4616       -0.7015       -0.2761       -1.6318  
+       YPEL1  
+      1.3044  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mForward <span class="ot">&lt;-</span> <span class="fu">step</span>(m1,<span class="at">scope=</span><span class="fu">formula</span>(mfull),<span class="at">direction=</span><span class="st">"forward"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-19.33
+BA ~ 1
+
+               Df Sum of Sq     RSS     AIC
++ LOC100505650  1    14.668  4.3588 -68.910
++ PNISR         1    14.376  4.6505 -66.643
++ ATRX          1    14.104  4.9231 -64.650
++ ZFHX4         1    13.869  5.1574 -63.022
++ PLK1S1        1    13.860  5.1671 -62.956
++ FTSJ1         1    13.781  5.2459 -62.426
++ BSDC1         1    13.703  5.3234 -61.913
++ DNAJC12       1    13.412  5.6141 -60.052
++ HOXB5         1    13.400  5.6263 -59.976
++ YPEL1         1    13.049  5.9774 -57.858
+&lt;none&gt;                      19.0266 -19.333
+
+Step:  AIC=-68.91
+BA ~ LOC100505650
+
+          Df Sum of Sq    RSS     AIC
++ YPEL1    1   1.20478 3.1540 -78.233
++ DNAJC12  1   0.91062 3.4482 -75.112
++ PLK1S1   1   0.81030 3.5485 -74.109
++ FTSJ1    1   0.78960 3.5692 -73.905
++ BSDC1    1   0.75759 3.6012 -73.592
++ HOXB5    1   0.69933 3.6595 -73.031
++ ZFHX4    1   0.69895 3.6599 -73.027
++ ATRX     1   0.63276 3.7261 -72.400
++ PNISR    1   0.36333 3.9955 -69.956
+&lt;none&gt;                 4.3588 -68.910
+
+Step:  AIC=-78.23
+BA ~ LOC100505650 + YPEL1
+
+          Df Sum of Sq    RSS     AIC
+&lt;none&gt;                 3.1540 -78.233
++ PNISR    1  0.133032 3.0210 -77.741
++ HOXB5    1  0.116332 3.0377 -77.548
++ FTSJ1    1  0.063065 3.0910 -76.940
++ ATRX     1  0.048977 3.1051 -76.781
++ DNAJC12  1  0.044347 3.1097 -76.729
++ ZFHX4    1  0.029234 3.1248 -76.559
++ BSDC1    1  0.029032 3.1250 -76.557
++ PLK1S1   1  0.025778 3.1283 -76.520</code></pre>
+</div>
+</div>
+<p>Nu achterwaartse modelselectie:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mBackward <span class="ot">&lt;-</span> <span class="fu">step</span>(mfull,<span class="at">direction=</span><span class="st">"backward"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-67.34
+BA ~ HOXB5 + PNISR + ATRX + LOC100505650 + PLK1S1 + DNAJC12 + 
+    ZFHX4 + BSDC1 + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- BSDC1         1  0.003369 2.7288 -69.302
+- DNAJC12       1  0.005688 2.7312 -69.272
+- LOC100505650  1  0.014735 2.7402 -69.156
+- PLK1S1        1  0.025044 2.7505 -69.025
+- ZFHX4         1  0.030840 2.7563 -68.951
+- HOXB5         1  0.039762 2.7652 -68.838
+- ATRX          1  0.063271 2.7887 -68.542
+- YPEL1         1  0.139909 2.8654 -67.593
+- FTSJ1         1  0.157697 2.8832 -67.376
+&lt;none&gt;                      2.7255 -67.345
+- PNISR         1  0.211967 2.9374 -66.723
+
+Step:  AIC=-69.3
+BA ~ HOXB5 + PNISR + ATRX + LOC100505650 + PLK1S1 + DNAJC12 + 
+    ZFHX4 + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- DNAJC12       1  0.006916 2.7357 -71.213
+- LOC100505650  1  0.014255 2.7431 -71.119
+- PLK1S1        1  0.025052 2.7539 -70.982
+- ZFHX4         1  0.028026 2.7569 -70.944
+- HOXB5         1  0.036934 2.7658 -70.831
+- ATRX          1  0.087988 2.8168 -70.191
+- YPEL1         1  0.136972 2.8658 -69.587
+- FTSJ1         1  0.155963 2.8848 -69.356
+&lt;none&gt;                      2.7288 -69.302
+- PNISR         1  0.228042 2.9569 -68.492
+
+Step:  AIC=-71.21
+BA ~ HOXB5 + PNISR + ATRX + LOC100505650 + PLK1S1 + ZFHX4 + FTSJ1 + 
+    YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- LOC100505650  1  0.014893 2.7506 -73.023
+- ZFHX4         1  0.025561 2.7613 -72.887
+- PLK1S1        1  0.031313 2.7671 -72.815
+- HOXB5         1  0.044757 2.7805 -72.645
+- ATRX          1  0.081205 2.8170 -72.189
+&lt;none&gt;                      2.7357 -71.213
+- YPEL1         1  0.171775 2.9075 -71.082
+- FTSJ1         1  0.183246 2.9190 -70.944
+- PNISR         1  0.221272 2.9570 -70.491
+
+Step:  AIC=-73.02
+BA ~ HOXB5 + PNISR + ATRX + PLK1S1 + ZFHX4 + FTSJ1 + YPEL1
+
+         Df Sum of Sq    RSS     AIC
+- ZFHX4   1   0.02825 2.7789 -74.665
+- HOXB5   1   0.04052 2.7912 -74.511
+- PLK1S1  1   0.05611 2.8068 -74.316
+- ATRX    1   0.13350 2.8841 -73.364
+- YPEL1   1   0.15739 2.9080 -73.075
+&lt;none&gt;                2.7506 -73.023
+- FTSJ1   1   0.31935 3.0700 -71.178
+- PNISR   1   0.90015 3.6508 -65.114
+
+Step:  AIC=-74.67
+BA ~ HOXB5 + PNISR + ATRX + PLK1S1 + FTSJ1 + YPEL1
+
+         Df Sum of Sq    RSS     AIC
+- HOXB5   1   0.02391 2.8028 -76.365
+- PLK1S1  1   0.03749 2.8164 -76.196
+- YPEL1   1   0.14939 2.9283 -74.832
+&lt;none&gt;                2.7789 -74.665
+- ATRX    1   0.19488 2.9738 -74.293
+- FTSJ1   1   0.29613 3.0750 -73.121
+- PNISR   1   0.89851 3.6774 -66.860
+
+Step:  AIC=-76.37
+BA ~ PNISR + ATRX + PLK1S1 + FTSJ1 + YPEL1
+
+         Df Sum of Sq    RSS     AIC
+- PLK1S1  1   0.05400 2.8568 -77.698
+- YPEL1   1   0.15995 2.9628 -76.423
+&lt;none&gt;                2.8028 -76.365
+- ATRX    1   0.17201 2.9748 -76.281
+- FTSJ1   1   0.28291 3.0857 -75.000
+- PNISR   1   1.01508 3.8179 -67.548
+
+Step:  AIC=-77.7
+BA ~ PNISR + ATRX + FTSJ1 + YPEL1
+
+        Df Sum of Sq    RSS     AIC
+- ATRX   1   0.11974 2.9766 -78.260
+&lt;none&gt;               2.8568 -77.698
+- YPEL1  1   0.26844 3.1252 -76.554
+- FTSJ1  1   0.50227 3.3591 -74.029
+- PNISR  1   0.96156 3.8184 -69.543
+
+Step:  AIC=-78.26
+BA ~ PNISR + FTSJ1 + YPEL1
+
+        Df Sum of Sq    RSS     AIC
+&lt;none&gt;               2.9766 -78.260
+- YPEL1  1   0.18969 3.1662 -78.098
+- FTSJ1  1   0.39421 3.3708 -75.907
+- PNISR  1   1.59191 4.5685 -65.266</code></pre>
+</div>
+</div>
+<p>We kunnen ook stapsgewijze modelselectie doen startende vanaf het meest eenvoudige model:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mForStep <span class="ot">&lt;-</span> <span class="fu">step</span>(m1,<span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span><span class="fu">formula</span>(m1),<span class="at">upper=</span><span class="fu">formula</span>(mfull)), <span class="at">direction=</span><span class="st">"both"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-19.33
+BA ~ 1
+
+               Df Sum of Sq     RSS     AIC
++ LOC100505650  1    14.668  4.3588 -68.910
++ PNISR         1    14.376  4.6505 -66.643
++ ATRX          1    14.104  4.9231 -64.650
++ ZFHX4         1    13.869  5.1574 -63.022
++ PLK1S1        1    13.860  5.1671 -62.956
++ FTSJ1         1    13.781  5.2459 -62.426
++ BSDC1         1    13.703  5.3234 -61.913
++ DNAJC12       1    13.412  5.6141 -60.052
++ HOXB5         1    13.400  5.6263 -59.976
++ YPEL1         1    13.049  5.9774 -57.858
+&lt;none&gt;                      19.0266 -19.333
+
+Step:  AIC=-68.91
+BA ~ LOC100505650
+
+               Df Sum of Sq     RSS     AIC
++ YPEL1         1    1.2048  3.1540 -78.233
++ DNAJC12       1    0.9106  3.4482 -75.112
++ PLK1S1        1    0.8103  3.5485 -74.109
++ FTSJ1         1    0.7896  3.5692 -73.905
++ BSDC1         1    0.7576  3.6012 -73.592
++ HOXB5         1    0.6993  3.6595 -73.031
++ ZFHX4         1    0.6990  3.6599 -73.027
++ ATRX          1    0.6328  3.7261 -72.400
++ PNISR         1    0.3633  3.9955 -69.956
+&lt;none&gt;                       4.3588 -68.910
+- LOC100505650  1   14.6678 19.0266 -19.333
+
+Step:  AIC=-78.23
+BA ~ LOC100505650 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+&lt;none&gt;                      3.1540 -78.233
++ PNISR         1   0.13303 3.0210 -77.741
++ HOXB5         1   0.11633 3.0377 -77.548
++ FTSJ1         1   0.06306 3.0910 -76.940
++ ATRX          1   0.04898 3.1051 -76.781
++ DNAJC12       1   0.04435 3.1097 -76.729
++ ZFHX4         1   0.02923 3.1248 -76.559
++ BSDC1         1   0.02903 3.1250 -76.557
++ PLK1S1        1   0.02578 3.1283 -76.520
+- YPEL1         1   1.20478 4.3588 -68.910
+- LOC100505650  1   2.82334 5.9774 -57.858</code></pre>
+</div>
+</div>
+<p>Nu stapsgewijze modelselectie startende vanaf het meest complexe model:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mBackStep <span class="ot">&lt;-</span> <span class="fu">step</span>(mfull,<span class="at">scope=</span><span class="fu">list</span>(<span class="at">lower=</span><span class="fu">formula</span>(m1),<span class="at">upper=</span><span class="fu">formula</span>(mfull)), <span class="at">direction=</span><span class="st">"both"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=-67.34
+BA ~ HOXB5 + PNISR + ATRX + LOC100505650 + PLK1S1 + DNAJC12 + 
+    ZFHX4 + BSDC1 + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- BSDC1         1  0.003369 2.7288 -69.302
+- DNAJC12       1  0.005688 2.7312 -69.272
+- LOC100505650  1  0.014735 2.7402 -69.156
+- PLK1S1        1  0.025044 2.7505 -69.025
+- ZFHX4         1  0.030840 2.7563 -68.951
+- HOXB5         1  0.039762 2.7652 -68.838
+- ATRX          1  0.063271 2.7887 -68.542
+- YPEL1         1  0.139909 2.8654 -67.593
+- FTSJ1         1  0.157697 2.8832 -67.376
+&lt;none&gt;                      2.7255 -67.345
+- PNISR         1  0.211967 2.9374 -66.723
+
+Step:  AIC=-69.3
+BA ~ HOXB5 + PNISR + ATRX + LOC100505650 + PLK1S1 + DNAJC12 + 
+    ZFHX4 + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- DNAJC12       1  0.006916 2.7357 -71.213
+- LOC100505650  1  0.014255 2.7431 -71.119
+- PLK1S1        1  0.025052 2.7539 -70.982
+- ZFHX4         1  0.028026 2.7569 -70.944
+- HOXB5         1  0.036934 2.7658 -70.831
+- ATRX          1  0.087988 2.8168 -70.191
+- YPEL1         1  0.136972 2.8658 -69.587
+- FTSJ1         1  0.155963 2.8848 -69.356
+&lt;none&gt;                      2.7288 -69.302
+- PNISR         1  0.228042 2.9569 -68.492
++ BSDC1         1  0.003369 2.7255 -67.345
+
+Step:  AIC=-71.21
+BA ~ HOXB5 + PNISR + ATRX + LOC100505650 + PLK1S1 + ZFHX4 + FTSJ1 + 
+    YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- LOC100505650  1  0.014893 2.7506 -73.023
+- ZFHX4         1  0.025561 2.7613 -72.887
+- PLK1S1        1  0.031313 2.7671 -72.815
+- HOXB5         1  0.044757 2.7805 -72.645
+- ATRX          1  0.081205 2.8170 -72.189
+&lt;none&gt;                      2.7357 -71.213
+- YPEL1         1  0.171775 2.9075 -71.082
+- FTSJ1         1  0.183246 2.9190 -70.944
+- PNISR         1  0.221272 2.9570 -70.491
++ DNAJC12       1  0.006916 2.7288 -69.302
++ BSDC1         1  0.004597 2.7312 -69.272
+
+Step:  AIC=-73.02
+BA ~ HOXB5 + PNISR + ATRX + PLK1S1 + ZFHX4 + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- ZFHX4         1   0.02825 2.7789 -74.665
+- HOXB5         1   0.04052 2.7912 -74.511
+- PLK1S1        1   0.05611 2.8068 -74.316
+- ATRX          1   0.13350 2.8841 -73.364
+- YPEL1         1   0.15739 2.9080 -73.075
+&lt;none&gt;                      2.7506 -73.023
++ LOC100505650  1   0.01489 2.7358 -71.213
+- FTSJ1         1   0.31935 3.0700 -71.178
++ DNAJC12       1   0.00755 2.7431 -71.119
++ BSDC1         1   0.00409 2.7466 -71.075
+- PNISR         1   0.90015 3.6508 -65.114
+
+Step:  AIC=-74.67
+BA ~ HOXB5 + PNISR + ATRX + PLK1S1 + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- HOXB5         1   0.02391 2.8028 -76.365
+- PLK1S1        1   0.03749 2.8164 -76.196
+- YPEL1         1   0.14939 2.9283 -74.832
+&lt;none&gt;                      2.7789 -74.665
+- ATRX          1   0.19488 2.9738 -74.293
+- FTSJ1         1   0.29613 3.0750 -73.121
++ ZFHX4         1   0.02825 2.7506 -73.023
++ LOC100505650  1   0.01759 2.7613 -72.887
++ DNAJC12       1   0.00489 2.7740 -72.727
++ BSDC1         1   0.00072 2.7782 -72.674
+- PNISR         1   0.89851 3.6774 -66.860
+
+Step:  AIC=-76.37
+BA ~ PNISR + ATRX + PLK1S1 + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- PLK1S1        1   0.05400 2.8568 -77.698
+- YPEL1         1   0.15995 2.9628 -76.423
+&lt;none&gt;                      2.8028 -76.365
+- ATRX          1   0.17201 2.9748 -76.281
+- FTSJ1         1   0.28291 3.0857 -75.000
++ HOXB5         1   0.02391 2.7789 -74.665
++ LOC100505650  1   0.01287 2.7899 -74.526
++ ZFHX4         1   0.01165 2.7912 -74.511
++ DNAJC12       1   0.01066 2.7921 -74.499
++ BSDC1         1   0.00070 2.8021 -74.374
+- PNISR         1   1.01508 3.8179 -67.548
+
+Step:  AIC=-77.7
+BA ~ PNISR + ATRX + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+- ATRX          1   0.11974 2.9766 -78.260
+&lt;none&gt;                      2.8568 -77.698
+- YPEL1         1   0.26844 3.1252 -76.554
++ PLK1S1        1   0.05400 2.8028 -76.365
++ HOXB5         1   0.04042 2.8164 -76.196
++ LOC100505650  1   0.03471 2.8221 -76.125
++ BSDC1         1   0.03081 2.8260 -76.077
++ DNAJC12       1   0.02797 2.8288 -76.042
++ ZFHX4         1   0.00022 2.8566 -75.700
+- FTSJ1         1   0.50227 3.3591 -74.029
+- PNISR         1   0.96156 3.8184 -69.543
+
+Step:  AIC=-78.26
+BA ~ PNISR + FTSJ1 + YPEL1
+
+               Df Sum of Sq    RSS     AIC
+&lt;none&gt;                      2.9766 -78.260
+- YPEL1         1   0.18969 3.1662 -78.098
++ ATRX          1   0.11974 2.8568 -77.698
++ LOC100505650  1   0.08940 2.8871 -77.328
++ ZFHX4         1   0.04005 2.9365 -76.735
++ BSDC1         1   0.00413 2.9724 -76.309
++ HOXB5         1   0.00203 2.9745 -76.284
++ PLK1S1        1   0.00173 2.9748 -76.281
++ DNAJC12       1   0.00061 2.9759 -76.268
+- FTSJ1         1   0.39421 3.3708 -75.907
+- PNISR         1   1.59191 4.5685 -65.266</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mForward </span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = BA ~ LOC100505650 + YPEL1, data = mcx)
+
+Coefficients:
+ (Intercept)  LOC100505650         YPEL1  
+     -32.240         1.671         2.337  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mBackward</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = BA ~ PNISR + FTSJ1 + YPEL1, data = mcx)
+
+Coefficients:
+(Intercept)        PNISR        FTSJ1        YPEL1  
+     -6.538        2.165       -1.784        1.240  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mForStep</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = BA ~ LOC100505650 + YPEL1, data = mcx)
+
+Coefficients:
+ (Intercept)  LOC100505650         YPEL1  
+     -32.240         1.671         2.337  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mBackStep</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = BA ~ PNISR + FTSJ1 + YPEL1, data = mcx)
+
+Coefficients:
+(Intercept)        PNISR        FTSJ1        YPEL1  
+     -6.538        2.165       -1.784        1.240  </code></pre>
+</div>
+</div>
+</section>
+<section id="alternatieve-criteria" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="alternatieve-criteria"><span class="header-section-number">12.3.3</span> Alternatieve criteria</h3>
+<p>Recent zijn er binnen de machine learning diverse alternatieve technieken voor modelbouw ontwikkeld die hoofdzakelijk steunen op crossvalidatie, d.i. een techniek waarbij men telkens het regressiemodel schat op basis van een subset van de observaties en haar performantie evalueert door na te gaan hoe goed ze de resterende observaties voorspelt. Deze methoden zijn nog beter geschikt voor het bouwen van predictiemodellen. Ze evalueren het model immers op data die het model nog niet heeft gezien tijdens de training (fitting) fase.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Gekopieerd!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Gekopieerd!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-GeneralLinearModel.html" class="pagination-link" aria-label="Algemeen lineair model">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Algemeen lineair model</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/statOmics/statistiek2deBach/edit/main/11-ModelSelectie.qmd" class="toc-action"><i class="bi bi-github"></i>Pagina bewerken</a></li></ul></div></div></div></footer></body></html>

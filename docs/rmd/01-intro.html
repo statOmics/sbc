@@ -2587,12 +2587,12 @@ window.Quarto = {
 <li><p>We vatten de data eerst samen. We berekenen het gemiddelde en de standaard deviatie (een maat voor de spreiding, zie volgende hoofdstukken). We slaan het resultaat hiervan op in het object apRelSum via <code>apRelSum &lt;-</code>.</p></li>
 </ul>
 <ol type="1">
-<li><p>We pipen (via <code>%&gt;%</code>) het <code>ap</code> dataframe naar de <code>group_by</code> functie om de data te groeperen per treatment trt: <code>group_by(trt)</code>.</p></li>
+<li><p>We pipen (via <code>|&gt;</code>) het <code>ap</code> dataframe naar de <code>group_by</code> functie om de data te groeperen per treatment trt: <code>group_by(trt)</code>.</p></li>
 <li><p>We pipen het resultaat naar de <code>summarize_at</code> function om de “rel” variable samen te vatten en berekenen hierbij het gemiddelde en standaardafwijking. Omdat we de data eerst hebben gegroepeerd zullen we het gemiddelde en de standaard deviatie berekenen per groep.</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="ot">&lt;-</span> ap <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trt) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="ot">&lt;-</span> ap <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trt) <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;rel&quot;</span>,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd</span>
@@ -2652,7 +2652,7 @@ Met de ggplot2 bibliotheek kunnen we gemakkelijk grafieken opbouwen in lagen (la
 <li><p>We voegen foutenvlaggen toe om de onzekerheid op het gemiddelde weer te geven. We doen dit via de <code>geom_errorbar</code> functie en specifiëren het minimum en maximum van de error bar. Het <code>width</code> argument wordt gebruikt om de breedte van de error bar smaller te maken dan deze van de bar.</p></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>mean)) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd,<span class="at">ymax=</span>mean<span class="sc">+</span>sd),<span class="at">width=</span>.<span class="dv">2</span>) <span class="sc">+</span></span>
@@ -2688,7 +2688,7 @@ Met de ggplot2 bibliotheek kunnen we gemakkelijk grafieken opbouwen in lagen (la
 <li>We voegen laag toe voor de boxplot dmv de functie <code>geom_boxplot()</code></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">|&gt;</span>  </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2703,7 +2703,7 @@ Met de ggplot2 bibliotheek kunnen we gemakkelijk grafieken opbouwen in lagen (la
 <hr>
 <p>Merk op dat we de plot ook op kunnen slaan als een object.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>apBoxplot <span class="ot">&lt;-</span> ap <span class="sc">%&gt;%</span>  </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>apBoxplot <span class="ot">&lt;-</span> ap <span class="sc">|&gt;</span>  </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2731,7 +2731,7 @@ Met de ggplot2 bibliotheek kunnen we gemakkelijk grafieken opbouwen in lagen (la
 <li>We geven de ruwe data weer via de <code>geom_point(position=&quot;jitter&quot;)</code> functie. We gebruiken hierbij het argument position=‘jitter’ zodat we wat random ruis toevoegen aan de x-cordinaat zodat de gegevens elkaar niet overlappen.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">|&gt;</span>  </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
@@ -2974,8 +2974,8 @@ $ PregnantNow      &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N
 </ul></li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">%&gt;%</span>  </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">|&gt;</span>  </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">|&gt;</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height))<span class="sc">+</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Gender <span class="sc">~</span> .) <span class="sc">+</span></span>
@@ -2999,22 +2999,22 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <li>We selecteren enkel het geslacht en Lengte zodat de dataset geen onnodige variabelen bevat.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nhanesSub <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nhanesSub <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">|&gt;</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Height&quot;</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 <p>We berekenen het gemiddelde en de standaard deviatie voor de lengte voor mannen en vrouwen in de grote dataset. We groeperen de data hiervoor op basis van het geslacht (variable Gender).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean =</span> mean,</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">sd =</span> sd)</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>              )</span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  HeightSum <span class="sc">%&gt;%</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  HeightSum <span class="sc">|&gt;</span></span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="at">digits=</span><span class="dv">1</span>)</span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3073,12 +3073,12 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1023</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
@@ -3103,7 +3103,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <hr>
 <p>Data Exploratie</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>samp1 <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>samp1 <span class="sc">|&gt;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Gender<span class="sc">~</span>.) <span class="sc">+</span></span>
@@ -3116,8 +3116,8 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>HeightSumExp1 <span class="ot">&lt;-</span> samp1 <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>HeightSumExp1 <span class="ot">&lt;-</span> samp1 <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean =</span> mean,</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sd =</span> sd)</span>
@@ -3149,18 +3149,18 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <p>Als we het experiment herhalen selecteren we andere mensen en verkrijgen we andere resultaten.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1024</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>samp2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>HeightSumExp2 <span class="ot">&lt;-</span> samp2 <span class="sc">%&gt;%</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>HeightSumExp2 <span class="ot">&lt;-</span> samp2 <span class="sc">|&gt;</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
 <span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
 <span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd)</span>
@@ -3173,7 +3173,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 1 female  166.  9.89
 2 male    170.  8.24</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>samp2 <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>samp2 <span class="sc">|&gt;</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
@@ -3203,18 +3203,18 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">88605</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>samp3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
 <span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>HeightSumExp3 <span class="ot">&lt;-</span> samp3 <span class="sc">%&gt;%</span></span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>HeightSumExp3 <span class="ot">&lt;-</span> samp3 <span class="sc">|&gt;</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
 <span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
 <span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd)</span>
@@ -3227,7 +3227,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 1 female  173.  1.97
 2 male    168.  2.84</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>samp3 <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>samp3 <span class="sc">|&gt;</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
@@ -3260,10 +3260,10 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
 <span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
 <span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
 <span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
 <span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
@@ -3279,7 +3279,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil=</span><span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(malSamps))</span>
 <span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>res <span class="sc">|&gt;</span></span>
 <span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>verschil)) <span class="sc">+</span></span>
 <span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
@@ -3303,10 +3303,10 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">25</span></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
 <span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
 <span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
 <span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
@@ -3325,7 +3325,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>res2<span class="sc">$</span>ng <span class="ot">&lt;-</span> <span class="dv">25</span></span>
 <span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>ng <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(res,res2) <span class="sc">%&gt;%</span></span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(res,res2) <span class="sc">|&gt;</span></span>
 <span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>verschil)) <span class="sc">+</span></span>
 <span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
@@ -3387,7 +3387,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vaccin=</span><span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;no&quot;</span>),</span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">total=</span><span class="fu">c</span>(<span class="dv">221998</span>,<span class="dv">725173</span>,<span class="dv">123605</span>),</span>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">polio=</span><span class="fu">c</span>(<span class="dv">54</span>,<span class="dv">391</span>,<span class="dv">56</span>)</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">noPolio =</span> total <span class="sc">-</span> polio)</span>
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3434,7 +3434,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <p>Vergelijk de polio incidentie?</p>
 <hr>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> nfip <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> nfip <span class="sc">|&gt;</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incidencePM =</span> <span class="fu">round</span>(nfip<span class="sc">$</span>polio<span class="sc">/</span>nfip<span class="sc">$</span>total<span class="sc">*</span><span class="fl">1e6</span>,<span class="dv">0</span>))</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3534,7 +3534,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">group=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>,<span class="st">&quot;control&quot;</span>,<span class="st">&quot;noConcent&quot;</span>),</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment=</span><span class="fu">c</span>(<span class="st">&quot;vaccine&quot;</span>,<span class="st">&quot;placebo&quot;</span>,<span class="st">&quot;none&quot;</span>),</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">total=</span><span class="fu">c</span>(<span class="dv">200745</span>,<span class="dv">201229</span>, <span class="dv">338778</span>),<span class="at">polio=</span><span class="fu">c</span>(<span class="dv">57</span>,<span class="dv">142</span>,<span class="dv">157</span>)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">noPolio =</span> total<span class="sc">-</span>polio,</span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidencePM =</span> <span class="fu">round</span>(polio<span class="sc">/</span>total<span class="sc">*</span><span class="fl">1e6</span>,<span class="dv">0</span>)</span>
@@ -4347,15 +4347,15 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-274"><a href="#cb43-274" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We vatten de data eerst samen. We berekenen het gemiddelde en de standaard deviatie (een maat voor de spreiding, zie volgende hoofdstukken).</span>
 <span id="cb43-275"><a href="#cb43-275" aria-hidden="true" tabindex="-1"></a>We slaan het resultaat hiervan op in het object apRelSum via <span class="in">`apRelSum &lt;-`</span>.</span>
 <span id="cb43-276"><a href="#cb43-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-277"><a href="#cb43-277" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>We pipen (via <span class="in">`%&gt;%`</span>) het <span class="in">`ap`</span> dataframe naar de <span class="in">`group_by`</span> functie om de data te groeperen per treatment trt: <span class="in">`group_by(trt)`</span>.</span>
+<span id="cb43-277"><a href="#cb43-277" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>We pipen (via <span class="in">`|&gt;`</span>) het <span class="in">`ap`</span> dataframe naar de <span class="in">`group_by`</span> functie om de data te groeperen per treatment trt: <span class="in">`group_by(trt)`</span>.</span>
 <span id="cb43-278"><a href="#cb43-278" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-279"><a href="#cb43-279" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>We pipen het resultaat naar de <span class="in">`summarize_at`</span> function om de &quot;rel&quot; variable samen te vatten en berekenen hierbij het gemiddelde en standaardafwijking. Omdat we de data eerst hebben gegroepeerd zullen we het gemiddelde en de standaard deviatie berekenen per groep.</span>
 <span id="cb43-280"><a href="#cb43-280" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-281"><a href="#cb43-281" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-282"><a href="#cb43-282" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-285"><a href="#cb43-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-286"><a href="#cb43-286" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="ot">&lt;-</span> ap <span class="sc">%&gt;%</span></span>
-<span id="cb43-287"><a href="#cb43-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trt) <span class="sc">%&gt;%</span></span>
+<span id="cb43-286"><a href="#cb43-286" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="ot">&lt;-</span> ap <span class="sc">|&gt;</span></span>
+<span id="cb43-287"><a href="#cb43-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trt) <span class="sc">|&gt;</span></span>
 <span id="cb43-288"><a href="#cb43-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;rel&quot;</span>,</span>
 <span id="cb43-289"><a href="#cb43-289" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
 <span id="cb43-290"><a href="#cb43-290" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd</span>
@@ -4395,7 +4395,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-328"><a href="#cb43-328" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>We voegen foutenvlaggen toe om de onzekerheid op het gemiddelde weer te geven.  We doen dit via de <span class="in">`geom_errorbar`</span> functie en specifiëren het minimum en maximum van de error bar. Het <span class="in">`width`</span> argument wordt gebruikt om de breedte van de error bar smaller te maken dan deze van de bar.</span>
 <span id="cb43-329"><a href="#cb43-329" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-332"><a href="#cb43-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-333"><a href="#cb43-333" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="sc">%&gt;%</span></span>
+<span id="cb43-333"><a href="#cb43-333" aria-hidden="true" tabindex="-1"></a>apRelSum <span class="sc">|&gt;</span></span>
 <span id="cb43-334"><a href="#cb43-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>mean)) <span class="sc">+</span></span>
 <span id="cb43-335"><a href="#cb43-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
 <span id="cb43-336"><a href="#cb43-336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd,<span class="at">ymax=</span>mean<span class="sc">+</span>sd),<span class="at">width=</span>.<span class="dv">2</span>) <span class="sc">+</span></span>
@@ -4430,7 +4430,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-365"><a href="#cb43-365" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>We voegen laag toe voor de boxplot dmv de functie <span class="in">`geom_boxplot()`</span></span>
 <span id="cb43-366"><a href="#cb43-366" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-369"><a href="#cb43-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-370"><a href="#cb43-370" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<span id="cb43-370"><a href="#cb43-370" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">|&gt;</span>  </span>
 <span id="cb43-371"><a href="#cb43-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
 <span id="cb43-372"><a href="#cb43-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
 <span id="cb43-373"><a href="#cb43-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
@@ -4441,7 +4441,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-378"><a href="#cb43-378" aria-hidden="true" tabindex="-1"></a>Merk op dat we de plot ook op kunnen slaan als een object.</span>
 <span id="cb43-379"><a href="#cb43-379" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-382"><a href="#cb43-382" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-383"><a href="#cb43-383" aria-hidden="true" tabindex="-1"></a>apBoxplot <span class="ot">&lt;-</span> ap <span class="sc">%&gt;%</span>  </span>
+<span id="cb43-383"><a href="#cb43-383" aria-hidden="true" tabindex="-1"></a>apBoxplot <span class="ot">&lt;-</span> ap <span class="sc">|&gt;</span>  </span>
 <span id="cb43-384"><a href="#cb43-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
 <span id="cb43-385"><a href="#cb43-385" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb43-386"><a href="#cb43-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
@@ -4467,7 +4467,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-408"><a href="#cb43-408" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We geven de ruwe data weer via de  <span class="in">`geom_point(position=&quot;jitter&quot;)`</span> functie. We gebruiken hierbij het argument position=&#39;jitter&#39; zodat we wat random ruis toevoegen aan de x-cordinaat zodat de gegevens elkaar niet overlappen.</span>
 <span id="cb43-409"><a href="#cb43-409" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-412"><a href="#cb43-412" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-413"><a href="#cb43-413" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">%&gt;%</span>  </span>
+<span id="cb43-413"><a href="#cb43-413" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">|&gt;</span>  </span>
 <span id="cb43-414"><a href="#cb43-414" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
 <span id="cb43-415"><a href="#cb43-415" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb43-416"><a href="#cb43-416" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
@@ -4661,8 +4661,8 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-612"><a href="#cb43-612" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>We veranderen het label van de x-as met de <span class="in">`xlab`</span> functie.</span>
 <span id="cb43-613"><a href="#cb43-613" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-616"><a href="#cb43-616" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-617"><a href="#cb43-617" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">%&gt;%</span>  </span>
-<span id="cb43-618"><a href="#cb43-618" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-617"><a href="#cb43-617" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">|&gt;</span>  </span>
+<span id="cb43-618"><a href="#cb43-618" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">|&gt;</span></span>
 <span id="cb43-619"><a href="#cb43-619" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Height))<span class="sc">+</span></span>
 <span id="cb43-620"><a href="#cb43-620" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb43-621"><a href="#cb43-621" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Gender <span class="sc">~</span> .) <span class="sc">+</span></span>
@@ -4683,8 +4683,8 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-636"><a href="#cb43-636" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>We selecteren enkel het geslacht en Lengte zodat de dataset geen onnodige variabelen bevat.</span>
 <span id="cb43-637"><a href="#cb43-637" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-640"><a href="#cb43-640" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-641"><a href="#cb43-641" aria-hidden="true" tabindex="-1"></a>nhanesSub <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
-<span id="cb43-642"><a href="#cb43-642" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-641"><a href="#cb43-641" aria-hidden="true" tabindex="-1"></a>nhanesSub <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
+<span id="cb43-642"><a href="#cb43-642" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(Height)) <span class="sc">|&gt;</span></span>
 <span id="cb43-643"><a href="#cb43-643" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;Height&quot;</span>))</span>
 <span id="cb43-644"><a href="#cb43-644" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb43-645"><a href="#cb43-645" aria-hidden="true" tabindex="-1"></a></span>
@@ -4695,15 +4695,15 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-650"><a href="#cb43-650" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-651"><a href="#cb43-651" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-654"><a href="#cb43-654" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-655"><a href="#cb43-655" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb43-656"><a href="#cb43-656" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb43-655"><a href="#cb43-655" aria-hidden="true" tabindex="-1"></a>HeightSum <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb43-656"><a href="#cb43-656" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb43-657"><a href="#cb43-657" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
 <span id="cb43-658"><a href="#cb43-658" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean =</span> mean,</span>
 <span id="cb43-659"><a href="#cb43-659" aria-hidden="true" tabindex="-1"></a>               <span class="at">sd =</span> sd)</span>
 <span id="cb43-660"><a href="#cb43-660" aria-hidden="true" tabindex="-1"></a>              )</span>
 <span id="cb43-661"><a href="#cb43-661" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-662"><a href="#cb43-662" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb43-663"><a href="#cb43-663" aria-hidden="true" tabindex="-1"></a>  HeightSum <span class="sc">%&gt;%</span></span>
+<span id="cb43-663"><a href="#cb43-663" aria-hidden="true" tabindex="-1"></a>  HeightSum <span class="sc">|&gt;</span></span>
 <span id="cb43-664"><a href="#cb43-664" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, round, <span class="at">digits=</span><span class="dv">1</span>)</span>
 <span id="cb43-665"><a href="#cb43-665" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb43-666"><a href="#cb43-666" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4744,12 +4744,12 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-705"><a href="#cb43-705" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb43-706"><a href="#cb43-706" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1023</span>)</span>
 <span id="cb43-707"><a href="#cb43-707" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb43-708"><a href="#cb43-708" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb43-709"><a href="#cb43-709" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-708"><a href="#cb43-708" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb43-709"><a href="#cb43-709" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb43-710"><a href="#cb43-710" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb43-711"><a href="#cb43-711" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-712"><a href="#cb43-712" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb43-713"><a href="#cb43-713" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-712"><a href="#cb43-712" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb43-713"><a href="#cb43-713" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb43-714"><a href="#cb43-714" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb43-715"><a href="#cb43-715" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-716"><a href="#cb43-716" aria-hidden="true" tabindex="-1"></a>samp1 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
@@ -4762,15 +4762,15 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-723"><a href="#cb43-723" aria-hidden="true" tabindex="-1"></a>Data Exploratie</span>
 <span id="cb43-724"><a href="#cb43-724" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-727"><a href="#cb43-727" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-728"><a href="#cb43-728" aria-hidden="true" tabindex="-1"></a>samp1 <span class="sc">%&gt;%</span></span>
+<span id="cb43-728"><a href="#cb43-728" aria-hidden="true" tabindex="-1"></a>samp1 <span class="sc">|&gt;</span></span>
 <span id="cb43-729"><a href="#cb43-729" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
 <span id="cb43-730"><a href="#cb43-730" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb43-731"><a href="#cb43-731" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Gender<span class="sc">~</span>.) <span class="sc">+</span></span>
 <span id="cb43-732"><a href="#cb43-732" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Lengte (cm)&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb43-733"><a href="#cb43-733" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
 <span id="cb43-734"><a href="#cb43-734" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-735"><a href="#cb43-735" aria-hidden="true" tabindex="-1"></a>HeightSumExp1 <span class="ot">&lt;-</span> samp1 <span class="sc">%&gt;%</span></span>
-<span id="cb43-736"><a href="#cb43-736" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb43-735"><a href="#cb43-735" aria-hidden="true" tabindex="-1"></a>HeightSumExp1 <span class="ot">&lt;-</span> samp1 <span class="sc">|&gt;</span></span>
+<span id="cb43-736"><a href="#cb43-736" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb43-737"><a href="#cb43-737" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
 <span id="cb43-738"><a href="#cb43-738" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean =</span> mean,</span>
 <span id="cb43-739"><a href="#cb43-739" aria-hidden="true" tabindex="-1"></a>                      <span class="at">sd =</span> sd)</span>
@@ -4786,7 +4786,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-749"><a href="#cb43-749" aria-hidden="true" tabindex="-1"></a>Boxplot is beter:</span>
 <span id="cb43-750"><a href="#cb43-750" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-751"><a href="#cb43-751" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo=FALSE}</span></span>
-<span id="cb43-752"><a href="#cb43-752" aria-hidden="true" tabindex="-1"></a>samp1 <span class="sc">%&gt;%</span></span>
+<span id="cb43-752"><a href="#cb43-752" aria-hidden="true" tabindex="-1"></a>samp1 <span class="sc">|&gt;</span></span>
 <span id="cb43-753"><a href="#cb43-753" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
 <span id="cb43-754"><a href="#cb43-754" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb43-755"><a href="#cb43-755" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
@@ -4812,25 +4812,25 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-775"><a href="#cb43-775" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-778"><a href="#cb43-778" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb43-779"><a href="#cb43-779" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1024</span>)</span>
-<span id="cb43-780"><a href="#cb43-780" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb43-781"><a href="#cb43-781" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-780"><a href="#cb43-780" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb43-781"><a href="#cb43-781" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb43-782"><a href="#cb43-782" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb43-783"><a href="#cb43-783" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-784"><a href="#cb43-784" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb43-785"><a href="#cb43-785" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-784"><a href="#cb43-784" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb43-785"><a href="#cb43-785" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb43-786"><a href="#cb43-786" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb43-787"><a href="#cb43-787" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-788"><a href="#cb43-788" aria-hidden="true" tabindex="-1"></a>samp2 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
 <span id="cb43-789"><a href="#cb43-789" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-790"><a href="#cb43-790" aria-hidden="true" tabindex="-1"></a>HeightSumExp2 <span class="ot">&lt;-</span> samp2 <span class="sc">%&gt;%</span></span>
-<span id="cb43-791"><a href="#cb43-791" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb43-790"><a href="#cb43-790" aria-hidden="true" tabindex="-1"></a>HeightSumExp2 <span class="ot">&lt;-</span> samp2 <span class="sc">|&gt;</span></span>
+<span id="cb43-791"><a href="#cb43-791" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb43-792"><a href="#cb43-792" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
 <span id="cb43-793"><a href="#cb43-793" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
 <span id="cb43-794"><a href="#cb43-794" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd)</span>
 <span id="cb43-795"><a href="#cb43-795" aria-hidden="true" tabindex="-1"></a>              )</span>
 <span id="cb43-796"><a href="#cb43-796" aria-hidden="true" tabindex="-1"></a>HeightSumExp2</span>
 <span id="cb43-797"><a href="#cb43-797" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-798"><a href="#cb43-798" aria-hidden="true" tabindex="-1"></a>samp2 <span class="sc">%&gt;%</span></span>
+<span id="cb43-798"><a href="#cb43-798" aria-hidden="true" tabindex="-1"></a>samp2 <span class="sc">|&gt;</span></span>
 <span id="cb43-799"><a href="#cb43-799" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
 <span id="cb43-800"><a href="#cb43-800" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb43-801"><a href="#cb43-801" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
@@ -4854,25 +4854,25 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-821"><a href="#cb43-821" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb43-822"><a href="#cb43-822" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">&lt;-</span> <span class="dv">88605</span></span>
 <span id="cb43-823"><a href="#cb43-823" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
-<span id="cb43-824"><a href="#cb43-824" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb43-825"><a href="#cb43-825" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-824"><a href="#cb43-824" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb43-825"><a href="#cb43-825" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;female&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb43-826"><a href="#cb43-826" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb43-827"><a href="#cb43-827" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-828"><a href="#cb43-828" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
-<span id="cb43-829"><a href="#cb43-829" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-828"><a href="#cb43-828" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
+<span id="cb43-829"><a href="#cb43-829" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">&quot;male&quot;</span>) <span class="sc">|&gt;</span></span>
 <span id="cb43-830"><a href="#cb43-830" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size=</span><span class="dv">5</span>)</span>
 <span id="cb43-831"><a href="#cb43-831" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-832"><a href="#cb43-832" aria-hidden="true" tabindex="-1"></a>samp3 <span class="ot">&lt;-</span> <span class="fu">rbind</span>(fem,mal)</span>
 <span id="cb43-833"><a href="#cb43-833" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-834"><a href="#cb43-834" aria-hidden="true" tabindex="-1"></a>HeightSumExp3 <span class="ot">&lt;-</span> samp3 <span class="sc">%&gt;%</span></span>
-<span id="cb43-835"><a href="#cb43-835" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb43-834"><a href="#cb43-834" aria-hidden="true" tabindex="-1"></a>HeightSumExp3 <span class="ot">&lt;-</span> samp3 <span class="sc">|&gt;</span></span>
+<span id="cb43-835"><a href="#cb43-835" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">|&gt;</span></span>
 <span id="cb43-836"><a href="#cb43-836" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_at</span>(<span class="st">&quot;Height&quot;</span>,</span>
 <span id="cb43-837"><a href="#cb43-837" aria-hidden="true" tabindex="-1"></a>               <span class="fu">list</span>(<span class="at">mean=</span>mean,</span>
 <span id="cb43-838"><a href="#cb43-838" aria-hidden="true" tabindex="-1"></a>                    <span class="at">sd=</span>sd)</span>
 <span id="cb43-839"><a href="#cb43-839" aria-hidden="true" tabindex="-1"></a>              )</span>
 <span id="cb43-840"><a href="#cb43-840" aria-hidden="true" tabindex="-1"></a>HeightSumExp3</span>
 <span id="cb43-841"><a href="#cb43-841" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-842"><a href="#cb43-842" aria-hidden="true" tabindex="-1"></a>samp3 <span class="sc">%&gt;%</span></span>
+<span id="cb43-842"><a href="#cb43-842" aria-hidden="true" tabindex="-1"></a>samp3 <span class="sc">|&gt;</span></span>
 <span id="cb43-843"><a href="#cb43-843" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> Height)) <span class="sc">+</span></span>
 <span id="cb43-844"><a href="#cb43-844" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb43-845"><a href="#cb43-845" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="st">&quot;jitter&quot;</span>) <span class="sc">+</span></span>
@@ -4899,10 +4899,10 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-868"><a href="#cb43-868" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb43-869"><a href="#cb43-869" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-870"><a href="#cb43-870" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
-<span id="cb43-871"><a href="#cb43-871" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb43-871"><a href="#cb43-871" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
 <span id="cb43-872"><a href="#cb43-872" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
 <span id="cb43-873"><a href="#cb43-873" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-874"><a href="#cb43-874" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb43-874"><a href="#cb43-874" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
 <span id="cb43-875"><a href="#cb43-875" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
 <span id="cb43-876"><a href="#cb43-876" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-877"><a href="#cb43-877" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
@@ -4918,7 +4918,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-887"><a href="#cb43-887" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb43-888"><a href="#cb43-888" aria-hidden="true" tabindex="-1"></a>  <span class="at">verschil=</span><span class="fu">colMeans</span>(femSamps) <span class="sc">-</span> <span class="fu">colMeans</span>(malSamps))</span>
 <span id="cb43-889"><a href="#cb43-889" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-890"><a href="#cb43-890" aria-hidden="true" tabindex="-1"></a>res <span class="sc">%&gt;%</span></span>
+<span id="cb43-890"><a href="#cb43-890" aria-hidden="true" tabindex="-1"></a>res <span class="sc">|&gt;</span></span>
 <span id="cb43-891"><a href="#cb43-891" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>verschil)) <span class="sc">+</span></span>
 <span id="cb43-892"><a href="#cb43-892" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb43-893"><a href="#cb43-893" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
@@ -4935,10 +4935,10 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-906"><a href="#cb43-906" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span> <span class="dv">25</span></span>
 <span id="cb43-907"><a href="#cb43-907" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-908"><a href="#cb43-908" aria-hidden="true" tabindex="-1"></a><span class="co"># We filteren de data vooraf zodat we dit niet telkens opnieuw hoeven te doen</span></span>
-<span id="cb43-909"><a href="#cb43-909" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb43-909"><a href="#cb43-909" aria-hidden="true" tabindex="-1"></a>fem <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
 <span id="cb43-910"><a href="#cb43-910" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
 <span id="cb43-911"><a href="#cb43-911" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-912"><a href="#cb43-912" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">%&gt;%</span></span>
+<span id="cb43-912"><a href="#cb43-912" aria-hidden="true" tabindex="-1"></a>mal <span class="ot">&lt;-</span> nhanesSub <span class="sc">|&gt;</span></span>
 <span id="cb43-913"><a href="#cb43-913" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">&quot;male&quot;</span>)</span>
 <span id="cb43-914"><a href="#cb43-914" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-915"><a href="#cb43-915" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulatie studie</span></span>
@@ -4957,7 +4957,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-928"><a href="#cb43-928" aria-hidden="true" tabindex="-1"></a>res2<span class="sc">$</span>ng <span class="ot">&lt;-</span> <span class="dv">25</span></span>
 <span id="cb43-929"><a href="#cb43-929" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>ng <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb43-930"><a href="#cb43-930" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-931"><a href="#cb43-931" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(res,res2) <span class="sc">%&gt;%</span></span>
+<span id="cb43-931"><a href="#cb43-931" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(res,res2) <span class="sc">|&gt;</span></span>
 <span id="cb43-932"><a href="#cb43-932" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y=</span>verschil)) <span class="sc">+</span></span>
 <span id="cb43-933"><a href="#cb43-933" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb43-934"><a href="#cb43-934" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Gemiddeld Verschil (cm)&quot;</span>) <span class="sc">+</span></span>
@@ -5011,7 +5011,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-984"><a href="#cb43-984" aria-hidden="true" tabindex="-1"></a>  <span class="at">vaccin=</span><span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;no&quot;</span>),</span>
 <span id="cb43-985"><a href="#cb43-985" aria-hidden="true" tabindex="-1"></a>  <span class="at">total=</span><span class="fu">c</span>(<span class="dv">221998</span>,<span class="dv">725173</span>,<span class="dv">123605</span>),</span>
 <span id="cb43-986"><a href="#cb43-986" aria-hidden="true" tabindex="-1"></a>  <span class="at">polio=</span><span class="fu">c</span>(<span class="dv">54</span>,<span class="dv">391</span>,<span class="dv">56</span>)</span>
-<span id="cb43-987"><a href="#cb43-987" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb43-987"><a href="#cb43-987" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb43-988"><a href="#cb43-988" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">noPolio =</span> total <span class="sc">-</span> polio)</span>
 <span id="cb43-989"><a href="#cb43-989" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip)</span>
 <span id="cb43-990"><a href="#cb43-990" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -5021,7 +5021,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-994"><a href="#cb43-994" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb43-995"><a href="#cb43-995" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-998"><a href="#cb43-998" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb43-999"><a href="#cb43-999" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> nfip <span class="sc">%&gt;%</span></span>
+<span id="cb43-999"><a href="#cb43-999" aria-hidden="true" tabindex="-1"></a>nfip <span class="ot">&lt;-</span> nfip <span class="sc">|&gt;</span></span>
 <span id="cb43-1000"><a href="#cb43-1000" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">incidencePM =</span> <span class="fu">round</span>(nfip<span class="sc">$</span>polio<span class="sc">/</span>nfip<span class="sc">$</span>total<span class="sc">*</span><span class="fl">1e6</span>,<span class="dv">0</span>))</span>
 <span id="cb43-1001"><a href="#cb43-1001" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(nfip)</span>
 <span id="cb43-1002"><a href="#cb43-1002" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -5075,7 +5075,7 @@ Dat zal ons toe laten om de data verder samen te vatten door gebruik te maken va
 <span id="cb43-1052"><a href="#cb43-1052" aria-hidden="true" tabindex="-1"></a>  <span class="at">group=</span><span class="fu">c</span>(<span class="st">&quot;cases&quot;</span>,<span class="st">&quot;control&quot;</span>,<span class="st">&quot;noConcent&quot;</span>),</span>
 <span id="cb43-1053"><a href="#cb43-1053" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment=</span><span class="fu">c</span>(<span class="st">&quot;vaccine&quot;</span>,<span class="st">&quot;placebo&quot;</span>,<span class="st">&quot;none&quot;</span>),</span>
 <span id="cb43-1054"><a href="#cb43-1054" aria-hidden="true" tabindex="-1"></a>  <span class="at">total=</span><span class="fu">c</span>(<span class="dv">200745</span>,<span class="dv">201229</span>, <span class="dv">338778</span>),<span class="at">polio=</span><span class="fu">c</span>(<span class="dv">57</span>,<span class="dv">142</span>,<span class="dv">157</span>)</span>
-<span id="cb43-1055"><a href="#cb43-1055" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb43-1055"><a href="#cb43-1055" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb43-1056"><a href="#cb43-1056" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb43-1057"><a href="#cb43-1057" aria-hidden="true" tabindex="-1"></a>    <span class="at">noPolio =</span> total<span class="sc">-</span>polio,</span>
 <span id="cb43-1058"><a href="#cb43-1058" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidencePM =</span> <span class="fu">round</span>(polio<span class="sc">/</span>total<span class="sc">*</span><span class="fl">1e6</span>,<span class="dv">0</span>)</span>

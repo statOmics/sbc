@@ -2451,15 +2451,15 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/chol.txt&quot;</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">as.factor</span>(group))</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nGroups <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(group) <span class="sc">%&gt;%</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  table</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>nGroups <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(group) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> nGroups <span class="sc">%&gt;%</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> nGroups <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>chol</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
@@ -2609,7 +2609,7 @@ window.Quarto = {
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(g,y) {</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t.test</span>(y[g],y[<span class="sc">-</span>g])<span class="sc">$</span>statistic</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> chol <span class="sc">%&gt;%</span> <span class="fu">pull</span>(cholest)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> chol <span class="sc">|&gt;</span> <span class="fu">pull</span>(cholest)</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tStar)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -2708,14 +2708,14 @@ window.Quarto = {
 <li>Kleinste observatie krijgt dus rank 1, de tweede kleinste rank 2, enzovoort, en de grootste observatie, tenslotte, krijgt rank <span class="math inline">\(n\)</span>.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 244 206 242 278 236 188 212 186 198 160</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  rank</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rank</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  9  5  8 10  7  3  6  2  4  1</code></pre>
 </div>
@@ -2724,7 +2724,7 @@ window.Quarto = {
 <p>Soms komen <em>ties</em> voor in de data, i.e. minstens twee observaties hebben dezelfde numerieke waarde. Een klein voorbeeld:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>metTies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">403</span>, <span class="dv">507</span>, <span class="dv">507</span>, <span class="dv">610</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">830</span>, <span class="dv">900</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>metTies <span class="sc">%&gt;%</span> rank</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>metTies <span class="sc">|&gt;</span> <span class="fu">rank</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.0 2.5 2.5 4.0 6.0 6.0 6.0 8.0 9.0</code></pre>
 </div>
@@ -2749,7 +2749,7 @@ R_i &amp;=&amp; \frac{ \#\{Y_j: Y_j\leq Y_i\} + ( \#\{Y_j: Y_j &lt; Y_i\} +1)}{2
 group   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;1&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;   &quot;2&quot;  
 cholest &quot;244&quot; &quot;206&quot; &quot;242&quot; &quot;278&quot; &quot;236&quot; &quot;188&quot; &quot;212&quot; &quot;186&quot; &quot;198&quot; &quot;160&quot;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -2823,17 +2823,17 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li><p>In volgende lijnen berekenen we <span class="math inline">\(S_1\)</span> en <span class="math inline">\(S_2\)</span> manueel voor de dataset.</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>S1 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank=</span><span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>S1 <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank=</span><span class="fu">rank</span>(cholest)) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">|&gt;</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>S2 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank =</span> <span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>S2 <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank =</span> <span class="fu">rank</span>(cholest)) <span class="sc">|&gt;</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">|&gt;</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
 <span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>S1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -2855,12 +2855,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li><p>U telt hoeveel keer observatie uit groep 1 <span class="math inline">\(\geq\)</span> observatie uit groep 2.</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">2</span>) <span class="sc">|&gt;</span></span>
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
 <span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>u1Hlp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
@@ -3014,7 +3014,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/dna.txt&quot;</span>,<span class="at">delim=</span><span class="st">&quot; &quot;</span>)</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> dna <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> dna <span class="sc">|&gt;</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dose =</span> <span class="fu">as.factor</span>(dna<span class="sc">$</span>dose))</span>
 <span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>dna</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -3192,12 +3192,12 @@ P value adjustment method: holm </code></pre>
 <span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) {</span>
 <span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>         test <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(</span>
 <span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>       length<span class="sc">~</span>dose,</span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>       dna <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dose<span class="sc">%in%</span>x)</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>       dna <span class="sc">|&gt;</span> <span class="fu">filter</span>(dose<span class="sc">%in%</span>x)</span>
 <span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>       )</span>
 <span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>         <span class="fu">return</span>(test<span class="sc">$</span>statistic<span class="sc">/</span><span class="fu">prod</span>(nGroep[x]))</span>
 <span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>    })</span>
 <span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(probInd) <span class="ot">&lt;-</span> <span class="fu">combn</span>(</span>
-<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>  dna <span class="sc">%&gt;%</span> <span class="fu">pull</span>(dose) <span class="sc">%&gt;%</span> levels,</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>  dna <span class="sc">|&gt;</span> <span class="fu">pull</span>(dose) <span class="sc">|&gt;</span> <span class="fu">levels</span>(),</span>
 <span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>,</span>
 <span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>  paste,</span>
 <span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse=</span><span class="st">&quot;vs&quot;</span>)</span>
@@ -3746,15 +3746,15 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-62"><a href="#cb64-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb64-63"><a href="#cb64-63" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/chol.txt&quot;</span>)</span>
 <span id="cb64-64"><a href="#cb64-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-65"><a href="#cb64-65" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb64-65"><a href="#cb64-65" aria-hidden="true" tabindex="-1"></a>chol <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
 <span id="cb64-66"><a href="#cb64-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">as.factor</span>(group))</span>
 <span id="cb64-67"><a href="#cb64-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-68"><a href="#cb64-68" aria-hidden="true" tabindex="-1"></a>nGroups <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb64-69"><a href="#cb64-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(group) <span class="sc">%&gt;%</span></span>
-<span id="cb64-70"><a href="#cb64-70" aria-hidden="true" tabindex="-1"></a>  table</span>
+<span id="cb64-68"><a href="#cb64-68" aria-hidden="true" tabindex="-1"></a>nGroups <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb64-69"><a href="#cb64-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(group) <span class="sc">|&gt;</span></span>
+<span id="cb64-70"><a href="#cb64-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span>
 <span id="cb64-71"><a href="#cb64-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-72"><a href="#cb64-72" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> nGroups <span class="sc">%&gt;%</span></span>
-<span id="cb64-73"><a href="#cb64-73" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb64-72"><a href="#cb64-72" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> nGroups <span class="sc">|&gt;</span></span>
+<span id="cb64-73"><a href="#cb64-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
 <span id="cb64-74"><a href="#cb64-74" aria-hidden="true" tabindex="-1"></a>chol</span>
 <span id="cb64-75"><a href="#cb64-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb64-76"><a href="#cb64-76" aria-hidden="true" tabindex="-1"></a></span>
@@ -3762,12 +3762,12 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-78"><a href="#cb64-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-79"><a href="#cb64-79" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-80"><a href="#cb64-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE,out.width=&#39;50%&#39;, fig.asp=.8, fig.align=&#39;center&#39;}</span></span>
-<span id="cb64-81"><a href="#cb64-81" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span>  </span>
+<span id="cb64-81"><a href="#cb64-81" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">|&gt;</span>  </span>
 <span id="cb64-82"><a href="#cb64-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>group,<span class="at">y=</span>cholest)) <span class="sc">+</span></span>
 <span id="cb64-83"><a href="#cb64-83" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb64-84"><a href="#cb64-84" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span>
 <span id="cb64-85"><a href="#cb64-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-86"><a href="#cb64-86" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>cholest)) <span class="sc">+</span></span>
+<span id="cb64-86"><a href="#cb64-86" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>cholest)) <span class="sc">+</span></span>
 <span id="cb64-87"><a href="#cb64-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
 <span id="cb64-88"><a href="#cb64-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
 <span id="cb64-89"><a href="#cb64-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>group)</span>
@@ -3885,7 +3885,7 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-201"><a href="#cb64-201" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(g,y) {</span>
 <span id="cb64-202"><a href="#cb64-202" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t.test</span>(y[g],y[<span class="sc">-</span>g])<span class="sc">$</span>statistic</span>
 <span id="cb64-203"><a href="#cb64-203" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb64-204"><a href="#cb64-204" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> chol <span class="sc">%&gt;%</span> <span class="fu">pull</span>(cholest)</span>
+<span id="cb64-204"><a href="#cb64-204" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> chol <span class="sc">|&gt;</span> <span class="fu">pull</span>(cholest)</span>
 <span id="cb64-205"><a href="#cb64-205" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb64-206"><a href="#cb64-206" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tStar)</span>
 <span id="cb64-207"><a href="#cb64-207" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(tStar)</span>
@@ -3986,12 +3986,12 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-304"><a href="#cb64-304" aria-hidden="true" tabindex="-1"></a>  tenslotte, krijgt rank $n$.</span>
 <span id="cb64-305"><a href="#cb64-305" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-308"><a href="#cb64-308" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb64-309"><a href="#cb64-309" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
+<span id="cb64-309"><a href="#cb64-309" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">|&gt;</span></span>
 <span id="cb64-310"><a href="#cb64-310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest)</span>
 <span id="cb64-311"><a href="#cb64-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-312"><a href="#cb64-312" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">%&gt;%</span></span>
-<span id="cb64-313"><a href="#cb64-313" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest) <span class="sc">%&gt;%</span></span>
-<span id="cb64-314"><a href="#cb64-314" aria-hidden="true" tabindex="-1"></a>  rank</span>
+<span id="cb64-312"><a href="#cb64-312" aria-hidden="true" tabindex="-1"></a>chol <span class="sc">|&gt;</span></span>
+<span id="cb64-313"><a href="#cb64-313" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest) <span class="sc">|&gt;</span></span>
+<span id="cb64-314"><a href="#cb64-314" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rank</span>()</span>
 <span id="cb64-315"><a href="#cb64-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb64-316"><a href="#cb64-316" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-317"><a href="#cb64-317" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -4000,7 +4000,7 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-320"><a href="#cb64-320" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-323"><a href="#cb64-323" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb64-324"><a href="#cb64-324" aria-hidden="true" tabindex="-1"></a>metTies <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">403</span>, <span class="dv">507</span>, <span class="dv">507</span>, <span class="dv">610</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">651</span>, <span class="dv">830</span>, <span class="dv">900</span>)</span>
-<span id="cb64-325"><a href="#cb64-325" aria-hidden="true" tabindex="-1"></a>metTies <span class="sc">%&gt;%</span> rank</span>
+<span id="cb64-325"><a href="#cb64-325" aria-hidden="true" tabindex="-1"></a>metTies <span class="sc">|&gt;</span> <span class="fu">rank</span>()</span>
 <span id="cb64-326"><a href="#cb64-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb64-327"><a href="#cb64-327" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-328"><a href="#cb64-328" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ties: 507 komt tweemaal voor, 651 komt driemaal voor. Dit zijn voorbeelden van *ties*.</span>
@@ -4019,7 +4019,7 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-341"><a href="#cb64-341" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-344"><a href="#cb64-344" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb64-345"><a href="#cb64-345" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(chol)</span>
-<span id="cb64-346"><a href="#cb64-346" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
+<span id="cb64-346"><a href="#cb64-346" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
 <span id="cb64-347"><a href="#cb64-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholest)</span>
 <span id="cb64-348"><a href="#cb64-348" aria-hidden="true" tabindex="-1"></a>z</span>
 <span id="cb64-349"><a href="#cb64-349" aria-hidden="true" tabindex="-1"></a><span class="fu">rank</span>(z)</span>
@@ -4106,17 +4106,17 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-432"><a href="#cb64-432" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-433"><a href="#cb64-433" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In volgende lijnen berekenen we  $S_1$ en $S_2$ manueel voor de dataset.</span>
 <span id="cb64-436"><a href="#cb64-436" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb64-437"><a href="#cb64-437" aria-hidden="true" tabindex="-1"></a>S1 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb64-438"><a href="#cb64-438" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank=</span><span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
-<span id="cb64-439"><a href="#cb64-439" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb64-440"><a href="#cb64-440" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
-<span id="cb64-441"><a href="#cb64-441" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb64-437"><a href="#cb64-437" aria-hidden="true" tabindex="-1"></a>S1 <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb64-438"><a href="#cb64-438" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank=</span><span class="fu">rank</span>(cholest)) <span class="sc">|&gt;</span></span>
+<span id="cb64-439"><a href="#cb64-439" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb64-440"><a href="#cb64-440" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">|&gt;</span></span>
+<span id="cb64-441"><a href="#cb64-441" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
 <span id="cb64-442"><a href="#cb64-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-443"><a href="#cb64-443" aria-hidden="true" tabindex="-1"></a>S2 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb64-444"><a href="#cb64-444" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank =</span> <span class="fu">rank</span>(cholest)) <span class="sc">%&gt;%</span></span>
-<span id="cb64-445"><a href="#cb64-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb64-446"><a href="#cb64-446" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">%&gt;%</span></span>
-<span id="cb64-447"><a href="#cb64-447" aria-hidden="true" tabindex="-1"></a>  sum</span>
+<span id="cb64-443"><a href="#cb64-443" aria-hidden="true" tabindex="-1"></a>S2 <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb64-444"><a href="#cb64-444" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cholRank =</span> <span class="fu">rank</span>(cholest)) <span class="sc">|&gt;</span></span>
+<span id="cb64-445"><a href="#cb64-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb64-446"><a href="#cb64-446" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(cholRank) <span class="sc">|&gt;</span></span>
+<span id="cb64-447"><a href="#cb64-447" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
 <span id="cb64-448"><a href="#cb64-448" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-449"><a href="#cb64-449" aria-hidden="true" tabindex="-1"></a>S1</span>
 <span id="cb64-450"><a href="#cb64-450" aria-hidden="true" tabindex="-1"></a>S2</span>
@@ -4138,12 +4138,12 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-466"><a href="#cb64-466" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>U telt hoeveel keer observatie uit groep 1 $\geq$ observatie uit groep 2.</span>
 <span id="cb64-467"><a href="#cb64-467" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-470"><a href="#cb64-470" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb64-471"><a href="#cb64-471" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb64-472"><a href="#cb64-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-471"><a href="#cb64-471" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb64-472"><a href="#cb64-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb64-473"><a href="#cb64-473" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
 <span id="cb64-474"><a href="#cb64-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-475"><a href="#cb64-475" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> chol <span class="sc">%&gt;%</span></span>
-<span id="cb64-476"><a href="#cb64-476" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb64-475"><a href="#cb64-475" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> chol <span class="sc">|&gt;</span></span>
+<span id="cb64-476"><a href="#cb64-476" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group<span class="sc">==</span><span class="dv">2</span>) <span class="sc">|&gt;</span></span>
 <span id="cb64-477"><a href="#cb64-477" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(<span class="st">&quot;cholest&quot;</span>)</span>
 <span id="cb64-478"><a href="#cb64-478" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-479"><a href="#cb64-479" aria-hidden="true" tabindex="-1"></a>u1Hlp <span class="ot">&lt;-</span> <span class="fu">sapply</span>(</span>
@@ -4279,7 +4279,7 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-619"><a href="#cb64-619" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb64-620"><a href="#cb64-620" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/dna.txt&quot;</span>,<span class="at">delim=</span><span class="st">&quot; &quot;</span>)</span>
 <span id="cb64-621"><a href="#cb64-621" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-622"><a href="#cb64-622" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> dna <span class="sc">%&gt;%</span></span>
+<span id="cb64-622"><a href="#cb64-622" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> dna <span class="sc">|&gt;</span></span>
 <span id="cb64-623"><a href="#cb64-623" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dose =</span> <span class="fu">as.factor</span>(dna<span class="sc">$</span>dose))</span>
 <span id="cb64-624"><a href="#cb64-624" aria-hidden="true" tabindex="-1"></a>dna</span>
 <span id="cb64-625"><a href="#cb64-625" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4287,12 +4287,12 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-627"><a href="#cb64-627" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb64-628"><a href="#cb64-628" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-629"><a href="#cb64-629" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE,out.width=&#39;100%&#39;, fig.asp=.8, fig.align=&#39;center&#39;}</span></span>
-<span id="cb64-630"><a href="#cb64-630" aria-hidden="true" tabindex="-1"></a>dna <span class="sc">%&gt;%</span></span>
+<span id="cb64-630"><a href="#cb64-630" aria-hidden="true" tabindex="-1"></a>dna <span class="sc">|&gt;</span></span>
 <span id="cb64-631"><a href="#cb64-631" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose,<span class="at">y=</span>length,<span class="at">fill=</span>dose))<span class="sc">+</span></span>
 <span id="cb64-632"><a href="#cb64-632" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb64-633"><a href="#cb64-633" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">&quot;jitter&quot;</span>)</span>
 <span id="cb64-634"><a href="#cb64-634" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-635"><a href="#cb64-635" aria-hidden="true" tabindex="-1"></a>dna <span class="sc">%&gt;%</span></span>
+<span id="cb64-635"><a href="#cb64-635" aria-hidden="true" tabindex="-1"></a>dna <span class="sc">|&gt;</span></span>
 <span id="cb64-636"><a href="#cb64-636" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>length)) <span class="sc">+</span></span>
 <span id="cb64-637"><a href="#cb64-637" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
 <span id="cb64-638"><a href="#cb64-638" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
@@ -4306,8 +4306,8 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-646"><a href="#cb64-646" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb64-647"><a href="#cb64-647" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-648"><a href="#cb64-648" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE,out.width=&#39;100%&#39;, fig.asp=.8, fig.align=&#39;center&#39;}</span></span>
-<span id="cb64-649"><a href="#cb64-649" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(length <span class="sc">~</span> dose, <span class="at">data =</span> dna) <span class="sc">%&gt;%</span></span>
-<span id="cb64-650"><a href="#cb64-650" aria-hidden="true" tabindex="-1"></a>  plot</span>
+<span id="cb64-649"><a href="#cb64-649" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(length <span class="sc">~</span> dose, <span class="at">data =</span> dna) <span class="sc">|&gt;</span></span>
+<span id="cb64-650"><a href="#cb64-650" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span>
 <span id="cb64-651"><a href="#cb64-651" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb64-652"><a href="#cb64-652" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-653"><a href="#cb64-653" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -4417,12 +4417,12 @@ P value adjustment method: holm </code></pre>
 <span id="cb64-763"><a href="#cb64-763" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) {</span>
 <span id="cb64-764"><a href="#cb64-764" aria-hidden="true" tabindex="-1"></a>         test <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(</span>
 <span id="cb64-765"><a href="#cb64-765" aria-hidden="true" tabindex="-1"></a>       length<span class="sc">~</span>dose,</span>
-<span id="cb64-766"><a href="#cb64-766" aria-hidden="true" tabindex="-1"></a>       dna <span class="sc">%&gt;%</span> <span class="fu">filter</span>(dose<span class="sc">%in%</span>x)</span>
+<span id="cb64-766"><a href="#cb64-766" aria-hidden="true" tabindex="-1"></a>       dna <span class="sc">|&gt;</span> <span class="fu">filter</span>(dose<span class="sc">%in%</span>x)</span>
 <span id="cb64-767"><a href="#cb64-767" aria-hidden="true" tabindex="-1"></a>       )</span>
 <span id="cb64-768"><a href="#cb64-768" aria-hidden="true" tabindex="-1"></a>         <span class="fu">return</span>(test<span class="sc">$</span>statistic<span class="sc">/</span><span class="fu">prod</span>(nGroep[x]))</span>
 <span id="cb64-769"><a href="#cb64-769" aria-hidden="true" tabindex="-1"></a>    })</span>
 <span id="cb64-770"><a href="#cb64-770" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(probInd) <span class="ot">&lt;-</span> <span class="fu">combn</span>(</span>
-<span id="cb64-771"><a href="#cb64-771" aria-hidden="true" tabindex="-1"></a>  dna <span class="sc">%&gt;%</span> <span class="fu">pull</span>(dose) <span class="sc">%&gt;%</span> levels,</span>
+<span id="cb64-771"><a href="#cb64-771" aria-hidden="true" tabindex="-1"></a>  dna <span class="sc">|&gt;</span> <span class="fu">pull</span>(dose) <span class="sc">|&gt;</span> <span class="fu">levels</span>(),</span>
 <span id="cb64-772"><a href="#cb64-772" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span>,</span>
 <span id="cb64-773"><a href="#cb64-773" aria-hidden="true" tabindex="-1"></a>  paste,</span>
 <span id="cb64-774"><a href="#cb64-774" aria-hidden="true" tabindex="-1"></a>  <span class="at">collapse=</span><span class="st">&quot;vs&quot;</span>)</span>

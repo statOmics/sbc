@@ -1,0 +1,76 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Cursus Statistiek 2026-2027"
+  author: "Lieven Clement"
+  date: last-modified
+  description: "Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie & de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie"
+  output-file: "Statistiek_2026_2027"
+  repo-url: https://github.com/statOmics/statistiek2deBach
+  repo-actions: [edit]
+  downloads: [pdf, epub]
+  chapters:
+    - index.qmd
+    - 01-Inleiding.qmd
+    - 02-Concepten.qmd
+    - 03-Proefopzet.qmd
+    - 04-DataExploratie.qmd
+    - 05-StatistischeBesluitvorming.qmd
+    - 06-LineareRegressie.qmd
+    - 07-VariantieAnalyse.qmd
+    - 08-NietParametrischeStatistiek.qmd
+    - 09-CategorischeDataAnalyse.qmd
+    - 10-GeneralLinearModel.qmd
+    - 11-ModelSelectie.qmd
+    - references.qmd
+
+lang: nl
+
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: true
+
+crossref:
+  fig-title: "Figuur"
+  fig-prefix: "Figuur"
+  tbl-title: "Tabel"
+  tbl-prefix: "Tabel"
+  eq-prefix: "Vergelijking"
+  thm-title: "Theorema"
+  thm-prefix: "Theorema"
+  lem-title: "Lemma"
+  lem-prefix: "Lemma"
+  def-title: "Definitie"
+  def-prefix: "Definitie"
+  cor-title: "Corollary"
+  cor-prefix: "Corollary"
+  prp-title: "Eigenschap"
+  prp-prefix: "Eigenschap"
+  exm-title: "Voorbeeld"
+  exm-prefix: "Voorbeeld"
+  exr-title: "Oefening"
+  exr-prefix: "Oefening"
+
+execute:
+  warning: false
+  message: false
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+  pdf:
+    documentclass: book
+    classoption: [12pt]
+    pdf-engine: xelatex
+    include-in-header: preamble-quarto.tex
+    cite-method: natbib
+    keep-tex: true
+    colorlinks: true
+    linkcolor: blue
+    urlcolor: blue
+    citecolor: blue
+  epub: default

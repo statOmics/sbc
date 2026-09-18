@@ -2610,7 +2610,7 @@ F-statistic: 51.99 on 3 and 93 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Na terug transformatie</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lmVWS<span class="sc">$</span>coef <span class="sc">%&gt;%</span> exp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lmVWS<span class="sc">$</span>coef <span class="sc">|&gt;</span> <span class="fu">exp</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)      lcavol     lweight sviinvasion 
   0.7648524   1.7360954   1.6628548   1.9467442 </code></pre>
@@ -3331,7 +3331,7 @@ F-statistic: 880.7 on 2 and 17 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>We fitten een model op basis van de gemiddelde systolische bloeddruk (<code>BPSysAve</code>) in functie van de leeftijd, geslacht en een interactie tussen leeftijd en geslacht voor volwassen blanke subjecten uit de NHANES studie.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>bpData <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>bpData <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  Race1 <span class="sc">==</span><span class="st">&quot;White&quot;</span> <span class="sc">&amp;</span></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span></span>
@@ -3362,7 +3362,7 @@ F-statistic: 880.7 on 2 and 17 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="transformatie"><span class="header-section-number">6.2.1</span> Transformatie</h3>
 <p>We fitten een model op basis van de log2 getransformeerde gemiddelde systolische bloeddruk (<code>BPSysAve</code>) in functie van de leeftijd, geslacht en een interactie tussen leeftijd en geslacht.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mBp2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">%&gt;%</span> log2 <span class="sc">~</span> Age<span class="sc">*</span>Gender, bpData)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mBp2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">|&gt;</span> <span class="fu">log2</span>() <span class="sc">~</span> Age<span class="sc">*</span>Gender, bpData)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mBp2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3390,7 +3390,7 @@ F-statistic: 880.7 on 2 and 17 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>De inferentie blijft asymptotisch geldig.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mSd <span class="ot">&lt;-</span> <span class="fu">lm</span>(mBp1<span class="sc">$</span>res <span class="sc">%&gt;%</span> abs <span class="sc">~</span> mBp2<span class="sc">$</span>fitted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mSd <span class="ot">&lt;-</span> <span class="fu">lm</span>(mBp1<span class="sc">$</span>res <span class="sc">|&gt;</span> <span class="fu">abs</span>() <span class="sc">~</span> mBp2<span class="sc">$</span>fitted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We schatten het model nu opnieuw:</p>
 <div class="cell">
@@ -3398,7 +3398,7 @@ F-statistic: 880.7 on 2 and 17 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>De residuen vertonen nog steeds heteroscedasticiteit.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">residuals =</span> mBp3<span class="sc">$</span>residuals, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">residuals =</span> mBp3<span class="sc">$</span>residuals, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">|&gt;</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(fit,residuals)) <span class="sc">+</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3415,7 +3415,7 @@ F-statistic: 880.7 on 2 and 17 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>met <span class="math inline">\(w_i = 1/\hat \sigma^2_i\)</span>.</p>
 <p>De gewogen regressie zal dus correct rekening houden met heteroscedasticiteit.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">scaled_residuals =</span> mBp3<span class="sc">$</span>residuals<span class="sc">/</span>mSd<span class="sc">$</span>fitted, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">scaled_residuals =</span> mBp3<span class="sc">$</span>residuals<span class="sc">/</span>mSd<span class="sc">$</span>fitted, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">|&gt;</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(fit,scaled_residuals)) <span class="sc">+</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -3508,7 +3508,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Age + Age:Gendermale = 0&quot;</span>,</span>
 <span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Age:Gendermale = 0&quot;</span>)</span>
 <span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>bpPosthoc <span class="sc">%&gt;%</span> summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>bpPosthoc <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      Simultaneous Tests for General Linear Hypotheses
@@ -3524,7 +3524,7 @@ Age:Gendermale == 0       -0.19115    0.02420  -7.899   &lt;1e-10 ***
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 (Adjusted p values reported -- single-step method)</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>bpPosthocBI <span class="ot">&lt;-</span> bpPosthoc <span class="sc">%&gt;%</span> confint</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>bpPosthocBI <span class="ot">&lt;-</span> bpPosthoc <span class="sc">|&gt;</span> <span class="fu">confint</span>()</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>bpPosthocBI</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -4067,8 +4067,8 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-59"><a href="#cb48-59" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-60"><a href="#cb48-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r , out.width=&#39;100%&#39;, fig.asp=.8, fig.align=&#39;center&#39;,echo=FALSE}</span></span>
 <span id="cb48-61"><a href="#cb48-61" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb48-62"><a href="#cb48-62" aria-hidden="true" tabindex="-1"></a>prostate <span class="sc">%&gt;%</span></span>
-<span id="cb48-63"><a href="#cb48-63" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>pgg45)  <span class="sc">%&gt;%</span></span>
+<span id="cb48-62"><a href="#cb48-62" aria-hidden="true" tabindex="-1"></a>prostate <span class="sc">|&gt;</span></span>
+<span id="cb48-63"><a href="#cb48-63" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>pgg45)  <span class="sc">|&gt;</span></span>
 <span id="cb48-64"><a href="#cb48-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggpairs</span>()</span>
 <span id="cb48-65"><a href="#cb48-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-66"><a href="#cb48-66" aria-hidden="true" tabindex="-1"></a></span>
@@ -4155,7 +4155,7 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-151"><a href="#cb48-151" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-152"><a href="#cb48-152" aria-hidden="true" tabindex="-1"></a>Na terug transformatie</span>
 <span id="cb48-155"><a href="#cb48-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-156"><a href="#cb48-156" aria-hidden="true" tabindex="-1"></a>lmVWS<span class="sc">$</span>coef <span class="sc">%&gt;%</span> exp</span>
+<span id="cb48-156"><a href="#cb48-156" aria-hidden="true" tabindex="-1"></a>lmVWS<span class="sc">$</span>coef <span class="sc">|&gt;</span> <span class="fu">exp</span>()</span>
 <span id="cb48-157"><a href="#cb48-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-158"><a href="#cb48-158" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-159"><a href="#cb48-159" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -4729,7 +4729,7 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-741"><a href="#cb48-741" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-742"><a href="#cb48-742" aria-hidden="true" tabindex="-1"></a><span class="in">```{r out.width=&#39;90%&#39;, fig.asp=.8, fig.align=&#39;center&#39;, message=FALSE,echo=FALSE}</span></span>
 <span id="cb48-743"><a href="#cb48-743" aria-hidden="true" tabindex="-1"></a>bodyfat <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;https://raw.githubusercontent.com/statomics/sbc/master/data/bodyfat.txt&quot;</span>,<span class="at">delim=</span><span class="st">&quot; &quot;</span>)</span>
-<span id="cb48-744"><a href="#cb48-744" aria-hidden="true" tabindex="-1"></a>bodyfat <span class="sc">%&gt;%</span> <span class="fu">ggpairs</span>()</span>
+<span id="cb48-744"><a href="#cb48-744" aria-hidden="true" tabindex="-1"></a>bodyfat <span class="sc">|&gt;</span> <span class="fu">ggpairs</span>()</span>
 <span id="cb48-745"><a href="#cb48-745" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-746"><a href="#cb48-746" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-747"><a href="#cb48-747" aria-hidden="true" tabindex="-1"></a>***</span>
@@ -4887,7 +4887,7 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-903"><a href="#cb48-903" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-906"><a href="#cb48-906" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb48-907"><a href="#cb48-907" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
-<span id="cb48-908"><a href="#cb48-908" aria-hidden="true" tabindex="-1"></a>bpData <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb48-908"><a href="#cb48-908" aria-hidden="true" tabindex="-1"></a>bpData <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span></span>
 <span id="cb48-909"><a href="#cb48-909" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(</span>
 <span id="cb48-910"><a href="#cb48-910" aria-hidden="true" tabindex="-1"></a>  Race1 <span class="sc">==</span><span class="st">&quot;White&quot;</span> <span class="sc">&amp;</span></span>
 <span id="cb48-911"><a href="#cb48-911" aria-hidden="true" tabindex="-1"></a>    Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span></span>
@@ -4911,7 +4911,7 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-929"><a href="#cb48-929" aria-hidden="true" tabindex="-1"></a>We fitten een model op basis van de log2 getransformeerde gemiddelde systolische bloeddruk (<span class="in">`BPSysAve`</span>) in functie van de leeftijd, geslacht en een interactie tussen leeftijd en geslacht.</span>
 <span id="cb48-930"><a href="#cb48-930" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-933"><a href="#cb48-933" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-934"><a href="#cb48-934" aria-hidden="true" tabindex="-1"></a>mBp2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">%&gt;%</span> log2 <span class="sc">~</span> Age<span class="sc">*</span>Gender, bpData)</span>
+<span id="cb48-934"><a href="#cb48-934" aria-hidden="true" tabindex="-1"></a>mBp2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(BPSysAve <span class="sc">|&gt;</span> <span class="fu">log2</span>() <span class="sc">~</span> Age<span class="sc">*</span>Gender, bpData)</span>
 <span id="cb48-935"><a href="#cb48-935" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb48-936"><a href="#cb48-936" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mBp2)</span>
 <span id="cb48-937"><a href="#cb48-937" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4929,7 +4929,7 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-949"><a href="#cb48-949" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>De inferentie blijft asymptotisch geldig.</span>
 <span id="cb48-950"><a href="#cb48-950" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-953"><a href="#cb48-953" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-954"><a href="#cb48-954" aria-hidden="true" tabindex="-1"></a>mSd <span class="ot">&lt;-</span> <span class="fu">lm</span>(mBp1<span class="sc">$</span>res <span class="sc">%&gt;%</span> abs <span class="sc">~</span> mBp2<span class="sc">$</span>fitted)</span>
+<span id="cb48-954"><a href="#cb48-954" aria-hidden="true" tabindex="-1"></a>mSd <span class="ot">&lt;-</span> <span class="fu">lm</span>(mBp1<span class="sc">$</span>res <span class="sc">|&gt;</span> <span class="fu">abs</span>() <span class="sc">~</span> mBp2<span class="sc">$</span>fitted)</span>
 <span id="cb48-955"><a href="#cb48-955" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-956"><a href="#cb48-956" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-957"><a href="#cb48-957" aria-hidden="true" tabindex="-1"></a>We schatten het model nu opnieuw:</span>
@@ -4941,7 +4941,7 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-965"><a href="#cb48-965" aria-hidden="true" tabindex="-1"></a>De residuen vertonen nog steeds heteroscedasticiteit.</span>
 <span id="cb48-966"><a href="#cb48-966" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-969"><a href="#cb48-969" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-970"><a href="#cb48-970" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">residuals =</span> mBp3<span class="sc">$</span>residuals, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">%&gt;%</span></span>
+<span id="cb48-970"><a href="#cb48-970" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">residuals =</span> mBp3<span class="sc">$</span>residuals, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">|&gt;</span></span>
 <span id="cb48-971"><a href="#cb48-971" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(fit,residuals)) <span class="sc">+</span></span>
 <span id="cb48-972"><a href="#cb48-972" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb48-973"><a href="#cb48-973" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -4957,7 +4957,7 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-983"><a href="#cb48-983" aria-hidden="true" tabindex="-1"></a>De gewogen regressie zal dus correct rekening houden met heteroscedasticiteit.</span>
 <span id="cb48-984"><a href="#cb48-984" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-987"><a href="#cb48-987" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb48-988"><a href="#cb48-988" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">scaled_residuals =</span> mBp3<span class="sc">$</span>residuals<span class="sc">/</span>mSd<span class="sc">$</span>fitted, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">%&gt;%</span></span>
+<span id="cb48-988"><a href="#cb48-988" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">scaled_residuals =</span> mBp3<span class="sc">$</span>residuals<span class="sc">/</span>mSd<span class="sc">$</span>fitted, <span class="at">fit =</span> mBp3<span class="sc">$</span>fitted) <span class="sc">|&gt;</span></span>
 <span id="cb48-989"><a href="#cb48-989" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(fit,scaled_residuals)) <span class="sc">+</span></span>
 <span id="cb48-990"><a href="#cb48-990" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb48-991"><a href="#cb48-991" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -5017,9 +5017,9 @@ Age:Gendermale == 0       -0.1911  -0.2472 -0.1351</code></pre>
 <span id="cb48-1051"><a href="#cb48-1051" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Age + Age:Gendermale = 0&quot;</span>,</span>
 <span id="cb48-1052"><a href="#cb48-1052" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Age:Gendermale = 0&quot;</span>)</span>
 <span id="cb48-1053"><a href="#cb48-1053" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb48-1054"><a href="#cb48-1054" aria-hidden="true" tabindex="-1"></a>bpPosthoc <span class="sc">%&gt;%</span> summary</span>
+<span id="cb48-1054"><a href="#cb48-1054" aria-hidden="true" tabindex="-1"></a>bpPosthoc <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span>
 <span id="cb48-1055"><a href="#cb48-1055" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-1056"><a href="#cb48-1056" aria-hidden="true" tabindex="-1"></a>bpPosthocBI <span class="ot">&lt;-</span> bpPosthoc <span class="sc">%&gt;%</span> confint</span>
+<span id="cb48-1056"><a href="#cb48-1056" aria-hidden="true" tabindex="-1"></a>bpPosthocBI <span class="ot">&lt;-</span> bpPosthoc <span class="sc">|&gt;</span> <span class="fu">confint</span>()</span>
 <span id="cb48-1057"><a href="#cb48-1057" aria-hidden="true" tabindex="-1"></a>bpPosthocBI</span>
 <span id="cb48-1058"><a href="#cb48-1058" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb48-1059"><a href="#cb48-1059" aria-hidden="true" tabindex="-1"></a></span>

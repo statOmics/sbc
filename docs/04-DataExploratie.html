@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl" xml:lang="nl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Basiscursus Statistiek voor de 2de Bachelor of Science in de Biologie, - in de Biochemie &amp; de Biotechnologie, - in de Biomedische Wetenschappen, en - in de Chemie">
+
+<title>5&nbsp; Data exploratie en beschrijvende statistiek – Cursus Statistiek 2026-2027</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-StatistischeBesluitvorming.html" rel="next">
+<link href="./03-Proefopzet.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Geen resultaten",
+    "search-matching-documents-text": "Gevonden documenten",
+    "search-copy-link-title": "Kopieer link om te zoeken",
+    "search-hide-matches-text": "Extra overeenkomsten verbergen",
+    "search-more-match-text": "meer overeenkomst in dit document",
+    "search-more-matches-text": "meer overeenkomsten in dit document",
+    "search-clear-button-title": "Wissen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Annuleren",
+    "search-submit-button-title": "Verzenden",
+    "search-label": "Zoeken"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Schakel zijbalknavigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-DataExploratie.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data exploratie en beschrijvende statistiek</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Schakel zijbalknavigatie" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Zoeken" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Cursus Statistiek 2026-2027</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/statOmics/statistiek2deBach" title="Broncode" class="quarto-navigation-tool px-1" aria-label="Broncode"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Statistiek_2026_2027.pdf">
+              <i class="bi bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Statistiek_2026_2027.epub">
+              <i class="bi bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Zoeken"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Cursus Statistiek 2026-2027</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Inleiding.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Inleiding</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Concepten.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Belangrijke concepten &amp; conventies</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Proefopzet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Studiedesign</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-DataExploratie.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data exploratie en beschrijvende statistiek</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-StatistischeBesluitvorming.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistische besluitvorming</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-LineareRegressie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Enkelvoudige lineaire regressie</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-VariantieAnalyse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variantie analyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-NietParametrischeStatistiek.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Niet-parametrische statistiek</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-CategorischeDataAnalyse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Categorische data analyse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-GeneralLinearModel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Algemeen lineair model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-ModelSelectie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Modelselectie</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhoudsopgave</h2>
+   
+  <ul>
+  <li><a href="#inleiding" id="toc-inleiding" class="nav-link active" data-scroll-target="#inleiding"><span class="header-section-number">5.1</span> Inleiding</a></li>
+  <li><a href="#sec-univar" id="toc-sec-univar" class="nav-link" data-scroll-target="#sec-univar"><span class="header-section-number">5.2</span> Univariate beschrijving van de variabelen</a></li>
+  <li><a href="#sec-summarize" id="toc-sec-summarize" class="nav-link" data-scroll-target="#sec-summarize"><span class="header-section-number">5.3</span> Samenvattingsmaten voor continue variabelen</a>
+  <ul class="collapse">
+  <li><a href="#maten-voor-de-centrale-ligging" id="toc-maten-voor-de-centrale-ligging" class="nav-link" data-scroll-target="#maten-voor-de-centrale-ligging"><span class="header-section-number">5.3.1</span> Maten voor de centrale ligging</a></li>
+  <li><a href="#sec-spreiding" id="toc-sec-spreiding" class="nav-link" data-scroll-target="#sec-spreiding"><span class="header-section-number">5.3.2</span> Spreidingsmaten</a></li>
+  </ul></li>
+  <li><a href="#sec-normal" id="toc-sec-normal" class="nav-link" data-scroll-target="#sec-normal"><span class="header-section-number">5.4</span> De Normale benadering van gegevens</a>
+  <ul class="collapse">
+  <li><a href="#sec-qq" id="toc-sec-qq" class="nav-link" data-scroll-target="#sec-qq"><span class="header-section-number">5.4.1</span> QQ-plots</a></li>
+  </ul></li>
+  <li><a href="#sec-explCatVar" id="toc-sec-explCatVar" class="nav-link" data-scroll-target="#sec-explCatVar"><span class="header-section-number">5.5</span> Samenvattingsmaten voor categorische variabelen</a>
+  <ul class="collapse">
+  <li><a href="#prospectieve-studies-en-lukrake-steekproeven" id="toc-prospectieve-studies-en-lukrake-steekproeven" class="nav-link" data-scroll-target="#prospectieve-studies-en-lukrake-steekproeven"><span class="header-section-number">5.5.1</span> Prospectieve studies en lukrake steekproeven</a></li>
+  <li><a href="#sec-retrospect" id="toc-sec-retrospect" class="nav-link" data-scroll-target="#sec-retrospect"><span class="header-section-number">5.5.2</span> Retrospectieve studies</a></li>
+  <li><a href="#rates-versus-risicos" id="toc-rates-versus-risicos" class="nav-link" data-scroll-target="#rates-versus-risicos"><span class="header-section-number">5.5.3</span> Rates versus risico’s</a></li>
+  </ul></li>
+  <li><a href="#associaties-tussen-twee-variabelen" id="toc-associaties-tussen-twee-variabelen" class="nav-link" data-scroll-target="#associaties-tussen-twee-variabelen"><span class="header-section-number">5.6</span> Associaties tussen twee variabelen</a>
+  <ul class="collapse">
+  <li><a href="#sec-kruistabel" id="toc-sec-kruistabel" class="nav-link" data-scroll-target="#sec-kruistabel"><span class="header-section-number">5.6.1</span> Associatie tussen twee kwalitatieve variabelen</a></li>
+  <li><a href="#sec-asskwalcont" id="toc-sec-asskwalcont" class="nav-link" data-scroll-target="#sec-asskwalcont"><span class="header-section-number">5.6.2</span> Associatie tussen één kwalitatieve en één continue variabele</a></li>
+  </ul></li>
+  <li><a href="#sec-correlatie" id="toc-sec-correlatie" class="nav-link" data-scroll-target="#sec-correlatie"><span class="header-section-number">5.7</span> Associatie tussen twee continue variabelen</a>
+  <ul class="collapse">
+  <li><a href="#covariantie-en-correlatie" id="toc-covariantie-en-correlatie" class="nav-link" data-scroll-target="#covariantie-en-correlatie"><span class="header-section-number">5.7.1</span> Covariantie en Correlatie</a></li>
+  <li><a href="#pearson-correlatie" id="toc-pearson-correlatie" class="nav-link" data-scroll-target="#pearson-correlatie"><span class="header-section-number">5.7.2</span> Pearson Correlatie</a></li>
+  <li><a href="#verschillende-groottes-van-correlatie" id="toc-verschillende-groottes-van-correlatie" class="nav-link" data-scroll-target="#verschillende-groottes-van-correlatie"><span class="header-section-number">5.7.3</span> Verschillende groottes van correlatie</a></li>
+  <li><a href="#spearman-correlatie" id="toc-spearman-correlatie" class="nav-link" data-scroll-target="#spearman-correlatie"><span class="header-section-number">5.7.4</span> Spearman correlatie</a></li>
+  </ul></li>
+  <li><a href="#sec-missing" id="toc-sec-missing" class="nav-link" data-scroll-target="#sec-missing"><span class="header-section-number">5.8</span> Onvolledige gegevens</a></li>
+  <li><a href="#clips-over-de-code-in-dit-hoofdstuk" id="toc-clips-over-de-code-in-dit-hoofdstuk" class="nav-link" data-scroll-target="#clips-over-de-code-in-dit-hoofdstuk"><span class="header-section-number">5.9</span> Clips over de code in dit hoofdstuk</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/statOmics/statistiek2deBach/edit/main/04-DataExploratie.qmd" class="toc-action"><i class="bi bi-github"></i>Pagina bewerken</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-chap-describe" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data exploratie en beschrijvende statistiek</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Alle kennisclips die in dit hoofdstuk zijn verwerkt kan je in deze youtube playlist vinden: <a href="https://www.youtube.com/watch?v=AVd-8WE_DhU&amp;list=PLZH1hP8_LbJLKTeg_D9CHC3xbk0nfBa-1">Kennisclips Hoofdstuk4</a></p>
+<p>Link naar webpage/script die wordt gebruik in de kennisclips: <a href="https://statomics.github.io/sbc/rmd/04-dataExploration.html">script Hoofdstuk4</a></p>
+<section id="inleiding" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="inleiding"><span class="header-section-number">5.1</span> Inleiding</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AVd-8WE_DhU" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Om de resultaten van een experimentele of observationele studie te rapporteren, is het uiteraard niet mogelijk om per subject waarvoor gegevens verzameld werden in de studie de bekomen gegevens neer te schrijven. Met de veelheid aanwezige informatie is het integendeel belangrijk de gegevens gericht samen te vatten en voor te stellen. Zelfs wanneer het duidelijk is welke analyse er moet uitgevoerd worden, moet er eerst een basisbeschrijving komen van de verzamelde gegevens. Dit zal mee helpen aangeven of er geen fouten zijn gemaakt tijdens het onderzoek of bij de registratie van gegevens. Eventuele anomalieën of zelfs fraude worden in deze fase opgespoord en tenslotte krijgt men een indruk of voldaan is aan de onderstellingen (bvb. de onderstelling dat de gegevens Normaal verdeeld zijn <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) die aan de grond liggen van de voorgestelde statistische analyses in de latere fase.</p>
+<p>De eerste vraag die moet gesteld worden bij het benaderen van een echte data set is:</p>
+<ol type="1">
+<li>Wat is de oorspronkelijke vraagstelling (geweest), waarom zijn deze gegevens verzameld?</li>
+<li>Hoe en onder welke omstandigheden zijn de subjecten gekozen en de variabelen gemeten? Hierbij stelt men meteen de vraag naar het design van de studie, alsook hoeveel subjecten werden aangezocht voor meetwaarden en hoeveel daar uiteindelijk echt van in de database zijn terecht gekomen (m.a.w. of gegevens die men gepland had te verzamelen, om een of andere reden toch niet bekomen werden). Bovendien laat dit toe om te evalueren of verschillende subjecten in de studie al dan niet meer verwant zijn dan andere subjecten en of de analyse hier rekening mee moet houden.</li>
+<li>Is er een specifieke numerieke code die een ontbrekend gegeven of ander type uitzondering voorstelt in plaats van een echte meetwaarde?</li>
+</ol>
+<p>Als het vertrekpunt duidelijk is en alle variabelen goed beschreven zijn, kan men starten met een betekenisvolle exploratie van de gerealiseerde observaties.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-pop2Samp2PopDataExpl" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pop2Samp2PopDataExpl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-pop2Samp2PopDataExpl-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pop2Samp2PopDataExpl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.1: Verschillende stappen in een studie. In dit hoofdstuk ligt de focus op de data-exploratie en beschrijvende statistiek
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Dit hoofdstuk zullen werken rond een centrale dataset: de NHANES studie.</p>
+<div id="exm-nhanesEx" class="theorem example">
+<p><span class="theorem-title"><strong>Voorbeeld 5.1 (NHANES studie)</strong></span> &nbsp;</p>
+</div>
+<p>De National Health and Nutrition Examination Survey (NHANES) wordt sinds 1960 op regelmatige basis afgenomen. In dit voorbeeld maken we gebruik van de gegevens die werden verzameld tussen 2009-2012 bij 10000 Amerikanen en die werden opgenomen in het R-pakket NHANES. Er werd een groot aantal fysieke, demografische, nutritionele, levensstijl en gezondheidskarakteristieken gecollecteerd in deze studie (zie Tabel <a href="#tbl-nhanesDatExpl" class="quarto-xref"><span>5.1</span></a>). Merk op dat ontbrekende waarnemingen hier gecodeerd worden a.d.h.v. de code <code>NA</code> (Not Available / Missing Value)</p>
+<p><strong>Einde voorbeeld</strong></p>
+<div class="cell">
+<div id="tbl-nhanesDatExpl" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nhanesDatExpl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel&nbsp;5.1: Overzicht van een aantal variabelen uit de NHANES studie.
+</figcaption>
+<div aria-describedby="tbl-nhanesDatExpl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">ID</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Gender</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Age</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Race1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Weight</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Height</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">BMI</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">BPSysAve</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">TotChol</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">SmokeNow</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Smoke100</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">51624</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">87.4</td>
+<td style="text-align: right;">164.7</td>
+<td style="text-align: right;">32.22</td>
+<td style="text-align: right;">113</td>
+<td style="text-align: right;">3.49</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">51625</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Other</td>
+<td style="text-align: right;">17.0</td>
+<td style="text-align: right;">105.4</td>
+<td style="text-align: right;">15.30</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">51630</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">86.7</td>
+<td style="text-align: right;">168.4</td>
+<td style="text-align: right;">30.57</td>
+<td style="text-align: right;">112</td>
+<td style="text-align: right;">6.70</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">51638</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">29.8</td>
+<td style="text-align: right;">133.1</td>
+<td style="text-align: right;">16.82</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">4.86</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">51646</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">35.2</td>
+<td style="text-align: right;">130.6</td>
+<td style="text-align: right;">20.64</td>
+<td style="text-align: right;">107</td>
+<td style="text-align: right;">4.09</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">51647</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">75.7</td>
+<td style="text-align: right;">166.7</td>
+<td style="text-align: right;">27.24</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">5.82</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="sec-univar" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-univar"><span class="header-section-number">5.2</span> Univariate beschrijving van de variabelen</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/q-mcuUbNHCg" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>In de regel begint men met een <em>univariate</em> inspectie: elke variabele wordt apart onderzocht. Het is absoluut aan te raden om hierbij eerst alle ruwe gegevens te bekijken door middel van grafieken (zie verder) alvorens naar samenvattingsmaten (zoals het gemiddelde) over te stappen. Dit laat toe om een idee te krijgen hoe de geobserveerde waarden van een veranderlijke verdeeld zijn in de studiegroep (bvb. welke verdeling de bloeddrukmetingen in de studie hebben) en of er eventuele <em>uitschieters</em> (d.i. extreme metingen of <em>outliers</em>) zijn. Met outliers worden observaties aangegeven die ten opzichte van de geobserveerde verdeling van de waarden in de data set, extreem zijn, buitenbeentjes.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#De data van de NHANES studie bevindt zich</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#in het R package NHANES</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES) <span class="co">#laad NHANES package</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#NHANES is een data frame met de gegevens</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#De rijen bevatten informatie over elk subject</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#De kolommen de variabelen die werden geregistreerd</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#vb variabele Gender, BMI, ...</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Een variabele (kolom) kan uit de dataframe</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#worden gehaald door gebruik van het $ teken</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#en de naam van de variabele</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># We slaan de frequentietabel voor variable Gender</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># op in object 'tab'</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">table</span>(NHANES<span class="sc">$</span>Gender)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>tab</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+female   male 
+  5020   4980 </code></pre>
+</div>
+</div>
+<p>We maken nu een barplot voor de variabele gender</p>
+<ol type="1">
+<li>We pipen de NHANES data naar ggplot</li>
+<li>Als aestetics definiëren we x=Gender</li>
+<li>We voegen een laag met een barplot toe via de functie <code>geom_bar</code>. We definiëren de kleur via het argument <code>fill</code></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Gender)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">"steelblue"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Er zijn weinig methoden voorhanden om <em>nominale</em> variabelen te beschrijven. In Voorbeeld <a href="#exm-nhanesEx" class="quarto-xref"><span>5.1</span></a> is de variable <em>Gender</em> kwalitatief nominaal. Alles is gezegd over de verdeling van het geslacht als we weergeven hoeveel vrouwen en mannen zijn opgenomen in de studie.</p>
+<p>We stellen vast dat 5020 van de 10000 subjecten, ofwel 50.2% vrouwen in de studie zijn opgenomen.</p>
+<p>Een staafdiagram geeft op de X-as de mogelijke uitkomsten van de variabele aan (bvb. geslacht). Daarbovenop komt een staaf met hoogte evenredig aan het totaal aantal keer dat die waarde voorkomt in de dataset. De staven staan los van elkaar met een breedte die constant is, maar verder willekeurig. Als de steekproef representatief is voor de populatie, dan krijgen we hier misschien een eerste impressie dat er iets meer vrouwen zijn in de populatie.</p>
+<p>Voor <em>numerieke continue variabelen</em> wordt het moeilijk om de frequentie van alle uitkomstwaarden in een tabel te klasseren omdat veel waarden hoogstens 1 keer voorkomen. Het <em>tak-en-blad diagram</em> (in het Engels: <em>stem and leaf plot</em> is een middel om toch nog alle uitkomsten weer te geven. Een voorbeeld is weergegeven in onderstaande R-output voor het BMI in de NHANES studie.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(NHANES<span class="sc">$</span>BMI)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  The decimal point is 1 digit(s) to the right of the |
+
+  1 | 33333333333333333344444444444444444444444444444444444444444444444444+37
+  1 | 55555555555555555555555555555555555555555555555555555555555555555555+1389
+  2 | 00000000000000000000000000000000000000000000000000000000000000000000+2264
+  2 | 55555555555555555555555555555555555555555555555555555555555555555555+2610
+  3 | 00000000000000000000000000000000000000000000000000000000000000000000+1693
+  3 | 55555555555555555555555555555555555555555555555555555555555555555555+635
+  4 | 00000000000000000000000000000000000000000000000000000000000000000000+255
+  4 | 55555555555555555555555556666666666666666666666666666666666777777777+46
+  5 | 0000011111122222233333444444444444
+  5 | 5556677777789999
+  6 | 133444
+  6 | 567899
+  7 | 
+  7 | 
+  8 | 111</code></pre>
+</div>
+</div>
+<p>Hier wordt van alle uitkomsten het eerste cijfer of de eerste paar cijfers op een verticale lijn in volgorde uitgezet in de vorm van een boomstam. Daaraan worden horizontaal de bladeren gehecht, met name de laatste cijfers van de geobserveerde uitkomsten. De output geeft bijvoorbeeld aan dat er 3 personen zijn waarvan het afgeronde BMI 55 bedraagt, 2 personen met een afgerond BMI van 56, …. Gezien de studie zo groot is, is het tak-en-blad diagram niet erg praktisch voor dit voorbeeld.</p>
+<p>In een tak-en-blad diagram krijgt men alle individuele uitkomsten nagenoeg exact te zien, terwijl de vorm die het diagram aanneemt reeds een idee van de verdeling geeft zoals in een histogram (zie verder). Een vuistregel om de vorm van de verdeling het best te zien is het aantal takken ongeveer gelijk te maken aan <span class="math inline">\(1 + \sqrt{n}\)</span>, waarbij <span class="math inline">\(n\)</span> het aantal observaties voorstelt. Dit aantal kan uiteraard aangepast worden aan de omstandigheden. Een populair alternatief voor het tak en blad diagram is de <em>eenvoudige frequentietabel</em>. Deze kan men bekomen door de continue variabele (bvb. BMI) om te zetten in een kwalitatieve ordinale variabele, waarvoor vervolgens een frequentietabel wordt weergegeven.</p>
+<p>Het grafisch equivalent van dergelijke frequentietabel noemt een <em>histogram</em>, hetgeen men in <code>ggplot</code> bekomt via</p>
+<ol type="1">
+<li>Pipe de data van de NHANES study naar de <code>ggplot</code> functie</li>
+<li>Selecteer de variable BMI als de data om in de x-coordinaat te visualiseren voor het aestetics argument van ggplot gebruik hiervoor de <code>aes</code> functie</li>
+<li>Voeg een laag toe voor het histogram. Wanneer je geen aestetics <code>aes</code> meegeeft verkrijg je standaard absolute frequenties. Met <code>fill=..counts..</code> in de aestetics kan je de balken van het histogram inkleuren a.d.h.v. de absolute frequenties.</li>
+<li>Indien je het wenst kan je op een histogram met densities ook nog een laag toevoegen met een niet parametrische densiteitsschatter voor de verdeling d.m.v. de <code>geom_density</code> functie.</li>
+</ol>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BMI)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),<span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-histo" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-histo-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.2: Histogram van het BMI in de NHANES studie.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Wanneer alle klassen een zelfde breedte hebben, worden de absolute of relatieve frequenties per klasse weergegeven door de hoogte van de bijhorende kolom. Bij ongelijke klassebreedtes is het de oppervlakte van de kolom die met de bijhorende klassefrequentie correspondeert. Omdat een histogram met ongelijke klassebreedtes moeilijker te interpreteren is, zijn histogrammen met gelijke klassebreedtes vaak te verkiezen. Als histogrammen voor verschillende groepen bekeken worden, vergemakkelijkt het gebruik van <em>relatieve</em> frequenties i.p.v. absolute frequenties de visuele vergelijkbaarheid.</p>
+<p>Op het histogram in Figuur <a href="#fig-histo" class="quarto-xref"><span>5.2</span></a> worden densiteiten weergegeven en klassen met een breedte iets meer dan 5 eenheden.</p>
+<p>De keuze van het aantal klassen is van belang bij een histogram. Als er te weinig klassen zijn, dan gaat veel informatie verloren. Als er teveel zijn, dan wordt het algemene patroon verdoezeld door een grote hoeveelheid overbodige details. Gewoonlijk kiest men tussen 5 en 15 intervallen, maar de specifieke keuze hangt af van het beeld van het histogram dat men te zien krijgt.</p>
+<p>Een histogram is vooral geschikt om de distributie te schatten in grote datasets. Daar kan men dan veel intervallen gebruiken. Daarom heeft de ggplot functie standaard 30 intervallen.</p>
+<p>Indien een voldoende aantal gegevens beschikbaar is, dan kan men een gladdere indruk van de verdeling van de gegevens bekomen door een zogenaamde <em>kernel density schatter</em> te bepalen. Zo’n schatter is een positieve functie die genormaliseerd is in die zin dat de oppervlakte onder de functie 1 is. Ze kan zo geïnterpreteerd worden dat de oppervlakte onder de functie tussen 2 punten <span class="math inline">\(a\)</span> en <span class="math inline">\(b\)</span> op de X-as, de kans voorstelt dat een lukrake meting in het interval <span class="math inline">\([a,b]\)</span> gevonden wordt. Figuur <a href="#fig-histo" class="quarto-xref"><span>5.2</span></a> toont een histogram met kernel density schatter van de het BMI.</p>
+<p>De verdeling kan ook geëvalueerd worden aan de hand van een <em>box-and-whisker-plot</em>, kortweg <em>boxplot</em> genoemd. Deze is meer compact dan een histogram en laat om die reden gemakkelijker vergelijkingen tussen verschillende groepen toe (zie verder). Een Boxplot voor het BMI wordt getoond in Figuur <a href="#fig-boxBMI" class="quarto-xref"><span>5.3</span></a>. De boxplot toont een doos lopend van het 25% tot 75% percentiel met een lijntje ter hoogte van de mediaan (het 50% percentiel) en verder 2 snorharen. Die laatste kunnen in principe lopen tot het minimum en maximum, of tot het 2.5% en 97.5 % of 5% en 95% percentiel. R kiest voor de kleinste en de grootste geobserveerde waarde die geen outlier of extreme waarde zijn. Een meting wordt hierbij een outlier genoemd wanneer ze meer dan 1.5 keer de boxlengte beneden het eerste of boven het derde kwartiel ligt. Een meting wordt een extreme waarde genoemd wanneer ze meer dan 3 keer de boxlengte beneden het eerste of boven het derde kwartiel ligt.</p>
+<div id="def-percentiel" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.1 (percentiel)</strong></span> &nbsp;</p>
+</div>
+<p>Het <em>25% percentiel</em> of <em>25% kwantiel</em> <span class="math inline">\(x_{25}\)</span> van een reeks waarnemingen wordt gedefinieerd als een uitkomstwaarde <span class="math inline">\(x_{25}\)</span> zodat minstens <span class="math inline">\(25\%\)</span> van die waarnemingen kleiner of gelijk zijn aan <span class="math inline">\(x_{25}\)</span> en minstens <span class="math inline">\(75\%\)</span> van die waarnemingen groter of gelijk zijn aan <span class="math inline">\(x_{25}\)</span>. Het <em>75% percentiel</em> of <em>75% kwantiel</em> van een reeks waarnemingen definieert men als een uitkomstwaarde <span class="math inline">\(x_{75}\)</span> zodat minstens 75% kleiner of gelijk zijn aan <span class="math inline">\(x_{75}\)</span> en minstens <span class="math inline">\(25\%\)</span> van die waarnemingen groter of gelijk zijn aan <span class="math inline">\(x_{75}\)</span>. Algemeen wordt het <em><span class="math inline">\(k\%\)</span> percentiel</em> van een reeks waarnemingen gedefinieerd als een waarde (van <span class="math inline">\(x\)</span>) waarvoor de cumulatieve frequentie gelijk is aan <span class="math inline">\(k/100.\)</span> Als er meerdere observaties aan voldoen neemt men vaak het gemiddelde van die waarden.</p>
+<p><strong>Einde definitie</strong></p>
+<p>In R kunnen die als volgt worden bekomen</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(NHANES<span class="sc">$</span>BMI,<span class="fu">c</span>(<span class="fl">0.25</span>,.<span class="dv">5</span>,.<span class="dv">75</span>),<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  25%   50%   75% 
+21.58 25.98 30.89 </code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-boxBMI" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxBMI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-boxBMI-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxBMI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.3: Boxplot van BMI in de NHANES studie.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In ggplot maak je de boxplot als volgt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="st">""</span>,<span class="at">y=</span>BMI)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Bij de inspectie van een dataset speelt het detecteren van outliers in het algemeen een belangrijke rol. Ze kunnen wijzen op fouten, zoals tikfouten of andere fouten die gecheckt en gecorrigeerd moeten worden. Als het geen foutief genoteerde waarden zijn, dan kan het soms wijzen op een subject dat niet echt in de studiepopulatie thuis hoort. Als het in alle opzichten om een bona fide waarde gaat, dan nog is het belangrijk om outliers te detecteren: ze kunnen zeer invloedrijk zijn op de schatting van statistische parameters (zie Sectie <a href="#sec-summarize" class="quarto-xref"><span>5.3</span></a>). Als de conclusies van een studie anders liggen met of zonder inclusie van de outlier, dan is dit een ongewenst fenomeen. Men wil immers nooit dat 1 observatie beslissend is voor de conclusies. Dit soort onzekerheid ondermijnt de geloofwaardigheid van de onderzoeksresultaten en vraagt om verdere studie. Binnen de statistiek bestaat een grote waaier aan technieken, zogenaamde <em>robuuste statistische technieken</em>, die erop gericht zijn om de invloed van outliers te minimaliseren. In deze cursus gaan we hier slechts in zeer beperkte mate op in (zie Sectie <a href="#sec-summarize" class="quarto-xref"><span>5.3</span></a>, mediaan).</p>
+</section>
+<section id="sec-summarize" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-summarize"><span class="header-section-number">5.3</span> Samenvattingsmaten voor continue variabelen</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nY3ONJlySUk" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Een histogram levert reeds een sterke samenvatting van de geobserveerde, continue gegevens, maar in wetenschappelijke rapporten is er zelden plaats om per geobserveerde variabele dergelijke grafiek voor te stellen. Om die reden is vaak een veel drastischere samenvattingsmaat noodzakelijk. In deze sectie geven we aan hoe de centrale locatie van de gegevens kan beschreven worden, alsook de spreiding van die gegevens rond hun centrale locatie.</p>
+<section id="maten-voor-de-centrale-ligging" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="maten-voor-de-centrale-ligging"><span class="header-section-number">5.3.1</span> Maten voor de centrale ligging</h3>
+<div id="def-rekenkundig-gemiddelde" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.2 (rekenkundig gemiddelde)</strong></span> &nbsp;</p>
+</div>
+<p>Het <strong>(rekenkundig) gemiddelde</strong> <span class="math inline">\(\overline{x}\)</span> (spreek uit: <em>x-streep</em> of <em>x-bar</em>) van een reeks waarnemingen <span class="math inline">\(x_i, i=1, 2, \dots, n\)</span> is per definitie de som van de observaties gedeeld door hun aantal <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[\overline{x}= \frac{x_1 + x_2 + \dots + x_n}{n} =\sum_{i=1}^n x_i \frac{1}{n} \]</span></p>
+<p><strong>Einde definitie</strong></p>
+<p>Merk op dat het rekenkundig gemiddelde ook verkregen zou worden als gemiddelde voor een discrete distributie met kansen van 1/n op elke waarde uit de steekproef. Wanneer we het steekproefgemiddelde gebruiken dan schatten we de distributie in de populatie als het ware aan de hand van de empirische distributie van de data. We maken dus geen distributionele veronderstellingen hiervoor.</p>
+<p>Een groot voordeel van het gemiddelde als een maat voor de centrale locatie van de observaties is dat het alle data-waarden efficiënt gebruikt vanuit statistisch perspectief. Dit wil zeggen dat ze (onder bepaalde statistische modellen) het maximum aan informatie uit de gegevens haalt en om die reden relatief gezien zeer stabiel blijft wanneer ze herberekend wordt op basis van een nieuwe, even grote steekproef die onder identieke omstandigheden werd bekomen. Bovendien beschrijft het gemiddelde ook verschillende belangrijke modellen voor de verdeling van de gegevens, zoals de Normale verdeling (zie Sectie <a href="#sec-normal" class="quarto-xref"><span>5.4</span></a>). Een groot nadeel van het gemiddelde is dat het zeer gevoelig is aan de aanwezigheid van outliers in de dataset. Om die reden is het vooral een interessante maat van locatie wanneer de verdeling van de observaties (zoals weergegeven door bijvoorbeeld een histogram) min of meer symmetrisch is.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(NHANES<span class="sc">$</span>BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 26.66014</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#opnieuw is de na.rm statement hier nodig</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#omdat ontbrekende waarden voorkomen.</span></span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><em>Indien men de grootste observatie (81.25) vervangt door 8125 om als het ware een tikfout voor te stellen, dan wijzigt het rekenkundig gemiddelde naar 27.5 en dat terwijl er bijna 10000 BMI metingen zijn. Merk op dat het gemiddelde vrij sterk beïnvloed kan worden door één outlier.</em></p>
+<p><strong>Eigenschap</strong></p>
+<p>Als alle uitkomsten <span class="math inline">\(x_i\)</span> met een willekeurige constante <span class="math inline">\(a\)</span> worden vermenigvuldigd, dan ook het gemiddelde van die reeks uitkomsten. Als bij alle uitkomsten een constante <span class="math inline">\(a\)</span> wordt opgeteld, dan ook bij het gemiddelde van die reeks uitkomsten. Formeel betekent dit:</p>
+<p><span class="math display">\[\begin{eqnarray*}
+\overline{ax} &amp;= &amp;a \overline{x} \\
+\overline{a + x} &amp;= &amp;a + \overline{x}
+\end{eqnarray*}\]</span></p>
+<p>Voor 2 reeksen getallen <span class="math inline">\(x_i\)</span> en <span class="math inline">\(y_i\)</span>, <span class="math inline">\(i=1,...,n\)</span>, geldt dat het gemiddelde van de som van de observaties gelijk is aan de som van hun gemiddelden:</p>
+<p><span class="math display">\[\begin{equation*}
+\overline{x + y} = \overline{x} + \overline{y}.
+\end{equation*}\]</span></p>
+<p>Als de gegevens <span class="math inline">\(x_i\)</span> enkel de waarden 0 of 1 aannemen, dan is <span class="math inline">\(\overline{x}\)</span> de proportie subjecten voor wie de waarde 1 werd geobserveerd. Immers, zij <span class="math inline">\(n_1\)</span> het aantal subjecten binnen de groep van <span class="math inline">\(n\)</span> subjecten waarvoor de waarde 1 werd geobserveerd, dan is</p>
+<p><span class="math display">\[\begin{equation*}
+\overline{x}= \sum_{i=1}^n \frac{x_i}{n} = \frac{n_1}{n}.
+\end{equation*}\]</span></p>
+<p>Bijvoorbeeld, als we de variabele <strong>Gender</strong> zó coderen dat mannen een waarde 0 aannemen en vrouwen een waarde 1, dan is het gemiddelde van de variabele <strong>Gender</strong> gelijk aan 50.2%, hetgeen de proportie is van het aantal vrouwen in de studie. Een percentage kan dus steeds opgevat worden als het gemiddelde van een geschikte variabele.</p>
+<p><strong>Einde eigenschap</strong></p>
+<p>Een centrale maat die robuuster reageert dan het gemiddelde, d.w.z. minder of niet gevoelig is aan outliers, is de <em>mediaan</em> of het <em>50% percentiel</em>.</p>
+<div id="def-mediaan" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.3 (mediaan)</strong></span> &nbsp;</p>
+</div>
+<p>De <strong>mediaan</strong>, het <strong>50% percentiel</strong> of het <strong>50% kwantiel</strong> <span class="math inline">\(x_{50}\)</span> van een reeks waarnemingen <span class="math inline">\(x_i, i=1, 2, \dots, n\)</span> is per definitie een uitkomstwaarde <span class="math inline">\(x_{50}\)</span> zodat minstens <span class="math inline">\(50\%\)</span> van die waarnemingen groter of gelijk zijn aan <span class="math inline">\(x_{50}\)</span> en minstens <span class="math inline">\(50\%\)</span> van die waarnemingen kleiner of gelijk zijn aan <span class="math inline">\(x_{50}\)</span>.</p>
+<p><strong>Einde definitie</strong></p>
+<p>Om de mediaan te schatten, rangschikt men eerst de gegevens volgens grootte. Als het aantal observaties <span class="math inline">\(n\)</span> oneven is, dan is een schatting voor de mediaan de middelste waarneming. Indien <span class="math inline">\(n\)</span> even is, dan zijn er 2 middelste waarnemingen en schat men de mediaan (meestal) als hun gemiddelde. Een voordeel van de mediaan is dat ze niet gevoelig is aan outliers. In het bijzonder kan ze vaak nuttig aangewend worden wanneer sommige gegevens <em>gecensureerd</em> zijn. Dit wil zeggen dat men voor een aantal gegevens enkel weet dat ze boven of onder een bepaalde drempelwaarde liggen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(NHANES<span class="sc">$</span>BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25.98</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Merk op dat we hier gebruik maken van het argument na.rm=TRUE</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Dit komt omdat we niet beschikken over het BMI</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#voor elke persoon: ontbrekende waarnemingen</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Die worden in R als een NA voorgesteld</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Als we het argument na.rm=TRUE gebruiken wordt</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#de mediaan berekend op basis van de beschikbare observaties</span></span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Indien men de grootste observatie (81.25) vervangt door 8125, dan wijzigt de mediaan niet. Merk ook op dat de mediaan lager is dan het gemiddelde, hij is minder gevoelig voor de outliers in de dataset.</p>
+<div id="def-modus" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.4 (modus)</strong></span> &nbsp;</p>
+</div>
+<p>De <strong>modus</strong> van een reeks observaties is de waarde die het meest frequent is, of wanneer de gegevens gegroepeerd worden, de klasse met de hoogste frequentie.</p>
+<p><strong>Einde definitie</strong></p>
+<p>De modus wordt niet vaak gebruikt in statistische analyse omdat haar waarde sterk afhangt van de nauwkeurigheid waarmee de gegevens werden gemeten. Zo is de modus van de reeks observaties <span class="math inline">\(1, 1, 1, 1.5, 1.75, 1.9, 2, 2.1, 2.4\)</span> gelijk aan 1, maar wordt ze 2 wanneer alle observaties afgerond worden tot gehele getallen. Bovendien is de modus niet eenvoudig te schatten voor continue data waar de frequentie van elke geobserveerde waarde meestal 1 is. De modus is daarom het meest zinvol voor kwalitatieve en discrete numerieke gegevens, waar ze de meest frequente klasse aanduidt.</p>
+<p>Als de observaties uit een <em>symmetrische verdeling</em> afkomstig zijn, vallen de mediaan en het gemiddelde nagenoeg samen (als de geobserveerde verdeling perfect symmetrisch is, vallen ze theoretisch exact samen). De beste schatter voor het centrum van de verdeling op basis van de beschikbare steekproef is dan het gemiddelde eerder dan de mediaan van die observaties. Inderdaad, als men telkens opnieuw een lukrake steekproef neemt uit de gegeven studiepopulatie en voor elke steekproef het gemiddelde en de mediaan berekent, dan zal het gemiddelde minder variëren van steekproef tot steekproef dan de mediaan. Ze is bijgevolg stabieler en wordt daarom een <em>meer precieze schatter</em> genoemd. Intuïtief kan men begrijpen dat het gemiddelde meer informatie uit de gegevens gebruikt: niet alleen of iets groter of kleiner is dan <span class="math inline">\(x_{50}\)</span> maar ook hoeveel groter of kleiner de exacte waarde van elke observatie is, wordt in de berekening betrokken.</p>
+<div id="def-scheve-verdeling" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.5 (scheve verdeling)</strong></span> &nbsp;</p>
+</div>
+<p>Een niet-symmetrische verdeling wordt <strong>scheef</strong> genoemd. Als de waarden rechts van de mediaan verder uitlopen dan links, dan is de verdeling <em>scheef naar rechts</em> (in het Engels: <em>positively skew</em>) en is het gemiddelde (meestal) groter dan de mediaan. Als de waarden links van de mediaan verder uitlopen dan rechts, dan is de verdeling <em>scheef naar links</em> (in het Engels: <em>negatively skew</em>) en is het gemiddelde (meestal) kleiner dan de mediaan.</p>
+<p><strong>Einde definitie</strong></p>
+<p>Voor een niet-symmetrische verdeling is de mediaan veelal een beter interpreteerbare maat dan het gemiddelde omdat ze minder beïnvloed is door de staarten van de verdeling en daarom beter het centrum van de verdeling aanduidt. Maar in sommige gevallen, zoals bijvoorbeeld voor `de gemiddelde opbrengst per week’, blijft het gemiddelde zinvol omdat het meteen verwijst naar de totale opbrengst over alle weken (gelijk aan <span class="math inline">\(n\)</span> keer het gemiddelde als <span class="math inline">\(n\)</span> weken werden geobserveerd). Ook voor kwalitatieve variabelen kan een gemiddelde zinvol zijn. Voor binaire nominale variabelen die als 1 of 0 gecodeerd zijn, geeft het gemiddelde immers het percentage observaties gelijk aan 1 weer. Voor ordinale variabelen die bijvoorbeeld gecodeerd zijn als <span class="math inline">\(1, 2, 3, ...\)</span> levert het gemiddelde soms nuttigere informatie dan de mediaan. Niettemin berust het dan op de impliciete onderstelling dat een wijziging van score van 1 naar 2 even belangrijk is als een wijziging van 2 naar 3.</p>
+<p>Om scheve verdelingen in een paar woorden te beschrijven is het vaak nuttig om</p>
+<ul>
+<li>ofwel de gegevens te beschrijven in termen van percentielen,</li>
+<li>ofwel de gegevens te transformeren naar een andere schaal (bvb. door logaritmen te nemen), zodat ze op de nieuwe schaal bij benadering symmetrisch verdeeld zijn.</li>
+</ul>
+<p>Wanneer het gemiddelde groter is dan de mediaan en alle metingen positief zijn (vb concentraties, BMI), dan is een logaritmische transformatie van de gegevens vaak nuttig om de scheefheid weg te nemen. In dit geval is vooral het <em>geometrisch gemiddelde</em> interessant.</p>
+<!---break-->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lkKz_PAXab8" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<div id="def-geometrisch-gemiddelde" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.6 (geometrisch gemiddelde)</strong></span> &nbsp;</p>
+</div>
+<p>Het <strong>geometrische gemiddelde</strong> van een reeks waarnemingen <span class="math inline">\(x_i, i=1,
+2, \dots, n\)</span> ontstaat door er de natuurlijke logaritme van te berekenen, het gemiddelde hiervan te nemen en dit vervolgens terug te transformeren naar de originele schaal door er de exponentiële functie van te nemen:</p>
+<p><span class="math display">\[\begin{equation*}
+\sqrt[n]{\prod\limits_{i=1}^n x_i} = \exp\left\{\frac{1}{n} \sum_{i=1}^n \log(x_i)\right\}
+\end{equation*}\]</span></p>
+<p><strong>Einde definitie</strong></p>
+<ul>
+<li><p>Geometrisch gemiddelde ligt dichter bij de mediaan dan het gemiddelde</p></li>
+<li><p>log-transformatie verwijdert scheefheid</p></li>
+<li><p>Is vaak een meer geschikte maat voor centrale locatie dan de mediaan:</p></li>
+</ul>
+<ol type="1">
+<li>Gebruikt alle observatie: is meer precies</li>
+<li>Is het rekenkundig gemiddelde van log-transformeerde data <span class="math inline">\(\rightarrow\)</span> klassieke statistische methoden kunnen direct worden gebruikt, b.v. hypothese testen en betrouwbaarheidsintervallen (zie hoofdstuk 5)</li>
+<li>Veel biologische en chemische variabelen zoals concentraties, intensiteiten, etc kunnen niet negatief zijn.</li>
+<li>Verschillen op log schaal hebben de betekenis van een <code>log fold change</code>:</li>
+</ol>
+<p><span class="math display">\[
+\log (B) - \log(A)= \log(\frac{B}{A})=\log(FC_\text{B vs A})
+\]</span></p>
+<ul>
+<li><p>In Genomics wordt de <span class="math inline">\(\log_2\)</span> transformatie veel gebruikt.</p></li>
+<li><p>Een verschil van 1 op <span class="math inline">\(\log_2\)</span> schaal betekent een verdubbeling op de originele schaal <span class="math inline">\(FC=2\)</span>.</p></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>logSummary <span class="ot">&lt;-</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">logMean =</span> <span class="fu">mean</span>(BMI <span class="sc">|&gt;</span> <span class="fu">log2</span>(),<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(BMI <span class="sc">|&gt;</span> <span class="fu">log2</span>(),<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="fu">median</span>(BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">geoMean=</span><span class="dv">2</span><span class="sc">^</span>logMean)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BMI <span class="sc">|&gt;</span> <span class="fu">log2</span>())) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun=</span>dnorm,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"red"</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">args=</span><span class="fu">list</span>(</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean=</span>logSummary<span class="sc">$</span>logMean,</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">sd=</span>logSummary<span class="sc">$</span>sd)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>logSummary</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  logMean    sd  mean median geoMean
+    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1    4.68 0.408  26.8   25.6    25.7</code></pre>
+</div>
+<div class="cell-output-display">
+<div id="fig-histLogBMI" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-histLogBMI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-histLogBMI-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histLogBMI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.4: Boxplot van BMI en log(BMI) in de NHANES studie.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In situaties waar de log-transformatie inderdaad de scheefheid wegneemt, zal het geometrisch gemiddelde dichter bij de mediaan liggen dan het gemiddelde. Wanneer de verdeling scheef is, is ze soms zelfs een nuttigere maat voor centrale locatie dan de mediaan:</p>
+<ol type="1">
+<li><p>omdat ze ook gebruik maakt van de exacte waarden van de observaties en daarom doorgaans preciezer is dan de mediaan;</p></li>
+<li><p>omdat ze, op een transformatie na, berekend wordt als een rekenkundig gemiddelde (weliswaar van de logaritmisch getransformeerde observaties) en algemene statistische technieken voor een gemiddelde (zoals betrouwbaarheidsintervallen (zie volgende hoofdstukken) en toetsen van hypothesen (zie volgende hoofdstukken) daardoor vrijwel rechtstreeks toepasbaar zijn voor geometrische gemiddelden.</p></li>
+</ol>
+<div id="exm-bmi" class="theorem example">
+<p><span class="theorem-title"><strong>Voorbeeld 5.2 (BMI)</strong></span> &nbsp;</p>
+</div>
+<p>Het gemiddelde en mediane BMI bedraagt 26.66 en 25.98 , respectievelijk. Het gemiddelde is hier groter dan de mediaan omdat de BMI scheef verdeeld is naar rechts (zie Figuur <a href="#fig-histLogBMI" class="quarto-xref"><span>5.4</span></a>). De verdeling wordt meer symmetrisch na log-transformatie. Het gemiddelde en mediane log-BMI liggen ook dichter bij elkaar en bedragen respectievelijk 3.25 en 3.26. De geometrische gemiddelde BMI-concentratie bekomen we door de exponentiële functie te evalueren in 3.25, hetgeen ons 25.69 oplevert. Merk op dat dit inderdaad beter met de mediaan overeenstemt dan het rekenkundig gemiddelde.</p>
+<p><strong>Einde voorbeeld</strong></p>
+<p>Tot slot, vooraleer een eenvoudige maat voor de centrale ligging (en spreiding) te construeren of interpreteren, is het goed om altijd eerst de volledige verdeling te bekijken! Immers, stel dat men het gemiddelde of mediaan berekent van gegevens uit een bimodale verdeling (d.i. een verdeling met 2 modi, voor bvb. zieken en niet-zieke dieren). Dan kan het gemiddelde of mediaan makkelijk een zeer zeldzame waarde aannemen die geenszins in de buurt van 1 van beide maxima ligt.</p>
+<!---break-->
+</section>
+<section id="sec-spreiding" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="sec-spreiding"><span class="header-section-number">5.3.2</span> Spreidingsmaten</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0v8-4cRiDFg" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Nadat de centrale ligging van de gegevens werd bepaald, is men in tweede instantie geïnteresseerd in de spreiding van de gegevens rond die centrale waarde. Er zijn verschillende redenen waarom daar interesse in bestaat:</p>
+<ol type="1">
+<li>Om risico’s te berekenen (zie Sectie <a href="#sec-normal" class="quarto-xref"><span>5.4</span></a>) volstaat het niet om de centrale locatie van de gegevens te kennen, maar moet men bovendien weten hoeveel de gegevens rond die waarde variëren. Inderdaad, stel dat men wenst te weten welk percentage van de subjecten een BMI heeft van boven de 35. Wetende dat een geometrisch gemiddelde van 25.69 wordt geobserveerd, zal dat percentage relatief hoog zijn wanneer de metingen zeer gespreid zijn en relatief laag anders.</li>
+<li>Veldbiologen zijn vaak geïnteresseerd in de mate waarin dieren of planten verspreid zijn over een zeker studiegebied. Op die manier kunnen ze immers leren over de relaties tussen individuen onderling en met hun omgeving. Daartoe zal men in de praktijk op verschillende plaatsen in het studiegebied tellingen maken van het aantal individuen op die plaats. Men kan aantonen dat, onder bepaalde veronderstellingen, individuen lukraak verspreid zijn over het studiegebied wanneer de spreiding op die tellingen, zoals gemeten door de variantie (zie verder), van dezelfde grootte-orde is als de gemiddelde telling. Indien de spreiding groter is, dan hebben individuen de neiging om zich te groeperen. Andersom, indien de spreiding op die tellingen lager is dan de gemiddelde telling, dan zijn de individuen zeer uniform verdeeld over het studiegebied.</li>
+<li>Stel dat men een zekere uitkomst (bvb. het aantal species ongewervelde dieren in een stuk bodemkorst) wenst te vergelijken tussen 2 groepen (bvb. gebieden met en zonder bosbrand), dan zal men een duidelijk beeld van het groepseffect krijgen wanneer de uitkomst weinig gespreid is, maar een veel minder duidelijk beeld wanneer de gegevens meer chaotisch (en dus meer gespreid) zijn. Om uit te maken of een interventie-effect toevallig of systematisch is, moet men daarom een idee hebben van de spreiding op de gegevens.</li>
+</ol>
+<p>Dat uitkomsten variëren tussen individuen en binnen individuen omwille van allerlei redenen ligt aan de basis van de statistische analyse van veel fenomenen. Het goed beschrijven van variatie naast de centrale locatie van de gegevens is daarom belangrijk! Hierbij zal men typisch een onderscheid maken tussen variatie die men kan verklaren (door middel van karakteristieken, zoals bijvoorbeeld de leeftijd, van de bestudeerde individuen) en onverklaarde variatie. We gaan dieper in op dit onderscheid in Hoofdstuk <a href="06-LineareRegressie.html" class="quarto-xref"><span>7</span></a> rond lineaire regressie.</p>
+<p>Variatie betekent dat niet alle observaties <span class="math inline">\(x_i\)</span> gelijk zijn aan het gemiddelde <span class="math inline">\(\overline{x}\)</span>. De afwijking <span class="math inline">\(x_i - \bar{x}\)</span> is om die reden interessant. Het gemiddelde van die afwijkingen is echter altijd 0 (verifieer!) omdat positieve en negatieve afwijkingen mekaar opheffen. Bijgevolg levert de gemiddelde afwijking geen goede maat op voor de variatie en is het beter om bijvoorbeeld naar kwadratische afwijkingen <span class="math inline">\((x_i - \bar{x})^2\)</span> te kijken. Het gemiddelde van die <em>kwadratische afwijkingen rond het gemiddelde</em>, het gemiddelde dus van <span class="math inline">\((x_i - \bar{x})^2\)</span>, levert daarom wel een goede maat op. Merk op dat we bij het berekenen van het gemiddelde niet delen door het aantal observaties <span class="math inline">\(n\)</span>, maar door <span class="math inline">\(n-1\)</span> waarbij we corrigeren voor het feit dat we voor de berekening van de steekproef variantie 1 vrijheidsgraad hebben gespendeerd aan het schatten van het gemiddelde.</p>
+<div id="def-variantie" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.7 (variantie)</strong></span> &nbsp;</p>
+</div>
+<p>De <strong>variantie</strong> een reeks waarnemingen <span class="math inline">\(x_i, i=1, 2, \dots, n\)</span> is per definitie</p>
+<p><span class="math display">\[\begin{equation*}
+s^2_x = \sum_{i=1}^{n} \frac{(x_i - \bar{x})^2}{n-1}
+\end{equation*}\]</span></p>
+<p>Als duidelijk is om welke waarnemingen het gaat, wordt dit ook met <span class="math inline">\(s^2\)</span> genoteerd.</p>
+<p><strong>Einde definitie</strong></p>
+<p>Indien alle observaties gelijk waren en er dus geen variatie was, dan zou hun variantie 0 bedragen. Hoe meer de gegevens uitgesmeerd zijn rond hun gemiddelde, hoe groter <span class="math inline">\(s^2\)</span>. Helaas is de waarde van de variantie zelf niet gemakkelijk te interpreteren. Dit is deels omdat door het kwadrateren de variantie niet langer de dimensie van de oorspronkelijke waarnemingen heeft. Handiger om mee te werken is daarom de <em>standaarddeviatie</em> of <em> standaardafwijking</em>:</p>
+<p><span class="math display">\[\begin{equation*}
+s_x= \sqrt{s_x^2} .
+\end{equation*}\]</span></p>
+<p>De standaarddeviatie is gedefinieerd voor elke numerieke variabele, maar is vooral nuttig omdat voor heel wat variabelen (in het bijzonder Normaal verdeelde variabelen - zie Sectie <a href="#sec-normal" class="quarto-xref"><span>5.4</span></a>) bij benadering 68% van de waarnemingen liggen tussen <span class="math inline">\(\bar{x} - s_x\)</span> en <span class="math inline">\(\bar{x} + s_x\)</span>, en 95% van de waarnemingen liggen tussen<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math inline">\(\bar{x} - 2 s_x\)</span> en <span class="math inline">\(\bar{x} + 2 s_x\)</span>. Deze intervallen noemt men respectievelijk 68% en 95% <em>referentie-intervallen</em>. Het is precies deze eigenschap die de standaarddeviatie zo nuttig maakt in de praktijk. De standaarddeviatie van een reeks waarnemingen wordt vaak afgekort als SD in de wetenschappelijke literatuur.</p>
+<p><strong>Eigenschap</strong></p>
+<p>Als alle uitkomsten <span class="math inline">\(x_i\)</span> met een willekeurige constante <span class="math inline">\(a\)</span> worden vermenigvuldigd, dan wordt hun variantie vermenigvuldigd met <span class="math inline">\(a^2\)</span> en hun standaarddeviatie met <span class="math inline">\(|a|\)</span> (de absolute waarde van <span class="math inline">\(a\)</span>). Als bij alle uitkomsten <span class="math inline">\(a\)</span> wordt opgeteld, wijzigen hun variantie en standaarddeviatie niet.</p>
+<p><strong>Einde eigenschap</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Het gebruik van functie sd() levert de standarddeviatie</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># van de variabele BMI in de NHANES dataset.</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Het na.rm=TRUE argument wordt gebruikt omdat er</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ontbrekende waarnemingen voorkomen.</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(NHANES<span class="sc">$</span>BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.376579</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># levert de variantie van de variabele BMI</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(NHANES<span class="sc">$</span>BMI,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 54.41392</code></pre>
+</div>
+</div>
+<p>Wanneer een variabele niet Normaal verdeeld is (dit is bijvoorbeeld het geval voor het BMI gezien het niet symmetrisch verdeeld is), dan geldt niet langer dat bij benadering 95% van de waarnemingen ligt tussen <span class="math inline">\(\bar{x} - 2 s\)</span> en <span class="math inline">\(\bar{x} + 2 s\)</span>. Een symmetrische maat voor de spreiding van de gegevens, zoals de standaarddeviatie, is dan niet langer interessant. In dat geval zijn de range en interkwantielafstand betere maten.</p>
+<div id="def-bereik-en-interkwartielafstand" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.8 (bereik en interkwartielafstand)</strong></span> &nbsp;</p>
+</div>
+<p>Het <strong>bereik</strong> of de <strong>range</strong> <span class="math inline">\(R_x\)</span> van een reeks waarnemingen <span class="math inline">\(x_i, i=1,2,...,n\)</span>, is per definitie het verschil tussen de grootste en kleinste geobserveerde waarde. De <strong>interkwartielafstand</strong> van een reeks waarnemingen <span class="math inline">\(x_i, i=1,2,...,n\)</span> is per definitie de afstand tussen het derde kwartiel <span class="math inline">\(x_{75}\)</span> en het eerste kwartiel <span class="math inline">\(x_{25}\)</span>. Dat wordt ook grafisch weergegeven op een boxplot (breedte van de box). Hierbinnen liggen circa 50% van de observaties. Circa 95% van de observaties kan men vinden tussen het 2.5% en 97.5% percentiel.</p>
+<p><strong>Einde definitie</strong></p>
+<p>Het bereik is zeer gevoelig voor outliers en is systematisch afhankelijk van het aantal observaties: hoe groter <span class="math inline">\(n,\)</span> hoe groter men <span class="math inline">\(R_x\)</span> verwacht. Om die reden vormt een interkwartielafstand een betere maat voor de spreiding van de gegevens dan de range.</p>
+<p>Tenslotte is het vaak zo dat de gegevens meer gespreid zijn naarmate hun gemiddelde hogere waarden aanneemt. De <em>variatiecoëfficiënt</em>=<span class="math inline">\(VC_x\)</span> standaardiseert daarom de standaarddeviatie door ze uit te drukken als een percentage van het gemiddelde</p>
+<p><span class="math display">\[\begin{equation*}
+VC_x = \frac{s_x}{\bar{x}} 100\%.
+\end{equation*}\]</span></p>
+<p>Omdat ze gestandaardiseerd is, dient ze beter dan de standaarddeviatie zelf om de spreiding op de gegevens te vergelijken tussen populaties met een verschillend gemiddelde. De variatiecoëfficiënt heeft verder de aantrekkelijke eigenschap dat ze geen eenheden heeft en ongevoelig is voor herschaling van de gegevens (d.w.z. wanneer alle gegevens met een constante <span class="math inline">\(a\)</span> worden vermenigvuldigd, dan is <span class="math inline">\(VC_{ax}=VC_x\)</span>).</p>
+</section>
+</section>
+<section id="sec-normal" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-normal"><span class="header-section-number">5.4</span> De Normale benadering van gegevens</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_OLtgfagMTg" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Bij biologische en chemische data is het vaak zo dat het histogram van een continue meting bij verschillende subjecten de karakteristieke vorm heeft van de Normale verdeling. Dat is bijvoorbeeld zo als men een histogram maakt van het logaritme van de totale cholestorol. Rond 1870 opperde de wereldberoemde Belg Adolphe Quetelet (die tevens de eerste student was die een doctoraat behaalde aan de Universiteit Gent) de idee om deze curve als `ideaal histogram’ te gebruiken voor de voorstelling en vergelijking van gegevens. Dit zal handig blijken om meer inzicht te krijgen in de gegevens op basis van een minimum aantal samenvattingsvatten, zoals het gemiddelde en de standaarddeviatie die vaak in wetenschappelijke rapporten vermeld staan.</p>
+<section id="sec-qq" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="sec-qq"><span class="header-section-number">5.4.1</span> QQ-plots</h3>
+<p>Hoewel heel wat metingen in de biologische wetenschappen en scheikunde, zoals concentraties van een bepaalde stof, scheef verdeeld zijn naar rechts, worden ze door het nemen van een logaritme vaak getransformeerd naar gegevens waarvoor het histogram de vorm heeft van een Normale dichtheidsfunctie. Dit is uiteraard niet altijd zo en stappen om te verifiëren of observaties Normaal verdeeld zijn, zijn daarom van groot belang omdat heel wat technieken uit de verdere hoofdstukken er zullen van uit gaan dat de gegevens Normaal verdeeld zijn. Hoewel een vergelijking van het histogram van de gegevens met de vorm van de Normale curve wel inzicht geeft of de gegevens al dan niet Normaal verdeeld zijn, is dit vaak niet makkelijk te zien en wordt de uiteindelijke beslissing nogal makkelijk beïnvloed door de keuze van de klassebreedtes op het histogram. Om die reden zullen we kwantielgrafieken gebruiken die duidelijker toelaten om na te gaan of gegevens Normaal verdeeld zijn.</p>
+<p><em>QQ-plots</em> of <em>kwantielgrafieken</em> (in het Engels: <em>quantile-quantile plots</em>) zijn grafieken die toelaten te verifiëren of een reeks observaties lukrake trekkingen zijn uit een Normale verdeling. Met andere woorden, ze laten toe om na te gaan of een reeks observaties al dan niet de onderstelling tegenspreken dat ze realisaties zijn van een reeks Normaal verdeelde gegevens. Het principe achter deze grafieken is vrij eenvoudig. Verschillende percentielen die men heeft berekend voor de gegeven reeks observaties worden uitgezet t.o.v. de overeenkomstige percentielen die men verwacht op basis van de Normale curve. Als de onderstelling correct is dat de gegevens Normaal verdeeld zijn, dan komen beide percentielen telkens vrij goed met elkaar overeen en verwacht men bijgevolg een reeks puntjes min of meer op een rechte te zien. Systematische afwijkingen van een rechte wijzen op systematische afwijkingen van Normaliteit. Lukrake afwijkingen van een rechte kunnen het gevolg zijn van toevallige biologische variatie en zijn daarom niet indicatief voor afwijkingen van Normaliteit.</p>
+<p>Om inzicht te krijgen in QQ-plots simuleren we eerst data uit de normale verdeling om te zien hoe deze plots eruit zien als de data normaal verdeeld zijn.</p>
+<ul>
+<li>We simuleren data voor 9 steekproeven met een gemiddeld van 18 en een standaard afwijking van 9.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">18</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>nSamp <span class="ot">&lt;-</span><span class="dv">9</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>normSim <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n<span class="sc">*</span>nSamp,<span class="at">mean=</span>mu,<span class="at">sd=</span>sigma),<span class="at">nrow=</span>n) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We gaan nu de data visualiseren.</p>
+<ul>
+<li>Merk op dat de data niet in het tidy formaat is.</li>
+<li>De data voor elke groep/simulatie staat naast elkaar in de kolommen.</li>
+</ul>
+<ol type="1">
+<li><p>We converteren het in het tidy formaat via de <code>gather</code> functie. Hierbij wordt een eerste kolom gemaakt samp die de kolomnamen van de originele dataset normSim voor elk overeenkomstig gesimuleerd data punt bij zal houden. De inhoud van de kolommen van de originele dataset normSim, de gesimuleerde waarden, worden opgeslagen in de variable met naam data.</p></li>
+<li><p>we maken een ggplot histogram voor de variabele data</p></li>
+<li><p>Aan de hand van de functie <code>facet_wrap</code> kunnen we de data opsplitsen volgens de variabele samp. We krijgen dus een histogram voor elk sample.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>normSim <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(samp,data) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>data)) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..),<span class="at">bins=</span><span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..)) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>samp)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Gezien er vrij weinig data punten zijn en omdat er veel distributies vergeleken moeten worden is het handiger om dit via een boxplot te doen.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>normSim <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(samp,data) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> samp,<span class="at">y =</span> data)) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">"jitter"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Hoewel alle observaties in alle steekproeven uit dezelfde populatie zijn getrokken zien we toch vrij grote fluctuaties van steekproef tot steekproef in de mediaan, maar zeker ook in de boxgrootte en het bereik van de data in elke steekproef. Dus ondanks het feit dat we over een vrij grote steekproef beschikken (20 observaties) is er toch een grote variabiliteit van steekproef tot steekproef.</p>
+<p>We gaan nu normaliteit na via QQ-plot.</p>
+<ol type="1">
+<li>Zet data om in tidy data</li>
+<li>maak een ggplot object</li>
+<li>Voeg een laag toe met de QQ-plot via de functie <code>geom_qq</code></li>
+<li>Voeg een laag toe met de rechte in de QQ-plot via de functie <code>geom_qq_line</code> om te kunnen evalueren hoe goed de data een normale verdeling volgt.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>normSim <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(samp,data) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>data)) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>samp)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Zelf voor Normal data zien we duidelijk nog afwijkingen door sampling variabiliteit! De plots laten ons toe om ons visueel te trainen om QQ-plots van Normale data te herkennen.</p>
+<p>Om de interpretatie van de QQ-plot goed te kunnen illustreren gaan we een histogram en QQ-plot naast elkaar zetten. D.m.v. het package <code>gridExtra</code> kunnen we meerdere GG-plot objecten in een matrix op dezelfde plot afbeelden.</p>
+<ol type="1">
+<li>We maken een eerste object aan met het histogram. We slaan dit nu op als object p1 in plaats van dit te visualiseren.</li>
+<li>Maak een object p2 met de QQ-plot</li>
+<li>Gebruik de functie <code>grid.arrange</code> om de objecten p1 en p2 af te beelden en we geven aan dat we dit in 2 kolommen zullen doen <code>ncol=2</code>. (je kan ook de dimensie in rijen geven (nrow=1))</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span> <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">"female"</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(BMI)) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>BMI))<span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">xlab</span>(<span class="st">"BMI"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ggtitle</span>(<span class="st">"All females in study"</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..))</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> NHANES <span class="sc">|&gt;</span> <span class="fu">filter</span>(Gender<span class="sc">==</span><span class="st">"female"</span><span class="sc">&amp;!</span><span class="fu">is.na</span>(BMI)) <span class="sc">|&gt;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>BMI)) <span class="sc">+</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The QQ-plot toont dat de kwantielen van de data in de steekproef</p>
+<ul>
+<li><p>groter zijn (boven de lijn liggen) dan wat we verwachten voor Normaal verdeelde data in de linkerstaart: compressie van de linkerstaart t.o.v. de Normale verdeling. De waarden in de linkerstaart liggen dus dichter bij top van de distributie dan wat we verwachten voor normaal verdeelde data.</p></li>
+<li><p>groter zijn (boven de lijn liggen) dan wat we verwachten voor Normaal verdeelde data: lange staart naar rechts. De waarden in de rechterstaart liggen dus verder van de top van de distributie dan wat we verwachten voor normaal verdeelde data.</p></li>
+</ul>
+<p>We zien dus duidelijk dat de data scheef verdeeld zijn naar rechts.</p>
+</section>
+</section>
+<section id="sec-explCatVar" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-explCatVar"><span class="header-section-number">5.5</span> Samenvattingsmaten voor categorische variabelen</h2>
+<p>De samenvattingsmaten uit de vorige sectie (gemiddelde, mediaan, standaarddeviatie, …) kunnen niet zomaar toegepast worden voor de beschrijving van categorische variabelen. In deze sectie gaan we hier dieper op in, daarbij onderscheid makend tussen enerzijds gegevens die uit prospectieve studies of lukrake steekproeven afkomstig zijn, en anderzijds gegevens uit retrospectieve studies.</p>
+<section id="prospectieve-studies-en-lukrake-steekproeven" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="prospectieve-studies-en-lukrake-steekproeven"><span class="header-section-number">5.5.1</span> Prospectieve studies en lukrake steekproeven</h3>
+<div id="exm-houtluizen" class="theorem example">
+<p><span class="theorem-title"><strong>Voorbeeld 5.3 (Houtluizen)</strong></span> &nbsp;</p>
+</div>
+<p>Een bioloog verzamelt ’s nachts bladerafval op een lukrake plaats van 1 m<span class="math inline">\(^2\)</span> in 2 wouden, waarvan 1 met klei- en 1 met kalkgrond. Op elke plaats telt hij het aantal houtluizen van de species Armadilidium of Oniscus, met als doel na te gaan of de ene soort vaker voorkomt op kleigrond dan op kalkgrond<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Tabel <a href="#tbl-cox" class="quarto-xref"><span>5.2</span></a> toont de bekomen gegevens. Hier stelt <span class="math inline">\(a\)</span> (<span class="math inline">\(c\)</span>) het aantal houtluizen van de soort Armadilidium (Oniscus) voor op kleigrond, en <span class="math inline">\(b\)</span> (<span class="math inline">\(d\)</span>) het aantal houtluizen van de soort Armadilidium (Oniscus) op kalkgrond.</p>
+<div class="cell">
+<div id="tbl-cox" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel&nbsp;5.2: Kruistabel van species houtluis versus type grond.
+</figcaption>
+<div aria-describedby="tbl-cox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Armadil.</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Oniscus</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Totaal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Klei</td>
+<td style="text-align: left;">14 (a)</td>
+<td style="text-align: left;">6 (c)</td>
+<td style="text-align: left;">20 (a+c)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kalk</td>
+<td style="text-align: left;">22 (b)</td>
+<td style="text-align: left;">46 (d)</td>
+<td style="text-align: left;">68 (b+d)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Totaal</td>
+<td style="text-align: left;">36 (a+b)</td>
+<td style="text-align: left;">52 (c+d)</td>
+<td style="text-align: left;">88 (n)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><strong>Einde voorbeeld</strong></p>
+<p>Er zijn verschillende manieren om de resultaten van deze studie te beschrijven. De kans dat 1 van beide species houtluizen van de soort Armadilidium is, is <span class="math inline">\(p_{kl}=a/(a+c)=0.70\)</span> of 70% op kleigrond en <span class="math inline">\(p_{ka}=b/(b+d)=0.32\)</span> of 32% op kalkgrond.</p>
+<div id="def-absolute-risico-verschil" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.9 (absolute risico verschil)</strong></span> &nbsp;</p>
+</div>
+<p>Het <strong>absolute risico verschil</strong> of absolute kansverschil op een gegeven gebeurtenis (bvb. om Armadilidium aan te treffen) voor populatie T (Test, bvb. kleigrond) versus C (Controle, bvb. kalkgrond) wordt met ARV genoteerd en gedefinieerd als het verschil</p>
+<p><span class="math display">\[\begin{equation*}
+ARV=p_T-p_C
+\end{equation*}\]</span></p>
+<p>tussen de kansen dat deze gebeurtenis zich voordoet in populaties T en C.</p>
+<p><strong>Einde definitie</strong></p>
+<p>Het ARV op Armadilidium tussen klei- en kalkgrond bedraagt 0.38, hetgeen suggereert dat de kans dat 1 van beide species houtluizen van de soort Armadilidium is, 38% hoger is op kleigrond dan op kalkgrond. Een absoluut kansverschil van 0 drukt uit dat de overeenkomstige kansen even groot zijn in beide populaties en dat beide populaties dus vergelijkbaar zijn in termen van de bestudeerde uitkomst.</p>
+<p>Het absolute kansverschil zegt echter niet alles omtrent het bestudeerde effect. Een kansverschil kan immers een grotere impact hebben alnaargelang beide proporties <span class="math inline">\(p_T\)</span> en <span class="math inline">\(p_C\)</span> dicht bij 0 of 1 liggen, dan wanneer ze in de buurt van 0.5 liggen. Bijvoorbeeld, wanneer we de proportie vrouwen jonger dan 60 jaar meten die borstkanker ontwikkelen, is een risicoverschil tussen <span class="math inline">\(p_A=0.01\)</span> voor vrouwen die het allel Leu/Leu bezitten op het BRCA1 gen en <span class="math inline">\(p_B=0.001\)</span> voor de overige vrouwen, wellicht belangrijker dan een verschil tussen <span class="math inline">\(p_C=0.41\)</span> en <span class="math inline">\(p_D=0.401\)</span> voor beide populaties. Een uitspraak dat het risico 0.9% lager is in de ene dan in de andere populatie geeft om die reden slechts een beperkt beeld van het belang van die reductie. Een goede vergelijking van risico’s, kansen of percentages moet om die reden ook rekening houden met het basisrisico (d.w.z. de kans op de bestudeerde uitkomst in een referentiepopulatie). Het ARV doet dit niet, in tegenstelling tot volgende associatiemaat.</p>
+<div id="def-relatief-risico" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.10 (relatief risico)</strong></span> &nbsp;</p>
+</div>
+<p>Het <strong>relatief risico</strong> op een gegeven gebeurtenis (bvb. om Armadilidium aan te treffen) voor populatie T (Test, bvb. kleigrond) versus C (Controle, bvb. kalkgrond) wordt met RR genoteerd en gedefinieerd als het quotiënt</p>
+<p><span class="math display">\[\begin{equation*}
+RR=\frac{p_T}{p_C}
+\end{equation*}\]</span></p>
+<p>van de kansen dat deze gebeurtenis zich voordoet in populaties T en C.</p>
+<p><strong>Einde definitie</strong></p>
+<p>In de studie naar houtluizen bedraagt dit <span class="math inline">\(RR=0.70/0.32=2.2\)</span>. Dit suggereert dat er 2.2 keer zoveel kans om een houtluis van de soort Armadilidium (i.p.v. Oniscus) aan te treffen op kleigrond dan op kalkgrond. Een relatief risico van 1 drukt uit dat beide populaties dus vergelijkbaar zijn in termen van de bestudeerde uitkomst.</p>
+<p>Een nadeel van het relatief risico is dat ze, in tegenstelling tot het absolute risico verschil, niet goed duidelijk maakt hoeveel meer individuen de bestudeerde uitkomst ondervinden in de ene dan in de andere populatie. Bijvoorbeeld, zelfs wetende dat het relatief risico op Armidilidium in klei-versus kalkgrond 2.2 bedraagt, is het niet mogelijk om uit te maken hoeveel meer houtluizen van de soort Armidilidium zich manifesteren op kleigrond. Als de kans om Armidilidium aan te treffen i.p.v. Oniscus 0.1% bedraagt op kalkgrond, dan verwacht men dat er per 10000 houtluizen (van de soort Armidilidium of Oniscus) er 10 van de soort Armidilidium zullen zijn op kalkgrond en 22 op kleigrond, wat neerkomt op een verwaarloosbaar verschil van 12. Als de kans om Armidilidium aan te treffen i.p.v. Oniscus 40% bedraagt op kalkgrond, dan verwacht men dat er per 10000 houtluizen (van de soort Armidilidium of Oniscus) er 4000 van de soort Armidilidium zullen zijn op kalkgrond en 8800 op kleigrond, wat neerkomt op een aanzienlijk verschil van 4800. Soms rapporteert men in de plaats van het relatief risico, het <em>relatieve risico verschil</em> <span class="math inline">\(ARV/p_C=RR-1\)</span>. Voor de gegeven studie bedraagt dit 1.2. Het drukt uit dat de toename (van kalk- naar kleigrond) in kans om Armadilidium aan te treffen succes meer dan 1 keer zo groot is als het basisrisico in de controlegroep (kalkgrond).</p>
+<p>Merk op dat alle bovenstaande associatiematen eveneens gebruikt kunnen worden wanneer men, in tegenstelling tot wat in een prospectieve studie gebeurt, een volledig lukrake groep proefpersonen selecteert zonder vast te leggen hoeveel van hen al dan niet blootgesteld zijn.</p>
+</section>
+<section id="sec-retrospect" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-retrospect"><span class="header-section-number">5.5.2</span> Retrospectieve studies</h3>
+<p>Beschouw de case-controle studie uit Voorbeeld <a href="03-Proefopzet.html#exm-brcaLeu" class="quarto-xref"><span>4.16</span></a>, waarvan de gegevens samengevat zijn in Tabel <a href="#tbl-leu2" class="quarto-xref"><span>5.3</span></a>. Omdat men in zo’n design op zoek gaat naar <span class="math inline">\(a+b+c\)</span> lukraak gekozen controles en <span class="math inline">\(d+e+f\)</span> lukraak gekozen cases, liggen de marges <span class="math inline">\(a+b+c\)</span> en <span class="math inline">\(d+e+f\)</span> vast en is het bijgevolg onmogelijk om het risico op case (bvb. risico op borstkanker) te schatten. Dit is noch mogelijk binnen de totale groep, noch binnen de groep van blootgestelden (d.i. vrouwen met allel Leu/Leu), noch binnen de groep niet-blootgestelden. Immers, de kans op case binnen die geobserveerde groep reflecteert hoofdzakelijk de verhouding waarin cases en controles in totaal werden gekozen door het design. Alleen analyses die de kolomtotalen in de tabel vast gegeven veronderstellen, zijn hier zinvol. Dit heeft tot gevolg dat <em>het relatief risico</em> op de aandoening (d.w.z. op <em>case</em>) in de populatie voor blootgestelden versus niet-blootgestelden niet rechtstreeks kan geschat worden op basis van gegevens uit een <em>case-controle studie</em>. Analoog kan ook het bijhorende <em>absolute risicoverschil niet geschat</em> worden.</p>
+<div class="cell">
+<div id="tbl-leu2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-leu2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel&nbsp;5.3: Kruistabel van borstkanker-status versus BRCA1-allel.
+</figcaption>
+<div aria-describedby="tbl-leu2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Genotype</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Controles</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Cases</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Totaal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Pro/Pro</td>
+<td style="text-align: left;">266 (a)</td>
+<td style="text-align: left;">342 (d)</td>
+<td style="text-align: left;">608 (a+d)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pro/Leu</td>
+<td style="text-align: left;">250 (b)</td>
+<td style="text-align: left;">369 (e)</td>
+<td style="text-align: left;">619 (b+e)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Leu/Leu</td>
+<td style="text-align: left;">56 (c)</td>
+<td style="text-align: left;">89 (f)</td>
+<td style="text-align: left;">145 (c+f)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Totaal</td>
+<td style="text-align: left;">572 (a+b+c)</td>
+<td style="text-align: left;">800 (d+e+f)</td>
+<td style="text-align: left;">1372 (n)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Wel heeft men informatie over de kans om het allel Leu/Leu aan te treffen bij cases, <span class="math inline">\(\pi_1=f/(d+e+f)=89/800=11.1\%\)</span>, en de kans op het allel Leu/Leu bij controles, <span class="math inline">\(\pi_0=c/(a+b+c)=56/572=9.8\%\)</span>. Het relatief risico op blootstelling voor cases versus controles is bijgevolg <span class="math inline">\((89/800)/(56/572)=1.14\)</span>. Vrouwen met borstkanker hebben dus 14% meer kans om de allelcombinatie Leu/Leu te hebben op het BRCA1 gen dan vrouwen zonder borstkanker. Dit suggereert dat er een associatie<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> is tussen het polymorfisme op het BRCA1 gen en borstkanker, maar drukt helaas niet uit hoeveel hoger het risico op borstkanker is voor vrouwen met de allelcombinatie Leu/Leu dan voor andere vrouwen. Om toch een antwoord te vinden op deze laatste vraag, voeren we een nieuwe risicomaat in.</p>
+<div id="def-odds" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.11 (Odds)</strong></span> &nbsp;</p>
+</div>
+<p>De <em>odds</em> op een gebeurtenis wordt gedefinieerd als</p>
+<p><span class="math display">\[\begin{equation*}
+\frac{p}{1-p}
+\end{equation*}\]</span></p>
+<p>waarbij <span class="math inline">\(p\)</span> de kans is op die gebeurtenis.</p>
+<p><strong>Einde definitie</strong></p>
+<p>De odds is dus een transformatie van het risico, met onder andere de volgende eigenschappen:</p>
+<ul>
+<li><p>de odds neemt waarden aan tussen nul en oneindig.</p></li>
+<li><p>de odds is gelijk aan 1 als en slechts als de kans zelf gelijk is aan 1/2.</p></li>
+<li><p>de odds neemt toe als de kans toeneemt.</p></li>
+</ul>
+<p>Het gebruik van odds is populair onder gokkers omdat het uitdrukt hoeveel waarschijnlijker het is om te winnen dan om te verliezen. Een odds op winnen gelijk aan 1 drukt bijvoorbeeld uit dat het even waarschijnlijk is om te winnen dan om te verliezen. Een odds op winnen gelijk aan 0.9 drukt uit men per 10 verliesbeurten, 9 keer verwacht te winnen. In de genetische associatiestudie uit Voorbeeld <a href="03-Proefopzet.html#exm-brcaLeu" class="quarto-xref"><span>4.16</span></a> is de odds op allel Leu/Leu bij cases gelijk aan <span class="math inline">\(\mbox{odds}_1=f/(d+e)=89/711=0.125\)</span> en bij controles gelijk aan <span class="math inline">\(\mbox{odds}_2=c/(a+b)=56/516=0.109\)</span>. Vrouwen met borstkanker hebben bijgevolg ongeveer 8 (<span class="math inline">\(\approx 1/0.125\)</span>) keer meer kans om de allelcombinatie Leu/Leu niet te hebben op het BRCA1 gen dan om het wel te hebben. Om de associatie tussen blootstelling en uitkomst te beschrijven, kan men nu een verhouding van odds (odds ratio) gebruiken in plaats van een verhouding van risico’s (relatief risico).</p>
+<div id="def-odds-ratio" class="theorem definition">
+<p><span class="theorem-title"><strong>Definitie 5.12 (Odds ratio)</strong></span> &nbsp;</p>
+</div>
+<p>De <strong>odds ratio</strong> op een gegeven gebeurtenis (bvb. borstkanker) voor populatie T (bvb. vrouwen met allel Leu/Leu) versus C (bvb. vrouwen zonder allel Leu/Leu) wordt met OR genoteerd en gedefinieerd als het quotiënt <span class="math display">\[\begin{equation*}
+OR=\frac{\mbox{odds}_T}{\mbox{odds}_C}
+\end{equation*}\]</span> van de odds op deze gebeurtenis in populaties T en C.</p>
+<p><strong>Einde definitie</strong></p>
+<p>Op basis van de gegevens in Tabel <a href="#tbl-leu2" class="quarto-xref"><span>5.3</span></a> kan de odds ratio op blootstelling voor cases versus controles geschat worden d.m.v. het kruisproduct</p>
+<p><span class="math display">\[\begin{equation*}
+\frac{ \frac{ f/(d+e+f)}{(d+e)/(d+e+f)} }{ \frac{c/(a+b+c)}{(a+b)/(a+b+c)}} = \frac{f(a+b)}{c (d+e)}
+\end{equation*}\]</span></p>
+<p>In het bijzonder vinden we dat de odds op allelcombinatie Leu/Leu voor vrouwen met versus zonder borstkanker gelijk is aan <span class="math inline">\(OR=(89\times 516)/(56\times 711)=1.15\)</span>. Helaas drukt dit resultaat nog steeds niet uit hoeveel meer risico op borstkanker vrouwen met de allelcombinatie Leu/Leu lopen.</p>
+<p>Was de bovenstaande studie echter een volledig lukrake steekproef geweest (waarbij het aantal cases en controles niet per design werden vastgelegd), dan konden we daar ook de odds ratio op borstkanker berekenen voor mensen met versus zonder het allel Leu/leu. We zouden dan vaststellen dat dit gelijk is aan</p>
+<p><span class="math display">\[\begin{equation*}
+\frac{ \frac{ f/(c+f)}{c/(c+f)} }{ \frac{(d+e)/(a+b+d+e)}{(a+b)/(a+b+d+e)}} = \frac{f(a+b)}{c(d+e)},
+\end{equation*}\]</span></p>
+<p>en bijgevolg dezelfde waarde aanneemt. Dat is omdat de odds ratio een <em>symmetrische associatiemaat</em> is zodat de odds ratio op `case’ voor blootgestelden versus niet-blootgestelden steeds gelijk is aan de odds op blootstelling voor cases versus controles. Hieruit volgt dat voor het schatten van de odds ratio het er niet toe doet of we prospectief werken zoals in een typische cohort studie, of retrospectief zoals in een typische case-controle studie. In het bijzonder kunnen we in de genetische associatiestudie uit Voorbeeld <a href="03-Proefopzet.html#exm-brcaLeu" class="quarto-xref"><span>4.16</span></a> de odds op borstkanker voor vrouwen met allel Leu/leu versus zonder berekenen als <span class="math inline">\(OR=89\times 516/(56\times 711)=1.15\)</span>. De odds op borstkanker is bijgevolg 15% hoger bij vrouwen met die specifieke allelcombinatie.</p>
+<p>Stel nu dat we met <span class="math inline">\(p_T\)</span> en <span class="math inline">\(p_C\)</span> respectievelijk de kans op case noteren voor blootgestelden en niet-blootgestelden. Wanneer beide kansen klein zijn (namelijk <span class="math inline">\(p_T&lt;5\%\)</span> en <span class="math inline">\(p_C&lt;5\%\)</span>), dan is de odds een goede benadering voor het risico. Dit is omdat in dat geval <span class="math inline">\(\mbox{odds}_T=p_T/(1-p_T)\approx p_T\)</span> en <span class="math inline">\(\mbox{odds}_C=p_C/(1-p_C)\approx p_C\)</span>. Er volgt dan bovendien dat de odds ratio een goede benadering voor het relatief risico:</p>
+<p><span class="math display">\[\begin{equation*}
+OR=\frac{\mbox{ odds}_T}{\mbox{
+odds}_C}\approx \frac{p_T}{p_C}=RR
+\end{equation*}\]</span></p>
+<p>Wetende dat het risico op borstkanker laag is, mogen we op basis van de gevonden OR van 1.15 bijgevolg besluiten dat het risico (i.p.v. de odds) op borstkanker (bij benadering) 15% hoger ligt bij vrouwen met het allel Leu/Leu op het BRCA1 gen. Dit is een bijzonder nuttige eigenschap omdat (a) het relatief risico, dat niet rechtstreeks geschat kan worden in case-controle studies, gemakkelijker te interpreteren is dan de odds ratio; en (b) de odds ratio bepaalde wiskundige eigenschappen heeft die ze aantrekkelijker maakt dan een relatief risico in statistische modellen<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Algemeen is de odds ratio echter steeds verder van 1 verwijderd dan het relatief risico. Wetende dat de odds ratio op borstkanker 1.15 bedraagt voor vrouwen met versus zonder de allelcombinatie Leu/Leu, kunnen we bijgevolg meer nauwkeurig besluiten dat het overeenkomstige relatief risico tussen 1 en 1.15 gelegen is (maar niettemin dicht bij 1.15).</p>
+<p>Omdat de odds ratio moeilijker te interpreteren is dan een relatief risico en bijgevolg misleidend kan zijn, valt deze laatste steeds te verkiezen in situaties (zoals prospectieve studies) waar het mogelijk is om het relatief risico in de populatie te schatten. In sommige case-controle studies (nl. matched case-controle studies) wordt voor elke case een controle gezocht die bepaalde karakteristieken gemeenschappelijk heeft, teneinde een betere onderlinge vergelijkbaarheid te garanderen. In dat geval moet de statistische analyse (inclusief de manier om odds ratio’s te schatten) rekening houden met het feit dat de resultaten van elke case gecorreleerd of verwant zijn met de resultaten van de bijhorende controle.</p>
+</section>
+<section id="rates-versus-risicos" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="rates-versus-risicos"><span class="header-section-number">5.5.3</span> Rates versus risico’s</h3>
+<p>Vaak wordt het begrip <em>risico</em> verward met het begrip <em>rate</em>. Een <em>rate</em> drukt een aantal gebeurtenissen (bvb. aantal sterfte- of ziektegevallen) uit per eenheid in de populatie in een bepaalde tijdspanne. Bijvoorbeeld, een <em>crude mortality rate (CMR)</em> voor een bepaald jaartal is gedefinieerd als 1000 maal het aantal sterftegevallen dat optreedt in dat jaar gedeeld door de grootte van de beschouwde populatie halfweg dat jaar. De reden dat met 1000 wordt vermenigvuldigd is dat het bijvoorbeeld makkelijker na te denken is over een CMR van 12 sterftes per 1000 in Engeland en Wales, dan over 0.012 sterftes per individu. Indien een specifieke leeftijdsgroep wordt gekozen, verkrijgt men de <em>leeftijdsspecifieke mortality rate</em> als 1000 maal het aantal sterftegevallen dat optreedt in een bepaald jaar en bepaalde leeftijdsgroep gedeeld door de grootte van de beschouwde populatie in die leeftijdsklasse halfweg dat jaar. In tegenstelling tot de incidentie, is de prevalentie geen rate omdat ze niet een aantal gebeurtenissen uitdrukt over een zekere tijdspanne.</p>
+</section>
+</section>
+<section id="associaties-tussen-twee-variabelen" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="associaties-tussen-twee-variabelen"><span class="header-section-number">5.6</span> Associaties tussen twee variabelen</h2>
+<p>Tot nog toe zijn we hoofdzakelijk ingegaan op zogenaamde univariate beschrijvingen waarbij slechts 1 variabele onderzocht wordt. In de meeste wetenschappelijke studies wenst men echter associaties tussen 2 of meerdere variabelen te onderzoeken, bijvoorbeeld tussen een interventie en de daarop volgende respons. In deze Sectie onderzoeken we hoe associaties tussen 2 variabelen kunnen beschreven worden. We maken daarbij onderscheid naargelang het type van de variabelen.</p>
+<section id="sec-kruistabel" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="sec-kruistabel"><span class="header-section-number">5.6.1</span> Associatie tussen twee kwalitatieve variabelen</h3>
+<p>Als twee kwalitatieve variabelen niet veel verschillende waarden aannemen, dan is een <em>kruistabel</em> aangewezen om hun associatie voor te stellen. In deze tabel worden de verschillende waarden die de ene variabele aanneemt in de kolommen uitgezet en de verschillende waarden die de andere variabele aanneemt in de rijen. In elke cel van de tabel (die overeenkomt met 1 specifieke combinatie van waarden voor beide variabelen) wordt de frequentie neergeschreven.</p>
+<div class="cell">
+<div id="tbl-genderBMI" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-genderBMI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel&nbsp;5.4: Kruistabel van Gender vs BMI klasse.
+</figcaption>
+<div aria-describedby="tbl-genderBMI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">12.0_18.5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">18.5_to_24.9</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">25.0_to_29.9</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">30.0_plus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">629</td>
+<td style="text-align: right;">1616</td>
+<td style="text-align: right;">1179</td>
+<td style="text-align: right;">1402</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">648</td>
+<td style="text-align: right;">1295</td>
+<td style="text-align: right;">1485</td>
+<td style="text-align: right;">1349</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>Tabel <a href="#tbl-genderBMI" class="quarto-xref"><span>5.4</span></a> toont zo’n kruistabel voor het aantal mannen en vrouwen per BMI klasse. Dergelijke eenvoudige kruistabel met slechts 2 rijen en 4 kolommen, noemt men ook een <span class="math inline">\(2\times 4\)</span> tabel.</p>
+</section>
+<section id="sec-asskwalcont" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="sec-asskwalcont"><span class="header-section-number">5.6.2</span> Associatie tussen één kwalitatieve en één continue variabele</h3>
+<p>Boxplots zijn meer compact dan een histogram en laat om die reden gemakkelijker vergelijkingen tussen verschillende groepen toe. Twee dergelijke boxplots worden getoond in Figuur <a href="#fig-boxplotCholGender" class="quarto-xref"><span>5.5</span></a>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>NHANES <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender,<span class="at">y =</span> <span class="fu">log</span>(DirectChol))) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"log(Direct Cholestorol)"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-boxplotCholGender" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplotCholGender-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-boxplotCholGender-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplotCholGender-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.5: Boxplot van log-getransformeerde directe HDL cholestorol concentratie in functie van Gender voor alle subjecten van de NHANES studie.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Op basis van deze figuur stellen we vast dat hogere log-cholestorol concentraties geobserveerd worden bij vrouwen dan bij mannen, maar dat de variabiliteit van de log-concentraties vergelijkbaar is tussen de 2 groepen. De vraag blijft of we hier kunnen spreken van een systematisch hogere log-cholestorol concentratie tussen vrouwen en mannen. We zullen in Hoofdstuk <a href="05-StatistischeBesluitvorming.html" class="quarto-xref"><span>6</span></a> dieper op deze vraag ingaan.</p>
+<p>Figuur <a href="#fig-boxplotCholGender" class="quarto-xref"><span>5.5</span></a> kan men samenvatten door gemiddelde verschillen tussen beide groepen te rapporteren. Hier stellen we een gemiddeld verschil van 0.17 in directe HDL cholestorol concentratie vast op de log schaal tussen vrouwen en mannen. Gezien we weten dat <span class="math inline">\(\log(C_2)-\log(C_1)=\log(C_2/C_1)\)</span> weten we dat de HDL cholestorol concentratie in de NHANES studie gemiddeld 1.19 keer hoger ligt voor vrouwen dan voor mannen.</p>
+<p>In de introductie hebben we bij het microbiome voorbeeld gezien dat het ook erg nuttig is om de ruwe data weer te geven op de boxplot. Als het aantal gegevens niet te hoog is kunnen we eenvoudig een extra laag toevoegen met de originele datapunten. Merk op dat het wel belangrijk is om de outliers dan niet weer te geven in de boxplot, anders zal men deze twee keer afbeelden. Eens in de geom_boxplot laag een eens in de geom_point laag. Daarom zetten we het symbool voor de outliers op NA.</p>
+<p>In onderstaande grafiek plotten we de relatieve abundanties van <strong>Staphylococcus</strong> van de oksel microbiome case study.</p>
+<ol type="1">
+<li>We pipen het <code>ap</code> dataframe naar <code>ggplot</code></li>
+<li>We selecteren de data voor de plot via <code>ggplot(aes(x=trt,y=rel))</code></li>
+<li>We voegen laag toe voor de boxplot dmv de functie <code>geom_boxplot()</code>. Merk op dat we het argument <code>outlier.shape</code> op NA (not available) zetten <code>outlier.shape=NA</code> in the <code>geom_boxplot</code> functie omdat we anders outliers twee keer weer zullen geven. Eerst via de boxplot laag en daarna omdat we een laag met alle ruwe data toevoegen aan de plot.</li>
+<li>We geven de ruwe data weer via de <code>geom_point(position="jitter")</code> functie. We gebruiken hierbij het argument position=‘jitter’ zodat we wat random ruis toevoegen aan de x-cordinaat zodat de gegevens elkaar niet overlappen.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ap <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/GTPB/PSLS20/master/data/armpit.csv"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>ap <span class="sc">|&gt;</span>  </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>trt,<span class="at">y=</span>rel)) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape=</span><span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position=</span><span class="st">"jitter"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Dot-plots zijn bijzonder interessant in pre-test post-test designs waar dezelfde subjecten op verschillende tijdstippen worden geobserveerd. In dat geval kunnen de uitkomsten uitgezet worden op de Y-as en de tijdstippen op de X-as, en kunnen de metingen voor eenzelfde subject worden verbonden met een lijn.</p>
+<p>Een voorbeeld hiervan is weergegeven in Figuur <a href="#fig-captoDot" class="quarto-xref"><span>5.6</span></a>. De figuur vat de gegevens samen van de captopril studie die de centrale dataset vormt van Hoofdstuk <a href="05-StatistischeBesluitvorming.html" class="quarto-xref"><span>6</span></a>. In de studie wenst men het effect van een bloeddrukverlagend geneesmiddel captopril evalueren. Voor elke patiënt in de studie werd de systolische bloeddruk twee keer gemeten: één keer voor en één keer na de behandeling met het bloeddruk verlagende medicijn captopril. In Figuur <a href="#fig-captoDot" class="quarto-xref"><span>5.6</span></a> worden de metingen van dezelfde patiënt met een lijntje verbonden. Hierdoor krijgen we een heel duidelijk beeld van de gegevens. Namelijk, we krijgen een sterke indruk dat de bloeddruk daalt na het toedienen van captopril gezien we bijna voor alle patiënten een daling observeren.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Eerst lezen we de data in.</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Deze bevindt zich in de subdirectory dataset</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Het is een tekstbestand waarbij de kolommen van elkaar gescheiden zijn d.m.v comma's.</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#sep=","</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#De eerste rij bevat de namen van de variabelen</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>captopril <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"https://raw.githubusercontent.com/statOmics/sbc/master/data/captopril.txt"</span>,<span class="at">header=</span><span class="cn">TRUE</span>,<span class="at">sep=</span><span class="st">","</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(captopril)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id SBPb DBPb SBPa DBPa
+1  1  210  130  201  125
+2  2  169  122  165  121
+3  3  187  124  166  121
+4  4  160  104  157  106
+5  5  167  112  147  101
+6  6  176  101  145   85</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>captoprilTidy <span class="ot">&lt;-</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  captopril <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(type,bp,<span class="sc">-</span>id)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>captoprilTidy <span class="sc">|&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">"SBPa"</span>,<span class="st">"SBPb"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    type,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"SBPb"</span>,<span class="st">"SBPa"</span>))</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>type,<span class="at">y=</span>bp)) <span class="sc">+</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> id)) <span class="sc">+</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-captoDot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-captoDot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-captoDot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-captoDot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.6: Dotplot van de systolische bloeddruk in de captopril studie voor en na het toedienen van het bloeddruk verlagend middel captopril.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-correlatie" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sec-correlatie"><span class="header-section-number">5.7</span> Associatie tussen twee continue variabelen</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_1SD8DTCLAU" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>We zullen dit opnieuw illustreren aan de hand van de NHANES studie. We bestuderen hierbij lengte en gewicht bij vrouwen.</p>
+<p>We voeren eerst een data exploratie uit waarbij we</p>
+<ol type="1">
+<li>De volwassen vrouwen filteren uit de dataset</li>
+<li>In het ggplot commando de lengte selecteren in de x-as en het gewicht in de y-as.</li>
+<li>Een laag toevoegen d.m.v. <code>geom_point</code> om een scatterplot te bekomen van y i.f.v. x.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height,<span class="at">y=</span>Weight)) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Er is een duidelijke associatie tussen gewicht en lengte: als de lengte stijgt dan stijgt het gewicht gemiddeld ook. Er is echter veel variabiliteit en ook een indicatie dat het gewicht is scheef verdeeld naar rechts.</p>
+<p>We exploreren eerst de data univariaat: variabele per variabele. Om een histogram en QQ-plot naast elkaar af te beelden slaan we de plots eerst op als een object en maken we gebruik van de <code>grid.arrange</code> functie van het gridExtra package om de plots naast elkaar te plotten.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> NHANES<span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height)) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">xlab</span>(<span class="st">"Height"</span>) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"All females in study"</span>) <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..))</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> NHANES<span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>Height)) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>De lengte data zijn duidelijk approximatief normaal verdeeld.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> NHANES<span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Weight)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">xlab</span>(<span class="st">"Weight"</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"All females in study"</span>) <span class="sc">+</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..))</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> NHANES<span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>Weight)) <span class="sc">+</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p3,p4,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>De gewichtsdata zijn inderdaad scheef verdeeld!</p>
+<p>Na log transformatie zijn de gewichtsdata minder scheef, maar nog steeds niet Normaal verdeeld.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> NHANES<span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Weight<span class="sc">|&gt;</span><span class="fu">log2</span>())) <span class="sc">+</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density.., <span class="at">fill=</span>..count..)) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">xlab</span>(<span class="st">"Weight (log2)"</span>) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"All females in study"</span>) <span class="sc">+</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..))</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>p6<span class="ot">&lt;-</span> NHANES<span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample=</span>Weight<span class="sc">|&gt;</span><span class="fu">log2</span>())) <span class="sc">+</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>()</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p5,p6,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>De scheefheid is er nog maar is sterk gereduceerd. We maken nu een plot van lengte in functie van het log<span class="math inline">\(_2\)</span> getransformeerde gewicht.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">|&gt;</span> <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Height,<span class="at">y=</span>Weight <span class="sc">|&gt;</span> <span class="fu">log2</span>())) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Weight (log2)"</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We introduceren nu een statistiek om de associatie te schatten: de correlatie.</p>
+<!---break-->
+<section id="covariantie-en-correlatie" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="covariantie-en-correlatie"><span class="header-section-number">5.7.1</span> Covariantie en Correlatie</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uhvEMOfGq4c" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<p>Stel dat X en Y continue toevallig veranderlijken zijn</p>
+<ul>
+<li>Voor elk subject i observeren we dus <span class="math inline">\((X_i,Y_i)\)</span>.</li>
+<li>Covariantie: hoe variëren <span class="math inline">\(X_i\)</span> en <span class="math inline">\(Y_i\)</span> rond hun gemiddelde <span class="math inline">\((E[X],E[Y])\)</span>?</li>
+</ul>
+<p><span class="math display">\[\mbox{Covar}(X,Y)=E[(X-E[X])(Y-E[Y])]\]</span></p>
+<ul>
+<li>De covariantie is dus de verwachte waarde van het product van de afwijking van de X waarde t.o.v. zijn verwachte waarde E[X] en de afwijking van de Y waarde t.o.v.zijn verwachte waarde E[Y].</li>
+</ul>
+<p>We kunnen de covariantie nu ook standardiseren zodat we een maat krijgen die voor elke dataset vergelijkbaar wordt: de correlatie. We doen dit door de covariantie te delen door de standaardafwijking van elke variabele:</p>
+<p><span class="math display">\[\mbox{Cor}(X,Y)=\frac{E[(X-E[X])(Y-E[Y])]}{\sqrt{E[(X-E[X])^2]}\sqrt{E[(Y-E[Y])^2]}}\]</span></p>
+</section>
+<section id="pearson-correlatie" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="pearson-correlatie"><span class="header-section-number">5.7.2</span> Pearson Correlatie</h3>
+<p>We introduceren nu een schatter voor de correlatie tussen twee continue toevallig veranderlijken op basis van de data in de steekproef:</p>
+<p><span class="math display">\[
+\mbox{Cor}(X,Y)=\frac{\sum_{i=1}^{n}(x_{i}-\bar{x})(y_{i}-\bar{y})}{(n-1)s_{x}s_{y}}
+\]</span></p>
+<p>We vervangen de verwachte waarden weer door het steekproefgemiddelden <span class="math inline">\(\bar x\)</span> en <span class="math inline">\(\bar y\)</span>, en, we berekenen het gemiddeld product van de afwijkingen in x en y in de steekproef. Let op dat we hierbij weer corrigeren voor het aantal vrijheidsgraden. We geven elke observatie geen gewicht van 1/n maar van 1/(n-1). We hebben inderdaad het gemiddelde geschat, hier is dat gemiddelde bivariaat (het heeft een x en y coordinaat).</p>
+<p>Deze schatter wordt ook wel de Pearson correlatie genoemd en heeft volgende eigenschappen:</p>
+<ul>
+<li><p>Er is een positieve correlatie wanneer <span class="math inline">\(y\)</span> gemiddeld toeneemt bij een toename van: <span class="math inline">\(x \ \nearrow \ \Rightarrow \ y \ \nearrow\)</span></p></li>
+<li><p>Er is een negatieve correlatie als <span class="math inline">\(y\)</span> gemiddeld afneemt bij een toename in <span class="math inline">\(x\)</span>: <span class="math inline">\(x \ \nearrow \ \Rightarrow \ y \ \searrow\)</span></p></li>
+<li><p>De correlatie ligt ook altijd tussen -1 en 1</p></li>
+</ul>
+<p>In de figuur <a href="#fig-bijdrageCor" class="quarto-xref"><span>5.7</span></a> wordt de bijdrage weergegeven van individuele metingen in de correlatie. Als punten in het 1ste en 3de kwadrant liggen is er een positieve bijdrage van de observatie in de correlatie, als ze in het 2de en 4de kwadrant liggen is er een negatieve bijdrage.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-bijdrageCor" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bijdrageCor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-bijdrageCor-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bijdrageCor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.7: Bijdrage van individuele metingen in de correlatie.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We berekenen vervolgens de correlatie voor lengte, gewicht en het log getransformeerde gewicht.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Weight,Height) <span class="sc">|&gt;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log2Weight=</span>Weight<span class="sc">|&gt;</span><span class="fu">log2</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.exclude</span>() <span class="sc">|&gt;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Weight    Height log2Weight
+Weight     1.0000000 0.2845792  0.9811638
+Height     0.2845792 1.0000000  0.3074578
+log2Weight 0.9811638 0.3074578  1.0000000</code></pre>
+</div>
+</div>
+<p>Merk op dat:</p>
+<ul>
+<li>De correlatie lager is als de data niet worden getransformeerd.</li>
+<li>De Pearson correlatie is gevoelig voor outliers!</li>
+<li>Gebruik de Pearson correlatie niet voor scheef verdeelde data of data met outliers!</li>
+</ul>
+<section id="impact-van-outliers" class="level4" data-number="5.7.2.1">
+<h4 data-number="5.7.2.1" class="anchored" data-anchor-id="impact-van-outliers"><span class="header-section-number">5.7.2.1</span> Impact van outliers</h4>
+<p>In figuur <a href="#fig-corOutlier" class="quarto-xref"><span>5.8</span></a> wordt de impact van outliers op de Pearson correlatie geïllustreerd d.m.v. gesimuleerde data met één outlier. We zien dat de correlatie bijna halveert ten gevolge van de outlier!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">20</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>simData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x,<span class="at">y=</span>x<span class="sc">*</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(x)))</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> simData <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">"cor ="</span>,<span class="fu">cor</span>(simData[,<span class="dv">1</span>],simData[,<span class="dv">2</span>]) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)))</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>outlier<span class="ot">&lt;-</span> <span class="fu">rbind</span>(simData,<span class="fu">c</span>(<span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>))</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> outlier <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">"cor ="</span>,<span class="fu">cor</span>(outlier[,<span class="dv">1</span>],outlier[,<span class="dv">2</span>]) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)))</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-corOutlier" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corOutlier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-corOutlier-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corOutlier-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.8: Correlatie van gesimuleerde data met 1 outlier
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="de-pearson-correlatie-pikt-enkel-linear-associatie-op" class="level4" data-number="5.7.2.2">
+<h4 data-number="5.7.2.2" class="anchored" data-anchor-id="de-pearson-correlatie-pikt-enkel-linear-associatie-op"><span class="header-section-number">5.7.2.2</span> De Pearson correlatie pikt enkel linear associatie op</h4>
+<p>In figuur <a href="#fig-corQuad" class="quarto-xref"><span>5.9</span></a> simuleren we data met een kwadratisch verband en observeren we dat de correlatie bijna nul is!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>quadratic <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x,<span class="at">y=</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(x)))</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>quadratic <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>x,<span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="fu">paste</span>(<span class="st">"cor ="</span>,<span class="fu">cor</span>(quadratic[,<span class="dv">1</span>],quadratic[,<span class="dv">2</span>]) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>))) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(quadratic[,<span class="dv">2</span>]),<span class="at">col=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(quadratic[,<span class="dv">1</span>]),<span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-corQuad" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corQuad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-DataExploratie_files/figure-html/fig-corQuad-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corQuad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figuur&nbsp;5.9: Correlatie van gesimuleerde data met een kwadratisch verband. De data in de bovenste kwadranten compenseren elkaar als het ware alsook in de onderste kwadranten (ongeveer evenveel positieve en negatieve bijdragen door de data in de correlatie)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="verschillende-groottes-van-correlatie" class="level3" data-number="5.7.3">
+<h3 data-number="5.7.3" class="anchored" data-anchor-id="verschillende-groottes-van-correlatie"><span class="header-section-number">5.7.3</span> Verschillende groottes van correlatie</h3>
+<p>Om een inzicht te krijgen in de grootte van de correlatie, simuleren we data met een verschillende correlatie. We geven telkens de correlatie weer boven de plot. Hoe sterker de correlatie hoe meer de puntenwolk naar een lineair verband toegaat.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04-DataExploratie_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="spearman-correlatie" class="level3" data-number="5.7.4">
+<h3 data-number="5.7.4" class="anchored" data-anchor-id="spearman-correlatie"><span class="header-section-number">5.7.4</span> Spearman correlatie</h3>
+<p>De Spearman correlatie is de Pearson correlatie na transformatie van de data naar ranks. Hierdoor wordt deze schatter minder gevoelig voor outliers.</p>
+<ul>
+<li>Pearson correlatie</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(outlier)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          x         y
+x 1.0000000 0.4682823
+y 0.4682823 1.0000000</code></pre>
+</div>
+</div>
+<ul>
+<li>Spearman correlatie</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(outlier,<span class="at">method=</span><span class="st">"spearman"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          x         y
+x 1.0000000 0.6571429
+y 0.6571429 1.0000000</code></pre>
+</div>
+</div>
+<p>We verifiëren dat de Spearman correlatie de Pearson correlatie is van rang getransformeerde data. Die wordt bekomen door de observaties te ordenen van klein naar groot en elke observatie te vervangen door zijn rangorde.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>rankData<span class="ot">&lt;-</span><span class="fu">apply</span>(outlier,<span class="dv">2</span>,rank)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rankData)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          x         y
+x 1.0000000 0.6571429
+y 0.6571429 1.0000000</code></pre>
+</div>
+</div>
+<p>We berekenen nu de Spearman correlatie in de NHANES studie. We observeren dat de correlatie tussen lengte en gewicht, en lengte en log2 getransformeerd gewicht exact gelijk is. Dat is logisch want de log-transformatie is een monotone transformatie en verandert de ordening van de data dus niet, de ranks van gewicht en deze van het log gewicht zijn identiek!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>NHANES<span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> Gender<span class="sc">==</span><span class="st">"female"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Weight,Height) <span class="sc">|&gt;</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log2Weight=</span>Weight<span class="sc">|&gt;</span><span class="fu">log2</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.exclude</span>() <span class="sc">|&gt;</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">method=</span><span class="st">"spearman"</span>)</span></code></pre></div><button title="Kopieer naar klembord" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Weight    Height log2Weight
+Weight     1.0000000 0.2892776  1.0000000
+Height     0.2892776 1.0000000  0.2892776
+log2Weight 1.0000000 0.2892776  1.0000000</code></pre>
+</div>
+</div>
+<p>Bij het interpreteren van correlaties, alsook bij het uitvoeren van regressie-analyses in de volgende secties, zijn de volgende waarschuwingen van zeer groot belang:</p>
+<ol type="1">
+<li><p>Correlaties zijn het makkelijkst te interpreteren tussen 2 groepen Normaal verdeelde observaties. Een kleine training laat immers toe om snel inzicht te krijgen in de grootte van de correlatiecoëfficiënt zonder zich verder over de specifieke verdeling te hoeven bekommeren. In het bijzonder kan men voor Normaal verdeelde observaties visueel inzicht krijgen in de sterkte van de correlatie door een ellips rond de puntenwolk te tekenen die (nagenoeg) alle punten bevat. Als de ellips op een cirkel lijkt, dan is er geen correlatie. Hoe dunner de ellips, hoe sterker de correlatie. De oriëntatie van de ellips geeft hierbij het teken van de correlatie weer.</p></li>
+<li><p>Voor niet-Normale gegevens hangt de betekenis van een correlatiecoëfficiënt van zekere grootte, nauw samen met de specifieke vorm van de verdeling. Wanneer de 2 variabelen die we onderzoeken niet Normaal verdeeld zijn, dan zijn er 2 mogelijkheden om een zinvolle correlatiecoëfficiënt weer te geven. Variabelen die scheef verdeeld zijn, kan men transformeren (bvb. een log-transformatie) in de hoop dat de getransformeerde gegevens bij benadering Normaal verdeeld zijn en lineair samenhangen.</p></li>
+<li><p>Merk op dat een correlatiecoëfficiënt van 0 tussen 2 variabelen <span class="math inline">\(X\)</span> en <span class="math inline">\(Y\)</span> niet noodzakelijk impliceert dat deze variabelen onafhankelijk zijn. Zie kwadratisch verband! Daarom is het van belang om de aard van samenhang tussen 2 variabelen steeds te onderzoeken via een scatterplot alvorens een correlatiecoëfficiënt te rapporteren. Wanneer het verband monotoon is, maar sterk niet-lineair is, dan is het aangewezen om niet de Pearson correlatiecoëfficiënt, maar Spearman’s correlatiecoëfficiënt te rapporteren. Indien het verband niet-monotoon is, dan zijn correlatiecoëfficiënten niet geschikt en moet men overstappen op meer geavanceerde regressietechnieken.</p></li>
+<li><p>Bij jonge kinderen is de grootte van hun schoenmaat uiteraard sterk gecorreleerd met hun leescapaciteiten. Dat op zich impliceert echter niet dat het leren van nieuwe woorden hun voeten doet groeien of dat het groeien van hun voeten impliceert dat ze beter kunnen lezen. Ook algemeen<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> hoeft een correlatie tussen 2 variabelen niet te impliceren dat er een causaal verband is. De relatie tussen 2 metingen kan immers sterk verstoord worden door confounders (bvb. de leeftijd in bovenstaand voorbeeld). Hoewel dit overduidelijk is in bovenstaand voorbeeld, is het in vele andere contexten veel minder duidelijk en worden er, vooral in de populaire literatuur, vaak causale beweringen gemaakt die niet (volledig) door de gegevens worden gestaafd. Volgend voorbeeld illustreert dit. Denk hierbij aan het voorbeeld van de associatie van groente consumptie en covid mortaliteit.</p></li>
+<li><p>Een <em>ecologische analyse</em> is een statistische analyse waarbij men associaties bestudeert tussen samenvattingsmaten (zoals gemiddelden, incidenties, …) die reeds berekend werden voor groepen subjecten. Dit is het geval bij het covid voorbeeld uit de introductie waarbij men mortaliteit modellereert in functie van de gemiddelde dagelijkse groenteconsumptie per capita in verschillende landen. Wanneer men aldus een <em>ecologische correlatie</em> vaststelt voor groepen subjecten of individuen (in dit geval,landen), impliceert dat niet noodzakelijk dat deze correlatie ook voor de subjecten zelf opgaat<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Volgend voorbeeld illustreert dit.</p></li>
+</ol>
+<div id="exm-ecological-fallacy" class="theorem example">
+<p><span class="theorem-title"><strong>Voorbeeld 5.4 (Ecological fallacy)</strong></span> &nbsp;</p>
+</div>
+<p>Voor de 48 staten in de V.S. werden telkens 2 getallen berekend: het percentage van de mensen die in een ander land geboren zijn en het percentage geletterden. De correlatie ertussen bedraagt 0.53 (Robinson, 1950). Dit is een <em>ecologische correlatie</em> omdat de eenheid van de analyse de groep residenten uit een zelfde staat is, en niet de individuele residenten zelf. Deze ecologische correlatie suggereert dat mensen van vreemde afkomst doorgaans beter geschoold zijn (in Amerikaans Engels) dan de oorspronkelijke inwoners. Wanneer men echter de correlatie berekent op basis van de gegevens voor alle individuele residenten, bekomt men -0.11. De ecologische analyse is hier duidelijk misleidend: het teken van de correlatie is er positief omdat mensen van vreemde origine de neiging hebben om te gaan wonen in staten waar de oorspronkelijke bevolking relatief goed geschoold is.</p>
+<p><strong>Einde voorbeeld</strong></p>
+</section>
+</section>
+<section id="sec-missing" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="sec-missing"><span class="header-section-number">5.8</span> Onvolledige gegevens</h2>
+<p>Het gebeurt vaak in de biowetenschappen dat, ondanks zorgvuldig veld- en laboratoriumwerk, metingen die men plande te verzamelen, niet bekomen werden. Men noemt deze dan <em>ontbrekende gegevens</em> of <em>missing data (points)</em>.</p>
+<p>Minder drastisch, kunnen observaties soms slechts ten dele gekend zijn. Bijvoorbeeld bij een studie van de overlevingsduur van dieren en planten wacht men niet steeds tot alle subjecten gestorven zijn. Op het eind van de studie zal men bijvoorbeeld voor een 50-jarige olifant die in leven is, slechts weten dat de overlevingstijd minstens 50 jaar bedraagt, maar niet de exacte waarde kennen. Zo’n gegeven wordt <em>rechts-gecensureerd</em> genoemd: we weten dat de gewenste observatie rechts van 50 ligt, maar verder niets meer.</p>
+<p>Analoog kunnen observaties <em>links-gecensureerd</em> zijn. Bij het meten van bepaalde concentraties kan een detectielimiet bestaan: een ondergrens beneden dewelke het meettoestel geen aanwezigheid kan detecteren. Men weet in zo’n geval dat de concentratie kleiner dan die ondergrens is, maar niet hoeveel kleiner.</p>
+<p>Tenslotte vermelden we nog <em>interval-gecensureerde</em> gegevens. Bij het screenen naar HIV bijvoorbeeld, zal men weten dat een subject seropositief geworden is ergens tussen de laatste negatieve HIV test en de eerste positieve HIV test, maar het exacte tijdstip van seroconversie blijft onbekend.</p>
+<p>De aanwezigheid van gegevens die niet of slechts partieel zijn opgemeten zorgt altijd voor extra moeilijkheden bij de analyse en interpretatie van de onderzoeksresultaten. Dat is omdat de missende gegevens mogelijks afkomstig zijn van een speciale populatie. Dat is het meest duidelijk in klinische experimenten bij mensen. Patiënten zullen hier vaak de studie verlaten wanneer ze genezen zijn, in welk geval men de metingen van deze patiënten niet te zien krijgt. Dit negeren door enkel de aanwezige gegevens te analyseren, zal de resultaten er slechter doen uitzien dan ze in werkelijkheid zijn. Meestal houdt dat immers de veronderstelling in dat de aanwezige gegevens representatief blijven voor de populatie die men wenst te bestuderen. Dit kan in sommige gevallen de resultaten sterk vertekenen. In de statistische literatuur zijn de laatste jaren heel wat complexe technieken ontwikkeld om hiervoor te corrigeren. Deze technieken worden meer en meer in de statistische software ingebouwd en recent heeft ook R verschillende bibliotheken toegevoegd. Het is echter aangewezen om voor het gebruik van deze gevorderde technieken een statisticus te consulteren.</p>
+</section>
+<section id="clips-over-de-code-in-dit-hoofdstuk" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="clips-over-de-code-in-dit-hoofdstuk"><span class="header-section-number">5.9</span> Clips over de code in dit hoofdstuk</h2>
+<ol type="1">
+<li>Univariate exploratie van continue variabelen</li>
+</ol>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Du4q0yatlmA" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<ol start="2" type="1">
+<li>Beschrijvende statistiek</li>
+</ol>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/b3CMvj5pMy4" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<ol start="3" type="1">
+<li>Normale benadering</li>
+</ol>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sGSyd-g-Nz0" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+<ol start="4" type="1">
+<li>Associatie van twee continue Variabelen</li>
+</ol>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pnbf-MhCX3U" frameborder="0" style="display: block; margin: auto;" allow="autoplay; encrypted-media" allowfullscreen="">
+</iframe>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Zie Sectie <a href="#sec-qq" class="quarto-xref"><span>5.4.1</span></a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Later zullen we zien dat het nog iets correcter is om te stellen dat 95% van de waarnemingen liggen tussen <span class="math inline">\(\bar{x} - 1.96 s_x\)</span> en <span class="math inline">\(\bar{x} + 1.96 s_x\)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Merk op dat dit design niet optimaal is omdat replicaties op de verkeerde schaal werden bekomen. Idealiter moesten meer dan 2 stukken grond in de studie opgenomen worden omdat de 2 gekozen stukken grond in veel meer kunnen verschillen dan alleen het bodemtype. Verschillen in de verdeling van houtluizen kunnen bijgevolg niet zomaar aan het bodemtype kunnen toegeschreven worden.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Al is het nog de vraag of die associatie toevallig is, dan wel systematisch. We komen in het hoofdstuk <a href="09-CategorischeDataAnalyse.html" class="quarto-xref"><span>10</span></a>. terug op technieken om dit te onderzoeken.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Dit is bijvoorbeeld het geval in logistische regressiemodellen die gebruikt worden om het risico op een bepaalde aandoening te modelleren in functie van prognostische factoren.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>In het Engels is dit welbekend onder de zinsnede <em>`Association is not causation!’</em>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>In het Engels is dit welbekend onder de naam <em>`ecological fallacy’</em>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Gekopieerd!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Gekopieerd!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-Proefopzet.html" class="pagination-link" aria-label="Studiedesign">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Studiedesign</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-StatistischeBesluitvorming.html" class="pagination-link" aria-label="Statistische besluitvorming">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Statistische besluitvorming</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/statOmics/statistiek2deBach/edit/main/04-DataExploratie.qmd" class="toc-action"><i class="bi bi-github"></i>Pagina bewerken</a></li></ul></div></div></div></footer></body></html>

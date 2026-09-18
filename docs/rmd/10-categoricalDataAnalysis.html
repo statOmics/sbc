@@ -2350,14 +2350,16 @@ window.Quarto = {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
   <li><a href="#test-for-a-proportion" id="toc-test-for-a-proportion" class="nav-link" data-scroll-target="#test-for-a-proportion"><span class="header-section-number">2</span> Test for a proportion</a>
   <ul class="collapse">
-  <li><a href="#bernoulli-probability-mass-distribution" id="toc-bernoulli-probability-mass-distribution" class="nav-link" data-scroll-target="#bernoulli-probability-mass-distribution"><span class="header-section-number">2.1</span> Bernoulli Probability Mass Distribution</a></li>
-  <li><a href="#binomiale-test" id="toc-binomiale-test" class="nav-link" data-scroll-target="#binomiale-test"><span class="header-section-number">2.2</span> Binomiale test</a>
+  <li><a href="#saksen-study" id="toc-saksen-study" class="nav-link" data-scroll-target="#saksen-study"><span class="header-section-number">2.1</span> Saksen-study</a></li>
+  <li><a href="#bernoulli-probability-mass-distribution" id="toc-bernoulli-probability-mass-distribution" class="nav-link" data-scroll-target="#bernoulli-probability-mass-distribution"><span class="header-section-number">2.2</span> Bernoulli Probability Mass Distribution</a></li>
+  <li><a href="#binomiale-test" id="toc-binomiale-test" class="nav-link" data-scroll-target="#binomiale-test"><span class="header-section-number">2.3</span> Binomiale test</a>
   <ul class="collapse">
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">2.2.1</span> Binomial Distribution</a></li>
-  <li><a href="#some-binomial-probability-mass-functions." id="toc-some-binomial-probability-mass-functions." class="nav-link" data-scroll-target="#some-binomial-probability-mass-functions."><span class="header-section-number">2.2.2</span> Some Binomial probability mass functions.</a></li>
-  <li><a href="#confidence-interval-on-a-proportion" id="toc-confidence-interval-on-a-proportion" class="nav-link" data-scroll-target="#confidence-interval-on-a-proportion"><span class="header-section-number">2.2.3</span> Confidence interval on a proportion</a></li>
-  <li><a href="#ci-on-proportion-in-small-sample" id="toc-ci-on-proportion-in-small-sample" class="nav-link" data-scroll-target="#ci-on-proportion-in-small-sample"><span class="header-section-number">2.2.4</span> CI on proportion in small sample?</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">2.2.5</span> Conclusion</a></li>
+  <li><a href="#general-n-independent-samples" id="toc-general-n-independent-samples" class="nav-link" data-scroll-target="#general-n-independent-samples"><span class="header-section-number">2.3.1</span> General: <span class="math inline">\(n\)</span> independent samples</a></li>
+  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">2.3.2</span> Binomial Distribution</a></li>
+  <li><a href="#some-binomial-probability-mass-functions." id="toc-some-binomial-probability-mass-functions." class="nav-link" data-scroll-target="#some-binomial-probability-mass-functions."><span class="header-section-number">2.3.3</span> Some Binomial probability mass functions.</a></li>
+  <li><a href="#confidence-interval-on-a-proportion" id="toc-confidence-interval-on-a-proportion" class="nav-link" data-scroll-target="#confidence-interval-on-a-proportion"><span class="header-section-number">2.3.4</span> Confidence interval on a proportion</a></li>
+  <li><a href="#ci-on-proportion-in-small-sample" id="toc-ci-on-proportion-in-small-sample" class="nav-link" data-scroll-target="#ci-on-proportion-in-small-sample"><span class="header-section-number">2.3.5</span> CI on proportion in small sample?</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">2.3.6</span> Conclusion</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#test-for-association-between-two-qualitative-variables" id="toc-test-for-association-between-two-qualitative-variables" class="nav-link" data-scroll-target="#test-for-association-between-two-qualitative-variables"><span class="header-section-number">3</span> Test for association between two qualitative variables</a>
@@ -2382,6 +2384,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#categorical-predictor" id="toc-categorical-predictor" class="nav-link" data-scroll-target="#categorical-predictor"><span class="header-section-number">5.1</span> Categorical predictor</a></li>
   <li><a href="#continuous-predictor" id="toc-continuous-predictor" class="nav-link" data-scroll-target="#continuous-predictor"><span class="header-section-number">5.2</span> Continuous Predictor</a></li>
+  <li><a href="#design" id="toc-design" class="nav-link" data-scroll-target="#design"><span class="header-section-number">5.3</span> Design</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -2430,7 +2433,8 @@ window.Quarto = {
 </section>
 <section id="test-for-a-proportion" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Test for a proportion</h1>
-<p>##Saksen-study</p>
+<section id="saksen-study" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="saksen-study"><span class="header-section-number">2.1</span> Saksen-study</h2>
 <ul>
 <li>Fairly closed population (few migration)</li>
 <li>Probability that an unborn child is male?</li>
@@ -2454,8 +2458,9 @@ window.Quarto = {
 <li><p>Formally we have considered a population of unborn children where each individual is characterized by a 0 or 1.</p></li>
 </ul>
 <hr>
-<section id="bernoulli-probability-mass-distribution" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="bernoulli-probability-mass-distribution"><span class="header-section-number">2.1</span> Bernoulli Probability Mass Distribution</h2>
+</section>
+<section id="bernoulli-probability-mass-distribution" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="bernoulli-probability-mass-distribution"><span class="header-section-number">2.2</span> Bernoulli Probability Mass Distribution</h2>
 <ul>
 <li><p>Binary data can be modelled using a Bernoulli distribution: <span class="math display">\[\begin{eqnarray*}
 X_i &amp;\sim&amp; B(\pi) \text{ with}\\
@@ -2495,8 +2500,8 @@ B(\pi)&amp;=&amp;\pi^{X_i}(1-\pi)^{(1-X_i)},
 <p>In our example <span class="math inline">\(\bar x =\)</span> 3175 / 6155 = 51.6%.</p>
 <hr>
 </section>
-<section id="binomiale-test" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="binomiale-test"><span class="header-section-number">2.2</span> Binomiale test</h2>
+<section id="binomiale-test" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="binomiale-test"><span class="header-section-number">2.3</span> Binomiale test</h2>
 <ul>
 <li><p>Is the observed probability 51.6% that an unborn child is male, sufficient evidence to conclude that there is a higher chance on a boy than on a girl?</p></li>
 <li><p>Statistical test for <span class="math display">\[H_0: \pi=1/2 \text{ versus } H_1: \pi\neq 1/2,\]</span></p></li>
@@ -2545,7 +2550,8 @@ B(\pi)&amp;=&amp;\pi^{X_i}(1-\pi)^{(1-X_i)},
 </tbody>
 </table>
 <hr>
-<p>###General: <span class="math inline">\(n\)</span> independent samples</p>
+<section id="general-n-independent-samples" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="general-n-independent-samples"><span class="header-section-number">2.3.1</span> General: <span class="math inline">\(n\)</span> independent samples</h3>
 <ul>
 <li><p>Probability for <span class="math inline">\(\pi\)</span> on success (<span class="math inline">\(X=1\)</span>)</p></li>
 <li><p>Total number of successes <span class="math inline">\(S\)</span> (sum of all values of 1) can take <span class="math inline">\(n+1\)</span> possible values <span class="math display">\[S=k\text{, met }k=0,\ldots,n\]</span></p></li>
@@ -2569,8 +2575,9 @@ k \\
 <li><p>In R you can calculate the probabilities on each <span class="math inline">\(S=k\)</span> with the function <code>dbinom(k,n,p)</code></p></li>
 </ul>
 <hr>
-<section id="binomial-distribution" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">2.2.1</span> Binomial Distribution</h3>
+</section>
+<section id="binomial-distribution" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">2.3.2</span> Binomial Distribution</h3>
 <p>S is a:</p>
 <ul>
 <li><p><em>Binomial distributed random variable</em> with <em>Binomial probability mass function</em></p></li>
@@ -2587,8 +2594,8 @@ k \\
 </ul>
 <hr>
 </section>
-<section id="some-binomial-probability-mass-functions." class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="some-binomial-probability-mass-functions."><span class="header-section-number">2.2.2</span> Some Binomial probability mass functions.</h3>
+<section id="some-binomial-probability-mass-functions." class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="some-binomial-probability-mass-functions."><span class="header-section-number">2.3.3</span> Some Binomial probability mass functions.</h3>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -2686,8 +2693,8 @@ probability of success
 <p>On the 5% significance-level we conclude that there is on average a higher probability on a unborn male child than an unborn female child.</p>
 <hr>
 </section>
-<section id="confidence-interval-on-a-proportion" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="confidence-interval-on-a-proportion"><span class="header-section-number">2.2.3</span> Confidence interval on a proportion</h3>
+<section id="confidence-interval-on-a-proportion" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="confidence-interval-on-a-proportion"><span class="header-section-number">2.3.4</span> Confidence interval on a proportion</h3>
 <ul>
 <li>Estimator of the proportion of boys in the population is the sample mean <span class="math inline">\(\hat \pi=\bar x=\)</span> 0.516</li>
 <li>The standard error is <span class="math display">\[SE_{\bar x}=\sqrt{\frac{\text{Var}[X]}{n}}=\sqrt{\frac{\pi(1-\pi)}{n}}\]</span></li>
@@ -2703,8 +2710,8 @@ probability of success
 </div>
 <hr>
 </section>
-<section id="ci-on-proportion-in-small-sample" class="level3" data-number="2.2.4">
-<h3 data-number="2.2.4" class="anchored" data-anchor-id="ci-on-proportion-in-small-sample"><span class="header-section-number">2.2.4</span> CI on proportion in small sample?</h3>
+<section id="ci-on-proportion-in-small-sample" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="ci-on-proportion-in-small-sample"><span class="header-section-number">2.3.5</span> CI on proportion in small sample?</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>CI <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(<span class="at">x=</span>boys,<span class="at">n=</span>n,<span class="at">p=</span>pi0)<span class="sc">$</span>conf.int</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>CI</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2716,8 +2723,8 @@ attr(,&quot;conf.level&quot;)
 </div>
 <hr>
 </section>
-<section id="conclusion" class="level3" data-number="2.2.5">
-<h3 data-number="2.2.5" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">2.2.5</span> Conclusion</h3>
+<section id="conclusion" class="level3" data-number="2.3.6">
+<h3 data-number="2.3.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">2.3.6</span> Conclusion</h3>
 <ul>
 <li><p>Note that the test for a proportion is equivalent to a one-sample t-test for binary data.</p></li>
 <li><p>For the Saksen population we conclude at the 5% significance level that the gender of unborn children is more likely to be male than female (<span class="math inline">\(p=\)</span> 0.013). The probability that an unborn child is male equals 51.6% (95% CI [50.3,52.8]%).</p></li>
@@ -3440,8 +3447,8 @@ Y_i&amp;\sim&amp;B(\pi_i)\\\\
 <li>Note that we use the function <code>as.factor</code> to convert the cancer variable to a factor variable. - We further use the function <code>relevel</code> to specify the control treatment as the reference group.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>cancer<span class="ot">&lt;-</span>brca<span class="sc">$</span>cancer <span class="sc">%&gt;%</span> as.factor <span class="sc">%&gt;%</span> <span class="fu">relevel</span>(<span class="st">&quot;control&quot;</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>variant<span class="ot">&lt;-</span>brca<span class="sc">$</span>variant <span class="sc">%&gt;%</span> as.factor <span class="sc">%&gt;%</span> <span class="fu">relevel</span>(<span class="st">&quot;pro/pro&quot;</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>cancer<span class="ot">&lt;-</span>brca<span class="sc">$</span>cancer <span class="sc">|&gt;</span> <span class="fu">as.factor</span>() <span class="sc">|&gt;</span> <span class="fu">relevel</span>(<span class="st">&quot;control&quot;</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>variant<span class="ot">&lt;-</span>brca<span class="sc">$</span>variant <span class="sc">|&gt;</span> <span class="fu">as.factor</span>() <span class="sc">|&gt;</span> <span class="fu">relevel</span>(<span class="st">&quot;pro/pro&quot;</span>)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>brcaLogit <span class="ot">&lt;-</span> <span class="fu">glm</span>(cancer<span class="sc">~</span>variant,<span class="at">data=</span>brca,<span class="at">family=</span>binomial)</span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brcaLogit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -3540,15 +3547,15 @@ Multiple Comparisons of Means: Tukey Contrasts
 
 Fit: glm(formula = cancer ~ variant, family = binomial, data = brca)
 
-Quantile = 2.3244
+Quantile = 2.3254
 95% family-wise confidence level
  
 
 Linear Hypotheses:
                        Estimate lwr      upr     
-leu/leu - pro/pro == 0  0.21197 -0.22768  0.65162
-pro/leu - pro/pro == 0  0.13802 -0.13098  0.40703
-pro/leu - leu/leu == 0 -0.07395 -0.51377  0.36587</code></pre>
+leu/leu - pro/pro == 0  0.21197 -0.22786  0.65181
+pro/leu - pro/pro == 0  0.13802 -0.13109  0.40714
+pro/leu - leu/leu == 0 -0.07395 -0.51395  0.36605</code></pre>
 </div>
 </div>
 <ul>
@@ -3563,13 +3570,13 @@ pro/leu - leu/leu == 0 -0.07395 -0.51377  0.36587</code></pre>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>OR</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   Estimate       lwr      upr
-leu/leu - pro/pro 1.2361111 0.7963756 1.918656
-pro/leu - pro/pro 1.1480000 0.8772332 1.502342
-pro/leu - leu/leu 0.9287191 0.5982376 1.441767
+leu/leu - pro/pro 1.2361111 0.7962321 1.919002
+pro/leu - pro/pro 1.1480000 0.8771365 1.502507
+pro/leu - leu/leu 0.9287191 0.5981298 1.442027
 attr(,&quot;conf.level&quot;)
 [1] 0.95
 attr(,&quot;calpha&quot;)
-[1] 2.324411</code></pre>
+[1] 2.325363</code></pre>
 </div>
 </div>
 <ul>
@@ -3585,7 +3592,14 @@ attr(,&quot;calpha&quot;)
 <li>Toxicolocal effect of carbon disulfite (CS<span class="math inline">\(_2\)</span>) on beetles.</li>
 <li>Research hypothesis is there an effect of the CS<span class="math inline">\(_2\)</span> concentration on the mortality of beetles?</li>
 </ul>
-<p>##Design## - 32 independent experiments - Each time 1 beatle is exposed to one of 8 CS<span class="math inline">\(_2\)</span> concentrations (mg/l). - The outcome: mortality (<span class="math inline">\(y=1\)</span>) or survival (<span class="math inline">\(y=0\)</span>).</p>
+</section>
+<section id="design" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="design"><span class="header-section-number">5.3</span> Design</h2>
+<ul>
+<li>32 independent experiments</li>
+<li>Each time 1 beatle is exposed to one of 8 CS<span class="math inline">\(_2\)</span> concentrations (mg/l).</li>
+<li>The outcome: mortality (<span class="math inline">\(y=1\)</span>) or survival (<span class="math inline">\(y=0\)</span>).</li>
+</ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>beetles<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/statOmics/sbc/master/data/beetles.csv&quot;</span>)</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(beetles)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3654,18 +3668,18 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <li>Increasing the CS<span class="math inline">\(_2\)</span> dose increases the mortality.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">%&gt;%</span> data.frame</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">|&gt;</span> <span class="fu">data.frame</span>()</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">grid=</span><span class="fu">seq</span>(<span class="fu">min</span>(beetles<span class="sc">$</span>dose),<span class="fu">max</span>(beetles<span class="sc">$</span>dose),.<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">grid=</span><span class="fu">seq</span>(<span class="fu">min</span>(beetles<span class="sc">$</span>dose),<span class="fu">max</span>(beetles<span class="sc">$</span>dose),.<span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">piHat=</span><span class="fu">predict</span>(beatleModel,</span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">dose=</span>grid),</span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">type=</span><span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">type=</span><span class="st">&quot;response&quot;</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(grid,piHat))<span class="sc">+</span></span>
 <span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;dose&quot;</span>) <span class="sc">+</span></span>
 <span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;probability (dead)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose<span class="sc">%&gt;%</span>as.character<span class="sc">%&gt;%</span>as.double,<span class="at">y=</span>status<span class="sc">%&gt;%</span>as.character<span class="sc">%&gt;%</span>as.double,<span class="at">label=</span>Freq),beetlesTab<span class="sc">%&gt;%</span><span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose<span class="sc">%&gt;%</span>as.character<span class="sc">%&gt;%</span>as.double,<span class="at">y=</span>status<span class="sc">%&gt;%</span>as.character<span class="sc">%&gt;%</span>as.double,<span class="at">label=</span>Freq),beetlesTab<span class="sc">%&gt;%</span><span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose<span class="sc">|&gt;</span><span class="fu">as.character</span>()<span class="sc">|&gt;</span><span class="fu">as.double</span>(),<span class="at">y=</span>status<span class="sc">|&gt;</span><span class="fu">as.character</span>()<span class="sc">|&gt;</span><span class="fu">as.double</span>(),<span class="at">label=</span>Freq),beetlesTab<span class="sc">|&gt;</span><span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose<span class="sc">|&gt;</span><span class="fu">as.character</span>()<span class="sc">|&gt;</span><span class="fu">as.double</span>(),<span class="at">y=</span>status<span class="sc">|&gt;</span><span class="fu">as.character</span>()<span class="sc">|&gt;</span><span class="fu">as.double</span>(),<span class="at">label=</span>Freq),beetlesTab<span class="sc">|&gt;</span><span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -4168,7 +4182,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <span id="cb59-33"><a href="#cb59-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-34"><a href="#cb59-34" aria-hidden="true" tabindex="-1"></a><span class="fu"># Test for a proportion </span></span>
 <span id="cb59-35"><a href="#cb59-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-36"><a href="#cb59-36" aria-hidden="true" tabindex="-1"></a>##Saksen-study</span>
+<span id="cb59-36"><a href="#cb59-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Saksen-study</span></span>
 <span id="cb59-37"><a href="#cb59-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-38"><a href="#cb59-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fairly closed population (few migration)</span>
 <span id="cb59-39"><a href="#cb59-39" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Probability that an unborn child is male?</span>
@@ -4275,7 +4289,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <span id="cb59-144"><a href="#cb59-144" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-145"><a href="#cb59-145" aria-hidden="true" tabindex="-1"></a>***</span>
 <span id="cb59-146"><a href="#cb59-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-147"><a href="#cb59-147" aria-hidden="true" tabindex="-1"></a>###General: $n$ independent samples</span>
+<span id="cb59-147"><a href="#cb59-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### General: $n$ independent samples</span></span>
 <span id="cb59-148"><a href="#cb59-148" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-149"><a href="#cb59-149" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Probability for $\pi$ on success ($X=1$)</span>
 <span id="cb59-150"><a href="#cb59-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Total number of successes $S$ (sum of all values of 1) can take $n+1$ possible values</span>
@@ -4927,8 +4941,8 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <span id="cb59-820"><a href="#cb59-820" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-821"><a href="#cb59-821" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Note that we use the function <span class="in">`as.factor`</span> to convert the cancer variable to a factor variable. - We further use the function <span class="in">`relevel`</span> to specify the control treatment as the reference group.  </span>
 <span id="cb59-824"><a href="#cb59-824" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-825"><a href="#cb59-825" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>cancer<span class="ot">&lt;-</span>brca<span class="sc">$</span>cancer <span class="sc">%&gt;%</span> as.factor <span class="sc">%&gt;%</span> <span class="fu">relevel</span>(<span class="st">&quot;control&quot;</span>)</span>
-<span id="cb59-826"><a href="#cb59-826" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>variant<span class="ot">&lt;-</span>brca<span class="sc">$</span>variant <span class="sc">%&gt;%</span> as.factor <span class="sc">%&gt;%</span> <span class="fu">relevel</span>(<span class="st">&quot;pro/pro&quot;</span>)</span>
+<span id="cb59-825"><a href="#cb59-825" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>cancer<span class="ot">&lt;-</span>brca<span class="sc">$</span>cancer <span class="sc">|&gt;</span> <span class="fu">as.factor</span>() <span class="sc">|&gt;</span> <span class="fu">relevel</span>(<span class="st">&quot;control&quot;</span>)</span>
+<span id="cb59-826"><a href="#cb59-826" aria-hidden="true" tabindex="-1"></a>brca<span class="sc">$</span>variant<span class="ot">&lt;-</span>brca<span class="sc">$</span>variant <span class="sc">|&gt;</span> <span class="fu">as.factor</span>() <span class="sc">|&gt;</span> <span class="fu">relevel</span>(<span class="st">&quot;pro/pro&quot;</span>)</span>
 <span id="cb59-827"><a href="#cb59-827" aria-hidden="true" tabindex="-1"></a>brcaLogit <span class="ot">&lt;-</span> <span class="fu">glm</span>(cancer<span class="sc">~</span>variant,<span class="at">data=</span>brca,<span class="at">family=</span>binomial)</span>
 <span id="cb59-828"><a href="#cb59-828" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(brcaLogit)</span>
 <span id="cb59-829"><a href="#cb59-829" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -5000,7 +5014,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <span id="cb59-903"><a href="#cb59-903" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Toxicolocal effect of carbon disulfite (CS$_2$) on beetles.</span>
 <span id="cb59-904"><a href="#cb59-904" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Research hypothesis is there an effect of the  CS$_2$ concentration on the mortality of beetles?</span>
 <span id="cb59-905"><a href="#cb59-905" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-906"><a href="#cb59-906" aria-hidden="true" tabindex="-1"></a>##Design##</span>
+<span id="cb59-906"><a href="#cb59-906" aria-hidden="true" tabindex="-1"></a><span class="fu">## Design</span></span>
 <span id="cb59-907"><a href="#cb59-907" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>32 independent experiments</span>
 <span id="cb59-908"><a href="#cb59-908" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Each time 1 beatle is exposed to one of 8 CS$_2$ concentrations (mg/l).</span>
 <span id="cb59-909"><a href="#cb59-909" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The outcome: mortality ($y=1$) or survival ($y=0$).</span>
@@ -5038,18 +5052,18 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <span id="cb59-945"><a href="#cb59-945" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-946"><a href="#cb59-946" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-949"><a href="#cb59-949" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb59-950"><a href="#cb59-950" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">%&gt;%</span> data.frame</span>
+<span id="cb59-950"><a href="#cb59-950" aria-hidden="true" tabindex="-1"></a>beetlesTab<span class="ot">&lt;-</span><span class="fu">table</span>(beetles) <span class="sc">|&gt;</span> <span class="fu">data.frame</span>()</span>
 <span id="cb59-951"><a href="#cb59-951" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-952"><a href="#cb59-952" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">grid=</span><span class="fu">seq</span>(<span class="fu">min</span>(beetles<span class="sc">$</span>dose),<span class="fu">max</span>(beetles<span class="sc">$</span>dose),.<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-952"><a href="#cb59-952" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">grid=</span><span class="fu">seq</span>(<span class="fu">min</span>(beetles<span class="sc">$</span>dose),<span class="fu">max</span>(beetles<span class="sc">$</span>dose),.<span class="dv">1</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb59-953"><a href="#cb59-953" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">piHat=</span><span class="fu">predict</span>(beatleModel,</span>
 <span id="cb59-954"><a href="#cb59-954" aria-hidden="true" tabindex="-1"></a>          <span class="at">newdata=</span><span class="fu">data.frame</span>(<span class="at">dose=</span>grid),</span>
-<span id="cb59-955"><a href="#cb59-955" aria-hidden="true" tabindex="-1"></a>          <span class="at">type=</span><span class="st">&quot;response&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb59-955"><a href="#cb59-955" aria-hidden="true" tabindex="-1"></a>          <span class="at">type=</span><span class="st">&quot;response&quot;</span>)) <span class="sc">|&gt;</span> </span>
 <span id="cb59-956"><a href="#cb59-956" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(grid,piHat))<span class="sc">+</span></span>
 <span id="cb59-957"><a href="#cb59-957" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb59-958"><a href="#cb59-958" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;dose&quot;</span>) <span class="sc">+</span></span>
 <span id="cb59-959"><a href="#cb59-959" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;probability (dead)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb59-960"><a href="#cb59-960" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose<span class="sc">%&gt;%</span>as.character<span class="sc">%&gt;%</span>as.double,<span class="at">y=</span>status<span class="sc">%&gt;%</span>as.character<span class="sc">%&gt;%</span>as.double,<span class="at">label=</span>Freq),beetlesTab<span class="sc">%&gt;%</span><span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb59-961"><a href="#cb59-961" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose<span class="sc">%&gt;%</span>as.character<span class="sc">%&gt;%</span>as.double,<span class="at">y=</span>status<span class="sc">%&gt;%</span>as.character<span class="sc">%&gt;%</span>as.double,<span class="at">label=</span>Freq),beetlesTab<span class="sc">%&gt;%</span><span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">1</span>))</span>
+<span id="cb59-960"><a href="#cb59-960" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose<span class="sc">|&gt;</span><span class="fu">as.character</span>()<span class="sc">|&gt;</span><span class="fu">as.double</span>(),<span class="at">y=</span>status<span class="sc">|&gt;</span><span class="fu">as.character</span>()<span class="sc">|&gt;</span><span class="fu">as.double</span>(),<span class="at">label=</span>Freq),beetlesTab<span class="sc">|&gt;</span><span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb59-961"><a href="#cb59-961" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x=</span>dose<span class="sc">|&gt;</span><span class="fu">as.character</span>()<span class="sc">|&gt;</span><span class="fu">as.double</span>(),<span class="at">y=</span>status<span class="sc">|&gt;</span><span class="fu">as.character</span>()<span class="sc">|&gt;</span><span class="fu">as.double</span>(),<span class="at">label=</span>Freq),beetlesTab<span class="sc">|&gt;</span><span class="fu">filter</span>(status<span class="sc">==</span><span class="dv">1</span>))</span>
 <span id="cb59-962"><a href="#cb59-962" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb59-963"><a href="#cb59-963" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-964"><a href="#cb59-964" aria-hidden="true" tabindex="-1"></a></span>
