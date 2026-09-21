@@ -233,11 +233,11 @@
 \newcommand*\listoflistings{\listof{codelisting}{Lijst van listings}}
 \usepackage{amsthm}
 \theoremstyle{definition}
-\newtheorem{exercise}{Oefening}[chapter]
+\newtheorem{example}{Voorbeeld}[chapter]
 \theoremstyle{definition}
 \newtheorem{definition}{Definitie}[chapter]
 \theoremstyle{definition}
-\newtheorem{example}{Voorbeeld}[chapter]
+\newtheorem{exercise}{Oefening}[chapter]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Bewijs}}
 \newtheorem*{remark}{Opmerking}
@@ -268,7 +268,7 @@
 
 \title{Cursus Statistiek 2026-2027}
 \author{Lieven Clement}
-\date{2026-09-18}
+\date{2026-09-21}
 \begin{document}
 \frontmatter
 \maketitle
@@ -13365,14 +13365,13 @@ gemiddelde op de log schaal:
 \begin{eqnarray*}
 \sum\limits_{i=1}^n \frac{\log x_i}{n}&=&\frac{\log x_1 + \ldots + \log x_n}{n}\\\\
 &\stackrel{(1)}{=}&\frac{\log(x_1 \times \ldots \times x_n)}{n}=\frac{\log\left(\prod\limits_{i=1}^n x_i\right)}{n}\\\\
-&\stackrel{(2)}{=}&\log \left(\sqrt[\leftroot{-1}\uproot{2}\scriptstyle n]{\prod\limits_{i=1}^n x_i}\right)
+&\stackrel{(2)}{=}&\log \left(\sqrt[n]{\prod\limits_{i=1}^n x_i}\right)
 \end{eqnarray*}
 
 waarbij in overgang (1) en (2) wordt gesteund op de eigenschappen van
 logaritmen en \(\prod\) de product operator is. Na terug transformatie
 wordt dus een geometrisch gemiddelde
-\(\sqrt[\leftroot{-1}\uproot{2}\scriptstyle n]{\prod\limits_{i=1}^n x_i}\)
-bekomen.
+\(\sqrt[n]{\prod\limits_{i=1}^n x_i}\) bekomen.
 
 In de onderstaande notatie worden de populatiegemiddelden \(\mu\) dus
 geschat a.d.h.v. geometrisch gemiddelden. Omdat de logaritmische
@@ -16074,13 +16073,13 @@ te permuteren.
 
 In praktijk zijn er
 \(m=\binom{n_1+n_2}{n_1}=\binom{n}{n_1}=\binom{n}{n_2}\) mogelijke
-unieke permutaties \(\cal{G}\) van de groepslabels. Voor ons voorbeeld
-zijn dat er \(m=\) 252. Als \(m\) niet te groot is dan kunnen alle
-unieke permutaties van de groepslabels berekend worden. Voor iedere
-unique permutatie \(g \in \cal{G}\) wordt de teststatistiek \(t^*_g\)
-berekend\footnote{in ons geval de t-test statistiek door de originele
-  reponses te gebruiken die nu gekoppeld worden aan de gepermuteerde
-  groepslabels \(G_g^*\)}.
+unieke permutaties \(\mathcal{G}\) van de groepslabels. Voor ons
+voorbeeld zijn dat er \(m=\) 252. Als \(m\) niet te groot is dan kunnen
+alle unieke permutaties van de groepslabels berekend worden. Voor iedere
+unique permutatie \(g \in \mathcal{G}\) wordt de teststatistiek
+\(t^*_g\) berekend\footnote{in ons geval de t-test statistiek door de
+  originele reponses te gebruiken die nu gekoppeld worden aan de
+  gepermuteerde groepslabels \(G_g^*\)}.
 
 We kunnen alle m=252 permutaties in R genereren a.d.h.v. de functie
 \texttt{combn(n,n\_1)}. Dit wordt geïllustreerd in de onderstaande R
@@ -16165,7 +16164,7 @@ steekproef en voor elke permutatie
 Merk op dat \texttt{y{[}g{]}} de data selecteert met volgnummers g uit
 de vector y en \texttt{y{[}-g{]}} de data waarvoor de volgnummers niet
 tot g behoren. De vector \texttt{tStar} bevat de waarden van de
-teststatistiek \(t^*_g\) voor alle \(g \in {\cal{G}}\).
+teststatistiek \(t^*_g\) voor alle \(g \in {\mathcal{G}}\).
 
 We kunnen nu de verdeling van de teststatistiek onder \(H_0\)
 bestuderen.
@@ -16216,9 +16215,9 @@ cholesterolwaarden die weergegeven worden in de vector
 \(\mathbf{y}=(y_{11},\ldots,y_{51},y_{12},\ldots,y_{52})^T\).
 
 Aangezien de permutatienuldistrubutie van \(T\) bepaald wordt door
-\(t^*_g\), \(g \in{\cal{G}}\), berekenen we
+\(t^*_g\), \(g \in{\mathcal{G}}\), berekenen we
 
-\[p  = \text{P}_0\left[\left\vert T\right\vert \geq \left\vert t\right\vert \mid \mathbf{y}\right] = \frac{\#\{g\in {\cal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m},\]
+\[p  = \text{P}_0\left[\left\vert T\right\vert \geq \left\vert t\right\vert \mid \mathbf{y}\right] = \frac{\#\{g\in {\mathcal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m},\]
 
 m.a.w. als de ratio van het aantal permutaties waarvoor de statistiek
 minstens even extreem is als de geobserveerde statistiek op het totaal
@@ -16256,12 +16255,13 @@ at random getrokken zijn uit de populatie.} Het bewijs hiervan valt
 buiten het bestek van de cursus.
 
 Soms treedt er een praktisch probleem op omdat het aantal permutaties
-\(m=\#{\cal{G}}\) erg groot is. Enkele voorbeelden: \(\binom{20}{10}=\)
-184756, \(\binom{30}{15}=\) 1.55e+08 en \(\binom{40}{20}=\) 1.38e+11.
+\(m=\#{\mathcal{G}}\) erg groot is. Enkele voorbeelden:
+\(\binom{20}{10}=\) 184756, \(\binom{30}{15}=\) 1.55e+08 en
+\(\binom{40}{20}=\) 1.38e+11.
 
 Dus zelfs met slechts 40 observaties en een gebalanceerde proefopzet is
 het quasi onmogelijk om alle permutaties één voor één door te rekenen.
-De oplossing bestaat erin om niet alle \(g \in {\cal{G}}\) te
+De oplossing bestaat erin om niet alle \(g \in {\mathcal{G}}\) te
 beschouwen, maar slechts een beperkt aantal (bv. 10000 of 100000). We
 kunnen m.a.w. de nuldistributie benaderen door een groot aantal random
 permutaties uit te voeren.
@@ -16970,7 +16970,7 @@ permutaties is.
     Approximative Kruskal-Wallis Test
 
 data:  length by dose (0, 1.25, 2.5, 5)
-chi-squared = 14, p-value = 0.00033
+chi-squared = 14, p-value = 5e-04
 \end{verbatim}
 
 We kunnen besluiten dat er een extreem significant verschil is in

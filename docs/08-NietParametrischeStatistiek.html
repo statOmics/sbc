@@ -472,7 +472,7 @@ H_0: F_1(y) = F_2(y) \text{ voor alle } y \;\;\;\text{ of }\;\;\; H_0: f_1(y) = 
 </section>
 <section id="verdeling-van-de-statistiek-onder-h_0" class="level4" data-number="8.2.2.2">
 <h4 data-number="8.2.2.2" class="anchored" data-anchor-id="verdeling-van-de-statistiek-onder-h_0"><span class="header-section-number">8.2.2.2</span> Verdeling van de statistiek onder <span class="math inline">\(H_0\)</span></h4>
-<p>In praktijk zijn er <span class="math inline">\(m=\binom{n_1+n_2}{n_1}=\binom{n}{n_1}=\binom{n}{n_2}\)</span> mogelijke unieke permutaties <span class="math inline">\(\cal{G}\)</span> van de groepslabels. Voor ons voorbeeld zijn dat er <span class="math inline">\(m=\)</span> 252. Als <span class="math inline">\(m\)</span> niet te groot is dan kunnen alle unieke permutaties van de groepslabels berekend worden. Voor iedere unique permutatie <span class="math inline">\(g \in \cal{G}\)</span> wordt de teststatistiek <span class="math inline">\(t^*_g\)</span> berekend<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>In praktijk zijn er <span class="math inline">\(m=\binom{n_1+n_2}{n_1}=\binom{n}{n_1}=\binom{n}{n_2}\)</span> mogelijke unieke permutaties <span class="math inline">\(\mathcal{G}\)</span> van de groepslabels. Voor ons voorbeeld zijn dat er <span class="math inline">\(m=\)</span> 252. Als <span class="math inline">\(m\)</span> niet te groot is dan kunnen alle unieke permutaties van de groepslabels berekend worden. Voor iedere unique permutatie <span class="math inline">\(g \in \mathcal{G}\)</span> wordt de teststatistiek <span class="math inline">\(t^*_g\)</span> berekend<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p>We kunnen alle m=252 permutaties in R genereren a.d.h.v. de functie <code>combn(n,n_1)</code>. Dit wordt geïllustreerd in de onderstaande R code:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">combn</span>(n,nGroups[<span class="dv">1</span>])</span>
@@ -520,7 +520,7 @@ H_0: F_1(y) = F_2(y) \text{ voor alle } y \;\;\;\text{ of }\;\;\; H_0: f_1(y) = 
 <pre><code>[1] 252</code></pre>
 </div>
 </div>
-<p>Merk op dat <code>y[g]</code> de data selecteert met volgnummers g uit de vector y en <code>y[-g]</code> de data waarvoor de volgnummers niet tot g behoren. De vector <code>tStar</code> bevat de waarden van de teststatistiek <span class="math inline">\(t^*_g\)</span> voor alle <span class="math inline">\(g \in {\cal{G}}\)</span>.</p>
+<p>Merk op dat <code>y[g]</code> de data selecteert met volgnummers g uit de vector y en <code>y[-g]</code> de data waarvoor de volgnummers niet tot g behoren. De vector <code>tStar</code> bevat de waarden van de teststatistiek <span class="math inline">\(t^*_g\)</span> voor alle <span class="math inline">\(g \in {\mathcal{G}}\)</span>.</p>
 <p>We kunnen nu de verdeling van de teststatistiek onder <span class="math inline">\(H_0\)</span> bestuderen.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qplot</span>(tStar,<span class="at">bins=</span><span class="dv">50</span>) <span class="sc">+</span></span>
@@ -547,8 +547,8 @@ Het histogram in Figuur <a href="#fig-tPermDist" class="quarto-xref"><span>8.3</
 <p>Nu we in staat zijn de permutatienuldistributie te berekenen, kunnen we hypothesetesten uitvoeren net als in de parametrische statistiek. Voor een permutatietest is de <span class="math inline">\(p\)</span>-waarde voor de tweezijdige test (immers <span class="math inline">\(H_1: \mu_1 \neq \mu_2\)</span>)</p>
 <p><span class="math display">\[p=\text{P}_0\left[\vert T\vert \geq \vert t\vert \mid \mathbf{y}\right].\]</span></p>
 <p>Merk op dat deze p-waarde geconditioneerd is op de geobserveerde cholesterolwaarden die weergegeven worden in de vector <span class="math inline">\(\mathbf{y}=(y_{11},\ldots,y_{51},y_{12},\ldots,y_{52})^T\)</span>.</p>
-<p>Aangezien de permutatienuldistrubutie van <span class="math inline">\(T\)</span> bepaald wordt door <span class="math inline">\(t^*_g\)</span>, <span class="math inline">\(g \in{\cal{G}}\)</span>, berekenen we</p>
-<p><span class="math display">\[p  = \text{P}_0\left[\left\vert T\right\vert \geq \left\vert t\right\vert \mid \mathbf{y}\right] = \frac{\#\{g\in {\cal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m},\]</span></p>
+<p>Aangezien de permutatienuldistrubutie van <span class="math inline">\(T\)</span> bepaald wordt door <span class="math inline">\(t^*_g\)</span>, <span class="math inline">\(g \in{\mathcal{G}}\)</span>, berekenen we</p>
+<p><span class="math display">\[p  = \text{P}_0\left[\left\vert T\right\vert \geq \left\vert t\right\vert \mid \mathbf{y}\right] = \frac{\#\{g\in {\mathcal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m},\]</span></p>
 <p>m.a.w. als de ratio van het aantal permutaties waarvoor de statistiek minstens even extreem is als de geobserveerde statistiek op het totaal aantal permutaties. In R kunnen we dit als volgt berekenen.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">abs</span>(tStar)<span class="sc">&gt;=</span><span class="fu">abs</span>(tOrig))</span>
@@ -560,8 +560,8 @@ Het histogram in Figuur <a href="#fig-tPermDist" class="quarto-xref"><span>8.3</
 <p>We vinden dus een <span class="math inline">\(p\)</span>-waarde van 0.0159. Aangezien <span class="math inline">\(p&lt;5\%\)</span>, besluiten we op het <span class="math inline">\(5\%\)</span> significantieniveau dat de distributies van de cholesterol concentraties niet gelijk zijn bij hartpatiënten en bij gezonde personen. De <span class="math inline">\(p\)</span>-waarde die gevonden wordt via de permutatienuldistributie op basis van alle permutaties wordt een <strong>exacte</strong> <span class="math inline">\(p\)</span>-waarde genoemd. De permutatienuldistributie wordt een <strong>exacte</strong> nuldistributie genoemd. De term <strong>exact</strong> betekent dat de resultaten correct zijn voor iedere steekproefgrootte <span class="math inline">\(n\)</span>.</p>
 <p>De kans op een type I fout wordt dus gecontroleerd door een permutatietest, maar wel conditioneel op de geobserveerde uitkomsten data <span class="math inline">\(\mathbf{y}\)</span>.</p>
 <p>We hebben steeds geconditioneerd op de observaties van de steekproef. <strong>We kunnen ons nu afvragen of we de conclusies kunnen veralgemenen naar de populatie toe? Het antwoord is ja, als de subjecten at random getrokken zijn uit de populatie.</strong> Het bewijs hiervan valt buiten het bestek van de cursus.</p>
-<p>Soms treedt er een praktisch probleem op omdat het aantal permutaties <span class="math inline">\(m=\#{\cal{G}}\)</span> erg groot is. Enkele voorbeelden: <span class="math inline">\(\binom{20}{10}=\)</span> 184756, <span class="math inline">\(\binom{30}{15}=\)</span> 1.55e+08 en <span class="math inline">\(\binom{40}{20}=\)</span> 1.38e+11.</p>
-<p>Dus zelfs met slechts 40 observaties en een gebalanceerde proefopzet is het quasi onmogelijk om alle permutaties één voor één door te rekenen. De oplossing bestaat erin om niet alle <span class="math inline">\(g \in {\cal{G}}\)</span> te beschouwen, maar slechts een beperkt aantal (bv. 10000 of 100000). We kunnen m.a.w. de nuldistributie benaderen door een groot aantal random permutaties uit te voeren.</p>
+<p>Soms treedt er een praktisch probleem op omdat het aantal permutaties <span class="math inline">\(m=\#{\mathcal{G}}\)</span> erg groot is. Enkele voorbeelden: <span class="math inline">\(\binom{20}{10}=\)</span> 184756, <span class="math inline">\(\binom{30}{15}=\)</span> 1.55e+08 en <span class="math inline">\(\binom{40}{20}=\)</span> 1.38e+11.</p>
+<p>Dus zelfs met slechts 40 observaties en een gebalanceerde proefopzet is het quasi onmogelijk om alle permutaties één voor één door te rekenen. De oplossing bestaat erin om niet alle <span class="math inline">\(g \in {\mathcal{G}}\)</span> te beschouwen, maar slechts een beperkt aantal (bv. 10000 of 100000). We kunnen m.a.w. de nuldistributie benaderen door een groot aantal random permutaties uit te voeren.</p>
 </section>
 <section id="hoe-kunnen-we-conclusie-interpreteren" class="level4" data-number="8.2.2.4">
 <h4 data-number="8.2.2.4" class="anchored" data-anchor-id="hoe-kunnen-we-conclusie-interpreteren"><span class="header-section-number">8.2.2.4</span> Hoe kunnen we conclusie interpreteren</h4>
@@ -920,7 +920,7 @@ Kruskal-Wallis chi-squared = 14, df = 3, p-value = 0.002905</code></pre>
     Approximative Kruskal-Wallis Test
 
 data:  length by dose (0, 1.25, 2.5, 5)
-chi-squared = 14, p-value = 0.00043</code></pre>
+chi-squared = 14, p-value = 0.00044</code></pre>
 </div>
 </div>
 <p>We kunnen besluiten dat er een extreem significant verschil is in distributie van de DNA schade ten gevolge van de dosis.</p>

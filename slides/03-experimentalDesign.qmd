@@ -257,9 +257,9 @@ inherent vergelijkbaar zijn.
 | **A₂: 6% H₂O₂** | A₂B₁ | A₂B₂ |
 
 - Factoriële designs leveren rijkere informatie dan afzonderlijke
-parallelle designs omdat ze interacties kunnen detecteren: 
+parallelle designs. 
 
-- Het effect van extra enzym (van 25% naar 100%) is bij lage substraat  concentratie (1% $H_2O_2$) veel kleiner dan bij hoge concentratie van het substraat (6% $H_2O_2$) en vice versa 
+- Ze laten toe om interacties te detecteren: bijvoorbeeld wanneer het effect van extra enzym (van 25% naar 100%) bij lage substraat  concentratie (1% $H_2O_2$) kleiner (groter) is dan bij hoge concentratie van het substraat (6% $H_2O_2$) en vice versa 
 
 - In de afwezigheid van interacties is er evenveel inzicht in de effecten
 van 2 factoren als uit 2 afzonderlijke parallelle designs.
@@ -320,7 +320,7 @@ van 2 factoren als uit 2 afzonderlijke parallelle designs.
 
 ## Vitamine E en risico op hartziekten
 
-prospectieve observationele studie naar effect van Vitamine E: 
+Prospectieve observationele studie naar effect van Vitamine E: 
 
 " After controlling for age and several coronary risk factors, we observed a
 lower risk of coronary disease among men with higher intakes of
@@ -336,7 +336,9 @@ te dienen.
 
 ***
 
-## Dubbelgeblindeerde gerandomiseerde vitamine E/placebo studies
+## Vergelijking met Experimentele studies naar effect van vitamine E
+
+Uit experimentele dubbelgeblindeerde gerandomiseerde vitamine E/placebo studies leerde men:  
 
 - voedingsinterventie studies in Linxian (China): relatief risico (RR)
 0.90 (95% confidence interval (CI), 0.76-1.07);

@@ -573,11 +573,11 @@ Ter illustratie herschrijven we bijvoorbeeld het rekenkundig gemiddelde op de lo
 \begin{eqnarray*}
 \sum\limits_{i=1}^n \frac{\log x_i}{n}&=&\frac{\log x_1 + \ldots + \log x_n}{n}\\\\
 &\stackrel{(1)}{=}&\frac{\log(x_1 \times \ldots \times x_n)}{n}=\frac{\log\left(\prod\limits_{i=1}^n x_i\right)}{n}\\\\
-&\stackrel{(2)}{=}&\log \left(\sqrt[\leftroot{-1}\uproot{2}\scriptstyle n]{\prod\limits_{i=1}^n x_i}\right)
+&\stackrel{(2)}{=}&\log \left(\sqrt[n]{\prod\limits_{i=1}^n x_i}\right)
 \end{eqnarray*}
 
 waarbij in overgang (1) en (2) wordt gesteund op de eigenschappen van logaritmen en $\prod$ de product operator is.
-Na terug transformatie wordt dus een geometrisch gemiddelde $\sqrt[\leftroot{-1}\uproot{2}\scriptstyle n]{\prod\limits_{i=1}^n x_i}$ bekomen.
+Na terug transformatie wordt dus een geometrisch gemiddelde $\sqrt[n]{\prod\limits_{i=1}^n x_i}$ bekomen.
 
 In de onderstaande notatie worden de populatiegemiddelden $\mu$ dus geschat a.d.h.v. geometrisch gemiddelden.
 Omdat de logaritmische transformatie een monotone transformatie is, kunnen we ook betrouwbaarheidsintervallen berekend op log-schaal terugtransformeren!

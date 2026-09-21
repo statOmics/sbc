@@ -154,10 +154,10 @@ We kunnen bijgevolg de verdeling van de test-statistiek onder de nulhypothese be
 
 #### Verdeling van de statistiek onder $H_0$
 
-In praktijk zijn er $m=\binom{n_1+n_2}{n_1}=\binom{n}{n_1}=\binom{n}{n_2}$ mogelijke unieke permutaties $\cal{G}$ van de groepslabels.
+In praktijk zijn er $m=\binom{n_1+n_2}{n_1}=\binom{n}{n_1}=\binom{n}{n_2}$ mogelijke unieke permutaties $\mathcal{G}$ van de groepslabels.
 Voor ons voorbeeld zijn dat er $m=$ `r choose(n,nGroups[1])`.
 Als $m$ niet te groot is dan kunnen alle unieke permutaties van de groepslabels berekend worden.
-Voor iedere unique permutatie $g \in \cal{G}$ wordt de teststatistiek $t^*_g$ berekend^[in ons geval de t-test statistiek door de originele reponses te gebruiken die nu gekoppeld worden aan de gepermuteerde groepslabels $G_g^*$].
+Voor iedere unique permutatie $g \in \mathcal{G}$ wordt de teststatistiek $t^*_g$ berekend^[in ons geval de t-test statistiek door de originele reponses te gebruiken die nu gekoppeld worden aan de gepermuteerde groepslabels $G_g^*$].
 
 We kunnen alle m=`r choose(n,nGroups[1])` permutaties in R genereren a.d.h.v. de functie `combn(n,n_1)`.
 Dit wordt geïllustreerd in de onderstaande R code:
@@ -192,7 +192,7 @@ length(tStar)
 ```
 
 Merk op dat `y[g]` de data selecteert met volgnummers g  uit de vector y en  `y[-g]` de data waarvoor de volgnummers niet tot g behoren.
-De vector `tStar` bevat de  waarden van de teststatistiek $t^*_g$ voor alle $g \in {\cal{G}}$.
+De vector `tStar` bevat de  waarden van de teststatistiek $t^*_g$ voor alle $g \in {\mathcal{G}}$.
 
 We kunnen nu de verdeling van de teststatistiek onder $H_0$ bestuderen.
 
@@ -214,9 +214,9 @@ $$p=\text{P}_0\left[\vert T\vert \geq \vert t\vert \mid \mathbf{y}\right].$$
 
 Merk op dat deze p-waarde geconditioneerd is op de geobserveerde cholesterolwaarden die weergegeven worden in de vector $\mathbf{y}=(y_{11},\ldots,y_{51},y_{12},\ldots,y_{52})^T$.
 
- Aangezien de permutatienuldistrubutie van $T$ bepaald wordt door $t^*_g$, $g \in{\cal{G}}$, berekenen we
+ Aangezien de permutatienuldistrubutie van $T$ bepaald wordt door $t^*_g$, $g \in{\mathcal{G}}$, berekenen we
 
-$$p  = \text{P}_0\left[\left\vert T\right\vert \geq \left\vert t\right\vert \mid \mathbf{y}\right] = \frac{\#\{g\in {\cal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m},$$
+$$p  = \text{P}_0\left[\left\vert T\right\vert \geq \left\vert t\right\vert \mid \mathbf{y}\right] = \frac{\#\{g\in {\mathcal{G}}: \vert t^*_g\vert \geq \vert t \vert \}}{m},$$
 
 m.a.w. als de ratio van het aantal permutaties waarvoor de statistiek minstens even extreem is als de geobserveerde statistiek op het totaal aantal permutaties. In R kunnen we dit als volgt berekenen.
 
@@ -232,11 +232,11 @@ De kans op een type I fout wordt dus gecontroleerd door een permutatietest, maar
 
 We hebben steeds geconditioneerd op de observaties van de steekproef. **We kunnen ons nu afvragen of we de conclusies kunnen veralgemenen naar de populatie toe? Het antwoord is ja, als de subjecten at random getrokken zijn uit de populatie.**  Het bewijs hiervan valt buiten het bestek van de cursus.
 
-Soms treedt er een praktisch probleem op omdat het aantal permutaties $m=\#{\cal{G}}$ erg groot is. Enkele voorbeelden:
+Soms treedt er een praktisch probleem op omdat het aantal permutaties $m=\#{\mathcal{G}}$ erg groot is. Enkele voorbeelden:
 $\binom{20}{10}=$ `r format( choose(20,10),digits=3)`, $\binom{30}{15}=$ `r format( choose(30,15),digits=3)` en $\binom{40}{20}=$ `r format( choose(40,20),digits=3)`.
 
 Dus zelfs met slechts 40 observaties en een gebalanceerde proefopzet is het quasi onmogelijk om alle permutaties één voor één door te rekenen.
-De oplossing bestaat erin om niet alle $g \in {\cal{G}}$ te beschouwen, maar slechts een beperkt aantal (bv. 10000 of 100000).
+De oplossing bestaat erin om niet alle $g \in {\mathcal{G}}$ te beschouwen, maar slechts een beperkt aantal (bv. 10000 of 100000).
 We kunnen m.a.w. de nuldistributie benaderen door een groot aantal random permutaties uit te voeren.
 
 
