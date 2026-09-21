@@ -47,7 +47,7 @@ Statistische geletterdheid is cruciaal om resultaten en publicaties kritisch te 
 
 ***
 
-- Okselgeur wordt niet veroorzaakt door het zweet zelf. De geur is afkomstig van specificiek micro-organismen van de groep *Corynebacterium spp.* die het zweet metaboliseren. *Staphylococcus spp.* zijn een andere groep bacteriën die ook abundant zijn in het microbiome van de oksel die zweet metaboliseren naar metabolieten die niet stinken.
+- Okselgeur wordt niet veroorzaakt door het zweet zelf. De geur is afkomstig van specificiek micro-organismen van de groep *Corynebacterium spp.* die het zweet metaboliseren. *Staphylococcus spp.* zijn een andere groep bacteriën die ook abundant zijn in het microbiome van de oksel die zweet metaboliseren naar metabolieten die geen geurhinder veroorzaken.
 
 - De CMET-groep aan UGENT doet onderzoek naar het transplanteren van de microbiële gemeenschap, het microbiome, om mensen van geurende oksels af te helpen.  
 
@@ -149,7 +149,7 @@ text(1.5,5,"EXP. DESIGN (1)",col="black",cex=1.2)
 
 - Experiment:
 
-    - 20 personen worden at random uit de populatie getrokken van personen met een okselgeur: steekproef representatief voor populatie!
+    - 20 personen worden at random uit de populatie getrokken van personen met een okselgeur: aselecte steekproef $\rightarrow$ representatief voor populatie!
 
     - de personen worden at random verdeeld over twee behandelingsgroepen:
 
@@ -170,7 +170,7 @@ DGGE
 
 ***
 
-Vertaal onderzoeksvraag naar iets wat we kunnen quantificeren: Is er een verschil in relatieve abundantie van *Staphylococcus spp.* in het microbiome van de placebo groep en de transplantatie
+Vertaal onderzoeksvraag naar iets wat we kunnen quantificeren: Is er gemiddeld een verschil in relatieve abundantie van *Staphylococcus spp.* in het microbiome van de placebo groep en de transplantatie
 
 ***
 
@@ -514,7 +514,7 @@ t.test(rel~trt,data=ap)
 ```
 
 Conclusie:
-Gemiddeld is de relatieve abundantie van Staphylococcus in het microbiome van personen met een zweetgeur `r format(apRelSum$mean[2]-apRelSum$mean[1],digits=3)`% hoger na de transplantie dan na de placebo behandeling.
+Gemiddeld is de relatieve abundantie van Staphylococcus in het microbiome van personen met een zweetgeur `r format(apRelSum$mean[2]-apRelSum$mean[1],digits=3)`% hoger na de transplantie dan na de placebo behandeling ($p << 0.001$, 95% BI [`r paste0(round(sort(abs(t.test(rel~trt,data=ap)$conf.int)),1),"%")`]).
 
 ***
 
@@ -699,6 +699,7 @@ HeightSumExp1 <- samp1 |>
                       sd = sd)
                   )
 HeightSumExp1
+HeightSumExp1$mean[1]-HeightSumExp1$mean[2]
 ```
 
 Histogram is niet zinvol als we maar zo weinig datapunten hebben.
@@ -752,6 +753,7 @@ HeightSumExp2 <- samp2 |>
                     sd=sd)
               )
 HeightSumExp2
+HeightSumExp2$mean[1]-HeightSumExp2$mean[2]
 
 samp2 |>
   ggplot(aes(x = Gender,y = Height)) +
@@ -794,6 +796,7 @@ HeightSumExp3 <- samp3 |>
                     sd=sd)
               )
 HeightSumExp3
+HeightSumExp3$mean[1]-HeightSumExp3$mean[2]
 
 samp3 |>
   ggplot(aes(x = Gender,y = Height)) +
