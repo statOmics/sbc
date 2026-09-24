@@ -71,7 +71,7 @@ text(7.5,.5,"DATA EXPLORATIE &\nBESCHRIJVENDE STATISTIEK (2)",col="black",cex=1.
 
 ## Proefopzet (1)
    - Scope: De onderzoeker bepaalt de **populatie** naar waar ze de resultaten van de studie wensen te veralgemenen.
-   - Financiële and logistieke beperkingen $\rightarrow$ **representatieve steekproef** van de populatie: Randomisatie!
+   - Financiële en logistieke beperkingen $\rightarrow$ **representatieve steekproef** van de populatie: Randomisatie!
 
 ## Data analysis (2 & 3)
    - **Data-Exploratie en Beschrijvende Statistiek (2)**:
@@ -92,8 +92,8 @@ text(7.5,.5,"DATA EXPLORATIE &\nBESCHRIJVENDE STATISTIEK (2)",col="black",cex=1.
 ## Voorbeeld
 
 - National Health and Nutrition Examination Survey (NHANES)
-- Americaanse demografische studie
-- Groot aantal van fysieke, demografische, nutritionele, gezondheids karakteristieken  
+- Amerikaanse demografische studie
+- Groot aantal van fysieke, demografische, nutritionele, gezondheidskarakteristieken
 
 ```{r nhanes, tidy=FALSE,echo=FALSE}
 library(NHANES)
@@ -106,7 +106,7 @@ knitr::kable(NHANES[c(1,4,5,6,7,8),c(1,3,20,23,34,72)],
 # Variabelen
 
 - We meten *variabelen* op subjecten in een steekproef
-- Een Variabele is een karateristiek b.v. Lengte, Direct cholesterol, Age, Gender, ...
+- Een Variabele is een karakteristiek b.v. Lengte, Direct cholesterol, Age, Gender, ...
 - Het varieert van subject tot subject in de populatie en is dus ook in de steekproef en tussen steekproeven.
 
 
@@ -118,7 +118,7 @@ knitr::kable(NHANES[c(1,4,5,6,7,8),c(1,3,20,23,34,72)],
 
 2. *Numerieke variabelen*:
    	- *discrete variabelen*: tellingen v.b. number of partners in life span, ...
-	- *continue variabelen*: kunnen (in theorie) elke mogelijke waarde aannemen binnen bepaalde grenzen v.b. Age, Height, Weight, BMI, Direct Cholestorol...
+	- *continue variabelen*: kunnen (in theorie) elke mogelijke waarde aannemen binnen bepaalde grenzen v.b. Age, Height, Weight, BMI, Direct Cholesterol...
 
 	- Soms dichotomiseren naar een nominale kwalitatieve variabele $\rightarrow$ informatieverlies: BMI $\rightarrow$ BMI class
 
@@ -172,7 +172,7 @@ knitr::kable(NHANES[c(1,4,5,6,7,8),c(1,3,20,23,34,72)],
 
 ## Conventie
 
-- Gebruik hoofdletters om aan te geven dat bestudeerde karakteristiek (vb. systolische bloeddruk) variabel is in de populatie zonder daarbij concreet over de gerealiseerde waarde voor een bepaald subject na te denken.
+- Gebruik hoofdletters om aan te geven dat de bestudeerde karakteristiek (vb. systolische bloeddruk) variabel is in de populatie zonder daarbij concreet over de gerealiseerde waarde voor een bepaald subject na te denken.
 \vspace{15pt}
 - Variabele $X$ wordt algemeen een *toevalsveranderlijke* genoemd: is formeel
 resultaat van een *toevallige trekking* van een bepaalde
@@ -182,7 +182,7 @@ karakteristiek uit de studiepopulatie.
 \vspace{15pt}
 - Noodzakelijk om te kunnen redeneren hoe resultaten van steekproef tot steekproef kunnen wijzigen
 \vspace{15pt}
-- Toevallig veranderlijken kunnen kwalitatief, kwantitatief, discreet, continu, .... zijn
+- Toevallige veranderlijken kunnen kwalitatief, kwantitatief, discreet, continu, .... zijn
 
 ***
 
@@ -204,7 +204,7 @@ karakteristiek uit de studiepopulatie.
 
 ## Intermezzo probabiliteitstheorie
 
-### Discrete toevallig veranderlijken
+### Discrete toevallige veranderlijken
 
 - Stel dat we een discrete random variabele meten $X$
 
@@ -216,8 +216,8 @@ karakteristiek uit de studiepopulatie.
 
 - Een event $A$  is een subset van de steekproefruimte
 
-      - Een even getal werpen met een dobbelsteen: $A=(2,4,6)$.
-      - Kan ook een specifieke waarde zijn $A=(1)$.
+    - Een even getal werpen met een dobbelsteen: $A=(2,4,6)$.
+    - Kan ook een specifieke waarde zijn $A=(1)$.
 
 
 - Event ruimte $\mathcal{A}$ is de klasse van alle mogelijke events die kunnen optreden bij een bepaald experiment.
@@ -242,14 +242,14 @@ karakteristiek uit de studiepopulatie.
     - $\Omega=(1,2,3,4,5,6)$: $Pr(\Omega)=1$
 
 
-- Als we twee subjecten (j en k) onafhankelijk trekken van de populatie dan is de gezamelijke probabiliteit
+- Als we twee subjecten (j en k) onafhankelijk trekken van de populatie dan is de gezamenlijke probabiliteit
 $P(X_j,X_k)= P(X_j)P(X_k)$
 
 ***
 
 #### Verdeling
 
-- De verdeling van een discrete toevallig veranderlijke $X$ beschrijft de kans op elke mogelijke waarde van de steekproefruimte.
+- De verdeling van een discrete toevallige veranderlijke $X$ beschrijft de kans op elke mogelijke waarde van de steekproefruimte.
 
 - Voorbeeld: Gender is een binaire variabele (0: vrouw, 1: man) en binaire variabelen volgen een Bernoulli verdeling. 50.8% van de subjecten in de Amerikaanse populatie zijn vrouw en 49.2% is man.
 
@@ -267,7 +267,7 @@ tibble(X=c(0,1),prob=c(0.508,0.492)) |>
   ylab("Probability")
 ```
 
-Toevallig veranderlijke $X$ volgt een Bernoulli verdeling $B(\pi)$ met parameter $\pi=0.492$,
+Toevallige veranderlijke $X$ volgt een Bernoulli verdeling $B(\pi)$ met parameter $\pi=0.492$,
     $$B(\pi)= \pi^x(1-\pi)^{(1-x)}$$
 
 ***
@@ -299,14 +299,14 @@ tibble(X=c(0.5,1:6,6.5),cumprob=c(0,cumsum(rep(1/6,6)),1)) |>
 
 #### Gemiddelde
 
-Het gemiddelde of de verwachte waarde $E[X]$ van een discrete toevallig veranderlijke $X$ is gegeven door:
+Het gemiddelde of de verwachte waarde $E[X]$ van een discrete toevallige veranderlijke $X$ is gegeven door:
 
 $$E[X]=\sum\limits_{x\in\Omega} x P(X=x)$$
 
 - Gender voorbeeld
 
     - $E[X]= 0 \times (1-\pi) + 1 \times (\pi) = \pi$
-    - The mean equals $E[X]=0.492$.
+    - Het gemiddelde is $E[X]=0.492$.
 
 - Dobbelsteen:
 
@@ -316,7 +316,7 @@ $E[X]= 1 \times \frac{1}{6} + 2 \times \frac{1}{6} + \ldots + 6 \times \frac{1}{
 
 #### Variantie
 
-De variantie is een maat voor de variabiliteit van een toevallig veranderlijke en wordt gegeven door:
+De variantie is een maat voor de variabiliteit van een toevallige veranderlijke en wordt gegeven door:
 
 $$E[(X-E[X])^2]=\sum\limits_{x\in\Omega} (x-E[X])^2 P(X=x)$$
 
@@ -330,10 +330,10 @@ $$E[(X-E[X])^2]=\sum\limits_{x\in\Omega} (x-E[X])^2 P(X=x)$$
 
 ***
 
-### Continue toevallig veranderlijke
+### Continue toevallige veranderlijke
 
 
-- Een continue toevallig veranderlijke kan binnen bepaalde grenzen alle mogelijke waarden aannemen.
+- Een continue toevallige veranderlijke kan binnen bepaalde grenzen alle mogelijke waarden aannemen.
 
 - De kans om exact één bepaalde waarde aanneemt is daarom gelijk aan 0.
 
@@ -344,7 +344,7 @@ $$E[(X-E[X])^2]=\sum\limits_{x\in\Omega} (x-E[X])^2 P(X=x)$$
 
 - Dat wordt kort genoteerd als $f(x) = N(\mu,\sigma^2)$
 
-- Van het IQ is geweten dat het normale verdeling volgt met gemiddelde $\mu=100$ en standaardafwijking $\sigma=15$.  
+- Van het IQ is geweten dat het een normale verdeling volgt met gemiddelde $\mu=100$ en standaardafwijking $\sigma=15$.
 $$IQ \sim N(100,15^2)$$
 
 
@@ -362,7 +362,7 @@ iq |>
   geom_line()
 ```
 
-- Binnen bepaalde grenzen kunnen continue toevallig veranderlijken alle mogelijke waarden aannemen dus is $\Omega$ oneindig groot.
+- Binnen bepaalde grenzen kunnen continue toevallige veranderlijken alle mogelijke waarden aannemen dus is $\Omega$ oneindig groot.
 
 ***
 
@@ -375,7 +375,7 @@ $$F(x)=\int \limits_{-\infty}^x f(x) dx$$
 
 - Merk op dat $f(x)=0$ als x niet tot de steekproefruimte behoort.
 
-- We kunnen $F(x)$ berekenen voor een normaal verdeelde toevallig veranderlijke met de functie `pnorm` die opnieuw argumenten `mean` en `sd` heeft.
+- We kunnen $F(x)$ berekenen voor een normaal verdeelde toevallige veranderlijke met de functie `pnorm` die opnieuw argumenten `mean` en `sd` heeft.
 
 ```{r}
 iq |>
@@ -453,7 +453,7 @@ text(107.5,dnorm(114.5,100,15),expression(sigma))
 text(100-15/2,dnorm(114.5,100,15),expression(sigma))
 ```
 
-- Voor normaal verdeelde toevallig veranderlijken heeft ongeveer 95% van de subjecten in de populatie een waarde die binnen twee standaardafwijkingen ($2 \sigma$) ligt van het gemiddelde.
+- Voor normaal verdeelde toevallige veranderlijken heeft ongeveer 95% van de subjecten in de populatie een waarde die binnen twee standaardafwijkingen ($2 \sigma$) ligt van het gemiddelde.
 
 $$P[\mu - 2 \sigma < X < \mu + 2 \sigma]\approx 0.95$$
 ```{r fig.align='center',echo=FALSE}
@@ -489,7 +489,7 @@ qnorm(0.975)
 
 ```
 
-Voor een standaard normaal verdeelde toevallig veranderlijke valt inderdaad ongeveer $0.975 - 0.025=0.95$ van de waarden binnen het interval [-2,2], of binnen 2 standaardafwijkingen ($\sigma=1$) van het gemiddelde  ($\mu=0$).
+Voor een standaard normaal verdeelde toevallige veranderlijke valt inderdaad ongeveer $0.975 - 0.025=0.95$ van de waarden binnen het interval [-2,2], of binnen 2 standaardafwijkingen ($\sigma=1$) van het gemiddelde  ($\mu=0$).
 
 ***
 
@@ -497,14 +497,14 @@ Voor een standaard normaal verdeelde toevallig veranderlijke valt inderdaad onge
 
 - In echte studies kennen we de verdeling van een random veranderlijke in de populatie niet!
 
-- Omwille van financiële en logsitieke beperkingen kunen we bijna nooit de volledige populatie bestuderen.
+- Omwille van financiële en logistieke beperkingen kunnen we bijna nooit de volledige populatie bestuderen.
 
 - De populatie parameters (v.b. gemiddeld IQ, variantie van IQ) kunnen daardoor niet zonder onzekerheid worden bepaald.  
 
 - We kunnen enkel een kleine subset van de populatie bestuderen: de *steekproef*  (engels: sample)
 - Trek observaties volgens een gestructureerd design: trek de  **subjecten volledig at random uit de populatie** zodat elk subject een gelijke kans heeft om in de steekproef te worden opgenomen $\rightarrow$ **Representatieve steekproef**.
 
-- Steekproef $x_1, x_2, . . . , x_{n}$ kan als $n$ realisatie van dezelfde toevallig veranderlijke $X$ worden beschouwd voor subjecten $i = 1,2,...,n$.
+- Steekproef $x_1, x_2, . . . , x_{n}$ kan als $n$ realisatie van dezelfde toevallige veranderlijke $X$ worden beschouwd voor subjecten $i = 1,2,...,n$.
 
 - De verdeling in de populatie is ongekend en moet worden geschat op basis van de steekproef.
 
@@ -520,7 +520,7 @@ Voor een standaard normaal verdeelde toevallig veranderlijke valt inderdaad onge
 
 - Selecteer $n=10000$ subjecten at random van de Amerikaanse populatie.
 
-- Eens de steekproef is getrokken hebben we $n$ realisaties geobserveerd voor de toevallig veranderlijke $X$.
+- Eens de steekproef is getrokken hebben we $n$ realisaties geobserveerd voor de toevallige veranderlijke $X$.
 
 - *Conventie*: Geobserveerde waarden  worden met een kleine letter aangeduid $x$.
 
@@ -528,7 +528,7 @@ Voor een standaard normaal verdeelde toevallig veranderlijke valt inderdaad onge
 
 ## Samenvatting  
 
-  - Voor we het experiment uitvoeren is de populatie karakteristiek voor de proefpersonen $1,\ldots,n$ die we uit de populatie zullen trekken ongekend en zijn dat toevallig veranderlijken: $X_1, \ldots, X_n$
+  - Voor we het experiment uitvoeren is de populatie karakteristiek voor de proefpersonen $1,\ldots,n$ die we uit de populatie zullen trekken ongekend en zijn dat toevallige veranderlijken: $X_1, \ldots, X_n$
   - Dit is noodzakelijk om te kunnen redeneren over hoe de resultaten van steekproef tot steekproef kunnen wijzigen
   - In een steekproef observeren we gerealiseerde uitkomsten $x_1, x_2, \dots, x_n$: v.b. gender of lengte van subjecten in de steekproef.
 
@@ -544,8 +544,8 @@ NHANES |> ggplot(aes(x=Gender)) + geom_bar()
 - Gender is een binaire variabele.
 - Het volgt een Bernoulli verdeling.
 - De Bernoulli verdeling heeft een parameter: het gemiddelde $\pi$.
-- We kunnen $\pi$ schatten op basis van de steekproef door het steekproefgemiddelde te berekenen $\bar x = \sum\limits_{i=1}^n x_i$
-- Merk op dat het steekproefgemiddelde zelf een toevallig veranderlijke is! Het wijzigt ook van steekproef tot steekproef!
+- We kunnen $\pi$ schatten op basis van de steekproef door het steekproefgemiddelde te berekenen $\bar x = \frac{\sum\limits_{i=1}^n x_i}{n}$
+- Merk op dat het steekproefgemiddelde zelf een toevallige veranderlijke is! Het wijzigt ook van steekproef tot steekproef!
 
 
 ```{r}
@@ -647,7 +647,7 @@ ecdfFem10(150)
 
 - We moeten hiervoor enkel twee parameters schatten:
     - gemiddelde via steekproefgemiddelde ($\hat\mu=\bar x$)
-    - variantie via steekproefvariantie ($\hat{\sigma}^2= s^2$) of de standaardafwijking d.m.v. steekproef standaarddeviatie ($\hat\sigma=s$).
+    - variantie via steekproefvariantie ($\hat{\sigma}^2= s^2$) of de standaardafwijking d.m.v. steekproefstandaarddeviatie ($\hat\sigma=s$).
 
 
 ```{r}
@@ -726,11 +726,11 @@ ecdfFem10(150)
 
 ***
 
-## Referentie intervallen
+## Referentie-intervallen
 
-- Normale waarden voor de lengte kunnen worden bekomen door gebruik te maken van een referentie interval.
+- Normale waarden voor de lengte kunnen worden bekomen door gebruik te maken van een referentie-interval.
 
-- Typisch wordt een 95% referentie interval gebruikt zodat we voor 95% van de subjecten in de populatie verwachten dat ze een karakteristiek hebben die in het referentie interval ligt.
+- Typisch wordt een 95% referentie-interval gebruikt zodat we voor 95% van de subjecten in de populatie verwachten dat ze een karakteristiek hebben die in het referentie-interval ligt.
 
 - We kunnen dat opnieuw op basis van de empirische verdeling.
 
@@ -761,13 +761,13 @@ fem10 |>
 ```
 
 - Dit interval o.b.v. de kleine steekproef is een ruwe benadering.
-- We hebben immers niet voldoende observaties om een goede benadering te hebben voor extreme quantielen.
+- We hebben immers niet voldoende observaties om een goede benadering te hebben voor extreme kwantielen.
 
 ### Normale benadering
 
-- We kunnen de functie qnorm gebruiken om quantielen te berekenen van de normale verdeling.
+- We kunnen de functie qnorm gebruiken om kwantielen te berekenen van de normale verdeling.
 
-- We weten dat een 95% referentie interval ongeveer binnen twee standaard deviaties rond het gemiddelde ligt.
+- We weten dat een 95% referentie-interval ongeveer binnen twee standaard deviaties rond het gemiddelde ligt.
 
 
 - Grote steekproef
@@ -793,8 +793,8 @@ qnorm(0.975,mean=HeightSum10$mean,sd=HeightSum10$sd)
 
 - Voor de kleine steekproef werkt de normale benadering beter dan de empirische verdeling.
 
-    - We kijken immers naar extreme quantielen 2.5% en 97.5%.
-    - Er zijn inderdaad weinig gegevens in de steekproef die toelaten om deze quantielen direct te schatten.
+    - We kijken immers naar extreme kwantielen 2.5% en 97.5%.
+    - Er zijn inderdaad weinig gegevens in de steekproef die toelaten om deze kwantielen direct te schatten.
     - Met de normale benadering kunnen we alle data gebruiken om het gemiddelde en de standaarddeviatie te schatten.
     - Als de aanname van normaliteit geldt dan krijgen we betere schattingen voor deze kwantielen.  
 
