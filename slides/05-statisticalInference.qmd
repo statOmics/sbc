@@ -315,9 +315,9 @@ n <- 15 # number of subjects per sample
 nSim <- 50 # number of simulations
 
 femSamp <- matrix(nrow=n,ncol=nSim)
+set.seed(2105)
 for (j in 1:nSim)
 {
-  set.seed(2105)
   femSamp[,j] <- sample(fem$DirectChol,15)
   if (j<4) {
     p <- femSamp |>
