@@ -325,9 +325,9 @@ NHANES |> filter(Gender=="female") |>
 # Normale benadering
 
 
-- Biologische and chemische data zijn vaak Normaal verdeeld na transformatie.
+- Biologische and chemische data zijn vaak Normaal verdeeld (**na transformatie**).
 
-- Als dat het geval is dan kunnen we veel inzicht in de data krijgen op basis van twee beschrijvende statistieken: het gemiddelde $\mu$ en de standaarddeviatie $\sigma$.
+- Als dat het geval is dan kunnen we veel inzicht in de data krijgen op basis van twee beschrijvende statistieken: het gemiddelde $\mu$ en de standaarddeviatie $\sigma$ (**op de getransformeerde gegevens**).
 
 ***
 
