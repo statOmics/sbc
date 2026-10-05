@@ -36,7 +36,7 @@ set.seed(1314)
 
 - bv. het populatie gemiddelde
   $$E(X)=\mu$$
-- Vermindert de gemiddelde bloeddruk bij patiënten met hypertensie na toedienen van Captopril?
+- Vermindert de bloeddruk bij patiënten met hypertensie gemiddeld na toedienen van Captopril?
 
 ***
 
@@ -281,7 +281,7 @@ De systolische bloeddruk verschillen zijn ongeveer normaal verdeeld.
 
 - $\bar X$ is een *overtekende schatter* voor $\mu$
 
-<details><summary>Click to see proof</summary><p>
+<details><summary>Klik om het bewijs te zien</summary><p>
 \begin{eqnarray*}
 E(\bar X) &=& E \left(\frac{X_1+ X_2+ ... + X_n}{n}\right) \\
 &= & \frac{E(X_1)+ E(X_2)+ ... + E(X_n)}{n} \\
@@ -308,8 +308,8 @@ E(\bar X) &=& E \left(\frac{X_1+ X_2+ ... + X_n}{n}\right) \\
 library(NHANES)
 
 fem <- NHANES |>
-  filter(Gender=="female" & !is.na(DirectChol)) |>
-  select("DirectChol")
+  dplyr::filter(Gender=="female" & !is.na(DirectChol)) |>
+  dplyr::select("DirectChol")
 
 n <- 15 # number of subjects per sample
 nSim <- 50 # number of simulations
@@ -318,7 +318,7 @@ femSamp <- matrix(nrow=n,ncol=nSim)
 set.seed(2105)
 for (j in 1:nSim)
 {
-  femSamp[,j] <- sample(fem$DirectChol,15)
+  femSamp[,j] <- sample(fem$DirectChol,n)
   if (j<4) {
     p <- femSamp |>
       log2() |>
@@ -390,7 +390,7 @@ $$\sigma^2_{\bar X}=\frac{\sigma^2}{n}$$
 - Hoe meer observaties we hebben, des te nauwkeuriger $\bar X$.
 
 
-<details><summary>Click to see proof</summary><p>
+<details><summary>Klik om het bewijs te zien</summary><p>
 \begin{eqnarray*}
 \text{Var}(\bar X)&=&\text{Var} \left(\frac{X_1+ X_2+ ... + X_n}{n}\right) \\
 &\overset{*}{=} & \frac{\text{Var}(X_1)+ \text{Var}(X_2)+ ... + \text{Var}(X_n)}{n^2} \\
@@ -402,7 +402,7 @@ $$\sigma^2_{\bar X}=\frac{\sigma^2}{n}$$
 $$\text{Var}[a X_1 + b X_2] = a^2\text{Var}[X_1] + b^2 \text{Var}[X_2] + 2 ab\text{Covar}[X_1,X_2]$$
 
     - Met $Covar[X_1,X_2]=0$ wanneer $X_1$ en $X_2$ onafhankelijk zijn.
-</p></details>s
+</p></details>
 
 **Definitie: standaard error**
 
@@ -692,7 +692,8 @@ data.frame(meanLog2Chol) |>
   ggtitle("Means on 10 females")
 ```
 
-**We hebben dus bevestigd dat het gemiddelde ongeveer normaal verdeeld is voor studies met 5 en 10 vrouwen, terwijl de originele gegevens ongeveer normaal verdeeld zijn.**
+
+**We hebben dus bevestigd dat het gemiddelde ongeveer normaal verdeeld is voor studies met 10 vrouwen, terwijl de originele gegevens ongeveer normaal verdeeld zijn.**
 
 ***
 
