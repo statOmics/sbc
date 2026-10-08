@@ -183,14 +183,15 @@ gemiddelde waarde voorstelt, dit is de onzekerheid in de responsvariabele.
 Gezien het lineair regressiemodel onderstellingen doet over de verdeling van X en Y , kunnen deze onderstellingen ook vals zijn. Later in dit hoofdstuk zullen we zien hoe deze onderstellingen geëvalueerd kunnen worden. Als echter voldaan is aan de onderstellingen, laat dit een efficiënte data-analyse toe: alle observaties worden benut om te leren over verwachte uitkomst bij X = x.
 
 
-Het lineair regressiemodel kan worden gebruikt voor   
+Het lineair regressiemodel kan worden gebruikt voor
+
   - *predictie* (voorspellingen): als $Y$ ongekend is, maar $X$ wel gekend is, kunnen we $Y$ voorspellen op basis van $X$
 
-$$\text{E}\left[Y|X =x\right]=\beta_0 + \beta_1 x.$$
+    $$\text{E}\left[Y|X =x\right]=\beta_0 + \beta_1 x.$$
 
   - *associatie*: beschrijven van de biologische relatie tussen variabele $X$ en continue meting $Y$:
 
-$$\text{E}\left[Y|X=x+\delta\right]-\text{E}\left[Y|X=x\right]= \left[\beta_0+\beta_1(x+\delta)\right]-(\beta_0+\beta_1x)=\beta_1\delta$$
+    $$\text{E}\left[Y|X=x+\delta\right]-\text{E}\left[Y|X=x\right]= \left[\beta_0+\beta_1(x+\delta)\right]-(\beta_0+\beta_1x)=\beta_1\delta$$
 
 waarbij $\beta_1$ het verschil is in gemiddelde uitkomst tussen subjecten die 1 eenheid verschillen in de genexpressie van het ESR1 gen.
 

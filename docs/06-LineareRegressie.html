@@ -620,13 +620,13 @@ E(Y|X =x)=\beta_0 + \beta_1 x
 <p><span class="math display">\[Y=E(Y|X=x)+\epsilon=\beta_0+\beta_1 x+\epsilon\]</span></p>
 <p>waarbij <span class="math inline">\(\epsilon\)</span> de afwijking tussen de uitkomst en haar (conditioneel) gemiddelde waarde voorstelt, dit is de onzekerheid in de responsvariabele.</p>
 <p>Gezien het lineair regressiemodel onderstellingen doet over de verdeling van X en Y , kunnen deze onderstellingen ook vals zijn. Later in dit hoofdstuk zullen we zien hoe deze onderstellingen geëvalueerd kunnen worden. Als echter voldaan is aan de onderstellingen, laat dit een efficiënte data-analyse toe: alle observaties worden benut om te leren over verwachte uitkomst bij X = x.</p>
-<p>Het lineair regressiemodel kan worden gebruikt voor<br>
-- <em>predictie</em> (voorspellingen): als <span class="math inline">\(Y\)</span> ongekend is, maar <span class="math inline">\(X\)</span> wel gekend is, kunnen we <span class="math inline">\(Y\)</span> voorspellen op basis van <span class="math inline">\(X\)</span></p>
-<p><span class="math display">\[\text{E}\left[Y|X =x\right]=\beta_0 + \beta_1 x.\]</span></p>
+<p>Het lineair regressiemodel kan worden gebruikt voor</p>
 <ul>
-<li><em>associatie</em>: beschrijven van de biologische relatie tussen variabele <span class="math inline">\(X\)</span> en continue meting <span class="math inline">\(Y\)</span>:</li>
+<li><p><em>predictie</em> (voorspellingen): als <span class="math inline">\(Y\)</span> ongekend is, maar <span class="math inline">\(X\)</span> wel gekend is, kunnen we <span class="math inline">\(Y\)</span> voorspellen op basis van <span class="math inline">\(X\)</span></p>
+<p><span class="math display">\[\text{E}\left[Y|X =x\right]=\beta_0 + \beta_1 x.\]</span></p></li>
+<li><p><em>associatie</em>: beschrijven van de biologische relatie tussen variabele <span class="math inline">\(X\)</span> en continue meting <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[\text{E}\left[Y|X=x+\delta\right]-\text{E}\left[Y|X=x\right]= \left[\beta_0+\beta_1(x+\delta)\right]-(\beta_0+\beta_1x)=\beta_1\delta\]</span></p></li>
 </ul>
-<p><span class="math display">\[\text{E}\left[Y|X=x+\delta\right]-\text{E}\left[Y|X=x\right]= \left[\beta_0+\beta_1(x+\delta)\right]-(\beta_0+\beta_1x)=\beta_1\delta\]</span></p>
 <p>waarbij <span class="math inline">\(\beta_1\)</span> het verschil is in gemiddelde uitkomst tussen subjecten die 1 eenheid verschillen in de genexpressie van het ESR1 gen.</p>
 </section>
 <section id="parameterschatting" class="level2" data-number="6.3">

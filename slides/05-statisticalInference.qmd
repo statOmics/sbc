@@ -982,7 +982,7 @@ res |>
 
 ### Andere betrouwbaarheidsniveaus
 
-- We kunnen $z_{2.5\%}=1.96$ vervangen door een ander kwantiel van de normale verdeling $z_{\alpha/2} om een interval te krijgen met een ander betrouwbaarheidsniveau $1-\alpha$.
+- We kunnen $z_{2.5\%}=1.96$ vervangen door een ander kwantiel van de normale verdeling $z_{\alpha/2}$ om een interval te krijgen met een ander betrouwbaarheidsniveau $1-\alpha$.
 
 - Betrouwbaarheidsintervallen worden niet alleen gebruikt voor het gemiddelde, maar ook voor andere populatieparameters.
 
@@ -998,8 +998,7 @@ In echte voorbeelden is $\sigma$ ongekend en wordt het geschat op basis van de s
 
 - Vandaar dat ${(\bar{X} - \mu)}/{(S/\sqrt{n}) }$ ongeveer standaard normaal verdeeld is en
 \begin{equation*}
-\left[\bar{X} - z_{\alpha/2} \ \frac{S}{\sqrt{n}} , \bar{X} + z_{\alpha/2} \
-\frac{S}{\sqrt{n}}\right]
+\left[\bar{X} - z_{\alpha/2} \ \frac{S}{\sqrt{n}} , \bar{X} + z_{\alpha/2} \ \frac{S}{\sqrt{n}}\right]
 \end{equation*}
 is een geschatte $(1- \alpha)100\%$ CI voor $\mu$.
 
@@ -1126,7 +1125,8 @@ res |>
 ***
 Opdracht
 
-Voer de bovenstaande simulatie studie opnieuw uit maar verdubbel de steekproefgrootte. Welke impact heeft dit op de BIs?
+Maak plot voor simulatie studie met grotere steekproefgrootte.  Welke impact heeft dit op de BIs?
+
 ***
 
 ![](https://www.nature.com/articles/nmeth.2659.pdf){width=100%}
@@ -1385,7 +1385,7 @@ tPermPlot
 
 Wanneer er geen effect van captopril is, is het bijna onmogelijk om een teststatistiek te verkrijgen die zo extreem is als degene die werd waargenomen (  t=`r round(tOrig,2)`).
 
--De kans om een grotere bloeddrukdaling waar te nemen dan degene die we in onze steekproef hebben waargenomen in een willekeurige steekproef onder $H_0$ is 1/`r format(2^15)`.
+- De kans om een grotere bloeddrukdaling waar te nemen dan degene die we in onze steekproef hebben waargenomen in een willekeurige steekproef onder $H_0$ is 1/`r format(2^15)`.
 
 - We noemen deze kans de *p-waarde*.
 
@@ -1630,7 +1630,7 @@ Er kan een verkeerde beslissing zijn genomen.
 
 ```{r,echo=FALSE}
 library("kableExtra")
-DecisionErrors=data.frame(Conclusion=c("Accept H0","Reject H0"),"H0"=c("OK","Type I ($\\alpha$)"),"H1"=c("Type II ($\\beta$)","OK"))
+DecisionErrors=data.frame(Conclusion=c("Accept H0","Reject H0"),"H0"=c("OK","Type I ($\alpha$)"),"H1"=c("Type II ($\beta$)","OK"))
 knitr::kable(DecisionErrors,,align="c")|>
   kable_styling( position = "center") |>
   add_header_above(c(" " = 1, "Reality" = 2))
@@ -2088,14 +2088,17 @@ Wat bij twee extremen:
 
 - Stel dat $\text{Cor}(Y_{1},Y_{2})=1$ tweede meting geen nieuwe informatie en zelfde nauwkeurigheid als wanneer we alleen de n eerste metingen beschouwen
 - Wanneer $\text{Cor}(Y_{1},Y_{2})=0$, tweede meting volledig nieuwe informatie en dus eenzelfde nauwkeurigheid als bij 1 meting voor $2n$ i.p.v. $n$ verschillende planten. Vermits
-\[\frac{\sigma^2}{2n}\{1+\text{Cor}(Y_{1},Y_{2})\}\geq \frac{\sigma^2}{2n}\]
+
+$$
+\frac{\sigma^2}{2n}\{1+\text{Cor}(Y_{1},Y_{2})\}\geq \frac{\sigma^2}{2n}
+$$
 
 *Wanneer de correlatie tussen herhaalde genexpressie metingen positief is (hetgeen we verwachten), zal men in de praktijk meer preciese resultaten bekomen door 1 meting te bepalen voor $2n$ verschillende planten dan door 2 metingen te bepalen voor $n$ verschillende planten.*
 
 - Als er evenveel herhaalde metingen zijn voor elk subject/experimentele unit (vb plant) dan kan men metingen ook reduceren naar $n$ onafhankelijke metingen door het gemiddelde te berekenen per experimentele unit.
 - Omdat de gemiddeldes per experimentele unit zijn gebaseerd op evenveel herhaalde metingen zal de precisie van die gemiddeldes hetzelfde zijn.
 - Bij verschillend aantal herhaalde metingen per experimentele unit kan men NIET met gemiddeldes per Exp. unit werken want die hebben anders een verschillende precisie
-$longrightarrow$ dan zijn meer geavanceerde methoden nodig!
+$\longrightarrow$ dan zijn meer geavanceerde methoden nodig!
 
 ## Captopril
 
@@ -2136,8 +2139,9 @@ sqrt(varXbarDelta)
   - kan enkel voor design met gepaarde metingen (2 metingen per patient)
   - Alle verschillen zijn onafhankelijk.
 
-$$X_{i}=Y_{ai}-Y_{bi}$$
-   - vervolgens standard error op $\bar X$.
+    $$X_{i}=Y_{ai}-Y_{bi}$$
+
+  - vervolgens standard error op $\bar X$.
 
 In het captopril voorbeeld wordt de schatting
 ```{r}

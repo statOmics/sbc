@@ -174,7 +174,7 @@ brcaSubset |>
     - Punt op regressielijn voor een gegeven $x_i$: $(x_i, \beta_0 + \beta_1 x_i)$  zo dicht mogelijk bij $(x_i, y_i)$
     - Kies $\beta_0$ en $\beta_1$ zodat de som tussen voorspelde en waargenomen punten zo klein mogelijk wordt.
 
-$$SSE=\sum_{i=1}^n (y_i-\beta_0-\beta_1 x_i)^2=\sum_{i=1}^n e_i^2$$
+      $$SSE=\sum_{i=1}^n (y_i-\beta_0-\beta_1 x_i)^2=\sum_{i=1}^n e_i^2$$
 
 - Met $e_i$ de residuen: de verticale afstanden van de observaties tot de gefitte regressierechte
 
