@@ -1595,7 +1595,7 @@ Een test resultaat is *statistisch significant* als $p<\alpha$
 
 - Het vat het bewijs tegen de nul samen.
 
-$$\begin{array}{cl}>0.10 & \text{ non significant (no evidence)}\\0.05-0.10 & \text{ marginal significant, weak evidence (do not use this yourself)}\\0.01-0.05 & \text{ significant}\\0.001-0.01 & \text{strongly significant}\\<0.001 & \text{ extremely significant}\end{array}$$
+$$\begin{array}{cl}>0.10 & \text{ niet significant }\\0.05-0.10 & \text{ marginaal significant, weak evidence (gebruik dit niet zelf)}\\0.01-0.05 & \text{ significant}\\0.001-0.01 & \text{sterk significant}\\<0.001 & \text{ extreem significant}\end{array}$$
 
 ***
 
@@ -1630,7 +1630,10 @@ Er kan een verkeerde beslissing zijn genomen.
 
 ```{r,echo=FALSE}
 library("kableExtra")
-DecisionErrors=data.frame(Conclusion=c("Accept H0","Reject H0"),"H0"=c("OK","Type I ($\alpha$)"),"H1"=c("Type II ($\beta$)","OK"))
+# Unicode alpha/beta: "$\alpha$" in een R-string wordt door R als het
+# escape-teken \a (alert) gelezen, waardoor "$lpha$" overblijft.
+greeks <- c(alpha = 'α', beta = 'β')
+DecisionErrors=data.frame(Conclusion=c("Accept H0","Reject H0"),"H0"=c("OK",paste0("Type I (",greeks['alpha'],")")),"H1"=c(paste0("Type II (",greeks['beta'],")"),"OK"))
 knitr::kable(DecisionErrors,,align="c")|>
   kable_styling( position = "center") |>
   add_header_above(c(" " = 1, "Reality" = 2))
@@ -1679,6 +1682,7 @@ We illustreren dit in een simulatiestudie
 - 1000 gesimuleerde steekproeven
 
 ```{r}
+set.seed(1524)
 nsim <- 10000
 n <- 15
 sigma <- 9
@@ -1713,6 +1717,50 @@ data.frame(pValue = pSim) |>
 
 - De type I-fout is inderdaad ongeveer 0,05
 - De p-waarden zijn uniform
+
+Wat als we de steekproef vergroten?
+
+- n=30
+- $\mu=0$ mmHg, er is dus geen effect van de behandeling
+- $\sigma =9$ mmHg
+- 1000 gesimuleerde steekproeven
+
+```{r}
+nsim <- 10000
+n <- 30
+sigma <- 9
+mu <- 0
+mu0 <- 0
+alpha <- 0.05
+
+#simulate nsim samples of size n
+deltaSim <- matrix(
+  rnorm(n*nsim,mu,sigma),
+  nrow=n,
+  ncol=nsim)
+
+pSim <- apply(
+  deltaSim,
+  2,
+  function(x, mu, alternative)    
+    t.test(x,
+      mu = mu,
+      alternative = alternative)$p.value,
+      mu = mu0,
+      alternative="less"
+  )
+
+mean(pSim<alpha)
+
+data.frame(pValue = pSim) |>
+  ggplot(aes(x=pValue)) +
+  geom_histogram() +
+  xlim(0,1)
+```
+
+- De type I-fout is opnieuw ongeveer 0,05
+- De p-waarden zijn uniform
+
 ***
 
 ### Type II fout
@@ -1846,7 +1894,7 @@ Dus,
 
 - $p \geq \alpha$ accepteer $H_0$  
 
-	  - Betekent niet dat we $H_0$ correct accepteren.
+  	- Betekent niet dat we $H_0$ correct accepteren.
   	- We kunnen enkel concluderen dat de gegevens onvoldoende bewzijs hebben tegen de $H_0$ in voordeel van $H_1$.
     - Dit noemen we een zwakke conclusie
     - We concluderen doorgaans dat het effect van de behandeling niet significant is.
