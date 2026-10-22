@@ -139,7 +139,8 @@ onbekend  **intercept** $\beta_0$ en
 ## Gebruik
 
 - *Predictie*: wanneer $Y$ ongekend is, maar $X$ wel, kunnen we $Y$ voorspellen op basis van $X$
-\[E(Y|X=x)=\beta_0 + \beta_1 x\]
+
+$$E(Y|X=x)=\beta_0 + \beta_1 x$$
 
 - *Associatie*: biologische relatie tussen variabele $X$ en continue meting $Y$ beschrijven.
 - *Intercept:* $E(Y|X=0)=\beta_0$
@@ -202,21 +203,35 @@ lm1 <- lm(S100A8 ~ ESR1, brcaSubset)
 summary(lm1)
 ```
 
-\[E(Y|X=x)=`r round(lm1$coef[1],2)`-`r abs(round(lm1$coef[2],3))` x\]
+$$
+E(Y|X=x)=`r round(lm1$coef[1],2)`-`r abs(round(lm1$coef[2],3))` x
+$$
 
-- De verwachte S100A8-expressie is gemiddeld  `r abs(round(lm1$coef[2],3)*1000)` eenheden lager voor patiënten met een ESR1-expressieniveau die 1000 eenheden hoger ligt.
+- De verwachte S100A8-expressie is gemiddeld  `r abs(round(lm1$coef[2],3)*1000)` eenheden lager voor patiënten met een ESR1-expressieniveau die 1000 eenheden hoger ligt 
+
+- Crossectionele studie dus helling enkel te interpreteren als verschillen tussen groepen patienten!.
 
 - Verwachte S100A8 expressieniveau voor patiënten met een ESR1 expressieniveau van 2000:  
-\[`r round(lm1$coef[1],2)`-`r abs(round(lm1$coef[2],3))`\times 2000=`r round(lm1$coef[1]+lm1$coef[2]*2000,2)`\]
+
+$$
+`r round(lm1$coef[1],2)`-`r abs(round(lm1$coef[2],3))`\times 2000=`r round(lm1$coef[1]+lm1$coef[2]*2000,2)`
+$$
 
 - Verwachte S100A8 expressieniveau voor patiënten met een ESR1 expressieniveau van 4000:  
-\[`r round(lm1$coef[1],2)`-`r abs(round(lm1$coef[2],3))`\times 4000=`r round(lm1$coef[1]+lm1$coef[2]*4000,2)`\]
+
+$$
+`r round(lm1$coef[1],2)`-`r abs(round(lm1$coef[2],3))`\times 4000=`r round(lm1$coef[1]+lm1$coef[2]*4000,2)`
+$$
+
 - **Let op voor extrapolatie!** (Veronderstelling van lineariteit kan men enkel nagaan binnen het bereik van de data).
 
 # Statistische besluitvorming (statistische inferentie)
 
 Om besluiten te kunnen trekken over lineaire regressiemodel
-\[E(Y|X)=\beta_0+\beta_1 X\]
+
+$$
+E(Y|X)=\beta_0+\beta_1 X
+$$
 
 moeten we weten:
 
@@ -261,6 +276,7 @@ $$\sigma^2_{\hat{\beta}_1}=\frac{\sigma^2}{\sum\limits_{i=1}^n (X_i-\bar X)^2}$$
 - *mean squared error* (MSE)
 
 $$\hat\sigma^2=MSE=\frac{\sum\limits_{i=1}^n \left(y_i-\hat\beta_0-\hat\beta_1\times x_i\right)^2}{n-2}=\frac{\sum\limits_{i=1}^n e^2_i}{n-2}.$$
+
 - Voor het bekomen van deze schatter steunen we op onafhankelijkheid (aanname 2) en homoscedasticiteit (aanname 3).
 - deel door $n-2$
 
@@ -273,8 +289,7 @@ $$T=\frac{\hat{\beta}_k-\beta_k}{SE(\hat{\beta}_k)} \text{ with } k=1,2.$$
 
 - Als aan alle aannames is voldaan volgt $T$ een t-verdeling met n-2 vrijheidsgraden.
 
-- Als geen normaliteit maar wel onafhankelijk, lineariteit en homoscedasticiteit en grote dataset
-\[\rightarrow \text{Centrale Limietstelling}\]
+- Als geen normaliteit maar wel onafhankelijk, lineariteit en homoscedasticiteit en grote dataset $\rightarrow \text{Centrale Limietstelling}$
 
 
 ### Borstkanker voorbeeld
@@ -282,6 +297,7 @@ $$T=\frac{\hat{\beta}_k-\beta_k}{SE(\hat{\beta}_k)} \text{ with } k=1,2.$$
 - Negatieve associatie tussen S100A8 en ESR1 gen expressie.
 
 - Veralgemeen effect in steekproef naar populatie met behulp van het betrouwbaarheidsinterval op de helling:
+
 $$[\hat\beta_1 - t_{n-2,\alpha/2} \text{SE}_{\hat\beta_1},\hat\beta_1 + t_{n-2,\alpha/2} \text{SE}_{\hat\beta_1}]$$.
 
 ```{r}
@@ -450,7 +466,7 @@ confint(lm2)
 ```
 
 
-### Interpretatie 1
+### Interpretatie 1 / algemeen, in schaal waarin data gemodelleerd zijn
 
 Een patiënt met een ESR1 expressie die 1 eenheid op de $\log_2$ schaal hoger ligt dan dat van een andere patiënt heeft gemiddeld gezien een expressie-niveau van het S100A8 gen  dat `r abs(round(lm2$coef[2],2))` eenheden lager ligt (95\% BI [`r paste(round(confint(lm2)[2,],2),collapse=",")`]).
 
@@ -459,7 +475,7 @@ Een patiënt met een ESR1 expressie die 1 eenheid op de $\log_2$ schaal hoger li
 $$\log_2 \hat\mu_1=23.401  -1.615 \times \text{logESR}_1,\text{ } \log_2 \hat\mu_2=23.401  -1.615 \times \text{logESR}_2 $$
 $$\log_2 \hat\mu_2-\log_2 \hat\mu_1=  -1.615 (\log_2 \text{ESR}_2-\log_2 \text{ESR}_1) = -1.615 \times 1 = -1.615$$
 
-### Interpretatie 2
+### Interpretatie 2 / specifiek door gebruik te maken van de transformatie van de variabelen
 
 Model op log-schaal: bij terugtransformatie verkrijgen we het geometrische gemiddelde
 
@@ -490,7 +506,7 @@ or
 $$\frac{\hat\mu_1}{\hat\mu_2}=2^{1.615} =3.06$$
 
 
-### Interpratie 3
+### Interpratie 3 / Enkel bij log-transformatie van zowel response als predictor variabelen
 
 Een patiënt met een ESR1 expressie die 1\% hoger is dan die van een andere patiënt zal gemiddeld een expressieniveau voor het S100A8 gen  hebben dat ongeveer `r round(lm2$coef[2],2)`% lager is (95\% BI [`r paste(round(confint(lm2)[2,],2),collapse=",")`])%.
 
@@ -506,7 +522,7 @@ $$-10<\beta_1<10 \rightarrow 1.01^{\beta_1} -1 \approx \frac{\beta_1}{100}.$$
 
 - Regressie model kan ook worden gebruikt voor predictie
 
-- Besluitvorming te doen over de gemiddelde uitkomst bij een gegeven waarde $x$, m.a.w.
+- Om besluitvorming te doen over de gemiddelde uitkomst bij een gegeven waarde $x$, m.a.w.
 $$\hat{g}(x)= \hat{\beta}_0 + \hat{\beta}_1 x$$
 - $\hat{g}(x)$ een schatter van het conditionele gemiddelde $E[Y\vert X=x]$
 
@@ -543,7 +559,10 @@ brca |> ggplot(
   geom_smooth(method = "lm")
 ```
 
-## Terugtransformatie
+## Terugtransformatie 
+
+- Terug transformatie van BI's is mogelijk omdat de log-transformatie monotoon is! 
+
 ```{r}
 newdata<-data.frame(cbind(grid,2^g))
 brca |>
@@ -567,9 +586,10 @@ $$
 met $\epsilon^*\sim N(0,\sigma^2)$ en $\epsilon^*$ onafhankelijk van de waarnemingen in de steekproef $Y_1,\ldots, Y_n$.
 
 - We voorspellen een nieuwe log-S100A8 voor een patiënt met een gekend log2-ESR1-expressieniveau x
-\[
+
+$$
   \hat{y}(x)=\hat{\beta}_0+\hat{\beta}_1 \times x
-\]
+$$
 
 -  De geschatte gemiddelde uitkomst en voorspelling voor een nieuwe waarneming zijn gelijk.
 
@@ -843,7 +863,7 @@ summary(lm2)
 
 ```{r, echo=FALSE}
 grid<-seq(0,10,.1)
-plot(grid,df(grid,1,30),type="l",xlab="F",ylab="Density",main="F-distributie 1 df in tellen, 30 in noemer",cex.main=1.5,cex.axis=1.5,cex.lab=1.5)
+plot(grid,df(grid,1,30),type="l",xlab="F",ylab="Density",main="F-distributie 1 df in teller, 30 in noemer",cex.main=1.5,cex.axis=1.5,cex.lab=1.5)
 ```
 
 
@@ -965,7 +985,7 @@ sim_df |>
 
 - Mogelijks **confounding**: geen randomisatie $\rightarrow$ groepen patiënten met aangetaste lymfeknopen en niet-aangetaste lymfeknopen kunnen nog in andere karakteristieken van elkaar verschillen.
 
-- Enkel besluiten dat er een associatie is tussen de lymfeknoop status en de leeftijd.
+- We kunnen enkel besluiten dat er een associatie is tussen de lymfeknoop status en de leeftijd.
 
 - Het is dus niet noodzakelijkerwijs een causaal verband!
 
@@ -975,7 +995,7 @@ sim_df |>
 
 - Aangezien we de ESR1-expressie niet experimenteel vast hebben kunnen leggen, kunnen we niet besluiten dat een hogere ESR1-expressie de S100A8-expressie doet verlagen.
 
-- Enkel besluiten dat er een negatieve associatie is.
+- We kunnen enkel besluiten dat er een negatieve associatie is.
 
 - Om impact van gen te bestuderen op andere genen: knockout mutanten generenen in het labo
 

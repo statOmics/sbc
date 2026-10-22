@@ -901,7 +901,7 @@ NHANES |> ggplot(aes(x=Gender)) + geom_bar()
 - Gender is een binaire variabele.
 - Het volgt een Bernoulli verdeling.
 - De Bernoulli verdeling heeft een parameter: het gemiddelde $\pi$.
-- We kunnen $\pi$ schatten op basis van de steekproef door het steekproefgemiddelde te berekenen $\bar x = \sum\limits_{i=1}^n x_i$
+- We kunnen $\pi$ schatten op basis van de steekproef door het steekproefgemiddelde te berekenen $\bar x = \dfrac{1}{n}\sum\limits_{i=1}^n x_i$
 - Merk op dat het steekproefgemiddelde zelf een toevallig veranderlijke is! Het wijzigt ook van steekproef tot steekproef!
 
 

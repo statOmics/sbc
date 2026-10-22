@@ -1,0 +1,225 @@
+---
+title: "Recap: One-sample vs. Two-sample t-test"
+lang: nl
+format:
+  pdf:
+    documentclass: article
+    papersize: a4
+    fontsize: 10pt
+    geometry:
+      - margin=1.5cm
+    pdf-engine: xelatex
+    toc: false
+    number-sections: false
+    colorlinks: false
+    include-in-header:
+      text: |
+        \usepackage{titlesec}
+        \usepackage{xcolor}
+        \usepackage{enumitem}
+        \definecolor{brandgreen}{HTML}{4F704F}
+        \titlespacing{\section}{0pt}{8pt}{3pt}
+        \titleformat{\section}{\normalfont\bfseries\color{brandgreen}\large}{}{0em}{}
+        \setlength{\parindent}{0pt}
+        \setlength{\parskip}{2pt}
+        \setlist{noitemsep, topsep=1pt, parsep=0pt, partopsep=0pt, leftmargin=1.2em}
+        \setlist[itemize,2]{label=$\circ$}
+        \newcommand{\twocol}[2]{\noindent\begin{minipage}[t]{0.485\textwidth}#1\end{minipage}\hfill\begin{minipage}[t]{0.485\textwidth}#2\end{minipage}\par\medskip}
+---
+
+## Dataset -- onderzoeksvraag -- design
+
+```{=latex}
+\twocol{
+\begin{minipage}[t][1.0cm][t]{\linewidth}\textbf{One-sample t-test / Gepaarde t-test - one sample t-test op verschil (Captopril)}\end{minipage}
+\begin{itemize}
+\item Is er een effect van het toedienen van captopril op bloeddruk bij patiënten met hypertensie? 
+\item 15 personen at random
+\item bloeddruk vóór en ná behandeling bij dezelfde patiënt (pretest/posttest, gepaarde metingen) 
+\end{itemize}
+$\Rightarrow$ verschil $Y=\text{BP}_\text{na}-\text{BP}_\text{voor}$.
+}{
+\begin{minipage}[t][1.0cm][t]{\linewidth}\textbf{Two-sample t-test (Oksel-microbioom)}\end{minipage}
+\begin{itemize}
+\item
+Is er een effect van microbioom-transplantatie op relatieve abundantie van \textit{Staphylococcus}?
+\item 20 personen at random 
+\item verdeeld over 2 \textbf{onafhankelijke} groepen (10 placebo, 10 transplantatie).
+\end{itemize}
+}
+```
+
+## Vertalen van onderzoeksvraag naar effectgrootte in populatie
+
+```{=latex}
+\twocol{
+\[\delta=\mu-\mu_0\]
+\begin{itemize}
+\item verschil tussen populatie gemiddelde $\mu$ en een vooropgestelde waarde $\mu_0$
+\item bij captopril / gepaarde gegevens
+\begin{itemize}
+\item  $\mu$: gemiddeld verschil na - voor in de populatie
+\item $\mu_0=0$
+\end{itemize}
+\end{itemize}
+}{
+\[\delta = \mu_1-\mu_2\]
+\begin{itemize}
+\item verschil tussen groepsgemiddelden
+\end{itemize}
+}
+```
+
+## Puntschatter
+
+```{=latex}
+\twocol{
+\[\hat\delta = \hat{\mu} - \mu_0, \quad\quad\hat\mu=\bar Y\]
+}{
+\[\hat\delta=\hat\mu_1-\hat\mu_2=\bar Y_1-\bar Y_2\]
+}
+```
+
+## Model / verdeling
+
+```{=latex}
+\twocol{
+\begin{eqnarray*}
+Y\sim N(\mu,\sigma^2) &\Longrightarrow& \bar Y\sim N\!\left(\mu,\frac{\sigma^2}{n}\right)
+\end{eqnarray*}
+}{
+\begin{eqnarray*}
+Y_{ij}\sim N(\mu_j,\sigma^2)&\Longrightarrow& \bar Y_{j} \sim N\left(\mu_j,\frac{\sigma^2}{n_j}\right)\\
+&\Longrightarrow& \bar Y_1-\bar Y_2\sim N\!\left(\mu_1-\mu_2,\ \sigma^2\left(\tfrac1{n_1}+\tfrac1{n_2}\right)\right)
+\end{eqnarray*}
+}
+```
+
+## Aannames
+
+```{=latex}
+\twocol{
+\begin{itemize}
+\item Representatieve steekproef: $E[\bar Y]=\mu$
+\item Normaliteit
+\item Onafhankelijkheid (tussen subjecten)
+\end{itemize}
+}{
+\begin{itemize}
+\item Representatieve steekproef: $E[\bar Y_j]=\mu_j$
+\item Normaliteit
+\item Onafhankelijkheid \textbf{en} gelijkheid van variantie tussen de 2 groepen ($\sigma_1^2=\sigma_2^2=\sigma^2$)
+\end{itemize}
+}
+```
+
+## Variantie-/SE-schatter
+
+```{=latex}
+\twocol{
+\begin{minipage}[t][1.3cm][c]{\linewidth}\centering$\hat\sigma^2=S^2=\dfrac{\sum_{i=1}^n(Y_i-\bar Y)^2}{n-1}$\end{minipage}
+\begin{minipage}[t][1.0cm][c]{\linewidth}\centering$SE_{\bar Y}=\dfrac{S}{\sqrt n}$\end{minipage}
+}{
+\begin{minipage}[t][1.3cm][c]{\linewidth}\centering$S_p^2=\dfrac{\sum_{j=1}^2\sum_{i=1}^{n_j}(Y_{ij}-\bar Y_j)^2}{n_1+n_2-2}$\end{minipage}
+\begin{minipage}[t][1.0cm][c]{\linewidth}\centering$SE_{\bar Y_1-\bar Y_2}=S_p\sqrt{\tfrac1{n_1}+\tfrac1{n_2}}$\end{minipage}
+}
+```
+
+## Centrale statistiek
+
+```{=latex}
+\twocol{
+\[T=\frac{\bar Y-\mu}{SE_{\bar Y}}\sim t_{n-1}\]
+}{
+\[T=\frac{(\bar Y_1-\bar Y_2)-(\mu_1-\mu_2)}{SE_{\bar Y_1-\bar Y_2}}\sim t_{n_1+n_2-2}\]
+}
+```
+
+## Betrouwbaarheidsinterval
+
+```{=latex}
+\twocol{
+\[\bar Y\pm t_{n-1,\alpha/2}\,SE_{\bar Y}\]
+}{
+\[(\bar Y_1-\bar Y_2)\pm t_{n_1+n_2-2,\alpha/2}\,SE_{\bar Y_1-\bar Y_2}\]
+}
+```
+
+## Hypothesetoets
+
+```{=latex}
+\twocol{
+\[H_0:\mu=\mu_0 \quad\text{vs}\quad H_1:\mu\neq\mu_0\]
+(of eenzijdig: $\mu<\mu_0$ of $\mu>\mu_0$)
+
+\vspace{0.4cm}
+
+Teststatistiek onder $H_0$:
+\[T=\frac{\bar Y-\mu_0}{SE_{\bar Y}}\sim t_{n-1}\]
+voor captopril $\mu_0 =0$
+}{
+\[H_0:\mu_1-\mu_2=0 \quad\text{vs}\quad H_1:\mu_1-\mu_2\neq0\]
+(of eenzijdig: $\mu_1-\mu_2<0$ of $\mu_1-\mu_2>0$)
+
+\vspace{0.4cm}
+
+Teststatistiek onder $H_0$:
+\[T=\frac{\bar Y_1-\bar Y_2}{SE_{\bar Y_1-\bar Y_2}}\sim t_{n_1+n_2-2}\]
+}
+```
+
+\begin{itemize}
+\item Beide statistieken zijn een **signaal/ruis-ratio**: $T=\hat\delta/SE_{\hat\delta}$, met $\hat\delta=\bar Y-\mu_0$ (one-sample) en $\hat\delta=\bar Y_1-\bar Y_2$ (two-sample). 
+\item De p-waarde is de kans om, onder de nulhypothese ($H_0$), in een random steekproef met hetzelfde design, een even extreme of meer extreme statistiek te bekomen als hetgeen we observeerden in het experiment.  (meer extreem $\rightarrow$ in de richting van H1)
+\end{itemize}
+
+## R-functie
+
+```{=latex}
+\twocol{
+\texttt{t.test(x, mu = mu0)}\\
+of gepaard: \texttt{t.test(x1, x2, paired = TRUE)}
+}{
+\texttt{t.test(y \textasciitilde{} groep, var.equal = TRUE)}
+}
+```
+
+## Als aannames niet voldaan zijn
+
+```{=latex}
+\twocol{
+\begin{itemize}
+\item Geen normaliteit, grote $n$: centrale limietstelling
+\item Geen normaliteit, kleine $n$: permutatietest (teken van $Y-\mu_0$ permuteren, $2^n$ mogelijkheden)
+\end{itemize}
+}{
+\begin{itemize}
+\item Ongelijke varianties: Welch two-sample t-test 
+\item Geen normaliteit, grote $n$ in beide groepen: centrale limietstelling
+\item Geen normaliteit, kleine $n$: niet-parametrisch
+(Wilcoxon/Mann-Whitney H8)
+\end{itemize}
+}
+```
+
+## Design aspecten: waarvan hangt de power af?
+
+```{=latex}
+\twocol{
+\begin{minipage}[t][1.4cm][c]{\linewidth}\centering$T=\dfrac{\bar Y-\mu_0}{S/\sqrt n}$\end{minipage}
+\begin{itemize}
+\item $S$: niet in de hand, hangt af van variabiliteit in populatie
+\item $n$: belangrijkste designparameter
+\item significantieniveau (meestal 5\%)
+\item werkelijke effectgrootte $\mu-\mu_0$: niet in de hand, moeten we dus wel vooraf inschatten om minimale $n$ te kunnen bepalen om minimale effectgrootte $\delta$ op te kunnen pikken die wetenschappelijke relevant is.
+\end{itemize}
+}{
+\begin{minipage}[t][1.4cm][c]{\linewidth}\centering$T=\dfrac{\bar Y_1-\bar Y_2}{S_p\sqrt{\tfrac1{n_1}+\tfrac1{n_2}}}$\end{minipage}
+\begin{itemize}
+\item $S_p$: niet in de hand, hangt af van variabiliteit in populatie
+\item $n_1,n_2$: belangrijkste designparameters; bij vast totaal $n_1+n_2$ is $SE$ minimaal als $n_1=n_2$
+\item significantieniveau (meestal 5\%)
+\item werkelijke effectgrootte $\mu_1-\mu_2$:  niet in de hand, moeten we dus wel vooraf inschatten om minimale $n$ te kunnen bepalen om minimale effectgrootte $\delta$ op te kunnen pikken die wetenschappelijke relevant is.
+\end{itemize}
+}
+```

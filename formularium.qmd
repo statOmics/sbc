@@ -1,0 +1,230 @@
+---
+title: "Formularium Statistiek"
+lang: nl
+format:
+  pdf:
+    documentclass: article
+    papersize: a4
+    fontsize: 10pt
+    geometry:
+      - margin=1.1cm
+    pdf-engine: xelatex
+    toc: false
+    number-sections: false
+    colorlinks: false
+    include-in-header:
+      text: |
+        \usepackage{multicol}
+        \usepackage{titlesec}
+        \usepackage{xcolor}
+        \usepackage{enumitem}
+        \definecolor{brandgreen}{HTML}{4F704F}
+        \titlespacing{\section}{0pt}{6pt}{2pt}
+        \titlespacing{\subsection}{0pt}{4pt}{1pt}
+        \titleformat{\section}{\normalfont\bfseries\color{brandgreen}\large}{\thesection}{0.5em}{}
+        \titleformat{\subsection}{\normalfont\bfseries\color{brandgreen}}{\thesubsection}{0.5em}{}
+        \setlength{\parindent}{0pt}
+        \setlength{\parskip}{2pt}
+        \setlist{noitemsep, topsep=1pt, parsep=0pt, partopsep=0pt, leftmargin=1.1em}
+        \setlength{\columnsep}{16pt}
+        \setlength{\columnseprule}{0.3pt}
+---
+
+```{=latex}
+\footnotesize
+\begin{multicols}{2}
+```
+
+# 2. Basisbegrippen & kansrekenen
+
+**Bernoulli-verdeling.** $B(\pi)=\pi^x(1-\pi)^{1-x}$. $\pi$ = kans op succes. $E[X]=\pi$; $\text{Var}(X)=\pi(1-\pi)$.
+
+**Verwachte waarde (discreet).** $E[X]=\sum_{x\in\Omega}xP(X=x)$.
+
+**Variantie (discreet).** $\text{Var}(X)=\sum_{x\in\Omega}(x-E[X])^2P(X=x)$.
+
+**Verwachte waarde (continu).** $E[X]=\displaystyle\int_{x\in\Omega}xf(x)\,dx$.
+
+**Variantie (continu).** $\text{Var}(X)=\displaystyle\int_{x\in\Omega}(x-E[X])^2f(x)\,dx$.
+
+**Normale dichtheid.** $f(x)=\dfrac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$, $X\sim N(\mu,\sigma^2)$. $E[X]=\mu$; $\text{Var}(X)=\sigma^2$.
+
+**68%-95% regel.** $P(\mu-\sigma<X<\mu+\sigma)\approx0.68$; $P(\mu-2\sigma<X<\mu+2\sigma)\approx0.95$.
+
+**Standaardisatie.** $Z=\dfrac{X-\mu}{\sigma}\sim N(0,1)$.
+
+**Kans via standaardisatie.** $P(a\le X\le b)=\Phi\!\left(\frac{b-\mu}{\sigma}\right)-\Phi\!\left(\frac{a-\mu}{\sigma}\right)$; $\Phi(-z)=1-\Phi(z)$.
+
+**Kwantiel $z_\alpha$** (= $(1-\alpha)\cdot100\%$-percentiel). $P(Z\ge z_\alpha)=\alpha$; $P(-z_{\alpha/2}\le Z\le z_{\alpha/2})=1-\alpha$.
+
+**Referentie-interval.** $[\mu-z_{\alpha/2}\sigma,\ \mu+z_{\alpha/2}\sigma]$; geschat: $[\bar x-z_{\alpha/2}s_x,\ \bar x+z_{\alpha/2}s_x]$.
+
+**ECDF.** $\widehat F(x)=\dfrac{\#(x_i\le x)}{n}$.
+
+**Steekproefgemiddelde.** $\bar X=\dfrac1n\sum_{i=1}^n X_i$.
+
+**Notatie:** populatie $\mu,\sigma^2$ (Grieks) $\leftrightarrow$ steekproef $\bar X, S^2$ (Latijns).
+
+# 4. Data-exploratie & beschrijvende statistiek
+
+**Steekproefgemiddelde.** $\bar x=\dfrac1n\sum_{i=1}^n x_i$.
+
+**Geometrisch gemiddelde.** $\sqrt[n]{\prod_i x_i}=\exp\{\frac1n\sum_i\log x_i\}$.
+
+**Log fold change.** $\log B-\log A=\log(FC_{B\text{ vs }A})$.
+
+**Steekproefvariantie.** $s_x^2=\dfrac{\sum_i(x_i-\bar x)^2}{n-1}$; $s_x=\sqrt{s_x^2}$.
+
+**Lineaire transformatie.** $\text{Var}(aX)=a^2\text{Var}(X)$; $SD(aX)=|a|SD(X)$; $\text{Var}(X+a)=\text{Var}(X)$.
+
+**Bereik / IQR.** $R_x=x_{\max}-x_{\min}$; $IQR=x_{75}-x_{25}$.
+
+**Variatiecoëfficiënt.** $VC_x=\dfrac{s_x}{\bar x}\times100\%$.
+
+**Covariantie.** $\text{Cov}(X,Y)=E[(X-E[X])(Y-E[Y])]$.
+
+**Correlatie (Pearson, steekproef).** $\text{cor}(x,y)=\dfrac{\sum_i(x_i-\bar x)(y_i-\bar y)}{(n-1)s_xs_y}\in[-1,1]$.
+
+**Risico/odds (kwalitatieve associatie).**
+$ARV=p_T-p_C$; \quad $RR=\dfrac{p_T}{p_C}$; \quad $\text{odds}=\dfrac{p}{1-p}$; \quad $OR=\dfrac{\text{odds}_T}{\text{odds}_C}$.
+Bij zeldzame uitkomst ($p<5\%$): $OR\approx RR$.
+
+# 5. Statistische besluitvorming
+
+**Var./SE van het gemiddelde.** $\text{Var}(\bar X)=\dfrac{\sigma^2}{n}$; \quad $SE(\bar X)=\dfrac{\sigma}{\sqrt n}$; geschat: $\widehat{SE}=\dfrac{S}{\sqrt n}$.
+
+**Var. van lin. combinatie.** $\text{Var}(aX+bY)=a^2\text{Var}(X)+b^2\text{Var}(Y)+2ab\,\text{Cor}(X,Y)\sqrt{\text{Var}(X)\text{Var}(Y)}$.
+
+**Centrale limietstelling.** $\bar X_n\approx N\!\left(\mu,\frac{\sigma^2}{n}\right)$ voor grote $n$, ongeacht verdeling van $X_i$.
+
+**BI gemiddelde, gekende $\sigma$.** $\left[\bar X-z_{\alpha/2}\frac{\sigma}{\sqrt n},\ \bar X+z_{\alpha/2}\frac{\sigma}{\sqrt n}\right]$.
+
+**t-verdeling.** $\dfrac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}$.
+
+**BI gemiddelde, ongekende $\sigma$.** $\left[\bar X-t_{n-1,\alpha/2}\frac{s}{\sqrt n},\ \bar X+t_{n-1,\alpha/2}\frac{s}{\sqrt n}\right]$.
+
+---
+
+**One-sample t-test.** $H_0:\mu=\mu_0$; \quad $t=\dfrac{\bar X-\mu_0}{se_{\bar X}}\sim t_{n-1}$ onder $H_0$.
+
+**p-waarde.** Eenzijdig ($H_1:\mu>\mu_0$): $p=P_0[T\ge t]$. Eenzijdig ($H_1:\mu<\mu_0$): $p=P_0[T\le t]$. Tweezijdig ($H_1:\mu\neq\mu_0$): $p=2P_0[T\ge|t|]$.
+
+**Kritieke waarde / beslissing.** Verwerp $H_0$ als $|t|>t_{n-1;\alpha/2}$ (tweezijdig).
+
+**Type I/II fout, power.** $P[\text{Type I}]=\alpha$; \quad power $\pi(\delta)=1-\beta(\delta)=P_\delta[P<\alpha]$.
+
+---
+
+**Gepaarde t-test.** $\bar X=\sum_i\frac{Y_{i2}-Y_{i1}}{n}$; toets = one-sample t-test op de verschillen.
+
+---
+
+**Two-sample model.** $Y_{ij}\sim N(\mu_j,\sigma^2)$, $i=1,\ldots,n_j,\ j=1,2$.
+
+**Gepoolde variantie.** $S_p^2=\dfrac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}$.
+
+**Two-sample t-test (gelijke var.).** $T=\dfrac{\bar Y_1-\bar Y_2}{S_p\sqrt{\frac1{n_1}+\frac1{n_2}}}\sim t_{n_1+n_2-2}$; BI: $(\bar Y_1-\bar Y_2)\pm t_{n_1+n_2-2,\alpha/2}S_p\sqrt{\frac1{n_1}+\frac1{n_2}}$.
+
+**Welch t-test (ongelijke var.).** $T=\dfrac{\bar Y_1-\bar Y_2}{\sqrt{S_1^2/n_1+S_2^2/n_2}}$.
+
+# 6. Lineaire regressie (enkelvoudig)
+
+**Model.** $Y=\beta_0+\beta_1x+\epsilon$, $\epsilon\sim N(0,\sigma^2)$; \quad $E[Y\mid X{=}x{+}\delta]-E[Y\mid X{=}x]=\beta_1\delta$.
+
+**KKS-schatters.** $\hat\beta_1=\dfrac{\sum_i(y_i-\bar y)(x_i-\bar x)}{\sum_i(x_i-\bar x)^2}=\dfrac{\text{cor}(x,y)s_y}{s_x}$; \quad $\hat\beta_0=\bar y-\hat\beta_1\bar x$.
+
+**MSE.** $\hat\sigma^2=\text{MSE}=\dfrac{\sum_i e_i^2}{n-2}$, $e_i=y_i-\hat\beta_0-\hat\beta_1x_i$.
+
+**SE van schatters.** $SE_{\hat\beta_1}=\sqrt{\dfrac{\text{MSE}}{\sum_i(X_i-\bar X)^2}}$; \quad $SE_{\hat\beta_0}=\sqrt{\dfrac{\sum_iX_i^2}{\sum_i(X_i-\bar X)^2}\cdot\dfrac{\text{MSE}}{n}}$.
+
+**Toets/BI helling.** $T=\dfrac{\hat\beta_1-\beta_1}{SE_{\hat\beta_1}}\sim t_{n-2}$; \quad BI: $\hat\beta_1\pm t_{n-2,\alpha/2}SE_{\hat\beta_1}$; $H_0:\beta_1=0$.
+
+**BI gemiddelde respons.** $SE_{\hat g(x)}=\sqrt{\text{MSE}\left\{\frac1n+\frac{(x-\bar X)^2}{\sum_i(X_i-\bar X)^2}\right\}}$.
+
+**Predictie-interval.** $SE_{\hat Y(x)}=\sqrt{\text{MSE}\left\{1+\frac1n+\frac{(x-\bar X)^2}{\sum_i(X_i-\bar X)^2}\right\}}$ (groter dan BI door extra term 1).
+
+**Kwadratensommen.** $\text{SSTot}=\sum_i(Y_i-\bar Y)^2$; $\text{SSR}=\sum_i(\hat Y_i-\bar Y)^2$; $\text{SSE}=\sum_i(Y_i-\hat Y_i)^2$; $\text{SSTot}=\text{SSR}+\text{SSE}$.
+
+**$R^2$ en F-test.** $R^2=1-\dfrac{\text{SSE}}{\text{SSTot}}=\dfrac{\text{SSR}}{\text{SSTot}}$; \quad $F=\dfrac{\text{SSR}/1}{\text{SSE}/(n-2)}\sim F_{1,n-2}$ onder $H_0:\beta_1=0$.
+
+**Dummy-variabele (2 groepen).** $Y=\beta_0+\beta_1x+\epsilon$, $x\in\{0,1\}$; $\beta_1=\mu_2-\mu_1$; $\hat\beta_0=\bar Y_1$, $\hat\beta_1=\bar Y_2-\bar Y_1$ (= two-sample t-test).
+
+**Polynomiale regressie.** $E(Y\mid X)=\beta_0+\beta_1X+\beta_2X^2(+\beta_3X^3+\ldots)$.
+
+# 7. Variantie-analyse (ANOVA)
+
+**Model.** $Y_i\mid\text{groep }j\sim N(\mu_j,\sigma^2)$; $H_0:\mu_1=\ldots=\mu_g$.
+
+**Kwadratensommen.** $\text{SST}=\sum_j n_j(\bar Y_j-\bar Y)^2$ (tussen groepen, $g-1$ df); $\text{SSTot}=\text{SST}+\text{SSE}$; $\text{MSE}=\sum_j\frac{(n_j-1)S_j^2}{n-g}$.
+
+**F-test.** $F=\dfrac{\text{SST}/(g-1)}{\text{SSE}/(n-g)}=\dfrac{\text{MST}}{\text{MSE}}\sim F_{g-1,n-g}$.
+
+**Post-hoc t-test.** $T_{jk}=\dfrac{\bar Y_j-\bar Y_k}{\sqrt{\text{MSE}\left(\frac1{n_j}+\frac1{n_k}\right)}}\sim t_{n-g}$.
+
+**Bonferroni.** $\alpha_E\le m\alpha$ (FWER, $m$ toetsen); individueel niveau $\alpha=\alpha_E/m$; aangepaste p-waarde $\tilde p=\min(mp,1)$.
+
+---
+
+**One-sample t-test als lineair model.** $Y_i\sim N(\beta_0,\sigma^2)$; $\hat\mu=\hat\beta_0$; $T=\dfrac{\hat\beta_0-\beta_0}{SE_{\hat\beta_0}}\sim t_{n-1}$.
+
+**Two-sample t-test als lineair model.** $Y_i\sim N(\beta_0+\beta_1x_i,\sigma^2)$, $x_i=1$ in groep 2 ($x_i=0$ in groep 1); $\hat\mu_2-\hat\mu_1=\hat\beta_1$ (zie Dummy-variabele, §6).
+
+**Contrast-test (ANOVA/GLM via lineair model).** Voor een lineaire combinatie $L\boldsymbol\beta$ (bv. $L\hat{\boldsymbol\beta}=\hat\beta_4-\hat\beta_2$): $T=\dfrac{L\hat{\boldsymbol\beta}-L\boldsymbol\beta}{SE_{L\hat{\boldsymbol\beta}}}\sim t_{n-p}$.
+
+# 8. Niet-parametrische toetsen
+
+**Wilcoxon rank-sum / Mann-Whitney.** $S_1=\sum_iR(Y_{i1})$; $U_1=S_1-\frac12n_1(n_1{+}1)=\sum_{i,k}\mathbb 1\{Y_{i1}\ge Y_{k2}\}$; $\frac1{n_1n_2}E[U_1]=P[Y_1\ge Y_2]$.
+
+# 9. Categorische data & logistische regressie
+
+**Proportie.** $\hat\pi=\bar X=\frac1n\sum_iX_i$; $SE=\sqrt{\frac{\bar x(1-\bar x)}{n}}$; BI: $\bar x\pm z_{\alpha/2}SE$.
+
+**z-toets voor proportie.** $H_0:\pi=\pi_0$; $z=\dfrac{\bar x-\pi_0}{\sqrt{\pi_0(1-\pi_0)/n}}$.
+
+**Binomiale verdeling.** $P(S=k)=\binom nk\pi^k(1-\pi)^{n-k}$.
+
+**Binomiale toets (exact, voor $\pi$).** $H_0:\pi=\pi_0$; $x$ = aantal successen, $n$ = aantal onafh. observaties, $p=\pi_0$.
+
+**Gepaarde data (McNemar).** $\widehat{ARV}=\dfrac{f-g}{n}$, $SE=\frac1n\sqrt{f+g-\frac{(f-g)^2}{n}}$; $z=\dfrac{f-g}{\sqrt{f+g}}$ (met continuïteitscorrectie: $z=\dfrac{|f-g|-1}{\sqrt{f+g}}$); $f,g$ = discordante paren. Exact (bij kleine $f,g$): binomiale toets met $x=f$, $n=f+g$, $\pi_0=0.5$.
+
+**Chi-kwadraattoets.** $E_{ij}=\dfrac{\text{rijtot}_i\cdot\text{koltot}_j}{n}$; $X^2=\sum_{ij}\dfrac{(O_{ij}-E_{ij})^2}{E_{ij}}\sim\chi^2_{(r-1)(c-1)}$ (2×2 met Yates-correctie: $-0.5$ in teller).
+
+**Logistische regressie.** $Y_i\sim B(\pi_i)$, $\log\dfrac{\pi_i}{1-\pi_i}=\beta_0+\beta_1X_{i1}+\ldots+\beta_pX_{ip}$.
+
+Categorisch: intercept $=\log\text{ODDS}_{\text{ref}}$; $\beta_k=\log\dfrac{\text{ODDS}_k}{\text{ODDS}_{\text{ref}}}$ (log-OR t.o.v. referentie).
+
+Continu: $\exp(\beta_1)=$ OR per eenheid verschil in $x$.
+
+# 10. Algemeen lineair model
+
+**Additief model.** $Y_i=\beta_0+\beta_1X_{i1}+\ldots+\beta_{p-1}X_{i,p-1}+\epsilon_i$, $\epsilon_i\sim N(0,\sigma^2)$.
+
+**Interpretatie $\beta_j$.** $E(Y\mid\ldots,X_j{=}x_j{+}\delta,\ldots)-E(Y\mid\ldots,X_j{=}x_j,\ldots)=\beta_j\delta$ (overige $X_k$ constant).
+
+**MSE.** $\hat\sigma^2=\text{MSE}=\dfrac{\sum_i e_i^2}{n-p}$.
+
+**Toets/BI parameter.** $T_k=\dfrac{\hat\beta_k-\beta_k}{SE(\hat\beta_k)}\sim t_{n-p}$; BI: $\hat\beta_j\pm t_{n-p,\alpha/2}SE_{\hat\beta_j}$.
+
+**Interactie (dummy $\times$ continu).** $Y=\beta_0+\beta_vx_v+\beta_wx_w+\beta_sx_s+\beta_{vs}x_vx_s+\beta_{ws}x_wx_s+\epsilon$; geïmpliceerde rechten: $x_s=0$: $Y=\beta_0+\beta_vx_v+\beta_wx_w+\epsilon$; $x_s=1$: $Y=(\beta_0+\beta_s)+(\beta_v+\beta_{vs})x_v+(\beta_w+\beta_{ws})x_w+\epsilon$.
+
+**Interactie (2 continue).** $Y=\beta_0+\beta_vx_v+\beta_wx_w+\beta_{vw}x_vx_w+\epsilon$; effect van $+1$ op $X_v$: $\beta_v+\beta_{vw}x_w$.
+
+**Factoriële proefopzet (2 factoren, interactie).** $Y_i=\beta_0+\sum_k\beta_{A_k}x_{iA_k}+\sum_l\beta_{B_l}x_{iB_l}+\sum_{k,l}\beta_{A_k:B_l}x_{iA_k}x_{iB_l}+\epsilon_i$, met $x_{A_k},x_{B_l}$ dummy's voor niveaus $k$ van factor $A$ en $l$ van factor $B$ (t.o.v. referentieniveaus). Niet-significante interactie (partiële F-test, zie lager) $\Rightarrow$ verwijderen $\Rightarrow$ additief model (hoofdeffecten apart interpreteerbaar).
+
+**VIF.** $\text{VIF}_j=(1-R_j^2)^{-1}$, met $R_j^2$ = determinatiecoëfficiënt van de regressie van predictor $x_j$ op alle andere predictoren ($>10$: ernstige multicollineariteit).
+
+**Leverage.** Maat voor de afstand van de predictorwaarden van observatie $i$ tot het gemiddelde; ligt tussen $1/n$ en 1, gemiddeld $p/n$; extreem als $>2p/n$.
+
+**Cook's distance.** $D_i=\dfrac{\sum_j(\hat Y_j-\hat Y_{j(i)})^2}{p\cdot\text{MSE}}$; extreem als $D_i$ het 50%-percentiel van de $F_{p,n-p}$-verdeling overschrijdt.
+
+**DFBETAS.** $\text{DFBETAS}_{j(i)}=\dfrac{\hat\beta_j-\hat\beta_{j(i)}}{SD(\hat\beta_j)}$.
+
+**Kwadratensommen & $R^2$/F.** Zoals §6, met $p-1$ i.p.v. 1 df: $F=\text{MSR}/\text{MSE}\sim F_{p-1,n-p}$.
+
+**Extra kwadratensom (partiële F-test).** $\text{SSR}_{2\mid1}=\text{SSE}_1-\text{SSE}_2=\text{SSR}_2-\text{SSR}_1$ (model 1 = genest in model 2); $F=\dfrac{\text{SSR}_{2\mid1}/(\#\text{extra param.})}{\text{MSE}_2}$.
+
+**Type III kwadratensom.** $\text{SSR}_{j\mid\text{alle andere}}=\text{SSE}_{\text{zonder }x_j}-\text{SSE}_{\text{vol}}$ (volgorde-onafhankelijk); $F=\text{MSR}_j/\text{MSE}\sim F_{1,n-p}$.
+
+```{=latex}
+\end{multicols}
+```
