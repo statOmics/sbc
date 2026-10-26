@@ -526,9 +526,57 @@ $$-10<\beta_1<10 \rightarrow 1.01^{\beta_1} -1 \approx \frac{\beta_1}{100}.$$
 $$\hat{g}(x)= \hat{\beta}_0 + \hat{\beta}_1 x$$
 - $\hat{g}(x)$ een schatter van het conditionele gemiddelde $E[Y\vert X=x]$
 
-- Parameterschatters Normale verdeeld en onvertekend $\rightarrow$ schatter $\hat{g}(x)$ ook Normaal verdeeld en onvertekend.
+- Parameterschatters Normale verdeeld en onvertekend $\rightarrow$ schatter $\hat{g}(x)$ ook Normaal verdeeld en onvertekend. SE?
+
+
+- Predictie voor een nieuwe variabele is een lineare combinatie van helling en intercept: $\hat{\beta}_0 + \hat{\beta}_1 x = L^T\hat{\boldsymbol{\beta}}$ met L = $\left[\begin{matrix}1\\x\end{matrix}\right]$.
+
+
+$$
+\text{Var}\left(\mathbf{L}^T\hat{\boldsymbol{\beta}}\right)=\mathbf{L}^T\Sigma_{\hat{\boldsymbol{\beta}}}\mathbf{L}
+$$
+
+$$
+  \Sigma_{\hat{\boldsymbol{\beta}}}
+  =\left[\begin{matrix}
+  \dfrac{\sum\limits_{i=1}^n X_i^2}{n\sum\limits_{i=1}^n (X_i-\bar X)^2}\,\sigma^2
+  & -\dfrac{\bar X}{\sum\limits_{i=1}^n (X_i-\bar X)^2}\,\sigma^2 \\[2.5ex]
+  -\dfrac{\bar X}{\sum\limits_{i=1}^n (X_i-\bar X)^2}\,\sigma^2
+  & \dfrac{\sigma^2}{\sum\limits_{i=1}^n (X_i-\bar X)^2}
+  \end{matrix}\right]
+$$
+
+$$\text{Var}\left(L^T\hat{\boldsymbol\beta}\right)
+= L^T \,\text{Var}(\hat{\boldsymbol\beta})\, L
+= \left[\begin{matrix}1 & x\end{matrix}\right]
+\left[\begin{matrix}
+\dfrac{\sum\limits_{i=1}^n X_i^2}{n\sum\limits_{i=1}^n (X_i-\bar X)^2}\,\sigma^2
+& -\dfrac{\bar X}{\sum\limits_{i=1}^n (X_i-\bar X)^2}\,\sigma^2 \\[2.5ex]
+-\dfrac{\bar X}{\sum\limits_{i=1}^n (X_i-\bar X)^2}\,\sigma^2
+& \dfrac{\sigma^2}{\sum\limits_{i=1}^n (X_i-\bar X)^2}
+\end{matrix}\right]
+\left[\begin{matrix}1\\x\end{matrix}\right]
+$$
+
+$$
+= \sigma^2\left[\dfrac{\sum\limits_{i=1}^n X_i^2}{n\sum\limits_{i=1}^n (X_i-\bar X)^2}
+- \dfrac{2x\bar X}{\sum\limits_{i=1}^n (X_i-\bar X)^2}
++ \dfrac{x^2}{\sum\limits_{i=1}^n (X_i-\bar X)^2}\right]
+$$
+
+
+Gebruik makend van $\dfrac{\sum_i X_i^2}{n}=\bar X^2+\dfrac{\sum_i(X_i-\bar X)^2}{n}$ herleidt dit tot:
+
+$$
+\text{Var}\left(L^T\hat{\boldsymbol\beta}\right)
+= \sigma^2\left\{\dfrac{1}{n}+\dfrac{(x-\bar X)^2}{\sum\limits_{i=1}^n (X_i-\bar X)^2}\right\}
+$$
+
+- Als we hiervan de vierkantswortel trekken en de variantie vervangen door zijn schatter MSE bekomen we: 
 
 $$\text{SE}_{\hat{g}(x)}=\sqrt{MSE\left\{\frac{1}{n}+\frac{(x-\bar X)^2}{\sum\limits_{i=1}^n (X_i-\bar X)^2}\right\}}.$$
+
+- Bijgevolg kunnen we dan volgende t-test statistiek gebruiken 
 
 $$T=\frac{\hat{g}(x)-g(x)}{SE_{\hat{g}(x)}}\sim t_{n-2}$$
 

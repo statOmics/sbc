@@ -95,7 +95,7 @@ Bij zeldzame uitkomst ($p<5\%$): $OR\approx RR$.
 
 **Var. van lin. combinatie.** $\text{Var}(aX+bY)=a^2\text{Var}(X)+b^2\text{Var}(Y)+2ab\,\text{Cor}(X,Y)\sqrt{\text{Var}(X)\text{Var}(Y)}$.
 
-**Centrale limietstelling.** $\bar X_n\approx N\!\left(\mu,\frac{\sigma^2}{n}\right)$ voor grote $n$, ongeacht verdeling van $X_i$.
+**Centrale limietstelling.** $\bar X_n\sim N\!\left(\mu,\frac{\sigma^2}{n}\right)$ voor grote $n$, ongeacht verdeling van $X_i$.
 
 **BI gemiddelde, gekende $\sigma$.** $\left[\bar X-z_{\alpha/2}\frac{\sigma}{\sqrt n},\ \bar X+z_{\alpha/2}\frac{\sigma}{\sqrt n}\right]$.
 
@@ -169,7 +169,7 @@ Bij zeldzame uitkomst ($p<5\%$): $OR\approx RR$.
 
 **Two-sample t-test als lineair model.** $Y_i\sim N(\beta_0+\beta_1x_i,\sigma^2)$, $x_i=1$ in groep 2 ($x_i=0$ in groep 1); $\hat\mu_2-\hat\mu_1=\hat\beta_1$ (zie Dummy-variabele, §6).
 
-**Contrast-test (ANOVA/GLM via lineair model).** Voor een lineaire combinatie $L\boldsymbol\beta$ (bv. $L\hat{\boldsymbol\beta}=\hat\beta_4-\hat\beta_2$): $T=\dfrac{L\hat{\boldsymbol\beta}-L\boldsymbol\beta}{SE_{L\hat{\boldsymbol\beta}}}\sim t_{n-p}$.
+**Contrast-test (ANOVA/GLM via lineair model).** Voor een lineaire combinatie $L\pmb{\beta}$ (bv. $L\hat{\pmb{\beta}}=\hat\beta_4-\hat\beta_2$): $T=\dfrac{L\hat{\pmb{\beta}}-L\pmb{\beta}}{SE_{L\hat{\pmb{\beta}}}}\sim t_{n-p}$.
 
 # 8. Niet-parametrische toetsen
 
@@ -204,6 +204,8 @@ Continu: $\exp(\beta_1)=$ OR per eenheid verschil in $x$.
 **MSE.** $\hat\sigma^2=\text{MSE}=\dfrac{\sum_i e_i^2}{n-p}$.
 
 **Toets/BI parameter.** $T_k=\dfrac{\hat\beta_k-\beta_k}{SE(\hat\beta_k)}\sim t_{n-p}$; BI: $\hat\beta_j\pm t_{n-p,\alpha/2}SE_{\hat\beta_j}$.
+
+**Contrast-test** Voor een lineaire combinatie $L\pmb{\beta}$: $T=\dfrac{L\hat{\pmb{\beta}}-L\pmb{\beta}}{SE_{L\hat{\pmb{\beta}}}}\sim t_{n-p}$.
 
 **Interactie (dummy $\times$ continu).** $Y=\beta_0+\beta_vx_v+\beta_wx_w+\beta_sx_s+\beta_{vs}x_vx_s+\beta_{ws}x_wx_s+\epsilon$; geïmpliceerde rechten: $x_s=0$: $Y=\beta_0+\beta_vx_v+\beta_wx_w+\epsilon$; $x_s=1$: $Y=(\beta_0+\beta_s)+(\beta_v+\beta_{vs})x_v+(\beta_w+\beta_{ws})x_w+\epsilon$.
 
