@@ -66,7 +66,7 @@ prostacyclin |>
 
 
 Data in de drie groepen lijkt normaal verdeeld en de variantie is ongeveer gelijk:
-\[Y_i \vert \text{groep j} \sim N(\mu_j,\sigma^2),\]
+$$Y_i \vert \text{groep j} \sim N(\mu_j,\sigma^2),$$
 met $j= \text{1, 2, 3}$
 
 
@@ -75,19 +75,19 @@ met $j= \text{1, 2, 3}$
 Vraagstelling kan vertaald worden in volgende hypotheses
 
 - $H_0$: De arachidonzuurconcentratie heeft geen effect op het gemiddelde prostacycline niveau bij ratten
-\[
+$$
   H_0:\mu_1=\mu_2 = \mu_3
-\]
+$$
 
 - $H_1$: De arachidonzuurconcentratie heeft een effect op het gemiddelde prostacycline niveau bij ratten. Wat betekent dat minstens twee gemiddelden verschillend zijn:
-\[H_1: \exists\ j,k \in \{1,\ldots,g\} : \mu_j\neq\mu_k\]
+$$H_1: \exists\ j,k \in \{1,\ldots,g\} : \mu_j\neq\mu_k$$
 
 
 
 **naïeve benadering**: nulhypothese op splitsen in **partiële hypotheses**
-\[
+$$
   H_{0jk}: \mu_j=\mu_k \text{ versus } H_{1jk}: \mu_j \neq \mu_k
-\]
+$$
 
 Elk van deze partiële hypotheses testen met two-sample $t$-testen
 
@@ -167,7 +167,7 @@ We herformuleren het model door $\mu$-notaties te gebruiken:
 
  De oorspronkelijk nulhypothese $H_0:\mu_1=\mu_2=\mu_3$ kan equivalent geformuleerd worden als
 
-\[H_0: \beta_1=\beta_2=0\]
+$$H_0: \beta_1=\beta_2=0$$
 
  Model laat toe om methoden van lineaire regressie te gebruiken voor meervoudig vergelijken van gemiddelden.
 
@@ -221,9 +221,9 @@ met $n_1$, $n_2$ en $n_3$ het aantal waarnemingen in elke groep (hier $n-1=n_2=n
 - De overeenkomstige gemiddelde kwadratensom wordt dan $\text{MST}=\text{SST}/2$.
 
 De decompositie van SSTot wordt dan geschreven als
-  \[
+  $$
     \text{SSTot} = \text{SST} + \text{SSE}
-  \]
+  $$
 
 ## SSTot
 
@@ -290,9 +290,9 @@ axis(at=1:3,labels=c(expression(paste(y[i]," - ",bar(y))),expression(paste(bar(y
 ## Anova test
 
 Test $H_0: \beta_1=\beta_2=0$ met $F$-test.
-\[
+$$
   F = \frac{\text{MST}}{\text{MSE}}
-\]
+$$
 
 met
 
@@ -674,7 +674,7 @@ confint(model1.mcp)
 De gemiddelde prostacyclineconcentratie is hoger in de hoge dosisgroep dan in de lage en matige dosisgroep (beide p-waardes zijn kleiner dan $p<0.001$).
 - De gemiddelde concentratie in de hoge dosisgroep is `r round(confint(model1.mcp)$confint[2,1],1)`ng/ml (95% CI [`r paste(round(confint(model1.mcp)$confint[2,2:3],1),collapse=",")`]ng/ml) en `r round(confint(model1.mcp)$confint[3,1],1)`ng/ml (95% BI [`r paste(round(confint(model1.mcp)$confint[3,2:3],1),collapse=",")`]ng/ml) hoger dan in de lage en matige dosisgroep, respectievelijk.
 - Het verschil in gemiddelde prostacyclineconcentratie tussen de matige en lage dosisgroep is niet significant  (p=`r round(summary(model1.mcp)$test$pvalues[1],2)`).
-(Alle p-waardes en betrouwbaarheidsintervallen voor post-hoc-tests worden gecorrigeerd voor meervoudige tests met behulp van de Tukey-methode).
+(Alle p-waardes en betrouwbaarheidsintervallen voor post-hoc-testen worden gecorrigeerd voor meervoudige tests met behulp van de Tukey-methode).
 
 Merk op dat het belangrijk is om ook de niet significante resultaten te vermelden!
 
